@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="description" content="Curiosidades e termos periféricos para ler uma vez. PSCPP 2027.">
+<meta name="theme-color" content="#7a6f55">
+<meta name="color-scheme" content="light">
+<!-- iOS: permite "Adicionar à Tela de Início" e abrir em tela cheia como app -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PSCPP · Baixo Retorno">
+<meta name="mobile-web-app-capable" content="yes">
+<!-- Open Graph: prévia bonita ao compartilhar o link -->
+<meta property="og:title" content="Baixo Retorno — Arte Naval · PSCPP 2027">
+<meta property="og:description" content="Curiosidades e termos periféricos para ler uma vez. PSCPP 2027.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<title>Baixo Retorno — Arte Naval · PSCPP 2027</title>
+<style>
+  /* safe-area */
+  body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);}
+  .site-nav{padding-top:env(safe-area-inset-top);}
+  :root{
+    --teal-dk:#0D3D36; --gold:#C8A84B; --teal:#1A7A6E; --cream:#F7F3EA;
+    --cream2:#FCFAF4; --line:#E5DCC6; --ink:#0D3D36; --bg:#F4EFE2; --mute:#7a6f55;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(122,111,85,.2);}
+  .row,.resetbar button{touch-action:manipulation;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.55;}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 20px 80px;}
+  header.top{text-align:center;border-bottom:2px solid var(--gold);padding-bottom:14px;margin-bottom:8px;}
+  .kicker{letter-spacing:.32em;font-size:.72rem;color:var(--teal-dk);font-weight:bold;}
+  .sub{font-style:italic;color:var(--teal);font-size:.95rem;margin-top:2px;}
+  h1{font-size:1.9rem;margin:18px 0 2px;color:var(--teal-dk);}
+  .tier-badge{display:inline-block;background:var(--mute);color:#fff;font-size:.7rem;letter-spacing:.14em;
+    padding:4px 12px;border-radius:2px;text-transform:uppercase;margin-bottom:6px;}
+  .lead{font-size:1rem;color:#3b554f;max-width:74ch;}
+  .progress{margin:14px 0 4px;font-size:.85rem;color:var(--teal);}
+  .barwrap{height:8px;background:#e7ddc6;border-radius:5px;overflow:hidden;margin-bottom:18px;}
+  .bar{height:100%;width:0;background:var(--gold);transition:width .3s;}
+  .band{display:flex;align-items:center;margin:30px 0 12px;}
+  .band .n{background:var(--mute);color:#fff;font-weight:bold;font-size:1rem;padding:7px 13px;}
+  .band .t{background:#EDE8DC;color:var(--teal-dk);font-weight:bold;font-size:1rem;padding:7px 15px;
+    border:1px solid var(--mute);border-left:none;flex:1;}
+  .row{display:flex;gap:12px;align-items:flex-start;background:var(--cream2);border:1px solid var(--line);
+    border-radius:6px;padding:11px 13px;margin:8px 0;cursor:pointer;transition:opacity .2s;}
+  .row.read{opacity:.5;}
+  .row .chk{flex-shrink:0;width:20px;height:20px;border:2px solid var(--teal);border-radius:4px;margin-top:2px;
+    display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#fff;}
+  .row.read .chk{background:var(--teal);}
+  .row .txt b{color:var(--teal-dk);}
+  .row .txt .en{font-style:italic;color:var(--teal);font-size:.83rem;}
+  .why{font-size:.85rem;color:var(--mute);font-style:italic;margin:2px 0 16px;}
+  .resetbar{text-align:right;margin-top:24px;}
+  .resetbar button{font-family:Georgia,serif;background:#fff;border:1px solid var(--line);color:var(--teal-dk);
+    padding:7px 14px;border-radius:6px;cursor:pointer;font-size:.84rem;}
+  footer{margin-top:46px;border-top:1px solid var(--line);padding-top:14px;font-size:.78rem;color:var(--teal);
+    font-style:italic;text-align:center;}
+</style>
+</head>
+<body>
+<div id="site-nav" class="site-nav" style="display:none;background:#7a6f55;color:#fff;font-family:Georgia,serif;font-size:.82rem;padding:8px 16px;">
+  <a href="./" id="site-home" style="color:#fff;text-decoration:none;">‹ Índice PSCPP</a>
+</div>
+<script>
+  // mostra a barra de navegação só quando aberto a partir do índice do site
+  (function(){
+    try{
+      var p=new URLSearchParams(location.search);
+      if(p.get('from')==='index'){ document.getElementById('site-nav').style.display='block'; }
+    }catch(e){}
+  })();
+</script>
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">C A P I T A L &nbsp; S E R E N O</div>
+    <div class="sub">PSCPP 2027 · Estudo dirigido por retorno em prova</div>
+  </header>
+
+  <div class="tier-badge">Baixo retorno — ler uma vez e soltar</div>
+  <h1>Curiosidades e termos periféricos</h1>
+  <p class="lead">Estes itens raramente rendem questão. <b>Não gaste repetição espaçada aqui.</b>
+  Leia uma vez, entenda o sentido e marque como visto — a barra mostra seu avanço. Se um deles aparecer
+  na prova, será reconhecível pelo contexto. O objetivo é <b>liberar energia</b> para o Alto Retorno.</p>
+
+  <div class="progress">Lidos: <span id="cnt">0</span> de <span id="tot">0</span></div>
+  <div class="barwrap"><div class="bar" id="bar"></div></div>
+
+  <div id="content"></div>
+
+  <div class="resetbar"><button id="reset">Limpar marcações</button></div>
+
+  <footer>
+    Estudo dirigido · Baixo Retorno · Arte Naval (Fonseca) · PSCPP 2027 — Capital Sereno<br>
+    Leitura única. Marcações ficam só nesta aba (não são salvas ao fechar).
+  </footer>
+</div>
+
+<script>
+  function tap(el, fn){
+    if(!el) return;
+    let moved=false;
+    el.addEventListener('touchstart',()=>{moved=false;},{passive:true});
+    el.addEventListener('touchmove',()=>{moved=true;},{passive:true});
+    el.addEventListener('touchend',(e)=>{ if(!moved){ e.preventDefault(); fn(e);} },{passive:false});
+    el.addEventListener('click',fn);
+  }
+  const DATA = [
+    ["Detalhes históricos do casco", [
+      ["Jardim de popa","balcony","Em navio de guerra de grande porte."],
+      ["Contrassopro","—","Escudo de chapa que protege do canhão (mtr)."],
+      ["Seteiras","loop hole","Aberturas estreitas nas torres/passadiço de navios antigos; as LAR fluviais possuem seteiras."],
+      ["Portinholas","port lid","Aberturas retangulares que existiam na borda/costado de navios antigos."],
+      ["Contrafeito","—","Parte rebaixada no costado do navio."],
+      ["Poço","well","Espaço entre o castelo/tombadilho e a superestrutura central."],
+      ["Trincheira","—","Qualquer local onde se guardam as macas."],
+      ["Camarim","—","Compartimento onde trabalha o pessoal de um departamento do navio."],
+    ]],
+    ["Peças e trabalhos pouco cobrados", [
+      ["Quina","knuckle","Mudança brusca de direção na superfície externa do casco."],
+      ["Bainha","seam","Solda entre duas chapas de um chapeamento."],
+      ["Calcanhar","skeg","Comum em navios com leme compensado; apoio para picadeiros de docagem a ré."],
+      ["Recesso do túnel","—","Parte de um túnel ampliada em sua seção (ex.: túnel do eixo)."],
+      ["Cambotas","—","Reforços do chapeamento da popa, análogos às cavernas no costado."],
+      ["Vaus secos","hold beam","Vaus do porão, mais espaçados, sem assoalho; atracam as cavernas."],
+      ["Latas","batten","Vaus não contínuos de BB a BE, na altura de enora/escotilha."],
+      ["Suplemento de válvula","—","Liga o orifício da carena à válvula Kingston e a suporta."],
+      ["Zinco protetor","—","Laminado, nunca fundido; 'isolador de zinco' está errado."],
+    ]],
+    ["Ornamentos e trançados (marinharia)", [
+      ["Pinha de lambaz","—","Ornamentação."],
+      ["Pinha de abacaxi","—","Ornamentar pés-de-carneiro e cana do leme."],
+      ["Nó de frade","—","Limitar ângulo de leme de embarcações miúdas e ornamentação."],
+      ["Nó de moringa","—","Alça permanente / enfeite (pendurar moringas nos veleiros)."],
+      ["Coxim turco","—","Quadros de trabalhos marinheiros, capachos de portaló."],
+      ["Gaxeta","—","Trançado ornamental em molduras, fiéis, fundas, cortinas."],
+      ["Auste","—","Modo de ligar dois cabos pelos chicotes (em desuso)."],
+      ["Nó de fio de carreta","—","Em desuso."],
+      ["Volta de encapeladura dobrada","—","Usada só para enfeite."],
+    ]],
+    ["Embarcações e curiosidades de propulsão", [
+      ["Lameiros","—","Transportam a lama das dragagens dos portos."],
+      ["Gaviete","—","Peça robusta com rodete, fixada à proa dos pontões de amarração."],
+      ["Aerobarco","—","Usa hidrofólios; limite ~60 nós pela cavitação."],
+      ["Redutores de corrente","—","Não comparáveis aos demais meios de redução em instalações marítimas."],
+      ["Gerador de gás de pistão livre","—","Une a compressão do cilindro diesel à expansão da turbina a gás."],
+      ["Pau da bandeira de cruzeiro","—","Na proa (pau do jeque)."],
+    ]],
+  ];
+
+  const content=document.getElementById('content');
+  let total=0;
+  DATA.forEach((grp,gi)=>{
+    const band=document.createElement('div');band.className='band';
+    band.innerHTML='<div class="n">'+(gi+1)+'</div><div class="t">'+grp[0]+'</div>';
+    content.appendChild(band);
+    grp[1].forEach(([nm,en,df])=>{
+      total++;
+      const row=document.createElement('div');row.className='row';
+      const enTxt = en && en!=="—" ? ' <span class="en">('+en+')</span>' : '';
+      row.innerHTML='<div class="chk">✓</div><div class="txt"><b>'+nm+'</b>'+enTxt+' — '+df+'</div>';
+      tap(row, ()=>{row.classList.toggle('read');update();});
+      content.appendChild(row);
+    });
+  });
+  document.getElementById('tot').textContent=total;
+
+  const bar=document.getElementById('bar'),cnt=document.getElementById('cnt');
+  function update(){
+    const n=document.querySelectorAll('.row.read').length;
+    cnt.textContent=n; bar.style.width=(n/total*100)+'%';
+  }
+  tap(document.getElementById('reset'), ()=>{
+    document.querySelectorAll('.row.read').forEach(r=>r.classList.remove('read'));update();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="description" content="Acessórios do casco e do convés para reconhecer, com diagrama e quiz. PSCPP 2027.">
+<meta name="theme-color" content="#1A7A6E">
+<meta name="color-scheme" content="light">
+<!-- iOS: permite "Adicionar à Tela de Início" e abrir em tela cheia como app -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PSCPP · Médio Retorno">
+<meta name="mobile-web-app-capable" content="yes">
+<!-- Open Graph: prévia bonita ao compartilhar o link -->
+<meta property="og:title" content="Médio Retorno — Arte Naval · PSCPP 2027">
+<meta property="og:description" content="Acessórios do casco e do convés para reconhecer, com diagrama e quiz. PSCPP 2027.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<title>Médio Retorno — Arte Naval · PSCPP 2027</title>
+<style>
+  /* safe-area */
+  body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);}
+  .site-nav{padding-top:env(safe-area-inset-top);}
+  :root{
+    --teal-dk:#0D3D36; --gold:#C8A84B; --teal:#1A7A6E; --cream:#F7F3EA;
+    --cream2:#FCFAF4; --line:#E5DCC6; --ink:#0D3D36; --red:#B0413E; --bg:#F4EFE2;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(26,122,110,.22);}
+  .hot,.opts button,.q-foot button,nav.toc a{touch-action:manipulation;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.55;}
+  .wrap{max-width:1040px;margin:0 auto;padding:28px 20px 80px;}
+  header.top{text-align:center;border-bottom:2px solid var(--gold);padding-bottom:14px;margin-bottom:8px;}
+  .kicker{letter-spacing:.32em;font-size:.72rem;color:var(--teal-dk);font-weight:bold;}
+  .sub{font-style:italic;color:var(--teal);font-size:.95rem;margin-top:2px;}
+  h1{font-size:1.9rem;margin:18px 0 2px;color:var(--teal-dk);}
+  .tier-badge{display:inline-block;background:var(--teal);color:#fff;font-size:.7rem;letter-spacing:.14em;
+    padding:4px 12px;border-radius:2px;text-transform:uppercase;margin-bottom:6px;}
+  .lead{font-size:1rem;color:#3b554f;max-width:74ch;}
+  nav.toc{position:sticky;top:0;background:var(--bg);z-index:20;display:flex;flex-wrap:wrap;gap:6px;
+    padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:18px;}
+  nav.toc a{font-size:.78rem;text-decoration:none;color:var(--teal-dk);border:1px solid var(--line);
+    padding:5px 10px;border-radius:14px;background:#fff;}
+  nav.toc a:hover{background:var(--gold);border-color:var(--gold);}
+  .band{display:flex;align-items:center;margin:34px 0 14px;}
+  .band .n{background:var(--teal);color:#fff;font-weight:bold;font-size:1.05rem;padding:8px 14px;}
+  .band .t{background:#E8EFE9;color:var(--teal-dk);font-weight:bold;font-size:1.05rem;padding:8px 16px;
+    border:1px solid var(--teal);border-left:none;flex:1;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;}
+  .item{background:#fff;border:1px solid var(--line);border-radius:6px;padding:10px 12px;}
+  .item b{color:var(--teal-dk);}
+  .item .en{font-style:italic;color:var(--teal);font-size:.84rem;}
+  .note{font-size:.78rem;color:#7a6f55;margin-top:14px;background:var(--cream);padding:10px 12px;border-radius:6px;
+    border-left:4px solid var(--gold);}
+  /* diagram */
+  .diagram-box{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px;margin:14px 0;}
+  .diagram-box svg{width:100%;height:auto;display:block;}
+  .hot{cursor:pointer;transition:fill .15s,stroke .15s;}
+  .hot:hover{stroke:var(--gold);stroke-width:2.5;}
+  .hot.active{stroke:var(--red);stroke-width:3;}
+  .dlabel{font:600 12px Georgia,serif;fill:var(--teal-dk);pointer-events:none;}
+  .dinfo{margin-top:12px;background:var(--cream);border-left:4px solid var(--teal);padding:12px 14px;
+    border-radius:0 5px 5px 0;min-height:62px;}
+  .dinfo .nm{font-weight:bold;color:var(--teal-dk);font-size:1.02rem;}
+  .dinfo .en{font-style:italic;color:var(--teal);font-size:.85rem;}
+  .dinfo .df{margin-top:4px;font-size:.92rem;}
+  .dinfo.empty{color:#9a8c66;font-style:italic;display:flex;align-items:center;}
+  /* recognition quiz */
+  .quiz{background:var(--cream2);border:1px solid var(--line);border-radius:8px;padding:16px;margin-top:10px;}
+  .q-term{font-size:1.15rem;font-weight:bold;color:var(--teal-dk);margin-bottom:10px;}
+  .opts{display:grid;gap:8px;}
+  .opts button{font-family:Georgia,serif;font-size:.95rem;text-align:left;background:#fff;border:1px solid var(--line);
+    padding:10px 12px;border-radius:6px;cursor:pointer;color:var(--ink);}
+  .opts button:hover{border-color:var(--teal);}
+  .opts button.ok{background:#DCEFE3;border-color:#2f8f5e;color:#15633c;}
+  .opts button.no{background:#F6E2E0;border-color:var(--red);color:#8a2c29;}
+  .q-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:.85rem;color:var(--teal);}
+  .q-foot button{font-family:Georgia,serif;background:var(--teal-dk);color:#fff;border:none;padding:8px 16px;
+    border-radius:6px;cursor:pointer;}
+  .score{font-weight:bold;}
+  footer{margin-top:50px;border-top:1px solid var(--line);padding-top:14px;font-size:.78rem;color:var(--teal);
+    font-style:italic;text-align:center;}
+</style>
+</head>
+<body>
+<div id="site-nav" class="site-nav" style="display:none;background:#1A7A6E;color:#fff;font-family:Georgia,serif;font-size:.82rem;padding:8px 16px;">
+  <a href="./" id="site-home" style="color:#fff;text-decoration:none;">‹ Índice PSCPP</a>
+</div>
+<script>
+  // mostra a barra de navegação só quando aberto a partir do índice do site
+  (function(){
+    try{
+      var p=new URLSearchParams(location.search);
+      if(p.get('from')==='index'){ document.getElementById('site-nav').style.display='block'; }
+    }catch(e){}
+  })();
+</script>
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">C A P I T A L &nbsp; S E R E N O</div>
+    <div class="sub">PSCPP 2027 · Estudo dirigido por retorno em prova</div>
+  </header>
+
+  <div class="tier-badge">Médio retorno — reconhecer, não recitar</div>
+  <h1>Acessórios do casco e do convés</h1>
+  <p class="lead">Você precisa <b>reconhecer</b> estes termos se aparecerem — não produzi-los de cabeça.
+  Estratégia: leitura de reconhecimento (não repetição espaçada pesada). Clique no diagrama do convés
+  para fixar a posição, depois use o quiz de reconhecimento no fim da sessão.</p>
+
+  <nav class="toc">
+    <a href="#diag">Diagrama do convés</a>
+    <a href="#conves">No convés</a>
+    <a href="#borda">Na borda</a>
+    <a href="#costado">Costado & carena</a>
+    <a href="#aberturas">Aberturas</a>
+    <a href="#quiz">Quiz de reconhecimento</a>
+  </nav>
+
+  <!-- DIAGRAM -->
+  <div class="band" id="diag"><div class="n">◆</div><div class="t">Diagrama interativo — acessórios do convés</div></div>
+  <p class="lead">Clique em cada acessório destacado para ver nome e função.</p>
+  <div class="diagram-box">
+    <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" aria-label="Acessórios do convés">
+      <!-- deck base -->
+      <rect x="0" y="210" width="720" height="50" fill="#E0D3A6" stroke="#0D3D36"/>
+      <text x="8" y="252" class="dlabel">convés</text>
+      <!-- water below -->
+      <rect x="0" y="260" width="720" height="60" fill="#DCE9E6" opacity="0.5"/>
+      <!-- amurada / balaustrada -->
+      <line id="balaustre" class="hot" data-k="balaustre" x1="40" y1="160" x2="40" y2="210" stroke="#0D3D36" stroke-width="3"/>
+      <line x1="40" y1="170" x2="120" y2="170" stroke="#888" stroke-width="1"/>
+      <line x1="40" y1="186" x2="120" y2="186" stroke="#888" stroke-width="1"/>
+      <text x="46" y="150" class="dlabel">balaústre</text>
+      <!-- cabeço -->
+      <g id="cabeco" class="hot" data-k="cabeco">
+        <rect x="150" y="178" width="14" height="32" rx="2" fill="#C8A84B" stroke="#0D3D36"/>
+        <rect x="170" y="178" width="14" height="32" rx="2" fill="#C8A84B" stroke="#0D3D36"/>
+        <rect x="146" y="172" width="42" height="8" rx="2" fill="#B0894B" stroke="#0D3D36"/>
+      </g>
+      <text x="146" y="166" class="dlabel">cabeço</text>
+      <!-- abita -->
+      <g id="abita" class="hot" data-k="abita">
+        <rect x="230" y="174" width="16" height="36" rx="2" fill="#C8A84B" stroke="#0D3D36"/>
+        <line x1="224" y1="186" x2="252" y2="186" stroke="#0D3D36" stroke-width="2"/>
+      </g>
+      <text x="222" y="166" class="dlabel">abita</text>
+      <!-- buzina / closed chock -->
+      <path id="buzina" class="hot" data-k="buzina" d="M300,210 q12,-22 24,0 a14,12 0 0 1 -24,0 Z" fill="#E8DCB6" stroke="#0D3D36"/>
+      <text x="296" y="166" class="dlabel">buzina</text>
+      <line x1="312" y1="166" x2="312" y2="186" stroke="#bbb"/>
+      <!-- cunho -->
+      <g id="cunho" class="hot" data-k="cunho">
+        <rect x="372" y="196" width="40" height="10" rx="3" fill="#B0894B" stroke="#0D3D36"/>
+        <rect x="388" y="190" width="8" height="20" fill="#B0894B" stroke="#0D3D36"/>
+      </g>
+      <text x="372" y="184" class="dlabel">cunho</text>
+      <!-- olhal/arganeu -->
+      <circle id="olhal" class="hot" data-k="olhal" cx="450" cy="205" r="8" fill="none" stroke="#0D3D36" stroke-width="3"/>
+      <text x="436" y="190" class="dlabel">olhal</text>
+      <!-- cabrestante -->
+      <g id="cabrestante" class="hot" data-k="cabrestante">
+        <ellipse cx="520" cy="200" rx="26" ry="10" fill="#C8A84B" stroke="#0D3D36"/>
+        <rect x="508" y="174" width="24" height="28" rx="6" fill="#D8B85E" stroke="#0D3D36"/>
+      </g>
+      <text x="494" y="166" class="dlabel">cabrestante</text>
+      <!-- gaiuta -->
+      <g id="gaiuta" class="hot" data-k="gaiuta">
+        <rect x="600" y="184" width="46" height="26" fill="#E8DCB6" stroke="#0D3D36"/>
+        <path d="M600,184 L623,168 L646,184 Z" fill="#D8CDA8" stroke="#0D3D36"/>
+      </g>
+      <text x="600" y="160" class="dlabel">gaiuta</text>
+      <!-- ventilador (cachimbo) -->
+      <g id="ventilador" class="hot" data-k="ventilador">
+        <path d="M676,210 L676,150 q0,-14 16,-14 l0,12 q-6,0 -6,8 l0,54 Z" fill="#B0894B" stroke="#0D3D36"/>
+      </g>
+      <text x="664" y="134" class="dlabel">ventilador</text>
+    </svg>
+    <div id="dinfo" class="dinfo empty">Clique num acessório destacado para ver nome e função.</div>
+  </div>
+
+  <!-- NO CONVÉS -->
+  <div class="band" id="conves"><div class="n">1</div><div class="t">Acessórios no convés</div></div>
+  <div class="grid">
+    <div class="item"><b>Reclamos</b> <span class="en">— guias para cabos do aparelho nos mastros; gurnidos pelo seio.</span></div>
+    <div class="item"><b>Malagueta</b> <span class="en">(belaying pin) — pino para dar volta nos cabos em mastros/anteparas.</span></div>
+    <div class="item"><b>Retorno</b> <span class="en">— peça para mudar a direção de um cabo sem forte atrito.</span></div>
+    <div class="item"><b>Berço</b> <span class="en">(cradle) — suporte só para peça volante (ex.: bote).</span></div>
+    <div class="item"><b>Picadeiros</b> <span class="en">(stocks) — embarcações miúdas e blocos de apoio de docagem.</span></div>
+    <div class="item"><b>Gaiuta</b> <span class="en">(companion) — cobre escotilhas, dá luz e ar; metálica c/ lona = meia-laranja.</span></div>
+    <div class="item"><b>Molinete</b> <span class="en">(windlass) — coroas de barbotim, eixo horizontal.</span></div>
+    <div class="item"><b>Boça da amarra</b> <span class="en">— cabo/corrente que aboça a amarra; parte do aparelho de fundear.</span></div>
+    <div class="item"><b>Pau de carga</b> <span class="en">(derrick) — iça/arria carga; sem mastro, fixa-se a um toco/pescador.</span></div>
+    <div class="item"><b>Toldos</b> <span class="en">(awning) — numerados de vante para ré; nomes de onde ficam.</span></div>
+    <div class="item"><b>Espinhaço</b> <span class="en">(ridge) — suporta o toldo a meio.</span></div>
+    <div class="item"><b>Sarilho</b> <span class="en">(reel) — tambor horizontal manual onde se colhem as espias.</span></div>
+    <div class="item"><b>Selha</b> <span class="en">— vaso de madeira ventilado, acondiciona cabo de manobra.</span></div>
+    <div class="item"><b>Carlinga</b> <span class="en">(mast step) — gola onde se apoia o pé do mastro.</span></div>
+  </div>
+
+  <!-- BORDA -->
+  <div class="band" id="borda"><div class="n">2</div><div class="t">Na borda</div></div>
+  <div class="grid">
+    <div class="item"><b>Castanha</b> <span class="en">(hanging clamp) — prende peças removíveis; nos turcos: palmatória (sup.) e cachimbo (inf.).</span></div>
+    <div class="item"><b>Balaústres</b> <span class="en">(stanchion) — a balaustrada é o conjunto com correntes/cabos.</span></div>
+    <div class="item"><b>Corrimão da borda</b> <span class="en">(main rail).</span></div>
+    <div class="item"><b>Talabardão</b> <span class="en">(roughtree rail) — quando a passarela fica junto à borda.</span></div>
+  </div>
+
+  <!-- COSTADO / CARENA -->
+  <div class="band" id="costado"><div class="n">3</div><div class="t">No costado e na carena</div></div>
+  <div class="grid">
+    <div class="item"><b>Verdugo</b> <span class="en">(fender) — proteção nas manobras de atracação.</span></div>
+    <div class="item"><b>Pau de surriola</b> <span class="en">— horizontalmente a vante.</span></div>
+    <div class="item"><b>Verga de sécia</b> <span class="en">— perpendicular ao costado; indica a posição dos hélices sem guarda.</span></div>
+    <div class="item"><b>Raposas</b> <span class="en">(anchor bolster) — recessos p/ alojar âncoras em proa bulbosa.</span></div>
+    <div class="item"><b>Guarda do hélice</b> <span class="en">(propeller guards) — protege hélices nas atracações.</span></div>
+    <div class="item"><b>Pés-de-galinha</b> <span class="en">(shaft brackets) — apoio dos eixos em navios de + de um hélice.</span></div>
+    <div class="item"><b>Tubulão do leme</b> <span class="en">(rudder trunk) — onde a madre atravessa o casco.</span></div>
+    <div class="item"><b>Bosso do eixo</b> <span class="en">— saliência em torno do eixo do hélice.</span></div>
+    <div class="item"><b>Caixas de mar</b> <span class="en">(sea chests) — admissão de água nas válvulas de tomada de mar.</span></div>
+  </div>
+
+  <!-- ABERTURAS -->
+  <div class="band" id="aberturas"><div class="n">4</div><div class="t">Aberturas e passagens</div></div>
+  <div class="grid">
+    <div class="item"><b>Escotilha</b> <span class="en">(hatch) — ar, luz, pessoal e carga. Escotilhão: só pessoal, menor.</span></div>
+    <div class="item"><b>Agulheiro</b> <span class="en">— pequena escotilha circular/elíptica de paiol.</span></div>
+    <div class="item"><b>Vigia</b> <span class="en">(side scuttle) — luz e ventilação; tampa de combate (deadlight).</span></div>
+    <div class="item"><b>Olho de boi</b> <span class="en">(side light) — só claridade.</span></div>
+    <div class="item"><b>Embornal</b> <span class="en">(scupper) — escoa águas de baldeação/chuva. Dala afasta a água do costado.</span></div>
+    <div class="item"><b>Saídas de água</b> <span class="en">(freeing ports) — na borda-falsa, p/ grandes massas em mar grosso.</span></div>
+    <div class="item"><b>Tubo do escovém</b> <span class="en">(hawse pipe). Gateiras: amarras para o paiol.</span></div>
+    <div class="item"><b>Enoras</b> <span class="en">(mast hole) — onde se enfurnam os mastros.</span></div>
+    <div class="item"><b>Portaló</b> <span class="en">(entering port) — em Nv de guerra, o de BE é o de honra.</span></div>
+    <div class="item"><b>Portas de visita</b> <span class="en">(manholes) — inspeção de tanques.</span></div>
+  </div>
+
+  <div class="note"><b>Como usar:</b> leia uma vez com atenção, clique no diagrama para ancorar a posição,
+  e rode o quiz abaixo. Acertou de primeira = reconhecimento ok, não precisa de repetição. Errou = mande para o
+  deck de Alto Retorno só se for um par que a banca troca; senão, basta reler.</div>
+
+  <!-- QUIZ -->
+  <div class="band" id="quiz"><div class="n">5</div><div class="t">Quiz de reconhecimento</div></div>
+  <div class="quiz" id="quizbox">
+    <div class="q-term" id="qterm"></div>
+    <div class="opts" id="qopts"></div>
+    <div class="q-foot">
+      <span class="score" id="qscore">0 / 0</span>
+      <button id="qnext">Próximo →</button>
+    </div>
+  </div>
+
+  <footer>
+    Estudo dirigido · Médio Retorno · Arte Naval (Fonseca) · PSCPP 2027 — Capital Sereno<br>
+    Reconhecimento passivo. Reserve a repetição espaçada para o Alto Retorno.
+  </footer>
+</div>
+
+<script>
+  function tap(el, fn){
+    if(!el) return;
+    let moved=false;
+    el.addEventListener('touchstart',()=>{moved=false;},{passive:true});
+    el.addEventListener('touchmove',()=>{moved=true;},{passive:true});
+    el.addEventListener('touchend',(e)=>{ if(!moved){ e.preventDefault(); fn(e);} },{passive:false});
+    el.addEventListener('click',fn);
+  }
+  const DEF = {
+    balaustre:{nm:"Balaústre / balaustrada",en:"stanchion",df:"Suporte vertical; a balaustrada é o conjunto com correntes, cabos e vergalhões na borda."},
+    cabeco:{nm:"Cabeço",en:"bollards",df:"Junto à amurada/balaustrada; parte do arranjo de reboque de emergência. No cais não são montados aos pares."},
+    abita:{nm:"Abita",en:"bitt",df:"Cabeço de aço singelo com nervuras (tetas); peça do arranjo de amarração, para a espia dar volta redonda."},
+    buzina:{nm:"Buzina",en:"closed chock",df:"Guia fixa na borda para os cabos de amarração; a tamanca (half block) faz o mesmo, em formato diferente."},
+    cunho:{nm:"Cunho",en:"cleat",df:"Para cabos de laborar, em forma de bigorna. A escoteira tem forma de cruz."},
+    olhal:{nm:"Olhal",en:"pad eye",df:"No chão do convés; com outra argola acoplada, esta é o arganéu (hank)."},
+    cabrestante:{nm:"Cabrestante",en:"capstan",df:"Eixo vertical; compõe o aparelho de fundear e suspender, com mordente, boça da amarra e pino de braga. O molinete é o equivalente de eixo horizontal."},
+    gaiuta:{nm:"Gaiuta",en:"companion",df:"Cobre escotilhas e permite luz e ar; quando metálica com lona (capuchana), é meia-laranja (hood)."},
+    ventilador:{nm:"Ventilador",en:"ventilator",df:"Cachimbo, cogumelo, pescoço de cisne, cabeços. Os cachimbos podem ter dois furos e são móveis (orientam-se ao vento)."},
+  };
+  const dinfo=document.getElementById('dinfo');
+  function showDef(k){
+    document.querySelectorAll('.hot.active').forEach(n=>n.classList.remove('active'));
+    document.querySelectorAll('[data-k="'+k+'"]').forEach(n=>n.classList.add('active'));
+    const d=DEF[k]; if(!d) return;
+    dinfo.className='dinfo';
+    dinfo.innerHTML='<span class="nm">'+d.nm+'</span> <span class="en">('+d.en+')</span><div class="df">'+d.df+'</div>';
+  }
+  document.querySelectorAll('.hot').forEach(el=>tap(el,()=>showDef(el.dataset.k)));
+
+  // recognition quiz
+  const Q=[
+    // no convés
+    ["Guia fixa na borda para cabos de amarração",["Buzina","Cunho","Castanha","Abita"],0],
+    ["Cabeço de aço singelo com tetas, p/ volta redonda da espia",["Abita","Cabeço","Olhal","Berço"],0],
+    ["Cobre escotilhas e permite luz e ar",["Gaiuta","Vigia","Agulheiro","Embornal"],0],
+    ["Eixo vertical do aparelho de fundear e suspender",["Cabrestante","Molinete","Sarilho","Selha"],0],
+    ["Guias para cabos do aparelho nos mastros, gurnidos pelo seio",["Reclamos","Retorno","Malagueta","Cunho"],0],
+    ["Tambor de coroas de barbotim, eixo horizontal",["Molinete","Cabrestante","Sarilho","Carlinga"],0],
+    ["Peça que muda a direção de um cabo sem forte atrito",["Retorno","Reclamos","Cunho","Olhal"],0],
+    ["Pino em mastros/anteparas para dar volta nos cabos",["Malagueta","Abita","Cabeço","Berço"],0],
+    ["Para cabos de laborar, em forma de bigorna",["Cunho","Buzina","Olhal","Castanha"],0],
+    ["No chão do convés; com argola acoplada vira arganéu",["Olhal","Cunho","Reclamos","Abita"],0],
+    ["Suporte só para peça volante, como um bote",["Berço","Picadeiro","Carlinga","Castanha"],0],
+    ["Embarcações miúdas e blocos de apoio de docagem",["Picadeiros","Berço","Selha","Sarilho"],0],
+    ["Gola onde se apoia o pé de um mastro",["Carlinga","Enora","Buzina","Olhal"],0],
+    ["Tambor horizontal manual onde se colhem as espias",["Sarilho","Molinete","Selha","Cabrestante"],0],
+    ["Cabo/corrente que aboça a amarra (aparelho de fundear)",["Boça da amarra","Retorno","Malagueta","Reclamos"],0],
+    ["Iça/arria carga; sem mastro fixa-se a um toco/pescador",["Pau de carga","Pau de surriola","Verga de sécia","Espinhaço"],0],
+    ["Suporta o toldo a meio",["Espinhaço","Vergueiro","Sarilho","Toldo"],0],
+    // na borda
+    ["Prende peças removíveis; nos turcos vira palmatória e cachimbo",["Castanha","Cunho","Abita","Buzina"],0],
+    ["Passarela junto à borda recebe que corrimão?",["Talabardão","Main rail","Balaústre","Buzina"],0],
+    // costado / carena
+    ["Recessos no costado p/ alojar âncoras em proa bulbosa",["Raposas","Bossos","Verdugos","Gateiras"],0],
+    ["Proteção do casco nas manobras de atracação",["Verdugo","Bolina","Raposa","Pau de surriola"],0],
+    ["Perpendicular ao costado; indica a posição dos hélices sem guarda",["Verga de sécia","Pau de surriola","Verdugo","Bosso"],0],
+    ["Apoio dos eixos em navios de mais de um hélice",["Pés-de-galinha","Tubulão do leme","Bosso do eixo","Raposas"],0],
+    ["Onde a madre do leme atravessa o casco",["Tubulão do leme","Bosso do eixo","Pé-de-galinha","Clara"],0],
+    ["Admissão de água nas válvulas de tomada de mar",["Caixas de mar","Embornal","Gateiras","Escovém"],0],
+    // aberturas
+    ["Escoa águas de baldeação/chuva do convés",["Embornal","Saídas de água","Olho de boi","Escovém"],0],
+    ["Na borda-falsa, p/ grandes massas de água em mar grosso",["Saídas de água","Embornal","Vigia","Portinhola"],0],
+    ["Pequena escotilha circular/elíptica, p/ serviço de paiol",["Agulheiro","Escotilhão","Vigia","Olho de boi"],0],
+    ["Dá luz e ventilação; tem tampa de combate (deadlight)",["Vigia","Olho de boi","Agulheiro","Portaló"],0],
+    ["Onde se enfurnam os mastros",["Enoras","Gateiras","Escovém","Buzina"],0],
+    ["Por onde as amarras passam para o paiol",["Gateiras","Escovém","Embornal","Enoras"],0],
+    ["Em Nv de guerra, o de BE é o de honra",["Portaló","Portinhola","Vigia","Escotilhão"],0],
+  ];
+  let qi=0, hit=0, done=0, answered=false;
+  for(let i=Q.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[Q[i],Q[j]]=[Q[j],Q[i]];}
+  const qterm=document.getElementById('qterm'),qopts=document.getElementById('qopts'),
+        qscore=document.getElementById('qscore'),qnext=document.getElementById('qnext');
+  function render(){
+    answered=false;
+    const [term,opts,ok]=Q[qi];
+    qterm.textContent=term;
+    qopts.innerHTML='';
+    // shuffle options, tracking where the correct one lands
+    const idx=opts.map((_,i)=>i);
+    for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+    idx.forEach(origin=>{
+      const b=document.createElement('button');b.textContent=opts[origin];
+      tap(b, ()=>{
+        if(answered)return; answered=true; done++;
+        if(origin===ok){b.classList.add('ok');hit++;}
+        else{b.classList.add('no');
+          [...qopts.children].forEach((c,k)=>{ if(c.textContent===opts[ok]) c.classList.add('ok'); });}
+        qscore.textContent=hit+' / '+done;
+      });
+      qopts.appendChild(b);
+    });
+  }
+  tap(qnext, ()=>{qi=(qi+1)%Q.length;render();});
+  render();
+</script>
+</body>
+</html>
