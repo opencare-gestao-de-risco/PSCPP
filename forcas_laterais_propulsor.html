@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0D3D36">
+<title>Forças Laterais do Propulsor — PSCPP 2027</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde-m:#1A7A6E; --dourado:#C8A84B;
+    --creme:#F4EFE2; --creme-c:#FCFAF4; --linha:#E5DCC6;
+    --tinta:#16302B; --mute:#7a6f55; --ambar:#F2C879;
+    --bb:#1a5c96; --bb-bg:#dbeafe;
+    --be:#9a3412; --be-bg:#fde8d7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.65}
+  .wrap{max-width:980px;margin:0 auto;padding:0 22px}
+
+  header{background:
+      radial-gradient(circle at 90% 12%, rgba(200,168,75,.18), transparent 46%),
+      linear-gradient(155deg,var(--verde) 0%,#0a322c 70%,#082822 100%);
+    color:var(--creme);padding:46px 0 38px;border-bottom:4px solid var(--dourado)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--dourado);font-weight:bold;margin-bottom:12px}
+  header h1{font-size:35px;font-weight:normal;line-height:1.14;margin-bottom:10px}
+  header h1 em{color:var(--dourado);font-style:normal}
+  header .sub{font-size:16px;color:#cfe3df;max-width:620px}
+  .badges{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+  .hbadge{font-family:'Trebuchet MS',sans-serif;font-size:11px;font-weight:bold;letter-spacing:.1em;
+    text-transform:uppercase;padding:4px 12px;border-radius:4px}
+  .hb-banca{background:var(--dourado);color:var(--verde)}
+  .hb-src{background:rgba(255,255,255,.10);color:var(--creme);border:1px solid rgba(255,255,255,.22)}
+
+  .toc{position:sticky;top:0;z-index:30;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--linha);padding:11px 0}
+  .toc .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;
+    color:var(--verde-m);border:1.5px solid var(--verde-m);padding:6px 13px;border-radius:18px;transition:all .15s}
+  .toc a:hover{background:var(--verde-m);color:#fff}
+
+  .convencao{background:var(--verde);color:var(--creme);border-radius:10px;padding:16px 20px;
+    margin:26px 0 8px;display:flex;gap:26px;flex-wrap:wrap;align-items:center}
+  .convencao .conv-titulo{font-family:'Trebuchet MS',sans-serif;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--dourado);font-weight:bold}
+  .conv-item{display:flex;align-items:center;gap:9px;font-size:14px}
+  .conv-chip{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12px;padding:3px 10px;border-radius:5px}
+  .chip-bb{background:var(--bb-bg);color:var(--bb)}
+  .chip-be{background:var(--be-bg);color:var(--be)}
+
+  .sec{padding:36px 0 6px}
+  .sec-titulo{font-size:11px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--verde-m);border-bottom:2px solid var(--dourado);
+    padding-bottom:6px;margin-bottom:22px;scroll-margin-top:70px}
+
+  .banca-box{background:var(--verde);color:var(--creme);border-left:5px solid var(--dourado);
+    border-radius:8px;padding:18px 22px;margin-bottom:28px}
+  .banca-box .banca-title{font-family:'Trebuchet MS',sans-serif;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--dourado);font-weight:bold;margin-bottom:10px}
+  .banca-box p{font-size:14.5px;line-height:1.6;margin-top:7px}
+  .banca-box strong{color:var(--ambar)}
+
+  .diagrama{background:var(--creme-c);border:1px solid var(--linha);border-radius:12px;
+    padding:20px;margin-bottom:28px;display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:center}
+  .diagrama svg{flex:0 0 auto}
+  .diagrama .leg{font-size:13.5px;color:#3d5450;max-width:340px}
+  .diagrama .leg h4{font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--verde);
+    text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+  .diagrama .leg p{margin-bottom:7px;line-height:1.5}
+
+  .efeitos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:18px;margin-bottom:28px}
+  .efeito-card{background:var(--creme-c);border:1px solid var(--linha);border-radius:10px;overflow:hidden;
+    box-shadow:0 2px 10px rgba(13,61,54,.08)}
+  .efeito-card.destaque{border:1px solid var(--dourado);box-shadow:0 0 0 2px rgba(200,168,75,.25)}
+  .efeito-header{padding:14px 18px 12px;border-bottom:1px solid var(--linha);display:flex;align-items:center;gap:12px}
+  .efeito-card.destaque .efeito-header{background:rgba(200,168,75,.08)}
+  .efeito-num{width:34px;height:34px;border-radius:50%;background:var(--verde);color:var(--dourado);
+    font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:16px;display:flex;align-items:center;
+    justify-content:center;flex:0 0 auto}
+  .efeito-card.destaque .efeito-num{background:var(--dourado);color:var(--verde)}
+  .efeito-nome{font-size:17px;color:var(--verde);line-height:1.2}
+  .efeito-card.destaque .efeito-nome{color:#9a7d1e}
+  .efeito-nome-en{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.04em;font-style:italic}
+  .efeito-body{padding:16px 18px}
+  .efeito-mecanismo{font-size:13.5px;color:#3d5450;margin-bottom:14px;line-height:1.55;
+    border-left:3px solid var(--dourado);padding-left:12px}
+  .tag-inercia{display:inline-block;font-family:'Trebuchet MS',sans-serif;font-size:10px;font-weight:bold;
+    letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-bottom:10px}
+  .ti-sim{background:var(--dourado);color:var(--verde)}
+  .ti-nao{background:#eee7d4;color:var(--mute)}
+
+  .mini-tab{width:100%;border-collapse:collapse;font-size:13px}
+  .mini-tab th{background:var(--verde);color:var(--dourado);font-family:'Trebuchet MS',sans-serif;
+    font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;text-align:center}
+  .mini-tab td{padding:8px 10px;border-bottom:1px solid var(--linha);vertical-align:top;text-align:center}
+  .mini-tab tr:last-child td{border-bottom:none}
+  .mini-tab td:first-child{text-align:left;font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;color:var(--verde)}
+
+  .dir{display:inline-block;font-family:'Trebuchet MS',sans-serif;font-weight:bold;padding:2px 9px;
+    border-radius:5px;font-size:12.5px;white-space:nowrap}
+  .dir-bb{background:var(--bb-bg);color:var(--bb)}
+  .dir-be{background:var(--be-bg);color:var(--be)}
+  .dir-n{background:#f1f0ec;color:var(--mute)}
+  .dir-dep{background:#fef9ec;color:#8b6800;font-size:11px}
+  .efic{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);font-style:italic;display:block;margin-top:3px}
+
+  .tabela-wrap{overflow-x:auto;margin-bottom:14px;border-radius:10px;
+    box-shadow:0 2px 12px rgba(13,61,54,.10);border:1px solid var(--linha);-webkit-overflow-scrolling:touch}
+  table.guinada{width:100%;border-collapse:collapse;font-size:13px;min-width:720px}
+  table.guinada thead th{background:var(--verde);color:var(--dourado);font-family:'Trebuchet MS',sans-serif;
+    font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:10px 12px;text-align:center;
+    border-right:1px solid rgba(255,255,255,.1)}
+  table.guinada thead th:first-child{text-align:left}
+  table.guinada .sub-header td{background:#0f4a42;color:#9ecfca;font-family:'Trebuchet MS',sans-serif;
+    font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;text-align:center}
+  table.guinada tbody td{padding:10px 12px;border-bottom:1px solid var(--linha);
+    border-right:1px solid var(--linha);vertical-align:middle;text-align:center}
+  table.guinada tbody td:first-child{text-align:left;font-weight:bold;font-family:'Trebuchet MS',sans-serif;
+    font-size:13px;background:rgba(200,168,75,.05);color:var(--verde)}
+  table.guinada tbody tr:last-child td{border-bottom:none}
+  table.guinada tbody tr:hover td{background:rgba(26,122,110,.05)}
+
+  details.pscpp{background:var(--creme-c);border:1px solid var(--dourado);border-left:5px solid var(--dourado);
+    border-radius:8px;margin-bottom:16px;overflow:hidden}
+  details.pscpp summary{cursor:pointer;padding:14px 18px;font-family:'Trebuchet MS',sans-serif;
+    font-size:13px;font-weight:bold;letter-spacing:.04em;color:var(--verde);
+    list-style:none;display:flex;align-items:center;gap:10px;user-select:none}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"\2693";font-size:16px;color:var(--dourado);flex:0 0 auto}
+  details.pscpp summary .badge-q{background:var(--verde);color:var(--dourado);font-size:10px;
+    padding:2px 8px;border-radius:4px;margin-left:auto;flex:0 0 auto}
+  details.pscpp[open] summary{border-bottom:1px solid var(--linha)}
+  .pscpp-body{padding:16px 18px;font-size:14px;line-height:1.6}
+  .pscpp-body .q-num{font-family:'Trebuchet MS',sans-serif;font-size:11px;font-weight:bold;
+    color:#9a7d1e;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+  .pscpp-body .q-text{margin-bottom:12px;color:#2d4a44;font-style:italic}
+  .pscpp-body p{margin-bottom:8px}
+  .pscpp-body .gabarito{background:var(--verde);color:var(--creme);border-radius:6px;
+    padding:11px 15px;font-size:13.5px;margin-top:12px;line-height:1.55}
+  .pscpp-body .gabarito strong{color:var(--ambar)}
+  .pscpp-body .q-nota{font-size:12.5px;color:var(--mute);font-style:italic;margin-top:9px}
+
+  .distr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-bottom:24px}
+  .distr{background:var(--creme-c);border:1px solid var(--linha);border-top:3px solid var(--be);
+    border-radius:8px;padding:14px 16px}
+  .distr .distr-label{font-family:'Trebuchet MS',sans-serif;font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--be);font-weight:bold;margin-bottom:7px}
+  .distr .distr-errado{color:var(--mute);font-size:13.5px;margin-bottom:5px}
+  .distr .distr-errado::before{content:"\2715 ";color:var(--be);font-weight:bold}
+  .distr .distr-certo{color:var(--verde);font-size:13.5px;font-weight:bold}
+  .distr .distr-certo::before{content:"\2713 ";color:var(--verde-m)}
+
+  .nota-fonte{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);
+    border-top:1px solid var(--linha);padding-top:8px;margin:6px 0 4px}
+
+  footer{background:var(--verde);color:#8ab5ae;padding:28px 0;
+    font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:28px;line-height:1.6}
+  footer b{color:var(--dourado)}
+
+  @media(max-width:600px){
+    header h1{font-size:26px}
+    .efeitos-grid{grid-template-columns:1fr}
+    .convencao{gap:14px}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Arte Naval · Bloco B — Propulsão · PSCPP 2027</p>
+    <h1>Forças Laterais do <em>Propulsor</em></h1>
+    <p class="sub">Efeitos no navio de um hélice de passo direito — partindo da inércia e em movimento, avante e a ré.</p>
+    <div class="badges">
+      <span class="hbadge hb-banca">&#9875; BANCA 2006 · 2008 · 2011 · 2012</span>
+      <span class="hbadge hb-src">Arte Naval Cap. 12</span>
+      <span class="hbadge hb-src">Crenshaw · Naval Shiphandling</span>
+      <span class="hbadge hb-src">PNA Vol. III</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <div class="row">
+      <a href="#regra">Regra de ouro</a>
+      <a href="#efeitos">Os 4 efeitos</a>
+      <a href="#quadro">Quadro Arte Naval</a>
+      <a href="#guinada">Guinada da proa</a>
+      <a href="#provas">Questões de prova</a>
+      <a href="#distratores">Distratores</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="convencao">
+  <span class="conv-titulo">Convenção &#9875;</span>
+  <div class="conv-item"><span class="conv-chip chip-bb">BB</span> Bombordo = <em>port</em> (esquerda)</div>
+  <div class="conv-item"><span class="conv-chip chip-be">BE</span> Boreste = <em>starboard</em> (direita)</div>
+  <div class="conv-item" style="font-size:12.5px;color:#cfe3df">Tudo aqui é hélice de <strong>passo direito</strong>. Para passo esquerdo, inverta os resultados.</div>
+</div>
+
+<div class="sec" id="regra">
+  <div class="banca-box">
+    <div class="banca-title">&#9889; Regra de ouro — cobrada literalmente em 2008</div>
+    <p>Com o <strong>navio parado na inércia</strong> e o hélice acionado subitamente, <strong>um único efeito atua</strong>:
+    o <strong>efeito de imersão rasa (<em>shallow submergence</em>)</strong>.</p>
+    <p>Iniciando rotação para <strong>marcha AV</strong> &rarr; popa cai para <strong>BE (starboard)</strong>.<br>
+    Iniciando rotação para <strong>marcha AR</strong> &rarr; popa cai para <strong>BB (port)</strong>.</p>
+    <p style="margin-top:10px">Os outros três efeitos (<em>following wake</em>, <em>inclination</em>, <em>helical discharge</em>) dependem do movimento do navio, da esteira ou do jato sobre o leme — por isso <strong>não atuam com o navio parado</strong>.</p>
+    <p style="margin-top:8px;font-size:12.5px;color:#9ecfca"><em>Fonte: Crenshaw, Naval Shiphandling (4ª ed., 1975) — Q6/2008 e Q54/2006. Concorda com Arte Naval art. 12.4.</em></p>
+  </div>
+</div>
+
+<div class="diagrama">
+  <svg width="200" height="220" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de popa mostrando pás superiores rasas e pás inferiores em maior pressão">
+    <rect x="0" y="70" width="200" height="150" fill="#cde3df" opacity="0.5"/>
+    <line x1="0" y1="70" x2="200" y2="70" stroke="#1A7A6E" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="6" y="64" font-family="Trebuchet MS,sans-serif" font-size="10" fill="#1A7A6E">linha-d'água</text>
+    <path d="M60 70 L140 70 L128 175 Q100 195 72 175 Z" fill="#0D3D36" opacity="0.12" stroke="#0D3D36" stroke-width="1.5"/>
+    <circle cx="100" cy="135" r="42" fill="none" stroke="#0D3D36" stroke-width="2"/>
+    <circle cx="100" cy="135" r="6" fill="#0D3D36"/>
+    <path d="M100 135 L100 96 L108 100 L100 135 Z" fill="#C8A84B"/>
+    <path d="M100 135 L100 96 L92 100 L100 135 Z" fill="#C8A84B" opacity="0.7"/>
+    <path d="M100 135 L100 174 L108 170 L100 135 Z" fill="#1A7A6E"/>
+    <path d="M100 135 L100 174 L92 170 L100 135 Z" fill="#1A7A6E" opacity="0.7"/>
+    <text x="112" y="100" font-family="Trebuchet MS,sans-serif" font-size="9" fill="#9a7d1e">pás rasas</text>
+    <text x="112" y="111" font-family="Trebuchet MS,sans-serif" font-size="9" fill="#9a7d1e">menos empuxo</text>
+    <text x="112" y="168" font-family="Trebuchet MS,sans-serif" font-size="9" fill="#1A7A6E">pás fundas</text>
+    <text x="112" y="179" font-family="Trebuchet MS,sans-serif" font-size="9" fill="#1A7A6E">mais empuxo</text>
+    <text x="36" y="139" font-family="Trebuchet MS,sans-serif" font-size="13" font-weight="bold" fill="#1a5c96">BB</text>
+    <text x="150" y="139" font-family="Trebuchet MS,sans-serif" font-size="13" font-weight="bold" fill="#9a3412">BE</text>
+    <text x="74" y="212" font-family="Trebuchet MS,sans-serif" font-size="9" fill="#7a6f55">vista pela popa</text>
+  </svg>
+  <div class="leg">
+    <h4>Por que a imersão rasa atua sozinha</h4>
+    <p>As pás <strong>inferiores</strong> giram em maior profundidade, sob maior pressão hidrostática &rarr; geram mais empuxo. As pás <strong>superiores</strong>, próximas à superfície, geram menos.</p>
+    <p>Esse desequilíbrio existe <strong>desde o primeiro giro</strong>, sem precisar de movimento do navio. Por isso é o único ativo na inércia.</p>
+    <p style="font-size:12px;color:var(--mute)">Em marcha AV o empuxo extra das pás de baixo empurra a popa para BE. Na AR a rotação inverte e a popa vai para BB.</p>
+  </div>
+</div>
+
+<div class="sec" id="efeitos">
+  <div class="sec-titulo">Os 4 efeitos laterais — nomenclatura Crenshaw / PNA</div>
+  <div class="efeitos-grid">
+
+    <div class="efeito-card">
+      <div class="efeito-header">
+        <div class="efeito-num">1</div>
+        <div>
+          <div class="efeito-nome">Efeito da esteira seguidora</div>
+          <div class="efeito-nome-en">Following wake effect</div>
+        </div>
+      </div>
+      <div class="efeito-body">
+        <span class="tag-inercia ti-nao">Inativo na inércia</span>
+        <p class="efeito-mecanismo">O navio em movimento arrasta água (esteira), mais densa na linha-d'água e nula na quilha. Isso aumenta a pressão sobre as pás superiores do hélice, desequilibrando o empuxo lateral.</p>
+        <table class="mini-tab">
+          <tr><th>Condição</th><th>Popa tende a</th></tr>
+          <tr><td>Marcha AV</td><td><span class="dir dir-be">BE</span><span class="efic">a própria esteira neutraliza a pressão lateral em velocidade</span></td></tr>
+          <tr><td>Marcha AR</td><td><span class="dir dir-n">sem efeito</span><span class="efic">a esteira forma-se na proa</span></td></tr>
+          <tr><td>Parado</td><td><span class="dir dir-n">inativo</span><span class="efic">sem movimento não há esteira</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="efeito-card">
+      <div class="efeito-header">
+        <div class="efeito-num">2</div>
+        <div>
+          <div class="efeito-nome">Efeito de inclinação</div>
+          <div class="efeito-nome-en">Inclination effect</div>
+        </div>
+      </div>
+      <div class="efeito-body">
+        <span class="tag-inercia ti-nao">Inativo na inércia</span>
+        <p class="efeito-mecanismo">O eixo do hélice é levemente inclinado em relação ao fluxo de entrada. A pá descendente (lado BE, posição "3h") recebe ângulo de ataque maior que a ascendente &rarr; assimetria de empuxo.</p>
+        <table class="mini-tab">
+          <tr><th>Condição</th><th>Proa / popa</th></tr>
+          <tr><td>Marcha AV</td><td>proa <span class="dir dir-bb">BB</span><span class="efic">efeito secundário; leme domina em velocidade</span></td></tr>
+          <tr><td>Marcha AR</td><td><span class="dir dir-dep">inverte</span><span class="efic">depende do fluxo de aproximação</span></td></tr>
+          <tr><td>Parado</td><td><span class="dir dir-n">inativo</span><span class="efic">requer fluxo diagonal</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="efeito-card">
+      <div class="efeito-header">
+        <div class="efeito-num">3</div>
+        <div>
+          <div class="efeito-nome">Efeito de descarga helicoidal</div>
+          <div class="efeito-nome-en">Helical discharge effect</div>
+        </div>
+      </div>
+      <div class="efeito-body">
+        <span class="tag-inercia ti-nao">Inativo na inércia</span>
+        <p class="efeito-mecanismo">A corrente de descarga sai espiralada e bate assimetricamente no leme (mais força na parte superior do jato) e na carena da popa, gerando força lateral resultante.</p>
+        <table class="mini-tab">
+          <tr><th>Condição</th><th>Popa tende a</th></tr>
+          <tr><td>Marcha AV<br><span class="efic" style="display:inline">leme a meio</span></td><td><span class="dir dir-bb">BB</span><span class="efic">pás inferiores predominam; jato atinge o leme</span></td></tr>
+          <tr><td>Marcha AR<br><span class="efic" style="display:inline">leme a meio</span></td><td><span class="dir dir-bb">BB</span><span class="efic">descarga bate na carena a BE &rarr; reação a BB</span></td></tr>
+          <tr><td>Parado</td><td><span class="dir dir-n">fraco</span><span class="efic">exige velocidade para jato pleno no leme</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="efeito-card destaque">
+      <div class="efeito-header">
+        <div class="efeito-num">4</div>
+        <div>
+          <div class="efeito-nome">Efeito de imersão rasa &#9733;</div>
+          <div class="efeito-nome-en">Shallow submergence effect</div>
+        </div>
+      </div>
+      <div class="efeito-body">
+        <span class="tag-inercia ti-sim">&#9733; Único ativo na inércia</span>
+        <p class="efeito-mecanismo">As pás superiores giram mais próximas da superfície livre (menor pressão) e geram menos empuxo que as inferiores. <strong>Independe do movimento do navio e da esteira</strong> — atua desde o instante zero.</p>
+        <table class="mini-tab">
+          <tr><th>Condição</th><th>Popa tende a</th></tr>
+          <tr><td>Marcha AV</td><td><span class="dir dir-be">BE</span><span class="efic">pás inferiores (mais pressão) empurram para BE</span></td></tr>
+          <tr><td>Marcha AR</td><td><span class="dir dir-bb">BB</span><span class="efic">rotação inverte &rarr; empuxo extra vai para BB</span></td></tr>
+          <tr><td><strong>Parado</strong></td><td><span class="dir dir-be" style="font-size:13px">BE (AV) / BB (AR)</span><span class="efic">Arte Naval 12.4 · Q6/2008</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="sec" id="quadro">
+  <div class="sec-titulo">Quadro dos efeitos do propulsor — Arte Naval, art. 12.3–12.5</div>
+  <div class="tabela-wrap">
+    <table class="guinada">
+      <thead>
+        <tr>
+          <th style="width:230px;text-align:left">Ação do propulsor</th>
+          <th>Marcha AV — efeito na popa</th>
+          <th>Marcha AR — efeito na popa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Corrente de <strong>sucção</strong></td>
+          <td><span class="dir dir-n">sem efeito</span><span class="efic">corre paralela ao eixo</span></td>
+          <td><span class="dir dir-n">sem efeito</span> com leme a meio<span class="efic">aumenta a ação do leme se angulado</span></td>
+        </tr>
+        <tr>
+          <td>Corrente de <strong>descarga</strong></td>
+          <td><span class="dir dir-bb">BB</span> com leme a meio<span class="efic">aumenta a ação do leme se angulado</span></td>
+          <td><span class="dir dir-bb">BB</span><span class="efic">descarga bate na carena a BE</span></td>
+        </tr>
+        <tr>
+          <td><strong>Pressão lateral</strong> das pás<span class="efic">(= shallow submergence; só sensível no início ou com pás emersas)</span></td>
+          <td><span class="dir dir-be">BE</span><span class="efic">pás inferiores sob maior pressão</span></td>
+          <td><span class="dir dir-bb">BB</span><span class="efic">efeito inverso</span></td>
+        </tr>
+        <tr>
+          <td>Corrente da <strong>esteira</strong></td>
+          <td><span class="efic" style="font-style:normal">Neutraliza a pressão lateral; reduz a ação do leme</span></td>
+          <td><span class="dir dir-n">sem efeito</span><span class="efic">forma-se na proa</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="nota-fonte">Fonte: Arte Naval (Fonseca, 7ª ed., 2005), Cap. 12, art. 12.3–12.5. A "pressão lateral das pás" de Fonseca corresponde ao <em>shallow submergence effect</em> de Crenshaw.</p>
+</div>
+
+<div class="sec" id="guinada">
+  <div class="sec-titulo">Guinada da proa nas 4 situações — Arte Naval, art. 12.6</div>
+  <p style="font-size:14px;color:var(--mute);margin-bottom:16px">Leme a meio, a BB ou a BE. "Partindo do repouso" = navio na inércia ao acionar o hélice.</p>
+  <div class="tabela-wrap">
+    <table class="guinada">
+      <thead>
+        <tr>
+          <th style="width:84px;text-align:left">Leme</th>
+          <th colspan="2">Navio + hélice AV</th>
+          <th colspan="2">Navio + hélice AR</th>
+          <th>Seguim. AV<br>hélice AR</th>
+          <th>Seguim. AR<br>hélice AV</th>
+        </tr>
+        <tr class="sub-header">
+          <td></td>
+          <td>do repouso</td>
+          <td>com seguim.</td>
+          <td>do repouso</td>
+          <td>com seguim.</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A meio</td>
+          <td>proa <span class="dir dir-bb">BB</span> lenta<span class="efic">pressão lat.</span></td>
+          <td>proa <span class="dir dir-be">BE</span> lenta<span class="efic">esteira supera</span></td>
+          <td>proa <span class="dir dir-be">BE</span> lenta<span class="efic">descarga+pres.lat.</span></td>
+          <td>proa <span class="dir dir-be">BE</span> lenta</td>
+          <td>proa <span class="dir dir-be">BE</span> lenta</td>
+          <td><span class="dir dir-dep">BB ou BE</span><span class="efic">pres.lat. fraca</span></td>
+        </tr>
+        <tr>
+          <td>A BB</td>
+          <td>proa <span class="dir dir-bb">BB</span> rápida<span class="efic">leme+descarga</span></td>
+          <td>proa <span class="dir dir-bb">BB</span></td>
+          <td>popa <span class="dir dir-be">BE</span> muito lenta<span class="efic">pres.lat+desc.&gt;leme</span></td>
+          <td>popa <span class="dir dir-be">BE</span> rápida<span class="efic">leme c/ seguim.</span></td>
+          <td>proa <span class="dir dir-bb">BB</span>&rarr;<span class="dir dir-be">BE</span><span class="efic">leme perde p/ hélice</span></td>
+          <td>popa <span class="dir dir-bb">BB</span> lenta<span class="efic">descarga&gt;leme</span></td>
+        </tr>
+        <tr>
+          <td>A BE</td>
+          <td>proa <span class="dir dir-be">BE</span> lenta</td>
+          <td>proa <span class="dir dir-be">BE</span></td>
+          <td>popa <span class="dir dir-be">BE</span> lenta<span class="efic">pres.lat+leme+sucção</span></td>
+          <td>popa <span class="dir dir-be">BE</span> lenta<br>ou a caminho</td>
+          <td>proa <span class="dir dir-be">BE</span> muito lenta<br>ou a caminho</td>
+          <td>popa <span class="dir dir-be">BE</span> lenta</td>
+        </tr>
+        <tr>
+          <td colspan="7" style="font-style:italic;font-size:12.5px;color:var(--mute);text-align:left;padding:9px 12px;background:rgba(200,168,75,.04)">
+            <strong>Ação do leme:</strong> Grande (AV) · Muito pequena (AR do repouso) · Grande (AR c/ seguim.) · Pouca (AV&rarr;AR, aumenta se a máquina parar) · Grande (AR&rarr;AV) — ver art. 12.6.3
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="nota-fonte">Fonte: Arte Naval (Fonseca, 7ª ed.), Cap. 12, art. 12.6.</p>
+</div>
+
+<div class="banca-box" style="background:#0f4a42;margin-top:8px">
+  <div class="banca-title">&#128208; Regra de Baistrocchi</div>
+  <p style="font-size:15px">"<em>O navio tende a obedecer ao leme conforme o <strong>sentido em que gira o hélice</strong>, e não conforme o sentido da marcha do navio.</em>"</p>
+  <p style="margin-top:8px;font-size:13.5px">Consequência prática: para guinar para um bordo ao inverter a marcha, <strong>carregue o leme antes de inverter</strong> — enquanto ainda há seguimento e o leme domina.</p>
+</div>
+
+<div class="sec" id="provas">
+  <div class="sec-titulo">&#9875; Pontos PSCPP — questões de prova com gabarito</div>
+
+  <details class="pscpp" open>
+    <summary>Q6 · 2008 — Navio parado, hélice acionado subitamente <span class="badge-q">(D)</span></summary>
+    <div class="pscpp-body">
+      <div class="q-num">PSCPP/2008 — Q6 (0,7 pt) · em inglês</div>
+      <div class="q-text">"With the ship at rest and the right hand screw is started rapidly, only the ___ effect acts and, as a result, a single propeller ship tends to move the stern to ___."</div>
+      <p>(a) helicoidal discharge – starboard · (b) following wake – port · (c) inclination effect – port · <strong>(d) shallow submergence – starboard</strong> · (e) following wake – starboard</p>
+      <div class="gabarito">
+        &#9989; Gabarito <strong>(D) shallow submergence – starboard (BE)</strong><br>
+        Com o navio na inércia não há esteira, fluxo inclinado nem jato sobre o leme. Só existe a diferença de pressão entre as pás superiores e inferiores &rarr; popa para <strong>BE</strong>.
+      </div>
+    </div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Q54 · 2006 — As 4 afirmativas de força lateral <span class="badge-q">(D)</span></summary>
+    <div class="pscpp-body">
+      <div class="q-num">PSCPP/2006 — Q54 · em inglês · hélice passo direito</div>
+      <p>I) <em>Following wake</em> &rarr; popa à direita, navio guina para BB. <strong>[F]</strong><br>
+      II) <em>Inclination</em> &rarr; torce o navio para a direita. <strong>[F]</strong><br>
+      III) <em>Shallow submergence</em> &rarr; popa para BE (starboard), navio guina para BB (port). <strong>[V]</strong><br>
+      IV) <em>Helical discharge</em> &rarr; vira o navio para a direita. <strong>[F]</strong></p>
+      <div class="gabarito">&#9989; Gabarito <strong>(D) apenas III é verdadeira</strong></div>
+      <p class="q-nota">Fonte: Crenshaw, Naval Shiphandling, 4ª ed., 1975.</p>
+    </div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Q16 · 2011 — Sequência dos 4 efeitos (hélice AV) <span class="badge-q">(E)</span></summary>
+    <div class="pscpp-body">
+      <div class="q-num">PSCPP/2011 — Q16 (1,2 pt) · hélice horário visto de fora · marcha AV</div>
+      <p>I) <em>Following wake</em> &rarr; popa para <strong>BE</strong><br>
+      II) Inclinação &rarr; proa para <strong>BB</strong><br>
+      III) Descarga helicoidal &rarr; proa para <strong>BB</strong><br>
+      IV) <em>Shallow submergence</em> &rarr; popa para <strong>BE</strong><br>
+      V) Efeito de <strong>shallow submergence</strong> é independente da esteira (<em>wake</em>)</p>
+      <div class="gabarito">
+        &#9989; Gabarito <strong>(E) BE · BB · BB · BE · "shallow submergence"</strong><br>
+        Chave do item V: a imersão rasa é o único efeito independente do movimento do navio.
+      </div>
+      <p class="q-nota">[VERIFICAR gabarito impresso]</p>
+    </div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Q47–49 · 2012 — Força lateral e leme na marcha AR <span class="badge-q">[VERIFICAR]</span></summary>
+    <div class="pscpp-body">
+      <div class="q-num">PSCPP/2012 — Q47 · Q48 · Q49 · hélice passo direito, visto pela popa</div>
+      <p><strong>Q47:</strong> a grandeza da <em>side force</em> varia com o tipo de navio e a estrutura submersa [V]. Rotação direita &rarr; popa a BE [V]; rotação esquerda &rarr; popa a BB [V]. Item afirmando que a direção depende <em>somente</em> do sentido de rotação &rarr; <strong>[F]</strong>.</p>
+      <p><strong>Q48:</strong> navio AV + hélice AV, leme a meio &rarr; resultante tende a guinar a proa para <strong>BB</strong>.</p>
+      <p><strong>Q49:</strong> navio parado iniciando AR, leme a meio &rarr; popa para <strong>BB</strong>; com leme a 30° a BE pode não vencer a força lateral em baixa velocidade.</p>
+      <div class="gabarito">
+        &#9989; Padrão: <strong>marcha AR partindo do repouso &rarr; popa sempre tende a BB</strong> (pressão lateral + descarga se somam).
+      </div>
+      <p class="q-nota">[VERIFICAR gabarito definitivo impresso 2012]</p>
+    </div>
+  </details>
+</div>
+
+<div class="sec" id="distratores">
+  <div class="sec-titulo">Distratores clássicos — armadilhas da banca</div>
+  <div class="distr-grid">
+    <div class="distr">
+      <div class="distr-label">Inércia</div>
+      <div class="distr-errado">Following wake atua com o navio parado</div>
+      <div class="distr-certo">Só em movimento — exige esteira formada</div>
+    </div>
+    <div class="distr">
+      <div class="distr-label">Marcha AR do repouso</div>
+      <div class="distr-errado">Popa vai a BE ao iniciar a ré</div>
+      <div class="distr-certo">Popa vai a BB — pressão lat. + descarga somam</div>
+    </div>
+    <div class="distr">
+      <div class="distr-label">Eficácia do leme</div>
+      <div class="distr-errado">Leme a BE em baixa velocidade AR &rarr; popa a BE</div>
+      <div class="distr-certo">Hélice domina &rarr; popa ainda vai a BB</div>
+    </div>
+    <div class="distr">
+      <div class="distr-label">Dependência da esteira</div>
+      <div class="distr-errado">Shallow submergence depende do wake</div>
+      <div class="distr-certo">Único efeito INDEPENDENTE do movimento</div>
+    </div>
+    <div class="distr">
+      <div class="distr-label">Marcha AV com seguimento</div>
+      <div class="distr-errado">Popa a BB com leme a meio em AV</div>
+      <div class="distr-certo">Com seguimento, a esteira supera a pressão lat. &rarr; popa a BE</div>
+    </div>
+    <div class="distr">
+      <div class="distr-label">Corrente de sucção</div>
+      <div class="distr-errado">Sucção age com o leme a meio</div>
+      <div class="distr-certo">Só age com leme angulado — paralela ao leme a meio</div>
+    </div>
+    <div class="distr">
+      <div class="distr-label">Tradução</div>
+      <div class="distr-errado">Starboard = BB · Port = BE</div>
+      <div class="distr-certo">Starboard = BE (boreste) · Port = BB (bombordo)</div>
+    </div>
+    <div class="distr">
+      <div class="distr-label">Convenção da banca</div>
+      <div class="distr-errado">Pressão lateral das pás ≠ shallow submergence</div>
+      <div class="distr-certo">São o mesmo efeito — Fonseca vs. Crenshaw</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>PSCPP 2027</b> · Arte Naval Cap. 12 — Forças Laterais do Propulsor<br>
+    Fontes: Fonseca (7ª ed., 2005) · Crenshaw, Naval Shiphandling (4ª ed., 1975) · PNA Vol. III · provas 2006/2008/2011/2012 · Capital Sereno
+  </div>
+</footer>
+
+</body>
+</html>
