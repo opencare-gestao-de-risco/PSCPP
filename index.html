@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estante PSCPP 2027 — Manobrabilidade</title>
+<style>
+  :root{
+    --verde-escuro:#0D3D36; --verde-medio:#1A7A6E; --dourado:#C8A84B;
+    --creme:#F7F3EA; --creme-card:#FBF8F1; --tinta:#16302B;
+    --amarelo-hl:#FCEFA8; --ambar-hl:#F2C879;
+    --sombra:0 2px 12px rgba(13,61,54,.10);
+    --sombra-forte:0 8px 28px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Georgia,'Times New Roman',serif;background:var(--creme);color:var(--tinta);line-height:1.6}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+
+  /* HERO */
+  header.hero{
+    background:
+      radial-gradient(circle at 88% 15%, rgba(200,168,75,.20), transparent 44%),
+      linear-gradient(160deg,var(--verde-escuro) 0%,#0a322c 60%,#082822 100%);
+    color:var(--creme);padding:52px 0 44px;border-bottom:4px solid var(--dourado);
+  }
+  .hero .eyebrow{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--dourado);font-family:'Trebuchet MS',sans-serif;margin:0 0 14px}
+  .hero h1{font-size:40px;line-height:1.12;margin:0 0 14px;font-weight:normal;letter-spacing:-.5px}
+  .hero h1 em{color:var(--dourado);font-style:normal}
+  .hero .sub{font-size:18px;color:#cfe3df;max-width:660px;margin:0}
+  .hero .stat{margin-top:24px;display:flex;gap:22px;flex-wrap:wrap;font-family:'Trebuchet MS',sans-serif}
+  .hero .stat div{font-size:13px;color:#a9c8c1}
+  .hero .stat b{display:block;font-size:30px;color:var(--dourado);font-weight:bold;line-height:1}
+
+  /* CONTROLES */
+  .controls{position:sticky;top:0;z-index:30;background:rgba(247,243,234,.95);backdrop-filter:blur(8px);border-bottom:1px solid #e3dcc8;padding:14px 0}
+  .controls .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  #busca{
+    flex:1 1 240px;font-family:Georgia,serif;font-size:16px;padding:11px 16px;
+    border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:200px;
+  }
+  #busca:focus{outline:none;border-color:var(--verde-medio);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
+  .filtros{display:flex;gap:7px;flex-wrap:wrap}
+  .fbtn{
+    font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;cursor:pointer;
+    border:1.5px solid var(--verde-medio);background:#fff;color:var(--verde-medio);
+    padding:8px 14px;border-radius:20px;transition:all .15s;
+  }
+  .fbtn:hover{background:#eef5f3}
+  .fbtn.on{background:var(--verde-medio);color:#fff}
+
+  /* GRUPOS */
+  main{padding:36px 0 60px}
+  .grupo{margin-bottom:40px}
+  .grupo-head{display:flex;align-items:center;gap:14px;margin:0 0 18px;padding-bottom:10px;border-bottom:2px solid #e8e1cf}
+  .grupo-letra{
+    font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:20px;color:#fff;
+    background:var(--verde-escuro);width:44px;height:44px;border-radius:11px;
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  }
+  .grupo-titulo{font-size:22px;color:var(--verde-escuro)}
+  .grupo-sub{font-size:14px;color:#7a8a85;font-family:'Trebuchet MS',sans-serif;margin-left:auto}
+
+  /* CARDS */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  a.card{
+    display:flex;flex-direction:column;text-decoration:none;color:inherit;
+    background:var(--creme-card);border:1px solid #e3dcc8;border-left:5px solid var(--dourado);
+    border-radius:12px;padding:18px 20px;box-shadow:var(--sombra);
+    transition:transform .18s,box-shadow .18s;min-height:140px;
+  }
+  a.card:hover{transform:translateY(-4px);box-shadow:var(--sombra-forte);border-left-color:var(--verde-medio)}
+  a.card .c-bloco{font-family:'Trebuchet MS',sans-serif;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--verde-medio);font-weight:bold}
+  a.card .c-titulo{font-size:20px;color:var(--verde-escuro);margin:6px 0 8px;line-height:1.25}
+  a.card .c-desc{font-size:14px;color:#5a6b66;flex:1}
+  a.card .c-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  a.card .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;padding:3px 9px;border-radius:20px;background:#eef5f3;color:var(--verde-medio)}
+  a.card .tag.banca{background:var(--verde-escuro);color:var(--dourado)}
+  a.card .c-go{font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--dourado);font-weight:bold;margin-top:12px}
+
+  .vazio{text-align:center;color:#8a8266;font-style:italic;padding:50px 0;font-size:17px;display:none}
+
+  /* COMO ADICIONAR */
+  .ajuda{background:var(--creme-card);border:1px dashed #c9bf9e;border-radius:12px;padding:20px 24px;margin-top:30px;font-size:14.5px}
+  .ajuda h3{margin:0 0 10px;color:var(--verde-escuro);font-weight:normal;font-size:18px}
+  .ajuda code{font-family:'Courier New',monospace;background:#fff;border:1px solid #e3dcc8;border-radius:6px;padding:2px 7px;font-size:13px;color:var(--tinta)}
+  .ajuda pre{background:#fff;border:1px solid #e3dcc8;border-radius:8px;padding:14px;overflow-x:auto;font-size:13px;font-family:'Courier New',monospace;line-height:1.7}
+
+  footer{background:var(--verde-escuro);color:#bcd5cf;padding:30px 0;font-family:'Trebuchet MS',sans-serif;font-size:13px}
+  footer b{color:var(--dourado)}
+
+  @media(max-width:600px){.hero h1{font-size:30px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Capital Sereno · Praticante de Prático</p>
+    <h1>Estante <em>PSCPP 2027</em></h1>
+    <p class="sub">Cadernos de fixação, simulados e materiais de apoio em manobrabilidade. Tudo num só lugar, sempre acessível.</p>
+    <div class="stat">
+      <div><b id="statTotal">0</b>cadernos</div>
+      <div><b id="statBlocos">0</b>blocos cobertos</div>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <div class="row">
+      <input id="busca" type="search" placeholder="Buscar por título, tema ou etiqueta…" oninput="render()" aria-label="Buscar cadernos">
+      <div class="filtros" id="filtros"></div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div id="estante"></div>
+    <div class="vazio" id="vazio">Nenhum caderno encontrado com esse filtro.</div>
+
+    <div class="ajuda">
+      <h3>Como adicionar um caderno novo</h3>
+      <p>1. Suba o arquivo <code>.html</code> nesta mesma pasta do GitHub.<br>
+         2. No código deste <code>index.html</code>, acrescente uma linha ao bloco <code>CADERNOS</code>, no topo do script:</p>
+      <pre>{ bloco:"E", titulo:"Nome do caderno", arquivo:"nome_do_arquivo.html",
+  desc:"Resumo de uma linha.", tags:["BANCA","Nomoto"] },</pre>
+      <p>Pronto — a estante se reorganiza sozinha. Sem banco de dados, sem configuração.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>PSCPP 2027</b> · Estante de estudos · Manobrabilidade (Blocos D–H) · Capital Sereno
+  </div>
+</footer>
+
+<script>
+/* ======================================================================
+   ÚNICO LUGAR QUE VOCÊ EDITA PARA ADICIONAR CADERNOS.
+   Copie uma linha, ajuste os campos, salve. A estante faz o resto.
+   Campos: bloco (D|E|F|G|H) · titulo · arquivo (nome do .html) · desc · tags[]
+   ====================================================================== */
+const CADERNOS = [
+  {
+    bloco:"E",
+    titulo:"Derivadas hidrodinâmicas",
+    arquivo:"derivadas_hidrodinamicas.html",
+    desc:"Série de Taylor, hipóteses simplificadoras, significado físico de Yv/Nr, massa adicional, C′ e Nomoto, águas rasas.",
+    tags:["BANCA","Nomoto","C′","Águas rasas"]
+  },
+  // ↑ Adicione novos cadernos acima desta linha, no mesmo formato.
+];
+
+/* ---- Metadados dos blocos do edital (não precisa editar) ---- */
+const BLOCOS = {
+  D:{titulo:"Padrões IMO de Manobrabilidade", sub:"A.601(15) · MSC.137(76) · MSC/Circ.1053"},
+  E:{titulo:"Dinâmica e Forças", sub:"6 GDL · derivadas hidrodinâmicas · forças do propulsor"},
+  F:{titulo:"Estabilidade Direcional e Nomoto", sub:"índices K e T · espiral · overshoot"},
+  G:{titulo:"Controle e Governo", sub:"governo · azimutais · zigue-zague · espiral · Bech"},
+  H:{titulo:"Giro e Parada", sub:"curva de giro · crash stop · pull-out"}
+};
+const ORDEM = ["D","E","F","G","H"];
+
+let filtroBloco = "todos";
+
+function setFiltro(b){ filtroBloco=b; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.b===b)); render(); }
+
+function montarFiltros(){
+  const cont=document.getElementById('filtros');
+  let html=`<button class="fbtn on" data-b="todos" onclick="setFiltro('todos')">Todos</button>`;
+  ORDEM.forEach(b=>{
+    if(CADERNOS.some(c=>c.bloco===b))
+      html+=`<button class="fbtn" data-b="${b}" onclick="setFiltro('${b}')">Bloco ${b}</button>`;
+  });
+  cont.innerHTML=html;
+}
+
+function render(){
+  const termo=(document.getElementById('busca').value||"").toLowerCase().trim();
+  const est=document.getElementById('estante');
+  est.innerHTML="";
+
+  let visiveis=0;
+  ORDEM.forEach(b=>{
+    if(filtroBloco!=="todos" && filtroBloco!==b) return;
+    let itens=CADERNOS.filter(c=>c.bloco===b);
+    if(termo){
+      itens=itens.filter(c=>{
+        const blob=(c.titulo+" "+(c.desc||"")+" "+(c.tags||[]).join(" ")).toLowerCase();
+        return blob.includes(termo);
+      });
+    }
+    if(itens.length===0) return;
+    visiveis+=itens.length;
+
+    const meta=BLOCOS[b]||{titulo:"",sub:""};
+    let cards="";
+    itens.forEach(c=>{
+      const tags=(c.tags||[]).map(t=>{
+        const cls = t.toUpperCase()==="BANCA" ? "tag banca" : "tag";
+        return `<span class="${cls}">${t}</span>`;
+      }).join("");
+      cards+=`<a class="card" href="${c.arquivo}">
+        <span class="c-bloco">Bloco ${c.bloco}</span>
+        <span class="c-titulo">${c.titulo}</span>
+        <span class="c-desc">${c.desc||""}</span>
+        <span class="c-tags">${tags}</span>
+        <span class="c-go">Abrir caderno →</span>
+      </a>`;
+    });
+
+    est.insertAdjacentHTML('beforeend',
+      `<section class="grupo">
+        <div class="grupo-head">
+          <div class="grupo-letra">${b}</div>
+          <div><div class="grupo-titulo">${meta.titulo}</div></div>
+          <div class="grupo-sub">${meta.sub}</div>
+        </div>
+        <div class="cards">${cards}</div>
+      </section>`);
+  });
+
+  document.getElementById('vazio').style.display = visiveis===0 ? "block" : "none";
+}
+
+function montarStats(){
+  document.getElementById('statTotal').textContent=CADERNOS.length;
+  document.getElementById('statBlocos').textContent=new Set(CADERNOS.map(c=>c.bloco)).size;
+}
+
+montarFiltros(); montarStats(); render();
+</script>
+
+</body>
+</html>

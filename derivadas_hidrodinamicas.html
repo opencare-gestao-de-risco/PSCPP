@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Derivadas Hidrodinâmicas — Bloco E | PSCPP 2027</title>
+<style>
+  :root{
+    --verde-escuro:#0D3D36;
+    --verde-medio:#1A7A6E;
+    --dourado:#C8A84B;
+    --creme:#F7F3EA;
+    --creme-card:#FBF8F1;
+    --vermelho:#B23A2E;
+    --azul:#2B6CA3;
+    --verde-asa:#2E7D4F;
+    --tinta:#16302B;
+    --amarelo-hl:#FCEFA8;
+    --ambar-hl:#F2C879;
+    --sombra:0 2px 12px rgba(13,61,54,.10);
+    --sombra-forte:0 6px 24px rgba(13,61,54,.16);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:Georgia,'Times New Roman',serif;
+    background:var(--creme);
+    color:var(--tinta);
+    line-height:1.72;
+    font-size:18px;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    background:
+      radial-gradient(circle at 85% 18%, rgba(200,168,75,.18), transparent 42%),
+      linear-gradient(160deg,var(--verde-escuro) 0%,#0a322c 60%,#082822 100%);
+    color:var(--creme);
+    padding:60px 0 52px;
+    border-bottom:4px solid var(--dourado);
+  }
+  .hero .eyebrow{
+    font-size:13px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--dourado);font-family:'Trebuchet MS',sans-serif;margin:0 0 16px;
+  }
+  .hero h1{
+    font-size:42px;line-height:1.12;margin:0 0 18px;font-weight:normal;
+    letter-spacing:-.5px;
+  }
+  .hero h1 em{color:var(--dourado);font-style:normal}
+  .hero .sub{font-size:19px;color:#cfe3df;max-width:680px;margin:0}
+  .hero .meta{
+    margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;
+    font-family:'Trebuchet MS',sans-serif;font-size:12.5px;letter-spacing:.04em;
+  }
+  .hero .meta span{
+    border:1px solid rgba(200,168,75,.5);border-radius:20px;
+    padding:5px 14px;color:#e7d9a8;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.toc{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,243,234,.94);backdrop-filter:blur(8px);
+    border-bottom:1px solid #e3dcc8;
+    font-family:'Trebuchet MS',sans-serif;
+  }
+  nav.toc .inner{
+    max-width:860px;margin:0 auto;padding:10px 22px;
+    display:flex;gap:6px;overflow-x:auto;
+  }
+  nav.toc a{
+    flex:0 0 auto;font-size:12.5px;text-decoration:none;color:var(--verde-medio);
+    padding:6px 11px;border-radius:7px;white-space:nowrap;letter-spacing:.02em;
+    transition:background .15s,color .15s;
+  }
+  nav.toc a:hover{background:var(--verde-medio);color:#fff}
+  nav.toc a .n{color:var(--dourado);font-weight:bold;margin-right:5px}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:48px 0;border-bottom:1px solid #e8e1cf}
+  section:last-of-type{border-bottom:none}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin:0 0 8px}
+  .sec-num{
+    font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;
+    color:#fff;background:var(--verde-medio);border-radius:6px;
+    padding:3px 10px;letter-spacing:.05em;flex:0 0 auto;
+  }
+  h2{font-size:28px;font-weight:normal;color:var(--verde-escuro);margin:0;line-height:1.2}
+  h3{font-size:21px;font-weight:normal;color:var(--verde-medio);margin:30px 0 10px}
+  p{margin:14px 0}
+  .lead{font-size:19.5px;color:#2a463f}
+  strong{color:var(--verde-escuro)}
+  .hl{background:linear-gradient(transparent 55%,var(--amarelo-hl) 55%);padding:0 2px}
+  .hl-ambar{background:linear-gradient(transparent 55%,var(--ambar-hl) 55%);padding:0 2px}
+  .en{color:var(--verde-medio);font-style:italic}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{display:flex;flex-wrap:wrap;gap:14px;margin:26px 0}
+  .tl-card{
+    flex:1 1 200px;background:var(--creme-card);border:1px solid #e3dcc8;
+    border-left:4px solid var(--dourado);border-radius:10px;padding:16px 18px;
+    box-shadow:var(--sombra);transition:transform .18s,box-shadow .18s;cursor:default;
+  }
+  .tl-card:hover{transform:translateY(-3px);box-shadow:var(--sombra-forte)}
+  .tl-year{font-family:'Trebuchet MS',sans-serif;font-size:22px;font-weight:bold;color:var(--verde-escuro)}
+  .tl-who{font-size:15px;color:var(--verde-medio);margin:2px 0 8px;font-style:italic}
+  .tl-what{font-size:15px;line-height:1.55}
+
+  /* ---------- NOTATION DECODER ---------- */
+  .decoder{
+    background:var(--verde-escuro);color:var(--creme);border-radius:14px;
+    padding:30px 26px;margin:24px 0;text-align:center;box-shadow:var(--sombra-forte);
+  }
+  .decoder .formula{font-size:54px;letter-spacing:2px;margin:6px 0 22px;font-family:Georgia,serif}
+  .decoder .formula .f-letter{color:var(--dourado);cursor:pointer;position:relative;transition:color .15s}
+  .decoder .formula .f-sub{color:#8fd3c6;font-size:34px;vertical-align:sub;cursor:pointer;transition:color .15s}
+  .decoder .formula .f-letter:hover,.decoder .formula .f-sub:hover{color:#fff;text-shadow:0 0 14px var(--dourado)}
+  .decoder .legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+  .decoder .chip{
+    font-family:'Trebuchet MS',sans-serif;font-size:13.5px;background:rgba(255,255,255,.08);
+    border:1px solid rgba(200,168,75,.4);border-radius:9px;padding:10px 14px;max-width:260px;text-align:left;
+  }
+  .decoder .chip b{color:var(--dourado)}
+  .decoder small{display:block;color:#9fc4bd;margin-top:18px;font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+
+  /* ---------- HIPOTESES ---------- */
+  .hyp-grid{display:flex;flex-direction:column;gap:14px;margin:24px 0}
+  .hyp{
+    background:var(--creme-card);border:1px solid #e3dcc8;border-radius:12px;
+    padding:18px 20px;box-shadow:var(--sombra);cursor:pointer;
+    border-left:5px solid var(--verde-medio);transition:all .2s;
+  }
+  .hyp:hover{box-shadow:var(--sombra-forte)}
+  .hyp.active{border-left-color:var(--dourado);background:#fff}
+  .hyp .h-top{display:flex;align-items:center;gap:14px}
+  .hyp .h-badge{
+    font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:20px;
+    color:#fff;background:var(--verde-medio);width:38px;height:38px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:background .2s;
+  }
+  .hyp.active .h-badge{background:var(--dourado);color:var(--verde-escuro)}
+  .hyp .h-title{font-size:18px;color:var(--verde-escuro);font-weight:bold}
+  .hyp .h-body{font-size:15.5px;margin-top:10px;line-height:1.6;display:none}
+  .hyp.active .h-body{display:block}
+  .hyp .h-elim{
+    margin-top:10px;font-family:'Trebuchet MS',sans-serif;font-size:13px;
+    background:var(--creme);border-radius:8px;padding:8px 12px;color:var(--vermelho);
+  }
+  .hint{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:var(--verde-medio);font-style:italic}
+
+  /* ---------- SIMETRIA TOGGLE ---------- */
+  .sim-box{background:var(--creme-card);border:1px solid #e3dcc8;border-radius:14px;padding:24px;margin:24px 0;box-shadow:var(--sombra)}
+  .sim-controls{display:flex;gap:10px;justify-content:center;margin-bottom:18px;flex-wrap:wrap}
+  .btn-toggle{
+    font-family:'Trebuchet MS',sans-serif;font-size:14px;cursor:pointer;
+    border:2px solid var(--verde-medio);background:#fff;color:var(--verde-medio);
+    padding:9px 18px;border-radius:9px;transition:all .18s;font-weight:bold;
+  }
+  .btn-toggle.on{background:var(--verde-medio);color:#fff}
+  .sim-stage{display:block;margin:0 auto;max-width:100%}
+  .sim-readout{display:flex;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+  .sim-read{
+    flex:1 1 200px;max-width:260px;border-radius:10px;padding:12px 14px;
+    font-family:'Trebuchet MS',sans-serif;font-size:14px;border:1px solid #e3dcc8;background:#fff;
+  }
+  .sim-read b{display:block;font-size:16px;margin-bottom:3px}
+  .sim-read.par{border-left:4px solid var(--azul)}
+  .sim-read.impar{border-left:4px solid var(--vermelho)}
+
+  /* ---------- EQUATIONS ---------- */
+  .eq-card{
+    background:#fff;border:1px solid #e3dcc8;border-radius:12px;
+    padding:20px 22px;margin:18px 0;box-shadow:var(--sombra);
+  }
+  .eq-label{font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-medio);margin-bottom:10px}
+  .eq{font-size:20px;line-height:2.1;text-align:center;font-family:Georgia,serif}
+  .eq .t-res{color:var(--vermelho);font-weight:bold}
+  .eq .t-mass{color:var(--azul);font-weight:bold}
+  .eq .t-asa{color:var(--verde-asa);font-weight:bold}
+  .eq sub{font-size:.7em}
+  .eq-legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;justify-content:center}
+  .eq-legend span{font-family:'Trebuchet MS',sans-serif;font-size:13px;padding:5px 12px;border-radius:20px}
+  .lg-res{background:#f7e3e0;color:var(--vermelho)}
+  .lg-mass{background:#e0ecf5;color:var(--azul)}
+  .lg-asa{background:#e1f0e7;color:var(--verde-asa)}
+
+  details.full-eq{margin:14px 0;border:1px dashed #c9bf9e;border-radius:10px;background:var(--creme-card)}
+  details.full-eq summary{
+    cursor:pointer;font-family:'Trebuchet MS',sans-serif;font-size:14px;
+    color:var(--verde-medio);padding:13px 18px;font-weight:bold;list-style:none;
+  }
+  details.full-eq summary::-webkit-details-marker{display:none}
+  details.full-eq summary::before{content:"▸ ";color:var(--dourado)}
+  details.full-eq[open] summary::before{content:"▾ "}
+  details.full-eq .full-body{padding:6px 20px 18px;font-size:15px;overflow-x:auto}
+  details.full-eq .full-body code{
+    display:block;font-family:'Courier New',monospace;font-size:14px;line-height:1.9;
+    background:#fff;border:1px solid #e3dcc8;border-radius:8px;padding:14px;white-space:pre-wrap;color:var(--tinta);
+  }
+
+  /* ---------- DERIVADAS CARDS ---------- */
+  .deriv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:24px 0}
+  .deriv{
+    background:var(--creme-card);border:1px solid #e3dcc8;border-radius:12px;
+    padding:0;box-shadow:var(--sombra);overflow:hidden;cursor:pointer;transition:box-shadow .18s;
+  }
+  .deriv:hover{box-shadow:var(--sombra-forte)}
+  .deriv .d-head{display:flex;align-items:center;justify-content:space-between;padding:15px 16px;background:#fff}
+  .deriv .d-sym{font-size:26px;color:var(--verde-escuro)}
+  .deriv .d-sym sub{font-size:.6em;color:var(--verde-medio)}
+  .deriv .d-sign{font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;padding:3px 9px;border-radius:20px}
+  .sign-neg{background:#f7e3e0;color:var(--vermelho)}
+  .sign-mass{background:#e0ecf5;color:var(--azul)}
+  .sign-var{background:#efe7cf;color:#8a6d1e}
+  .deriv .d-body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
+  .deriv.open .d-body{max-height:340px;padding:0 16px 16px}
+  .deriv .d-body p{font-size:14.5px;margin:10px 0;line-height:1.55}
+  .deriv .d-tag{font-family:'Trebuchet MS',sans-serif;font-size:11.5px;color:var(--verde-medio);text-transform:uppercase;letter-spacing:.05em}
+
+  /* ---------- TABLES ---------- */
+  .table-wrap{overflow-x:auto;margin:22px 0;border-radius:12px;box-shadow:var(--sombra)}
+  table{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
+  caption{text-align:left;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--verde-medio);padding:10px 14px;background:var(--creme-card);letter-spacing:.05em}
+  th{background:var(--verde-escuro);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:13.5px;font-weight:bold;padding:11px 14px;text-align:left;letter-spacing:.03em}
+  td{padding:11px 14px;border-top:1px solid #ece5d3;vertical-align:top}
+  tr:nth-child(even) td{background:var(--creme-card)}
+  td code{font-family:'Courier New',monospace;background:var(--creme);padding:2px 6px;border-radius:5px;font-size:14px}
+
+  /* ---------- C-LINHA TOGGLE ---------- */
+  .stab-box{background:var(--creme-card);border:1px solid #e3dcc8;border-radius:14px;padding:24px;margin:24px 0;box-shadow:var(--sombra);text-align:center}
+  .stab-formula{font-size:21px;margin:6px 0 20px;font-family:Georgia,serif;color:var(--verde-escuro)}
+  .stab-formula sub{font-size:.65em}
+  .stab-controls{display:flex;gap:10px;justify-content:center;margin-bottom:20px}
+  .stab-readout{font-size:17px;font-family:'Trebuchet MS',sans-serif;min-height:48px;padding:14px;border-radius:10px;transition:all .25s}
+  .stab-readout.estavel{background:#e1f0e7;color:var(--verde-asa);border:1px solid #b8dcc4}
+  .stab-readout.instavel{background:#f7e3e0;color:var(--vermelho);border:1px solid #e3bdb7}
+
+  /* ---------- NOMOTO ---------- */
+  .nomoto-eq{
+    background:var(--verde-escuro);color:var(--creme);border-radius:14px;
+    padding:26px;margin:22px 0;text-align:center;box-shadow:var(--sombra-forte);
+  }
+  .nomoto-eq .big{font-size:34px;letter-spacing:1px;margin:4px 0 16px}
+  .nomoto-eq .big .nm-k{color:var(--dourado)}
+  .nomoto-eq .big .nm-t{color:#8fd3c6}
+  .nomoto-eq .params{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+  .nomoto-eq .pm{font-family:'Trebuchet MS',sans-serif;font-size:14px;background:rgba(255,255,255,.07);border-radius:9px;padding:12px 16px;max-width:280px;text-align:left;border:1px solid rgba(200,168,75,.35)}
+  .nomoto-eq .pm b{font-size:18px}
+  .nomoto-eq .pm .pm-k{color:var(--dourado)}
+  .nomoto-eq .pm .pm-t{color:#8fd3c6}
+
+  /* ---------- PSCPP BOX ---------- */
+  details.pscpp{
+    margin:22px 0;border:1px solid var(--dourado);border-radius:12px;
+    background:linear-gradient(180deg,#fdf9ee,#fbf6e8);box-shadow:var(--sombra);overflow:hidden;
+  }
+  details.pscpp summary{
+    cursor:pointer;list-style:none;padding:16px 20px;font-family:'Trebuchet MS',sans-serif;
+    font-weight:bold;color:var(--verde-escuro);font-size:15.5px;display:flex;align-items:center;gap:10px;
+  }
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary .anchor{font-size:20px}
+  details.pscpp summary::after{content:"+";margin-left:auto;font-size:22px;color:var(--dourado);font-weight:bold}
+  details.pscpp[open] summary::after{content:"–"}
+  details.pscpp .pscpp-body{padding:4px 20px 20px;font-size:15.5px}
+  .banca-tag{display:inline-block;font-family:'Trebuchet MS',sans-serif;font-size:11px;font-weight:bold;background:var(--verde-escuro);color:var(--dourado);padding:2px 8px;border-radius:5px;letter-spacing:.04em;vertical-align:middle}
+
+  /* ---------- CALLOUT ---------- */
+  .callout{
+    background:#fff;border-left:5px solid var(--dourado);border-radius:0 10px 10px 0;
+    padding:16px 20px;margin:22px 0;box-shadow:var(--sombra);font-size:16px;
+  }
+  .callout .ct{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dourado);font-weight:bold;margin-bottom:4px}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--verde-escuro);color:#bcd5cf;padding:34px 0;font-family:'Trebuchet MS',sans-serif;font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  footer b{color:var(--dourado)}
+
+  @media(max-width:600px){
+    .hero h1{font-size:32px}
+    .decoder .formula{font-size:40px}
+    .nomoto-eq .big{font-size:26px}
+    body{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco E — Dinâmica e Forças</p>
+    <h1>As <em>derivadas hidrodinâmicas</em> de manobrabilidade</h1>
+    <p class="sub">A ponte entre a física das forças no casco-asa e a capacidade de prever, quantificar e simular o comportamento do navio em qualquer manobra.</p>
+    <div class="meta">
+      <span>Santos · Cap. 2 e 3</span>
+      <span>PNA Vol. III · Seções 3, 4 e 5</span>
+      <span>Bertram · Cap. 6</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="inner">
+    <a href="#s1"><span class="n">1</span>Da força à derivada</a>
+    <a href="#s2"><span class="n">2</span>Série de Taylor</a>
+    <a href="#s3"><span class="n">3</span>Três hipóteses</a>
+    <a href="#s4"><span class="n">4</span>Simetria</a>
+    <a href="#s5"><span class="n">5</span>Equações truncadas</a>
+    <a href="#s6"><span class="n">6</span>Significado físico</a>
+    <a href="#s7"><span class="n">7</span>Adimensionalização</a>
+    <a href="#s8"><span class="n">8</span>C′ e Nomoto</a>
+    <a href="#s9"><span class="n">9</span>Águas rasas + IMO</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ SEÇÃO 1 ============ -->
+<section id="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Da física das forças às derivadas</h2></div>
+  <p class="lead">A compreensão das forças que atuam sobre o casco como uma asa — com <strong>sustentação</strong>, <strong>arrasto</strong>, <strong>Momento de Munk</strong> e <strong>escoamento cruzado</strong> — abre caminho para uma das ferramentas matemáticas mais poderosas da manobrabilidade naval.</p>
+  <p>As forças sobre o casco — força longitudinal, força lateral e momento de guinada — dependem de muitas variáveis simultaneamente: a velocidade longitudinal, a velocidade lateral, a razão de guinada, as acelerações correspondentes, o ângulo de leme e a rotação do propulsor. Essa dependência múltipla <strong>não pode ser descrita por uma equação simples</strong>. A solução, importada diretamente da aeronáutica, foi expressar essas forças como <span class="hl">séries de potências — expansões em série de Taylor</span> — em torno de uma condição de equilíbrio conhecida.</p>
+
+  <h3>A linhagem histórica</h3>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-year">1937</div>
+      <div class="tl-who">George Weinblum · Alemanha</div>
+      <div class="tl-what">Formula pela primeira vez um modelo matemático para a manobrabilidade do navio usando derivadas hidrodinâmicas, por analogia com a aeronáutica.</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-year">1952</div>
+      <div class="tl-who">SNAME</div>
+      <div class="tl-what">A Sociedade de Arquitetos e Engenheiros Navais adota a notação compacta: letra da força + variável como subscrito (<em>Y<sub>v</sub></em>, <em>N<sub>r</sub></em>…).</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-year">1964</div>
+      <div class="tl-who">Martin Abkowitz · MIT</div>
+      <div class="tl-what">Aplica expansões de Taylor às forças em <strong>seis graus de liberdade</strong>, inaugurando as análises não lineares multi-GDL — base metodológica do campo até hoje.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEÇÃO 2 ============ -->
+<section id="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2>A série de Taylor e a notação SNAME</h2></div>
+  <p>A série de Taylor, aplicada a uma função de diversas variáveis, expressa o valor da função em qualquer ponto como a <strong>soma de termos que envolvem as derivadas parciais</strong> dessa função em relação a cada variável, avaliadas em torno da condição de equilíbrio. Cada um desses termos é chamado de <span class="hl">derivada hidrodinâmica</span>.</p>
+  <p>A notação é direta: <strong>a letra da força, seguida das variáveis como subscrito</strong>. Toque nas partes abaixo para decodificar.</p>
+
+  <div class="decoder">
+    <div class="formula">
+      <span class="f-letter" data-info="letter">Y</span><span class="f-sub" data-info="sub">v</span>
+    </div>
+    <div class="legend">
+      <div class="chip"><b>Letra da força (Y)</b><br>Indica qual força ou momento: <b>X</b> longitudinal · <b>Y</b> lateral · <b>N</b> momento de guinada (yaw).</div>
+      <div class="chip"><b>Subscrito (v)</b><br>Indica a variável de derivação: <b>v</b> velocidade lateral · <b>r</b> razão de guinada · <b>v̇ / ṙ</b> acelerações.</div>
+    </div>
+    <small>Exemplos: <b>Y<sub>v</sub></b> = derivada da força lateral em relação à velocidade lateral · <b>N<sub>r</sub></b> = derivada do momento de guinada em relação à razão de guinada.</small>
+  </div>
+
+  <p>Na expansão completa <strong>até terceira ordem</strong>, o número de termos é enorme. Para a força longitudinal X surgem termos de 1ª, 2ª e 3ª ordem em <em>u</em>, <em>v</em> e <em>r</em>, além de todos os cruzamentos. Felizmente, <span class="hl-ambar">três hipóteses simplificadoras</span> eliminam a maioria deles.</p>
+</section>
+
+<!-- ============ SEÇÃO 3 ============ -->
+<section id="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2>As três hipóteses simplificadoras</h2></div>
+  <p class="hint">Toque em cada hipótese para ver o que ela elimina.</p>
+  <div class="hyp-grid">
+    <div class="hyp" onclick="this.classList.toggle('active')">
+      <div class="h-top"><div class="h-badge">1</div><div class="h-title">Dependência linear da aceleração</div></div>
+      <div class="h-body">
+        <p>Fundamentada na <strong>2ª Lei de Newton</strong>: a dependência da força em relação à aceleração é linear.</p>
+        <div class="h-elim">✗ Eliminados: todos os termos de aceleração de 2ª e 3ª ordem.</div>
+      </div>
+    </div>
+    <div class="hyp" onclick="this.classList.toggle('active')">
+      <div class="h-top"><div class="h-badge">2</div><div class="h-title">Sem acoplamento velocidade–aceleração</div></div>
+      <div class="h-body">
+        <p>Não há acoplamento entre velocidades e acelerações.</p>
+        <div class="h-elim">✗ Eliminados: todos os termos que envolvem <em>simultaneamente</em> uma aceleração e uma velocidade.</div>
+      </div>
+    </div>
+    <div class="hyp" onclick="this.classList.toggle('active')">
+      <div class="h-top"><div class="h-badge">3</div><div class="h-title">Simetria boreste–bombordo (asa de baixa razão de aspecto)</div></div>
+      <div class="h-body">
+        <p>O casco é uma <strong>asa de baixa razão de aspecto com simetria BE–BB</strong>. A maioria dos navios é simétrica em relação ao plano longitudinal central e navega em linha reta com ângulo de ataque zero.</p>
+        <div class="h-elim">✗ Eliminados: os termos proibidos pela paridade (ver Seção 4). A mais elegante das três.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEÇÃO 4 ============ -->
+<section id="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2>A lógica da simetria: par <span style="color:#888">vs.</span> ímpar</h2></div>
+  <p>Imagine o navio e sua imagem espelhada. O sinal da força sob inversão de <em>v</em> determina quais termos podem existir. Use o botão para inverter a velocidade lateral.</p>
+
+  <div class="sim-box">
+    <div class="sim-controls">
+      <button class="btn-toggle on" id="btnBE" onclick="setV(1)">v &gt; 0 · para BORESTE</button>
+      <button class="btn-toggle" id="btnBB" onclick="setV(-1)">v &lt; 0 · para BOMBORDO</button>
+    </div>
+    <svg class="sim-stage" id="simSvg" viewBox="0 0 560 300" width="560" height="300" xmlns="http://www.w3.org/2000/svg" aria-label="Navio e imagem espelhada com vetores de força">
+      <!-- eixo / linha d'água -->
+      <line x1="40" y1="150" x2="520" y2="150" stroke="#c9bf9e" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text x="46" y="144" font-family="Trebuchet MS" font-size="11" fill="#8a8266">plano de simetria longitudinal</text>
+
+      <!-- NAVIO REAL (em cima) -->
+      <g id="shipReal">
+        <path d="M150 70 L380 70 Q420 85 380 100 L150 100 Q138 85 150 70 Z" fill="#1A7A6E" stroke="#0D3D36" stroke-width="2"/>
+        <text x="250" y="92" font-family="Trebuchet MS" font-size="13" fill="#fff" font-weight="bold">NAVIO REAL</text>
+        <!-- vetor v -->
+        <g id="vecVreal">
+          <line x1="265" y1="85" x2="265" y2="135" stroke="#C8A84B" stroke-width="3.5" marker-end="url(#arrG)"/>
+          <text id="vRealLbl" x="272" y="125" font-family="Georgia" font-size="15" fill="#0D3D36" font-style="italic">+v</text>
+        </g>
+        <!-- forças X e Y -->
+        <g id="vecXreal">
+          <line x1="380" y1="85" x2="450" y2="85" stroke="#2B6CA3" stroke-width="3.5" marker-end="url(#arrB)"/>
+          <text x="412" y="78" font-family="Georgia" font-size="15" fill="#2B6CA3" font-style="italic">X</text>
+        </g>
+        <g id="vecYreal">
+          <line x1="200" y1="85" x2="200" y2="40" stroke="#B23A2E" stroke-width="3.5" marker-end="url(#arrR)"/>
+          <text id="yRealLbl" x="178" y="42" font-family="Georgia" font-size="15" fill="#B23A2E" font-style="italic">+Y</text>
+        </g>
+      </g>
+
+      <!-- IMAGEM ESPELHADA (embaixo) -->
+      <g id="shipMirror" opacity="0.92">
+        <path d="M150 200 L380 200 Q420 215 380 230 L150 230 Q138 215 150 200 Z" fill="#9ec7c0" stroke="#0D3D36" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="232" y="222" font-family="Trebuchet MS" font-size="13" fill="#0D3D36" font-weight="bold">IMAGEM ESPELHADA</text>
+        <!-- vetor v espelhado -->
+        <g id="vecVmir">
+          <line x1="265" y1="215" x2="265" y2="165" stroke="#C8A84B" stroke-width="3.5" marker-end="url(#arrG)"/>
+          <text id="vMirLbl" x="272" y="180" font-family="Georgia" font-size="15" fill="#0D3D36" font-style="italic">−v</text>
+        </g>
+        <g id="vecXmir">
+          <line x1="380" y1="215" x2="450" y2="215" stroke="#2B6CA3" stroke-width="3.5" marker-end="url(#arrB)"/>
+          <text x="408" y="232" font-family="Georgia" font-size="15" fill="#2B6CA3" font-style="italic">X</text>
+        </g>
+        <g id="vecYmir">
+          <line x1="200" y1="215" x2="200" y2="260" stroke="#B23A2E" stroke-width="3.5" marker-end="url(#arrR)"/>
+          <text id="yMirLbl" x="178" y="278" font-family="Georgia" font-size="15" fill="#B23A2E" font-style="italic">−Y</text>
+        </g>
+      </g>
+
+      <defs>
+        <marker id="arrG" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#C8A84B"/></marker>
+        <marker id="arrB" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2B6CA3"/></marker>
+        <marker id="arrR" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#B23A2E"/></marker>
+      </defs>
+    </svg>
+
+    <div class="sim-readout">
+      <div class="sim-read par"><b style="color:var(--azul)">X é função PAR de v</b>Quando <em>v</em> muda de sinal, <strong>X não muda</strong>. ⟹ todos os termos lineares em <em>v</em> são nulos (X<sub>v</sub>, X<sub>v̇</sub>…). X só depende de termos pares: <code>v²</code>, <code>r²</code>, <code>v·r</code>.</div>
+      <div class="sim-read impar"><b style="color:var(--vermelho)">Y e N são ÍMPARES em v</b>Quando <em>v</em> muda de sinal, <strong>Y e N invertem o sinal</strong>. ⟹ só existem potências ímpares: <code>v³</code>, <code>r³</code>, e cruzamentos ímpares como <code>u²·v</code> ou <code>v²·r</code>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEÇÃO 5 ============ -->
+<section id="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2>As equações truncadas — código de cores do Santos</h2></div>
+  <p>Aplicando as três hipóteses e truncando em 3ª ordem, restam três expressões. As cores seguem o esquema dos autores: <span style="color:var(--vermelho);font-weight:bold">resistência</span> · <span style="color:var(--azul);font-weight:bold">massa adicional</span> · <span style="color:var(--verde-asa);font-weight:bold">arrasto / sustentação de asa</span>.</p>
+
+  <div class="eq-card">
+    <div class="eq-label">Força longitudinal — X</div>
+    <div class="eq">
+      X = <span class="t-res">X<sub>0</sub> + X<sub>u</sub>·u</span> <span class="t-mass">+ X<sub>u̇</sub>·u̇</span> <span class="t-asa">+ X<sub>vv</sub>·v² + X<sub>rr</sub>·r² + X<sub>vr</sub>·v·r</span>
+    </div>
+    <div class="eq-legend">
+      <span class="lg-res">resistência do casco em reta</span>
+      <span class="lg-mass">resistência à aceleração long.</span>
+      <span class="lg-asa">arrasto induzido da asa-casco</span>
+    </div>
+    <details class="full-eq">
+      <summary>Ver expansão completa do Santos (3ª ordem)</summary>
+      <div class="full-body">
+        <code>X_hid = X₀ + X_u·u + X_u̇·u̇ + ½[X_uu·u² + X_vv·v² + X_rr·r² + 2X_vr·v·r]
+        + ⅙[X_uuu·u³ + 3X_uvv·u·v² + 3X_urr·u·r² + 3X_uuu·... + 6X_uvr·u·v·r]
+
+Reescrevendo (razões numéricas absorvidas nas derivadas):
+X_hid = X₀ + X_u·u + X_u̇·u̇ + X_uu·u² + X_vv·v² + X_rr·r² + X_vr·v·r
+        + X_uvv·u·v² + X_urr·u·r² + X_uvr·u·v·r</code>
+      </div>
+    </details>
+  </div>
+
+  <div class="eq-card">
+    <div class="eq-label">Força lateral — Y</div>
+    <div class="eq">
+      Y = <span class="t-asa">Y<sub>v</sub>·v + Y<sub>r</sub>·r</span> <span class="t-mass">+ Y<sub>v̇</sub>·v̇ + Y<sub>ṙ</sub>·ṙ</span> <span class="t-asa">+ Y<sub>vvv</sub>·v³ + Y<sub>rrr</sub>·r³ + Y<sub>uuv</sub>·u²·v + …</span>
+    </div>
+    <div class="eq-legend">
+      <span class="lg-asa">sustentação linear + acoplamento r</span>
+      <span class="lg-mass">massa adicional (v̇, ṙ)</span>
+      <span class="lg-asa">não lineares 3ª ordem</span>
+    </div>
+    <details class="full-eq">
+      <summary>Ver expansão completa do Santos (3ª ordem)</summary>
+      <div class="full-body">
+        <code>Y_hid = Y₀ + Y_v·v + Y_r·r + Y_v̇·v̇ + Y_ṙ·ṙ + ½[2Y_uv·u·v + 2Y_ur·u·r + 2Y_vr·v·r]
+        + ⅙[Y_vvv·v³ + Y_rrr·r³ + 3Y_uuv·u²·v + 3Y_uur·u²·r + 3Y_uvv·u·v² + 3Y_uvr·...
+        + 3Y_urr·u·r² + 3Y_vvr·v²·r + 6Y_uvr·u·v·r]
+
+Reescrevendo (razões numéricas absorvidas nas derivadas):
+Y_hid = Y₀ + Y_v·v + Y_r·r + Y_v̇·v̇ + Y_ṙ·ṙ + Y_uv·u·v + Y_ur·u·r + Y_vr·v·r
+        + Y_vvv·v³ + Y_rrr·r³ + Y_uuv·u²·v + Y_uur·u²·r + Y_uvv·u·v² + Y_vvr·v²·r + ...</code>
+      </div>
+    </details>
+  </div>
+
+  <div class="eq-card">
+    <div class="eq-label">Momento de guinada — N</div>
+    <div class="eq">
+      N = <span class="t-asa">N<sub>v</sub>·v + N<sub>r</sub>·r</span> <span class="t-mass">+ N<sub>v̇</sub>·v̇ + N<sub>ṙ</sub>·ṙ</span> <span class="t-asa">+ N<sub>vvv</sub>·v³ + N<sub>rrr</sub>·r³ + N<sub>uuv</sub>·u²·v + …</span>
+    </div>
+    <div class="eq-legend">
+      <span class="lg-asa">momento linear + amortecimento r</span>
+      <span class="lg-mass">inércia adicional (v̇, ṙ)</span>
+      <span class="lg-asa">não lineares 3ª ordem</span>
+    </div>
+    <details class="full-eq">
+      <summary>Ver expansão completa do Santos (3ª ordem)</summary>
+      <div class="full-body">
+        <code>N_hid = N₀ + N_v·v + N_r·r + N_v̇·v̇ + N_ṙ·ṙ + ½[2N_uv·u·v + 2N_ur·u·r + 2N_vr·v·r]
+        + ⅙[N_vvv·v³ + N_rrr·r³ + 3N_uuv·u²·v + 3N_uur·u²·r + 3N_uvv·u·v² + 3N_vvr·v²·r
+        + 3N_urr·u·r² + ...]
+
+Reescrevendo (razões numéricas absorvidas nas derivadas):
+N_hid = N₀ + N_v·v + N_r·r + N_v̇·v̇ + N_ṙ·ṙ + N_uv·u·v + N_ur·u·r + N_vr·v·r
+        + N_vvv·v³ + N_rrr·r³ + N_uuv·u²·v + N_uur·u²·r + N_uvv·u·v² + N_vvr·v²·r + ...</code>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ SEÇÃO 6 ============ -->
+<section id="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Significado físico de cada derivada</h2></div>
+  <p>O domínio do significado físico é o que distingue o praticante competente do simples executante de fórmulas. Toque em cada card.</p>
+  <p class="hint">Sinal: <span style="color:var(--vermelho)">■ sempre negativa</span> · <span style="color:var(--azul)">■ massa/inércia adicional</span> · <span style="color:#8a6d1e">■ depende do navio</span></p>
+
+  <div class="deriv-grid">
+    <div class="deriv" onclick="this.classList.toggle('open')">
+      <div class="d-head"><span class="d-sym">Y<sub>v</sub></span><span class="d-sign sign-neg">sempre &lt; 0</span></div>
+      <div class="d-body"><p>Influência da velocidade lateral na <strong>força de sustentação do casco</strong>. Com velocidade lateral, o casco opera como asa com ângulo de ataque. O sinal negativo indica força <strong>restauradora</strong>, que se opõe ao movimento lateral e reduz o ângulo de deriva. Cresce em magnitude com o ângulo de deriva.</p></div>
+    </div>
+    <div class="deriv" onclick="this.classList.toggle('open')">
+      <div class="d-head"><span class="d-sym">Y<sub>v̇</sub></span><span class="d-sign sign-mass">massa adic.</span></div>
+      <div class="d-body"><p>Coeficiente de <strong>massa adicional</strong> para o movimento lateral. A água arrastada se opõe à aceleração, como se a massa do navio aumentasse (massa virtual). Para navios de carga: <span class="hl-ambar">80–120% da massa do navio</span> — comporta-se como se tivesse o dobro da massa real em acelerações laterais. Calculável por seção (½·ρ·calado²·coef. de forma) e integrado pela teoria de faixas.</p></div>
+    </div>
+    <div class="deriv" onclick="this.classList.toggle('open')">
+      <div class="d-head"><span class="d-sym">Y<sub>r</sub></span><span class="d-sign sign-var">acoplamento</span></div>
+      <div class="d-body"><p>Acoplamento entre a <strong>razão de guinada e a força lateral</strong>. Em guinada, cada seção experimenta velocidade transversal diferente (∝ distância ao centro × razão de guinada), gerando distribuição de ângulos de ataque e uma força lateral líquida.</p></div>
+    </div>
+    <div class="deriv" onclick="this.classList.toggle('open')">
+      <div class="d-head"><span class="d-sym">Y<sub>ṙ</sub></span><span class="d-sign sign-mass">inércia adic.</span></div>
+      <div class="d-body"><p>Coeficiente de <strong>inércia adicional acoplado</strong>. Representa a resistência à aceleração angular e está relacionado ao produto de inércia da massa adicionada.</p></div>
+    </div>
+    <div class="deriv" onclick="this.classList.toggle('open')">
+      <div class="d-head"><span class="d-sym">N<sub>v</sub></span><span class="d-sign sign-var">estab./instab.</span></div>
+      <div class="d-body"><p>Relaciona a velocidade lateral ao <strong>momento de guinada</strong>. A sustentação distribuída ao longo do casco — maior na proa que na popa, na maioria dos navios — gera momento resultante. <strong>O sinal e a magnitude de N<sub>v</sub> determinam se o navio é naturalmente estável ou instável em rota.</strong></p></div>
+    </div>
+    <div class="deriv" onclick="this.classList.toggle('open')">
+      <div class="d-head"><span class="d-sym">N<sub>r</sub></span><span class="d-sign sign-neg">sempre &lt; 0</span></div>
+      <div class="d-body"><p>Coeficiente de <strong>amortecimento em yaw</strong>. Representa a resistência do casco ao próprio movimento de guinada, tendendo a freá-lo. É a derivada de amortecimento por excelência.</p></div>
+    </div>
+    <div class="deriv" onclick="this.classList.toggle('open')">
+      <div class="d-head"><span class="d-sym">N<sub>v̇</sub></span><span class="d-sign sign-mass">inércia adic.</span></div>
+      <div class="d-body"><p>Coeficiente de <strong>inércia adicional acoplado</strong> para a equação de yaw.</p></div>
+    </div>
+    <div class="deriv" onclick="this.classList.toggle('open')">
+      <div class="d-head"><span class="d-sym">N<sub>ṙ</sub></span><span class="d-sign sign-mass">mom. inércia</span></div>
+      <div class="d-body"><p>Coeficiente de <strong>momento de inércia adicional</strong>. Somado ao momento de inércia polar do navio, forma o <strong>momento de inércia virtual</strong>, que determina a resistência à aceleração angular do navio.</p></div>
+    </div>
+  </div>
+
+  <h3>Y<sub>v</sub> versus v — o gráfico típico (Figura 38, Santos)</h3>
+  <div class="eq-card" style="text-align:center">
+    <svg viewBox="0 0 460 280" width="460" height="280" style="max-width:100%" xmlns="http://www.w3.org/2000/svg" aria-label="Gráfico de Y em função de v, função ímpar de inclinação negativa">
+      <!-- eixos -->
+      <line x1="60" y1="140" x2="420" y2="140" stroke="#0D3D36" stroke-width="1.6"/>
+      <line x1="240" y1="30" x2="240" y2="250" stroke="#0D3D36" stroke-width="1.6"/>
+      <polygon points="420,140 412,136 412,144" fill="#0D3D36"/>
+      <polygon points="240,30 236,38 244,38" fill="#0D3D36"/>
+      <text x="426" y="144" font-family="Georgia" font-size="16" font-style="italic" fill="#0D3D36">v</text>
+      <text x="248" y="34" font-family="Georgia" font-size="16" font-style="italic" fill="#0D3D36">Y</text>
+      <!-- curva ímpar de inclinação negativa: passa pela origem -->
+      <path d="M80 60 C150 95, 200 130, 240 140 C280 150, 330 185, 400 220" fill="none" stroke="#1A7A6E" stroke-width="3"/>
+      <!-- tangente na origem (negativa) -->
+      <line x1="160" y1="100" x2="320" y2="180" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="300" y="200" font-family="Trebuchet MS" font-size="12" fill="#8a6d1e">inclinação = Y_v &lt; 0</text>
+      <text x="90" y="50" font-family="Trebuchet MS" font-size="13" fill="#1A7A6E" font-weight="bold">Y sempre se opõe a v</text>
+    </svg>
+    <p style="font-size:14px;color:#5a6b66;margin-top:6px">Função ímpar passando pela origem; a inclinação na origem é <strong>Y<sub>v</sub></strong> — sempre negativa.</p>
+  </div>
+</section>
+
+<!-- ============ SEÇÃO 7 ============ -->
+<section id="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Adimensionalização, Wolff e Clarke</h2></div>
+  <p>Para comparar navios de tamanhos e velocidades diferentes, todas as derivadas são adimensionalizadas por potências de <strong>ρ</strong> (densidade), <strong>L</strong> (comprimento entre perpendiculares) e <strong>V</strong> (velocidade).</p>
+
+  <div class="table-wrap">
+    <table>
+      <caption>Fatores de adimensionalização — derivadas e variáveis</caption>
+      <thead><tr><th>Grandeza</th><th>Divisor</th></tr></thead>
+      <tbody>
+        <tr><td>Força longitudinal</td><td><code>½·ρ·L²·V²</code></td></tr>
+        <tr><td>Força lateral</td><td><code>½·ρ·L³·V²</code></td></tr>
+        <tr><td>Momento</td><td><code>½·ρ·L⁴·V²</code></td></tr>
+        <tr><td>Termos de massa</td><td><code>½·ρ·L³</code></td></tr>
+        <tr><td>Momento de inércia</td><td><code>½·ρ·L⁵</code></td></tr>
+        <tr><td>Velocidade lateral</td><td><code>v′ = v / u</code></td></tr>
+        <tr><td>Razão de guinada</td><td><code>r′ = r·L / u</code></td></tr>
+        <tr><td>Acelerações</td><td>potências de <code>L / u²</code> · <code>V² / L</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Esse sistema é <strong>padronizado internacionalmente</strong> e aparece nas tabelas de <strong>Wolff (1981)</strong>, com coeficientes para cinco tipos de navio: <span class="hl">petroleiro, Series 60, mariner, porta-contêineres e ferry</span>.</p>
+
+  <div class="callout">
+    <div class="ct">Clarke et al. (1983) <span class="banca-tag">BANCA · Bertram</span></div>
+    As <strong>fórmulas de regressão de Clarke</strong> permitem estimar as derivadas lineares de velocidade apenas a partir das dimensões do navio — comprimento, boca, calado e coeficiente de bloco — <strong>sem ensaios experimentais</strong>. Para <strong>Y<sub>v</sub></strong>, a fórmula é proporcional a <code>(T/L)²</code> vezes um fator com o coeficiente de bloco e a razão <code>B/T</code>. Para <strong>N<sub>r</sub></strong>, entram também <code>B/L</code> e <code>B/T</code>. Aparecem diretamente no Bertram e fundamentam questões de estimativa e cálculo.
+  </div>
+</section>
+
+<!-- ============ SEÇÃO 8 ============ -->
+<section id="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Estabilidade direcional C′ e a equação de Nomoto</h2></div>
+
+  <h3>Índice de estabilidade de guinada C′</h3>
+  <p>Obtido diretamente das derivadas lineares:</p>
+  <div class="stab-box">
+    <div class="stab-formula">
+      C′ = ( N<sub>r</sub>′ − m′·x<sub>G</sub>′ ) / ( −m′ ) − N<sub>v</sub>′ / Y<sub>v</sub>′
+    </div>
+    <div class="stab-controls">
+      <button class="btn-toggle on" id="cPos" onclick="setC(1)">C′ &gt; 0</button>
+      <button class="btn-toggle" id="cNeg" onclick="setC(-1)">C′ &lt; 0</button>
+    </div>
+    <div class="stab-readout estavel" id="stabRead">
+      <strong>Navio ESTÁVEL em rota.</strong> Qualquer perturbação é amortecida e o navio retorna à trajetória original.
+    </div>
+    <p style="font-size:14px;color:#5a6b66;margin-top:14px">A estabilidade de guinada é <strong>numericamente muito sensível</strong> a pequenas variações nos coeficientes — por isso navios próximos à fronteira de estabilidade exigem análises mais complexas.</p>
+  </div>
+
+  <h3>A equação de Nomoto — a simplificação mais radical</h3>
+  <p>Obtida eliminando a velocidade transversal e retendo apenas a equação de guinada. Resulta numa equação diferencial de <strong>primeira ordem</strong>:</p>
+
+  <div class="nomoto-eq">
+    <div class="big"><span class="nm-t">T</span>·ṙ + r = <span class="nm-k">K</span>·δ</div>
+    <div class="params">
+      <div class="pm"><b class="pm-t">T</b> — constante de tempo. Determina <strong>quão rapidamente</strong> o navio responde a uma deflexão de leme. T menor ⟹ resposta mais rápida. T é medida recíproca da estabilidade de rumo (σ₁ = −1/T′).</div>
+      <div class="pm"><b class="pm-k">K</b> — eficácia do leme. Determina a <strong>taxa de guinada estacionária</strong> por unidade de ângulo de leme. K maior ⟹ maior capacidade de giro.</div>
+    </div>
+  </div>
+
+  <p>Apesar de ignorar todos os efeitos não lineares, a velocidade transversal e a banda, a equação de Nomoto é útil para <strong>estimativas rápidas</strong> e aparece com frequência em questões que pedem a caracterização da resposta dinâmica ao leme. A solução para leme aplicado subitamente é:</p>
+  <div class="eq-card"><div class="eq" style="font-size:22px">r(t) = K·δ·( 1 − e<sup>−t/T</sup> )</div></div>
+  <p>A taxa de guinada cresce exponencialmente até o valor estacionário <strong>K·δ</strong>. A <strong>equação de Norrbin</strong> acrescenta um termo não linear <code>α·r³</code> para capturar o amortecimento não linear em guinadas de grande amplitude.</p>
+
+  <details class="pscpp">
+    <summary><span class="anchor">⚓</span> Guinada estacionária e o raio do círculo de evolução</summary>
+    <div class="pscpp-body">
+      <p>Na condição estacionária (círculo de giro constante), as acelerações <em>v̇</em> e <em>ṙ</em> são nulas e as equações se reduzem a um <strong>sistema algébrico linear</strong>. A taxa de guinada estacionária é proporcional ao ângulo de leme, com coeficiente que envolve as derivadas de força e momento do leme e do casco.</p>
+      <p>Essa razão determina o raio do círculo de evolução: <code>r = V / R</code>, onde V é a velocidade e R é o raio. Diâmetro estacionário: <code>D_c = 2V / r</code>.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ SEÇÃO 9 ============ -->
+<section id="s9">
+  <div class="sec-head"><span class="sec-num">09</span><h2>Águas rasas e a ponte com as manobras IMO</h2></div>
+
+  <h3>Quatro categorias de termos da equação de movimento</h3>
+  <p>Conforme o Santos expõe e o Bertram confirma:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Categoria</th><th>Origem</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Forças hidrodinâmicas (casco e apêndices)</td><td>velocidade, aceleração, deflexão de leme, rotação do propulsor</td></tr>
+        <tr><td>2</td><td>Forças de reação inercial</td><td>aceleração do navio — inclui termos de massa adicional</td></tr>
+        <tr><td>3</td><td>Forças ambientais</td><td>vento, correntes, ondas</td></tr>
+        <tr><td>4</td><td>Forças externas</td><td>rebocadores, propulsores transversais</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Os dois primeiros tipos atuam no plano horizontal (modos <strong>surge, sway, yaw</strong>). As forças hidrodinâmicas, por sua vez, dividem-se em duas categorias fundamentais — distinção central para qualquer prova sobre a origem física das derivadas:</p>
+  <div class="timeline">
+    <div class="tl-card" style="border-left-color:var(--verde-medio)">
+      <div class="tl-year" style="font-size:18px">Amortecimento</div>
+      <div class="tl-what">Nascem da <strong>velocidade</strong> do casco sobre a água. Ex.: Y<sub>v</sub>, N<sub>r</sub>.</div>
+    </div>
+    <div class="tl-card" style="border-left-color:var(--azul)">
+      <div class="tl-year" style="font-size:18px">Massa adicional</div>
+      <div class="tl-what">Nascem da <strong>aceleração</strong> do casco sobre a água. Ex.: Y<sub>v̇</sub>, N<sub>ṙ</sub>.</div>
+    </div>
+  </div>
+
+  <details class="pscpp" open>
+    <summary><span class="anchor">⚓</span> Efeito de águas rasas — ponto de prova recorrente</summary>
+    <div class="pscpp-body">
+      <p>Quando a quilha está apenas tocando o fundo, a razão de esbeltez efetiva do casco passa de ≈ <strong>0,1</strong> (= 2T/L, com o fator 2 da imagem-espelho no plano da água livre) para <strong>infinito</strong>:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Elemento</th><th>Razão de esbeltez efetiva</th><th>Fator de aumento das forças</th></tr></thead>
+          <tbody>
+            <tr><td>Casco</td><td>0,1 → ∞</td><td><span class="hl-ambar">≈ × 40</span></td></tr>
+            <tr><td>Leme</td><td>2 → ∞</td><td>≈ × 2,6</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Como as <strong>forças do casco crescem muito mais</strong> que as do leme, o resultado líquido em águas rasas para navios de guinada estável é o <strong>aumento do raio do círculo de evolução, do tempo de evolução e do tempo de verificação de guinada</strong>.</p>
+    </div>
+  </details>
+
+  <details class="pscpp">
+    <summary><span class="anchor">⚓</span> Efeitos de memória</summary>
+    <div class="pscpp-body">
+      <p>Decorrentes da liberação de vórtices e das ondas geradas pelo navio, fazem as forças dependerem do histórico temporal do movimento. <strong>Geralmente pequenos</strong> em manobras normais e usualmente desprezados. Exceções: ensaios com mecanismo de movimento planar de amplitudes muito pequenas e movimentos auto-induzidos de navios amarrados.</p>
+    </div>
+  </details>
+
+  <h3>A ponte com as manobras padrão IMO</h3>
+  <p>As derivadas são os coeficientes que determinam o comportamento do navio nos ensaios padronizados. Compreender as derivadas é compreender cada parâmetro que o IMO exige medir e exibir na ponte.</p>
+  <div class="table-wrap">
+    <table>
+      <caption>Conexão derivada / índice → manobra IMO</caption>
+      <thead><tr><th>Manobra padrão</th><th>Mede</th><th>Ligada a</th></tr></thead>
+      <tbody>
+        <tr><td>Espiral de Dieudonné (direta)</td><td>taxa de guinada estacionária</td><td><strong>C′</strong> (índice de estabilidade)</td></tr>
+        <tr><td>Espiral inversa de Bech</td><td>laço de histerese (navios instáveis)</td><td><strong>C′ &lt; 0</strong></td></tr>
+        <tr><td>Pull-out</td><td>taxa residual de guinada</td><td><strong>C′</strong></td></tr>
+        <tr><td>Zigue-zague (Kempf)</td><td>ângulo de sobregiro (overshoot)</td><td><strong>K e T</strong> de Nomoto</td></tr>
+        <tr><td>Círculo de evolução</td><td>diâmetro tático, avanço, transferência</td><td>derivadas do casco + leme</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="ct">Próximo subtópico</div>
+    Com o domínio das derivadas — origens, base na série de Taylor, hipóteses, significado físico, massa adicional, adimensionalização e águas rasas — o próximo passo aplica todo esse arcabouço à <strong>análise detalhada da guinada</strong>: o papel do Momento de Munk no início do giro, a progressão da sustentação da asa-casco, a redução da eficácia do leme com o aumento do ângulo de deriva, e a equação de movimento completa que rege o processo dinâmico.
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>PSCPP 2027 · <b>Capital Sereno</b> · Projeto P1b — Manobrabilidade DEFGH</div>
+    <div>Bloco E — Dinâmica e Forças · Material de apoio · Fiel ao roteiro de áudio</div>
+  </div>
+</footer>
+
+<script>
+  // ---- Simetria toggle ----
+  function setV(dir){
+    document.getElementById('btnBE').classList.toggle('on', dir===1);
+    document.getElementById('btnBB').classList.toggle('on', dir===-1);
+    var vReal=document.getElementById('vRealLbl'), yReal=document.getElementById('yRealLbl');
+    var vMir=document.getElementById('vMirLbl'), yMir=document.getElementById('yMirLbl');
+    var vrG=document.getElementById('vecVreal').querySelector('line');
+    var yrG=document.getElementById('vecYreal').querySelector('line');
+    if(dir===1){
+      vReal.textContent='+v'; yReal.textContent='+Y';
+      vMir.textContent='−v'; yMir.textContent='−Y';
+      vrG.setAttribute('y1','85'); vrG.setAttribute('y2','135');
+      yrG.setAttribute('y1','85'); yrG.setAttribute('y2','40');
+    } else {
+      vReal.textContent='−v'; yReal.textContent='−Y';
+      vMir.textContent='+v'; yMir.textContent='+Y';
+      vrG.setAttribute('y1','135'); vrG.setAttribute('y2','85');
+      yrG.setAttribute('y1','85'); yrG.setAttribute('y2','130');
+    }
+  }
+  // ---- C' toggle ----
+  function setC(sign){
+    document.getElementById('cPos').classList.toggle('on', sign===1);
+    document.getElementById('cNeg').classList.toggle('on', sign===-1);
+    var r=document.getElementById('stabRead');
+    if(sign===1){
+      r.className='stab-readout estavel';
+      r.innerHTML='<strong>Navio ESTÁVEL em rota.</strong> Qualquer perturbação é amortecida e o navio retorna à trajetória original.';
+    } else {
+      r.className='stab-readout instavel';
+      r.innerHTML='<strong>Navio INSTÁVEL.</strong> Qualquer perturbação tende a se amplificar — o navio não retorna sozinho à rota.';
+    }
+  }
+</script>
+
+</body>
+</html>
