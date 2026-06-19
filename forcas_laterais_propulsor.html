@@ -154,6 +154,28 @@
   .nota-fonte{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);
     border-top:1px solid var(--linha);padding-top:8px;margin:6px 0 4px}
 
+  /* INVERSÃO DE MÁQUINA */
+  .inv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:18px;margin-bottom:24px}
+  .inv-card{background:var(--creme-c);border:1px solid var(--linha);border-radius:10px;overflow:hidden;
+    box-shadow:0 2px 10px rgba(13,61,54,.08)}
+  .inv-head{padding:16px 18px;background:linear-gradient(135deg,var(--verde) 0%,#0f4a42 100%);color:var(--creme)}
+  .inv-mov{font-family:'Trebuchet MS',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ambar);font-weight:bold;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .inv-titulo{font-size:18px;line-height:1.25}
+  .inv-ref{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:#9ecfca;margin-top:5px}
+  .inv-tend{padding:12px 18px;background:rgba(200,168,75,.1);border-bottom:1px solid var(--linha);
+    font-size:13.5px;color:var(--verde)}
+  .inv-tend strong{color:#9a7d1e}
+  .inv-body{padding:14px 18px}
+  .inv-forcas{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);
+    text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+  .inv-forcas-list{font-size:13px;color:#3d5450;margin-bottom:14px;line-height:1.5}
+  .inv-leme{border-top:1px solid var(--linha);padding-top:10px}
+  .inv-leme-row{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:13.5px}
+  .inv-leme-tag{font-family:'Trebuchet MS',sans-serif;font-size:11px;font-weight:bold;flex:0 0 64px;
+    color:var(--verde);background:rgba(26,122,110,.1);padding:3px 8px;border-radius:5px;text-align:center}
+  .inv-leme-txt{flex:1;color:#3d5450;line-height:1.45}
+
   footer{background:var(--verde);color:#8ab5ae;padding:28px 0;
     font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:28px;line-height:1.6}
   footer b{color:var(--dourado)}
@@ -189,6 +211,7 @@
       <a href="#efeitos">Os 4 efeitos</a>
       <a href="#quadro">Quadro Arte Naval</a>
       <a href="#guinada">Guinada da proa</a>
+      <a href="#inversao">Inversão de máquina</a>
       <a href="#provas">Questões de prova</a>
       <a href="#distratores">Distratores</a>
     </div>
@@ -430,6 +453,89 @@
     </table>
   </div>
   <p class="nota-fonte">Fonte: Arte Naval (Fonseca, 7ª ed.), Cap. 12, art. 12.6.</p>
+</div>
+
+<div class="sec" id="inversao">
+  <div class="sec-titulo">Inversão de máquina — as duas situações de transição (art. 12.6.3–12.6.4)</div>
+  <p style="font-size:14px;color:var(--mute);margin-bottom:18px">Quando o navio tem seguimento num sentido e a máquina é dada no sentido oposto. Aqui as forças do leme e do hélice <strong>se opõem</strong> — e quem vence depende da velocidade do navio e da força do hélice. Hélice de passo direito.</p>
+  <div class="inv-grid">
+
+    <!-- CASO 3 -->
+    <div class="inv-card">
+      <div class="inv-head">
+        <div class="inv-mov">&#9650; Seguimento AV &nbsp;·&nbsp; &#9660; hélice a ré</div>
+        <div class="inv-titulo">Navio para vante, máquina a ré</div>
+        <div class="inv-ref">Arte Naval art. 12.6.3 · fig. 12-4</div>
+      </div>
+      <div class="inv-tend">Tendência geral: <strong>proa guina para BE</strong> — as duas forças do hélice (pressão lateral + descarga) levam a popa a BB.</div>
+      <div class="inv-body">
+        <div class="inv-forcas">Forças em jogo</div>
+        <div class="inv-forcas-list">
+          • <strong>Leme:</strong> com seguimento AV, leva a popa para o bordo <em>oposto</em> ao carregado.<br>
+          • <strong>Sucção:</strong> contraria o leme (ou nula, se leme a meio).<br>
+          • <strong>Descarga:</strong> incide na carena da popa a BE.<br>
+          • <strong>Pressão lateral das pás:</strong> leva a popa para BB.
+        </div>
+        <div class="inv-leme">
+          <div class="inv-leme-row">
+            <span class="inv-leme-tag">A meio</span>
+            <span class="inv-leme-txt">Proa guina lentamente para <span class="dir dir-be">BE</span> (pressão lat. + descarga). A guinada demora a começar: com muita velocidade AV, a esteira ainda influencia a pressão lateral.</span>
+          </div>
+          <div class="inv-leme-row">
+            <span class="inv-leme-tag">A BB</span>
+            <span class="inv-leme-txt">No início predomina o leme (proa a BB), mas dura pouco: o navio perde seguimento rápido e a proa acaba indo para <span class="dir dir-be">BE</span> do rumo inicial antes de parar.</span>
+          </div>
+          <div class="inv-leme-row">
+            <span class="inv-leme-tag">A BE</span>
+            <span class="inv-leme-txt">Proa guina para <span class="dir dir-be">BE</span> (leme + pressão lat. + descarga); a sucção contraria. Ao perder velocidade, a guinada diminui e o navio se mantém a caminho, ou guina um pouco para <span class="dir dir-bb">BB</span> antes de parar.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASO 4 -->
+    <div class="inv-card">
+      <div class="inv-head">
+        <div class="inv-mov">&#9660; Seguimento AR &nbsp;·&nbsp; &#9650; hélice avante</div>
+        <div class="inv-titulo">Navio para ré, máquina avante</div>
+        <div class="inv-ref">Arte Naval art. 12.6.4 · fig. 12-5</div>
+      </div>
+      <div class="inv-tend">Com o hélice AV a <strong>sucção não tem efeito</strong> no governo. Restam leme, pressão lateral e descarga — e a descarga costuma vencer.</div>
+      <div class="inv-body">
+        <div class="inv-forcas">Forças em jogo</div>
+        <div class="inv-forcas-list">
+          • <strong>Leme:</strong> leva a popa para o bordo em que foi carregado.<br>
+          • <strong>Pressão lateral das pás:</strong> leva a popa para BE (hélice AV).<br>
+          • <strong>Descarga:</strong> contraria a ação do leme.<br>
+          • <strong>Sucção:</strong> sem efeito (hélice dando adiante).
+        </div>
+        <div class="inv-leme">
+          <div class="inv-leme-row">
+            <span class="inv-leme-tag">A meio</span>
+            <span class="inv-leme-txt">Teoricamente popa vai para <span class="dir dir-be">BE</span> (só a pressão lateral atua). Na prática é imprevisível: a pressão lateral tem efeito reduzido.</span>
+          </div>
+          <div class="inv-leme-row">
+            <span class="inv-leme-tag">A BB</span>
+            <span class="inv-leme-txt">Popa tende a <span class="dir dir-be">BE</span> (pressão lat. + descarga sobre a porta) e a BB pelo leme. Em geral vencem as duas primeiras → popa a <span class="dir dir-be">BE</span>, exceto com muito seguimento AR.</span>
+          </div>
+          <div class="inv-leme-row">
+            <span class="inv-leme-tag">A BE</span>
+            <span class="inv-leme-txt">Popa vai a <span class="dir dir-be">BE</span> (leme + pressão lat.) e a BB pela descarga. Com a máquina a toda força AV, a descarga provavelmente vence → popa a <span class="dir dir-bb">BB</span>.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="banca-box" style="margin-bottom:0">
+    <div class="banca-title">&#9888; O detalhe que a banca cobra — quando carregar o leme</div>
+    <p>Na inversão <strong>AV → AR</strong> (caso 3), o momento de carregar o leme é decisivo:</p>
+    <p>• <strong>Leme antes de inverter:</strong> a proa já começa a obedecer ao leme e o hélice não consegue mais se sobrepor — o navio guina para o bordo desejado.<br>
+    • <strong>Leme depois de inverter:</strong> o efeito do hélice fica mais acentuado e domina.</p>
+    <p style="margin-top:10px">Por isso a manobra recomendada para guinar a um bordo é: <strong>parar a máquina, carregar o leme, esperar o navio obedecer, então inverter a toda força</strong> e quebrar a guinada com o leme oposto. Isso elimina o efeito do hélice (que independe do movimento do navio).</p>
+    <p style="margin-top:8px;font-size:12.5px;color:#9ecfca"><em>Lembrete: o navio vai mais facilmente para BE do que para BB — então, para guinar a BB, deixe guinar um pouco mais antes de quebrar.</em></p>
+  </div>
 </div>
 
 <div class="banca-box" style="background:#0f4a42;margin-top:8px">
