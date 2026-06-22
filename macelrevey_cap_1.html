@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Caderno de fixação PSCPP 2027 — Razão de giro (rate of turn) em MacElrevey, Shiphandling for the Mariner.">
+<meta name="theme-color" content="#0D3D36">
+<title>Cap. 1 — Shiphandling for the Mariner</title>
+<style>
+  :root{
+    --verde-escuro:#0D3D36; --verde-medio:#1A7A6E; --dourado:#C8A84B;
+    --creme:#F4EFE2; --creme-card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B;
+    --mute:#7a6f55; --amarelo-hl:#FBE9A0; --ambar-hl:#F2C879;
+    --sombra:0 2px 12px rgba(13,61,54,.10);
+    --sombra-forte:0 8px 28px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:820px;margin:0 auto;padding:0 22px}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    background:
+      radial-gradient(circle at 88% 15%, rgba(200,168,75,.20), transparent 44%),
+      linear-gradient(160deg,var(--verde-escuro) 0%,#0a322c 60%,#082822 100%);
+    color:var(--creme);padding:44px 0 38px;border-bottom:4px solid var(--dourado);
+  }
+  .hero .eyebrow{font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--dourado);font-family:'Trebuchet MS',sans-serif;margin:0 0 12px;font-weight:bold}
+  .hero h1{font-size:34px;line-height:1.14;margin:0 0 12px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--dourado);font-style:normal}
+  .hero .sub{font-size:16.5px;color:#cfe3df;max-width:620px;margin:0}
+  .hero .ref{margin-top:18px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:#a9c8c1}
+  .hero .ref b{color:var(--dourado)}
+
+  main{padding:34px 0 70px}
+
+  /* ---------- SEÇÕES ---------- */
+  h2.sec{font-size:22px;color:var(--verde-escuro);margin:38px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--linha);font-weight:normal}
+  h2.sec:first-child{margin-top:0}
+  h3.subsec{font-size:18px;color:var(--verde-medio);margin:26px 0 8px;font-weight:normal}
+  p{margin:0 0 15px}
+  .lead{font-size:17.5px}
+
+  .hl{background:linear-gradient(transparent 58%, var(--amarelo-hl) 58%);padding:0 2px}
+  .hl-ambar{background:linear-gradient(transparent 58%, var(--ambar-hl) 58%);padding:0 2px}
+  .termo{color:var(--verde-escuro);font-weight:bold}
+  em.en{font-style:italic;color:var(--mute)}
+
+  /* ---------- CAIXAS COLAPSÁVEIS PSCPP ---------- */
+  details.pscpp{background:var(--creme-card);border:1px solid var(--linha);border-left:6px solid var(--dourado);
+    border-radius:10px;margin:18px 0;box-shadow:var(--sombra);overflow:hidden}
+  details.pscpp[data-tipo="decorar"]{border-left-color:var(--verde-medio)}
+  details.pscpp[data-tipo="banca"]{border-left-color:#9c2b2b}
+  details.pscpp summary{cursor:pointer;list-style:none;padding:14px 18px;font-family:'Trebuchet MS',sans-serif;
+    font-weight:bold;font-size:14px;letter-spacing:.04em;color:var(--verde-escuro);display:flex;align-items:center;gap:9px;user-select:none}
+  details.pscpp[data-tipo="banca"] summary{color:#9c2b2b}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary .anchor{font-size:17px}
+  details.pscpp summary .arrow{margin-left:auto;transition:transform .2s;font-size:13px;color:var(--mute)}
+  details.pscpp[open] summary .arrow{transform:rotate(90deg)}
+  details.pscpp .corpo{padding:2px 18px 16px;font-size:15px}
+  details.pscpp .corpo p:last-child{margin-bottom:0}
+  .tagline{display:inline-block;font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.08em;
+    text-transform:uppercase;padding:2px 9px;border-radius:4px;margin-right:7px;vertical-align:middle}
+  .tag-decorar{background:var(--verde-medio);color:#fff}
+  .tag-banca{background:var(--verde-escuro);color:var(--dourado)}
+
+  /* ---------- TABELA ---------- */
+  .tab-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--linha);border-radius:10px}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--creme-card)}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--linha);vertical-align:top}
+  th{background:var(--verde-escuro);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px;letter-spacing:.04em;font-weight:bold}
+  tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:bold;color:var(--verde-escuro)}
+
+  /* ---------- DESTAQUE NUMÉRICO ---------- */
+  .num{background:var(--verde-escuro);color:var(--creme);border-radius:12px;padding:20px 24px;margin:22px 0;text-align:center}
+  .num .big{font-size:30px;color:var(--dourado);font-weight:bold;display:block;line-height:1.1}
+  .num .small{font-size:14px;color:#cfe3df;margin-top:6px;font-family:'Trebuchet MS',sans-serif}
+
+  /* ---------- BOTÃO SUPABASE ---------- */
+  .painel{margin:42px 0 0;text-align:center}
+  #btnPainel{font-family:'Trebuchet MS',sans-serif;font-size:15px;font-weight:bold;cursor:pointer;
+    background:var(--dourado);color:var(--verde-escuro);border:none;padding:14px 28px;border-radius:30px;
+    box-shadow:var(--sombra);transition:transform .15s,box-shadow .15s}
+  #btnPainel:hover{transform:translateY(-2px);box-shadow:var(--sombra-forte)}
+  #btnPainel:active{transform:translateY(0)}
+  #statusPainel{margin-top:12px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute);min-height:18px}
+
+  footer{background:var(--verde-escuro);color:#bcd5cf;padding:28px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:50px}
+  footer b{color:var(--dourado)}
+  a.back{display:inline-block;margin-bottom:18px;color:var(--dourado);font-family:'Trebuchet MS',sans-serif;font-size:13px;text-decoration:none}
+  a.back:hover{text-decoration:underline}
+  @media(max-width:600px){.hero h1{font-size:27px}.num .big{font-size:25px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Shiphandling for the Mariner · Cap. 1 (Arrival) · MacElrevey 4ª ed.</p>
+    <h1>Capítulo <em>1</em></h1>
+    <p class="sub">Assuntos tratados: razão de giro (rate of turn) — definição, queda durante a guinada e o erro que a banca explora · máximo seguro de giro · guinar para reduzir seguimento (regra dos 25–30% do VLCC) · varrer um sotavento (sweeping a lee) para o prático · quando o vento assume o controle (razões 3:1 e 5:1) · efeitos de águas rasas nas características de manobra (Fig. 1-7) · os seis fatores da estabilidade direcional (p. 20).</p>
+    <p class="ref"><b>Fonte:</b> MacElrevey, <em>Shiphandling for the Mariner</em>, 4ª ed. — Cap. 1 (Arrival, p. 12) e Cap. 2 (Shiphandling in a Channel, p. 83–84). · Bloco F — Governo Portuário</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <a class="back" href="index.html">← Voltar à Estante</a>
+
+    <h2 class="sec">O que é razão de giro</h2>
+    <p class="lead"><span class="termo">Razão de giro</span> (<em class="en">rate of turn</em>) é a <span class="hl">velocidade angular instantânea</span> com que a proa do navio gira — quão <em>rápido</em> ele está guinando num dado momento, medida em graus por segundo (ou, ocasionalmente, graus por minuto).</p>
+    <p>Não confunda com o <span class="termo">ângulo total já guinado</span>. A razão de giro é a taxa; o ângulo é o acumulado. Um indicador de razão de giro mostra essa taxa à direita ou à esquerda, conforme o sentido do movimento da proa.</p>
+    <p>MacElrevey ressalta que o valor absoluto da leitura, isolado, tem pouca utilidade. O que importa é a <span class="hl-ambar">indicação relativa</span>: se a taxa está <b>aumentando</b> ou <b>diminuindo</b>, e em que medida. É essa variação que diz ao manobrador se ele está ganhando ou perdendo controle da guinada.</p>
+
+    <details class="pscpp" data-tipo="decorar" open>
+      <summary><span class="anchor">⚓</span><span class="tagline tag-decorar">Decorar</span> Taxa ≠ ângulo total <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p>Razão de giro = velocidade angular (°/s), <b>não</b> o quanto a proa já mudou de rumo. O indicador de razão de giro mede o ritmo do giro, não o progresso. O que conta na leitura é se essa taxa cresce ou diminui — a indicação relativa.</p>
+      </div>
+    </details>
+
+    <h2 class="sec">Por que a razão de giro diminui ao longo da guinada</h2>
+    <p>Este é o ponto exato sobre o qual você perguntou. Na manobra de <span class="termo">backing and filling</span> (atracar e safar pela alternância de máquina avante/ré com leme), e também numa curva em regime permanente, o navio primeiro adquire um bom giro e <span class="hl">depois parece estar perdendo esse giro</span> à medida que a razão de giro diminui.</p>
+    <p>MacElrevey adverte explicitamente: <span class="hl-ambar">esse efeito é frequentemente mal interpretado</span>. O manobrador sente que o navio vai parar de guinar — e conclui, erradamente, que algo está impedindo a evolução.</p>
+
+    <h3 class="subsec">A causa física</h3>
+    <p>A razão de giro só diminui <b>porque o navio está perdendo seguimento</b> (<em class="en">headway</em>) — ou seja, perdendo velocidade através da água. O momento de giro depende do fluxo de água sobre o leme e o casco; conforme o navio desacelera (sobretudo durante a fase de máquina a ré do <em>backing and filling</em>), há menos escoamento, o momento gerado enfraquece, e a taxa angular cai.</p>
+    <p>O navio <b>não</b> está prestes a parar de guinar por instabilidade direcional nem por falha do leme. Ele continua guinando — apenas num ritmo angular menor, como resposta natural à perda de velocidade longitudinal.</p>
+
+    <details class="pscpp" data-tipo="banca">
+      <summary><span class="anchor">🎯</span><span class="tagline tag-banca">Banca</span> O distrator clássico <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p><b>Armadilha:</b> afirmar que a razão de giro caindo significa que "o navio vai parar de guinar", ou que isso indica "instabilidade direcional" ou "falha do leme". MacElrevey chama isso, literalmente, de mal-entendido.</p>
+        <p><b>Correto:</b> a queda decorre da <span class="hl">perda de seguimento</span>. A guinada prossegue.</p>
+        <p style="margin-top:10px;color:var(--mute);font-size:13.5px">Cuidado para não confundir com o caso oposto: num navio <b>direcionalmente instável</b> (ou caturrado de proa), a razão de giro <em>aumenta</em> com o leme a meio-navio — fenômeno distinto, tratado no Cap. 2. A banca pode justapor os dois para induzir troca.</p>
+      </div>
+    </details>
+
+    <h2 class="sec">Razão de giro segura — o número-âncora</h2>
+    <p>Quando há indicador de razão de giro, o manobrador pode <span class="hl">limitar a taxa a um máximo seguro conhecido</span> e manter sempre o navio sob controle. Isso é essencial em navios direcionalmente instáveis (ex.: certas classes de metaneiros que precisam navegar em quilha par para atender ao calado do terminal).</p>
+
+    <div class="num">
+      <span class="big">⅗ ° / segundo</span>
+      <span class="small">máximo seguro para uma guinada comum = 36° de mudança de proa em 1 minuto</span>
+    </div>
+
+    <p>O próprio texto fecha a aritmética: <b>⅗ °/s × 60 s = 36°</b> em um minuto. É a referência confortável sob a maioria das condições e o teto operacional citado para uma guinada ordinária.</p>
+
+    <details class="pscpp" data-tipo="decorar">
+      <summary><span class="anchor">⚓</span><span class="tagline tag-decorar">Decorar</span> O número e a conta <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p>Máximo seguro para guinada comum: <b>⅗ de grau por segundo</b>, equivalente a <b>36° por minuto</b>. Guarde a conversão — a banca gosta de substituir o número (ex.: trocar por ½ °/s ou por 30°/min) mantendo o resto da frase intacto.</p>
+      </div>
+    </details>
+
+    <h2 class="sec">A boia como indicador visual de razão de giro</h2>
+    <p>Antes da instrumentação, e ainda hoje como recurso, uma boia numa curva serve de <em>indicador de razão de giro</em>: alinha-se a boia com um ponto fixo do navio (estai, balaústre, caixilho de janela). Os três casos do Cap. 2:</p>
+
+    <div class="tab-wrap">
+      <table>
+        <thead>
+          <tr><th>Movimento da boia (vs. ponto de referência)</th><th>O que significa</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Move para vante (marcação muda para a proa)</td><td>Navio guina em direção que o aproxima da boia. Se o ritmo do movimento aumenta, a razão de giro está aumentando.</td></tr>
+          <tr><td>Permanece firme (steady)</td><td>Navio guina a uma taxa fixa; mantém distância da boia durante a curva.</td></tr>
+          <tr><td>Move para ré (marcação se abre da proa)</td><td>Distância à boia aumenta. Se a abertura acelera, a <span class="hl">razão de giro está diminuindo</span>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--mute)">Repare na simetria com a perda de seguimento: a boia abrindo cada vez mais rápido é a leitura visual da mesma razão de giro em queda discutida acima.</p>
+
+    <h2 class="sec">Guinar para reduzir seguimento — a regra dos 25–30% do VLCC</h2>
+    <p>A guinada não serve só para mudar de rumo: ela é uma das formas mais eficazes de <span class="termo">tirar seguimento</span> (<em class="en">headway</em>) de um navio grande. Quanto maior o navio, maior a redução — e isso desmonta a alegação de que VLCCs precisariam de "milhas para parar".</p>
+
+    <div class="num">
+      <span class="big">25 a 30% de seguimento</span>
+      <span class="small">perdidos a cada mudança de aproamento de 90°  ·  regra prática para VLCC</span>
+    </div>
+
+    <p>O exemplo numérico do próprio MacElrevey: um VLCC a <span class="hl">12 nós</span> termina um giro completo (round turn) com o seguimento reduzido a apenas <span class="hl">2 a 3 nós</span> — mesmo com a máquina ainda girando avante para manter governo (<em class="en">steerageway</em>). O giro se completa em cerca de <b>3× o comprimento</b> do navio em água profunda, ou pouco menos de <b>6× o comprimento</b> em água rasa.</p>
+
+    <p>Para reduzir seguimento, MacElrevey lista três métodos: máquina a ré (o mais comum, porém o <em>menos</em> eficaz — turbina pode ter só ~25% da potência a ré); <span class="termo">slewing</span> (série de guinadas para boreste e bombordo do rumo-base); e grandes mudanças de aproamento, incluindo o giro completo. O round turn é útil para evitar colisão numa situação de cruzamento, frear antes da estação de prático, fazer sombra (lee) para o prático embarcar, e parar o navio após perda de máquina.</p>
+
+    <details class="pscpp" data-tipo="banca">
+      <summary><span class="anchor">🎯</span><span class="tagline tag-banca">Banca</span> 2011 Q46 — cobrada ao pé da letra <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p><b>[BANCA: 2011-Q46]</b> perguntou exatamente este percentual para guinada de 90° de um VLCC, citando o livro por nome e edição (MacElrevey, 4ª ed., 2004). <b>Gabarito: 25%.</b></p>
+        <p style="margin-top:10px"><b>Distratores numéricos:</b> as alternativas erradas foram 15%, 35%, 40% e 50% — substituição de número é o padrão. Note que o texto dá a faixa <b>25–30%</b>, mas a alternativa correta foi o piso (25%); fixe a faixa inteira e o piso.</p>
+        <p style="margin:8px 0 0;color:var(--mute);font-size:13.5px">Cuidado para não confundir com a regra de seguimento da Fig. 1-7 (navio carrega seguimento por mais tempo em água rasa) — são coisas distintas.</p>
+      </div>
+    </details>
+
+    <details class="pscpp" data-tipo="decorar">
+      <summary><span class="anchor">⚓</span><span class="tagline tag-decorar">Decorar</span> Os números do giro <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p><b>25–30%</b> de seguimento perdido a cada <b>90°</b> de guinada. VLCC a <b>12 kt</b> → <b>2–3 kt</b> ao fim de um giro completo. Giro em <b>3×</b> o comprimento (água profunda) ou <b>~6×</b> (água rasa).</p>
+        <p style="margin-top:8px">Máquina a ré em turbina: tão pouco quanto <b>25%</b> da potência avante.</p>
+      </div>
+    </details>
+
+    <h2 class="sec">Varrer um sotavento (sweeping a lee) para o prático</h2>
+    <p><span class="termo">Varrer um sotavento</span> (<em class="en">sweeping a lee</em>) é usar o próprio casco do navio, posto em guinada, para criar uma área de água calma a sotavento onde a lancha do prático possa atracar e o prático embarcar com segurança. É uma aplicação direta da guinada: ao pôr o navio guinando com leme todo carregado imediatamente antes do embarque, de modo que a <span class="hl">alheta (popa) abra para longe da lancha</span>, o casco bloqueia a vaga e ainda "derruba" o vento curto (short chop) que vem em sentido contrário.</p>
+    <p>O recurso é especialmente útil quando há mar cruzado e marulho (cross sea and swell): o navio bloqueia o swell com o costado e, ao mesmo tempo, abate a vaga contrária no momento em que o prático sobe. A Fig. 1-12 mostra exatamente isso — o navio em guinada com leme todo, deixando "mar varrido e plano para o prático" do lado abrigado.</p>
+
+    <h3 class="subsec">Como executar</h3>
+    <p>Há dois modos, ambos ligados ao que já vimos sobre reduzir seguimento sem precisar de muito espaço:</p>
+    <p>O <span class="termo">giro completo</span> (round turn) é, muitas vezes, a melhor forma de fazer um bom sotavento — mesmo parecendo, à primeira vista, demorado. Como o giro tira boa parte do seguimento, compensa-se o tempo aproximando-se da estação a uma velocidade maior do que seria possível ir direto e frear só com a máquina. E o <span class="termo">backing and filling</span> permite varrer o sotavento sem ganhar seguimento excessivo: vem-se avante para iniciar a guinada para boreste e põe-se a máquina a ré; o navio gira em torno do ponto de pivô enquanto o seguimento é reduzido, sem exigir muito espaço.</p>
+
+    <details class="pscpp" data-tipo="decorar">
+      <summary><span class="anchor">⚓</span><span class="tagline tag-decorar">Decorar</span> Os parâmetros do embarque <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p>Velocidade ao fazer o sotavento para o prático: <b>3 a 4 nós</b> — confortável, mas não tão lenta que a lancha tenha dificuldade de acompanhar.</p>
+        <p style="margin-top:8px">A alheta deve <b>abrir para longe</b> da lancha durante a guinada. É o costado que bloqueia o swell e a vaga curta contrária.</p>
+      </div>
+    </details>
+
+    <details class="pscpp" data-tipo="banca">
+      <summary><span class="anchor">🎯</span><span class="tagline tag-banca">Banca</span> Cuidados ao varrer com a máquina a ré <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p>Dois erros que o texto alerta explicitamente, e que servem de distrator:</p>
+        <p style="margin:6px 0 0">• <b>Não</b> tirar todo o seguimento do navio — se ele ficar parado, a lancha do prático tem dificuldade de se manter ao costado.</p>
+        <p style="margin:6px 0 0">• <b>Não</b> dar máquina a ré por tempo demais — a água lançada (wash) pode alcançar a escada de prático e <span class="hl">afastar a lancha do costado</span>.</p>
+        <p style="margin:8px 0 0;color:var(--mute);font-size:13.5px">Dica de leitura de velocidade: com máquina a ré, quando a água lançada começa a subir pelo bordo de boreste, o navio está a cerca de 2 nós; quando alcança a meia-nau, está parado na água.</p>
+      </div>
+    </details>
+
+    <h2 class="sec">Quando o vento "assume o controle" — as razões 3:1 e 5:1</h2>
+    <p>À medida que o navio reduz a velocidade na chegada, o vento passa a pesar cada vez mais — porque o seguimento, a eficácia do leme e da máquina diminuem, enquanto a força do vento permanece a mesma. Quanto um navio "sentirá" o vento depende fortemente do seu tipo, sobretudo da <span class="termo">área vélica</span> (sail area) exposta em relação ao calado.</p>
+    <p>A regra prática de MacElrevey, baseada em ensaios com vários tipos de navios, a velocidades muito baixas de manobra:</p>
+
+    <div class="tab-wrap">
+      <table>
+        <thead>
+          <tr><th>Tipo de navio</th><th>Vento "assume o controle" quando a velocidade do vento atinge…</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Navio de bordos altos (passageiros, porta-contêineres)</td><td><span class="hl">≈ 3×</span> a velocidade do navio (razão 3:1)</td></tr>
+          <tr><td>Petroleiro carregado</td><td><span class="hl-ambar">≈ 5×</span> a velocidade do navio (razão 5:1)</td></tr>
+          <tr><td>Demais cargueiros (borda-livre intermediária)</td><td>Algo entre as duas razões, conforme superestrutura, carga de convés e borda-livre</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--mute);font-family:'Trebuchet MS',sans-serif">Fig. 1-17 — "Velocidade do navio na qual o vento assume o controle". MacElrevey, Cap. 1 (Arrival, p. 32 e gráfico na p. 34).</p>
+
+    <p>O gráfico da Fig. 1-17 plota velocidade do vento (nós) contra velocidade do navio (nós), com três retas: petroleiro carregado (declividade ~5:1), carga geral de borda-livre intermediária, e porta-contêineres/GNL/alta borda-livre (declividade ~3:1). Quanto mais alto o bordo, menos vento é necessário para tomar conta do navio.</p>
+    <p>Para dimensionar: um porta-contêineres, navio de passageiros, car carrier ou gaseiro de alta borda-livre com 75 pés de borda-livre apresenta de <b>50.000 a 60.000 pés²</b> de costado ao vento — mais do que os ~45.000 pés² de pano de um veleiro full-rigged. A direção e a força do vento importam ao manobrista moderno tanto quanto importavam na era da vela.</p>
+
+    <details class="pscpp" data-tipo="decorar">
+      <summary><span class="anchor">⚓</span><span class="tagline tag-decorar">Decorar</span> As razões e o efeito "ice tray" <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p><b>3:1</b> para bordos altos (passageiros, porta-contêineres) · <b>5:1</b> para petroleiro carregado · intermediários no meio. Quanto maior a área vélica, menor a razão — o vento toma conta mais cedo.</p>
+        <p style="margin-top:8px"><b>Efeito "ice tray":</b> navios de passageiros modernos, com fileiras de varandas fechadas separadas por anteparas verticais, "agarram" o vento — ele não escoa suavemente pelo costado e o navio é empurrado lateralmente em razão maior. Exige prever <span class="hl">mais abatimento (leeway)</span> ao se aproximar de berço ou fundeadouro.</p>
+      </div>
+    </details>
+
+    <p>A mesma razão funciona de forma inversa e prática: a velocidade do navio só pode ser reduzida até o ponto dado por essa razão vento:velocidade antes de começarem os problemas de governo. Não que se perca totalmente o governo nesse ponto, mas a partir dele é preciso <span class="termo">usar a máquina para governar</span> — dando um toque adiante (kick ahead) à medida que a proa começa a aproar para o vento.</p>
+
+    <details class="pscpp" data-tipo="banca">
+      <summary><span class="anchor">🎯</span><span class="tagline tag-banca">Banca</span> Punching the engine ahead <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p>"Socar a máquina adiante" (punching the engine ahead) = aumentar significativamente as rotações <b>apenas pelo tempo suficiente</b> para começar a guinar o navio de volta ao aproamento desejado. Permite controlar o navio <span class="hl">sem aumentar muito o seguimento</span> — crucial quando se está justamente tentando parar.</p>
+        <p style="margin-top:8px;color:var(--mute);font-size:13.5px">Distrator possível: trocar 3× e 5× entre os tipos (atribuir 5:1 ao porta-contêineres). Fixe: <b>bordo alto = razão menor (3:1); petroleiro carregado = razão maior (5:1)</b>, porque o petroleiro carregado tem pouca área vélica e muito calado.</p>
+      </div>
+    </details>
+
+    <h2 class="sec">Onde a razão de giro entra nos efeitos de águas rasas</h2>
+    <p>A razão de giro também aparece como uma linha da tabela-síntese do Cap. 1 — a <span class="termo">Figura 1-7</span>, que contrasta as características de manobra do navio em água profunda × água rasa. O ponto relevante para este caderno: a <span class="hl">razão de giro permanece essencialmente a mesma</span> nas duas profundidades, mesmo que o <em>diâmetro</em> da curva de giro aumente bastante em águas rasas. Por isso a maior área necessária para completar a curva não é óbvia para quem observa — você gira no mesmo ritmo angular, mas varrendo um espaço maior.</p>
+
+    <div class="tab-wrap">
+      <table>
+        <thead>
+          <tr><th>Característica</th><th>Água Profunda (no mar)</th><th>Água Rasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Estabilidade direcional</td>
+            <td>Função da forma do casco e do trim.</td>
+            <td>Torna-se mais positiva (o governo "melhora").</td>
+          </tr>
+          <tr style="background:rgba(251,233,160,.35)">
+            <td>Razão de giro</td>
+            <td>Depende das características do casco e da estabilidade direcional do navio.</td>
+            <td><span class="hl">Essencialmente a mesma</span> que em água profunda.</td>
+          </tr>
+          <tr>
+            <td>Diâmetro da curva de giro</td>
+            <td>Aproximadamente três vezes o comprimento do navio.</td>
+            <td>Aumenta para até o dobro do giro em água profunda.</td>
+          </tr>
+          <tr>
+            <td>Perda de velocidade</td>
+            <td>Significativa ao fazer grandes mudanças de rumo.</td>
+            <td>Ocorre com grandes mudanças de aproamento, mas em menor grau que em água profunda.</td>
+          </tr>
+          <tr>
+            <td>Perda de seguimento (máquina parada)</td>
+            <td>Em água calma, é função do deslocamento, do trim e da forma do casco.</td>
+            <td>Menor que em água profunda. <span class="hl-ambar">O navio mantém o seguimento por mais tempo</span> em água rasa.</td>
+          </tr>
+          <tr>
+            <td>Proa cai com a máquina a ré</td>
+            <td>A proa cai para boreste quando a máquina vai a ré.</td>
+            <td>Cai na mesma direção, porém em maior razão, à medida que a profundidade diminui.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--mute);font-family:'Trebuchet MS',sans-serif">Fig. 1-7 — Efeitos de águas rasas nas características de manobra do navio. MacElrevey, Cap. 1 (Arrival, p. 18).</p>
+
+    <details class="pscpp" data-tipo="banca">
+      <summary><span class="anchor">🎯</span><span class="tagline tag-banca">Banca</span> Tabela de altíssimo retorno <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p>Esta tabela concentra praticamente todos os contrastes água rasa × água profunda que a banca testa. <b>[BANCA: 2011-Q41]</b> e <b>[BANCA: 2012-Q4]</b> exploraram exatamente estes pares.</p>
+        <p style="margin-top:10px"><b>Inversões clássicas para vigiar:</b></p>
+        <p style="margin:6px 0 0">• Diâmetro: <b>3× comprimento</b> em profunda → até <b>2×</b> esse valor em rasa. (Trocar os números é distrator.)</p>
+        <p style="margin:6px 0 0">• Razão de giro: <span class="hl">igual</span> nas duas. (Afirmar que "aumenta" ou "diminui" em rasa é falso.)</p>
+        <p style="margin:6px 0 0">• Seguimento: o navio carrega seguimento por <b>mais</b> tempo em rasa (perde menos com máquina parada). Inverter isso é armadilha comum.</p>
+        <p style="margin:6px 0 0">• Estabilidade direcional fica <b>mais positiva</b> em rasa — exceto se o squat de proa for tão forte que o navio caturre, anulando o efeito estabilizador.</p>
+      </div>
+    </details>
+
+    <h2 class="sec">Os seis fatores da estabilidade direcional</h2>
+    <p>Logo após a tabela da Fig. 1-7, MacElrevey consolida numa lista os fatores que governam a <span class="termo">estabilidade direcional</span> do navio — diretamente ligada à razão de giro, porque é ela que determina se o navio se firma sozinho ao pôr o leme a meio (estável) ou se continua guinando em razão crescente (instável). Esta lista é a base da <b>[BANCA: 2012-Q10]</b>.</p>
+    <p>Fica evidente, então, que a estabilidade direcional:</p>
+
+    <div class="tab-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:42px">#</th><th>Fator</th><th>Efeito na estabilidade direcional</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Folga sob a quilha (UKC) <b>diminui</b></td><td><span style="color:var(--verde-medio);font-weight:bold">Aumenta</span> (governo "melhora" em água rasa).</td></tr>
+          <tr><td>2</td><td>Comprimento <b>aumenta</b></td><td><span style="color:var(--verde-medio);font-weight:bold">Mais positiva.</span></td></tr>
+          <tr><td>3</td><td>Trim de popa / drag <b>aumenta</b></td><td><span style="color:var(--verde-medio);font-weight:bold">Mais positiva.</span></td></tr>
+          <tr><td>4</td><td>Coeficiente de bloco (C<sub>b</sub>) <b>aumenta</b></td><td><span style="color:#9c2b2b;font-weight:bold">Diminui.</span></td></tr>
+          <tr><td>5</td><td>Boca <b>aumenta</b> para um dado comprimento (razão L/B diminui)</td><td><span style="color:#9c2b2b;font-weight:bold">Diminui.</span></td></tr>
+          <tr><td>6</td><td>Área das seções de vante <b>aumenta</b> em relação às de ré (pivô desloca para vante)</td><td><span style="color:#9c2b2b;font-weight:bold">Diminui.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--mute);font-family:'Trebuchet MS',sans-serif">MacElrevey, Cap. 1 (Arrival, p. 20), lista após a Fig. 1-8.</p>
+
+    <p>Repare na lógica que une os seis: tudo que <span class="hl">concentra área submersa à ré</span> (casco fino na proa, popa cheia, trim de popa, navio comprido e estreito) <b>estabiliza</b>; tudo que <span class="hl-ambar">empurra área submersa para vante</span> (C<sub>b</sub> alto, muita boca, seções de vante cheias, caturro de proa) <b>desestabiliza</b>, porque desloca o ponto de pivô para a proa e cria, num giro, o desequilíbrio de pressões à vante do CG que faz o navio "querer" continuar guinando.</p>
+
+    <details class="pscpp" data-tipo="decorar">
+      <summary><span class="anchor">⚓</span><span class="tagline tag-decorar">Decorar</span> O mnemônico dos sentidos <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p><b>Estabiliza (mais positiva):</b> menos folga sob a quilha · mais comprimento · mais trim de popa (drag).</p>
+        <p><b>Desestabiliza (diminui):</b> mais C<sub>b</sub> · mais boca (L/B menor) · seções de vante mais cheias / pivô para vante.</p>
+        <p style="margin-top:10px">Atalho: <span class="hl">"comprido, fino e arrastando de popa = firme; gordo, largo e cheio na proa = arisco"</span>. O caturro de proa é o caso extremo do fator 6 — qualquer navio caturrado de proa é direcionalmente instável.</p>
+      </div>
+    </details>
+
+    <details class="pscpp" data-tipo="banca">
+      <summary><span class="anchor">🎯</span><span class="tagline tag-banca">Banca</span> 2012 Q10 — armadilhas de sentido <span class="arrow">▶</span></summary>
+      <div class="corpo">
+        <p>A banca testa a <b>direção</b> de cada relação. Os distratores invertem um único item — afirmando, por exemplo, que a estabilidade "aumenta com o coeficiente de bloco" (falso: diminui) ou que "diminui à medida que o comprimento aumenta" (falso: aumenta).</p>
+        <p style="margin-top:10px">Atenção redobrada aos pares contraintuitivos:</p>
+        <p style="margin:6px 0 0">• Folga sob a quilha <b>menor</b> → estabilidade <b>maior</b> (relação inversa — fácil de errar).</p>
+        <p style="margin:6px 0 0">• Mais <b>boca</b> → <b>menos</b> estável (a relação é com L/B; cuidado se o enunciado falar só em "boca").</p>
+        <p style="margin:6px 0 0;color:var(--mute);font-size:13.5px">Como 2012 fica como [VERIFICAR gabarito impresso], confirme a numeração da questão contra o gabarito oficial antes de fixar.</p>
+      </div>
+    </details>
+
+    <h2 class="sec">Síntese para a prova</h2>
+    <p>Razão de giro é taxa angular instantânea; o que importa na leitura é se ela sobe ou desce. Durante o <em>backing and filling</em> ela cai por <b>perda de seguimento</b>, não por o navio "querer parar" — e isso é mal-entendido comum que a banca cobra. O máximo seguro de referência é <b>⅗ °/s = 36°/min</b>. Distinga sempre da instabilidade direcional, em que a taxa <em>cresce</em> com leme a meio-navio. E na Fig. 1-7: a razão de giro é <b>essencialmente igual</b> em água rasa e profunda, ainda que o diâmetro da curva quase dobre em água rasa. Por fim, os seis fatores da p. 20: a estabilidade direcional <b>aumenta</b> com menos folga sob a quilha, mais comprimento e mais trim de popa; <b>diminui</b> com mais C<sub>b</sub>, mais boca (L/B menor) e seções de vante mais cheias.</p>
+
+    <div class="painel">
+      <button id="btnPainel" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+      <div id="statusPainel"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Módulo II · Arte Naval — Shiphandling/MacElrevey · Bloco F · Capital Sereno</div>
+</footer>
+
+<script>
+/* ---------- Integração Supabase ---------- */
+const SUPABASE_URL = "https://iftourtecxtmvuhptvmo.supabase.co";
+const TABELA = "respostas";
+
+/* Metadados deste caderno — preencher conforme catalogação do projeto */
+const REGISTRO = {
+  caderno_id: "macelrevey_razao_de_giro",
+  tipo: "caderno",
+  bloco: "F",
+  tema: "Governo Portuário",
+  assunto: "Razão de giro (rate of turn)",
+  enunciado: "Razão de giro: definição, queda por perda de seguimento durante backing and filling, máximo seguro ⅗°/s = 36°/min, indicador por boia.",
+  acertou: null,
+  sessao_data: new Date().toISOString().slice(0,10)
+};
+
+async function enviarPainel(){
+  const status = document.getElementById('statusPainel');
+  const btn = document.getElementById('btnPainel');
+  status.textContent = "Enviando…";
+  btn.disabled = true;
+  try{
+    const resp = await fetch(SUPABASE_URL + "/rest/v1/" + TABELA, {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "Prefer":"return=minimal"
+        /* apikey / Authorization: configure no painel se sua tabela exigir.
+           Mantido sem chave aqui para não expor segredo no HTML público. */
+      },
+      body: JSON.stringify(REGISTRO)
+    });
+    if(resp.ok){
+      status.textContent = "✓ Registrado no Painel PSCPP.";
+    }else{
+      status.textContent = "Resposta " + resp.status + " — verifique a apikey/políticas RLS da tabela.";
+    }
+  }catch(e){
+    status.textContent = "Falha de rede ao enviar. Confira a URL e as permissões.";
+  }finally{
+    btn.disabled = false;
+  }
+}
+</script>
+
+</body>
+</html>

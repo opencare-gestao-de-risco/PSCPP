@@ -179,6 +179,13 @@ const CADERNOS = [
     desc:"Vantagens × desvantagens de Kort, CRP, CPP, azimutal, pod, waterjet, surface-piercing e Voith-Schneider, com conflitos entre fontes sinalizados.",
     tags:["BANCA","Propulsor","Rebocadores"]
   },
+  {
+    materia:"shiphandling", badge:"Shiphandling for the Mariner",
+    titulo:"Capítulo 1 — Chegada (Arrival)",
+    arquivo:"macelrevey_cap_1.html",
+    desc:"Definição (taxa angular ≠ ângulo total), queda por perda de seguimento, máximo seguro ⅗°/s = 36°/min, boia como indicador, regra dos 25–30% do VLCC, varrer um sotavento, razões de vento 3:1 e 5:1 (Fig. 1-17), tabela Fig. 1-7 (águas rasas) e os 6 fatores da estabilidade direcional (p. 20).",
+    tags:["BANCA","Governo","VLCC","Prático","Vento","Estab. direcional","Águas rasas","MacElrevey"]
+  },
   // ↑ Adicione novos cadernos acima desta linha, no mesmo formato.
 ];
 
@@ -186,9 +193,10 @@ const CADERNOS = [
 const MATERIAS = {
   "manobra-prop":{ titulo:"Manobrabilidade — Propulsão", sub:"Módulo I · Bloco B · Propulsão e Propulsores", cor:"#1A7A6E" },
   "manobrabilidade":{ titulo:"Manobrabilidade", sub:"Módulo I · Blocos D–H", cor:"#1A7A6E" },
+  "shiphandling":{ titulo:"Arte Naval — Shiphandling/MacElrevey", sub:"Módulo II · Blocos D·E·F·G · MacElrevey 4ª ed.", cor:"#0D3D36" },
   "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" }
 };
-const ORDEM = ["manobra-prop","manobrabilidade","arte-naval"];
+const ORDEM = ["manobra-prop","manobrabilidade","shiphandling","arte-naval"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }
