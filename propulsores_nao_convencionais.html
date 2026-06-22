@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propulsores Não Convencionais | PSCPP 2027</title>
+<style>
+  :root{
+    --verde:#0D3D36; --dourado:#C8A84B; --teal:#1A7A6E; --creme:#F7F3EA;
+    --amarelo:#FCE98A; --ambar:#F2C879; --texto:#1d2624; --borda:#d8d0bc;
+  }
+  *{box-sizing:border-box;}
+  body{font-family:Georgia,'Times New Roman',serif; background:var(--creme); color:var(--texto); margin:0; padding:0; line-height:1.65;}
+  .wrap{max-width:880px; margin:0 auto; padding:32px 20px 80px;}
+  header.capa{background:var(--verde); color:var(--creme); border-radius:14px; padding:30px 32px; margin-bottom:28px; border-bottom:5px solid var(--dourado);}
+  header.capa .bloco{font-size:13px; letter-spacing:2px; color:var(--dourado); text-transform:uppercase;}
+  header.capa h1{margin:8px 0 6px; font-size:27px; line-height:1.25;}
+  header.capa .sub{font-size:15px; opacity:.9;}
+  header.capa .fonte{margin-top:14px; font-size:13px; font-style:italic; opacity:.85; border-top:1px solid rgba(200,168,75,.4); padding-top:10px;}
+  h2.sec{color:var(--verde); font-size:21px; margin:36px 0 14px; border-left:5px solid var(--dourado); padding-left:12px;}
+  h3{color:var(--teal); font-size:17px; margin:24px 0 8px;}
+  p{margin:10px 0;}
+  .hl-am{background:var(--amarelo); padding:1px 4px; border-radius:3px;}
+  .hl-amb{background:var(--ambar); padding:1px 4px; border-radius:3px;}
+  .tag{display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:bold; letter-spacing:1px; padding:3px 9px; border-radius:5px; color:#fff; margin-right:6px; vertical-align:middle;}
+  .t-calc{background:#1A7A6E;} .t-dec{background:#9c7b16;} .t-conf{background:#a8412a;} .t-banca{background:#0D3D36;} .t-verif{background:#7a3b8a;}
+  .caixa{border:1px solid var(--borda); border-radius:10px; padding:16px 18px; margin:16px 0; background:#fff;}
+  .caixa.conf{border-left:5px solid #a8412a; background:#fbf0ed;}
+  .caixa.dec{border-left:5px solid var(--dourado); background:#fcf7e8;}
+  .caixa.verif{border-left:5px solid #7a3b8a; background:#f6eefb;}
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14.5px; background:#fff;}
+  th,td{border:1px solid var(--borda); padding:8px 10px; text-align:left; vertical-align:top;}
+  th{background:var(--verde); color:var(--creme); font-family:Arial,sans-serif; font-size:13px;}
+  tr:nth-child(even) td{background:#faf6ec;}
+  .vd{background:#eef6f0;} .dv{background:#fbeeea;}
+  .vd-h{background:#0F6E56 !important;} .dv-h{background:#a8412a !important;}
+  details.pscpp{border:1px solid var(--dourado); border-radius:10px; margin:18px 0; background:#fcf7e8; overflow:hidden;}
+  details.pscpp summary{cursor:pointer; padding:12px 16px; font-family:Arial,sans-serif; font-weight:bold; color:var(--verde); list-style:none; background:#f6ecd0; user-select:none;}
+  details.pscpp summary::-webkit-details-marker{display:none;}
+  details.pscpp summary:before{content:"⚓ ";}
+  details.pscpp[open] summary{border-bottom:1px solid var(--dourado);}
+  details.pscpp .corpo{padding:14px 18px;}
+  .card{border:1px solid var(--borda); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .card .titulo{background:var(--teal); color:#fff; padding:12px 16px; font-family:Arial,sans-serif; font-weight:bold; font-size:16px;}
+  .card .corpo{padding:16px 18px;}
+  .btn-painel{display:inline-block; margin-top:26px; background:var(--dourado); color:#0D3D36; font-family:Arial,sans-serif; font-weight:bold; font-size:15px; border:none; padding:13px 22px; border-radius:9px; cursor:pointer; box-shadow:0 2px 0 #a98a2e;}
+  .btn-painel:active{transform:translateY(1px); box-shadow:0 1px 0 #a98a2e;}
+  footer{margin-top:40px; font-size:12px; color:#7a7367; text-align:center; border-top:1px solid var(--borda); padding-top:16px;}
+  sub,sup{font-size:.75em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="capa">
+    <div class="bloco">P1a · Bloco B — Propulsão e Propulsores</div>
+    <h1>Propulsores Não Convencionais<br>Vantagens e Desvantagens</h1>
+    <div class="sub">Análise ponto a ponto de cada tipo, com conflitos entre fontes sinalizados para verificação</div>
+    <div class="fonte">Fontes: Bertram, <i>Practical Ship Hydrodynamics</i>, 2ª ed., Cap. 2 §2.8 · PNA (SNAME) Vol. II Cap. VI Sec. 10 · Larsson &amp; Raven Cap. 3 §3.7.7</div>
+  </header>
+
+  <div class="caixa verif">
+    <span class="tag t-verif">VERIFICAR</span>
+    <p style="margin-top:8px;"><b>Como ler este caderno.</b> As marcações <span class="tag t-verif" style="font-size:10px;">VERIFICAR</span> apontam afirmações que dependem de <b>publicações de rebocadores</b> (não anexadas neste projeto) — tração estática (<i>bollard pull</i>), operação ASD/Voith, capacidades de manobra. São números/afirmações do Bertram e do PNA que você deve <u>confrontar com fontes dedicadas de rebocadores</u> antes de fixar como definitivos. As marcações <span class="tag t-conf" style="font-size:10px;">CONFLITO</span> apontam divergências <b>já existentes entre as fontes deste projeto</b>.</p>
+  </div>
+
+  <!-- ===================== TUBEIRA KORT ===================== -->
+  <h2 class="sec">1. Propulsor dutado (tubeira Kort)</h2>
+  <p>Duto anular fixo, prolongado para vante, ao redor do propulsor; o anel tem <b>seção em fólio</b>. O propulsor opera com pequena folga entre as pontas das pás e a parede interna, no ponto mais estreito. <span class="hl-am">O duto fornece mais água ao propulsor (aumenta a eficiência ideal) e a forma de fólio gera empuxo adicional.</span> <i>(Bertram §2.8; L&amp;R §3.7.7)</i> <span class="tag t-banca" style="font-size:10px;">BANCA 2006</span></p>
+
+  <div class="card">
+    <div class="titulo">Tubeira Kort — vantagens × desvantagens</div>
+    <div class="corpo">
+      <table>
+        <tr><th class="vd-h">Vantagens (+)</th><th class="dv-h">Desvantagens (−)</th></tr>
+        <tr>
+          <td class="vd">Melhor eficiência em <b>alto coeficiente de carga</b> de empuxo. Para rebocadores/empurradores, ganhos de ~20%</td>
+          <td class="dv">Capacidade de mudança de rumo a <b>ré</b> é um tanto prejudicada</td>
+        </tr>
+        <tr>
+          <td class="vd"><b>Tração estática (bollard pull)</b> pode subir mais de <b>30%</b> <span class="tag t-verif" style="font-size:9px;">VERIFICAR</span></td>
+          <td class="dv">Em águas rasas, <b>suga cascalho e pedras</b>; risco de dano por gelo (daí ser rara em mar aberto)</td>
+        </tr>
+        <tr>
+          <td class="vd">Menor queda de eficiência <b>em mar agitado</b> que o não-dutado</td>
+          <td class="dv">Queda de pressão no duto → <b>cavitação ocorre mais cedo</b></td>
+        </tr>
+        <tr>
+          <td class="vd"><b>Estabilidade de rumo</b> substancialmente melhorada</td>
+          <td class="dv">(Histórico) problemas de vibração e cavitação afastaram dos navios grandes nos anos 1970</td>
+        </tr>
+      </table>
+      <p style="font-size:13px;">Aplicação típica: <b>rebocadores, pesqueiros, embarcações de águas interiores</b>.</p>
+    </div>
+  </div>
+
+  <div class="caixa verif">
+    <span class="tag t-verif">VERIFICAR</span>
+    <p style="margin-top:8px;"><b>Ponto a confrontar com fontes de rebocadores:</b> os números "<b>~20% de eficiência</b>" e "<b>+30% de bollard pull</b>" vêm do Bertram (e repetidos por Larsson). São coerentes entre as duas fontes deste projeto, mas <span class="hl-amb">a magnitude exata do incremento de tração estática é justamente o tipo de dado cobrado em prova com base em manuais de rebocador</span> (a DPC emite o Certificado de Tração Estática). Confronte com bibliografia dedicada de rebocadores antes de fixar o número.</p>
+  </div>
+
+  <!-- ===================== CRP ===================== -->
+  <h2 class="sec">2. Propulsores contra-rotativos (CRP)</h2>
+  <p>Dois propulsores <b>coaxiais</b> girando em sentidos opostos, em sequência. O de ré <b>recupera a energia rotacional</b> (torção) deixada na esteira pelo de vante. Para evitar cavitação, o de ré deve ter <b>diâmetro menor</b>. <i>(Bertram §2.8; L&amp;R §3.7.7)</i></p>
+
+  <div class="card">
+    <div class="titulo">CRP — vantagens × desvantagens</div>
+    <div class="corpo">
+      <table>
+        <tr><th class="vd-h">Vantagens (+)</th><th class="dv-h">Desvantagens (−)</th></tr>
+        <tr><td class="vd">Recupera perdas rotacionais (~8–10% em navios de carga); eficiência sobe</td><td class="dv">Instalação de <b>eixos coaxiais</b> é complexa, cara e exige mais manutenção</td></tr>
+        <tr><td class="vd"><b>Momento de banda</b> (heeling) do propulsor é compensado (desprezível em navios grandes)</td><td class="dv">Ganhos hidrodinâmicos parcialmente comidos por <b>perdas mecânicas no eixamento</b></td></tr>
+        <tr><td class="vd">Mais potência transmitida para um dado raio de propulsor</td><td class="dv">Falhas frequentes / tempo parado tornam a adoção pouco provável</td></tr>
+        <tr><td class="vd"><b>Compensação natural de torque</b> (por isso usado em torpedos)</td><td class="dv">—</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;"><b>Divergência de números ENTRE as fontes do projeto:</b></p>
+    <table>
+      <tr><th>Fonte</th><th>Ganho de eficiência do CRP</th></tr>
+      <tr><td>Bertram §2.8 (Isay 1964)</td><td>até <b>~6%</b></td></tr>
+      <tr><td>Larsson §3.7.7 (relatos gerais)</td><td><b>6% a 20%</b> (mas considera realista <b>3–6%</b>, Buhaug 2009)</td></tr>
+    </table>
+    <p style="font-size:13px;">A faixa "6–20%" é <u>otimista</u>; a estimativa criteriosa converge para <b>3–6%</b>. Na prova, se aparecer "20%", desconfie — Larsson explicitamente trata isso como exagero. <span class="hl-am">Use 3–6% como valor defensável.</span></p>
+    <p style="font-size:13px;"><span class="tag t-banca" style="font-size:10px;">BANCA 2012</span> A prova de 2012 (Q14) tratou de dois propulsores coaxiais de sentidos inversos. <b>Não confundir CRP com a roda de Grim</b>: na roda de Grim o "propulsor de ré" <u>não é acionado por eixo</u> e gira no <u>mesmo sentido</u> do propulsor.</p>
+  </div>
+
+  <!-- ===================== CPP ===================== -->
+  <h2 class="sec">3. Propulsor de passo controlável (CPP)</h2>
+  <p>Pás montadas individualmente no cubo, cada uma num eixo; o <b>passo pode ser alterado e até invertido</b> com o propulsor em operação, por mecanismo hidráulico interno (pistões/cruzetas). Opõe-se ao <b>FPP</b> (passo fixo). <i>(Bertram §2.8; PNA Sec. 10.6)</i> <span class="tag t-banca" style="font-size:10px;">BANCA 2006/2008/2012</span></p>
+
+  <div class="card">
+    <div class="titulo">CPP — vantagens × desvantagens</div>
+    <div class="corpo">
+      <table>
+        <tr><th class="vd-h">Vantagens (+)</th><th class="dv-h">Desvantagens (−)</th></tr>
+        <tr><td class="vd"><b>Parada rápida</b> (fast stop) e <b>ré</b> sem inverter o motor</td><td class="dv"><b>Maior consumo</b> de combustível (rotação alta em baixa velocidade é subótima)</td></tr>
+        <tr><td class="vd">Motor principal <b>não precisa ser reversível</b></td><td class="dv">Exige <b>cubo maior</b> (0,30–0,32 D) → menor eficiência relativa</td></tr>
+        <tr><td class="vd">Motor opera em <b>rotação constante/ótima</b> independe da velocidade (permite acionar gerador, usar óleo pesado)</td><td class="dv"><b>Distribuição de passo subótima</b> (passo quase constante causaria α negativo nos raios externos)</td></tr>
+        <tr><td class="vd">Resposta mais rápida em manobra; reversão de empuxo de emergência mais rápida</td><td class="dv">Maior <b>complexidade mecânica</b> e custo de manutenção</td></tr>
+      </table>
+      <p style="font-size:13px;">Aplicação típica: <b>rebocadores, arrasteiros, balsas, navios militares a turbina a gás</b> (não reversíveis).</p>
+    </div>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;"><b>FPP × CPP — o eixo da comparação cobrada:</b></p>
+    <table>
+      <tr><th></th><th>FPP (passo fixo)</th><th>CPP (passo controlável)</th></tr>
+      <tr><td>Reversão</td><td>inverte o <b>motor</b></td><td>inverte o <b>passo</b> (motor segue no mesmo sentido)</td></tr>
+      <tr><td>Eficiência de pico</td><td>maior (cubo menor)</td><td>levemente menor (cubo maior)</td></tr>
+      <tr><td>Flexibilidade operacional</td><td>baixa</td><td>alta (condições muito diversas)</td></tr>
+      <tr><td>Complexidade/custo</td><td>baixa</td><td>alta</td></tr>
+    </table>
+    <p style="font-size:13px;"><span class="tag t-conf" style="font-size:10px;">CONFLITO</span> Sutileza entre fontes: o <b>PNA</b> diz que o CPP "pode ser feito quase tão eficiente quanto o FPP" para uma condição escolhida (a única diferença é o cubo maior). O <b>Bertram</b> enfatiza mais o <b>maior consumo</b> por operar fora do ponto ótimo. Não é contradição real — PNA fala do ponto de projeto; Bertram, da operação fora dele. Bom guardar os dois ângulos.</p>
+  </div>
+
+  <!-- ===================== AZIMUTAL ===================== -->
+  <h2 class="sec">4. Propulsores azimutais (rudder propellers)</h2>
+  <p>Propulsor giratório que cobre <b>360°</b> (ao contrário do motor de popa, que gira ângulo limitado), usualmente com tubeira. Girar 180° <b>reverte o empuxo</b> — operação a ré <span class="hl-am">muito mais eficiente que inverter a rotação</span> de um propulsor convencional. Base dos rebocadores <b>ASD</b> (Azimuth Stern Drive). <i>(Bertram §2.8)</i></p>
+
+  <div class="caixa">
+    <p><b>Pontos-chave (Bertram não tabela este, mas destaca):</b></p>
+    <p style="margin-left:8px;font-size:14px;">
+      • cobre 360° → empuxo dirigido em qualquer direção → <b>manobrabilidade excelente</b>;<br>
+      • reversão por giro de 180° é mais eficiente que reverter rotação;<br>
+      • por volta de 2003, disponíveis até ~4000 kW de potência permanente;<br>
+      • os <b>pods</b> são um caso especial de azimutal (motor elétrico dentro do pod).
+    </p>
+  </div>
+
+  <div class="caixa verif">
+    <span class="tag t-verif">VERIFICAR</span>
+    <p style="margin-top:8px;"><b>Ponto a confrontar com fontes de rebocadores:</b> o azimutal é a base dos <b>rebocadores ASD e tractor</b>, cujas capacidades de manobra (empurrar/puxar pela popa, indirect towing, escort) são tratadas em manuais dedicados de rebocadores. Bertram só dá a base hidrodinâmica. <span class="hl-amb">As capacidades operacionais de manobra e tração desses rebocadores devem ser verificadas em bibliografia específica</span> antes de qualquer afirmação numérica em prova.</p>
+  </div>
+
+  <!-- ===================== POD ===================== -->
+  <h2 class="sec">5. Propulsores em pod (podded drives)</h2>
+  <p>Motor elétrico <b>dentro de um pod</b> submerso, unidade totalmente <b>azimutal</b>. Primeiro navio: "Seili" (1990); em uma década viraram escolha dominante para certos tipos (cruzeiros). <i>(Bertram §2.8, citando Mewis 2001)</i></p>
+
+  <div class="card">
+    <div class="titulo">Pod — vantagens × desvantagens (Mewis 2001)</div>
+    <div class="corpo">
+      <table>
+        <tr><th class="vd-h">Vantagens (+)</th><th class="dv-h">Desvantagens (−)</th></tr>
+        <tr><td class="vd">Mais <b>espaço de carga</b> (motor localizado livremente)</td><td class="dv">Maiores <b>custos de capital</b></td></tr>
+        <tr><td class="vd"><b>Melhor manobrabilidade</b>; baixas velocidades possíveis</td><td class="dv">Exige sistema <b>diesel-elétrico</b> (perda de potência na conversão)</td></tr>
+        <tr><td class="vd">Menor <b>ruído</b>; bom como <b>booster</b> de velocidade</td><td class="dv">Maior requisito de potência em arranjo de <b>eixo único</b></td></tr>
+        <tr><td class="vd">Menor esforço na construção; afluxo mais uniforme (duplo pod) → propulsor mais eficiente</td><td class="dv"><b>Limitação de potência</b> (~32 MW em 2003) e de <b>velocidade</b> (~30 nós em 2003)</td></tr>
+      </table>
+      <p style="font-size:13px;color:#555;"><span class="hl-amb">Atenção:</span> a eficiência hidrodinâmica da unidade pod é ~<b>5% menor</b> que um propulsor convencional idêntico com leme — e ainda se perde eficiência quando o propulsor do pod não pode ter diâmetro ótimo (limitação de torque do motor).</p>
+    </div>
+  </div>
+
+  <details class="pscpp">
+    <summary>Ordem de adequação do pod por tipo de navio (Mewis)</summary>
+    <div class="corpo">
+      <p><b>Muito bem adequado:</b> cruzeiro, balsa RoPax, quebra-gelo.<br>
+      <b>Bem adequado:</b> navio de suprimento, graneleiro, petroleiro (eixo único e duplo).<br>
+      <b>Pouco adequado:</b> porta-contêineres (eixo único) &lt; 3000 TEU.<br>
+      <b>Não bem adequado:</b> porta-contêineres (eixo duplo).<br>
+      <b>Inviável:</b> porta-contêineres (eixo único) &gt; 3000 TEU.</p>
+      <p style="font-size:13px;color:#555;">Esses limites (32 MW, 30 nós) são de <b>2003</b> — provavelmente já superados. Trate como referência histórica, não valor atual.</p>
+    </div>
+  </details>
+
+  <!-- ===================== WATERJET ===================== -->
+  <h2 class="sec">6. Waterjets (jatos d'água)</h2>
+  <p>Bomba interna que acelera a água e a descarrega por uma tubeira. Para <b>alta velocidade</b>, diâmetro restrito e operação livre de cavitação, onde o propulsor convencional atinge limites. <i>(Bertram §2.8; PNA Sec. 10)</i> <span class="tag t-banca" style="font-size:10px;">BANCA 2011</span></p>
+
+  <div class="card">
+    <div class="titulo">Waterjet — vantagens × desvantagens</div>
+    <div class="corpo">
+      <table>
+        <tr><th class="vd-h">Vantagens (+)</th><th class="dv-h">Desvantagens (−)</th></tr>
+        <tr><td class="vd">Maior eficiência <b>acima de 35 nós</b> (η &gt; 0,8)</td><td class="dv">Eficiência <b>drasticamente menor em baixa velocidade</b></td></tr>
+        <tr><td class="vd"><b>Sem resistência de apêndices</b> (eixos, pés de galinha, lemes)</td><td class="dv">Maior <b>peso</b> (inclui massa de água dentro da bomba)</td></tr>
+        <tr><td class="vd">Opera em <b>águas rasas</b>; risco de cavitação muito menor</td><td class="dv">Potência para <b>elevar a água</b> da tomada à tubeira (pior em hidrofólios)</td></tr>
+        <tr><td class="vd"><b>Excelente manobrabilidade</b>; ruído menor (−7 a −10 dB(A))</td><td class="dv">Maior custo de bombas/tomadas; mais espaço interno; risco de <b>obstrução por detritos</b></td></tr>
+        <tr><td class="vd">Mais empuxo com <b>menor diâmetro</b>; sem engrenagem de reversão (governo faz ré)</td><td class="dv">Difícil obter fluxo uniforme ao impulsor (água da camada-limite)</td></tr>
+      </table>
+      <p style="font-size:13px;">Aplicação: balsas rápidas, catamarãs, iates a motor, lanchas, hidrofólios, SES.</p>
+    </div>
+  </div>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;"><span class="tag t-banca" style="font-size:10px;">BANCA 2011</span> A prova de 2011 (PNA) cobrou <b>por que o waterjet "não é muito usado em navios mercantes"</b>. O PNA é mais duro que o Bertram aqui: as <b>eficiências de jato raramente passam de 0,60</b> e o PC máximo fica em ~0,51–0,54, contra η₀ ~0,65–0,72 de hélices convencionais. <span class="hl-am">Para navios convencionais (baixa/média velocidade), o waterjet é significativamente menos eficiente.</span> A vantagem de η &gt; 0,8 do Bertram é só para <b>alta velocidade (&gt;35 nós)</b> — os dois não se contradizem, mas a prova explora o regime de <u>baixa</u> velocidade.</p>
+  </div>
+
+  <!-- ===================== SURFACE-PIERCING ===================== -->
+  <h2 class="sec">7. Propulsores perfurantes de superfície</h2>
+  <p>Operam <b>parcialmente submersos</b> (tipicamente 30–50% emerso). As pás são projetadas para que a <b>face fique totalmente molhada</b> e o <b>dorso fique ventilado/seco</b>. Usados em embarcações muito rápidas (lanchas de corrida, algumas navais). <i>(Bertram §2.8)</i></p>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;"><span class="tag t-banca" style="font-size:10px;">BANCA</span> Distinção que a banca explora: a <b>ventilação</b> (entrada de <b>ar atmosférico</b> no lado de sucção) é um fenômeno <u>distinto</u> da <b>cavitação</b> (formação de <b>vapor</b> por queda de pressão). <span class="hl-am">Não confundir ventilação com cavitação</span> — são mecanismos diferentes ainda que ambos envolvam "ar/gás" na pá.</p>
+  </div>
+
+  <!-- ===================== VOITH-SCHNEIDER ===================== -->
+  <h2 class="sec">8. Propulsor Voith–Schneider (cicloidal)</h2>
+  <p>Acionamento <b>cicloidal</b>: um prato circular com ~5 pás verticais em fólio, fixado ao fundo, girando em torno de eixo vertical; cada pá também gira no seu eixo, com o ângulo de ataque sincronizado. <span class="hl-am">Empuxo ajustável em magnitude e direção quase instantaneamente, sem mudar a rotação do motor</span> → manobrabilidade altíssima. <i>(Bertram §2.8)</i> <span class="tag t-banca" style="font-size:10px;">BANCA 2012</span></p>
+
+  <div class="caixa">
+    <p><b>Características:</b></p>
+    <p style="margin-left:8px;font-size:14px;">
+      • combina <b>propulsão e manobra</b> num só dispositivo;<br>
+      • empuxo vante/ré com a <b>mesma força</b> (sem inverter rotação);<br>
+      • usualmente em <b>tandem</b>; usado em <b>rebocadores e balsas</b>;<br>
+      • base do <b>rebocador-trator Voith</b> (water tractor), que reboca puxando pela popa.
+    </p>
+  </div>
+
+  <div class="caixa verif">
+    <span class="tag t-verif">VERIFICAR</span>
+    <p style="margin-top:8px;"><span class="tag t-banca" style="font-size:10px;">BANCA 2012</span> A prova de 2012 cobrou rebocadores cicloidais Voith–Schneider (atuação vante/ré com a mesma força). <span class="hl-amb">O conceito de rebocador-trator (water tractor) e suas técnicas de reboque pertencem a bibliografia de rebocadores</span> não anexada aqui — Bertram só dá a base do propulsor. Confronte as capacidades de manobra/reboque com fontes dedicadas.</p>
+  </div>
+
+  <!-- ===================== SÍNTESE ===================== -->
+  <h2 class="sec">9. Quadro-síntese — quando cada um brilha</h2>
+  <table>
+    <tr><th>Tipo</th><th>Ponto forte decisivo</th><th>Limitação principal</th><th>Onde aparece</th></tr>
+    <tr><td>Tubeira Kort</td><td>tração estática (alta carga)</td><td>cavitação precoce; suga detritos</td><td>rebocadores, pesca</td></tr>
+    <tr><td>CRP</td><td>recupera perda rotacional</td><td>complexidade mecânica do eixamento</td><td>torpedos, alguns petroleiros</td></tr>
+    <tr><td>CPP</td><td>ré sem reverter motor</td><td>cubo maior; consumo</td><td>rebocadores, arrasteiros, militar</td></tr>
+    <tr><td>Azimutal</td><td>360° + ré eficiente</td><td>—</td><td>rebocadores ASD</td></tr>
+    <tr><td>Pod</td><td>manobra + espaço de carga</td><td>diesel-elétrico; −5% efic.</td><td>cruzeiros, RoPax</td></tr>
+    <tr><td>Waterjet</td><td>alta velocidade (&gt;35 nós)</td><td>péssimo em baixa velocidade</td><td>balsas rápidas, naval rápida</td></tr>
+    <tr><td>Surface-piercing</td><td>sem arrasto submerso total</td><td>só nichos muito rápidos</td><td>lanchas de corrida</td></tr>
+    <tr><td>Voith–Schneider</td><td>manobra omnidirecional</td><td>eficiência menor; custo</td><td>rebocadores, balsas</td></tr>
+  </table>
+
+  <div class="caixa verif">
+    <span class="tag t-verif">VERIFICAR</span>
+    <p style="margin-top:8px;"><b>Resumo do que confrontar com publicações de rebocadores (não anexadas):</b></p>
+    <p style="margin-left:8px;font-size:14px;">
+      1. Tubeira Kort: incremento exato de <b>bollard pull (+30%?)</b> e de eficiência (~20%?);<br>
+      2. Azimutal/ASD: <b>capacidades de manobra e tração</b> em escort/indirect towing;<br>
+      3. Voith–Schneider: técnicas e capacidades do <b>rebocador-trator</b>.
+    </p>
+    <p style="font-size:13px;color:#555;">Bertram e PNA dão a base hidrodinâmica; os números operacionais de rebocador vêm de manuais dedicados (e a DPC cobra via Certificado de Tração Estática).</p>
+  </div>
+
+  <div style="text-align:center;">
+    <button class="btn-painel" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+  </div>
+
+  <footer>
+    Capital Sereno × PSCPP 2027 · Projeto P1a — Bloco B · Propulsores Não Convencionais<br>
+    Bertram Cap. 2 §2.8 · PNA (SNAME) Vol. II Cap. VI Sec. 10 · Larsson &amp; Raven §3.7.7
+  </footer>
+</div>
+
+<script>
+  function enviarPainel(){
+    const payload = {
+      caderno_id: 'propulsores_nao_convencionais',
+      tipo: 'caderno', bloco: 'B', tema: 'Propulsores',
+      assunto: 'Propulsores não convencionais — vantagens e desvantagens',
+      enunciado: 'Kort, CRP, CPP, azimutal, pod, waterjet, surface-piercing, Voith-Schneider',
+      acertou: null, sessao_data: new Date().toISOString()
+    };
+    console.log('Payload Supabase →', payload);
+    alert('Registro preparado para o Painel PSCPP.\\nTabela: respostas\\nbloco: B · tema: Propulsores');
+  }
+</script>
+</body>
+</html>

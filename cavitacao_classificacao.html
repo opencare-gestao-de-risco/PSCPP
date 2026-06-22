@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cavitação — Classificação e Tipos | PSCPP 2027</title>
+<style>
+  :root{
+    --verde:#0D3D36; --dourado:#C8A84B; --teal:#1A7A6E; --creme:#F7F3EA;
+    --amarelo:#FCE98A; --ambar:#F2C879; --texto:#1d2624; --borda:#d8d0bc;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:Georgia,'Times New Roman',serif; background:var(--creme);
+    color:var(--texto); margin:0; padding:0; line-height:1.65;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:32px 20px 80px;}
+  header.capa{
+    background:var(--verde); color:var(--creme); border-radius:14px;
+    padding:30px 32px; margin-bottom:28px; border-bottom:5px solid var(--dourado);
+  }
+  header.capa .bloco{font-size:13px; letter-spacing:2px; color:var(--dourado); text-transform:uppercase;}
+  header.capa h1{margin:8px 0 6px; font-size:27px; line-height:1.25;}
+  header.capa .sub{font-size:15px; opacity:.9;}
+  header.capa .fonte{margin-top:14px; font-size:13px; font-style:italic; opacity:.85; border-top:1px solid rgba(200,168,75,.4); padding-top:10px;}
+  h2.sec{
+    color:var(--verde); font-size:21px; margin:36px 0 14px;
+    border-left:5px solid var(--dourado); padding-left:12px;
+  }
+  h3{color:var(--teal); font-size:17px; margin:24px 0 8px;}
+  p{margin:10px 0;}
+  .hl-am{background:var(--amarelo); padding:1px 4px; border-radius:3px;}
+  .hl-amb{background:var(--ambar); padding:1px 4px; border-radius:3px;}
+
+  .tag{display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:bold;
+    letter-spacing:1px; padding:3px 9px; border-radius:5px; color:#fff; margin-right:6px; vertical-align:middle;}
+  .t-calc{background:#1A7A6E;} .t-dec{background:#9c7b16;} .t-conf{background:#a8412a;} .t-banca{background:#0D3D36;} .t-duv{background:#5a5a5a;}
+
+  .caixa{border:1px solid var(--borda); border-radius:10px; padding:16px 18px; margin:16px 0; background:#fff;}
+  .caixa.calc{border-left:5px solid var(--teal); background:#f0f7f5;}
+  .caixa.conf{border-left:5px solid #a8412a; background:#fbf0ed;}
+  .caixa.dec{border-left:5px solid var(--dourado); background:#fcf7e8;}
+
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:15px; background:#fff;}
+  th,td{border:1px solid var(--borda); padding:8px 10px; text-align:left; vertical-align:top;}
+  th{background:var(--verde); color:var(--creme); font-family:Arial,sans-serif; font-size:13px;}
+  tr:nth-child(even) td{background:#faf6ec;}
+
+  .formula{font-family:'Courier New',monospace; background:#0D3D36; color:#F7F3EA;
+    padding:10px 14px; border-radius:7px; margin:10px 0; font-size:15px; overflow-x:auto;}
+  .var{font-size:14px; color:#444; margin:4px 0 4px 8px;}
+
+  details.pscpp{border:1px solid var(--dourado); border-radius:10px; margin:18px 0; background:#fcf7e8; overflow:hidden;}
+  details.pscpp summary{cursor:pointer; padding:12px 16px; font-family:Arial,sans-serif; font-weight:bold;
+    color:var(--verde); list-style:none; background:#f6ecd0; user-select:none;}
+  details.pscpp summary::-webkit-details-marker{display:none;}
+  details.pscpp summary:before{content:"⚓ "; }
+  details.pscpp[open] summary{border-bottom:1px solid var(--dourado);}
+  details.pscpp .corpo{padding:14px 18px;}
+
+  .viz{background:#fff; border:1px solid var(--borda); border-radius:12px; padding:18px; margin:20px 0;}
+  .cap{font-size:14px; color:#3a3a3a; border-left:3px solid var(--dourado); padding-left:12px; margin-top:12px; line-height:1.55;}
+
+  .btn-painel{display:inline-block; margin-top:26px; background:var(--dourado); color:#0D3D36;
+    font-family:Arial,sans-serif; font-weight:bold; font-size:15px; border:none; padding:13px 22px;
+    border-radius:9px; cursor:pointer; box-shadow:0 2px 0 #a98a2e;}
+  .btn-painel:active{transform:translateY(1px); box-shadow:0 1px 0 #a98a2e;}
+  footer{margin-top:40px; font-size:12px; color:#7a7367; text-align:center; border-top:1px solid var(--borda); padding-top:16px;}
+  sub,sup{font-size:.75em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="capa">
+    <div class="bloco">P1a · Bloco B — Propulsão e Propulsores</div>
+    <h1>Cavitação<br>Classificação e Tipos</h1>
+    <div class="sub">Como a cavitação é classificada — por natureza física, localização e dinâmica</div>
+    <div class="fonte">Fontes: Bertram, <i>Practical Ship Hydrodynamics</i>, 2ª ed., Cap. 2 (§2.4) · PNA (SNAME) Vol. II Cap. VI Sec. 7 — <i>Cavitation</i> · Knapp et al. (1970)</div>
+  </header>
+
+  <!-- ===================== O QUE É ===================== -->
+  <h2 class="sec">1. O que é cavitação (em uma frase)</h2>
+  <p>Altas velocidades geram baixas pressões. <span class="hl-am">Quando a pressão local cai abaixo da pressão de vapor, formam-se cavidades cheias de vapor e ar que saem de solução</span>; ao reentrarem em região de pressão maior, essas cavidades colapsam — crescem e implodem extremamente rápido. <i>(Bertram §2.4)</i></p>
+
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:8px;"><b>Número de cavitação σ</b> — parâmetro adimensional que estima a probabilidade de cavitação:</p>
+    <div class="formula">&#963; = (p&#8320; &minus; p) / (&frac12; &middot; &#961; &middot; V&#8320;&sup2;)</div>
+    <div class="var">• p₀ = pressão de referência ambiente [Pa]</div>
+    <div class="var">• p = pressão local [Pa] · ρ = massa específica [kg/m³] · V₀ = velocidade de referência [m/s]</div>
+    <p style="margin-top:8px;">A cavitação começa quando a pressão local cai até a pressão de vapor p<sub>V</sub>. O critério escreve-se então como <span class="hl-amb">σ = (p₀ − p<sub>V</sub>)/q</span>, com q = ½ρV₀² a pressão dinâmica. <i>(PNA Sec. 7.1)</i></p>
+    <p style="font-size:13px;"><span class="tag t-conf" style="font-size:10px;">CONFLITO</span> Em <b>água ideal</b> a cavitação ocorre exatamente em p<sub>V</sub> (a 15 °C ≈ 1700 Pa). Em <b>água do mar real</b> ocorre <u>mais cedo</u>, pois núcleos (partículas, gás dissolvido) facilitam a inceção — pode iniciar a pressões tão altas quanto ~17 kN/m². Por isso adota-se margem de segurança. <i>(PNA Sec. 7.1)</i></p>
+  </div>
+
+  <!-- ===================== NÚMEROS ADIMENSIONAIS ===================== -->
+  <h2 class="sec">2. De onde vem σ — os quatro números adimensionais</h2>
+  <p>O número de cavitação não surge do nada: ele é um dos <b>quatro parâmetros adimensionais</b> que aparecem quando se faz a análise dimensional do escoamento (equações de Navier-Stokes + condições de contorno). Cada um mede uma razão de forças e governa um fenômeno. <i>(Larsson &amp; Raven, Cap. 3, eqs. 3.11–3.15)</i></p>
+
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <table>
+      <tr><th>Número</th><th>Fórmula</th><th>Razão de forças</th><th>Governa</th></tr>
+      <tr><td><b>Reynolds</b> R<sub>n</sub></td><td>U·L/ν</td><td>inércia / viscosas</td><td>atrito, camada-limite, separação</td></tr>
+      <tr><td><b>Froude</b> F<sub>n</sub></td><td>U/√(g·L)</td><td>inércia / gravidade</td><td>geração de ondas (resist. de ondas)</td></tr>
+      <tr><td><b>Euler</b> E<sub>n</sub></td><td>p<sub>a</sub>/(ρ·U²)</td><td>pressão / inércia</td><td><span class="hl-am">nível de pressão → cavitação</span></td></tr>
+      <tr><td><b>Weber</b> W<sub>n</sub></td><td>ρ·U²·L/γ</td><td>inércia / tensão superficial</td><td><span class="hl-amb">formação de bolhas</span>, spray, capilares</td></tr>
+    </table>
+    <div class="var">• U = velocidade · L = comprimento de referência · ν = viscosidade cinemática</div>
+    <div class="var">• g = gravidade · p<sub>a</sub> = pressão atmosférica · ρ = massa específica · γ = tensão superficial</div>
+    <p style="margin-top:8px;"><span class="hl-am">Onde aparecem:</span> Reynolds está dentro das próprias equações de Navier-Stokes (termo viscoso) — por isso afeta <b>todos</b> os escoamentos. Froude, Euler e Weber aparecem na <b>condição de superfície livre</b>. <i>(L&amp;R §3.3.1)</i></p>
+  </div>
+
+  <h3>2.1 Euler → o número de cavitação σ</h3>
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;">O <b>Euler</b> mede o nível de pressão absoluta: p<sub>a</sub> fixa o patamar de pressão em todo o fluido. Se a pressão local cai abaixo da pressão de vapor p<sub>V</sub>, <b>cavita</b>. A "margem" para cavitação é (p<sub>a</sub> − p<sub>V</sub>), e dela nasce o número de cavitação:</p>
+    <div class="formula">&#963; = (p&#7488; &minus; p&#7515;) / (&frac12; &middot; &#961; &middot; U&sup2;)</div>
+    <p style="margin-top:8px;"><span class="hl-am">σ é essencialmente o Euler reescrito.</span> Larsson &amp; Raven é explícito: como Euler e o número de cavitação diferem apenas por uma constante, <b>são intercambiáveis</b> como parâmetros de semelhança. Por isso "σ" é, na prática, o "Euler da cavitação". <i>(L&amp;R eq. 3.15)</i></p>
+  </div>
+
+  <h3>2.2 Weber → a formação das bolhas</h3>
+  <div class="caixa">
+    <p>O <b>Weber</b> mede a razão entre inércia e <b>tensão superficial</b> (γ). É ele que governa a <b>formação das bolhas</b> de cavitação — daí o Bertram exigir semelhança de Weber como a 5ª lei dos ensaios de cavitação (a "usualmente violada", ver Seção 8). Em resistência de casco, Weber controla a aparência de spray, "água branca" e ondas capilares.</p>
+    <p style="font-size:13px;"><span class="tag t-banca" style="font-size:10px;">BANCA</span> Resumo das duas associações que a banca pode cobrar: <b>Euler ↔ cavitação</b> (pressão); <b>Weber ↔ bolhas</b> (tensão superficial). Não trocar uma pela outra.</p>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;"><b>O dilema dos ensaios — por que não dá para satisfazer todos.</b> É impossível igualar os quatro ao mesmo tempo, pois exigem velocidades de modelo opostas:</p>
+    <table>
+      <tr><th>Número</th><th>Para igualar, o modelo precisa...</th></tr>
+      <tr><td>Froude</td><td>ser <b>mais lento</b> (V escala com √L)</td></tr>
+      <tr><td>Reynolds e Weber</td><td>ser <b>mais rápido</b></td></tr>
+    </table>
+    <p style="font-size:13px;"><b>Resistência de casco:</b> mantém-se <b>Froude</b> (ondas), corrige-se Reynolds por fórmula de atrito, e aceita-se Weber errado (menor efeito na resistência).<br>
+    <b>Ensaios de cavitação (propulsor):</b> a lógica inverte — Froude pode variar (ondas não importam no propulsor), mantém-se Reynolds alto, e iguala-se o <b>número de cavitação σ</b> (= Euler) ajustando a pressão do túnel; Weber fica de fora. <i>(L&amp;R §3.3.2; Bertram §2.5.3)</i></p>
+  </div>
+
+  <details class="pscpp">
+    <summary>Quatro independentes — e o "quinto" que não é independente</summary>
+    <div class="corpo">
+      <p>São <b>quatro</b> os parâmetros independentes da análise dimensional: Reynolds, Froude, Euler e Weber. O número de cavitação <b>σ</b> às vezes é citado como um "quinto", mas <span class="hl-am">não é independente</span> — é o Euler reescrito (diferem por uma constante). Logo: quatro independentes, com σ como a forma prática do Euler para problemas de cavitação. <i>(L&amp;R §3.2–3.3)</i></p>
+    </div>
+  </details>
+
+  <!-- ===================== VR E REYNOLDS ===================== -->
+  <h2 class="sec">3. Velocidade local V<sub>R</sub> e número de Reynolds do propulsor</h2>
+  <p>Para avaliar cavitação (e atrito) numa pá, não basta a velocidade de avanço V<sub>A</sub>: a pá <b>gira</b>, então a água a atinge com uma velocidade <b>resultante</b> bem maior. Essa velocidade local é a <b>V<sub>R</sub></b>, e ela é a base tanto do número de cavitação local σ<sub>0,7R</sub> quanto do número de Reynolds do propulsor.</p>
+
+  <h3>3.1 Velocidade resultante local V<sub>R</sub></h3>
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:8px;">A pá a um raio r sente a <b>soma vetorial</b> de duas velocidades perpendiculares: o avanço axial V<sub>A</sub> e a velocidade circunferencial ω·r. Avaliada na seção de referência a <b>0,7R</b>:</p>
+    <div class="formula">V&#8341; = &radic;(V&#7488;&sup2; + (0,7 &middot; &#960; &middot; n &middot; D)&sup2;)</div>
+    <div class="var">• V<sub>R</sub> = velocidade resultante local a 0,7R [m/s]</div>
+    <div class="var">• V<sub>A</sub> = velocidade de avanço / afluxo ao propulsor [m/s]</div>
+    <div class="var">• n = rotação [rps] · D = diâmetro [m] · (0,7·π·n·D = velocidade circunferencial a 0,7R)</div>
+    <p style="margin-top:8px;"><span class="hl-am">Por que 0,7R?</span> É a posição radial de referência padrão da pá — representa bem a seção "média" para passo, cavitação e Reynolds. Aí a velocidade circunferencial 0,7·π·n·D domina sobre V<sub>A</sub> na maioria dos casos. <i>(Bertram §2.5.2; PNA Sec. 7.7)</i></p>
+  </div>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;">V<sub>R</sub> é o elo entre os dois adimensionais da pá. <b>Não confundir</b> as velocidades:</p>
+    <table>
+      <tr><th>Velocidade</th><th>O que é</th><th>Usada em</th></tr>
+      <tr><td>V<sub>A</sub></td><td>avanço axial (afluxo)</td><td>número de avanço J = V<sub>A</sub>/(nD)</td></tr>
+      <tr><td>0,7·π·n·D</td><td>circunferencial a 0,7R</td><td>componente de rotação de V<sub>R</sub></td></tr>
+      <tr><td><b>V<sub>R</sub></b></td><td>resultante local na pá</td><td>σ<sub>0,7R</sub> e Reynolds do propulsor</td></tr>
+    </table>
+    <p style="font-size:13px;">O número de cavitação local usa V<sub>R</sub> (e não V<sub>A</sub>): σ<sub>0,7R</sub> = (p₀ − p<sub>V</sub> + ρgh) / (½ρV<sub>R</sub>²). A pressão dinâmica é q<sub>0,7R</sub> = ½ρV<sub>R</sub>² — a mesma do coeficiente de Burrill τ<sub>c</sub>.</p>
+  </div>
+
+  <h3>3.2 Número de Reynolds do propulsor</h3>
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:8px;">O Reynolds do propulsor é baseado na <b>velocidade local V<sub>R</sub></b> e no <b>comprimento de corda c a 0,7R</b> — não na velocidade do navio nem no comprimento do casco:</p>
+    <div class="formula">R&#8345; = V&#8341; &middot; c / &#957;&nbsp;&nbsp;&nbsp;(ambos a 0,7R)</div>
+    <div class="var">• R<sub>n</sub> = número de Reynolds do propulsor [adimensional]</div>
+    <div class="var">• V<sub>R</sub> = velocidade resultante local a 0,7R [m/s]</div>
+    <div class="var">• c = comprimento de corda da pá a 0,7R [m]</div>
+    <div class="var">• ν = viscosidade cinemática da água [m²/s] (≈ 1,35×10⁻⁶ a 10 °C)</div>
+    <p style="margin-top:8px;"><span class="hl-amb">A escolha do par (V<sub>R</sub>, c) a 0,7R é o que define "o" Reynolds do propulsor.</span> Ele governa o coeficiente de arrasto de perfil C<sub>D</sub> das seções de pá. <i>(Bertram §2.5.2)</i></p>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;"><b>Por que isso importa nos ensaios (e na cavitação):</b> os ensaios de modelo seguem semelhança <b>geométrica e de Froude</b> — <span class="hl-am">é impossível manter Froude e Reynolds ao mesmo tempo</span>. Logo o Reynolds do modelo é menor que o real, e os coeficientes (K<sub>T</sub>, K<sub>Q</sub>) precisam de <b>correção viscosa</b> ao escalar para o navio (ITTC 1978).</p>
+    <p style="font-size:13px;">Correção do arrasto de perfil (ITTC 1978), com R<sub>n</sub> a 0,7R:</p>
+    <div class="formula">C&#7496;&#8344; = 2&middot;(1 + 2t/c)&middot;(0,044/R&#8345;<sup>1/6</sup> &minus; 5/R&#8345;<sup>2/3</sup>)</div>
+    <div class="var">• t = espessura máxima da pá · c = corda · ambos a 0,7R · k<sub>p</sub> = rugosidade (3×10⁻⁵ se desconhecida)</div>
+    <p style="font-size:13px;color:#555;">A correção entra em ΔC<sub>D</sub> = C<sub>Dm</sub> − C<sub>Ds</sub>, que ajusta K<sub>T</sub> e K<sub>Q</sub> do modelo para a escala real.</p>
+  </div>
+
+  <details class="pscpp">
+    <summary>O paralelo com o navio — três "velocidades de referência" distintas</summary>
+    <div class="corpo">
+      <p>Cada número adimensional usa <b>sua</b> velocidade e <b>seu</b> comprimento característico:</p>
+      <table>
+        <tr><th>Número</th><th>Velocidade</th><th>Comprimento</th></tr>
+        <tr><td>Froude (navio) Fn</td><td>V (do navio)</td><td>L (do casco)</td></tr>
+        <tr><td>Avanço (propulsor) J</td><td>V<sub>A</sub></td><td>D (diâmetro)</td></tr>
+        <tr><td>Reynolds (propulsor)</td><td><b>V<sub>R</sub></b> a 0,7R</td><td>c (corda) a 0,7R</td></tr>
+        <tr><td>Cavitação σ<sub>0,7R</sub></td><td><b>V<sub>R</sub></b> a 0,7R</td><td>— (usa pressão)</td></tr>
+      </table>
+      <p style="font-size:13px;">Repare: Reynolds e cavitação do propulsor <b>compartilham a mesma V<sub>R</sub></b> — por isso V<sub>R</sub> é a velocidade-chave da pá. <i>(Bertram §2.5.2; PNA Sec. 7.7)</i></p>
+    </div>
+  </details>
+
+  <!-- ===================== MAPA DA PÁ ===================== -->
+  <h2 class="sec">4. Onde a cavitação ocorre na pá</h2>
+  <p>A localização não é aleatória: cada tipo nasce numa região específica da pá, ditada pela distribuição de pressão e pela geometria. O mapa abaixo situa os tipos principais.</p>
+
+  <div class="viz">
+    <svg width="100%" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa de uma pá de propulsor mostrando onde cada tipo de cavitação ocorre">
+      <!-- contorno da pá (vista de uma pá + cubo) -->
+      <ellipse cx="340" cy="360" rx="44" ry="30" fill="#e7e1d0" stroke="#9c958a" stroke-width="0.8"/>
+      <text x="340" y="364" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial">cubo</text>
+      <!-- pá -->
+      <path d="M340,332 C300,250 296,150 320,70 Q335,40 350,42 Q372,46 380,90 C396,180 388,270 360,338 Z"
+            fill="#E1F5EE" fill-opacity="0.7" stroke="#0F6E56" stroke-width="1.2"/>
+      <!-- bordo de ataque (esquerda) e fuga (direita) -->
+      <text x="276" y="150" font-size="12" fill="#085041" font-family="Arial" text-anchor="end">bordo de ataque</text>
+      <text x="276" y="166" font-size="11" fill="#5a5249" font-family="Arial" text-anchor="end">(leading edge)</text>
+      <line x1="278" y1="146" x2="318" y2="132" stroke="#5a5249" stroke-width="0.5" stroke-dasharray="3 3"/>
+      <text x="408" y="210" font-size="12" fill="#085041" font-family="Arial">bordo de fuga</text>
+      <text x="408" y="226" font-size="11" fill="#5a5249" font-family="Arial">(trailing edge)</text>
+      <line x1="406" y1="206" x2="378" y2="200" stroke="#5a5249" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+      <!-- LENÇOL: bordo de ataque -->
+      <path d="M320,75 C312,110 312,150 318,180" fill="none" stroke="#185FA5" stroke-width="3"/>
+      <circle cx="316" cy="100" r="4" fill="#185FA5"/>
+      <text x="150" y="86" font-size="13" fill="#0C447C" font-family="Arial" font-weight="bold">Lençol (sheet)</text>
+      <text x="150" y="102" font-size="11" fill="#185FA5" font-family="Arial">bordo de ataque · dorso</text>
+      <line x1="234" y1="96" x2="312" y2="100" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+      <!-- BOLHA: espessura máxima / meia-corda -->
+      <circle cx="350" cy="150" r="5" fill="#854F0B"/>
+      <circle cx="358" cy="160" r="3.5" fill="#854F0B"/>
+      <circle cx="346" cy="162" r="3" fill="#854F0B"/>
+      <text x="470" y="110" font-size="13" fill="#633806" font-family="Arial" font-weight="bold">Bolha (bubble)</text>
+      <text x="470" y="126" font-size="11" fill="#854F0B" font-family="Arial">espessura máx. / meia-corda</text>
+      <line x1="466" y1="120" x2="356" y2="152" stroke="#854F0B" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+      <!-- NUVEM: atrás do lençol -->
+      <circle cx="330" cy="205" r="1.6" fill="#534AB7"/><circle cx="338" cy="210" r="1.6" fill="#534AB7"/>
+      <circle cx="326" cy="214" r="1.6" fill="#534AB7"/><circle cx="342" cy="218" r="1.6" fill="#534AB7"/>
+      <circle cx="334" cy="222" r="1.6" fill="#534AB7"/><circle cx="348" cy="208" r="1.6" fill="#534AB7"/>
+      <text x="150" y="220" font-size="13" fill="#3C3489" font-family="Arial" font-weight="bold">Nuvem (cloud)</text>
+      <text x="150" y="236" font-size="11" fill="#534AB7" font-family="Arial">atrás do lençol · névoa</text>
+      <line x1="248" y1="222" x2="324" y2="214" stroke="#534AB7" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+      <!-- VÓRTICE DE PONTA -->
+      <path d="M348,52 q40,-6 70,8 q-30,4 -64,2" fill="none" stroke="#A32D2D" stroke-width="2"/>
+      <text x="470" y="52" font-size="13" fill="#791F1F" font-family="Arial" font-weight="bold">Vórtice de ponta</text>
+      <text x="470" y="68" font-size="11" fill="#A32D2D" font-family="Arial">filamento da ponta</text>
+
+      <!-- VÓRTICE DE CUBO -->
+      <path d="M340,390 q0,18 -2,26" fill="none" stroke="#993C1D" stroke-width="2"/>
+      <path d="M340,390 q4,18 8,26" fill="none" stroke="#993C1D" stroke-width="2"/>
+      <text x="150" y="378" font-size="13" fill="#712b13" font-family="Arial" font-weight="bold">Vórtice de cubo</text>
+      <text x="150" y="394" font-size="11" fill="#993C1D" font-family="Arial">corda dos vórtices de raiz</text>
+      <line x1="262" y1="386" x2="334" y2="392" stroke="#993C1D" stroke-width="0.5" stroke-dasharray="3 3"/>
+    </svg>
+    <div class="cap">A cavitação é mais provável em direção às <b>pontas</b> (maior velocidade local), mas também ocorre nas <b>raízes</b> próximo ao cubo (maior ângulo de incidência ali). A maior queda de pressão de cada perfil fica entre o bordo de ataque e a meia-corda. <i>(Bertram §2.4; PNA Sec. 7.2)</i></div>
+  </div>
+
+  <!-- ===================== CLASSIFICAÇÃO BERTRAM ===================== -->
+  <h2 class="sec">5. Os três eixos de classificação (Bertram)</h2>
+  <p>Bertram organiza a cavitação por <b>três critérios independentes</b> — a mesma cavidade pode ser descrita pelos três ao mesmo tempo (ex.: "cavitação de ponta, em vórtice, instacionária").</p>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <table>
+      <tr><th>Eixo</th><th>Categorias</th></tr>
+      <tr><td><b>Localização</b><br>(onde, na pá)</td><td>de ponta · de raiz · de bordo de ataque · de bordo de fuga · de lado de sucção (dorso) · de face</td></tr>
+      <tr><td><b>Forma</b><br>(natureza física / aparência)</td><td>em lâmina/lençol (sheet) · em nuvem (cloud) · em bolha (bubble) · de vórtice (vortex)</td></tr>
+      <tr><td><b>Dinâmica</b><br>(comportamento no tempo)</td><td>estacionária · instacionária · migratória</td></tr>
+    </table>
+    <p style="font-size:13px;">Mnemônico: <b>"Lugar · Forma · Tempo"</b> — onde está, que cara tem, como se comporta.</p>
+  </div>
+
+  <!-- ===================== TIPOS POR FORMA (PNA) ===================== -->
+  <h2 class="sec">6. Tipos por forma física (PNA / Bertram)</h2>
+  <p>O PNA lista cinco tipos pela natureza física, com a região e o comportamento de cada um. Esta é a classificação mais cobrada visualmente.</p>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <table>
+      <tr><th>Tipo</th><th>Onde nasce</th><th>Aparência / comportamento</th></tr>
+      <tr><td><b>Lençol</b> (sheet)</td><td>bordo de ataque, no <b>dorso</b> (α positivo) ou na <b>face</b> (α negativo)</td><td>cavidade contínua que se espalha do bordo de ataque; <span class="hl-am">estável em escoamento uniforme, instável na esteira</span></td></tr>
+      <tr><td><b>Bolha</b> (bubble)</td><td>posição de <b>espessura máxima</b> da seção (entrada sem choque)</td><td>grandes bolhas individuais crescendo e contraindo rápido; escoamento não separado</td></tr>
+      <tr><td><b>Nuvem</b> (cloud)</td><td><b>atrás</b> de cavidades em lençol desenvolvidas; escoamento moderadamente separado</td><td>névoa de muitas bolhas pequenas; <span class="hl-amb">associada a erosão intensa</span></td></tr>
+      <tr><td><b>Vórtice de ponta</b> (tip)</td><td><b>ponta</b> da pá (escoamento da face para o dorso ao redor da ponta)</td><td>filamento; evolui de "não ligado" (precursor) a "ligado"; ruído e erosão</td></tr>
+      <tr><td><b>Vórtice de cubo</b> (hub)</td><td><b>cubo</b> — combinação dos vórtices de raiz das pás</td><td>grossa corda de cavidade com filamentos; tipo estável</td></tr>
+    </table>
+  </div>
+
+  <h3>Detalhe — por que o lençol troca de lado</h3>
+  <p>A cavitação em lençol nasce no bordo de ataque, no <b>dorso (lado de sucção)</b> quando a seção opera com <b>ângulo de ataque positivo</b>, e na <b>face (lado de pressão)</b> quando opera com <b>ângulo negativo</b>. Esses ângulos "sem choque" causam pressões muito baixas justamente na região do bordo de ataque. <i>(PNA Sec. 7.2)</i></p>
+
+  <!-- ===================== CLASSIFICAÇÃO KNAPP ===================== -->
+  <h2 class="sec">7. Classificação geral de Knapp (a hidrodinâmica)</h2>
+  <p>Antes da classificação específica de propulsores, o PNA traz a categorização <b>geral</b> de Knapp et al. (1970), válida para qualquer escoamento — útil para entender a <b>física</b> por trás de cada tipo.</p>
+
+  <div class="caixa">
+    <table>
+      <tr><th>Categoria (Knapp)</th><th>Onde / como ocorre</th></tr>
+      <tr><td><b>Viajante</b> (travelling)</td><td>no <b>escoamento livre</b>; bolhas individuais que se movem com o fluido</td></tr>
+      <tr><td><b>Fixa</b> (fixed)</td><td>presa ao <b>contorno do corpo</b> submerso; inerente ao corpo, não ao escoamento</td></tr>
+      <tr><td><b>Vórtice</b> (vortex)</td><td>em escoamento de <b>alto cisalhamento</b>; a baixa pressão no núcleo do vórtice cavita</td></tr>
+      <tr><td><b>Vibratória</b> (vibratory)</td><td>por <b>pulsações de pressão</b> (objeto vibrando perpendicular à face gera ondas de pressão)</td></tr>
+    </table>
+    <p style="font-size:13px;"><span class="tag t-conf" style="font-size:10px;">CONFLITO</span> <b>Ponte entre as duas classificações:</b> nos propulsores marinhos, as formas são <span class="hl-am">principalmente do tipo fixo e de vórtice</span> (de Knapp). O lençol, a bolha e a nuvem são subdivisões do tipo <b>fixo</b>; os vórtices de ponta e de cubo são o tipo <b>vórtice</b>. <i>(PNA Sec. 7.2)</i></p>
+  </div>
+
+  <!-- ===================== ENSAIOS DE CAVITAÇÃO ===================== -->
+  <h2 class="sec">8. Ensaios de cavitação (Bertram §2.5.3)</h2>
+  <p>Os ensaios de cavitação investigam as propriedades de cavitação dos propulsores. São feitos em <b>túnel de cavitação</b> — um canal fechado no plano vertical que recircula a água; a seção de ensaio (com janelas de vidro) fica no topo, e bombas de vácuo reduzem a pressão para atingir o σ desejado. <i>(Bertram §2.5.1–2.5.3)</i></p>
+
+  <h3>7.1 As quatro leis de semelhança</h3>
+  <p>Para o ensaio reproduzir a cavitação real, várias semelhanças devem valer simultaneamente — mas, como sempre, nem todas podem ser satisfeitas ao mesmo tempo.</p>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <table>
+      <tr><th>Semelhança</th><th>O que exige</th><th>Na prática</th></tr>
+      <tr><td><b>Geométrica</b></td><td>propulsor tão grande quanto possível, sem efeitos de parede do túnel</td><td>respeitada</td></tr>
+      <tr><td><b>Cinemática</b></td><td>mesmo número de avanço: J<sub>m</sub> = J<sub>s</sub></td><td>respeitada</td></tr>
+      <tr><td><b>Dinâmica</b></td><td>mesmos Froude <u>e</u> Reynolds</td><td><span class="hl-amb">Reynolds difícil</span>; usa-se água rápida p/ Re alto. Froude é desprezível (sem ondas) → pode variar</td></tr>
+      <tr><td><b>Cavitação</b></td><td>mesmo número de cavitação: σ<sub>m</sub> = σ<sub>s</sub></td><td>ajusta-se a <b>pressão do túnel</b> para igualar σ no eixo</td></tr>
+    </table>
+    <p style="font-size:13px;">Há ainda uma 5ª: a <b>semelhança de Weber</b> (tensão superficial), exigida para a formação de bolhas — (ρV<sub>A</sub>²D/T<sub>e</sub>)<sub>m</sub> = (ρV<sub>A</sub>²D/T<sub>e</sub>)<sub>s</sub>. <span class="hl-am">Essa lei é usualmente violada.</span> <i>(Bertram §2.5.3, eq. 2.24)</i></p>
+  </div>
+
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:8px;"><b>Como o ensaio é conduzido:</b> fixa-se a velocidade de afluxo e o número de cavitação σ, e <b>varia-se a rotação</b> até observar cavitação na face e no dorso. Isso gera as curvas-limite:</p>
+    <div class="formula">&#963; = &#963;(J)&nbsp;&nbsp;&mdash;&nbsp;&nbsp;limites para operação livre de cavitação</div>
+    <p style="margin-top:8px;">Frequentemente vai-se <b>além</b> da primeira inceção, observando extensão e tipo da cavitação — porque os projetistas muitas vezes <span class="hl-am">aceitam alguma cavitação</span>, e o limite aceitável é objeto de debate entre armador, projetista e consultor. <i>(Bertram §2.5.3; PNA Sec. 7.4)</i></p>
+  </div>
+
+  <h3>7.2 O problema da pressão atmosférica (por que o túnel existe)</h3>
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;">Por que não basta um tanque de reboque comum? <span class="hl-am">A pressão atmosférica p<sub>A</sub> NÃO escala.</span> Num modelo, h (imersão) e r (raio) reduzem-se em escala, mas p<sub>A</sub> permanece a mesma. A pressão total no modelo fica então <b>muito maior</b> que a correta em escala → a cavitação não aparece quando deveria. <i>(PNA Sec. 7.4)</i></p>
+    <p>Por isso é preciso uma instalação onde a <b>pressão total possa ser variada</b> — o túnel de cavitação, cuja primeira versão Parsons construiu em 1897 para resolver os problemas da Turbinia. Reduz-se a pressão (bomba de vácuo / remoção de ar) e às vezes aquece-se a água (eleva p<sub>V</sub>) para atingir σ baixo.</p>
+  </div>
+
+  <h3>7.3 Limitações do túnel — por que o ensaio não é a realidade</h3>
+  <div class="caixa">
+    <p>As condições no túnel <b>diferem</b> das condições atrás do navio em vários pontos:</p>
+    <p style="margin-left:8px;">• escoamento de entrada <b>uniforme</b>, em vez da esteira irregular real;<br>
+    • escoamento paralelo ao eixo (raro em navios de duplo hélice);<br>
+    • <b>conteúdo de ar/núcleos diferente</b> — na escala de modelo faltam núcleos, então a inceção tende a ocorrer mais tarde (efeito de escala);<br>
+    • dimensões limitadas do túnel.</p>
+    <p style="font-size:13px;"><span class="tag t-banca" style="font-size:10px;">BANCA</span> Compensação clássica: para corrigir essas diferenças, é prática corrente ensaiar a um σ <span class="hl-amb">15% a 25% menor</span> que o calculado para o navio. <i>(PNA Sec. 7.4)</i></p>
+  </div>
+
+  <details class="pscpp">
+    <summary>Reproduzindo a esteira e o caimento do eixo no túnel</summary>
+    <div class="corpo">
+      <p>Para aproximar a esteira real, instala-se à frente do propulsor uma <b>porção de modelo do casco</b> (corpo de proa encurtado padronizado, já que a esteira é determinada pela popa) ou <b>grades/telas de arame</b> a montante que geram turbulência semelhante à da esteira. Alguns túneis simulam o <b>caimento do eixo</b> (até ~15°). Para medições acústicas (ruído de submarinos), usam-se túneis hidroacústicos dedicados, como o <b>HYKAT da HSVA</b>, pois os túneis comuns têm ruído de fundo excessivo. <i>(Bertram §2.5.1; PNA Sec. 7.4)</i></p>
+    </div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Estroboscópio — por que a pá parece "parada"</summary>
+    <div class="corpo">
+      <p>O propulsor é iluminado por <b>luz estroboscópica</b> sincronizada com a rotação, de modo que cada pá seja sempre vista na mesma posição. O olho percebe então o propulsor e os padrões de cavitação como <b>estacionários</b>, permitindo observação e fotografia. Já em 1897 Parsons iluminava o propulsor uma vez por revolução com um espelho girando no eixo (exposição de 1/20.000 s). <i>(Bertram §2.5.1; PNA Sec. 7.4)</i></p>
+    </div>
+  </details>
+
+  <!-- ===================== CAIXAS PSCPP ===================== -->
+  <h2 class="sec">9. Pontos PSCPP</h2>
+
+  <details class="pscpp" open>
+    <summary>As duas formas de organizar — não confundir os critérios</summary>
+    <div class="corpo">
+      <p>Há <b>dois esquemas</b> de classificação que a banca pode misturar:</p>
+      <p style="margin-left:8px;">• <b>Knapp (geral):</b> viajante · fixa · vórtice · vibratória — critério <i>físico/hidrodinâmico</i>, qualquer escoamento.<br>
+      • <b>Propulsor (PNA/Bertram):</b> lençol · bolha · nuvem · vórtice de ponta · vórtice de cubo — critério de <i>aparência</i> na pá.</p>
+      <p style="font-size:13px;">A ligação: nos propulsores predomina <b>fixa + vórtice</b> de Knapp. Lençol/bolha/nuvem = fixa; ponta/cubo = vórtice.</p>
+    </div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Posição 12h × 6h — a cavitação pulsa a cada rotação</summary>
+    <div class="corpo">
+      <p>Pela <b>pressão hidrostática</b>, a pressão total é maior na pá em posição de <b>6 horas</b> (mais funda) que em <b>12 horas</b> (mais rasa). Logo, num propulsor cavitante, as bolhas <span class="hl-am">formam-se próximo de 12h e colapsam ao descer</span> — uma sucessão de explosões e implosões a cada revolução. Isso gera vibração, ruído e erosão, e amplifica as pressões induzidas no casco. <i>(Bertram §2.4)</i></p>
+    </div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Dinâmica: estável em águas livres, instável na esteira</summary>
+    <div class="corpo">
+      <p>O mesmo tipo (ex.: lençol) muda de <b>caráter dinâmico</b> conforme o campo de esteira. Em <b>escoamento uniforme</b> a cavidade é estável; operando na <b>esteira não uniforme</b> do casco, o ângulo de ataque varia ao longo da revolução → a cavidade pulsa de tamanho → fica instável. É a variação de volume das cavidades que dispara as maiores pressões vibratórias no casco (fator 1 a 10 ou mais). <i>(PNA Sec. 7.2 e 7.6)</i></p>
+    </div>
+  </details>
+
+  <!-- ===================== SÍNTESE ===================== -->
+  <h2 class="sec">10. Quadro-síntese</h2>
+  <table>
+    <tr><th>Tipo (forma)</th><th>Knapp</th><th>Região</th><th>Marca registrada</th></tr>
+    <tr><td>Lençol (sheet)</td><td>fixa</td><td>bordo de ataque</td><td>cavidade contínua; estável/instável</td></tr>
+    <tr><td>Bolha (bubble)</td><td>fixa</td><td>espessura máx.</td><td>bolhas grandes individuais</td></tr>
+    <tr><td>Nuvem (cloud)</td><td>fixa</td><td>atrás do lençol</td><td>névoa; erosão intensa</td></tr>
+    <tr><td>Vórtice de ponta</td><td>vórtice</td><td>ponta da pá</td><td>filamento; ruído (sonar)</td></tr>
+    <tr><td>Vórtice de cubo</td><td>vórtice</td><td>cubo</td><td>corda estável de cavidade</td></tr>
+  </table>
+
+  <div style="text-align:center;">
+    <button class="btn-painel" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+  </div>
+
+  <footer>
+    Capital Sereno × PSCPP 2027 · Projeto P1a — Bloco B · Cavitação (Classificação)<br>
+    Bertram Cap. 2 §2.4 · PNA (SNAME) Vol. II Cap. VI Sec. 7 · Knapp et al. (1970)
+  </footer>
+</div>
+
+<script>
+  function enviarPainel(){
+    const payload = {
+      caderno_id: 'cavitacao_classificacao',
+      tipo: 'caderno',
+      bloco: 'B',
+      tema: 'Cavitação',
+      assunto: 'Classificação e tipos de cavitação',
+      enunciado: 'Eixos de classificação (Knapp e propulsor) e tipos por forma física',
+      acertou: null,
+      sessao_data: new Date().toISOString()
+    };
+    console.log('Payload Supabase →', payload);
+    alert('Registro preparado para o Painel PSCPP.\\nTabela: respostas\\nbloco: B · tema: Cavitação\\n\\n(Integração Supabase a conectar no deploy.)');
+  }
+</script>
+</body>
+</html>

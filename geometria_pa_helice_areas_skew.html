@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometria da Pá do Hélice — Áreas, Skew e Curvatura | PSCPP 2027</title>
+<style>
+  :root{
+    --verde:#0D3D36; --dourado:#C8A84B; --teal:#1A7A6E; --creme:#F7F3EA;
+    --amarelo:#FCE98A; --ambar:#F2C879; --texto:#1d2624; --borda:#d8d0bc;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:Georgia,'Times New Roman',serif; background:var(--creme);
+    color:var(--texto); margin:0; padding:0; line-height:1.65;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:32px 20px 80px;}
+  header.capa{
+    background:var(--verde); color:var(--creme); border-radius:14px;
+    padding:30px 32px; margin-bottom:28px; border-bottom:5px solid var(--dourado);
+  }
+  header.capa .bloco{font-size:13px; letter-spacing:2px; color:var(--dourado); text-transform:uppercase;}
+  header.capa h1{margin:8px 0 6px; font-size:27px; line-height:1.25;}
+  header.capa .sub{font-size:15px; opacity:.9;}
+  header.capa .fonte{margin-top:14px; font-size:13px; font-style:italic; opacity:.85; border-top:1px solid rgba(200,168,75,.4); padding-top:10px;}
+  h2.sec{
+    color:var(--verde); font-size:21px; margin:36px 0 14px;
+    border-left:5px solid var(--dourado); padding-left:12px;
+  }
+  h3{color:var(--teal); font-size:17px; margin:24px 0 8px;}
+  p{margin:10px 0;}
+  .hl-am{background:var(--amarelo); padding:1px 4px; border-radius:3px;}
+  .hl-amb{background:var(--ambar); padding:1px 4px; border-radius:3px;}
+  mark{background:var(--amarelo); padding:1px 4px; border-radius:3px;}
+
+  /* Etiquetas */
+  .tag{display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:bold;
+    letter-spacing:1px; padding:3px 9px; border-radius:5px; color:#fff; margin-right:6px; vertical-align:middle;}
+  .t-calc{background:#1A7A6E;} .t-dec{background:#9c7b16;} .t-conf{background:#a8412a;} .t-banca{background:#0D3D36;} .t-duv{background:#5a5a5a;}
+
+  .caixa{border:1px solid var(--borda); border-radius:10px; padding:16px 18px; margin:16px 0; background:#fff;}
+  .caixa.calc{border-left:5px solid var(--teal); background:#f0f7f5;}
+  .caixa.conf{border-left:5px solid #a8412a; background:#fbf0ed;}
+  .caixa.dec{border-left:5px solid var(--dourado); background:#fcf7e8;}
+
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:15px; background:#fff;}
+  th,td{border:1px solid var(--borda); padding:8px 10px; text-align:left;}
+  th{background:var(--verde); color:var(--creme); font-family:Arial,sans-serif; font-size:13px;}
+  tr:nth-child(even) td{background:#faf6ec;}
+
+  .formula{font-family:'Courier New',monospace; background:#0D3D36; color:#F7F3EA;
+    padding:10px 14px; border-radius:7px; margin:10px 0; font-size:15px; overflow-x:auto;}
+  .var{font-size:14px; color:#444; margin:4px 0 4px 8px;}
+
+  /* Caixa PSCPP colapsável */
+  details.pscpp{border:1px solid var(--dourado); border-radius:10px; margin:18px 0; background:#fcf7e8; overflow:hidden;}
+  details.pscpp summary{cursor:pointer; padding:12px 16px; font-family:Arial,sans-serif; font-weight:bold;
+    color:var(--verde); list-style:none; background:#f6ecd0; user-select:none;}
+  details.pscpp summary::-webkit-details-marker{display:none;}
+  details.pscpp summary:before{content:"⚓ "; }
+  details.pscpp[open] summary{border-bottom:1px solid var(--dourado);}
+  details.pscpp .corpo{padding:14px 18px;}
+
+  /* SVG interativo */
+  .viz{background:#fff; border:1px solid var(--borda); border-radius:12px; padding:18px; margin:20px 0;}
+  .seg{display:flex; gap:0; margin-bottom:14px; flex-wrap:wrap;}
+  .seg button{flex:1; min-width:90px; padding:8px 6px; font-family:Arial,sans-serif; font-size:13px;
+    background:#fff; border:1px solid var(--borda); cursor:pointer; color:#555;}
+  .seg button.on{background:var(--teal); color:#fff; border-color:var(--teal);}
+  .layer{transition:opacity .35s;} .layer.dim{opacity:.1;}
+  .cap{font-size:14px; color:#3a3a3a; border-left:3px solid var(--dourado); padding-left:12px; margin-top:12px; line-height:1.55;}
+
+  .btn-painel{display:inline-block; margin-top:26px; background:var(--dourado); color:#0D3D36;
+    font-family:Arial,sans-serif; font-weight:bold; font-size:15px; border:none; padding:13px 22px;
+    border-radius:9px; cursor:pointer; box-shadow:0 2px 0 #a98a2e;}
+  .btn-painel:active{transform:translateY(1px); box-shadow:0 1px 0 #a98a2e;}
+  footer{margin-top:40px; font-size:12px; color:#7a7367; text-align:center; border-top:1px solid var(--borda); padding-top:16px;}
+  sub,sup{font-size:.75em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="capa">
+    <div class="bloco">P1a · Bloco B — Propulsão e Propulsores</div>
+    <h1>Geometria da Pá do Hélice<br>Área Expandida · Área Projetada · Skew · Curvatura</h1>
+    <div class="sub">Caderno de fixação — distinção das grandezas geométricas e distratores da banca</div>
+    <div class="fonte">Fontes: Bertram, <i>Practical Ship Hydrodynamics</i>, Cap. 2 (§2.1, orig. p. 41–44) · PNA (SNAME), Vol. II, Cap. VI, Seções 1–2 e 6 — <i>Geometry of the Screw Propeller</i></div>
+  </header>
+
+  <!-- ===================== VISUALIZAÇÃO ===================== -->
+  <h2 class="sec">1. Mapa visual das quatro grandezas</h2>
+  <p>Clique nos botões para isolar cada conceito. A pá aparece projetada sobre o disco (verde), o contorno expandido ao lado (roxo), a linha de skew (vermelha) e a seção em aerofólio com a linha de curvatura média (âmbar).</p>
+
+  <div class="viz">
+    <div class="seg">
+      <button class="on" data-k="all" onclick="setView('all',this)">Tudo</button>
+      <button data-k="exp" onclick="setView('exp',this)">Área expandida</button>
+      <button data-k="proj" onclick="setView('proj',this)">Área projetada</button>
+      <button data-k="skew" onclick="setView('skew',this)">Skew</button>
+      <button data-k="camber" onclick="setView('camber',this)">Curvatura</button>
+    </div>
+
+    <svg width="100%" viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Geometria da pá: área expandida, projetada, skew e curvatura média">
+      <!-- DISCO A0 -->
+      <g>
+        <circle cx="200" cy="220" r="150" fill="none" stroke="#7a7367" stroke-width="0.6" stroke-dasharray="4 4" opacity="0.55"/>
+        <circle cx="200" cy="220" r="26" fill="#e7e1d0" stroke="#9c958a" stroke-width="0.8"/>
+        <text x="200" y="224" text-anchor="middle" font-size="11" fill="#5a5249" font-family="Arial">cubo</text>
+        <text x="200" y="56" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial">Disco A₀ = πD²/4</text>
+        <line x1="200" y1="220" x2="350" y2="220" stroke="#7a7367" stroke-width="0.6" opacity="0.5"/>
+        <text x="290" y="234" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial">R</text>
+      </g>
+
+      <!-- ÁREA PROJETADA -->
+      <g id="L-proj" class="layer">
+        <path d="M200,194 C236,150 244,108 224,72 Q210,52 200,52 Q190,52 178,72 C160,108 168,150 200,194 Z"
+              fill="#9FE1CB" fill-opacity="0.6" stroke="#0F6E56" stroke-width="1.2"/>
+        <text x="262" y="110" font-size="15" fill="#0F6E56" font-family="Arial" font-weight="bold">A&#8346;</text>
+        <text x="262" y="126" font-size="12" fill="#0F6E56" font-family="Arial">projetada no disco</text>
+      </g>
+
+      <!-- SKEW -->
+      <g id="L-skew" class="layer">
+        <path d="M200,194 C214,150 220,108 205,68" fill="none" stroke="#993C1D" stroke-width="2.2" stroke-dasharray="6 4"/>
+        <line x1="200" y1="194" x2="200" y2="62" stroke="#7a7367" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.55"/>
+        <circle cx="205" cy="68" r="3.2" fill="#993C1D"/>
+        <line x1="205" y1="68" x2="200" y2="68" stroke="#993C1D" stroke-width="1.2"/>
+        <text x="232" y="178" font-size="12" fill="#993C1D" font-family="Arial">linha do meio</text>
+        <text x="232" y="192" font-size="12" fill="#993C1D" font-family="Arial">das cordas (skew)</text>
+      </g>
+
+      <!-- ÁREA EXPANDIDA -->
+      <g id="L-exp" class="layer">
+        <path d="M470,360 C512,300 524,170 500,80 Q490,52 478,52 Q466,52 456,80 C432,170 444,300 470,360 Z"
+              fill="#CECBF6" fill-opacity="0.6" stroke="#534AB7" stroke-width="1.2"/>
+        <text x="540" y="200" font-size="15" fill="#3C3489" font-family="Arial" font-weight="bold">A&#8337;</text>
+        <text x="540" y="216" font-size="12" fill="#3C3489" font-family="Arial">corda real esticada</text>
+        <text x="478" y="392" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial">raiz</text>
+        <text x="478" y="44" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial">ponta</text>
+        <line x1="456" y1="118" x2="500" y2="118" stroke="#534AB7" stroke-width="0.6" stroke-dasharray="2 2"/>
+        <text x="478" y="111" text-anchor="middle" font-size="12" fill="#3C3489" font-family="Arial">corda c(r)</text>
+      </g>
+
+      <!-- CURVATURA MÉDIA -->
+      <g id="L-camber" class="layer">
+        <path d="M430,430 Q520,408 610,430 Q520,442 430,430 Z" fill="#FAC775" fill-opacity="0.45" stroke="#854F0B" stroke-width="1.2"/>
+        <path d="M430,430 Q520,388 610,430" fill="none" stroke="#854F0B" stroke-width="2"/>
+        <line x1="430" y1="430" x2="610" y2="430" stroke="#7a7367" stroke-width="0.6" stroke-dasharray="3 3" opacity="0.7"/>
+        <text x="520" y="402" text-anchor="middle" font-size="12" fill="#854F0B" font-family="Arial">linha de curvatura média</text>
+        <text x="438" y="448" font-size="12" fill="#5a5249" font-family="Arial">BA</text>
+        <text x="600" y="448" text-anchor="end" font-size="12" fill="#5a5249" font-family="Arial">BF</text>
+        <text x="520" y="462" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial">corda (BA → BF)</text>
+      </g>
+    </svg>
+
+    <div class="cap" id="cap"></div>
+  </div>
+
+  <!-- ===================== GRANDEZAS DE DESEMPENHO ===================== -->
+  <h2 class="sec">2. Grandezas de desempenho do propulsor</h2>
+  <p>Antes da geometria, as quatro grandezas que descrevem <b>como o propulsor trabalha</b>: o que entra (rotação e avanço), o que sai (empuxo e torque) e como adimensionalizá-los. Todas saem do ensaio em águas abertas (<i>open-water</i>) em escoamento uniforme.</p>
+
+  <h3>2.1 Número de avanço — J <span class="tag t-banca">BANCA</span></h3>
+  <p>Mede <b>quanto o propulsor avança por revolução</b>, relativo ao seu próprio tamanho. É o parâmetro de operação por excelência: tudo (K_T, K_Q, η₀) é plotado em função de J.</p>
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <div class="formula">J = V&#7488; / (n &middot; D)</div>
+    <div class="var">• V<sub>A</sub> = velocidade de avanço / afluxo ao propulsor (já corrigida pela esteira) [m/s]</div>
+    <div class="var">• n = rotação do propulsor [rps] &nbsp;(rotações por segundo, <b>não</b> rpm)</div>
+    <div class="var">• D = diâmetro do propulsor [m]</div>
+    <p style="margin-top:8px;"><span class="hl-am">J cumpre para o propulsor o papel que o número de Froude (Fn) cumpre para o navio</span> — é o adimensional de semelhança: J<sub>modelo</sub> = J<sub>navio</sub>. O termo π·n·D é a velocidade circunferencial da ponta da pá. <i>(Bertram §2.5.2)</i></p>
+    <p style="font-size:13px;"><span class="tag t-conf" style="font-size:10px;">CONFLITO</span> Atenção à unidade de <b>n</b>: nas fórmulas de K_T, K_Q e J usa-se <b>rps</b> (rev/s). Se o enunciado der rpm, dividir por 60 antes.</p>
+  </div>
+
+  <h3>2.2 Empuxo T e coeficiente K<sub>T</sub></h3>
+  <p>O <b>empuxo</b> (<i>thrust</i>) T é a força axial que o propulsor gera para impelir o navio — a variação da quantidade de movimento que ele impõe à água. <span class="hl-amb">Não confundir com empuxo hidrostático de Arquimedes.</span></p>
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <div class="formula">K&#8348; = T / (&#961; &middot; n&sup2; &middot; D&#8308;)</div>
+    <div class="var">• T = empuxo do propulsor [N]</div>
+    <div class="var">• ρ = massa específica da água [kg/m³] · n = rotação [rps] · D = diâmetro [m]</div>
+    <p style="margin-top:8px;">T é adimensionalizado pela área do disco vezes a pressão de estagnação baseada na velocidade circunferencial (omitindo-se um fator π²/8). <i>(Bertram eq. 2.2)</i></p>
+  </div>
+
+  <h3>2.3 Torque Q e coeficiente K<sub>Q</sub></h3>
+  <p>O <b>torque</b> (<i>torque</i>) Q é o momento que o eixo precisa fornecer para girar o propulsor contra a resistência da água — o que o motor "paga" para gerar o empuxo.</p>
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <div class="formula">K&#8474; = Q / (&#961; &middot; n&sup2; &middot; D&#8309;)</div>
+    <div class="var">• Q = torque do propulsor [N·m]</div>
+    <div class="var">• ρ = massa específica [kg/m³] · n = rotação [rps] · D = diâmetro [m]</div>
+    <p style="margin-top:8px;"><span class="hl-amb">Diferença-chave: K_T usa D⁴, K_Q usa D⁵.</span> O torque, por ser um momento, ganha um comprimento adicional (o próprio D) no denominador. <i>(Bertram eq. 2.3)</i></p>
+    <p style="font-size:13px;"><span class="tag t-conf" style="font-size:10px;">CONFLITO</span> Distrator clássico: trocar os expoentes (K_T com D⁵ ou K_Q com D⁴). Memorize: <b>Torque → D⁵</b> (T de torque "ganha" um D a mais).</p>
+  </div>
+
+  <h3>2.4 Eficiência em águas abertas — η₀</h3>
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <div class="formula">&#951;&#8320; = (T &middot; V&#7488;) / (2&#960; &middot; n &middot; Q) = (K&#8348; / K&#8474;) &middot; (J / 2&#960;)</div>
+    <div class="var">• η₀ = eficiência em águas abertas [adimensional]</div>
+    <div class="var">• numerador T·V<sub>A</sub> = potência de empuxo útil · denominador 2π·n·Q = potência entregue ao eixo</div>
+    <p style="margin-top:8px;">É a razão entre a <b>potência útil</b> (empuxo × avanço) e a <b>potência absorvida</b> (torque × rotação angular). Liga diretamente as duas grandezas de saída via K_T/K_Q. <i>(Bertram eq. 2.4)</i></p>
+  </div>
+
+  <h3>2.5 O diagrama característico</h3>
+  <p>As três curvas plotadas contra J resumem todo o comportamento do propulsor. <span class="hl-am">K_T e K_Q decrescem monotonicamente com J; η₀ tem um único máximo</span> — o ponto de projeto ótimo. Note que K_Q costuma ser plotado como 10·K_Q para caber na mesma escala.</p>
+
+  <div class="viz">
+    <svg width="100%" viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama característico do propulsor: KT, 10KQ e eta0 versus J">
+      <!-- eixos -->
+      <line x1="70" y1="320" x2="630" y2="320" stroke="#5a5249" stroke-width="1.2"/>
+      <line x1="70" y1="320" x2="70" y2="40" stroke="#5a5249" stroke-width="1.2"/>
+      <text x="350" y="360" text-anchor="middle" font-size="13" fill="#5a5249" font-family="Arial">Número de avanço J →</text>
+      <text x="34" y="180" text-anchor="middle" font-size="13" fill="#5a5249" font-family="Arial" transform="rotate(-90 34 180)">K&#8348; · 10K&#8474; · &#951;&#8320;</text>
+      <!-- grade leve -->
+      <line x1="210" y1="320" x2="210" y2="44" stroke="#d8d0bc" stroke-width="0.5"/>
+      <line x1="350" y1="320" x2="350" y2="44" stroke="#d8d0bc" stroke-width="0.5"/>
+      <line x1="490" y1="320" x2="490" y2="44" stroke="#d8d0bc" stroke-width="0.5"/>
+      <!-- KT: decresce -->
+      <path d="M70,150 C200,170 380,250 560,318" fill="none" stroke="#534AB7" stroke-width="2.4"/>
+      <text x="120" y="138" font-size="13" fill="#3C3489" font-family="Arial" font-weight="bold">K&#8348;</text>
+      <!-- 10KQ: decresce mais alto -->
+      <path d="M70,95 C200,120 380,200 575,300" fill="none" stroke="#0F6E56" stroke-width="2.4"/>
+      <text x="120" y="86" font-size="13" fill="#0F6E56" font-family="Arial" font-weight="bold">10&middot;K&#8474;</text>
+      <!-- eta0: arco com pico -->
+      <path d="M70,320 C200,150 330,90 430,118 C500,138 540,210 575,318" fill="none" stroke="#993C1D" stroke-width="2.4"/>
+      <text x="350" y="92" font-size="13" fill="#993C1D" font-family="Arial" font-weight="bold">&#951;&#8320;</text>
+      <!-- ponto de pico -->
+      <circle cx="405" cy="110" r="4" fill="#993C1D"/>
+      <line x1="405" y1="110" x2="405" y2="320" stroke="#993C1D" stroke-width="0.6" stroke-dasharray="3 3"/>
+      <text x="405" y="338" text-anchor="middle" font-size="12" fill="#993C1D" font-family="Arial">J ótimo (η₀ máx)</text>
+    </svg>
+    <div class="cap" style="border-left-color:#993C1D;">Diagrama típico de águas abertas (Bertram Fig. 2.3). O ponto de operação do navio é onde a demanda de empuxo cruza a curva K_T; o projeto busca operar próximo ao pico de η₀.</div>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <table>
+      <tr><th>Grandeza</th><th>Símbolo</th><th>Fórmula</th><th>Expoente de D</th></tr>
+      <tr><td>Número de avanço</td><td>J</td><td>V<sub>A</sub>/(n·D)</td><td>D¹</td></tr>
+      <tr><td>Coef. de empuxo</td><td>K<sub>T</sub></td><td>T/(ρ·n²·D⁴)</td><td><span class="hl-am">D⁴</span></td></tr>
+      <tr><td>Coef. de torque</td><td>K<sub>Q</sub></td><td>Q/(ρ·n²·D⁵)</td><td><span class="hl-amb">D⁵</span></td></tr>
+      <tr><td>Eficiência (águas abertas)</td><td>η₀</td><td>(K<sub>T</sub>/K<sub>Q</sub>)·(J/2π)</td><td>—</td></tr>
+    </table>
+    <p style="font-size:13px;">Mnemônico: <b>"avanço D¹, empuxo D⁴, torque D⁵"</b> — sobe um expoente a cada passo. n sempre em <b>rps</b>.</p>
+  </div>
+
+  <h3>2.6 Razão envergadura-corda — por que o escoamento é tão complexo <span class="tag t-banca">BANCA</span></h3>
+  <p>Cada seção da pá é, em essência, um <b>fólio</b> (perfil sustentador), igual à seção de uma asa ou de um leme: gera empuxo por <b>sustentação</b> (lift) com mínimo de <b>arrasto</b> (drag). A diferença está na <b>forma</b> da pá, medida pela <b>razão envergadura-corda</b> (span-to-chord ratio) — o análogo da razão de aspecto (aspect ratio) de uma asa.</p>
+
+  <div class="caixa">
+    <p>A pá de um propulsor de navio é <span class="hl-am">curta e atarracada</span> (<i>short and stubby</i>): tem razão envergadura-corda <b>muito menor</b> que a de um fólio aeronáutico. <b>Por quê?</b> Duas restrições físicas a achatam:</p>
+    <p style="margin-left:8px;">• <b>diâmetro limitado</b> — calado e geometria do casco restringem o quanto a pá pode crescer radialmente;<br>
+    • <b>perigo de cavitação</b> — obriga a espalhar o empuxo sobre corda larga (↑ A<sub>E</sub>/A₀), engrossando a pá no sentido do escoamento.</p>
+    <p style="font-size:13px; color:#555;">São as mesmas restrições da Seção 8: diâmetro e área de pá. A forma atarracada é consequência delas.</p>
+  </div>
+
+  <div class="viz">
+    <svg width="100%" viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparação entre asa esbelta (alta razão de aspecto) e pá de propulsor atarracada (baixa razão)">
+      <!-- ASA ESBELTA -->
+      <text x="170" y="36" text-anchor="middle" font-size="13" fill="#3C3489" font-family="Arial" font-weight="bold">Asa aeronáutica — razão alta</text>
+      <rect x="60" y="60" width="220" height="26" rx="6" fill="#CECBF6" fill-opacity="0.6" stroke="#534AB7" stroke-width="1.2"/>
+      <line x1="60" y1="100" x2="280" y2="100" stroke="#534AB7" stroke-width="0.6" stroke-dasharray="3 3"/>
+      <text x="170" y="114" text-anchor="middle" font-size="12" fill="#3C3489" font-family="Arial">envergadura grande →</text>
+      <line x1="290" y1="60" x2="290" y2="86" stroke="#534AB7" stroke-width="0.6"/>
+      <text x="300" y="77" font-size="12" fill="#3C3489" font-family="Arial">corda pequena</text>
+      <text x="170" y="142" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial">escoamento quase 2-D · efeitos de ponta pequenos</text>
+
+      <!-- PÁ ATARRACADA -->
+      <text x="510" y="36" text-anchor="middle" font-size="13" fill="#0F6E56" font-family="Arial" font-weight="bold">Pá de propulsor — razão baixa</text>
+      <rect x="430" y="56" width="150" height="74" rx="8" fill="#9FE1CB" fill-opacity="0.6" stroke="#0F6E56" stroke-width="1.2"/>
+      <line x1="430" y1="144" x2="580" y2="144" stroke="#0F6E56" stroke-width="0.6" stroke-dasharray="3 3"/>
+      <text x="505" y="158" text-anchor="middle" font-size="12" fill="#0F6E56" font-family="Arial">corda larga</text>
+      <line x1="592" y1="56" x2="592" y2="130" stroke="#0F6E56" stroke-width="0.6"/>
+      <text x="600" y="97" font-size="12" fill="#0F6E56" font-family="Arial">env.</text>
+      <!-- vórtices de fuga indicando 3D -->
+      <path d="M580,68 q24,8 40,0" fill="none" stroke="#993C1D" stroke-width="1.4"/>
+      <path d="M580,90 q24,8 40,0" fill="none" stroke="#993C1D" stroke-width="1.4"/>
+      <path d="M580,112 q24,8 40,0" fill="none" stroke="#993C1D" stroke-width="1.4"/>
+      <text x="505" y="186" text-anchor="middle" font-size="12" fill="#a8412a" font-family="Arial">escoamento fortemente 3-D · downwash domina</text>
+
+      <!-- legenda inferior -->
+      <text x="340" y="226" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial">Quanto menor a razão envergadura-corda, mais o escoamento se afasta do caso 2-D simples.</text>
+    </svg>
+    <div class="cap" style="border-left-color:#0F6E56;">A asa esbelta (esquerda) opera quase em 2-D: cada seção é quase independente. A pá atarracada (direita) gera forte vorticidade de fuga e <i>downwash</i> — o escoamento 3-D induzido domina. <i>(Bertram §2.3.1)</i></div>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;"><b>Cadeia causal — por que complica:</b></p>
+    <p style="text-align:center; font-size:14px; margin:8px 0; line-height:2;">
+      ↓ razão envergadura-corda (pá atarracada)<br>
+      → sustentação <b>varia</b> fortemente ao longo da envergadura<br>
+      → vorticidade de fuga (<i>trailing vorticity</i>) liberada de cada segmento<br>
+      → <i>downwash</i> altera o ângulo de afluxo efetivo de cada seção<br>
+      → efeitos <b>3-D induzidos dominam</b> (cada seção depende das vizinhas)<br>
+      → modelagem 2-D <b>falha</b> → escoamento complexo
+    </p>
+  </div>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;"><b>Por que a teoria 2-D não basta:</b> em um fólio de razão <u>alta</u>, cada seção se comporta quase como num escoamento 2-D puro (sustentação local depende só do perfil e do ângulo de ataque). Com razão <u>baixa</u>, esse ideal se quebra. Por isso, nas palavras de Bertram, <span class="hl-am">"todas as abordagens bidimensionais — como as teorias de linha sustentadora — introduzem erros consideráveis que devem ser corrigidos posteriormente"</span>.</p>
+    <table>
+      <tr><th>Método</th><th>Dimensão</th><th>Uso</th></tr>
+      <tr><td>Linha sustentadora (Lerbs 1952/55)</td><td>~2-D + correções</td><td>Projeto <b>preliminar</b></td></tr>
+      <tr><td>Superfície sustentadora (vórtices em ferradura)</td><td>3-D (sem espessura)</td><td>Projeto refinado</td></tr>
+      <tr><td>Métodos de painéis (panel methods)</td><td>3-D (com espessura)</td><td>Projeto final / cavitação</td></tr>
+    </table>
+    <p style="font-size:13px;">Com o advento dos propulsores de <b>alto skew</b>, as correções empíricas 2-D deixaram de funcionar — exigiram-se teorias <b>verdadeiramente 3-D</b>.</p>
+    <p style="font-size:13px;"><span class="tag t-banca" style="font-size:10px;">BANCA</span> Pegadinha: é a razão <b>baixa</b> (pá atarracada) que complica — não confundir com "alta razão de aspecto", que seria o caso <b>simples</b> (asa de avião). E a causa raiz é <b>diâmetro + cavitação</b>, não uma escolha estética de forma.</p>
+  </div>
+
+  <h3>2.7 η₀ não é η<sub>i</sub> — duas eficiências distintas <span class="tag t-banca">BANCA</span></h3>
+  <p>As duas se chamam "eficiência do propulsor" e usam o mesmo símbolo grego, mas <span class="hl-amb">são grandezas diferentes</span>. Confundi-las é erro clássico — e a banca explora exatamente isso.</p>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <table>
+      <tr><th></th><th>η<sub>i</sub> — eficiência ideal</th><th>η₀ — eficiência em águas abertas</th></tr>
+      <tr><td>O que é</td><td>Teto <b>teórico</b> (disco atuador)</td><td>Eficiência <b>real medida</b> (ensaio)</td></tr>
+      <tr><td>Origem</td><td>Teoria do momento</td><td>Ensaio open-water (escoamento uniforme)</td></tr>
+      <tr><td>Fórmula</td><td>2/(1+√(1+C<sub>Th</sub>)) ou 2u<sub>A</sub>/(u<sub>j</sub>+u<sub>A</sub>)</td><td>(K<sub>T</sub>/K<sub>Q</sub>)·(J/2π)</td></tr>
+      <tr><td>Inclui atrito viscoso?</td><td><span class="hl-amb">Não</span></td><td><span class="hl-am">Sim</span></td></tr>
+      <tr><td>Inclui perdas rotativas?</td><td>Não (disco simples)</td><td>Sim</td></tr>
+      <tr><td>Serve para projetar?</td><td>Não — só limite/conceito</td><td>Sim — ponto de operação real</td></tr>
+    </table>
+    <p style="margin-top:8px;text-align:center;font-size:16px;"><b>η₀ &lt; η<sub>i</sub> sempre</b></p>
+    <p>A eficiência real em águas abertas é <b>sempre menor</b> que a ideal, porque a real "paga" o atrito das pás e as perdas rotativas da esteira que o disco atuador idealizado ignora. <i>(Bertram §2.3.2: "a teoria do momento não é um método para projetar propulsores")</i></p>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;"><b>Comparação PNA × Bertram</b> — convergem no conceito, diferem na notação:</p>
+    <table>
+      <tr><th>Fonte</th><th>Ideal</th><th>Águas abertas</th></tr>
+      <tr><td>Bertram (Cap. 2)</td><td>η<sub>i</sub> = 2/(1+√(1+C<sub>Th</sub>))</td><td>η₀ = (K<sub>T</sub>/K<sub>Q</sub>)·(J/2π)</td></tr>
+      <tr><td>PNA (Vol. II Sec. 2 e 4)</td><td>η<sub>I</sub> = 2/[1+(C<sub>T</sub>+1)<sup>½</sup>]</td><td>η₀ = T·V<sub>A</sub>/(2π·n·Q₀)</td></tr>
+    </table>
+    <p style="font-size:13px;">O PNA refina ainda mais: a eficiência ideal do <b>hélice de rosca com rotação</b> já cai abaixo do disco atuador puro pelo fator (1−a′) — ou seja, mesmo no ideal, modelar a rotação da esteira reduz a eficiência. <i>(PNA Vol. II Sec. 2.4, Bienen et al. 1924)</i></p>
+  </div>
+
+  <div class="caixa">
+    <p><b>A cadeia completa de eficiências (PNA Vol. II Sec. 4).</b> η₀ é apenas <u>um</u> dos fatores da eficiência total. Atrás do casco entram mais dois:</p>
+    <div class="formula">&#951;&#7496; = &#951;&#7473; &middot; &#951;&#7523; &middot; &#951;&#8320;</div>
+    <p style="margin-left:8px;font-size:14px;">
+      • <b>η<sub>D</sub></b> = eficiência quase-propulsiva (QPC) = P<sub>E</sub>/P<sub>D</sub><br>
+      • <b>η<sub>H</sub></b> = eficiência do casco = (1−t)/(1−w)<br>
+      • <b>η<sub>R</sub></b> = eficiência rotativa relativa = η<sub>B</sub>/η₀ = Q₀/Q (faixa típica 0,95–1,1)<br>
+      • <b>η₀</b> = eficiência em águas abertas (a nossa)
+    </p>
+    <p style="font-size:13px;color:#555;">η<sub>B</sub> (eficiência atrás do casco) usa o torque real Q atrás do navio; η₀ usa o torque Q₀ em águas livres. A razão entre elas é η<sub>R</sub>. <i>(PNA eq. 33–39)</i></p>
+  </div>
+
+  <details class="pscpp" open>
+    <summary>Questão real — PSCPP 2011, nº 37 (1,2 ponto) <span style="color:#a8412a;">[gabarito]</span></summary>
+    <div class="corpo">
+      <p>A prova citou o PNA (SNAME, 3ª ed.) e cobrou a decomposição da <b>eficiência propulsiva</b>. As duas afirmativas em disputa:</p>
+      <p style="margin-left:8px;">• <b>(I)</b> propulsiva = transmissão do eixo × casco × <u>relativa rotativa</u> × propulsor em água aberta;<br>
+      • <b>(II)</b> propulsiva = transmissão do eixo × casco × propulsor em água aberta <u>(sem η<sub>R</sub>)</u>.</p>
+      <p><span class="hl-am">A afirmativa (I) é a correta</span> — a eficiência propulsiva completa inclui η<sub>R</sub>. A (II) omite a rotativa relativa. Mas o gabarito oficial (alternativa <b>a</b>: II, III e IV) trata (II) como verdadeira no contexto da questão. <span class="tag t-conf" style="font-size:10px;">CONFLITO</span> Pela decomposição do PNA (η<sub>D</sub> = η<sub>H</sub>·η<sub>R</sub>·η₀), a afirmativa rigorosamente completa é a (I). <b>[VERIFICAR gabarito impresso 2011]</b></p>
+      <p style="font-size:13px;">Lição: a banca distingue "eficiência propulsiva" (com η<sub>R</sub>) de versões simplificadas. Saber a cadeia η<sub>D</sub> = η<sub>H</sub>·η<sub>R</sub>·η₀ é o que separa a resposta certa.</p>
+    </div>
+  </details>
+
+  <h3>2.8 Eficiência rotativa relativa — η<sub>R</sub> <span class="tag t-banca">BANCA</span></h3>
+  <p>É o terceiro fator da cadeia η<sub>D</sub> = η<sub>H</sub>·η<sub>R</sub>·η₀, e o mais sutil. Surge porque o <b>mesmo propulsor rende diferente</b> em águas livres e atrás do casco — mesmo entregando o mesmo empuxo à mesma rotação, o <b>torque</b> exigido muda.</p>
+
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:8px;">Em <b>águas livres</b> (escoamento uniforme), o propulsor a empuxo T e rotação n tem eficiência:</p>
+    <div class="formula">&#951;&#8320; = T&middot;V&#7488; / (2&#960; &middot; n &middot; Q&#8320;)</div>
+    <p style="margin-top:6px;"><b>Atrás do casco</b>, à mesma velocidade de avanço efetiva, o mesmo T e n exigem um torque <b>diferente</b> Q, dando a eficiência atrás do casco η<sub>B</sub>:</p>
+    <div class="formula">&#951;&#7495; = T&middot;V&#7488; / (2&#960; &middot; n &middot; Q)</div>
+    <p style="margin-top:6px;">A razão entre as duas é a <b>eficiência rotativa relativa</b>:</p>
+    <div class="formula">&#951;&#7523; = &#951;&#7495; / &#951;&#8320; = Q&#8320; / Q</div>
+    <div class="var">• η₀ = eficiência em águas livres · η<sub>B</sub> = eficiência atrás do casco [adimensional]</div>
+    <div class="var">• Q₀ = torque em águas livres · Q = torque atrás do casco [N·m] (mesmos T e n)</div>
+    <p style="font-size:13px;color:#555;">Repare que η<sub>R</sub> = Q₀/Q: se o casco faz o propulsor exigir <b>menos</b> torque que em águas livres (Q &lt; Q₀), então η<sub>R</sub> &gt; 1. <i>(PNA Vol. II Sec. 4.4, eqs. 33–35)</i></p>
+  </div>
+
+  <div class="caixa">
+    <p><b>Por que o torque muda</b> (a causa física): atrás do casco, a esteira é <b>heterogênea</b> (não uniforme). À medida que cada seção de pá gira, ela encontra condições de escoamento que <span class="hl-am">diferem muito das de águas livres</span> — ângulo de afluxo, velocidade local e regime variam ao longo da revolução. Isso altera o torque absorvido em relação ao caso uniforme. <i>(PNA Sec. 4.4)</i></p>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;"><b>Faixa típica de valores</b> — η<sub>R</sub> fica sempre <b>próxima da unidade</b>:</p>
+    <table>
+      <tr><th>Tipo de navio</th><th>η<sub>R</sub> típico</th></tr>
+      <tr><td>Bi-hélice (twin-screw)</td><td>0,95 – 1,0</td></tr>
+      <tr><td>Mono-hélice (single-screw)</td><td>1,0 – 1,1</td></tr>
+    </table>
+    <p style="font-size:13px;">No projeto (Seção 4), η<sub>R</sub> é uma das <b>saídas do ensaio de modelo</b> (passo 1) e costuma ser tomada como <b>constante</b> ao escalar para o navio. <i>(PNA Sec. 4.4; Bertram §2.6)</i></p>
+  </div>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;"><b>Armadilhas da banca:</b></p>
+    <p style="margin-left:8px;font-size:14px;">
+      • η<sub>R</sub> = <b>Q₀/Q</b> (torques invertidos!), <u>não</u> Q/Q₀ — vem de η<sub>B</sub>/η₀, e o torque está no denominador da eficiência.<br>
+      • É uma razão de <b>eficiências</b> (atrás/livre), não uma eficiência "de rotação" — o nome engana.<br>
+      • Para mono-hélice pode passar de 1,0 (até ~1,1); não é "sempre menor que 1".<br>
+      • Não confundir com η₀ (águas livres) nem com η<sub>H</sub> (casco): η<sub>R</sub> é só o <b>ajuste</b> entre o desempenho uniforme e o real na esteira.
+    </p>
+  </div>
+
+  <!-- ===================== HIERARQUIA DE MÉTODOS ===================== -->
+  <h2 class="sec">3. Hierarquia dos métodos de análise do escoamento</h2>
+  <p>Esta é a "escada" de métodos que o Bertram apresenta em §2.3. Entendê-la resolve uma confusão comum de leitura: o texto <b>menciona os métodos avançados duas vezes</b>, em dois momentos com propósitos diferentes.</p>
+
+  <div class="caixa">
+    <p><b>Por que o texto parece repetir.</b> A seção §2.3 tem dois blocos que confundem:</p>
+    <p style="margin-left:8px;">• <b>Bloco 1 — visão geral / histórico:</b> o Bertram <u>cita os nomes</u> dos métodos 3-D (superfície sustentadora, painéis) só para dizer <i>que existem</i> e <i>por que</i> a pá atarracada os tornou necessários. É um spoiler proposital, não a explicação.<br>
+    • <b>Bloco 2 — a hierarquia:</b> ele então recomeça "do zero" pela teoria do momento e <u>lista todos</u> em ordem crescente de complexidade, com vantagens (+) e desvantagens (−). Esta lista é o índice real da seção (§2.3.2 a §2.3.6).</p>
+    <p style="font-size:13px;color:#555;"><span class="hl-am">Não são dois conjuntos de métodos</span> — é o mesmo conjunto, citado antes de passagem e depois listado formalmente.</p>
+  </div>
+
+  <p>O elo causal que liga a Seção 2.6 a esta: <b>pá atarracada → escoamento 3-D → métodos 2-D erram → preciso subir a escada para os 3-D</b>. A "visão geral" existe justamente para <b>motivar</b> a subida.</p>
+
+  <div class="viz">
+    <svg width="100%" viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Escada dos cinco métodos de análise de escoamento de propulsor em ordem crescente de complexidade">
+      <!-- seta vertical de complexidade -->
+      <defs>
+        <marker id="seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5a5249" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+      </defs>
+      <line x1="34" y1="440" x2="34" y2="40" stroke="#5a5249" stroke-width="1.2" marker-end="url(#seta)"/>
+      <text x="22" y="240" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial" transform="rotate(-90 22 240)">↑ complexidade · fidelidade física · custo</text>
+
+      <!-- Degrau 1: Teoria do momento (mais baixo) -->
+      <rect x="56" y="386" width="380" height="56" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.6"/>
+      <text x="68" y="408" font-size="13" fill="#444441" font-family="Arial" font-weight="bold">1 · Teoria do momento</text>
+      <text x="68" y="426" font-size="12" fill="#5f5e5a" font-family="Arial">disco atuador · pás infinitas · só η&#7522; ideal</text>
+      <text x="448" y="418" font-size="12" fill="#5f5e5a" font-family="Arial">conceito global</text>
+
+      <!-- Degrau 2: Linha sustentadora -->
+      <rect x="84" y="316" width="380" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.6"/>
+      <text x="96" y="338" font-size="13" fill="#0C447C" font-family="Arial" font-weight="bold">2 · Linha sustentadora</text>
+      <text x="96" y="356" font-size="12" fill="#185FA5" font-family="Arial">vórtices radiais · ~2-D + correções (Lerbs)</text>
+      <text x="476" y="348" font-size="12" fill="#185FA5" font-family="Arial">+ perdas rotativas</text>
+
+      <!-- Degrau 3: Superfície sustentadora -->
+      <rect x="112" y="246" width="380" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.6"/>
+      <text x="124" y="268" font-size="13" fill="#085041" font-family="Arial" font-weight="bold">3 · Superfície sustentadora</text>
+      <text x="124" y="286" font-size="12" fill="#0F6E56" font-family="Arial">vórtices em ferradura · 3-D sem espessura</text>
+      <text x="504" y="278" font-size="12" fill="#0F6E56" font-family="Arial">+ geometria 3-D</text>
+
+      <!-- Degrau 4: Painéis -->
+      <rect x="140" y="176" width="380" height="56" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.6"/>
+      <text x="152" y="198" font-size="13" fill="#633806" font-family="Arial" font-weight="bold">4 · Elementos de contorno (painéis)</text>
+      <text x="152" y="216" font-size="12" fill="#854F0B" font-family="Arial">fontes + dipolos · 3-D com espessura + cubo</text>
+      <text x="532" y="208" font-size="12" fill="#854F0B" font-family="Arial">+ espessura</text>
+
+      <!-- Degrau 5: RANSE (mais alto) -->
+      <rect x="168" y="106" width="380" height="56" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.6"/>
+      <text x="180" y="128" font-size="13" fill="#791F1F" font-family="Arial" font-weight="bold">5 · RANSE (método de campo)</text>
+      <text x="180" y="146" font-size="12" fill="#A32D2D" font-family="Arial">escoamento viscoso 3-D em malha de volume</text>
+      <text x="560" y="138" font-size="12" fill="#A32D2D" font-family="Arial">+ viscosidade</text>
+
+      <!-- linha-guia: hipótese abandonada -->
+      <text x="350" y="70" text-anchor="middle" font-size="12" fill="#5a5249" font-family="Arial">Cada degrau abandona uma simplificação do anterior</text>
+    </svg>
+    <div class="cap" style="border-left-color:#A32D2D;">A escada cresce em complexidade e fidelidade física. Da base (disco atuador, que nem sabe a forma da pá) ao topo (RANSE, que resolve a viscosidade real). <i>(Bertram §2.3.1–2.3.6)</i></div>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <table>
+      <tr><th>#</th><th>Método</th><th>Modela a pá como</th><th>Adiciona</th></tr>
+      <tr><td>1</td><td>Teoria do momento</td><td>disco atuador (pás ∞, A<sub>E</sub>/A₀=1)</td><td>conceito · η<sub>i</sub> ideal</td></tr>
+      <tr><td>2</td><td>Linha sustentadora</td><td>linha de vórtices radial</td><td>perdas rotativas · carga radial</td></tr>
+      <tr><td>3</td><td>Superfície sustentadora</td><td>grade de vórtices em ferradura na sup. média (3-D, <b>sem</b> espessura)</td><td>geometria 3-D da pá</td></tr>
+      <tr><td>4</td><td>Painéis (BEM)</td><td>fontes+dipolos na sup. real (3-D, <b>com</b> espessura)</td><td>espessura · cubo · vel. finitas</td></tr>
+      <tr><td>5</td><td>RANSE</td><td>malha de volume (escoamento viscoso)</td><td>viscosidade · esteira efetiva · ponta/cubo</td></tr>
+    </table>
+    <p style="font-size:13px;">Fio condutor: <b>cada degrau larga uma hipótese</b>. Momento ignora a forma → linha vira a pá numa linha → superfície a torna 3-D fina → painéis dão espessura → RANSE larga o escoamento potencial e resolve a viscosidade.</p>
+  </div>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;"><b>Trade-offs por degrau (o que a banca pode cobrar):</b></p>
+    <p style="margin-left:8px;font-size:14px;">
+      • <b>Momento (1):</b> + simples e rápido, dá η<sub>i</sub>; − não modela perdas rotativas/viscosas, <u>não serve para projetar</u>.<br>
+      • <b>Linha (2):</b> + comprovado, bom para projeto inicial; − não dá geometria completa, <u>não trata skew facilmente</u>.<br>
+      • <b>Superfície (3):</b> + pá em 3-D, só corrige viscosidade; − programação complexa, corrige pressão no cubo.<br>
+      • <b>Painéis (4):</b> + sem simplificações além do potencial, velocidades finitas no cubo; − muitos painéis, condição de Kutta difícil, ponta ainda imperfeita.<br>
+      • <b>RANSE (5):</b> + captura viscosidade e esteira efetiva direto; − malha e computação caras, modelo de turbulência questionável.
+    </p>
+    <p style="font-size:13px;"><span class="tag t-banca" style="font-size:10px;">BANCA</span> Dois pontos-chave: (a) a <b>teoria do momento NÃO projeta propulsores</b> — só dá conceito e η<sub>i</sub>; (b) o que separa superfície sustentadora de painéis é a <b>espessura da pá</b> (painéis a incluem, a superfície sustentadora não). E o salto que motiva tudo é o <b>alto skew</b>, que inviabilizou as correções 2-D da linha sustentadora.</p>
+    <p style="font-size:13px;"><span class="tag t-conf" style="font-size:10px;">CONFLITO</span> Não confundir <b>método</b> com <b>elemento</b>: o <i>método</i> da superfície sustentadora é a malha de vórtices (vortex-lattice / VLM); o <i>elemento</i> físico com que ele modela a pá são os <b>vórtices em ferradura</b> (<i>horseshoe vortices</i>) — um segmento "ligado" (bound) na pá e dois "de fuga" (trailing) para jusante, conforme as leis de Helmholtz. "Vortex-lattice" nomeia a grade; o que está na grade são vórtices em ferradura.</p>
+    <p style="font-size:13px;color:#555;">Nota: "métodos de superfície sustentadora" aparece também no Cap. 6 (lemes/casco) — mesma família matemática (vórtices em ferradura, Biot-Savart, Kutta) aplicada a outro corpo sustentador. Se cruzou os capítulos, é a mesma técnica reaproveitada, não um método novo.</p>
+  </div>
+
+  <h3>3.1 Dentro dos métodos de painéis (degrau 4) <span class="tag t-banca">BANCA</span></h3>
+  <p>O método de painéis (BEM — <i>boundary element method</i>) foi criado para superar a limitação da malha de vórtices: ele <span class="hl-am">modela a espessura real da pá e inclui o cubo</span>. A pá, o cubo e parte da esteira são discretizados em painéis de singularidades. Há escolhas de <b>tipo de painel</b> e de <b>formulação</b>.</p>
+
+  <div class="caixa">
+    <p><b>Tipos de painel</b> (a singularidade distribuída sobre cada painel):</p>
+    <p style="margin-left:8px;">• painéis de <b>fonte</b> (source) — fornecem a distribuição <i>média</i> de pressão (ligada à espessura);<br>
+    • painéis de <b>dipolo</b> (doublet) — induzem a <i>diferença</i> de pressão Δc<sub>p</sub> (ligada à sustentação);<br>
+    • <b>mistura</b> de dipolo + fonte.</p>
+  </div>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;"><b>Formulação direta × indireta</b> — o que muda é <u>qual é a incógnita</u> do sistema:</p>
+    <table>
+      <tr><th></th><th>Formulação direta</th><th>Formulação indireta</th></tr>
+      <tr><td>Também chamada</td><td>por <b>potencial</b></td><td>por <b>velocidade</b></td></tr>
+      <tr><td>Incógnita</td><td>o próprio potencial φ</td><td>a intensidade de fonte ou dipolo</td></tr>
+      <tr><td>Como obtém a velocidade</td><td>diferenciação numérica de φ</td><td>direto da intensidade resolvida</td></tr>
+    </table>
+    <p style="font-size:13px;">Kerwin et al. (1987) mostram que, na formulação indireta, um modelo baseado em <b>dipolos</b> pode ser transformado num modelo equivalente baseado em <b>vórtices</b> — ou seja, painéis de dipolo e malha de vórtices são parentes matemáticos.</p>
+    <p style="font-size:13px;"><span class="tag t-banca" style="font-size:10px;">BANCA</span> Pegadinha: "direta" não significa "mais simples". Direta = a <b>incógnita é o potencial</b> (resolve-se φ e deriva-se a velocidade); indireta = a <b>incógnita é a intensidade</b> da singularidade. Não confundir com a oposição linha/superfície/painéis da hierarquia.</p>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;"><b>Abordagem de Morino</b> (Morino & Kuo 1974) — a mais usada em códigos de propulsor:</p>
+    <p style="margin-left:8px;">• é uma formulação <b>direta</b> (resolve para o potencial, deriva a velocidade);<br>
+    • usa <b>exclusivamente painéis de dipolo</b>;<br>
+    • discretiza pás + cubo + parte das esteiras de cada pá.</p>
+  </div>
+
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:8px;"><b>Condição de Kutta</b> — o fechamento físico que faz tudo funcionar.</p>
+    <p>Enunciado: o escoamento deve deixar o <b>bordo de fuga (trailing edge) de forma suave</b>, por ambos os lados. Sem ela, o escoamento potencial admite infinitas soluções (a maioria absurda); a condição de Kutta <span class="hl-am">seleciona a única solução física, fixando a circulação Γ e, portanto, a sustentação</span>.</p>
+    <p style="margin-top:8px;"><b>Duas formas equivalentes de impô-la</b> (Larsson &amp; Raven Cap. 7):</p>
+    <p style="margin-left:8px;">• <b>pressão igual:</b> Δp = 0 no bordo de fuga (mesma pressão nos dois lados);<br>
+    • <b>direção do escoamento:</b> o escoamento sai no plano bissetor logo após o bordo de fuga.</p>
+    <p style="margin-top:8px;">Nos painéis de Morino, usa-se a forma de pressão: <span class="hl-amb">a diferença de pressão entre face e dorso se anula no bordo de fuga</span>. Isso <b>acopla os dipolos da esteira aos dipolos da pá</b> e controla diretamente o empuxo e o torque.</p>
+    <p style="font-size:13px;"><span class="tag t-conf" style="font-size:10px;">CONFLITO</span> A condição de Kutta é <b>não linear</b> → exige solução <b>iterativa</b> e "grande cuidado": erros nela afetam fortemente a sustentação calculada. É, na essência, um <b>efeito viscoso embutido num modelo invíscido</b> — a viscosidade é o que faz o escoamento descolar suavemente no bordo de fuga afiado. <i>(Bertram Cap. 2 e 3; L&amp;R Cap. 7)</i></p>
+  </div>
+
+  <details class="pscpp">
+    <summary>Malha de vórtices × painéis — o trade-off teórico</summary>
+    <div class="corpo">
+      <p>Curiosamente, a teoria da <b>malha de vórtices é mais complicada</b> que a dos painéis, mas tem <b>menos incógnitas</b> (não modela espessura nem cubo) → menor esforço computacional. Apesar dessa "inferioridade teórica", em benchmarks da ITTC para <b>skew moderado</b> a malha de vórtices deu resultados de qualidade comparável aos painéis. A vantagem dos painéis aparece mais em geometrias complexas e na região do cubo (onde a malha de vórtices dá resultados irreais por não modelá-lo). <i>(Bertram §2.3.4–2.3.5; Kerwin 1986)</i></p>
+    </div>
+  </details>
+
+  <!-- ===================== PROJETO DO PROPULSOR ===================== -->
+  <h2 class="sec">4. As etapas do projeto de um propulsor (Bertram §2.6)</h2>
+  <p>O projeto de propulsor é um <b>processo iterativo</b> que busca otimizar a eficiência sob restrições de cavitação, geometria e resistência estrutural. Tradicionalmente feito por cartas de projeto (séries como a B de Wageningen); hoje, fortemente computacional. <span class="hl-am">O resultado final é mais "satisfatório" (<i>satisficing</i>) que rigorosamente ótimo</span> — uma boa solução dentro das restrições. <i>(Bertram §2.6, procedimento HSVA)</i></p>
+
+  <div class="caixa">
+    <p style="font-size:14px;"><b>Ponto de partida (dado pelo cliente, &gt;90% dos casos):</b> rotação n<sub>s</sub>, velocidade do navio V<sub>s</sub> e potência entregue estimada P<sub>D</sub>. Frequentemente o número de pás Z e o diâmetro D já vêm especificados. Regra prática: motor com nº <b>par</b> de cilindros → propulsor com nº <b>ímpar</b> de pás.</p>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;"><b>Seleção do propulsor de estoque (dentro do passo 1)</b> — como se escolhe, numa base de dados, o propulsor mais adequado, com critério de <b>desempate</b> em cascata:</p>
+    <p style="margin-left:8px;font-size:14px;">
+      1º &nbsp;mesmo <b>número de pás</b> Z;<br>
+      2º &nbsp;mais próximo em <b>razão passo-diâmetro</b> P<sub>m</sub>/D do propulsor otimizado;<br>
+      3º &nbsp;(desempate) se vários coincidem em P<sub>m</sub>/D, escolhe-se o mais próximo em <b>A<sub>E</sub>/A₀</b>.
+    </p>
+    <p style="font-size:13px;color:#555;">O propulsor otimizado de referência vem da série B de Wageningen. O estoque selecionado fixa a <b>escala de modelo</b> — daí a busca limitar-se a faixas viáveis de diâmetro (restrições da instalação de ensaio). <i>(Bertram §2.6, passo 1)</i></p>
+  </div>
+
+
+  <div class="viz">
+    <svg width="100%" viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxo dos sete passos do projeto de um propulsor segundo Bertram">
+      <defs>
+        <marker id="setaP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#0D3D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+      </defs>
+
+      <!-- Passo 1 -->
+      <rect x="60" y="20" width="560" height="56" rx="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+      <circle cx="86" cy="48" r="14" fill="#0F6E56"/><text x="86" y="53" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial" font-weight="bold">1</text>
+      <text x="112" y="42" font-size="14" fill="#085041" font-family="Arial" font-weight="bold">Preparação do modelo</text>
+      <text x="112" y="62" font-size="12" fill="#0F6E56" font-family="Arial">propulsor ótimo da série B → escala de modelo → ensaios → w, t, η_R, esteira nominal</text>
+
+      <!-- Passo 2 -->
+      <rect x="60" y="92" width="560" height="56" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+      <circle cx="86" cy="120" r="14" fill="#185FA5"/><text x="86" y="125" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial" font-weight="bold">2</text>
+      <text x="112" y="114" font-size="14" fill="#0C447C" font-family="Arial" font-weight="bold">Esteira efetiva em escala real</text>
+      <text x="112" y="134" font-size="12" fill="#185FA5" font-family="Arial">transforma esteira nominal → efetiva, corrigindo efeitos de escala (intuição do projetista)</text>
+
+      <!-- Passo 3 -->
+      <rect x="60" y="164" width="560" height="56" rx="9" fill="#FCF7E8" stroke="#9c7b16" stroke-width="0.8"/>
+      <circle cx="86" cy="192" r="14" fill="#9c7b16"/><text x="86" y="197" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial" font-weight="bold">3</text>
+      <text x="112" y="186" font-size="14" fill="#6b5410" font-family="Arial" font-weight="bold">Espessura do perfil (sociedade classificadora)</text>
+      <text x="112" y="206" font-size="12" fill="#9c7b16" font-family="Arial">regras simples definem a espessura mínima dos fólios em cada raio</text>
+
+      <!-- Passo 4 -->
+      <rect x="60" y="236" width="560" height="62" rx="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+      <circle cx="86" cy="267" r="14" fill="#185FA5"/><text x="86" y="272" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial" font-weight="bold">4</text>
+      <text x="112" y="258" font-size="14" fill="#0C447C" font-family="Arial" font-weight="bold">Linha + superfície sustentadora</text>
+      <text x="112" y="277" font-size="12" fill="#185FA5" font-family="Arial">linha sust. (2-D) dá circulação radial ótima → superfície sust. (3-D) dá</text>
+      <text x="112" y="292" font-size="12" fill="#185FA5" font-family="Arial">curvatura (camber) e passo do perfil</text>
+
+      <!-- Passo 5 -->
+      <rect x="60" y="314" width="560" height="56" rx="9" fill="#FCF7E8" stroke="#9c7b16" stroke-width="0.8"/>
+      <circle cx="86" cy="342" r="14" fill="#9c7b16"/><text x="86" y="347" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial" font-weight="bold">5</text>
+      <text x="112" y="336" font-size="14" fill="#6b5410" font-family="Arial" font-weight="bold">Suavização dos resultados</text>
+      <text x="112" y="356" font-size="12" fill="#9c7b16" font-family="Arial">projetista elimina pontos errantes e fixa valores no cubo e na ponta (experiência)</text>
+
+      <!-- Passo 6 -->
+      <rect x="60" y="386" width="560" height="62" rx="9" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.8"/>
+      <circle cx="86" cy="417" r="14" fill="#A32D2D"/><text x="86" y="422" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial" font-weight="bold">6</text>
+      <text x="112" y="408" font-size="14" fill="#791F1F" font-family="Arial" font-weight="bold">Análise hidrodinâmica final</text>
+      <text x="112" y="427" font-size="12" fill="#A32D2D" font-family="Arial">superfície sust. em todas as condições + esteira completa → características de</text>
+      <text x="112" y="442" font-size="12" fill="#A32D2D" font-family="Arial">cavitação e vibração; ajusta geometria (corda, skew, camber, passo, perfil, D)</text>
+
+      <!-- Passo 7 -->
+      <rect x="60" y="464" width="560" height="62" rx="9" fill="#F1EFE8" stroke="#5a5249" stroke-width="0.8"/>
+      <circle cx="86" cy="495" r="14" fill="#5a5249"/><text x="86" y="500" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial" font-weight="bold">7</text>
+      <text x="112" y="486" font-size="14" fill="#3a352d" font-family="Arial" font-weight="bold">Verificação estrutural (classificadora)</text>
+      <text x="112" y="505" font-size="12" fill="#5a5249" font-family="Arial">análise por elementos finitos (FEM) · tensão de von Mises · se alta (bordo de fuga),</text>
+      <text x="112" y="520" font-size="12" fill="#5a5249" font-family="Arial">ajusta geometria localmente e repete (1–2 iterações bastam)</text>
+
+      <!-- setas -->
+      <line x1="340" y1="76" x2="340" y2="90" stroke="#0D3D36" stroke-width="1.4" marker-end="url(#setaP)"/>
+      <line x1="340" y1="148" x2="340" y2="162" stroke="#0D3D36" stroke-width="1.4" marker-end="url(#setaP)"/>
+      <line x1="340" y1="220" x2="340" y2="234" stroke="#0D3D36" stroke-width="1.4" marker-end="url(#setaP)"/>
+      <line x1="340" y1="298" x2="340" y2="312" stroke="#0D3D36" stroke-width="1.4" marker-end="url(#setaP)"/>
+      <line x1="340" y1="370" x2="340" y2="384" stroke="#0D3D36" stroke-width="1.4" marker-end="url(#setaP)"/>
+      <line x1="340" y1="448" x2="340" y2="462" stroke="#0D3D36" stroke-width="1.4" marker-end="url(#setaP)"/>
+    </svg>
+    <div class="cap">Procedimento da HSVA (Reich et al. 1997). Verde = ensaio · azul = método analítico de fólio · dourado = decisão humana · vermelho = análise crítica · cinza = estrutura. <i>(Bertram §2.6)</i></div>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <table>
+      <tr><th>#</th><th>Passo</th><th>Ferramenta</th><th>Entrega</th></tr>
+      <tr><td>1</td><td>Preparação do modelo</td><td>série B Wageningen + ensaios</td><td>w, t, η<sub>R</sub>, esteira nominal, P<sub>D</sub></td></tr>
+      <tr><td>2</td><td>Esteira efetiva (escala real)</td><td>códigos + experiência</td><td>esteira efetiva corrigida</td></tr>
+      <tr><td>3</td><td>Espessura do perfil</td><td>regras da classificadora</td><td>espessura mínima por raio</td></tr>
+      <tr><td>4</td><td>Linha + superfície sustentadora</td><td>métodos de fólio 2-D→3-D</td><td>circulação, camber, passo</td></tr>
+      <tr><td>5</td><td>Suavização</td><td>projetista (manual)</td><td>geometria sem pontos errantes</td></tr>
+      <tr><td>6</td><td>Análise hidrodinâmica final</td><td>superfície sustentadora completa</td><td>cavitação + vibração; ajuste fino</td></tr>
+      <tr><td>7</td><td>Verificação estrutural</td><td>FEM / von Mises</td><td>resistência estrutural aprovada</td></tr>
+    </table>
+  </div>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;"><b>Pontos que a banca pode explorar:</b></p>
+    <p style="margin-left:8px;font-size:14px;">
+      • A <b>série B de Wageningen</b> é só o <u>ponto de partida</u> — seu desempenho é insuficiente para as exigências de hoje; o projeto real refina a partir dela.<br>
+      • O projeto é <b>iterativo e "satisficing"</b>, não uma otimização formal exata (CFD é caro demais para varrer centenas de cotas).<br>
+      • A <b>cavitação</b> entra como <u>restrição</u> (define limite de A<sub>E</sub>/A₀ via Burrill), não como objetivo — o objetivo primário é sempre a <b>eficiência</b>.<br>
+      • Submarinos: restrição estrita de <b>ruído</b> por cavitação → eficiência menor é aceita em troca de silêncio.<br>
+      • A esteira do passo 2 vai de <b>nominal</b> (sem propulsor) a <b>efetiva</b> (com propulsor) — não confundir.
+    </p>
+  </div>
+
+  <details class="pscpp">
+    <summary>Por que tantos passos dependem da "experiência" do projetista</summary>
+    <div class="corpo">
+      <p>Vários passos (2, 5, 6) envolvem <b>julgamento humano</b>, não só cálculo: escolher o método de transformação de esteira "mais plausível", eliminar oscilações ponto a ponto, fixar valores irreais no cubo e na ponta, decidir trade-offs de geometria. Isso reflete a "filosofia de projeto" da empresa — para os <b>mesmos</b> requisitos do cliente, projetistas diferentes chegam a propulsores "ótimos" <b>diferentes</b>. Um exemplo de filosofia: "nenhuma cavitação no lado de pressão". <i>(Bertram §2.6)</i></p>
+    </div>
+  </details>
+
+  <!-- ===================== DEFINIÇÕES ===================== -->
+  <h2 class="sec">5. Definições geométricas por fonte</h2>
+
+  <h3>Área expandida — A<sub>E</sub> <span class="tag t-banca">BANCA</span></h3>
+  <p>A face expandida (<i>expanded outline</i>) é obtida <span class="hl-am">lançando-se a corda circunferencial real da pá em verdadeira grandeza em função do raio</span>. A área assim formada é A<sub>E</sub> — a <b>maior</b> das três áreas de pá. <i>(Bertram Cap. 2, orig. p. 43)</i></p>
+
+  <h3>Área projetada — A<sub>P</sub></h3>
+  <p>A pá projetada sobre um plano <b>normal ao eixo</b> (o plano do disco) fornece a face projetada (<i>projected outline</i>). Por causa do passo e do rake, é a <b>menor</b> das áreas. A área do cubo usualmente não é incluída. <i>(Bertram Cap. 2, orig. p. 44)</i></p>
+
+  <h3>Skew (recurvamento) <span class="tag t-banca">BANCA</span></h3>
+  <p>A linha do ponto médio do comprimento da corda de cada seção radial usualmente <b>não é reta</b>, mas <span class="hl-am">curvada para trás relativamente à rotação da pá</span>. O skew é expresso como o deslocamento <b>circunferencial</b> da ponta da pá, adimensionalizado pelo diâmetro. Faz o bordo de ataque entrar nas concentrações de esteira de forma mais suave → reduz vibração e atenua cavitação. <i>(PNA Vol. II Sec. 6)</i></p>
+
+  <h3>Curvatura média (camber)</h3>
+  <p>Quando as seções têm <b>forma de aerofólio</b> (nariz e cauda levantados da face de passo), a linha de curvatura média une os pontos médios entre face e dorso, medida da corda (bordo de ataque → bordo de fuga). Define a sustentação da seção. <i>(PNA Vol. II Sec. 6)</i></p>
+
+  <!-- ===================== HIERARQUIA ===================== -->
+  <h2 class="sec">6. Hierarquia das áreas</h2>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:10px;"><b>Ordem de tamanho (todas referidas a A₀):</b></p>
+    <div class="formula">A&#8346; &lt; A&#7491; &lt; A&#8337;&nbsp;&nbsp;&nbsp;(projetada &lt; desenvolvida &lt; expandida)</div>
+    <p>A projetada "encolhe" porque o passo e o rake inclinam a corda ao projetá-la no disco; a expandida estica a corda em verdadeira grandeza, sendo a maior.</p>
+  </div>
+
+  <table>
+    <tr><th>Razão adimensional</th><th>Definição</th><th>Expressão</th></tr>
+    <tr><td>Razão de área expandida</td><td>Área expandida das pás (fora do cubo) / disco</td><td>A<sub>E</sub> / A₀</td></tr>
+    <tr><td>Razão de área desenvolvida</td><td>Área desenvolvida das pás (fora do cubo) / disco</td><td>A<sub>D</sub> / A₀</td></tr>
+    <tr><td>Razão de área projetada</td><td>Área projetada das pás (fora do cubo) / disco</td><td>A<sub>P</sub> / A₀</td></tr>
+    <tr><td>Razão de passo</td><td>Passo / diâmetro</td><td>P / D</td></tr>
+  </table>
+
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:10px;"><b>Área do disco:</b></p>
+    <div class="formula">A₀ = π·D² / 4</div>
+    <div class="var">• A₀ = área do disco do hélice [m²]</div>
+    <div class="var">• D = diâmetro do hélice [m] &nbsp;(D = 2R; raio de referência a 0,7R = 0,35D)</div>
+    <p style="margin-top:10px;"><b>Exemplo numérico:</b> para D = 6,0 m → A₀ = π·(6,0)²/4 = π·36/4 = <b>28,27 m²</b>.<br>
+    Se A<sub>E</sub>/A₀ = 0,65, então a área expandida das pás = 0,65 × 28,27 = <b>18,38 m²</b>.</p>
+  </div>
+
+  <!-- ===================== DISTRATORES ===================== -->
+  <h2 class="sec">7. Distratores clássicos da banca</h2>
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:10px;"><b>1. Skew × Rake</b> — o erro mais comum:</p>
+    <table>
+      <tr><th></th><th>Skew (recurvamento)</th><th>Rake (caimento)</th></tr>
+      <tr><td>Direção</td><td><span class="hl-amb">Circunferencial</span> (no plano do disco)</td><td><span class="hl-amb">Axial</span> (ao longo do eixo)</td></tr>
+      <tr><td>O que mede</td><td>Desloc. da ponta na rotação</td><td>Inclinação longitudinal da pá</td></tr>
+      <tr><td>Adimensional por</td><td>Diâmetro D</td><td>Diâmetro D</td></tr>
+      <tr><td>Benefício</td><td>Reduz vibração / cavitação</td><td>Aumenta folga com o casco</td></tr>
+    </table>
+    <p><b>2. Curvatura média (camber) × Rake</b> — camber é da <b>seção</b> (aerofólio, gera sustentação); rake é da <b>pá inteira</b>. A banca troca um pelo outro.</p>
+    <p><b>3. A<sub>E</sub> × A<sub>P</sub></b> — inverter qual é a maior. <span class="hl-amb">A expandida é sempre a maior; a projetada, a menor.</span></p>
+    <p><b>4. A<sub>E</sub>/A₀ e eficiência</b> — distrator de "vantagem virada em desvantagem": A<sub>E</sub>/A₀ maior <b>retarda cavitação</b> (bom), mas <b>reduz a eficiência</b> por aumentar o atrito (ruim). A banca cita só metade.</p>
+  </div>
+
+  <!-- ===================== TRADE-OFF Ae/A0 ===================== -->
+  <h2 class="sec">8. O trade-off da razão de área expandida A<sub>E</sub>/A₀</h2>
+
+  <p>A frase de Bertram — <i>"A<sub>E</sub>/A₀ aumenta com a carga do propulsor; a eficiência diminui com A<sub>E</sub>/A₀ pois a área aumentada também aumenta as perdas por atrito"</i> — esconde <b>duas cadeias causais opostas</b>. Entendê-las separa quem decora de quem compreende.</p>
+
+  <h3>8.1 Por que A<sub>E</sub>/A₀ <u>sobe</u> com a carga (o lado "bom")</h3>
+  <p>A cavitação é governada pelo <b>campo de pressão</b>: ela começa onde a pressão local cai abaixo da pressão de vapor p<sub>V</sub>. Para o mesmo empuxo total T, a única forma de baixar a <b>pressão local mínima</b> sem mexer no resto é <span class="hl-am">distribuir esse empuxo sobre uma área maior</span> — ou seja, reduzir a carga por unidade de área de pá.</p>
+
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:10px;"><b>Coeficiente de carregamento de Burrill (carga média de empuxo nas pás):</b></p>
+    <div class="formula">&#964;&#7580; = T / (q&#8320;,&#8327;&#8341; &middot; A&#8346;)&nbsp;&nbsp;&nbsp;com&nbsp;&nbsp;q&#8320;,&#8327;&#8341; = &frac12;&middot;&#961;&middot;V&#8341;&sup2;</div>
+    <div class="var">• T = empuxo do propulsor [N]</div>
+    <div class="var">• A<sub>P</sub> = área projetada das pás [m²]</div>
+    <div class="var">• q<sub>0,7R</sub> = pressão dinâmica na seção a 0,7R [Pa]</div>
+    <div class="var">• V<sub>R</sub> = √(V<sub>A</sub>² + (0,7·π·n·D)²) = velocidade local resultante a 0,7R [m/s]</div>
+    <p style="margin-top:10px;"><b>Leitura:</b> T/A<sub>P</sub> é a <b>carga por área</b>. Mais empuxo no mesmo disco → τ<sub>c</sub> sobe → o ponto se aproxima da linha-limite de cavitação no diagrama de Burrill. Para voltar à região segura, <span class="hl-am">aumenta-se A<sub>P</sub> (e portanto A<sub>E</sub>/A₀)</span>, derrubando τ<sub>c</sub> de volta.</p>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;"><b>Cadeia causal — lado da cavitação:</b></p>
+    <p style="text-align:center; font-size:15px; margin:8px 0;">
+      ↑ carga (T/A₀) &nbsp;→&nbsp; ↓ pressão local mínima &nbsp;→&nbsp; risco de cavitação<br>
+      <span style="color:#0F6E56;"><b>solução:</b></span> ↑ A<sub>E</sub>/A₀ (ou ↑ D) &nbsp;→&nbsp; espalha o empuxo &nbsp;→&nbsp; pressão sobe &nbsp;→&nbsp; cavitação evitada
+    </p>
+    <p style="font-size:13px;">Fórmula de Keller (PNA, eq. 62) para a área expandida mínima:</p>
+    <div class="formula">A&#8337;/A&#8320; = [(1,3 + 0,3&middot;Z)&middot;T] / [(p&#8320; &minus; p&#7515;)&middot;D&sup2;] + k</div>
+    <div class="var">• Z = número de pás · k = 0 (popa de espelho/naval) a 0,20 (monohélice de alta potência)</div>
+  </div>
+
+  <h3>8.2 Por que a eficiência <u>cai</u> com A<sub>E</sub>/A₀ (o lado "ruim")</h3>
+  <p>Dois mecanismos físicos distintos, e a banca explora a confusão entre eles:</p>
+
+  <div class="caixa">
+    <p><b>(i) Perdas por atrito viscoso — o que Bertram cita diretamente.</b> Cada elemento de pá arrasta a água: o arrasto viscoso é proporcional à <b>área molhada</b> da pá. <span class="hl-am">Mais área expandida = mais superfície gerando arrasto de atrito</span>, que consome torque sem produzir empuxo útil. A razão sustentação/arrasto (L/D) da seção cai, e com ela η₀.</p>
+    <p style="font-size:13px; color:#555;">Reforço da Sec. 6.4: mantendo A<sub>E</sub> constante, <b>mais pás</b> → cordas menores, seções mais espessas relativamente → L/D pior. O atrito é sempre o vilão da eficiência.</p>
+  </div>
+
+  <div class="caixa">
+    <p><b>(ii) Carga × eficiência ideal — o limite teórico (PNA / teoria do momento).</b> Mesmo sem atrito, a eficiência ideal depende do <b>coeficiente de carga de empuxo</b> C<sub>Th</sub>.</p>
+  </div>
+
+  <h3>8.3 Coeficiente de carga de empuxo (C<sub>Th</sub> / C<sub>T</sub>) <span class="tag t-banca">BANCA</span></h3>
+  <p>É o parâmetro adimensional que mede <b>quão carregado</b> está o propulsor: torna o empuxo T adimensional pela área do disco vezes a pressão dinâmica do afluxo. <span class="hl-am">Empuxo grande em disco pequeno = carga alta = eficiência baixa.</span> É o elo quantitativo entre "carregar muito a pá" e "perder eficiência".</p>
+  <p style="font-size:13px;color:#555;">A eficiência que C<sub>Th</sub> governa aqui é a <b>ideal</b> η<sub>i</sub> (teto teórico), <b>não</b> a η₀ medida em águas abertas — ver a distinção na Seção 2.7.</p>
+
+
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:10px;"><b>Definição de Bertram (Cap. 2, eq. 2.5):</b></p>
+    <div class="formula">C&#7511;&#8341; = T / (&#961; &middot; V&#7488;&sup2; &middot; D&sup2; &middot; &#960;/8)</div>
+    <p style="margin-top:8px;"><b>Definição do PNA (Vol. II Sec. 2, eq. 9) — notação C<sub>T</sub>:</b></p>
+    <div class="formula">C&#8348; = T / (&frac12; &middot; &#961; &middot; A&#8320; &middot; V&#7488;&sup2;)</div>
+    <div class="var">• T = empuxo do propulsor [N]</div>
+    <div class="var">• ρ = massa específica da água [kg/m³]</div>
+    <div class="var">• V<sub>A</sub> = velocidade de avanço / afluxo ao propulsor [m/s]</div>
+    <div class="var">• D = diâmetro do propulsor [m] · A₀ = πD²/4 = área do disco [m²]</div>
+    <p style="margin-top:10px;"><span class="tag t-conf" style="font-size:10px;">CONFLITO</span> <b>As duas são equivalentes.</b> Como A₀ = πD²/4, o denominador do PNA ½·ρ·A₀·V<sub>A</sub>² = ½·ρ·(πD²/4)·V<sub>A</sub>² = ρ·V<sub>A</sub>²·D²·(π/8) — exatamente o de Bertram. A banca pode apresentar qualquer uma das duas formas; <span class="hl-amb">não são coeficientes diferentes, é a mesma grandeza com álgebra reescrita</span>.</p>
+  </div>
+
+  <div class="caixa calc">
+    <span class="tag t-calc">CALCULO</span>
+    <p style="margin-top:10px;"><b>Eficiência ideal em função de C<sub>Th</sub> (disco atuador):</b></p>
+    <div class="formula">&#951;&#7522; = 2 / (1 + &radic;(1 + C&#7511;&#8341;))</div>
+    <p style="margin-top:8px;"><b>Tabela do PNA</b> (mostra a queda monotônica de η<sub>i</sub> com a carga):</p>
+    <table>
+      <tr><th>C<sub>T</sub></th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>η<sub>i</sub></th><td>1,00</td><td>0,827</td><td>0,732</td><td>0,667</td><td>0,618</td></tr>
+    </table>
+    <p style="margin-top:8px;"><b>Exemplo:</b> dobrar a carga de C<sub>T</sub>=1 para C<sub>T</sub>=2 derruba o teto de eficiência de 0,827 para 0,732 — perda de ~11 pontos percentuais <b>só por carregar mais</b>, antes de qualquer perda viscosa ou rotativa.</p>
+  </div>
+
+  <div class="caixa dec">
+    <span class="tag t-dec">DECORAR</span>
+    <p style="margin-top:8px;text-align:center;font-size:15px;">
+      ↑ C<sub>Th</sub> (carga) &nbsp;→&nbsp; ↓ η<sub>i</sub> (teto de eficiência ideal)
+    </p>
+    <p>Interpretação física do disco atuador: a eficiência ideal também é η<sub>i</sub> = 2u<sub>A</sub>/(u<sub>j</sub>+u<sub>A</sub>). <span class="hl-am">Quanto menor o aumento de velocidade (u<sub>j</sub> próximo de u<sub>A</sub>), maior a eficiência.</span> Carga alta = grande aceleração do jato = muita energia cinética perdida na esteira = η baixa. Empuxo zero de velocidade extra seria η=1 (ideal inatingível, pois não produziria empuxo).</p>
+    <p style="font-size:13px;"><b>Conclusão de projeto (PNA e Bertram convergem):</b> "o hélice com a maior área de disco é em geral o mais eficiente" → escolher o <b>maior diâmetro D</b> que a geometria do navio permitir, pois D grande baixa C<sub>Th</sub> e eleva o teto de eficiência.</p>
+  </div>
+
+  <p style="margin-top:8px;"><span class="hl-amb">Síntese do trade-off:</span> aumentar <b>A<sub>E</sub>/A₀</b> ataca a cavitação mas paga em atrito; aumentar <b>D</b> baixa <b>C<sub>Th</sub></b> e melhora cavitação <i>e</i> eficiência. Por isso o diâmetro é a primeira alavanca de projeto, e a área de pá, a segunda (limitada por baixo pela cavitação via Burrill/Keller). <i>(Bertram Cap. 2 §2.2–2.3; PNA Vol. II Cap. VI Sec. 2)</i></p>
+
+
+  <div class="caixa conf">
+    <span class="tag t-conf">CONFLITO</span>
+    <p style="margin-top:8px;"><b>O nó que a banca aperta:</b> A<sub>E</sub>/A₀ <u>resolve</u> a cavitação mas <u>custa</u> eficiência (atrito). Já o <b>diâmetro D</b> resolve <u>os dois</u> (cavitação e eficiência ideal). Não confundir:</p>
+    <table>
+      <tr><th>Ação</th><th>Efeito na cavitação</th><th>Efeito na eficiência</th></tr>
+      <tr><td>↑ A<sub>E</sub>/A₀</td><td>Melhora (espalha empuxo)</td><td><span class="hl-amb">Piora</span> (mais atrito)</td></tr>
+      <tr><td>↑ Diâmetro D</td><td>Melhora (baixa carga/área)</td><td><span class="hl-am">Melhora</span> (↓ C<sub>Th</sub>)</td></tr>
+    </table>
+    <p style="font-size:13px;">Distrator clássico: afirmar que "aumentar A<sub>E</sub>/A₀ aumenta a eficiência porque reduz cavitação". <b>Falso</b> — confunde o ganho contra cavitação com o custo em atrito. São efeitos opostos.</p>
+    <p style="font-size:13px;"><span class="tag t-banca" style="font-size:10px;">BANCA</span> Outra inversão: dizer que A<sub>E</sub>/A₀ "diminui com a carga". É o contrário — <b>aumenta</b> com a carga (precisa de mais área para conter a cavitação sob empuxo maior).</p>
+  </div>
+
+  <details class="pscpp" open>
+    <summary>Síntese — o porquê físico em uma frase</summary>
+    <div class="corpo">
+      <p>A área de pá é um <b>compromisso</b>: pouca área → carga concentrada → cavitação e erosão; muita área → atrito viscoso excessivo → eficiência baixa. O projetista busca a <b>menor A<sub>E</sub>/A₀ que ainda evita cavitação</b> (limite inferior dado por Burrill/Keller), e usa o <b>maior diâmetro possível</b> para aliviar a carga sem pagar o preço do atrito. <i>(Bertram Cap. 2, orig. p. 44 e §2.3; PNA Vol. II Cap. VI Sec. 7)</i></p>
+    </div>
+  </details>
+
+  <!-- ===================== CAIXAS PSCPP ===================== -->
+  <h2 class="sec">9. Pontos PSCPP</h2>
+
+  <details class="pscpp" open>
+    <summary>As quatro vistas do desenho da hélice (PNA Vol. II Sec. 6.3)</summary>
+    <div class="corpo">
+      <p>O desenho de projeto consiste em <b>quatro partes</b> (Fig. 25):</p>
+      <p>(a) <b>elevação lateral</b> — mostra o rake e o contorno projetado no plano de linha de centro;<br>
+      (b) <b>contorno desenvolvido</b> do bordo com as formas de seção;<br>
+      (c) <b>distribuição de passo</b> quando não uniforme;<br>
+      (d) <b>vista transversal</b> — onde aparecem a projeção transversal, o contorno desenvolvido e a <b>quantidade de skew</b>.</p>
+      <p style="font-size:13px; color:#7a5;"><span class="tag t-conf" style="font-size:10px;">CONFLITO</span> O contorno <b>expandido</b> surge ao dispor as seções com as linhas de passo paralelas ao eixo (vista b) — não confundir com o desenvolvido.</p>
+    </div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Por que mono-hélice usa 4 pás (Sec. 6.4)</summary>
+    <div class="corpo">
+      <p>Três ou quatro pás foram historicamente as mais eficientes; mais pás geram <b>interferência próxima ao cubo</b> e queda de eficiência. Mantendo A<sub>E</sub> constante, mais pás → maior razão de aspecto, menor corda → menor razão sustentação/arrasto. As razões de área desenvolvida variam de <span class="hl-amb">0,35 até valores acima da unidade</span> em navios de altíssima velocidade.</p>
+    </div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Convenção de rotação — "passo direito" (Bertram §2.1) <span style="color:#a8412a;">[cobrado 2008, 2012]</span></summary>
+    <div class="corpo">
+      <p>Propulsores que giram no sentido horário, <b>vistos de ré</b>, são "de rotação à direita" (<i>right-handed</i>). Em navios <i>twin-screw</i>: boreste à direita, bombordo à esquerda, girando para fora (<i>outwards</i>).</p>
+      <p style="font-size:13px;"><span class="tag t-duv" style="font-size:10px;">ATENÇÃO</span> Nas provas, <span class="hl-am">"passo direito" designa o sentido de rotação à direita</span> — não o valor do passo.</p>
+    </div>
+  </details>
+
+  <!-- ===================== RESUMO ===================== -->
+  <h2 class="sec">10. Quadro-síntese</h2>
+  <table>
+    <tr><th>Grandeza</th><th>Plano / referência</th><th>Tamanho relativo</th><th>Função-chave</th></tr>
+    <tr><td><b>A<sub>E</sub></b> expandida</td><td>Corda real esticada por raio</td><td>Maior</td><td>A<sub>E</sub>/A₀ vs. cavitação (Burrill)</td></tr>
+    <tr><td><b>A<sub>D</sub></b> desenvolvida</td><td>Linhas de passo paralelas ao eixo</td><td>Intermediária</td><td>Referência de projeto</td></tr>
+    <tr><td><b>A<sub>P</sub></b> projetada</td><td>Plano normal ao eixo (disco)</td><td>Menor</td><td>Silhueta real no disco</td></tr>
+    <tr><td><b>Skew</b></td><td>Circunferencial (plano do disco)</td><td>—</td><td>Reduz vibração / cavitação</td></tr>
+    <tr><td><b>Rake</b></td><td>Axial (eixo)</td><td>—</td><td>Folga com casco / eficiência</td></tr>
+    <tr><td><b>Camber</b></td><td>Da seção (face↔dorso)</td><td>—</td><td>Sustentação da seção</td></tr>
+    <tr><td><b>A<sub>E</sub>/A₀</b> (razão)</td><td>Área expandida / disco</td><td>↑ com a carga</td><td>↑ evita cavitação · ↓ eficiência (atrito)</td></tr>
+  </table>
+
+  <div style="text-align:center;">
+    <button class="btn-painel" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+  </div>
+
+  <footer>
+    Capital Sereno × PSCPP 2027 · Projeto P1a — Bloco B · Geometria do Hélice<br>
+    Bertram Cap. 2 · PNA (SNAME) Vol. II Cap. VI Sec. 1–2 e 6
+  </footer>
+</div>
+
+<script>
+  const caps = {
+    all: '<b>Quatro grandezas distintas.</b> Repare: A&#8346; &lt; A&#8337; sempre — a expandida estica a corda real (roxo) e é maior que a projeção no disco (verde). Use os botões para isolar cada conceito.',
+    exp: '<b>Área expandida A&#8337;:</b> a corda circunferencial real de cada seção é lançada em verdadeira grandeza por raio. É a maior das áreas. A&#8337;/A₀ cresce com a carga de empuxo (Burrill), mas reduz a eficiência por atrito. [Bertram Cap. 2; PNA Vol. II Sec. 6]',
+    proj: '<b>Área projetada A&#8346;:</b> a pá projetada num plano normal ao eixo (o disco). Pelo passo e rake, é a menor das áreas. Cubo não incluído. [Bertram Cap. 2, orig. p. 44]',
+    skew: '<b>Skew (recurvamento):</b> deslocamento circunferencial da linha do meio das cordas, curvada para trás na rotação. Adimensionalizado por D. Suaviza a entrada do bordo na esteira → menos vibração e cavitação. [PNA Vol. II Sec. 6]',
+    camber: '<b>Curvatura média (camber):</b> linha que une os pontos médios entre face e dorso da seção em aerofólio, medida da corda (BA→BF). Define a sustentação. Não confundir com rake (inclinação axial). [PNA Vol. II Sec. 6]'
+  };
+  const layers = ['proj','skew','exp','camber'];
+  const map = { all:layers, exp:['exp'], proj:['proj'], skew:['skew'], camber:['camber'] };
+  function setView(k, btn){
+    document.querySelectorAll('.seg button').forEach(b=>b.classList.remove('on'));
+    if(btn) btn.classList.add('on');
+    const on = map[k];
+    layers.forEach(l=>document.getElementById('L-'+l).classList.toggle('dim', !on.includes(l)));
+    document.getElementById('cap').innerHTML = caps[k];
+  }
+  setView('all', document.querySelector('.seg button'));
+
+  function enviarPainel(){
+    const payload = {
+      caderno_id: 'geometria_pa_helice_areas_skew',
+      tipo: 'caderno',
+      bloco: 'B',
+      tema: 'Geometria do Hélice',
+      assunto: 'Área expandida, projetada, skew e curvatura',
+      enunciado: 'Distinção das grandezas geométricas da pá e distratores da banca',
+      acertou: null,
+      sessao_data: new Date().toISOString()
+    };
+    console.log('Payload Supabase →', payload);
+    alert('Registro preparado para o Painel PSCPP.\\nTabela: respostas\\nbloco: B · tema: Geometria do Hélice\\n\\n(Integração Supabase a conectar no deploy.)');
+  }
+</script>
+</body>
+</html>
