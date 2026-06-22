@@ -159,21 +159,21 @@ const CADERNOS = [
     tags:["BANCA","Propulsor","Manobra"]
   },
   {
-    materia:"arte-naval", badge:"Alto retorno",
+    materia:"manobra-prop", badge:"Alto retorno",
     titulo:"Geometria da Pá e Projeto do Propulsor",
     arquivo:"geometria_pa_helice_areas_skew.html",
     desc:"Áreas (Aₑ/Aₚ/skew), J·K_T·K_Q·η₀, η_R, hierarquia de métodos (momento→RANSE), condição de Kutta, as 7 etapas de projeto e trade-off Aₑ/A₀.",
     tags:["BANCA","Propulsor","Projeto"]
   },
   {
-    materia:"arte-naval", badge:"Alto retorno",
+    materia:"manobra-prop", badge:"Alto retorno",
     titulo:"Cavitação — Classificação e Tipos",
     arquivo:"cavitacao_classificacao.html",
     desc:"Os 4 nº adimensionais (Euler→σ, Weber→bolhas), V_R e Reynolds do propulsor, tipos (lençol/bolha/nuvem/vórtice), Knapp e ensaios de cavitação.",
     tags:["BANCA","Cavitação","Propulsor"]
   },
   {
-    materia:"arte-naval", badge:"Médio retorno",
+    materia:"manobra-prop", badge:"Médio retorno",
     titulo:"Propulsores Não Convencionais",
     arquivo:"propulsores_nao_convencionais.html",
     desc:"Vantagens × desvantagens de Kort, CRP, CPP, azimutal, pod, waterjet, surface-piercing e Voith-Schneider, com conflitos entre fontes sinalizados.",
@@ -184,10 +184,11 @@ const CADERNOS = [
 
 /* ---- Matérias (ordem + rótulos + cor). Crie novas aqui se precisar. ---- */
 const MATERIAS = {
+  "manobra-prop":{ titulo:"Manobrabilidade — Propulsão", sub:"Módulo I · Bloco B · Propulsão e Propulsores", cor:"#1A7A6E" },
   "manobrabilidade":{ titulo:"Manobrabilidade", sub:"Módulo I · Blocos D–H", cor:"#1A7A6E" },
   "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" }
 };
-const ORDEM = ["manobrabilidade","arte-naval"];
+const ORDEM = ["manobra-prop","manobrabilidade","arte-naval"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }
