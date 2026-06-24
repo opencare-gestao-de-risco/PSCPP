@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Resistência Friccional — PNA Vol. II Cap. V §3 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  /* ---- HERO ---- */
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:34px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:680px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  /* ---- NAV ---- */
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  /* ---- BADGES de etiqueta ---- */
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  /* ---- highlights ---- */
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  /* ---- CAIXAS ---- */
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  /* ---- FÓRMULA ---- */
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:20px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  /* ---- TABELA ---- */
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  /* ---- TIMELINE (signature) ---- */
+  .timeline{position:relative;margin:24px 0;padding-left:4px}
+  .tl-item{position:relative;padding:0 0 4px 64px;margin-bottom:14px}
+  .tl-item::before{content:attr(data-year);position:absolute;left:0;top:2px;width:50px;text-align:right;
+    font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:13px;color:var(--ouro)}
+  .tl-item::after{content:"";position:absolute;left:55px;top:6px;width:2px;height:100%;background:var(--linha)}
+  .tl-item:last-child::after{display:none}
+  .tl-dot{position:absolute;left:50px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--verde2);border:2px solid var(--creme);z-index:2}
+  .tl-item.hot .tl-dot{background:var(--vermelho)}
+  .tl-card{background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:12px 15px;box-shadow:var(--sombra)}
+  .tl-card .t{font-weight:bold;color:var(--verde);font-size:16px}
+  .tl-card .d{font-size:14px;color:#4a5f59;margin-top:3px}
+
+  /* ---- CAMADA-LIMITE interativa (signature) ---- */
+  .blsim{background:linear-gradient(180deg,#eaf4f1,#dcebe6);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0}
+  .blsim .stage{position:relative;height:170px;background:linear-gradient(180deg,#bfe0f5,#9fcdec);border-radius:8px;overflow:hidden;border:1px solid #9bc3da}
+  .plate{position:absolute;left:0;bottom:0;width:100%;height:18px;background:repeating-linear-gradient(90deg,#6b5836,#6b5836 6px,#5a4a2d 6px,#5a4a2d 12px)}
+  .bl{position:absolute;left:0;bottom:18px;height:0;width:100%;
+    background:linear-gradient(180deg,rgba(155,90,60,0) 0%,rgba(13,61,54,.18) 70%,rgba(13,61,54,.34) 100%);transition:height .5s ease}
+  .transline{position:absolute;bottom:18px;width:2px;height:0;background:var(--vermelho);transition:left .5s,height .5s;left:38%}
+  .lam,.turb{position:absolute;bottom:120px;font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;color:var(--verde);background:rgba(255,255,255,.7);padding:2px 7px;border-radius:4px}
+  .lam{left:8%}.turb{left:62%}
+  .blctrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .blctrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde)}
+  .blctrl input[type=range]{flex:1;min-width:160px;accent-color:var(--verde2)}
+  .blread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:200px}
+  .blread b{color:var(--verde2)}
+
+  /* ---- QUIZ ---- */
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  /* ---- FLASHCARDS ---- */
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:150px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:16px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13.5px;transform:rotateY(180deg);line-height:1.45}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  /* ---- PSCPP anchor ---- */
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:27px}.eq{font-size:17px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco A — Resistência</p>
+    <h1>Resistência <em>Friccional</em></h1>
+    <p class="sub">O maior componente isolado da resistência total. De Froude às linhas ITTC-57 e ao fator de forma — o que a banca cobra, com as fórmulas, as armadilhas e o porquê de cada linha existir.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. II, Cap. V, Seção 3 (van Manen &amp; van Oossanen) · cruzado com Bertram Cap. 3 e Larsson &amp; Raven Cap. 6/8.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#vis">Panorama</a>
+    <a href="#froude">Froude</a>
+    <a href="#camada">Camada-limite</a>
+    <a href="#linhas">As linhas de atrito</a>
+    <a href="#fator">Fator de forma</a>
+    <a href="#sim">Camada-limite ▶</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ============ PANORAMA ============ -->
+<section class="bloco" id="vis">
+  <h2 class="sec"><span class="n">3.1</span> Por que importa tanto</h2>
+  <p class="lede">A resistência friccional é o resultado das forças <strong>tangenciais</strong> do fluido sobre o casco — a água arrastada pela superfície molhada.</p>
+
+  <p>Olhe a água turbulenta junto ao costado, crescendo da proa para a popa: é energia sendo absorvida em atrito. Em navios novos e lisos, a fração friccional vai de <span class="hl">80–85% da resistência total em navios lentos</span> a <span class="hl">cerca de 50% nos rápidos</span> <span class="tag t-decorar">DECORAR</span>. Qualquer rugosidade, corrosão ou incrustação aumenta apreciavelmente esse arrasto.</p>
+
+  <div class="box key">
+    <h4>A ideia que organiza tudo</h4>
+    <p>A resistência total se decompõe. Froude separou em <strong>friccional</strong> + <strong>residual</strong>; a visão moderna separa em <strong>viscosa</strong> + <strong>de ondas</strong>. A §3 é a história de como se estima a parte <em>friccional/viscosa</em> — porque é a única que se pode calcular por fórmula e "subtrair" para isolar o resto.</p>
+    <div class="eq">C<sub>T</sub> = C<sub>R</sub> + C<sub>F</sub> <span style="color:var(--mute)">  (Froude)</span> &nbsp;&nbsp;|&nbsp;&nbsp; C<sub>T</sub> = C<sub>V</sub> + C<sub>W</sub> <span style="color:var(--mute)">  (moderna)</span>
+    <span class="lbl">A diferença entre as duas filosofias é o coração do quê se "estica" do modelo para o navio</span></div>
+  </div>
+
+  <div class="box trap">
+    <h4>Armadilha clássica — friccional ≠ residual ≠ de ondas</h4>
+    <p><span class="hl-amb">Resistência residual NÃO é resistência de ondas.</span> Residual (Froude) = tudo que sobra depois de tirar a friccional de placa plana — inclui ondas <em>e</em> o efeito de forma na pressão viscosa. Resistência de ondas é só a parcela de ondas. A banca troca os dois. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ============ FROUDE ============ -->
+<section class="bloco" id="froude">
+  <h2 class="sec"><span class="n">3.2</span> Os experimentos de Froude</h2>
+  <p class="lede">William Froude rebocou pranchas lisas em Torquay (1872, 1874) e descobriu a lei empírica do atrito — antecipando a camada-limite anos antes de Prandtl.</p>
+
+  <p>Pranchas de <strong>0,61 m a 15,2 m</strong>, velocidades de 0,5 a 4,1 m/s. Froude viu que, a qualquer velocidade, <span class="hl">a resistência por unidade de área é menor numa prancha longa</span> — porque, na ré da prancha longa, a água já adquiriu movimento de avanço e tem velocidade relativa menor. Isso <em>é</em> a camada-limite, observada empiricamente <span class="tag t-banca">BANCA</span>.</p>
+
+  <div class="box formula">
+    <h4>Lei empírica de Froude</h4>
+    <div class="eq">R = ƒ · S · V<sup>n</sup><span class="lbl">Eq. (14) — atrito de pele empírico</span></div>
+    <p class="vars"><b>R</b> resistência (kN ou lb) · <b>S</b> área molhada total (m² ou ft²) · <b>V</b> velocidade · <b>ƒ, n</b> dependem do comprimento e da natureza da superfície.</p>
+  </div>
+
+  <table>
+    <caption style="caption-side:top;text-align:left;font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);padding-bottom:6px">Tendência dos coeficientes ƒ e n (Tabela 1 — superfície envernizada vs. rugosa)</caption>
+    <tr><th>Superfície</th><th class="center">Expoente n</th><th>Comportamento de ƒ</th></tr>
+    <tr><td>Verniz (lisa)</td><td class="center">cai de <strong>2,0 → 1,83</strong> com o comprimento</td><td>ƒ <strong>diminui</strong> com comprimento ↑; <strong>aumenta</strong> com rugosidade ↑</td></tr>
+    <tr><td>Areia (rugosa)</td><td class="center"><strong>2,0 constante</strong></td><td>idem</td></tr>
+  </table>
+  <div class="box trap">
+    <h4>Pegadinha do expoente</h4>
+    <p>Na superfície <strong>lisa</strong>, n cai com o comprimento (2,0 → 1,83). Na <strong>rugosa</strong>, n fica <strong>constante em 2,0</strong>. Inverter isso é distrator. <span class="tag t-verificar">VERIFICAR gabarito impresso</span></p>
+  </div>
+</section>
+
+<!-- ============ CAMADA-LIMITE ============ -->
+<section class="bloco" id="camada">
+  <h2 class="sec"><span class="n">3.3</span> Laminar, turbulento e a camada-limite</h2>
+  <p class="lede">Reynolds (tubo de vidro + filete de corante) mostrou dois regimes; Blasius e Prandtl–von Kármán deram as fórmulas de cada um.</p>
+
+  <p>Abaixo da velocidade crítica V<sub>c</sub>, o corante segue um filete reto — <strong>escoamento laminar</strong>, em camadas que não se misturam, resistência baixa. Acima, o filete se desfaz, há mistura transversal — <strong>escoamento turbulento</strong>, resistência maior. A transição se dá por volta de <span class="hl">R<sub>n</sub> ≈ 4,5 × 10<sup>5</sup></span>.</p>
+
+  <div class="box formula">
+    <h4>As duas leis bidimensionais (placa plana)</h4>
+    <div class="eq">Laminar (Blasius, 1908): &nbsp; C<sub>F</sub> = 1,327 · R<sub>n</sub><sup>−½</sup><span class="lbl">Eq. (15)</span></div>
+    <div class="eq">Turbulento (Prandtl–von Kármán, 1921): &nbsp; C<sub>F</sub> = 0,072 · R<sub>n</sub><sup>−1/5</sup><span class="lbl">Eq. (16)</span></div>
+    <p class="vars"><b>R<sub>n</sub></b> = VL/ν · <b>ν</b> viscosidade cinemática · <b>L</b> comprimento. A transição não é simultânea: começa num R<sub>c</sub> crítico e o ponto de transição avança com a velocidade.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Armadilha do expoente — ½ vs. 1/5</h4>
+    <p>Laminar varia com <strong>R<sub>n</sub><sup>−½</sup></strong> (Blasius); turbulento com <strong>R<sub>n</sub><sup>−1/5</sup></strong>. Trocar os expoentes (ou os coeficientes 1,327 ↔ 0,072) é distrator favorito. <span class="tag t-calc">CALCULO</span></p>
+  </div>
+</section>
+
+<!-- ============ LINHAS ============ -->
+<section class="bloco" id="linhas">
+  <h2 class="sec"><span class="n">3.4–3.5</span> As linhas de atrito — uma linha do tempo</h2>
+  <p class="lede">Cada "linha" é uma tentativa de dar um único C<sub>F</sub>(R<sub>n</sub>) confiável para extrapolar do modelo ao navio. Saber <em>quem propôs o quê</em> e a fórmula exata é cobrança recorrente.</p>
+
+  <div class="timeline">
+    <div class="tl-item" data-year="1872"><span class="tl-dot"></span><div class="tl-card">
+      <div class="t">Froude — pranchas de Torquay</div>
+      <div class="d">Lei empírica R = ƒSV<sup>n</sup>. Tideman (1876) reanalisou os dados para os coeficientes do navio; usados na EMB de 1901 a 1923.</div>
+    </div></div>
+
+    <div class="tl-item hot" data-year="1932"><span class="tl-dot"></span><div class="tl-card">
+      <div class="t">Schoenherr — a "linha ATTC" <span class="tag t-banca">BANCA</span></div>
+      <div class="d">Reuniu os testes de pranchas e ajustou a forma teórica de Prandtl–von Kármán com M = 0 e A = 0,242:</div>
+      <div class="eq" style="font-size:18px;margin:8px 0 0">0,242 / √C<sub>F</sub> = log<sub>10</sub>(R<sub>n</sub>·C<sub>F</sub>)<span class="lbl">Eq. (17) — Schoenherr / ATTC. Adotada pelo ATTC em 1947; tolerância de rugosidade +0,0004</span></div>
+    </div></div>
+
+    <div class="tl-item hot" data-year="1957"><span class="tl-dot"></span><div class="tl-card">
+      <div class="t">ITTC-57 — linha de correlação modelo-navio <span class="tag t-banca">BANCA</span></div>
+      <div class="d">Madrid, 1957. A mais cobrada de todas. Corrige a inclinação insuficiente da linha de Schoenherr em baixos R<sub>n</sub>:</div>
+      <div class="eq" style="font-size:19px;margin:8px 0 0">C<sub>F</sub> = 0,075 / (log<sub>10</sub> R<sub>n</sub> − 2)²<span class="lbl">Eq. (20) — ITTC 1957</span></div>
+    </div></div>
+
+    <div class="tl-item" data-year="1977"><span class="tl-dot"></span><div class="tl-card">
+      <div class="t">Granville — generalização da ITTC-57</div>
+      <div class="d">Mostrou que a ITTC-57 também serve como linha de atrito plano turbulento. Forma geral:</div>
+      <div class="eq" style="font-size:17px;margin:8px 0 0">C<sub>FO</sub> = a/(log<sub>10</sub>R<sub>n</sub> − b)² + c/R<sub>n</sub><span class="lbl">Eq. (21): a=0,0776, b=1,88, c=60 — recai na ITTC-57 com a=0,075, b=2, c=0</span></div>
+    </div></div>
+  </div>
+
+  <div class="box trap">
+    <h4>A armadilha conceitual nº 1 da §3</h4>
+    <p><span class="hl-amb">A ITTC-57 é uma "linha de correlação modelo-navio", NÃO uma "linha de resistência friccional".</span> Ela <em>não</em> pretende representar o atrito de uma placa plana — já embute algum efeito 3D da forma do navio (por isso é ~12% maior que a linha de Hughes em toda a faixa de R<sub>n</sub>). Foi rotulada como "solução provisória para fins práticos de engenharia". Confundir os dois nomes é erro clássico. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+
+  <div class="box key">
+    <h4>Não confunda os coeficientes</h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Linha</th><th class="center">Fórmula</th><th class="center">Coef. chave</th></tr>
+      <tr><td>ITTC-57</td><td class="center">0,075/(log R<sub>n</sub>−2)²</td><td class="center"><strong>0,075</strong></td></tr>
+      <tr><td>Hughes (placa plana)</td><td class="center">0,067/(log R<sub>n</sub>−2)²</td><td class="center"><strong>0,067</strong></td></tr>
+      <tr><td>Granville (geral)</td><td class="center">0,0776/(log R<sub>n</sub>−1,88)² + 60/R<sub>n</sub></td><td class="center"><strong>0,0776</strong></td></tr>
+    </table>
+    <p style="font-size:13.5px;color:var(--mute);margin-top:8px">A banca troca <strong>0,075 ↔ 0,067</strong> e o <strong>−2 ↔ −1,88</strong>. A ITTC-57 é a que você decora de cor. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+
+  <div class="box formula">
+    <h4>Correções práticas (3.5)</h4>
+    <p class="vars"><b>Temperatura padrão:</b> 15 °C (59 °F). Correção de <strong>−0,43%</strong> da R<sub>F</sub> por +1 °C (ou −0,24% por +1 °F).<br>
+    <b>Tolerância de correlação/rugosidade (C<sub>A</sub>):</b> tipicamente <strong>+0,0004</strong> para navios novos e limpos (na linha de Schoenherr/ITTC).</p>
+  </div>
+</section>
+
+<!-- ============ FATOR DE FORMA ============ -->
+<section class="bloco" id="fator">
+  <h2 class="sec"><span class="n">3.6</span> Fator de forma — a abordagem tridimensional</h2>
+  <p class="lede">Hughes propôs separar a viscosa da de ondas e medir quanto a <em>forma 3D</em> do casco amplia o atrito de placa plana. Esse é o conceito que distingue ITTC-57 de ITTC-78.</p>
+
+  <p>A baixo número de Froude, C<sub>W</sub> → 0 e a curva de C<sub>TM</sub> fica quase paralela à linha de atrito 2D. Hughes chamou esse ponto de <strong>ponto de run-in</strong> (R<sub>n0</sub>). Ali, C<sub>TM</sub> ≈ C<sub>VM</sub>.</p>
+
+  <div class="box formula">
+    <h4>Definição do fator de forma</h4>
+    <div class="eq">(1 + k) = C<sub>TM</sub>(R<sub>n0</sub>) / C<sub>FO</sub>(R<sub>n0</sub>)<span class="lbl">o fator k contabiliza a forma 3D do casco</span></div>
+    <div class="eq">C<sub>VM</sub> = (1 + k) · C<sub>FO</sub>(R<sub>n</sub>)<span class="lbl">resistência viscosa 3D = atrito de placa plana × (1+k)</span></div>
+    <p class="vars"><b>(1+k)</b> assumido <strong>invariante com R<sub>n</sub></strong> · <b>C<sub>FO</sub></b> coef. de placa plana equivalente.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Método de Prohaska (determinação experimental de k)</h4>
+    <div class="eq">C<sub>T</sub>/C<sub>F</sub> = (1 + k) + c · F<sub>n</sub><sup>n</sup>/C<sub>F</sub><span class="lbl">Eq. (23): 4 ≤ n ≤ 6 (tipicamente n = 4); c e k ajustados aos pontos medidos</span></div>
+    <p class="vars">Plotando C<sub>T</sub>/C<sub>F</sub> contra F<sub>n</sub><sup>4</sup>/C<sub>F</sub> e extrapolando para F<sub>n</sub> → 0 (elimina as ondas), o intercepto no eixo vertical é <strong>(1+k)</strong>. <span class="tag t-banca">BANCA</span></p>
+  </div>
+
+  <div class="box key">
+    <h4>Froude × Fator de forma — a diferença que cai</h4>
+    <p>No método de <strong>Froude</strong>, todo o C<sub>R</sub> (residual) é transferido ao navio <em>inalterado</em>. No método do <strong>fator de forma</strong>, só a parcela de C<sub>R</sub> atribuída a efeitos viscosos é reduzida na transferência (escala com R<sub>n</sub>); a de ondas passa igual. A introdução da filosofia do fator de forma melhorou a correlação modelo-navio (ITTC, 1978). <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ============ SIMULADOR ============ -->
+<section class="bloco" id="sim">
+  <h2 class="sec"><span class="n">▶</span> A camada-limite, na prática</h2>
+  <p class="lede">Aumente a velocidade (o número de Reynolds) e veja a camada-limite engrossar e o ponto de transição laminar→turbulento avançar em direção à proa.</p>
+
+  <div class="blsim">
+    <div class="stage" id="blStage">
+      <div class="lam">LAMINAR</div>
+      <div class="turb">TURBULENTO</div>
+      <div class="bl" id="blLayer"></div>
+      <div class="transline" id="blTrans"></div>
+      <div class="plate"></div>
+    </div>
+    <div class="blctrl">
+      <label for="blV">Velocidade →</label>
+      <input type="range" id="blV" min="0" max="100" value="35" oninput="updateBL()">
+      <div class="blread" id="blRead">R<sub>n</sub> baixo · transição perto da popa</div>
+    </div>
+  </div>
+  <p style="font-size:13.5px;color:var(--mute)">A faixa friccional cresce e fica mais turbulenta à medida que R<sub>n</sub> sobe — é por isso que pranchas longas (R<sub>n</sub> maior) têm <em>menor</em> resistência <em>específica</em>, mesmo com mais área turbulenta total.</p>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Cinco questões com os distratores que a banca realmente usa. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLASHCARDS ============ -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os números e nomes que a banca exige de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ============ PSCPP ============ -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Resistência Friccional (§3)</summary>
+  <ul>
+    <li><b>Fração friccional:</b> 80–85% (navios lentos) a ~50% (rápidos). Maior componente isolado.</li>
+    <li><b>ITTC-57:</b> <code>C_F = 0,075/(log Rn − 2)²</code> — decorar de cor. É linha de <em>correlação modelo-navio</em>, não de atrito puro (embute efeito 3D; ~12% &gt; Hughes).</li>
+    <li><b>Hughes (placa plana):</b> 0,067/(log Rn − 2)². Não confundir 0,075 ↔ 0,067.</li>
+    <li><b>Laminar × turbulento:</b> Blasius 1,327·Rn<sup>−½</sup> · Prandtl–von Kármán 0,072·Rn<sup>−1/5</sup>. Transição ~4,5×10⁵.</li>
+    <li><b>Froude:</b> R = ƒSV<sup>n</sup>. Lisa: n cai 2,0→1,83 com L. Rugosa: n = 2,0 constante.</li>
+    <li><b>Fator de forma:</b> (1+k) = C<sub>TM</sub>/C<sub>FO</sub> no ponto de run-in; Prohaska C<sub>T</sub>/C<sub>F</sub> = (1+k) + c·Fn⁴/C<sub>F</sub>.</li>
+    <li><b>Froude × fator de forma:</b> Froude transfere C<sub>R</sub> inteiro inalterado; fator de forma reduz só a parte viscosa.</li>
+    <li><b>Distratores:</b> residual ≠ de ondas · expoente ½ ↔ 1/5 · 0,075 ↔ 0,067 · −2 ↔ −1,88 · "linha de correlação" ≠ "linha de atrito".</li>
+    <li><b>Schoenherr:</b> 0,242/√C<sub>F</sub> = log(Rn·C<sub>F</sub>) = linha ATTC; tolerância +0,0004 (rugosidade).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Resistência Friccional (PNA Vol. II Cap. V §3) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ---------- Camada-limite ---------- */
+function updateBL(){
+  var v=+document.getElementById('blV').value;            // 0..100
+  var h=10+v*0.95;                                         // espessura BL
+  document.getElementById('blLayer').style.height=h+'px';
+  var transPos=90-v*0.78;                                  // % da esquerda (avança p/ proa)
+  var tl=document.getElementById('blTrans');
+  tl.style.left=transPos+'%'; tl.style.height=(h*0.8)+'px';
+  var rn = (1e5 * Math.pow(10, v/28)).toExponential(1);
+  var regime = v<25 ? 'transição perto da popa' : v<60 ? 'transição avançando' : 'quase toda turbulenta';
+  document.getElementById('blRead').innerHTML='R<sub>n</sub> ≈ '+rn+' · '+regime;
+}
+updateBL();
+
+/* ---------- Quiz ---------- */
+var QUIZ=[
+  {q:"A linha ITTC-57, C_F = 0,075/(log Rn − 2)², é melhor descrita como:",
+   o:["Uma linha de resistência friccional de placa plana pura",
+      "Uma linha de correlação modelo-navio, que embute algum efeito 3D da forma",
+      "A fórmula de resistência residual de Froude",
+      "A linha de escoamento laminar de Blasius"],
+   a:1, e:"Ela foi rotulada como linha de CORRELAÇÃO modelo-navio (solução provisória), não de atrito puro — por isso é ~12% maior que a linha de Hughes em toda a faixa de Rn."},
+  {q:"Em escoamento laminar sobre placa plana, o coeficiente de atrito varia com:",
+   o:["Rn^(−1/5), pela fórmula de Prandtl–von Kármán",
+      "Rn^(−½), pela fórmula de Blasius (1,327·Rn^−½)",
+      "(log Rn − 2)², pela ITTC-57",
+      "V², pela lei empírica de Froude"],
+   a:1, e:"Laminar = Blasius, C_F = 1,327·Rn^(−½). O expoente −1/5 (0,072·Rn^−1/5) é o TURBULENTO de Prandtl–von Kármán. Trocar os dois é o distrator clássico."},
+  {q:"Nos experimentos de Froude, para a superfície LISA (envernizada), o expoente n:",
+   o:["Permanece constante em 2,0",
+      "Cai de 2,0 para 1,83 com o aumento do comprimento",
+      "Sobe de 1,83 para 2,0 com o comprimento",
+      "É sempre 1,825"],
+   a:1, e:"Lisa: n cai de 2,0 (prancha curta) para 1,83 (prancha de 15,2 m). É a RUGOSA (areia) que mantém n = 2,0 constante."},
+  {q:"O fator de forma (1+k) no método de Hughes é definido como:",
+   o:["C_R / C_F no ponto de transição",
+      "C_TM(Rn0)/C_FO(Rn0) no ponto de run-in, e assumido invariante com Rn",
+      "0,075 / (log Rn − 2)²",
+      "A razão entre resistência de ondas e residual"],
+   a:1, e:"(1+k) = C_TM/C_FO no ponto de run-in (baixo Fn, onde C_W→0), tomado como independente de Rn. Multiplica o atrito de placa plana para dar a viscosa 3D."},
+  {q:"Diferença essencial entre o método de Froude e o método do fator de forma:",
+   o:["Froude ignora a resistência friccional",
+      "Froude transfere todo o C_R inalterado; o fator de forma reduz só a parcela viscosa do C_R na transferência",
+      "O fator de forma transfere todo o C_R inalterado",
+      "Ambos são idênticos numericamente"],
+   a:1, e:"No método de Froude, o C_R (residual) inteiro vai ao navio inalterado. No fator de forma, só a parte viscosa do residual escala com Rn; a de ondas passa igual. Isso melhorou a correlação (ITTC-78)."}
+];
+var qi=0, answered=false;
+function loadQ(){
+  var Q=QUIZ[qi]; answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts'); box.innerHTML="";
+  Q.o.forEach(function(t,i){
+    var b=document.createElement('button'); b.className='opt'; b.textContent=t;
+    b.onclick=function(){pick(i,b);}; box.appendChild(b);
+  });
+  var fb=document.getElementById('qFb'); fb.className='fb'; fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+}
+function pick(i,btn){
+  if(answered) return; answered=true;
+  var Q=QUIZ[qi]; var opts=document.querySelectorAll('#qOpts .opt');
+  opts.forEach(function(o,j){ if(j===Q.a)o.classList.add('right'); });
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){ fb.className='fb ok show'; fb.innerHTML="✓ Correto. "+Q.e; }
+  else{ btn.classList.add('wrong'); fb.className='fb no show'; fb.innerHTML="✗ "+Q.e; }
+  document.getElementById('qNext').disabled = (qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1){ document.getElementById('qNext').textContent="Fim ✓"; }
+}
+function nextQ(){ if(qi<QUIZ.length-1){qi++; loadQ();} }
+loadQ();
+
+/* ---------- Flashcards ---------- */
+var FC=[
+  {f:"ITTC-57", b:"C_F = 0,075 / (log₁₀ Rn − 2)². Linha de correlação modelo-navio (não atrito puro)."},
+  {f:"Hughes (placa plana)", b:"C_F = 0,067 / (log₁₀ Rn − 2)². ~12% menor que a ITTC-57."},
+  {f:"Blasius (laminar)", b:"C_F = 1,327 · Rn^(−½). Escoamento em camadas, baixa resistência."},
+  {f:"Prandtl–von Kármán (turbulento)", b:"C_F = 0,072 · Rn^(−1/5). Mistura transversal, resistência maior."},
+  {f:"Froude (empírica)", b:"R = ƒ·S·Vⁿ. Lisa: n 2,0→1,83. Rugosa: n=2,0 fixo."},
+  {f:"Schoenherr / ATTC", b:"0,242/√C_F = log₁₀(Rn·C_F). Tolerância de rugosidade +0,0004."},
+  {f:"Fator de forma", b:"(1+k) = C_TM/C_FO no ponto de run-in. Invariante com Rn. Viscosa 3D = (1+k)·C_FO."},
+  {f:"Prohaska", b:"C_T/C_F = (1+k) + c·Fn⁴/C_F. Extrapola Fn→0 para achar (1+k)."},
+  {f:"Fração friccional", b:"80–85% (navios lentos) → ~50% (rápidos). Maior componente isolado."},
+  {f:"Transição laminar→turb.", b:"Em torno de Rn ≈ 4,5 × 10⁵. Ponto de transição avança com a velocidade."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){
+  var d=document.createElement('div'); d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div>'
+    +'<div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){ d.classList.toggle('flip'); };
+  grid.appendChild(d);
+});
+</script>
+</body>
+</html>

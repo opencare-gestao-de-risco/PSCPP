@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Interação Casco-Hélice — PNA Vol. II Cap. VI §4 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:690px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:250px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:84px}
+  .ictrl input[type=range]{flex:1;min-width:130px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  /* cascade decomposition */
+  .cascade{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin:14px 0}
+  .cbar{flex:1;min-width:90px;border-radius:8px;padding:12px 8px;text-align:center;color:#fff;font-family:'Trebuchet MS',sans-serif}
+  .cbar .v{font-size:22px;font-weight:bold;display:block}
+  .cbar .l{font-size:11px;opacity:.92}
+  .cop{display:flex;align-items:center;font-size:22px;color:var(--mute);font-weight:bold}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:155px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15.5px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:26px}.eq{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco B — Propulsão</p>
+    <h1>Interação <em>Casco-Hélice</em></h1>
+    <p class="sub">O hélice não trabalha em água parada: a esteira o desacelera e a dedução de empuxo "rouba" parte do empuxo. Wake, thrust deduction, eficiência de casco e a decomposição η_D = η_H · η_R · η₀.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. II, Cap. VI, Seção 4 (van Manen &amp; van Oossanen).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#esteira">Esteira (wake)</a>
+    <a href="#va">V_A = V(1−w) ▶</a>
+    <a href="#desliz">Deslizamento</a>
+    <a href="#etar">η rotativa relativa</a>
+    <a href="#deducao">Dedução de empuxo</a>
+    <a href="#etah">η do casco ▶</a>
+    <a href="#etad">η_D = η_H·η_R·η₀ ▶</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===== 4.2 ESTEIRA ===== -->
+<section class="bloco" id="esteira">
+  <h2 class="sec"><span class="n">4.2</span> Esteira (wake) — Froude × Taylor</h2>
+  <p class="lede">Atrás do casco a água já adquiriu movimento para a frente. O hélice avança em relação a essa água a uma velocidade <strong>menor</strong> que a do navio: a velocidade de avanço V<sub>A</sub>.</p>
+
+  <div class="box formula">
+    <h4>As duas definições de fração de esteira <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">Froude: &nbsp; w<sub>F</sub> = (V − V<sub>A</sub>) / V<sub>A</sub> &nbsp;⇒&nbsp; V<sub>A</sub> = V/(1 + w<sub>F</sub>)<span class="lbl">Eq. (25) — esteira como fração da velocidade de AVANÇO</span></div>
+    <div class="eq">Taylor: &nbsp; w = (V − V<sub>A</sub>) / V &nbsp;⇒&nbsp; V<sub>A</sub> = V(1 − w)<span class="lbl">Eq. (26) — esteira como fração da velocidade do NAVIO</span></div>
+    <p class="vars">Conversão: <b>w = w<sub>F</sub>/(1 + w<sub>F</sub>)</b> · <b>w<sub>F</sub> = w/(1 − w)</b>. A definição de Taylor é hoje quase universal.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>A pegadinha nº1 do bloco — "esteira de 50%"</h4>
+    <p>Uma esteira de 50% significa coisas diferentes: em <strong>Taylor</strong>, a velocidade de esteira é 50% de V; em <strong>Froude</strong>, é só 33% de V. Cuidado ao usar dados antigos (britânicos), que dão w<sub>F</sub>. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+
+  <div class="box key">
+    <h4>As 3 causas da esteira</h4>
+    <ol style="margin:6px 0 0;padding-left:22px">
+      <li><strong>Friccional</strong> — a corrente de acompanhamento do atrito cresce em volume e velocidade rumo à popa.</li>
+      <li><strong>Linhas de corrente (potencial)</strong> — o fechamento das linhas na popa aumenta a pressão e reduz a velocidade relativa → esteira positiva.</li>
+      <li><strong>Ondas</strong> — o movimento orbital das partículas: positiva na crista, negativa no cavado.</li>
+    </ol>
+    <p style="margin-top:8px">A esteira total é quase sempre <strong>positiva</strong>. Exceção: embarcações de altíssima velocidade (contratorpedeiros), onde a esteira de ondas pode ser <strong>negativa</strong> se houver um cavado na hélice. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== V_A CHART ===== -->
+<section class="bloco" id="va">
+  <h2 class="sec"><span class="n">▶</span> Como a esteira reduz a velocidade de avanço</h2>
+  <p class="lede">O hélice "vê" V_A = V(1−w), não V. Deslize a fração de esteira e compare as duas notações.</p>
+
+  <div class="ichart">
+    <h4>V_A em função da fração de esteira (Taylor)</h4>
+    <p class="hint">Barra: velocidade do navio V (fixa) e a velocidade de avanço V_A que o hélice realmente enxerga.</p>
+    <canvas id="vaCanvas" width="860" height="180"></canvas>
+    <div class="ictrl">
+      <label for="vaW">w (Taylor) →</label>
+      <input type="range" id="vaW" min="0" max="55" value="25" oninput="drawVA()">
+      <div class="iread" id="vaRead"></div>
+    </div>
+  </div>
+  <p>Quanto maior a esteira, menor a velocidade que o hélice enfrenta — o que muda o ponto de operação (J, K_T, K_Q). Esteira típica: bi-hélice é menor (hélice mais afastada do casco); mono-hélice é maior (hélice no campo de esteira concentrado da popa).</p>
+</section>
+
+<!-- ===== 4.3 DESLIZAMENTO ===== -->
+<section class="bloco" id="desliz">
+  <h2 class="sec"><span class="n">4.3</span> Deslizamento real e aparente</h2>
+  <p class="lede">O deslizamento (slip) é o quanto o hélice "patina" em relação ao seu passo geométrico. Há duas versões — e elas não são iguais.</p>
+  <div class="box formula">
+    <div class="eq">Real: &nbsp; s<sub>R</sub> = 1 − V<sub>A</sub>/(P·n)<span class="lbl">usa a velocidade de AVANÇO V_A — guia real do desempenho, exige a esteira efetiva</span></div>
+    <div class="eq">Aparente: &nbsp; s<sub>A</sub> = 1 − V/(P·n)<span class="lbl">usa a velocidade do NAVIO V — fácil de calcular, registrada no diário de bordo</span></div>
+    <p class="vars"><b>P</b> passo · <b>n</b> rotações. O deslizamento real é o único guia verdadeiro, mas exige conhecer a esteira; o aparente só precisa de V, n e P.</p>
+  </div>
+  <div class="box trap">
+    <h4>Real × aparente</h4>
+    <p>Como V<sub>A</sub> &lt; V (esteira positiva), o deslizamento <strong>aparente</strong> é menor que o real. Trocar V por V<sub>A</sub> nas fórmulas é distrator clássico. <span class="tag t-calc">CALCULO</span></p>
+  </div>
+</section>
+
+<!-- ===== 4.4 ETA_R ===== -->
+<section class="bloco" id="etar">
+  <h2 class="sec"><span class="n">4.4</span> Eficiência rotativa relativa (η_R)</h2>
+  <p class="lede">A mesma hélice, ao mesmo empuxo e rotação, pede um torque diferente atrás do casco (esteira heterogênea) e em águas livres (entrada uniforme).</p>
+  <div class="box formula">
+    <div class="eq">η₀ = T·V<sub>A</sub>/(2πnQ₀) &nbsp;·&nbsp; η<sub>B</sub> = T·V<sub>A</sub>/(2πnQ)</div>
+    <div class="eq">η<sub>R</sub> = η<sub>B</sub>/η₀ = Q₀/Q<span class="lbl">Eq. (35) — razão dos torques (águas livres / atrás do casco)</span></div>
+    <p class="vars">Valores típicos: <b>0,95–1,0</b> (bi-hélice) e <b>1,0–1,1</b> (mono-hélice). Fica perto de 1. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== 4.5 DEDUCAO ===== -->
+<section class="bloco" id="deducao">
+  <h2 class="sec"><span class="n">4.5</span> Aumento de resistência e dedução de empuxo (t)</h2>
+  <p class="lede">O hélice acelera a água na popa, baixa a pressão ali e <em>aumenta</em> a resistência do casco. Em vez de "aumento de resistência", trata-se isso como uma dedução do empuxo.</p>
+  <div class="box formula">
+    <h4>Duas formas de ver o mesmo efeito</h4>
+    <div class="eq">Aumento de resistência: &nbsp; T = (1 + a)·R<sub>T</sub><span class="lbl">Eq. (36) — a = fração de aumento de resistência</span></div>
+    <div class="eq">Dedução de empuxo: &nbsp; t = (T − R<sub>T</sub>)/T = 1 − R<sub>T</sub>/T &nbsp;⇒&nbsp; R<sub>T</sub> = (1 − t)·T<span class="lbl">Eq. (37) — t = fração de dedução de empuxo</span></div>
+    <p class="vars">A hélice fornece T, mas só (1−t)·T fica disponível para vencer a resistência. <b>(1 − t)</b> = fator de dedução de empuxo.</p>
+  </div>
+  <div class="box key">
+    <h4>O exemplo de Todd (1934) <span class="tag t-banca">BANCA</span></h4>
+    <p>Navio de carga de 121,9 m: casco nu → <span class="hl">t = 0,2</span>; com leme de placa + poste de popa quadrado → <span class="hl-amb">t = 0,29</span> (perda considerável); afinando a proa do poste em aleta → t = 0,24. Mostra como apêndices mal projetados na popa elevam t. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== 4.6 ETA_H ===== -->
+<section class="bloco" id="etah">
+  <h2 class="sec"><span class="n">4.6</span> Eficiência do casco (η_H)</h2>
+  <p class="lede">É a razão entre o trabalho feito no navio (R_T·V) e o trabalho feito pela hélice (T·V_A). É o único η que pode passar de 1.</p>
+
+  <div class="box formula">
+    <div class="eq">η<sub>H</sub> = P<sub>E</sub>/P<sub>T</sub> = R<sub>T</sub>·V/(T·V<sub>A</sub>) = (1 − t)/(1 − w)<span class="lbl">Eq. (38) — notação Taylor</span></div>
+    <div class="eq">η<sub>H</sub> = (1 + w<sub>F</sub>)(1 − t)<span class="lbl">notação Froude</span></div>
+  </div>
+
+  <div class="ichart">
+    <h4>η_H = (1 − t)/(1 − w)</h4>
+    <p class="hint">Deslize a esteira w e a dedução t. Quando w &gt; t, η_H &gt; 1 (a esteira "devolve" energia que mais que compensa a dedução).</p>
+    <canvas id="hCanvas" width="860" height="240"></canvas>
+    <div class="ictrl">
+      <label for="hW">w (esteira) →</label>
+      <input type="range" id="hW" min="0" max="50" value="30" oninput="drawH()">
+    </div>
+    <div class="ictrl">
+      <label for="hT">t (dedução) →</label>
+      <input type="range" id="hT" min="0" max="40" value="20" oninput="drawH()">
+      <div class="iread" id="hRead"></div>
+    </div>
+  </div>
+
+  <div class="box trap">
+    <h4>η_H &gt; 1 não viola energia</h4>
+    <p>A eficiência do casco pode passar de 1 porque a hélice opera na esteira (V<sub>A</sub> &lt; V): recupera parte da energia já gasta no atrito do casco. Não é "moto-perpétuo" — apenas a contabilidade entre P<sub>E</sub> e P<sub>T</sub>. Quando w &gt; t, η_H &gt; 1. <span class="tag t-conflito">CONFLITO conceitual</span></p>
+  </div>
+</section>
+
+<!-- ===== 4.7 ETA_D ===== -->
+<section class="bloco" id="etad">
+  <h2 class="sec"><span class="n">4.7</span> A decomposição: η_D = η_H · η_R · η₀</h2>
+  <p class="lede">O coração da seção. O coeficiente quase-propulsivo se fatora em três eficiências — o que permite atacar cada perda separadamente.</p>
+
+  <div class="box formula">
+    <div class="eq">η<sub>D</sub> = [(1 − t)/(1 − w)] · η<sub>R</sub> · η₀ = η<sub>H</sub> · η<sub>R</sub> · η₀<span class="lbl">Eq. (39) — quase-propulsivo = casco × rotativa relativa × águas livres</span></div>
+  </div>
+
+  <div class="ichart">
+    <h4>Decomposição interativa de η_D</h4>
+    <p class="hint">Ajuste cada fator e veja a cascata. Mostra como cada eficiência puxa o η_D final.</p>
+    <div class="cascade" id="cascade"></div>
+    <div class="ictrl"><label for="dW">w →</label><input type="range" id="dW" min="0" max="50" value="30" oninput="drawCascade()"></div>
+    <div class="ictrl"><label for="dT">t →</label><input type="range" id="dT" min="0" max="40" value="18" oninput="drawCascade()"></div>
+    <div class="ictrl"><label for="dR">η_R →</label><input type="range" id="dR" min="90" max="110" value="102" oninput="drawCascade()"></div>
+    <div class="ictrl"><label for="d0">η₀ →</label><input type="range" id="d0" min="40" max="75" value="60" oninput="drawCascade()"></div>
+  </div>
+  <p>Em notação de Froude: η<sub>D</sub> = (1 + w<sub>F</sub>)(1 − t)·η<sub>R</sub>·η₀. A decomposição é a ferramenta central para estimar e melhorar a eficiência propulsiva no projeto. <span class="tag t-decorar">DECORAR</span></p>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Sete questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As fórmulas e números de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Interação Casco-Hélice (§4)</summary>
+  <ul>
+    <li><b>Esteira:</b> Taylor w=(V−V_A)/V → V_A=V(1−w). Froude w_F=(V−V_A)/V_A → V_A=V/(1+w_F). Conversão w=w_F/(1+w_F).</li>
+    <li><b>3 causas:</b> friccional · linhas de corrente (potencial) · ondas. Total quase sempre positiva (negativa só em navios muito rápidos).</li>
+    <li><b>"Esteira 50%":</b> Taylor = 50% de V; Froude = 33% de V.</li>
+    <li><b>Deslizamento:</b> real s_R=1−V_A/(Pn) (guia verdadeiro); aparente s_A=1−V/(Pn) (diário de bordo). Aparente &lt; real.</li>
+    <li><b>η_R:</b> = Q₀/Q. 0,95–1,0 (bi-hélice), 1,0–1,1 (mono-hélice). Perto de 1.</li>
+    <li><b>Dedução de empuxo:</b> t=(T−R_T)/T → R_T=(1−t)T. Todd: t=0,2 (nu) → 0,29 (leme placa+poste) → 0,24 (afinado).</li>
+    <li><b>Eficiência do casco:</b> η_H=(1−t)/(1−w). Pode ser &gt;1 quando w&gt;t (recupera energia da esteira).</li>
+    <li><b>Decomposição:</b> η_D = η_H · η_R · η₀ = [(1−t)/(1−w)]·η_R·η₀. Em Froude: (1+w_F)(1−t)·η_R·η₀.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Interação Casco-Hélice (PNA Vol. II Cap. VI §4) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== V_A bar chart ===== */
+function drawVA(){
+  var cv=document.getElementById('vaCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var w=(+document.getElementById('vaW').value)/100;
+  var x0=110,barW=W-160,y1=46,y2=104,bh=42;
+  // V (full)
+  ctx.fillStyle='#1A7A6E';ctx.fillRect(x0,y1,barW,bh);
+  ctx.fillStyle='#fff';ctx.font='bold 14px Trebuchet MS';ctx.fillText('V (navio)',x0+10,y1+26);
+  ctx.fillStyle='#16302B';ctx.font='13px Trebuchet MS';ctx.textAlign='right';ctx.fillText('V',x0-12,y1+26);ctx.textAlign='left';
+  // V_A
+  var vaW=barW*(1-w);
+  ctx.fillStyle='#C8A84B';ctx.fillRect(x0,y2,vaW,bh);
+  ctx.fillStyle='#16302B';ctx.font='bold 14px Trebuchet MS';ctx.fillText('V_A = V(1−w)',x0+10,y2+26);
+  ctx.font='13px Trebuchet MS';ctx.textAlign='right';ctx.fillText('V_A',x0-12,y2+26);ctx.textAlign='left';
+  // wake gap shaded
+  ctx.fillStyle='rgba(158,59,46,.18)';ctx.fillRect(x0+vaW,y2,barW-vaW,bh);
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([4,3]);ctx.strokeRect(x0+vaW,y2,barW-vaW,bh);ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.font='11px Trebuchet MS';ctx.fillText('esteira',x0+vaW+6,y2+26);
+  var wF=w/(1-w);
+  document.getElementById('vaRead').innerHTML='w = <b>'+w.toFixed(2)+'</b> · V_A = <b>'+((1-w)*100).toFixed(0)+'% de V</b> · w_F = <b>'+wF.toFixed(2)+'</b>';
+}
+drawVA();
+
+/* ===== eta_H chart vs w (curves for the chosen t) ===== */
+function drawH(){
+  var cv=document.getElementById('hCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-32,pW=W-78,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  var t=(+document.getElementById('hT').value)/100;
+  var wSel=(+document.getElementById('hW').value)/100;
+  var wMax=0.55;
+  function px(v){return x0+v/wMax*pW;}
+  var yMin=0.7,yMax=1.6;
+  function py(v){return y0-(v-yMin)/(yMax-yMin)*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('η_H',8,24);ctx.fillText('w',W-30,y0+20);
+  // unit line
+  ctx.strokeStyle='#ddd2b0';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(x0,py(1));ctx.lineTo(W-18,py(1));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a99';ctx.fillText('η_H = 1',W-78,py(1)-4);
+  [0.7,1.0,1.3,1.6].forEach(function(v){ctx.fillStyle='#a99';ctx.fillText(v.toFixed(1),x0-32,py(v)+4);});
+  [0,0.1,0.2,0.3,0.4,0.5].forEach(function(v){ctx.fillStyle='#a99';ctx.fillText(v.toFixed(1),px(v)-6,y0+16);});
+  // curve eta_H = (1-t)/(1-w) for current t
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.6;ctx.beginPath();var f=true;
+  for(var w=0;w<=wMax;w+=0.005){var eh=(1-t)/(1-w);var X=px(w),Y=py(eh);if(eh>=yMin&&eh<=yMax){if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}}ctx.stroke();
+  // marker
+  var ehSel=(1-t)/(1-wSel);
+  var mx=px(wSel),my=py(Math.min(yMax,Math.max(yMin,ehSel)));
+  ctx.fillStyle='#16302B';ctx.beginPath();ctx.arc(mx,my,5,0,7);ctx.fill();
+  ctx.strokeStyle='#16302B';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(mx,my);ctx.lineTo(mx,y0);ctx.stroke();ctx.setLineDash([]);
+  var rel = ehSel>1?'η_H > 1 (w > t: esteira compensa)':'η_H < 1 (t > w)';
+  document.getElementById('hRead').innerHTML='w=<b>'+wSel.toFixed(2)+'</b> · t=<b>'+t.toFixed(2)+'</b> · η_H = <b>'+ehSel.toFixed(3)+'</b> · '+rel;
+}
+drawH();
+
+/* ===== cascade eta_D ===== */
+function drawCascade(){
+  var w=(+document.getElementById('dW').value)/100;
+  var t=(+document.getElementById('dT').value)/100;
+  var eR=(+document.getElementById('dR').value)/100;
+  var e0=(+document.getElementById('d0').value)/100;
+  var eH=(1-t)/(1-w);
+  var eD=eH*eR*e0;
+  var c=document.getElementById('cascade');
+  function bar(val,label,color){return '<div class="cbar" style="background:'+color+'"><span class="v">'+val.toFixed(2)+'</span><span class="l">'+label+'</span></div>';}
+  c.innerHTML = bar(eH,'η_H casco','#1A7A6E')
+    +'<div class="cop">×</div>'+bar(eR,'η_R rotativa','#2C5F8A')
+    +'<div class="cop">×</div>'+bar(e0,'η₀ águas livres','#6B4E8E')
+    +'<div class="cop">=</div>'+bar(eD,'η_D propulsivo','#0D3D36');
+}
+drawCascade();
+window.addEventListener('resize',function(){drawVA();drawH();});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"Na notação de Taylor, a velocidade de avanço do hélice é:",
+   o:["V_A = V(1 + w)","V_A = V(1 − w)","V_A = V/(1 + w)","V_A = V·w"],
+   a:1,e:"Taylor: w=(V−V_A)/V → V_A = V(1−w). A esteira (positiva) reduz a velocidade que o hélice enxerga. Em Froude seria V_A = V/(1+w_F)."},
+  {q:"Uma esteira de 50% na notação de FROUDE corresponde a uma velocidade de esteira de:",
+   o:["50% da velocidade do navio","33% da velocidade do navio","67% da velocidade do navio","100% da velocidade do navio"],
+   a:1,e:"Em Froude, esteira é fração de V_A, não de V. 50% em Froude = 33% da velocidade do navio. Em Taylor, 50% seria 50% de V. É a pegadinha clássica."},
+  {q:"Quais são as três causas principais da esteira?",
+   o:["Atrito, pressão e cavitação","Friccional, linhas de corrente (potencial) e ondas","Empuxo, torque e rotação","Forma, rugosidade e apêndices"],
+   a:1,e:"Friccional (corrente de acompanhamento), linhas de corrente/potencial (fechamento na popa) e ondas (movimento orbital). A total é quase sempre positiva."},
+  {q:"A dedução de empuxo t relaciona empuxo e resistência por:",
+   o:["R_T = (1 + t)T","R_T = (1 − t)T","T = (1 − t)R_T","R_T = t·T"],
+   a:1,e:"t=(T−R_T)/T → R_T=(1−t)T. A hélice fornece T, mas só (1−t)T fica disponível para vencer a resistência, pois a hélice aumenta a resistência do casco."},
+  {q:"A eficiência do casco η_H = (1−t)/(1−w) pode ser maior que 1 quando:",
+   o:["t > w","w > t","t = w","nunca pode ser > 1"],
+   a:1,e:"Quando w > t, η_H > 1. Isso é possível porque a hélice opera na esteira (V_A < V) e recupera parte da energia já gasta no atrito do casco — não viola conservação de energia."},
+  {q:"A eficiência rotativa relativa η_R típica de um navio mono-hélice fica em:",
+   o:["0,5–0,7","0,95–1,0","1,0–1,1","1,3–1,5"],
+   a:2,e:"Mono-hélice: 1,0–1,1. Bi-hélice: 0,95–1,0. η_R = Q₀/Q fica sempre perto de 1 (a esteira heterogênea muda o torque vs. águas livres)."},
+  {q:"A decomposição do coeficiente quase-propulsivo é:",
+   o:["η_D = η_H + η_R + η₀","η_D = η_H · η_R · η₀","η_D = η₀ / (η_H · η_R)","η_D = η_H · η₀ / η_R"],
+   a:1,e:"η_D = η_H · η_R · η₀ = [(1−t)/(1−w)]·η_R·η₀. Casco × rotativa relativa × águas livres. É o produto, não a soma — permite atacar cada perda no projeto."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Esteira de Taylor",b:"w = (V−V_A)/V → V_A = V(1−w). Hoje quase universal."},
+  {f:"Esteira de Froude",b:"w_F = (V−V_A)/V_A → V_A = V/(1+w_F). Conversão: w = w_F/(1+w_F)."},
+  {f:"3 causas da esteira",b:"Friccional · linhas de corrente (potencial) · ondas. Total quase sempre positiva."},
+  {f:"'Esteira 50%'",b:"Taylor = 50% de V; Froude = 33% de V. Pegadinha clássica."},
+  {f:"Deslizamento real × aparente",b:"s_R=1−V_A/(Pn) (guia real) · s_A=1−V/(Pn) (diário). Aparente < real."},
+  {f:"η rotativa relativa",b:"η_R = Q₀/Q. 0,95–1,0 (bi) · 1,0–1,1 (mono). Perto de 1."},
+  {f:"Dedução de empuxo",b:"t=(T−R_T)/T → R_T=(1−t)T. Todd: 0,2(nu)→0,29→0,24."},
+  {f:"Eficiência do casco",b:"η_H=(1−t)/(1−w). >1 quando w>t (recupera energia da esteira)."},
+  {f:"Decomposição η_D",b:"η_D = η_H · η_R · η₀. Em Froude: (1+w_F)(1−t)·η_R·η₀."},
+  {f:"Por que η_H pode passar de 1",b:"Hélice opera na esteira (V_A<V); recupera energia do atrito do casco. Não viola energia."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+</script>
+</body>
+</html>

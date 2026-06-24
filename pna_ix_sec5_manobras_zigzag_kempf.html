@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Manobras Definitivas e Zigzag de Kempf — PNA Vol. III §5 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:700px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:270px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:96px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:160px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12.5px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:25px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · P1b — Controlabilidade</p>
+    <h1>Manobras Definitivas e <em>Zigzag de Kempf</em></h1>
+    <p class="sub">As três manobras que caracterizam o navio independentemente do timoneiro: espiral (estabilidade), zigzag/overshoot de Kempf (controle) e giro (capacidade de giro). E como as medidas do zigzag variam com estabilidade, leme e velocidade.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. III, Cap. IX, Seção 5 (manobra de zigzag, Kempf 1944).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#malha">Malha de controle</a>
+    <a href="#tres">3 manobras</a>
+    <a href="#zigzag">Zigzag ▶</a>
+    <a href="#medidas">3 medidas ▶</a>
+    <a href="#velocidade">Efeito da velocidade</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Continua os cadernos <a href="pna_ix_sec4_estabilidade_rumo_nomoto.html">Estabilidade de Rumo &amp; K-T (§4)</a> e <a href="pna_ix_sec3_estabilidade_movimento.html">Estabilidade de Movimento (§3)</a>. Os índices K e T (§5.4) já estão no caderno do §4. Próximo: capacidade de giro (§6).
+</div>
+
+<!-- ===== 5.1 MALHA ===== -->
+<section class="bloco" id="malha">
+  <h2 class="sec"><span class="n">5.1</span> A malha de controle — 5 elementos</h2>
+  <p class="lede">Manter e mudar de trajetória dependem de cinco elementos. Só um deles é a estabilidade com controles fixos.</p>
+  <table>
+    <tr><th>#</th><th>Elemento</th></tr>
+    <tr><td class="center">a</td><td>magnitude/frequência dos momentos de guinada e forças de deriva que desviam o navio</td></tr>
+    <tr><td class="center">b</td><td><strong>resposta do navio com controles fixos</strong> (= estabilidade)</td></tr>
+    <tr><td class="center">c</td><td>rapidez de detectar o erro e iniciar a correção</td></tr>
+    <tr><td class="center">d</td><td>taxa com que a correção vira movimento do leme (servo)</td></tr>
+    <tr><td class="center">e</td><td>magnitude da força e do momento de controle do leme</td></tr>
+  </table>
+  <div class="box trap">
+    <h4>A armadilha do "leme maior resolve tudo"</h4>
+    <p>Presume-se com frequência que aumentar a <strong>área do leme</strong> (e) ou a taxa de deflexão (d) corrige deficiências de manutenção/mudança de trajetória. O PNA demonstra na Seção 17 que essa visão está <strong>incorreta</strong>. O melhor projeto minimiza deficiências em <span class="hl">cada</span> elemento da malha. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== 5.2 TRES MANOBRAS ===== -->
+<section class="bloco" id="tres">
+  <h2 class="sec"><span class="n">5.2</span> As três manobras definitivas</h2>
+  <p class="lede">Concebidas para caracterizar o navio excluindo a influência do timoneiro/piloto automático (elemento c).</p>
+  <table>
+    <tr><th>Manobra</th><th>Determina</th><th>Seção</th></tr>
+    <tr><td><strong>Espiral</strong> (direta/Dieudonné ou reversa/Bech)</td><td>características de <strong>estabilidade</strong> direcional</td><td>§4.3</td></tr>
+    <tr><td><strong>Zigzag</strong> (Z / overshoot de Kempf)</td><td>características de <strong>controle</strong> (eficácia do leme)</td><td>§5.3</td></tr>
+    <tr><td><strong>Giro</strong> (girândola / círculo de giro)</td><td>qualidades de <strong>giro</strong></td><td>§6.1</td></tr>
+  </table>
+  <div class="box key">
+    <p>As três importam para navios mercantes e de guerra. <span class="hl">Espiral → estabilidade; zigzag → controle; giro → capacidade de giro.</span> <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== 5.3 ZIGZAG ===== -->
+<section class="bloco" id="zigzag">
+  <h2 class="sec"><span class="n">5.3</span> A manobra de zigzag (overshoot de Kempf, 1944)</h2>
+  <p class="lede">A segunda mais importante. Indica a capacidade do leme de controlar o navio — mas também depende, em parte, das características de estabilidade.</p>
+
+  <div class="box key">
+    <h4>O procedimento (Gertler, 1959) <span class="tag t-banca">BANCA</span></h4>
+    <p>(a) estabilizar como na espiral; (b) defletir o leme à taxa máxima até um ângulo pré-selecionado (ex.: 20°) e manter até atingir uma variação de rumo pré-selecionada (ex.: 20°); (c) nesse ponto, defletir à taxa máxima para o ângulo <strong>oposto</strong> (de verificação) de 20° e manter até a variação de rumo de execução no lado oposto — isso completa o <strong>overshoot</strong>; (d) repetir para um zigzag completo (mas o <span class="hl">primeiro overshoot é o mais importante</span>).</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Traçado do zigzag: ângulo de leme e ângulo de guinada no tempo</h4>
+    <p class="hint">Anime a manobra. O leme alterna em degraus; a guinada segue com atraso e ULTRAPASSA o ângulo comandado — esse é o overshoot.</p>
+    <canvas id="zzCanvas" width="860" height="270"></canvas>
+    <div class="ictrl"><button onclick="animZZ()" style="font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:18px;padding:7px 16px;cursor:pointer">▶ Animar manobra</button>
+      <div class="iread" id="zzRead">Ângulo de leme = 20° · variação de rumo de execução = 20°</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEDIDAS ===== -->
+<section class="bloco" id="medidas">
+  <h2 class="sec"><span class="n">5.3</span> As três medidas numéricas</h2>
+  <p class="lede">Do ensaio de overshoot extraem-se três parâmetros operacionais — e cada um varia de forma específica com a estabilidade e a eficácia do leme.</p>
+
+  <table>
+    <tr><th>Medida</th><th>O que mede</th><th>↑ estabilidade</th><th>↑ eficácia do leme</th></tr>
+    <tr><td><strong>(a)</strong> Tempo até o 2º execute</td><td>rapidez de alterar rumo</td><td class="center">aumenta (pior)</td><td class="center">diminui (melhor)</td></tr>
+    <tr><td><strong>(b)</strong> Ângulo de guinada de overshoot</td><td>contramanobra / antecipação</td><td class="center">diminui (melhor)</td><td class="center"><strong>aumenta</strong> (pior)</td></tr>
+    <tr><td><strong>(c)</strong> Largura de ultrapassagem da trajetória</td><td>contramanobra em águas restritas</td><td class="center">diminui (melhor)</td><td class="center">diminui (melhor)</td></tr>
+  </table>
+
+  <div class="ichart">
+    <h4>Como as 3 medidas variam (interativo)</h4>
+    <p class="hint">Deslize a estabilidade e a eficácia do leme. Veja as três barras se ajustarem — atenção: o overshoot de guinada AUMENTA com leme mais eficaz.</p>
+    <canvas id="medCanvas" width="860" height="220"></canvas>
+    <div class="ictrl"><label for="mStab">estabilidade →</label><input type="range" id="mStab" min="10" max="100" value="50" oninput="drawMed()"></div>
+    <div class="ictrl"><label for="mRud">eficácia leme →</label><input type="range" id="mRud" min="10" max="100" value="50" oninput="drawMed()">
+      <div class="iread" id="medRead"></div>
+    </div>
+  </div>
+
+  <div class="box trap">
+    <h4>A pegadinha do overshoot de guinada</h4>
+    <p>O ângulo de overshoot de guinada <strong>diminui com mais estabilidade</strong>, mas <span class="hl-amb">AUMENTA com leme mais eficaz</span>. Já a largura de ultrapassagem diminui com ambos. Confundir o comportamento dessas duas medidas frente à eficácia do leme é distrator clássico. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+  <div class="box key">
+    <h4>Significado operacional</h4>
+    <p>O tempo até o execute mede a rapidez de mudar rumo (melhora com leme eficaz e com <strong>menos</strong> estabilidade). O overshoot e a largura medem a <strong>contramanobra</strong> — a antecipação que o timoneiro precisa ter em águas restritas. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== VELOCIDADE ===== -->
+<section class="bloco" id="velocidade">
+  <h2 class="sec"><span class="n">5.3</span> Efeito da velocidade (e submarinos)</h2>
+  <p class="lede">Os resultados do zigzag dependem da velocidade — e há uma sutileza com o tempo adimensional.</p>
+  <div class="box formula">
+    <h4>Variação com a velocidade <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">
+      • Tempo até o execute: <strong>diminui</strong> com mais velocidade.<br>
+      • Ângulo de overshoot e largura de ultrapassagem: <strong>aumentam</strong> com mais velocidade.<br>
+      • <span class="hl">Tempo ADIMENSIONAL</span> (comprimentos de navio até o execute): <strong>aumenta</strong> com a velocidade — porque a taxa de deflexão do leme δ̇'<sub>R</sub> = δ̇<sub>R</sub>·L/V é maior em baixa velocidade (δ̇<sub>R</sub> é ~independente da velocidade). Em baixa velocidade o leme exerce influência total por mais tempo (em comprimentos de navio).
+    </p>
+  </div>
+  <div class="box key">
+    <h4>Submarinos: overshoot nos dois planos</h4>
+    <p>Nos submarinos, o overshoot é usado no plano horizontal <strong>e vertical</strong> — e no vertical é ainda mais crítico, porque o submarino opera numa camada d'água rasa. O <strong>ângulo de overshoot de arfagem</strong> e a <strong>variação de profundidade de overshoot</strong> são parâmetros de grande importância. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As medidas e tendências de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Oito questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Manobras Definitivas e Zigzag (§5)</summary>
+  <ul>
+    <li><b>Malha de controle (5 elementos):</b> (a) distúrbios · (b) resposta com controles fixos = estabilidade · (c) detecção do erro · (d) servo do leme · (e) força/momento do leme.</li>
+    <li><b>Leme maior NÃO resolve tudo:</b> a Seção 17 demonstra que aumentar área/taxa do leme não corrige todas as deficiências. Minimizar deficiências em cada elemento.</li>
+    <li><b>3 manobras definitivas:</b> espiral → estabilidade · zigzag → controle · giro → capacidade de giro.</li>
+    <li><b>Zigzag (Kempf, 1944):</b> defletir 20°, manter até 20° de rumo, defletir 20° ao lado oposto (verificação), repetir. 1º overshoot é o mais importante.</li>
+    <li><b>3 medidas:</b> (a) tempo até 2º execute = rapidez de alterar rumo · (b) ângulo de overshoot de guinada · (c) largura de ultrapassagem da trajetória.</li>
+    <li><b>↑ estabilidade:</b> tempo ↑ (pior) · overshoot ↓ · largura ↓.</li>
+    <li><b>↑ eficácia do leme:</b> tempo ↓ · overshoot ↑ (!) · largura ↓.</li>
+    <li><b>↑ velocidade:</b> tempo ↓ · overshoot ↑ · largura ↑. Tempo adimensional (comprimentos de navio) ↑ porque δ̇'_R = δ̇_R·L/V é maior em baixa velocidade.</li>
+    <li><b>Submarinos:</b> overshoot nos planos horizontal E vertical; no vertical é mais crítico (camada rasa). Overshoot de arfagem e profundidade.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Manobras Definitivas e Zigzag de Kempf (PNA Vol. III §5) · Capital Sereno · fidelidade verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== Zigzag trace ===== */
+var zzProg=1, zzTimer=null;
+function drawZZ(){
+  var cv=document.getElementById('zzCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=44,cy=H/2,pW=W-64;
+  ctx.clearRect(0,0,W,H);
+  // axes
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(x0,16);ctx.lineTo(x0,H-16);ctx.moveTo(x0,cy);ctx.lineTo(W-12,cy);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('ângulo (°)',6,24);ctx.fillText('tempo →',W-66,cy-6);
+  var tMax=24, sx=pW/tMax, amp=(H/2-24)/30; // 30 deg full
+  // rudder: square wave switching when heading reaches +-20
+  // We model heading as integrated response; precompute
+  var dt=0.05, dr=20, headTarget=20;
+  var head=0, rud=dr, t=0, pts=[], rudPts=[];
+  var switches=[];
+  while(t<=tMax){
+    // simple first-order-ish: heading rate proportional to rudder, with lag
+    head += rud*0.10*dt*( (Math.abs(head)<35)?1:0.3 );
+    // switch rudder when heading crosses target in rudder direction
+    if(rud>0 && head>=headTarget){rud=-dr;switches.push(t);}
+    else if(rud<0 && head<=-headTarget){rud=dr;switches.push(t);}
+    pts.push([t,head]);rudPts.push([t,rud]);
+    t+=dt;
+  }
+  var nShow=Math.floor(pts.length*zzProg);
+  function px(tt){return x0+tt*sx;}
+  function py(v){return cy-v*amp;}
+  // target lines +-20
+  ctx.strokeStyle='#ddd2b0';ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(x0,py(20));ctx.lineTo(W-12,py(20));ctx.moveTo(x0,py(-20));ctx.lineTo(W-12,py(-20));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a99';ctx.font='10px Trebuchet MS';ctx.fillText('+20°',W-44,py(20)-3);ctx.fillText('−20°',W-44,py(-20)+12);
+  // rudder (gold, stepped)
+  ctx.strokeStyle='#C8A84B';ctx.lineWidth=2;ctx.beginPath();
+  for(var i=0;i<nShow;i++){var X=px(rudPts[i][0]),Y=py(rudPts[i][1]);if(i===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}ctx.stroke();
+  // heading (teal)
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.8;ctx.beginPath();
+  for(var j=0;j<nShow;j++){var X2=px(pts[j][0]),Y2=py(pts[j][1]);if(j===0)ctx.moveTo(X2,Y2);else ctx.lineTo(X2,Y2);}ctx.stroke();
+  // mark overshoot on first peak
+  if(zzProg>=0.4){
+    // find first local max of heading after first switch
+    var pk=0,pkt=0;for(var k=1;k<pts.length-1;k++){if(pts[k][1]>pts[k-1][1]&&pts[k][1]>pts[k+1][1]){pk=pts[k][1];pkt=pts[k][0];break;}}
+    if(pk>0 && px(pkt)<=px(pts[nShow-1]?pts[nShow-1][0]:0)){
+      ctx.strokeStyle='#9E3B2E';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(px(pkt),py(20));ctx.lineTo(px(pkt),py(pk));ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#9E3B2E';ctx.font='11px Trebuchet MS';ctx.fillText('overshoot',px(pkt)+4,py(pk)-4);
+    }
+  }
+  ctx.font='11px Trebuchet MS';ctx.fillStyle='#C8A84B';ctx.fillText('— leme',W-130,30);ctx.fillStyle='#1A7A6E';ctx.fillText('— guinada (rumo)',W-130,46);
+}
+function animZZ(){if(zzTimer)clearInterval(zzTimer);zzProg=0;zzTimer=setInterval(function(){zzProg+=0.02;if(zzProg>=1){zzProg=1;clearInterval(zzTimer);}drawZZ();},25);}
+drawZZ();
+
+/* ===== 3 measures ===== */
+function drawMed(){
+  var cv=document.getElementById('medCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var stab=(+document.getElementById('mStab').value)/100; // 0.1..1
+  var rud=(+document.getElementById('mRud').value)/100;
+  // models (schematic, normalized 0..1)
+  var tempo = 0.3 + 0.6*stab - 0.45*rud;     // time: up with stab, down with rudder
+  var over  = 0.3 - 0.25*stab + 0.5*rud;     // overshoot: down with stab, UP with rudder
+  var larg  = 0.7 - 0.3*stab - 0.3*rud;      // width: down with both
+  tempo=Math.max(0.05,Math.min(1,tempo));over=Math.max(0.05,Math.min(1,over));larg=Math.max(0.05,Math.min(1,larg));
+  var bars=[['(a) Tempo até execute',tempo,'#2C5F8A'],['(b) Overshoot de guinada',over,'#9E3B2E'],['(c) Largura de ultrapassagem',larg,'#6B4E8E']];
+  var x0=240, pW=W-x0-60, bh=(H-30)/bars.length;
+  bars.forEach(function(b,i){
+    var y=14+i*bh;
+    ctx.fillStyle='#16302B';ctx.font='12px Trebuchet MS';ctx.textAlign='right';ctx.fillText(b[0],x0-10,y+bh/2+4);ctx.textAlign='left';
+    ctx.fillStyle='#eee6d0';ctx.fillRect(x0,y+6,pW,bh-16);
+    ctx.fillStyle=b[2];ctx.fillRect(x0,y+6,pW*b[1],bh-16);
+    ctx.fillStyle='#16302B';ctx.fillText(Math.round(b[1]*100)+'%',x0+pW*b[1]+6,y+bh/2+4);
+  });
+  document.getElementById('medRead').innerHTML='estabilidade=<b>'+Math.round(stab*100)+'%</b> · leme=<b>'+Math.round(rud*100)+'%</b> · note: overshoot SOBE com leme mais eficaz';
+}
+drawMed();
+window.addEventListener('resize',function(){drawZZ();drawMed();});
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Malha de controle (b)",b:"O único elemento ligado à estabilidade com controles fixos é a resposta do navio (b)."},
+  {f:"Leme maior resolve?",b:"Não. A Seção 17 mostra que aumentar área/taxa do leme não corrige todas as deficiências."},
+  {f:"3 manobras definitivas",b:"Espiral → estabilidade · Zigzag → controle · Giro → capacidade de giro."},
+  {f:"Zigzag = ?",b:"Overshoot de Kempf (1944), manobra 'Z'. Mede a capacidade do leme de controlar o navio."},
+  {f:"Procedimento zigzag",b:"Leme 20°, manter até 20° de rumo, leme 20° oposto (verificação), repetir. 1º overshoot é o mais importante."},
+  {f:"3 medidas do overshoot",b:"(a) tempo até 2º execute · (b) ângulo de overshoot de guinada · (c) largura de ultrapassagem."},
+  {f:"Tempo até execute",b:"Mede rapidez de alterar rumo. Melhora com leme eficaz e MENOS estabilidade."},
+  {f:"Overshoot de guinada",b:"DIMINUI com estabilidade, mas AUMENTA com leme mais eficaz."},
+  {f:"Largura de ultrapassagem",b:"DIMINUI com estabilidade E com leme mais eficaz. Importa em águas restritas."},
+  {f:"Efeito da velocidade",b:"↑V: tempo ↓, overshoot ↑, largura ↑. Tempo adimensional ↑ (δ̇'_R = δ̇_R·L/V maior em baixa V)."},
+  {f:"Submarinos",b:"Overshoot nos planos horizontal E vertical; vertical é mais crítico (camada rasa)."},
+  {f:"Contramanobra",b:"Overshoot e largura medem a antecipação que o timoneiro precisa em águas restritas."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"Das três manobras definitivas, qual determina as características de CONTROLE (eficácia do leme)?",
+   o:["A manobra espiral","A manobra de zigzag (overshoot de Kempf)","A manobra de giro","O teste de pullout"],
+   a:1,e:"Zigzag → controle. Espiral → estabilidade. Giro → capacidade de giro. A espiral também dá alguma indicação de controle, e o zigzag também depende em parte da estabilidade."},
+  {q:"No procedimento do zigzag, após o navio atingir a variação de rumo pré-selecionada, o leme é:",
+   o:["Mantido no mesmo ângulo","Defletido à taxa máxima para o ângulo OPOSTO (de verificação)","Colocado ao meio","Reduzido pela metade"],
+   a:1,e:"Defletido à taxa máxima para o ângulo oposto (de verificação), por exemplo de +20° para −20°. Isso completa o ciclo de overshoot. O 1º overshoot é o mais importante."},
+  {q:"O ângulo de overshoot de guinada, à medida que a estabilidade do navio AUMENTA:",
+   o:["Aumenta","Diminui","Permanece constante","Torna-se negativo"],
+   a:1,e:"Diminui com o aumento da estabilidade. Mas atenção: AUMENTA com a maior eficácia do leme — essa é a pegadinha clássica."},
+  {q:"O ângulo de overshoot de guinada, com o aumento da EFICÁCIA do leme:",
+   o:["Diminui","Aumenta","Não varia","Vai a zero"],
+   a:1,e:"AUMENTA com leme mais eficaz (ao contrário do que a intuição sugere). Já a largura de ultrapassagem da trajetória diminui tanto com mais estabilidade quanto com mais eficácia do leme."},
+  {q:"O tempo (real) para atingir o execute no zigzag, à medida que a velocidade aumenta:",
+   o:["Aumenta","Diminui","Não varia","Dobra"],
+   a:1,e:"O tempo real diminui com mais velocidade. Já o tempo ADIMENSIONAL (em comprimentos de navio) aumenta, porque δ̇'_R = δ̇_R·L/V é maior em baixa velocidade."},
+  {q:"A largura de ultrapassagem da trajetória diminui com:",
+   o:["Apenas o aumento da estabilidade","Apenas o aumento da eficácia do leme","Tanto o aumento da estabilidade quanto da eficácia do leme","Nenhum dos dois"],
+   a:2,e:"A largura de ultrapassagem diminui com AMBOS: mais estabilidade e mais eficácia do leme. Diferentemente do overshoot de guinada, que aumenta com leme mais eficaz."},
+  {q:"Aumentar a área do leme ou a taxa de deflexão, segundo o PNA, para corrigir deficiências de manutenção/mudança de trajetória:",
+   o:["Sempre resolve o problema","É demonstrado como incorreto na Seção 17","É a única solução possível","Só funciona em submarinos"],
+   a:1,e:"O PNA demonstra na Seção 17 que essa visão é incorreta. O melhor projeto minimiza deficiências em cada elemento da malha de controle, não apenas no leme."},
+  {q:"Para submarinos, o overshoot de Kempf é operacionalmente mais significativo:",
+   o:["No plano horizontal","No plano vertical (operam em camada d'água rasa)","Só em superfície","Não se aplica a submarinos"],
+   a:1,e:"No plano vertical é ainda mais crítico, pois o submarino opera numa camada d'água relativamente rasa. O ângulo de overshoot de arfagem e a variação de profundidade de overshoot são parâmetros importantes."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>

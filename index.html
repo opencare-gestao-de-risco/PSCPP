@@ -160,6 +160,97 @@ const CADERNOS = [
   },
   {
     materia:"manobra-prop", badge:"Alto retorno",
+    titulo:"Potência e Teoria do Hélice (PNA Cap. VI §1-2)",
+    arquivo:"pna_vi_sec1_2_potencia_teoria_helice.html",
+    desc:"Definições de potência (PI/PB/PS/PD/PE), coeficiente quase-propulsivo, e as 3 teorias: momento linear (η_I=1/(1+a), b=2a), elemento de pá e circulação (Kutta-Joukowski). Gráficos η_I×C_T e C_L×α interativos.",
+    tags:["BANCA","Propulsor","Teoria","Disco atuador","Circulação"]
+  },
+  {
+    materia:"manobra-prop", badge:"Alto retorno",
+    titulo:"Interação Casco-Hélice (PNA Cap. VI §4)",
+    arquivo:"pna_vi_sec4_interacao_casco_helice.html",
+    desc:"Esteira (wake) Froude × Taylor, deslizamento real/aparente, eficiência rotativa relativa η_R, dedução de empuxo (Todd), eficiência de casco η_H e a decomposição η_D = η_H·η_R·η₀. Decomposição em cascata e gráficos V_A e η_H interativos.",
+    tags:["BANCA","Propulsor","Wake","Thrust deduction","Eficiência"]
+  },
+  {
+    materia:"manobra-prop", badge:"Alto retorno",
+    titulo:"Geometria da Hélice (PNA Cap. VI §6)",
+    arquivo:"pna_vi_sec6_geometria_helice.html",
+    desc:"Superfície helicoidal, passo e ângulo (tan φ=P/2πr), as 4 vistas do desenho, razões de área (expandida/desenvolvida/projetada), número de pás, rake, skew e materiais. Triângulo de passo e cobertura do disco interativos.",
+    tags:["BANCA","Propulsor","Geometria","Passo","Skew","Rake"]
+  },
+  {
+    materia:"manobra-prop", badge:"Alto retorno",
+    titulo:"Cavitação (PNA Cap. VI §7)",
+    arquivo:"pna_vi_sec7_cavitacao.html",
+    desc:"Número de cavitação σ (e σ local), mecânica via Bernoulli, tipos de Knapp (viajante/fixa/vórtice/vibratória) e formas no propulsor, lei de semelhança (4 requisitos), critério de Burrill e efeitos (ruptura de empuxo, erosão/pitting, vibração). Gráficos de pressão e ruptura de empuxo interativos.",
+    tags:["BANCA","Propulsor","Cavitação","Burrill","Erosão"]
+  },
+  {
+    materia:"manobra-prop", badge:"Alto retorno",
+    titulo:"Outros Dispositivos de Propulsão (PNA Cap. VI §10)",
+    arquivo:"pna_vi_sec10_outros_propulsores.html",
+    desc:"Jato d'água (η=2V/(V_J+V), máx 0,5), jato de bomba, propulsores cicloidais (Voith-Schneider), passo controlável (CPP), contra-rotativos (Manhattan), supercavitantes, bocal Kort e a Tabela 29 de economia de energia. Gráfico do jato e tabela de economias interativos.",
+    tags:["BANCA","Propulsor","Jato","Voith-Schneider","CRP","Kort"]
+  },
+  {
+    materia:"manobra-leme", badge:"Alto retorno",
+    titulo:"Lemes e Superfícies de Controle (PNA Vol. III §14)",
+    arquivo:"pna_iii_sec14_lemes_superficies_controle.html",
+    desc:"Geometria do leme, forças (L, D, F), centro de pressão e torque, estol, cavitação e aeração, razão de aspecto efetiva (Prandtl) e os tipos de leme (totalmente móvel, com flap/Becker, semi-balanceado de patilhão). Curvas C_L×α e C_L×razão de aspecto interativas.",
+    tags:["BANCA","Leme","Estol","Centro de pressão","Razão de aspecto"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Alto retorno",
+    titulo:"Estabilidade de Movimento e Equações Lineares (PNA Cap. IX §3)",
+    arquivo:"pna_ix_sec3_estabilidade_movimento.html",
+    desc:"Base teórica do P1b: os 4 casos de estabilidade de movimento (Arentzen), controles fixos × operando (plano vertical × horizontal), linearização de Taylor, equações lineares de movimento, derivadas hidrodinâmicas (SNAME), massa virtual e amplificação leme→casco. Diagrama dos 4 casos e linearização interativos.",
+    tags:["BANCA","Manobra","Estabilidade","Nomoto","Derivadas"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Alto retorno",
+    titulo:"Estabilidade de Rumo &amp; Índices K-T de Nomoto (PNA Cap. IX §4)",
+    arquivo:"pna_ix_sec4_estabilidade_rumo_nomoto.html",
+    desc:"Índices de estabilidade (s₁, s₂), critério de estabilidade dinâmica (discriminante C), manobra espiral de Dieudonné e laço de histerese, espiral inverso de Bech, pullout, e os índices K e T de Nomoto (T·ṙ+r=K·δ, resposta exponencial, D₀/L=2/K'δ). Espiral estável/instável e resposta de Nomoto interativos.",
+    tags:["BANCA","Manobra","Nomoto","K e T","Espiral","Histerese"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Alto retorno",
+    titulo:"Manobras Definitivas e Zigzag de Kempf (PNA Cap. IX §5)",
+    arquivo:"pna_ix_sec5_manobras_zigzag_kempf.html",
+    desc:"A malha de controle (5 elementos), as três manobras definitivas (espiral/zigzag/giro) e a manobra de zigzag (overshoot de Kempf, 1944): procedimento, as três medidas numéricas e como variam com estabilidade, eficácia do leme e velocidade. Traçado do zigzag animado e gráfico das 3 medidas interativos.",
+    tags:["BANCA","Manobra","Zigzag","Kempf","Overshoot"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Alto retorno",
+    titulo:"Capacidade de Giro (PNA Cap. IX §6)",
+    arquivo:"pna_ix_sec6_capacidade_giro.html",
+    desc:"Geometria do círculo de giro (avanço, transferência, diâmetro tático), o ponto de pivô e o ângulo de deriva, as três fases do giro, o raio de giro estacionário (R∝L/δ, numerador = critério C), o navio instável que gira contra o leme, e a inversão do ângulo de escora entre as fases. Círculo de giro e escora interativos.",
+    tags:["BANCA","Manobra","Giro","Diâmetro tático","Pivô","Escora"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Alto retorno",
+    titulo:"Aceleração, Parada e Marcha à Ré (PNA Cap. IX §10)",
+    arquivo:"pna_ix_sec10_aceleracao_parada_re.html",
+    desc:"Alcance longitudinal (head reach) e lateral (side reach), efeito de pá, aceleração (Eq. 88), o método de Chase et al. (potencial e impulso dinâmico), reversão 80-50, superioridade da guinada sobre a parada (~6 nós), marcha à ré (Eq. 95) e dispositivos auxiliares. Forças na parada e guinada vs parada interativos.",
+    tags:["BANCA","Manobra","Parada","Head reach","Chase","Rebocadores"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Alto retorno",
+    titulo:"Efeitos do Ambiente: Vento, Corrente e Ondas (PNA Cap. IX §12)",
+    arquivo:"pna_ix_sec12_efeitos_ambiente.html",
+    desc:"Os 3 fatores do efeito do vento, ângulo de leme necessário e o limite de 35°, estabilidade de proa × instabilidade de popa (regimes de U'), corrente em águas restritas, acoplamento guinada-balanço-leme em ondas e o arpoamento (broaching) em mares de popa. Diagrama do vento e bússola de estabilidade interativos.",
+    tags:["BANCA","Manobra","Vento","Corrente","Ondas","Arpoamento"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Alto retorno",
+    titulo:"Águas Rasas, Canais e Interação entre Navios (PNA Cap. IX §13)",
+    arquivo:"pna_ix_sec13_aguas_rasas_canais_interacao.html",
+    desc:"Águas rasas (D_w/T≤3) e o efeito no giro (Esso Osaka), reversão da estabilidade, efeito de banco (Y_y0 atrai p/ margem próxima, N_y0 gira proa p/ distante), interação entre dois navios (posições 3 e 5 de risco), e o squat (afundamento+trim, Fn crítico). ⚠ Nota: 'sinkage' ≠ emborcamento. Taxa de giro, efeito de banco e squat interativos. Fecha o Módulo I.",
+    tags:["BANCA","Manobra","Águas rasas","Banco","Squat","Interação"]
+  },
+  {
+    materia:"manobra-prop", badge:"Alto retorno",
     titulo:"Geometria da Pá e Projeto do Propulsor",
     arquivo:"geometria_pa_helice_areas_skew.html",
     desc:"Áreas (Aₑ/Aₚ/skew), J·K_T·K_Q·η₀, η_R, hierarquia de métodos (momento→RANSE), condição de Kutta, as 7 etapas de projeto e trade-off Aₑ/A₀.",
@@ -193,17 +284,40 @@ const CADERNOS = [
     desc:"Efeitos de margem (suction>cushion), maré e corrente, tipos de leme e propulsão (CPP e Azipod — modos, comandos, regra de 1 comprimento, BRM), efeito do trim, curva pelo ponto de pivô (Fig. 2-11), auxílios ao guinar, cruzamento (170 pés) e ultrapassagem, instrumentação, squat (Barrass, V²) e UKC (8 achados, 6 nós/5 pés).",
     tags:["BANCA","Canal","Squat","UKC","Azipod","CPP","Trim","Efeitos de margem","Bloco F","MacElrevey"]
   },
+  {
+    materia:"manobra-resist", badge:"Alto retorno",
+    titulo:"Resistência Friccional (PNA Cap. V §3)",
+    arquivo:"pna_v_sec3_resistencia_friccional.html",
+    desc:"Froude, camada-limite (Blasius/Prandtl), as linhas de atrito (Schoenherr, ITTC-57 0,075/(logRn−2)², Hughes, Granville) e o fator de forma (Prohaska). Camada-limite interativa, quiz e flashcards.",
+    tags:["BANCA","Resistência","ITTC-57","Fator de forma","Camada-limite"]
+  },
+  {
+    materia:"manobra-resist", badge:"Alto retorno",
+    titulo:"Resistência por Ondas (PNA Cap. V §4)",
+    arquivo:"pna_v_sec4_resistencia_ondas.html",
+    desc:"Cunha de Kelvin (19°28'), saliências e depressões (humps & hollows), os 5 sistemas de Wigley, Michell e Havelock, viscosidade e efeito de escala. Cunha de Kelvin animada e curva de humps interativa.",
+    tags:["BANCA","Resistência","Kelvin","Humps & hollows","Froude"]
+  },
+  {
+    materia:"manobra-resist", badge:"Alto retorno",
+    titulo:"Outros Componentes de Resistência (PNA Cap. V §5)",
+    arquivo:"pna_v_sec5_outros_componentes.html",
+    desc:"Arrasto de forma (3 causas), pressão viscosa, separação, quebra de ondas (Taylor R≥V²/50), ar/vento (pico a 30° da proa), apêndices, trim, águas rasas (V=√gh) e resistência induzida. Três gráficos interativos de variação.",
+    tags:["BANCA","Resistência","Vento","Águas rasas","Apêndices","Trim"]
+  },
   // ↑ Adicione novos cadernos acima desta linha, no mesmo formato.
 ];
 
 /* ---- Matérias (ordem + rótulos + cor). Crie novas aqui se precisar. ---- */
 const MATERIAS = {
+  "manobra-resist":{ titulo:"Manobrabilidade — Resistência", sub:"Módulo I · Bloco A · Resistência ao Avanço", cor:"#2C5F8A" },
   "manobra-prop":{ titulo:"Manobrabilidade — Propulsão", sub:"Módulo I · Bloco B · Propulsão e Propulsores", cor:"#1A7A6E" },
+  "manobra-leme":{ titulo:"Manobrabilidade — Lemes", sub:"Módulo I · Bloco C · Lemes e Superfícies de Controle", cor:"#9E3B2E" },
   "manobrabilidade":{ titulo:"Manobrabilidade", sub:"Módulo I · Blocos D–H", cor:"#1A7A6E" },
   "shiphandling":{ titulo:"Arte Naval — Shiphandling/MacElrevey", sub:"Módulo II · Blocos D·E·F·G · MacElrevey 4ª ed.", cor:"#0D3D36" },
   "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" }
 };
-const ORDEM = ["manobra-prop","manobrabilidade","shiphandling","arte-naval"];
+const ORDEM = ["manobra-resist","manobra-prop","manobra-leme","manobrabilidade","shiphandling","arte-naval"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Cavitação — PNA Vol. II Cap. VI §7 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:690px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:250px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:84px}
+  .ictrl input[type=range]{flex:1;min-width:130px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  /* types grid */
+  .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:16px 0}
+  .tcard{background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:12px;box-shadow:var(--sombra)}
+  .tcard svg{width:100%;height:90px;display:block;background:#0c3b57;border-radius:6px}
+  .tcard .tt{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:13px;color:var(--verde);margin-top:8px}
+  .tcard .td2{font-size:12px;color:#5a6f68;margin-top:2px}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:155px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15.5px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:26px}.eq{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco B — Propulsão</p>
+    <h1>Cavitação</h1>
+    <p class="sub">Quando a pressão local cai à pressão de vapor, a água "ferve" e forma cavidades. O número de cavitação σ, os tipos (Knapp), a lei de semelhança e os efeitos: ruptura de empuxo, erosão e vibração.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. II, Cap. VI, Seção 7 (van Manen &amp; van Oossanen) · critério de Burrill cruzado com Bertram Cap. 2.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#natureza">Natureza</a>
+    <a href="#sigma">Número σ ▶</a>
+    <a href="#pressao">Pressão no perfil ▶</a>
+    <a href="#tipos">Tipos (Knapp)</a>
+    <a href="#formas">Formas no propulsor</a>
+    <a href="#semelhanca">Lei de semelhança</a>
+    <a href="#burrill">Critério de Burrill</a>
+    <a href="#efeitos">Efeitos / ruptura ▶</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Complementar ao caderno <a href="cavitacao_classificacao.html">Cavitação — Classificação</a>. Aqui o foco é a <strong>mecânica via Bernoulli, o número σ, a lei de semelhança e os efeitos prejudiciais</strong> do PNA §7.
+</div>
+
+<!-- ===== 7.1 NATUREZA ===== -->
+<section class="bloco" id="natureza">
+  <h2 class="sec"><span class="n">7.1</span> A natureza da cavitação</h2>
+  <p class="lede">Em propulsores muito carregados, acima de certas rotações críticas, há uma ruptura progressiva do escoamento e perda de empuxo — antes disso, ruído, vibração e erosão.</p>
+
+  <div class="box key">
+    <h4>Definição (PNA) <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Cavitação é o fenômeno em propulsores <strong>altamente carregados</strong> nos quais, além de certas rotações críticas, há <span class="hl">ruptura progressiva do escoamento e consequente perda de empuxo</span>. Em forma extrema, impede o navio de atingir a velocidade desejada. Antes disso, manifesta-se por <strong>ruído, vibração e erosão</strong> das pás, pontaletes e lemes.</p>
+  </div>
+
+  <p>Histórico de banca: primeiro caso registrado foi o contratorpedeiro britânico <strong>Daring</strong> (1894) — atingiu só 24 nós em vez de 27; com pás 45% maiores, chegou a 29,25 nós com 17% menos potência. Parsons enfrentou o mesmo na <strong>Turbinia</strong> e, para resolver, construiu o primeiro <strong>túnel de cavitação</strong> em 1897. <span class="tag t-banca">BANCA</span></p>
+</section>
+
+<!-- ===== 7.1 SIGMA ===== -->
+<section class="bloco" id="sigma">
+  <h2 class="sec"><span class="n">7.1</span> O número de cavitação σ</h2>
+  <p class="lede">A cavitação começa quando a queda de pressão no dorso da pá iguala a margem entre a pressão estática e a pressão de vapor — adimensionalizada, isso é σ.</p>
+
+  <div class="box formula">
+    <h4>Definição</h4>
+    <div class="eq">σ = (p₀ − p<sub>V</sub>) / q &nbsp;=&nbsp; (p₀ − p<sub>V</sub>) / (½ρV₀²)<span class="lbl">número de cavitação — começa a cavitar quando −δp/q ≥ (p₀−p_V)/q</span></div>
+    <p class="vars"><b>p₀</b> pressão estática total (hidrostática + atmosférica) · <b>p<sub>V</sub></b> pressão de vapor (depende da temperatura) · <b>q = ½ρV₀²</b> pressão dinâmica.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Número de cavitação local σ_L (na seção a raio r) <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">σ<sub>L</sub> = [p<sub>A</sub> + ρgh − ρgr − p<sub>V</sub>] / [½ρ((V<sub>A</sub>)² + ω²r²)]<span class="lbl">V_R² = V_A² + ω²r² (velocidade relativa na pá)</span></div>
+    <p class="vars">A pressão na seção é <strong>mínima na posição vertical superior</strong> (p<sub>A</sub> + ρgh − ρgr − p<sub>V</sub>). Por isso a cavitação transitória aparece primeiro na <span class="hl">parte superior do disco</span>. Ao girar, a pressão varia ±ρgr.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>σ em função da velocidade e da imersão</h4>
+    <p class="hint">Deslize a velocidade do escoamento e a imersão. σ cai com a velocidade (q sobe) → mais propenso a cavitar.</p>
+    <canvas id="sigCanvas" width="860" height="230"></canvas>
+    <div class="ictrl"><label for="sV">V₀ (m/s) →</label><input type="range" id="sV" min="30" max="200" value="80" oninput="drawSig()"></div>
+    <div class="ictrl"><label for="sH">imersão h (m) →</label><input type="range" id="sH" min="10" max="80" value="40" oninput="drawSig()">
+      <div class="iread" id="sRead"></div>
+    </div>
+  </div>
+
+  <div class="box trap">
+    <h4>O "otimismo" da pressão de vapor</h4>
+    <p>Supor que cavita só na pressão de vapor é <strong>otimista</strong>: a água do mar tem ar dissolvido e <strong>núcleos</strong> que antecipam as cavidades. A água doce destilada a 14°C tem p<sub>V</sub> ≈ 1,70 kN/m², mas no mar a cavitação pode ocorrer a pressões locais de até ~17 kN/m². Deixe margem. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== PRESSURE CHART ===== -->
+<section class="bloco" id="pressao">
+  <h2 class="sec"><span class="n">7.1</span> Por que cavita no dorso: a distribuição de pressão</h2>
+  <p class="lede">O fluido acelera no dorso (sucção) → pressão cai. Quando o pico de subpressão atinge −(p₀−p_V), começa. O que importa é a redução MÁXIMA, não a média.</p>
+
+  <div class="ichart">
+    <h4>Distribuição de pressão δp/q ao longo da corda × ângulo de ataque</h4>
+    <p class="hint">Deslize α. Quando o pico negativo no dorso cruza a linha −σ, a seção entra em cavitação. Aumente α e veja o pico crescer.</p>
+    <canvas id="prCanvas" width="860" height="260"></canvas>
+    <div class="ictrl"><label for="prA">ângulo α →</label><input type="range" id="prA" min="0" max="100" value="40" oninput="drawPr()"></div>
+    <div class="ictrl"><label for="prS">σ (margem) →</label><input type="range" id="prS" min="30" max="200" value="120" oninput="drawPr()">
+      <div class="iread" id="prRead"></div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <h4>A consequência de projeto</h4>
+    <p>Para uma dada sustentação (área sob as curvas de pressão), as seções <strong>mais resistentes à cavitação</strong> são as de <span class="hl">distribuição de pressão mais uniforme e pico mais suave</span>. É a redução máxima que dispara — não a média. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== 7.2 TIPOS KNAPP ===== -->
+<section class="bloco" id="tipos">
+  <h2 class="sec"><span class="n">7.2</span> Tipos de cavitação (Knapp et al., 1970)</h2>
+  <p class="lede">A classificação hidrodinâmica geral tem quatro categorias.</p>
+  <table>
+    <tr><th>Tipo</th><th>Onde / como</th></tr>
+    <tr><td><strong>Viajante (travelling)</strong></td><td>bolhas individuais que se movem com o escoamento livre — presa ao escoamento</td></tr>
+    <tr><td><strong>Fixa (fixed)</strong></td><td>presa ao contorno do corpo — inerente ao corpo, não ao escoamento</td></tr>
+    <tr><td><strong>Vórtice (vortex)</strong></td><td>em escoamento de alto cisalhamento; a baixa pressão no núcleo do vórtice cavita</td></tr>
+    <tr><td><strong>Vibratória</strong></td><td>pulsações de pressão (objeto vibrando ⟂ à face) levam a pressão abaixo de p_V</td></tr>
+  </table>
+  <p>Em propulsores marinhos, predominam os tipos <strong>fixo</strong> e de <strong>vórtice</strong>. <span class="tag t-banca">BANCA</span></p>
+</section>
+
+<!-- ===== FORMAS ===== -->
+<section class="bloco" id="formas">
+  <h2 class="sec"><span class="n">7.2</span> Formas no propulsor (por aparência física)</h2>
+  <p class="lede">Classificadas pela natureza física, são cinco formas. A banca cobra onde cada uma aparece.</p>
+
+  <div class="tgrid">
+    <div class="tcard">
+      <svg viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 70 Q60 30 140 35 L140 45 Q70 45 30 72 Z" fill="#dff0ff" opacity="0.9"/>
+        <path d="M20 72 Q70 40 140 45" fill="none" stroke="#fff" stroke-width="1.5"/>
+      </svg>
+      <div class="tt">Em lençol (sheet)</div>
+      <div class="td2">No bordo de ataque, dorso (α positivo). Espalha-se em folha. Estável em fluxo uniforme; instável na esteira.</div>
+    </div>
+    <div class="tcard">
+      <svg viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="45" r="13" fill="#dff0ff"/><circle cx="90" cy="40" r="9" fill="#dff0ff"/><circle cx="78" cy="60" r="7" fill="#dff0ff"/>
+      </svg>
+      <div class="tt">Bolha (bubble)</div>
+      <div class="td2">Na espessura máxima, entrada sem choque, escoamento não separado. Bolhas grandes crescendo/contraindo.</div>
+    </div>
+    <div class="tcard">
+      <svg viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#dff0ff"><circle cx="50" cy="45" r="3"/><circle cx="60" cy="38" r="2.5"/><circle cx="70" cy="50" r="3"/><circle cx="82" cy="42" r="2"/><circle cx="92" cy="55" r="2.5"/><circle cx="100" cy="40" r="2"/><circle cx="110" cy="50" r="3"/><circle cx="66" cy="60" r="2"/><circle cx="88" cy="33" r="2"/></g>
+      </svg>
+      <div class="tt">Nuvem (cloud)</div>
+      <div class="td2">Atrás de lençol desenvolvido, fluxo moderadamente separado. Névoa de bolhas pequenas → erosão intensa.</div>
+    </div>
+    <div class="tcard">
+      <svg viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 45 Q80 20 140 45" fill="none" stroke="#dff0ff" stroke-width="6" stroke-linecap="round"/>
+        <path d="M30 45 Q80 70 140 45" fill="none" stroke="#bfe0ff" stroke-width="2" opacity="0.6"/>
+      </svg>
+      <div class="tt">Vórtice de ponta (tip)</div>
+      <div class="td2">Filamento da ponta; começa não-ligado, depois liga. Precursor importante em navios de guerra.</div>
+    </div>
+    <div class="tcard">
+      <svg viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="45" r="8" fill="#0D3D36"/>
+        <path d="M48 45 Q90 38 140 45" fill="none" stroke="#dff0ff" stroke-width="7" stroke-linecap="round"/>
+        <path d="M48 45 L70 40 M48 45 L70 50" stroke="#bfe0ff" stroke-width="2"/>
+      </svg>
+      <div class="tt">Vórtice de cubo (hub)</div>
+      <div class="td2">Combinação dos vórtices de raiz das pás. Corda grossa com filamentos = nº de pás. Estável.</div>
+    </div>
+  </div>
+
+  <div class="box trap">
+    <h4>Dorso × face — qual cavita?</h4>
+    <p>Cavitação em lençol surge no <strong>dorso (sucção)</strong> com ângulos de ataque <strong>positivos</strong>, e na <strong>face (pressão)</strong> com ângulos <strong>negativos</strong>. Trocar dorso↔face ou o sinal do ângulo é distrator. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== 7.3 SEMELHANCA ===== -->
+<section class="bloco" id="semelhanca">
+  <h2 class="sec"><span class="n">7.3</span> Lei de semelhança (ensaios cavitantes)</h2>
+  <p class="lede">Para reproduzir a cavitação em modelo, quatro condições devem ser satisfeitas — e duas são incompatíveis (como sempre, Froude × Reynolds).</p>
+  <div class="box formula">
+    <h4>Os 4 requisitos <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">
+      <b>(a)</b> mesmo número de <strong>Froude</strong>;<br>
+      <b>(b)</b> mesmo número de <strong>Reynolds</strong> nas seções de pá;<br>
+      <b>(c)</b> mesmo <strong>deslizamento</strong> (mesmo J = V<sub>A</sub>/nD);<br>
+      <b>(d)</b> mesmo número de cavitação <strong>σ</strong>.
+    </p>
+  </div>
+  <p>Como em casco/águas livres, Froude e Reynolds são incompatíveis. Prioriza-se σ e J (modelos grandes a alta velocidade reduzem o efeito de escala de atrito). Em túnel, é prática usar σ <strong>15 a 25% menor</strong> que o calculado para o navio, compensando o fluxo uniforme do túnel vs. a esteira real. <span class="tag t-banca">BANCA</span></p>
+</section>
+
+<!-- ===== BURRILL ===== -->
+<section class="bloco" id="burrill">
+  <h2 class="sec"><span class="n">7.7</span> Critério de Burrill <span class="tag t-verificar" style="font-size:9px">fonte: Bertram</span></h2>
+  <p class="lede">O PNA §7 remete o carregamento de empuxo à §8. O critério prático mais cobrado — o diagrama de Burrill — vem da literatura de projeto (Bertram, Burrill 1943).</p>
+  <div class="box formula">
+    <h4>Coeficiente de carregamento de Burrill</h4>
+    <div class="eq">τ<sub>c</sub> = T / (½ρ·V<sub>R</sub>²·A<sub>P</sub>)<span class="lbl">empuxo por área projetada e pressão dinâmica na velocidade relativa a 0,7R</span></div>
+    <div class="eq">σ<sub>0.7R</sub> = (p₀ − p<sub>V</sub>) / [½ρ·V<sub>R</sub>²] &nbsp;·&nbsp; V<sub>R</sub>² = V<sub>A</sub>² + (0,7·πnD)²<span class="lbl">avaliado no raio representativo de 0,7R</span></div>
+    <p class="vars">No diagrama de Burrill (τ<sub>c</sub> × σ<sub>0.7R</sub>), traçam-se linhas-limite de % de cavitação no dorso. Regra prática: manter a porcentagem de área cavitada admissível (ex.: 5% para navios mercantes, ~10% para navios de guerra). <span class="tag t-calc">CALCULO</span></p>
+  </div>
+  <div class="box trap">
+    <h4>Atenção à fonte</h4>
+    <p>A fórmula clássica de Burrill (τ<sub>c</sub>, raio 0,7R, % de dorso cavitado) <strong>não está no PNA §7</strong> com esse detalhamento — vem de Bertram/Burrill. Se a banca citar "PNA" para Burrill, verifique. <span class="tag t-verificar">VERIFICAR gabarito impresso</span></p>
+  </div>
+</section>
+
+<!-- ===== 7.6 EFEITOS ===== -->
+<section class="bloco" id="efeitos">
+  <h2 class="sec"><span class="n">7.6</span> Efeitos prejudiciais</h2>
+  <p class="lede">Três frentes: queda de desempenho (ruptura de empuxo), dano às pás (erosão) e vibração/ruído.</p>
+
+  <h3>(a) Ruptura de empuxo (thrust breakdown)</h3>
+  <p>A cavitação reduz o pico de subpressão na borda de ataque e o espalha pela corda → após um aumento inicial, a <strong>sustentação cai</strong>, o arrasto sobe e a razão L/D da seção piora. Resultado: <span class="hl">K_T e η₀ despencam</span> em certos J, e o navio precisa de mais potência/rotações para a mesma velocidade.</p>
+
+  <div class="ichart">
+    <h4>Ruptura de empuxo: K_T e η₀ × J para vários σ</h4>
+    <p class="hint">Deslize σ. Para σ alto (≈ águas livres) as curvas são normais; ao reduzir σ, K_T e η₀ caem abruptamente em J baixo.</p>
+    <canvas id="brCanvas" width="860" height="250"></canvas>
+    <div class="ictrl"><label for="brS">σ →</label><input type="range" id="brS" min="30" max="300" value="200" oninput="drawBr()">
+      <div class="iread" id="brRead"></div>
+    </div>
+  </div>
+
+  <h3>(b) Erosão (dano às pás)</h3>
+  <p>O dano vem do <strong>colapso das bolhas</strong> na superfície da pá — ondas de choque em pontos minúsculos, com energia altíssima, produzindo a erosão ponteada (<strong>pitting</strong>). Teorias recentes: a energia vem de um <strong>jato re-entrante</strong> na bolha (fotografado por Ellis). Ocorre onde há cavitação em <strong>nuvem e bolha</strong> (colapso na zona de maior pressão a jusante). Outra forma: <strong>curvamento da borda de fuga</strong> (mono-hélice de alta potência) pelo colapso simultâneo de muitas bolhas (van Manen, 1963).</p>
+  <div class="box key">
+    <h4>Prevenção</h4>
+    <p>Melhor método: garantir que a cavitação prejudicial <strong>não ocorra</strong>. Se impossível: projetar <strong>supercavitante</strong> (cavidades colapsam a jusante, longe da superfície), ou usar materiais/revestimentos resistentes. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+
+  <h3>(c) Vibração e ruído</h3>
+  <p>As forças do propulsor na popa são a maior fonte de excitação vibratória. A cavitação <span class="hl-amb">amplia as flutuações de pressão induzidas por um fator entre 1 e 10</span> (às vezes mais), por causa das grandes variações de volume das cavidades ao mudar o ângulo de ataque na esteira.</p>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Oito questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As fórmulas e conceitos de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Cavitação (§7)</summary>
+  <ul>
+    <li><b>Definição:</b> em propulsores muito carregados, acima de rotações críticas → ruptura do escoamento e perda de empuxo. Antes: ruído, vibração, erosão.</li>
+    <li><b>Número de cavitação:</b> σ = (p₀−p_V)/(½ρV₀²). Local: σ_L = [p_A+ρgh−ρgr−p_V]/[½ρ(V_A²+ω²r²)]. Mínima na posição superior → cavita primeiro no topo do disco.</li>
+    <li><b>Início:</b> a redução MÁXIMA de pressão no dorso (não a média) dispara. Seções de pico suave resistem mais.</li>
+    <li><b>Otimismo do p_V:</b> núcleos e ar na água do mar antecipam a cavitação (até ~17 kN/m²).</li>
+    <li><b>Tipos (Knapp):</b> viajante · fixa · vórtice · vibratória. Em propulsores: predominam fixa e vórtice.</li>
+    <li><b>Formas:</b> lençol (BA do dorso, α+) · bolha (espessura máx) · nuvem (atrás do lençol, erosão) · vórtice de ponta · vórtice de cubo.</li>
+    <li><b>Semelhança (4):</b> Froude · Reynolds · deslizamento (J) · σ. Froude×Reynolds incompatíveis. Túnel usa σ 15–25% menor.</li>
+    <li><b>Burrill (Bertram):</b> τ_c = T/(½ρV_R²·A_P), σ a 0,7R, V_R²=V_A²+(0,7πnD)². Linhas de % de dorso cavitado.</li>
+    <li><b>Efeitos:</b> (a) ruptura de empuxo (K_T, η₀ despencam); (b) erosão por colapso de bolha (pitting, jato re-entrante), curvamento da BF; (c) vibração ×1 a 10.</li>
+    <li><b>Prevenção:</b> evitar a cavitação prejudicial; se não, supercavitante ou materiais/revestimentos resistentes.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Cavitação (PNA Vol. II Cap. VI §7) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== sigma vs V and h ===== */
+function drawSig(){
+  var cv=document.getElementById('sigCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=52,y0=H-30,pW=W-80,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  var V=(+document.getElementById('sV').value)/10;   // m/s
+  var h=(+document.getElementById('sH').value)/10;    // m
+  var pA=101.3, pV=1.7, rho=1.025; // kN units approx (rho in t/m3 -> kPa with g)
+  // p0 = pA + rho*g*h ; q = 0.5*rho*V^2 (use rho=1025 kg/m3 -> /1000 for kPa)
+  function sigma(v){var p0=pA+1.025*9.81*h; var q=0.5*1.025*v*v; return (p0-pV)/q;}
+  var vMin=3,vMax=20;
+  function px(v){return x0+(v-vMin)/(vMax-vMin)*pW;}
+  var sMax=8;
+  function py(s){return y0-Math.min(s,sMax)/sMax*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('σ',8,24);ctx.fillText('V₀ (m/s)',W-60,y0+20);
+  // sigma=1 reference
+  ctx.strokeStyle='#ddd2b0';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(x0,py(1));ctx.lineTo(W-18,py(1));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a99';ctx.fillText('σ=1',W-50,py(1)-4);
+  [3,6,10,14,18].forEach(function(v){ctx.fillStyle='#a99';ctx.fillText(v,px(v)-5,y0+16);});
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.6;ctx.beginPath();var f=true;
+  for(var v=vMin;v<=vMax;v+=0.2){var X=px(v),Y=py(sigma(v));if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  var sNow=sigma(V),mx=px(V),my=py(sNow);
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(mx,my,5,0,7);ctx.fill();
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(mx,my);ctx.lineTo(mx,y0);ctx.stroke();ctx.setLineDash([]);
+  var risk = sNow<0.5?'σ baixo → ALTO risco de cavitar':(sNow<1.5?'risco moderado':'σ alto → baixo risco');
+  document.getElementById('sRead').innerHTML='V₀=<b>'+V.toFixed(1)+'</b> m/s · h=<b>'+h.toFixed(1)+'</b> m · σ=<b>'+sNow.toFixed(2)+'</b> · '+risk;
+}
+drawSig();
+
+/* ===== pressure distribution ===== */
+function drawPr(){
+  var cv=document.getElementById('prCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=46,yMid=H/2,pW=W-70;
+  ctx.clearRect(0,0,W,H);
+  var a=(+document.getElementById('prA').value)/10;   // alpha 0..10
+  var sig=(+document.getElementById('prS').value)/100; // sigma margin 0.3..2
+  // peak suction grows with alpha
+  var peak=0.3+0.45*a; // -dp/q peak
+  function px(xc){return x0+xc*pW;}
+  function py(v){return yMid - v*(H/2-30);} // positive up = suction (we plot -dp/q upward)
+  // axes
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,20);ctx.lineTo(x0,H-20);ctx.moveTo(x0,yMid);ctx.lineTo(W-14,yMid);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('−δp/q (sucção ↑)',x0+4,18);ctx.fillText('corda',W-50,yMid+16);
+  // -sigma line (cavitation threshold)
+  var yThr=py(sig);
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([6,4]);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(x0,yThr);ctx.lineTo(W-14,yThr);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.font='12px Trebuchet MS';ctx.fillText('−σ (limite)',W-90,yThr-5);
+  // suction curve on back (peak near leading edge)
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.6;ctx.beginPath();
+  for(var xc=0;xc<=1;xc+=0.01){
+    var v=peak*Math.exp(-Math.pow((xc-0.12)/0.16,2)) - 0.05; // back suction
+    var X=px(xc),Y=py(v);if(xc===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);
+  }ctx.stroke();
+  // face (pressure) curve small positive below
+  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=1.6;ctx.beginPath();
+  for(var xc2=0;xc2<=1;xc2+=0.01){var v2=-0.12*Math.exp(-Math.pow((xc2-0.2)/0.3,2));var X2=px(xc2),Y2=py(v2);if(xc2===0)ctx.moveTo(X2,Y2);else ctx.lineTo(X2,Y2);}ctx.stroke();
+  // legend
+  ctx.font='11px Trebuchet MS';ctx.fillStyle='#1A7A6E';ctx.fillText('— dorso (sucção)',W-150,H-30);ctx.fillStyle='#2C5F8A';ctx.fillText('— face',W-150,H-15);
+  var cav = peak>=sig;
+  document.getElementById('prRead').innerHTML='α=<b>'+a.toFixed(1)+'</b> · pico=−<b>'+peak.toFixed(2)+'</b> · '+(cav?'<span style="color:#9E3B2E">⚠ CAVITA (pico ≥ σ)</span>':'sem cavitação');
+}
+drawPr();
+
+/* ===== thrust breakdown ===== */
+function drawBr(){
+  var cv=document.getElementById('brCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-32,pW=W-78,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  var sig=(+document.getElementById('brS').value)/100; // 0.3..3
+  var jMax=1.0;
+  function px(j){return x0+j/jMax*pW;}
+  function py(v){return y0-v/0.6*pH;} // KT up to ~0.5
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('K_T , η₀',6,24);ctx.fillText('J',W-30,y0+20);
+  [0,0.2,0.4,0.6,0.8,1.0].forEach(function(j){ctx.fillStyle='#a99';ctx.fillText(j.toFixed(1),px(j)-8,y0+16);});
+  // breakdown J threshold: lower sigma -> breakdown at higher J
+  var jBreak = 0.1 + (1-Math.min(sig,1))*0.55; // for sigma<1 breakdown intrudes
+  // KT normal: linear decreasing from 0.5 at J=0 to ~0 at J=0.9
+  function ktBase(j){return Math.max(0,0.5*(1-j/0.95));}
+  function eta(j){var e=1.6*j*(1-j/0.95);return Math.max(0,Math.min(0.7,e));}
+  // KT with breakdown: drops sharply below jBreak if sigma low
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.6;ctx.beginPath();var f=true;
+  for(var j=0;j<=jMax;j+=0.01){
+    var kt=ktBase(j);
+    if(sig<1 && j<jBreak){ var drop=(jBreak-j)/jBreak; kt*= (1-0.85*drop); }
+    var X=px(j),Y=py(kt);if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);
+  }ctx.stroke();
+  // eta
+  ctx.strokeStyle='#6B4E8E';ctx.lineWidth=2;ctx.beginPath();f=true;
+  for(var j2=0;j2<=jMax;j2+=0.01){
+    var e=eta(j2);
+    if(sig<1 && j2<jBreak){var drop2=(jBreak-j2)/jBreak; e*=(1-0.8*drop2);}
+    var X2=px(j2),Y2=py(e);if(f){ctx.moveTo(X2,Y2);f=false;}else ctx.lineTo(X2,Y2);
+  }ctx.stroke();
+  // breakdown marker
+  if(sig<1){ctx.strokeStyle='#9E3B2E';ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(px(jBreak),14);ctx.lineTo(px(jBreak),y0);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#9E3B2E';ctx.font='11px Trebuchet MS';ctx.fillText('ruptura',px(jBreak)+3,28);}
+  ctx.font='11px Trebuchet MS';ctx.fillStyle='#1A7A6E';ctx.fillText('— K_T',W-90,30);ctx.fillStyle='#6B4E8E';ctx.fillText('— η₀',W-90,46);
+  document.getElementById('brRead').innerHTML='σ=<b>'+sig.toFixed(2)+'</b> · '+(sig>=1?'≈ águas livres (sem ruptura)':'<span style="color:#9E3B2E">cavitação reduz K_T e η₀ em J baixo</span>');
+}
+drawBr();
+window.addEventListener('resize',function(){drawSig();drawPr();drawBr();});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"O número de cavitação σ é definido como:",
+   o:["½ρV₀² / (p₀ − p_V)","(p₀ − p_V) / (½ρV₀²)","(p₀ + p_V) / (½ρV₀²)","p_V / p₀"],
+   a:1,e:"σ = (p₀ − p_V)/(½ρV₀²): margem de pressão sobre a dinâmica. σ baixo (alta velocidade) → mais propenso a cavitar."},
+  {q:"A cavitação numa seção de pá é iniciada pela:",
+   o:["Redução MÉDIA de pressão no dorso","Redução MÁXIMA de pressão no dorso","Pressão na face","Velocidade média do escoamento"],
+   a:1,e:"É a redução MÁXIMA (o pico de subpressão), não a média. Por isso seções de distribuição de pressão uniforme e pico suave resistem mais à cavitação."},
+  {q:"Em que posição do disco a cavitação transitória aparece primeiro?",
+   o:["Na posição inferior (6 horas)","Na posição superior vertical (12 horas)","Nas laterais (3 e 9 horas)","Sempre no cubo"],
+   a:1,e:"Na posição superior, a pressão é mínima (p_A+ρgh−ρgr−p_V): menos coluna d'água acima. Por isso a cavitação transitória surge primeiro no topo do disco."},
+  {q:"Knapp et al. (1970) classificam a cavitação em quatro tipos. São eles:",
+   o:["Lençol, bolha, nuvem e vórtice","Viajante, fixa, vórtice e vibratória","Dorso, face, ponta e cubo","Erosiva, sonora, térmica e química"],
+   a:1,e:"Knapp: viajante, fixa, vórtice e vibratória. Lençol/bolha/nuvem/vórtice de ponta/cubo são as FORMAS (aparência física) em propulsores."},
+  {q:"A cavitação em lençol no DORSO da pá ocorre com ângulos de ataque:",
+   o:["Negativos","Positivos","Apenas nulos","Independe do ângulo"],
+   a:1,e:"No dorso (sucção), com α positivo. Na face (pressão), com α negativo. A baixa pressão na borda de ataque dispara o lençol."},
+  {q:"Quantos requisitos de semelhança existem para ensaios de propulsores cavitantes?",
+   o:["Dois: Froude e Reynolds","Três: Froude, Reynolds e σ","Quatro: Froude, Reynolds, deslizamento (J) e σ","Apenas o número de cavitação σ"],
+   a:2,e:"Quatro: mesmo Froude, mesmo Reynolds, mesmo deslizamento (J) e mesmo σ. Froude e Reynolds são incompatíveis; prioriza-se σ e J, usando σ 15-25% menor no túnel."},
+  {q:"O mecanismo de dano (erosão) por cavitação é causado principalmente por:",
+   o:["Corrosão química do metal","Colapso das bolhas na superfície (ondas de choque / jato re-entrante)","Atrito das pás com a água","Aquecimento das pás"],
+   a:1,e:"O colapso da bolha na superfície gera ondas de choque de energia altíssima em pontos minúsculos (pitting). Teorias recentes: jato re-entrante na bolha (Ellis fotografou). Não é corrosão, embora possam interagir."},
+  {q:"A cavitação amplifica as flutuações de pressão induzidas na popa por um fator de:",
+   o:["Menos de 1 (reduz)","Entre 1 e 10 (às vezes mais)","Exatamente 2","Mais de 100"],
+   a:1,e:"Fator entre 1 e 10 (às vezes maior), pelas grandes variações de volume das cavidades ao mudar o ângulo de ataque na esteira. As forças do propulsor na popa são a maior fonte de vibração."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Número de cavitação σ",b:"σ = (p₀−p_V)/(½ρV₀²). Margem de pressão / dinâmica. σ baixo = mais cavita."},
+  {f:"σ local na pá",b:"σ_L = [p_A+ρgh−ρgr−p_V]/[½ρ(V_A²+ω²r²)]. Mínimo no topo do disco."},
+  {f:"O que inicia a cavitação",b:"A redução MÁXIMA de pressão no dorso (não a média). Pico suave resiste mais."},
+  {f:"Otimismo do p_V",b:"Núcleos e ar no mar antecipam a cavitação — pode ocorrer até ~17 kN/m²."},
+  {f:"Tipos (Knapp)",b:"Viajante · fixa · vórtice · vibratória. Em propulsores: fixa e vórtice."},
+  {f:"Formas no propulsor",b:"Lençol (BA dorso, α+) · bolha (espessura máx) · nuvem (erosão) · vórtice ponta · vórtice cubo."},
+  {f:"Dorso × face",b:"Lençol no dorso com α+; na face com α−. Não trocar."},
+  {f:"Semelhança (4 requisitos)",b:"Froude · Reynolds · deslizamento (J) · σ. Túnel usa σ 15-25% menor."},
+  {f:"Critério de Burrill",b:"τ_c = T/(½ρV_R²·A_P), σ a 0,7R, V_R²=V_A²+(0,7πnD)². Fonte: Bertram."},
+  {f:"Ruptura de empuxo",b:"Cavitação espalha o pico de sucção → L cai, K_T e η₀ despencam em J baixo."},
+  {f:"Erosão (pitting)",b:"Colapso da bolha na superfície (ondas de choque / jato re-entrante). Nuvem e bolha."},
+  {f:"Vibração",b:"Cavitação amplia flutuações de pressão na popa ×1 a 10 (variação de volume das cavidades)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+</script>
+</body>
+</html>

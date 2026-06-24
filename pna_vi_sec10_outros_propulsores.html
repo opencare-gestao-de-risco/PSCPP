@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Outros Dispositivos de Propulsão — PNA Vol. II Cap. VI §10 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:690px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:250px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:84px}
+  .ictrl input[type=range]{flex:1;min-width:130px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  /* device cards */
+  .dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:16px 0}
+  .dcard{background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:14px;box-shadow:var(--sombra)}
+  .dcard .dh{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:14px;color:var(--verde);margin-bottom:4px}
+  .dcard .dd{font-size:13px;color:#4a5f59}
+  .dcard .dn{font-family:'Trebuchet MS',sans-serif;font-size:10px;font-weight:bold;color:#fff;background:var(--verde2);border-radius:4px;padding:1px 7px;float:right}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:155px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15.5px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:25px}.eq{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco B — Propulsão</p>
+    <h1>Outros Dispositivos de <em>Propulsão</em></h1>
+    <p class="sub">Quando o hélice de rosca não basta: jato d'água, jato de bomba, rodas de pás, propulsores cicloidais (Voith-Schneider), passo controlável, contra-rotativos, supercavitantes, sobrepostos e de superfície — e a tabela de economias de energia.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. II, Cap. VI, Seção 10 (van Manen &amp; van Oossanen). Bocal Kort cruzado com Bertram.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#jato">Jato ▶</a>
+    <a href="#pumpjet">Jato de bomba</a>
+    <a href="#cicloidal">Cicloidal (Voith)</a>
+    <a href="#cpp">Passo controlável</a>
+    <a href="#crp">Contra-rotativo</a>
+    <a href="#super">Supercavitante</a>
+    <a href="#kort">Bocal / duto</a>
+    <a href="#economia">Economia ▶</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Complementar ao caderno <a href="propulsores_nao_convencionais.html">Propulsores Não-Convencionais</a>. Aqui o foco é o tratamento do <strong>PNA §10</strong>: as fórmulas do jato, a cinemática cicloidal e a tabela de economias de energia.
+</div>
+
+<!-- ===== 10.2 JATO ===== -->
+<section class="bloco" id="jato">
+  <h2 class="sec"><span class="n">10.2</span> Propulsão a jato (waterjet)</h2>
+  <p class="lede">O tipo mais antigo (patentes de 1661). Uma bomba interna aspira água, acelera e descarrega a ré. É reação, como o hélice, mas com as partes móveis dentro do casco.</p>
+
+  <div class="box formula">
+    <h4>Empuxo e eficiência ideal</h4>
+    <div class="eq">T = ρ·V<sub>J</sub>·A·(V<sub>J</sub> − V)<span class="lbl">Eq. (88) — variação de quantidade de movimento por unidade de tempo</span></div>
+    <div class="eq">η = 2V / (V<sub>J</sub> + V)<span class="lbl">Eq. (89) — eficiência ideal (água entra à velocidade do navio, sem perdas)</span></div>
+    <p class="vars"><b>V</b> velocidade do navio · <b>V<sub>J</sub></b> velocidade do jato · <b>A</b> área do bocal. η → 1 quando V<sub>J</sub> → V, mas aí o empuxo → 0 (a menos que A seja enorme). Mesma lógica do hélice: mais água + menos aceleração = mais eficiente.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Eficiência do jato: ideal vs. com perdas de entrada</h4>
+    <p class="hint">Deslize a razão V_J/V. A curva ideal sobe até 1; a com perdas (Eq. 90) tem máximo de apenas 0,5 em V_J = 2V.</p>
+    <canvas id="jetCanvas" width="860" height="240"></canvas>
+    <div class="ictrl"><label for="jVR">V_J/V →</label><input type="range" id="jVR" min="105" max="400" value="200" oninput="drawJet()">
+      <div class="iread" id="jRead"></div>
+    </div>
+  </div>
+
+  <div class="box trap">
+    <h4>Os dois casos — a armadilha do 0,5</h4>
+    <p>Sem perdas de entrada (água chega à velocidade do navio): η = 2V/(V<sub>J</sub>+V) → pode ser alta. Com perdas (água levada ao repouso antes do impelidor, ou tomada no fundo): <span class="hl-amb">η = 2(V<sub>J</sub>−V)V/V<sub>J</sub>², máximo de apenas 0,5 em V<sub>J</sub> = 2V</span>. A banca testa essa diferença. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+  <div class="box key">
+    <h4>Balanço prático</h4>
+    <p>Na prática (Kim, 1964), a eficiência do jato raramente passa de 0,60 e o coeficiente propulsivo fica em ~0,51–0,54 — <strong>abaixo</strong> de hélices convencionais (η₀ ~0,65–0,72). Vantagens: manobra (descarga vetorada vira leme), reversão sem inverter o motor, silêncio, sem apêndices externos. Desvantagens: perda de volume interno, risco de obstrução, fluxo não uniforme ao impelidor. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== 10.3 PUMP JET ===== -->
+<section class="bloco" id="pumpjet">
+  <h2 class="sec"><span class="n">10.3</span> Jato de bomba (pump jet)</h2>
+  <p class="lede">Impelidor externo ao casco com palhetas-guia fixas, todo encerrado num duto longo (anel-envolvente).</p>
+  <div class="box key">
+    <p>No pump jet moderno, o duto <strong>aumenta de diâmetro</strong> da entrada ao impelidor → a velocidade cai e a pressão sobe. Isso dá maior diâmetro de impelidor e menor C<sub>T</sub> → <span class="hl">maior eficiência</span> e <strong>cavitação/ruído retardados</strong> (pressão mais alta no hélice). Folga pequena entre impelidor e anel inibe vórtices de ponta. Penalidade: a resistência do próprio duto. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== 10.5 CICLOIDAL ===== -->
+<section class="bloco" id="cicloidal">
+  <h2 class="sec"><span class="n">10.5</span> Propulsores de eixo vertical (cicloidais)</h2>
+  <p class="lede">Pás verticais num disco rotativo horizontal, o ângulo controlado para vetorar o empuxo em qualquer direção — propulsão e manobra ao mesmo tempo. Dois tipos: Kirsten-Boeing e Voith-Schneider.</p>
+
+  <div class="box formula">
+    <h4>Cinemática cicloidal (curva descrita pelas pás) <span class="tag t-decorar">DECORAR</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Relação ωR vs V₀</th><th class="center">J = V₀/ωR</th><th>Curva</th></tr>
+      <tr><td>ωR &gt; V₀ (rotação domina)</td><td class="center">J &lt; 1</td><td><strong>epiciclóide</strong></td></tr>
+      <tr><td>ωR = V₀</td><td class="center">J = 1</td><td><strong>ciclóide normal</strong></td></tr>
+      <tr><td>ωR &lt; V₀ (translação domina)</td><td class="center">J &gt; 1</td><td><strong>ciclóide alongada / trocóide</strong></td></tr>
+    </table>
+    <p class="vars">Passo a escorregamento zero: P/D = πJ = πV₀/(ωR). A excentricidade e = J. Para J &gt; 1 (trocóide), o movimento lembra um peixe nadando.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Eficiência — a armadilha</h4>
+    <p>O propulsor de eixo vertical é <span class="hl-amb">30 a 40% MENOS eficiente</span> que o hélice de rosca convencional (Van Manen, 1966), com K_T e K_Q bem menores. A vantagem não é eficiência — é a <strong>manobrabilidade</strong> (empuxo vetorado 360°). Confundir as duas é distrator. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+  <p>O <strong>Kirsten-Boeing</strong> tem as pás engrenadas (meia-revolução da pá por revolução do disco); o <strong>Voith-Schneider</strong> usa mecanismo de controle independente. Melhores eficiências: 6 pás.</p>
+</section>
+
+<!-- ===== 10.6 CPP ===== -->
+<section class="bloco" id="cpp">
+  <h2 class="sec"><span class="n">10.6</span> Passo controlável (CPP)</h2>
+  <p class="lede">Pás montadas separadamente no cubo, com passo ajustável (e reversível) em operação por pistões hidráulicos.</p>
+  <table>
+    <tr><th>Vantagens (CPP vs FPP)</th><th>Desvantagens</th></tr>
+    <tr><td>Motor dispensa mecanismo de reversão / turbina de popa</td><td>Cubo maior → menor eficiência hidrodinâmica relativa</td></tr>
+    <tr><td>Motor opera em rotação ótima independente da carga</td><td>Maior complexidade mecânica</td></tr>
+    <tr><td>Reversão de empuxo muito mais rápida (emergência)</td><td>Maior custo de manutenção</td></tr>
+  </table>
+  <p>Ideal para navios com condições muito variadas (rebocadores, arrasteiros), motores não-reversíveis (militares com turbina a gás) e ferries (param/partem/dão ré repetidamente). <span class="hl">Quando o passo muda, todas as seções giram pelo mesmo ângulo</span> — então a face deixa de ser uma superfície helicoidal verdadeira. <span class="tag t-banca">BANCA</span></p>
+</section>
+
+<!-- ===== 10.7 CRP ===== -->
+<section class="bloco" id="crp">
+  <h2 class="sec"><span class="n">10.7</span> Tandem e contra-rotativos (CRP)</h2>
+  <p class="lede">Dividir a carga entre dois hélices reduz o fator de carga, melhora a eficiência e adia a cavitação.</p>
+  <div class="box key">
+    <h4>Tandem × contra-rotativo</h4>
+    <p><strong>Tandem:</strong> dois ou mais hélices no mesmo eixo, <em>mesmo sentido</em>. O de ré, na esteira do de vante, precisa de passo maior. Aumenta a energia rotacional da esteira.<br><br>
+    <strong>Contra-rotativo (CRP):</strong> hélices coaxiais em <em>sentidos opostos</em>. O de ré <span class="hl">recupera a energia rotacional</span> da esteira do de vante (idealmente, esteira sem rotação ao final). O de ré tem diâmetro menor (contração da coluna de esteira). <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+  <div class="box formula">
+    <h4>O caso Manhattan (106.000 TPB) <span class="tag t-banca">BANCA</span></h4>
+    <p class="vars">O arranjo contra-rotativo exigiu <span class="hl">7% menos potência</span> que o hélice duplo convencional e 6,5% menos que o hélice simples de 5 pás. O mecanismo físico é a <strong>recuperação da energia rotacional</strong> da esteira. Desvantagem: peso e complexidade do eixamento coaxial (engrenagens, vedação).</p>
+  </div>
+</section>
+
+<!-- ===== 10.8 SUPER ===== -->
+<section class="bloco" id="super">
+  <h2 class="sec"><span class="n">10.8</span> Hélices supercavitantes</h2>
+  <p class="lede">Quando a cavidade cobre toda a face posterior (dorso), que deixa de estar molhada. Projetados de propósito para velocidades de 40–80 nós.</p>
+  <div class="box key">
+    <h4>Como e quando</h4>
+    <p>No regime totalmente cavitante, mais rotação não reduz mais a pressão no dorso (já seco) → o empuxo extra vem da face. <strong>Vantagem:</strong> sem erosão reversa (as bolhas não colapsam na superfície da pá) e menos vibração. Marca registrada: <span class="hl">seções em cunha (wedge-shaped)</span> com bordo de ataque fino para separação limpa. Condição de projeto: σ no raio 0,7R ≤ <strong>0,045</strong> (Tachmindji). <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+  <table>
+    <tr><th>Navio</th><th class="center">η convencional (NC)</th><th class="center">η supercavitante (SC)</th></tr>
+    <tr><td>Passageiros (40 nós)</td><td class="center">0,68</td><td class="center">0,61</td></tr>
+    <tr><td>Contratorpedeiro (39 nós)</td><td class="center">0,66</td><td class="center">0,62</td></tr>
+    <tr><td>Lancha (36,5 nós)</td><td class="center">0,67</td><td class="center">0,64</td></tr>
+  </table>
+  <p>SC é ~10% menos eficiente no navio de passageiros, mas a diferença é menor em embarcações rápidas — e o SC <strong>não sofre erosão</strong>. Acima de ~40 nós, pode ser a <strong>única alternativa</strong> (não dá para projetar convencional). Abaixo de 40 nós, sem vantagem. <span class="tag t-banca">BANCA</span></p>
+</section>
+
+<!-- ===== KORT / DUCTED ===== -->
+<section class="bloco" id="kort">
+  <h2 class="sec"><span class="n">10.11</span> Hélice em duto / bocal Kort <span class="tag t-verificar" style="font-size:9px">Kort: Bertram</span></h2>
+  <p class="lede">O hélice trabalha dentro de um anel anular (duto). Conforme o perfil do duto, ele acelera ou desacelera o fluxo.</p>
+  <div class="box formula">
+    <h4>Os dois tipos de bocal <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">
+      <b>Bocal acelerador (Kort / Nozzle 19A):</b> seção convergente; acelera o fluxo no hélice. Aumenta o empuxo em <strong>alta carga e baixa velocidade</strong> (rebocadores, arrasteiros, bollard pull). É o caso clássico.<br><br>
+      <b>Bocal desacelerador (Nozzle 33):</b> seção divergente; desacelera e aumenta a pressão no hélice → <strong>retarda a cavitação e reduz ruído</strong> (navios militares).
+    </p>
+  </div>
+  <div class="box trap">
+    <h4>Atenção à fonte</h4>
+    <p>O PNA §10 trata "hélice em duto" (ducted propeller) de forma geral e na Tabela 29, mas a nomenclatura específica <strong>bocal Kort / Nozzle 19A / 33</strong> e o detalhamento acelerador × desacelerador vêm de Bertram e da literatura de projeto. Se a banca atribuir "Kort" ao PNA, verifique. <span class="tag t-verificar">VERIFICAR gabarito impresso</span></p>
+  </div>
+</section>
+
+<!-- ===== ECONOMIA CHART ===== -->
+<section class="bloco" id="economia">
+  <h2 class="sec"><span class="n">10.11</span> Tabela 29 — economia de energia por dispositivo</h2>
+  <p class="lede">Uma das tabelas mais cobradas no PSCPP. Economias em % sobre a potência de um hélice simples convencional (Muntjewerf, 1983).</p>
+
+  <div class="ichart">
+    <h4>Faixas de economia de energia (interativo)</h4>
+    <p class="hint">Passe o mouse/toque nas barras. Os maiores ganhos vêm do duplo parafuso sobreposto + baixo RPM.</p>
+    <canvas id="ecoCanvas" width="860" height="380"></canvas>
+    <div class="iread" id="ecoRead" style="margin-top:12px">Toque numa barra para ver o mecanismo físico.</div>
+  </div>
+
+  <div class="box key">
+    <h4>Os mecanismos físicos por trás</h4>
+    <p>Quase todos recuperam <strong>energia rotacional da esteira</strong> ou trabalham com <strong>maior massa de água / menor aceleração</strong>: baixo RPM-grande diâmetro (5–18%), roda de pás de Grim (9–12%), aletas de reação (4–8%, pré-rotação contra o vórtice do hélice), contra-hélice/leme (já contribui 3–4%), sobrepostos (5–16%). O teto teórico da eliminação total das perdas rotacionais é ~10%. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Oito questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os números e conceitos de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Outros Dispositivos (§10)</summary>
+  <ul>
+    <li><b>Jato (waterjet):</b> T = ρV_J·A(V_J−V); η ideal = 2V/(V_J+V). Com perdas: η máx = 0,5 em V_J = 2V. Na prática &lt; hélices (~0,51–0,54 PC).</li>
+    <li><b>Jato de bomba:</b> duto que aumenta de diâmetro → V cai, p sobe, C_T menor → mais eficiente, cavitação retardada.</li>
+    <li><b>Cicloidal (Voith/Kirsten-Boeing):</b> J&lt;1 epiciclóide · J=1 ciclóide · J&gt;1 trocóide. P/D=πJ. 30–40% MENOS eficiente, mas manobra 360°.</li>
+    <li><b>CPP:</b> + dispensa reversão do motor, rotação ótima, reversão rápida. − cubo maior, complexidade. Passo muda → todas as seções giram igual.</li>
+    <li><b>Contra-rotativo (CRP):</b> sentidos opostos, recupera energia rotacional (Manhattan: 7% economia). Tandem = mesmo sentido (de ré precisa passo maior).</li>
+    <li><b>Supercavitante:</b> dorso totalmente seco; sem erosão reversa; seções em cunha; σ(0,7R) ≤ 0,045. Faixa 40–80 nós; abaixo de 40 sem vantagem.</li>
+    <li><b>Bocal Kort:</b> acelerador (19A, convergente) = empuxo em baixa velocidade/bollard pull; desacelerador (33, divergente) = anti-cavitação (militares).</li>
+    <li><b>Tabela 29 (economias):</b> baixo RPM-grande D 5–18% · roda de pás 9–12% · aletas reação 4–8% · hélice em duto 5–12% · sobreposto+baixo RPM 10–21%. Teto rotacional ~10%.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Outros Dispositivos de Propulsão (PNA Vol. II Cap. VI §10) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== Jet efficiency ===== */
+function drawJet(){
+  var cv=document.getElementById('jetCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-32,pW=W-78,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  var rMin=1.05,rMax=4;  // V_J/V
+  function px(r){return x0+(r-rMin)/(rMax-rMin)*pW;}
+  function py(e){return y0-e*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('η',8,24);ctx.fillText('V_J/V',W-50,y0+20);
+  [0,0.25,0.5,0.75,1].forEach(function(e){ctx.strokeStyle='#eee6d0';ctx.beginPath();ctx.moveTo(x0,py(e));ctx.lineTo(W-18,py(e));ctx.stroke();ctx.fillStyle='#a99';ctx.fillText(e.toFixed(2),x0-32,py(e)+4);});
+  [1.05,1.5,2,2.5,3,3.5,4].forEach(function(r){ctx.fillStyle='#a99';ctx.fillText(r.toFixed(1),px(r)-8,y0+16);});
+  // ideal: 2V/(V_J+V) = 2/(r+1)
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.6;ctx.beginPath();var f=true;
+  for(var r=rMin;r<=rMax;r+=0.02){var e=2/(r+1);var X=px(r),Y=py(e);if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  // with losses: 2(V_J-V)V/V_J^2 = 2(r-1)/r^2
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2.6;ctx.beginPath();f=true;
+  for(var r2=rMin;r2<=rMax;r2+=0.02){var e2=2*(r2-1)/(r2*r2);var X2=px(r2),Y2=py(e2);if(f){ctx.moveTo(X2,Y2);f=false;}else ctx.lineTo(X2,Y2);}ctx.stroke();
+  // mark 0.5 max at r=2
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(px(2),py(0.5),4,0,7);ctx.fill();
+  ctx.font='11px Trebuchet MS';ctx.fillText('máx 0,5 @ V_J=2V',px(2)-20,py(0.5)-8);
+  ctx.fillStyle='#1A7A6E';ctx.fillText('— ideal (sem perdas)',W-180,30);ctx.fillStyle='#9E3B2E';ctx.fillText('— com perdas (eq.90)',W-180,46);
+  // marker
+  var r3=(+document.getElementById('jVR').value)/100;
+  var eI=2/(r3+1), eL=2*(r3-1)/(r3*r3);
+  ctx.fillStyle='#16302B';ctx.beginPath();ctx.arc(px(r3),py(eI),4.5,0,7);ctx.fill();
+  ctx.beginPath();ctx.arc(px(r3),py(eL),4.5,0,7);ctx.fill();
+  document.getElementById('jRead').innerHTML='V_J/V=<b>'+r3.toFixed(2)+'</b> · η ideal=<b>'+(eI*100).toFixed(0)+'%</b> · η c/ perdas=<b>'+(eL*100).toFixed(0)+'%</b>';
+}
+drawJet();
+
+/* ===== Economy bar chart ===== */
+var ECO=[
+  {n:'Baixo RPM / grande D',lo:5,hi:18,m:'Maior massa de água, menor aceleração → menor C_T.'},
+  {n:'Skew / túnel de popa',lo:1,hi:5,m:'Suaviza entrada na esteira; reduz picos de carga e vibração.'},
+  {n:'Retrofit de hélice',lo:2,hi:10,m:'Hélice otimizado para as condições reais de operação.'},
+  {n:'Hélice + roda de pás (Grim)',lo:9,hi:12,m:'Roda livre absorve energia da esteira interna e a devolve como empuxo externo.'},
+  {n:'Aletas de reação',lo:4,hi:8,m:'Pré-rotação a montante contrabalança o vórtice do hélice.'},
+  {n:'Gôndola assimétrica',lo:5,hi:10,m:'Modifica o escoamento de entrada, homogeneíza a esteira.'},
+  {n:'Canhota assimétrica',lo:5,hi:8,m:'Forma de popa que melhora a interação hélice-casco.'},
+  {n:'Hélice em duto',lo:5,hi:12,m:'Duto acelerador/desacelerador conforme a aplicação.'},
+  {n:'Duto a vante do hélice',lo:5,hi:10,m:'Homogeneíza o fluxo e reduz resistência do casco.'},
+  {n:'Duplo parafuso sobreposto',lo:5,hi:16,m:'Discos parcialmente sobrepostos; ótimo a 0,7D de distância central.'},
+  {n:'Sobreposto + baixo RPM',lo:10,hi:21,m:'Combinação dos dois maiores ganhos. Teto da tabela.'}
+];
+var ecoHover=-1;
+function drawEco(){
+  var cv=document.getElementById('ecoCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var x0=240,maxV=22,pW=W-x0-30;
+  var bh=(H-20)/ECO.length;
+  function px(v){return x0+v/maxV*pW;}
+  // grid
+  [0,5,10,15,20].forEach(function(v){ctx.strokeStyle='#eee6d0';ctx.beginPath();ctx.moveTo(px(v),6);ctx.lineTo(px(v),H-6);ctx.stroke();ctx.fillStyle='#a99';ctx.font='11px Trebuchet MS';ctx.fillText(v+'%',px(v)-7,H-2);});
+  ECO.forEach(function(d,i){
+    var y=10+i*bh;
+    ctx.fillStyle=(i===ecoHover)?'#0D3D36':'#16302B';ctx.font=(i===ecoHover?'bold ':'')+'12px Trebuchet MS';ctx.textAlign='right';
+    ctx.fillText(d.n,x0-10,y+bh/2+4);ctx.textAlign='left';
+    // range bar
+    var x1=px(d.lo),x2=px(d.hi);
+    ctx.fillStyle=(i===ecoHover)?'#C8A84B':'#1A7A6E';
+    ctx.fillRect(x1,y+4,x2-x1,bh-12);
+    ctx.fillStyle=(i===ecoHover)?'#0D3D36':'#16302B';ctx.font='11px Trebuchet MS';
+    ctx.fillText(d.lo+'–'+d.hi+'%',x2+5,y+bh/2+4);
+  });
+}
+drawEco();
+var ecoCv=document.getElementById('ecoCanvas');
+function ecoPick(ev){
+  var rect=ecoCv.getBoundingClientRect();
+  var scaleY=ecoCv.height/rect.height;
+  var y=(ev.clientY-rect.top)*scaleY;
+  var bh=(ecoCv.height-20)/ECO.length;
+  var i=Math.floor((y-10)/bh);
+  if(i>=0&&i<ECO.length){ecoHover=i;drawEco();document.getElementById('ecoRead').innerHTML='<b>'+ECO[i].n+'</b> ('+ECO[i].lo+'–'+ECO[i].hi+'%): '+ECO[i].m;}
+}
+ecoCv.addEventListener('click',ecoPick);
+ecoCv.addEventListener('mousemove',ecoPick);
+window.addEventListener('resize',function(){drawJet();drawEco();});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"A eficiência ideal da propulsão a jato (sem perdas de entrada) é:",
+   o:["η = 2V/(V_J + V)","η = (V_J + V)/2V","η = V_J/V","η = ½ρV_J²"],
+   a:0,e:"η = 2V/(V_J+V). Aproxima-se de 1 quando V_J→V, mas então o empuxo→0 (a menos que A seja enorme). Mesma lógica do hélice."},
+  {q:"Com perdas de entrada (água levada ao repouso antes do impelidor), a eficiência máxima do jato é:",
+   o:["1,0","0,75","0,5 (em V_J = 2V)","0,9"],
+   a:2,e:"Com perdas, η = 2(V_J−V)V/V_J², que tem máximo de apenas 0,5 em V_J = 2V. É por isso que a propulsão a jato é menos eficiente que hélices convencionais."},
+  {q:"Num propulsor cicloidal, quando ωR = V₀ (J = 1), os centros das pás descrevem:",
+   o:["Uma epiciclóide","Uma ciclóide normal","Uma trocóide","Uma linha reta"],
+   a:1,e:"J=1 → ciclóide normal. J<1 (rotação domina) → epiciclóide. J>1 (translação domina) → ciclóide alongada/trocóide (movimento de peixe)."},
+  {q:"Comparado ao hélice de rosca convencional, o propulsor de eixo vertical (cicloidal) é:",
+   o:["Mais eficiente","30 a 40% menos eficiente, mas com manobra 360°","Igualmente eficiente","Mais eficiente só em alta velocidade"],
+   a:1,e:"30–40% menos eficiente (Van Manen, 1966). A vantagem é a manobrabilidade (empuxo vetorado em qualquer direção), não a eficiência."},
+  {q:"O mecanismo físico do ganho de eficiência dos hélices contra-rotativos é:",
+   o:["Aumentar a velocidade do jato","Recuperar a energia rotacional da esteira do hélice de vante","Reduzir o diâmetro total","Eliminar a cavitação"],
+   a:1,e:"O hélice de ré (sentido oposto) recupera a energia rotacional da esteira do de vante. No Manhattan, isso deu 7% de economia vs. hélice duplo convencional."},
+  {q:"Os hélices supercavitantes são caracterizados por:",
+   o:["Face totalmente molhada e seções circulares","Dorso totalmente coberto pela cavidade e seções em cunha","Operação abaixo de 20 nós","Ausência de cavitação"],
+   a:1,e:"A cavidade cobre toda a face posterior (dorso, que fica seco). Seções em CUNHA (bordo de ataque fino). Condição: σ(0,7R) ≤ 0,045. Faixa: 40–80 nós. Vantagem: sem erosão reversa."},
+  {q:"O bocal Kort ACELERADOR (tipo 19A) é mais vantajoso em:",
+   o:["Navios rápidos de baixa carga","Alta carga e baixa velocidade (rebocadores, bollard pull)","Navios militares para reduzir ruído","Veleiros"],
+   a:1,e:"O bocal acelerador (convergente) aumenta o empuxo em alta carga e baixa velocidade — caso clássico de rebocadores. O desacelerador (33, divergente) é anti-cavitação para militares."},
+  {q:"Na Tabela 29, o maior ganho de economia de energia vem de:",
+   o:["Skew / túnel de popa (1–5%)","Aletas de reação (4–8%)","Duplo parafuso sobreposto + baixo RPM (10–21%)","Retrofit de hélice (2–10%)"],
+   a:2,e:"Duplo parafuso sobreposto + baixo RPM: 10–21%. Combina os dois maiores mecanismos. O teto teórico da eliminação total das perdas rotacionais é ~10%."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Jato — empuxo e η",b:"T=ρV_J·A(V_J−V); η ideal=2V/(V_J+V). Com perdas: máx 0,5 @ V_J=2V."},
+  {f:"Jato — prática",b:"PC ~0,51–0,54, abaixo de hélices (η₀~0,65–0,72). Vantagem: manobra/reversão."},
+  {f:"Jato de bomba",b:"Duto aumenta de diâmetro → V cai, p sobe, C_T menor → mais eficiente, cavitação adiada."},
+  {f:"Cinemática cicloidal",b:"J<1 epiciclóide · J=1 ciclóide · J>1 trocóide. P/D=πJ, e=J."},
+  {f:"Eixo vertical — eficiência",b:"30–40% MENOS eficiente que rosca. Vantagem = manobra 360°. 6 pás é o melhor."},
+  {f:"CPP — vantagens",b:"Dispensa reversão do motor; rotação ótima; reversão rápida. Contra: cubo maior."},
+  {f:"Tandem × CRP",b:"Tandem = mesmo sentido. CRP = sentidos opostos, recupera energia rotacional."},
+  {f:"Manhattan (CRP)",b:"7% menos potência vs hélice duplo, 6,5% vs simples 5 pás."},
+  {f:"Supercavitante",b:"Dorso seco; seções em cunha; σ(0,7R)≤0,045; 40–80 nós; sem erosão reversa."},
+  {f:"Bocal Kort",b:"Acelerador (19A, convergente) = bollard pull/baixa vel. Desacelerador (33) = anti-cavitação."},
+  {f:"Tabela 29 — topos",b:"Sobreposto+baixo RPM 10–21% · baixo RPM-grande D 5–18% · roda de pás 9–12%."},
+  {f:"Teto rotacional",b:"Eliminar todas as perdas rotacionais ≈ 10%. O leme/contra-hélice já dá 3–4%."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+</script>
+</body>
+</html>

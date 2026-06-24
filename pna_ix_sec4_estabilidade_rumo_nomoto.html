@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Estabilidade de Rumo e Índices K-T de Nomoto — PNA §4 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:700px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:260px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:160px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12.5px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:24px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · P1b — Controlabilidade</p>
+    <h1>Estabilidade de Rumo &amp; Índices <em>K-T de Nomoto</em></h1>
+    <p class="sub">Os índices de estabilidade (s₁, s₂), o critério de estabilidade dinâmica (discriminante C), a manobra espiral de Dieudonné com seu laço de histerese, e os índices K e T de Nomoto — o coração quantitativo da manobra.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. III, Cap. IX, Seção 4 (e §5.4 para K e T de Nomoto, 1957).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#indices">Índices s₁, s₂</a>
+    <a href="#criterio">Critério C</a>
+    <a href="#espiral">Espiral ▶</a>
+    <a href="#histerese">Laço de histerese</a>
+    <a href="#bech">Bech / pullout</a>
+    <a href="#nomoto">Nomoto K-T ▶</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Continua o caderno <a href="pna_ix_sec3_estabilidade_movimento.html">Estabilidade de Movimento e Equações Lineares (§3)</a>. Usa diretamente as equações lineares (12) montadas lá. Os próximos: manobras definitivas (§5) e capacidade de giro (§6).
+</div>
+
+<!-- ===== 4.1 INDICES ===== -->
+<section class="bloco" id="indices">
+  <h2 class="sec"><span class="n">4.1</span> Os índices de estabilidade s₁ e s₂</h2>
+  <p class="lede">A solução simultânea das equações de avanço e guinada (12) dá uma equação de 2ª ordem cujas soluções contêm dois índices de estabilidade s₁ e s₂.</p>
+
+  <div class="box formula">
+    <h4>A equação quadrática dos índices <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">As² + Bs + C = 0<span class="lbl">Eq. (14) — s₁, s₂ são os índices de estabilidade (dimensão 1/t)</span></div>
+    <div class="eq">v' = V₁e<sup>s₁t</sup> + V₂e<sup>s₂t</sup> &nbsp;·&nbsp; r' = R₁e<sup>s₁t</sup> + R₂e<sup>s₂t</sup></div>
+    <p class="vars">
+      <b>A</b> = n'<sub>z</sub>·D'<sub>y</sub> &nbsp; <b>B</b> = −n'<sub>z</sub>Y'<sub>v</sub> − D'<sub>y</sub>N'<sub>r</sub> &nbsp; <b>C</b> = Y'<sub>v</sub>N'<sub>r</sub> − (Y'<sub>r</sub>−D')N'<sub>v</sub>
+    </p>
+  </div>
+
+  <div class="box key">
+    <h4>A regra do sinal <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Para a estabilidade com leme fixo, <span class="hl">ambos s₁ e s₂ devem ser negativos</span> → v' e r' decaem a zero, o navio retoma uma reta (Caso I). Se um deles for positivo, v' e r' crescem: o navio nunca retoma a reta e pode acabar girando com o leme em zero. Na prática só se fornece <strong>s₂</strong> (o algebricamente menor, que domina a resposta). <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== 4.2 CRITERIO ===== -->
+<section class="bloco" id="criterio">
+  <h2 class="sec"><span class="n">4.2</span> O critério de estabilidade dinâmica</h2>
+  <p class="lede">As condições para s₁ e s₂ negativos são B/A &gt; 0 e C/A &gt; 0. Como A e B são sempre positivos para navios, tudo se reduz a um único requisito: C &gt; 0.</p>
+
+  <div class="box formula">
+    <h4>O discriminante C <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">C = Y'<sub>v</sub>N'<sub>r</sub> − N'<sub>v</sub>(Y'<sub>r</sub> − D') &gt; 0<span class="lbl">Eq. (14c) — critério de estabilidade dinâmica de rumo</span></div>
+    <div class="eq">N'<sub>r</sub>/(Y'<sub>r</sub> − D') − N'<sub>v</sub>/Y'<sub>v</sub> &gt; 0<span class="lbl">Eq. (14e) — forma de "braços de alavanca"</span></div>
+    <p class="vars">C é o <strong>discriminante da estabilidade dinâmica</strong>. Diz <em>se</em> o navio é estável, mas <strong>não</strong> dá a medida quantitativa (essa vem dos índices s e, depois, de T de Nomoto). A forma (14e) lê-se como a relação entre o braço de alavanca das forças de guinada e de avanço.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Por que A e B são sempre positivos</h4>
+    <p>Y'<sub>v̇</sub> e N'<sub>ṙ</sub> (massa virtual e momento virtual de inércia) são sempre negativos e grandes; logo (D−Y'<sub>v̇</sub>) ≈ 2D e (I'<sub>z</sub>−N'<sub>ṙ</sub>) ≈ 2I'<sub>z</sub> são positivos e grandes → A &gt; 0 e B &gt; 0 sempre. <strong>Só C decide.</strong> <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+
+  <div class="box key">
+    <h4>Independência da velocidade <span class="tag t-banca">BANCA</span></h4>
+    <p>Os índices s no plano horizontal são <span class="hl">independentes da velocidade</span> em Froude baixo/moderado (as derivadas adimensionais são ~constantes). Consequência: se o navio é estável em baixa velocidade, será estável em alta — e vice-versa para instável. Espirais em velocidades diferentes não diferem muito.</p>
+  </div>
+</section>
+
+<!-- ===== 4.3 ESPIRAL ===== -->
+<section class="bloco" id="espiral">
+  <h2 class="sec"><span class="n">4.3</span> A manobra espiral de Dieudonné</h2>
+  <p class="lede">Prova definitiva que identifica as características de estabilidade direcional. Plota a taxa de guinada estacionária (ṙ) em função do ângulo de leme (δ_R).</p>
+
+  <div class="box key">
+    <h4>O procedimento (resumo)</h4>
+    <p>(a) estabilizar em rumo reto a velocidade fixa por ~1 min (depois não se mexe mais na propulsão); (b) leme a ~15° até a taxa de guinada estabilizar; (c) reduzir o leme em ~5° e esperar estabilizar; (d) repetir em pequenos incrementos, de grandes valores de boreste a grandes de bombordo e de volta. <span class="tag t-banca">BANCA</span></p>
+  </div>
+
+  <div class="ichart">
+    <h4>Espiral: navio estável (A) vs. instável (B)</h4>
+    <p class="hint">Alterne entre estável e instável. O navio estável dá uma curva única; o instável forma o laço de histerese (dois ramos).</p>
+    <div class="ictrl" style="margin-bottom:8px">
+      <button id="bStab" class="active" onclick="setStab(true)">Navio A — estável</button>
+      <button id="bUnst" onclick="setStab(false)">Navio B — instável</button>
+    </div>
+    <canvas id="spiralCanvas" width="860" height="260"></canvas>
+    <div class="iread" id="spiralRead" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<!-- ===== 4.3 HISTERESE ===== -->
+<section class="bloco" id="histerese">
+  <h2 class="sec"><span class="n">4.3</span> O laço de histerese e o giro contra o leme</h2>
+  <p class="lede">Um navio instável produz um laço; sua largura e altura medem o grau de instabilidade.</p>
+  <table>
+    <tr><th>Navio</th><th>Curva espiral</th><th>Índice de estabilidade</th></tr>
+    <tr><td><strong>A — estável</strong></td><td>linha única (uma taxa de giro por ângulo de leme)</td><td>s₂ negativo</td></tr>
+    <tr><td><strong>B — instável</strong></td><td>laço de histerese (dois ramos)</td><td>s₂ positivo</td></tr>
+  </table>
+  <div class="box key">
+    <h4>Giro contra o leme <span class="tag t-decorar">DECORAR</span></h4>
+    <p>No navio instável, há uma região onde <span class="hl">o navio pode girar contra o leme</span>: ele continua girando num sentido mesmo com o leme defletido no sentido oposto, até atingir o limite do laço — então salta bruscamente para a velocidade angular oposta. Com leme em zero, ṙ não é necessariamente zero (pode girar com o leme no meio). A altura e a largura do laço medem a instabilidade.</p>
+  </div>
+  <div class="box key">
+    <h4>Analogia com a estabilidade transversal (Abkowitz)</h4>
+    <p>A curva ṙ × δ_R é análoga à curva de momento restaurador × ângulo de banda. <strong>Inclinação na origem positiva = estável; negativa = instável</strong>. O navio instável em rumo é como um navio sem estabilidade transversal: não fica na vertical, aderna a um lado até uma posição de equilíbrio. <span class="tag t-banca">BANCA</span></p>
+  </div>
+  <div class="box trap">
+    <h4>Cuidado: tempo de estabilização</h4>
+    <p>Se não se dá tempo suficiente em cada ângulo (ex.: 60 s ou 120 s entre deflexões), aparece um <strong>laço de histerese FALSO</strong> num navio que é, na verdade, estável (Strom-Tejsen, 1965). A teoria linear não prevê o laço — para isso é preciso teoria não linear. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+  <div class="box key">
+    <h4>Ângulo neutro & teste de meandro</h4>
+    <p>Para o navio estável, o ângulo de leme em ṙ=0 é o <strong>ângulo neutro</strong> (δ₁) — o ângulo para manter o rumo reto. Para o instável, é o ângulo na metade da altura do laço. Submarinos no plano vertical não usam a espiral, mas o <strong>teste de meandro</strong> (planos de ré defletidos brevemente; oscilação amortecida = estável).</p>
+  </div>
+</section>
+
+<!-- ===== 4.4 BECH ===== -->
+<section class="bloco" id="bech">
+  <h2 class="sec"><span class="n">4.4</span> Espiral inverso de Bech e pullout</h2>
+  <p class="lede">Alternativas à espiral direta.</p>
+  <table>
+    <tr><th>Prova</th><th>Como funciona</th><th>O que dá</th></tr>
+    <tr><td><strong>Espiral inverso (Bech, 1968)</strong></td><td>guia-se o navio a uma taxa de giro constante e mede-se o ângulo médio de leme necessário</td><td>relação δ × ṙ; <strong>resolve dentro do laço</strong> (não é leme fixo); mede largura da banda morta</td></tr>
+    <tr><td><strong>Pullout (Burcher, 1972)</strong></td><td>coloca-se o navio em giro, depois leme ao meio</td><td>estável: ṙ→0; instável: ṙ→taxa residual. Faz-se a BB e BE para ver assimetria</td></tr>
+    <tr><td><strong>Meandro</strong></td><td>submarino: planos de ré defletidos brevemente</td><td>oscilação amortecida = estável; crescente = instável</td></tr>
+  </table>
+  <div class="box key">
+    <h4>Instabilidade não é necessariamente ruim</h4>
+    <p>Navios grandes e lentos com instabilidade direcional podem ser operados de forma satisfatória. O que importa é o <strong>grau</strong> de instabilidade em relação ao tipo, tamanho e velocidade. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== NOMOTO ===== -->
+<section class="bloco" id="nomoto">
+  <h2 class="sec"><span class="n">5.4</span> Os índices K e T de Nomoto</h2>
+  <p class="lede">Nomoto (1957) reescreveu as equações lineares numa forma de engenharia de controle: um ganho K e uma constante de tempo T resumem toda a manobra do navio.</p>
+
+  <div class="box formula">
+    <h4>A equação de Nomoto (1ª ordem) <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">T·ṙ + r = K·δ<sub>R</sub><span class="lbl">Eq. (17) — desprezando o acoplamento e a deriva</span></div>
+    <p class="vars">
+      <b>K = N'<sub>δ</sub>/N'<sub>r</sub></b> = coef. de momento de giro / coef. de amortecimento em guinada (<strong>ganho</strong>).<br>
+      <b>T = n'<sub>z</sub>/N'<sub>r</sub></b> = coef. de inércia em guinada / coef. de amortecimento em guinada (<strong>constante de tempo</strong>).<br>
+      Adimensional ↔ dimensional: T' = T·(V/L), K' = K·(L/V).
+    </p>
+  </div>
+
+  <div class="box formula">
+    <h4>A resposta ao leme (degrau) <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">r = K·δ₀·(1 − e<sup>−t/T</sup>)<span class="lbl">Eq. (19) — leme posto subitamente em δ₀ e mantido</span></div>
+    <p class="vars">A taxa de guinada cresce exponencialmente até o valor estacionário <strong>K·δ₀</strong>, com rapidez governada por <strong>T</strong>. Maior K → maior taxa de giro final; menor T → resposta inicial mais rápida.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Resposta de Nomoto r(t) — varie K e T</h4>
+    <p class="hint">Deslize K e T. K define a altura final (capacidade de giro); T define quão rápido se chega lá (responsividade).</p>
+    <canvas id="nomotoCanvas" width="860" height="260"></canvas>
+    <div class="ictrl"><label for="nK">K (ganho) →</label><input type="range" id="nK" min="10" max="100" value="50" oninput="drawNomoto()"></div>
+    <div class="ictrl"><label for="nT">T (tempo) →</label><input type="range" id="nT" min="5" max="100" value="40" oninput="drawNomoto()">
+      <div class="iread" id="nRead"></div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <h4>O significado de K e T <span class="tag t-decorar">DECORAR</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Índice</th><th>Cresce → melhora</th><th>Observação</th></tr>
+      <tr><td><strong>T'</strong></td><td>Estabilidade de rumo</td><td>s₂ = −1/T'. T' negativo = dinamicamente instável</td></tr>
+      <tr><td><strong>1/T'</strong></td><td>Responsividade ao leme</td><td>T menor = resposta inicial mais rápida</td></tr>
+      <tr><td><strong>K'</strong></td><td>Capacidade de giro</td><td>maior K' = giro mais fechado para o mesmo leme</td></tr>
+    </table>
+    <p class="vars" style="margin-top:10px">Navio muito manobrável: <strong>T' pequeno e K' grande</strong> → razão K'/T' grande (Parâmetro de Norrbin P = K'/2T'). Mas K'/T' grande só indica boa controlabilidade geral se a estabilidade não for maior que o necessário.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Relações com o giro e o overshoot</h4>
+    <div class="eq">D₀/L = 2/(K'·δ<sub>R₀</sub>)<span class="lbl">Eq. (22) — diâmetro de giro estacionário; maior K' → menor diâmetro</span></div>
+    <p class="vars">A relação <strong>s₂ = −1/T'</strong> torna T' uma medida direta da estabilidade em linha reta. O <strong>ângulo de overshoot</strong> (do zigzag) é quase proporcional a <strong>K'·T'</strong> — mas K'·T' não distingue um navio bom (K' grande, T' pequeno) de um ruim (K' pequeno, T' grande); só K'/T' faz essa distinção. <span class="tag t-banca">BANCA</span></p>
+  </div>
+
+  <div class="box trap">
+    <h4>K'/T' vs. K'·T' — a armadilha</h4>
+    <p>K'<strong>/</strong>T' (razão) = manobrabilidade; quanto maior, melhor o giro/resposta. K'<strong>·</strong>T' (produto) ∝ overshoot; mede a capacidade de "checar" o giro, mas não discrimina navio bom de ruim. Trocar razão por produto é distrator. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As fórmulas e critérios de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Oito questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Estabilidade de Rumo &amp; K-T (§4 e §5.4)</summary>
+  <ul>
+    <li><b>Índices s₁, s₂:</b> As²+Bs+C=0. Estável com leme fixo ⟺ ambos negativos. Na prática só s₂ (domina a resposta).</li>
+    <li><b>Critério:</b> A e B sempre positivos → tudo reduz a C > 0. C = Y'_v N'_r − N'_v(Y'_r − D'). C é o discriminante (diz SE, não QUANTO).</li>
+    <li><b>Independência da velocidade:</b> os s não dependem da velocidade em Froude baixo/moderado. Estável em baixa = estável em alta.</li>
+    <li><b>Espiral de Dieudonné:</b> plota ṙ × δ_R. Estável = curva única; instável = laço de histerese.</li>
+    <li><b>Laço:</b> largura e altura medem o grau de instabilidade. Giro contra o leme. Inclinação na origem: + estável, − instável (analogia com momento restaurador, Abkowitz).</li>
+    <li><b>Laço falso:</b> tempo de estabilização insuficiente cria histerese aparente em navio estável (Strom-Tejsen).</li>
+    <li><b>Ângulo neutro:</b> δ em ṙ=0 (mantém rumo reto). Meandro = teste para submarino.</li>
+    <li><b>Bech (inverso):</b> guia a ṙ constante, mede δ. Pullout: leme ao meio, vê se ṙ→0 (estável) ou residual (instável).</li>
+    <li><b>Nomoto:</b> T·ṙ + r = K·δ_R. r = Kδ₀(1−e^(−t/T)). K = N'_δ/N'_r (ganho). T = n'_z/N'_r (tempo).</li>
+    <li><b>K e T:</b> T' = estabilidade de rumo (s₂=−1/T'); 1/T' = responsividade; K' = capacidade de giro. Manobrável = T' pequeno, K' grande.</li>
+    <li><b>D₀/L = 2/(K'·δ).</b> Maior K' = giro menor. Overshoot ∝ K'·T' (não discrimina); K'/T' = manobrabilidade (Norrbin P=K'/2T').</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Estabilidade de Rumo &amp; Índices K-T de Nomoto (PNA Vol. III §4 e §5.4) · Capital Sereno · fidelidade verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== Spiral curve ===== */
+var stable=true;
+function setStab(s){stable=s;
+  document.getElementById('bStab').classList.toggle('active',s);
+  document.getElementById('bUnst').classList.toggle('active',!s);
+  drawSpiral();}
+function drawSpiral(){
+  var cv=document.getElementById('spiralCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,cx=W/2,cy=H/2;ctx.clearRect(0,0,W,H);
+  // axes
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(40,cy);ctx.lineTo(W-20,cy);ctx.moveTo(cx,20);ctx.lineTo(cx,H-20);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('ṙ (taxa de guinada)',cx+8,28);ctx.fillText('δ_R (ângulo de leme)',W-150,cy-8);
+  ctx.fillText('BE',W-34,cy+16);ctx.fillText('BB',46,cy+16);
+  var sx=(W/2-50)/35, sy=(H/2-30)/1.2; // delta in deg, r normalized
+  if(stable){
+    // single S-curve through origin, positive slope
+    ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.8;ctx.beginPath();var f=true;
+    for(var d=-35;d<=35;d+=0.5){var r=Math.tanh(d/12);var X=cx+d*sx,Y=cy-r*sy;if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+    ctx.fillStyle='#0D3D36';ctx.beginPath();ctx.arc(cx,cy,4,0,7);ctx.fill();
+    document.getElementById('spiralRead').innerHTML='<b>Navio A (estável):</b> curva única, inclinação positiva na origem (s₂ negativo). Uma só taxa de giro por ângulo de leme.';
+  } else {
+    // hysteresis loop: two branches with negative slope region near origin
+    function branch(off,dir){
+      ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2.6;ctx.beginPath();var f=true;
+      for(var d=-35;d<=35;d+=0.5){
+        // shifted tanh creating loop; off shifts horizontally
+        var r=Math.tanh((d+off)/7);
+        var X=cx+d*sx,Y=cy-r*sy;if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);
+      }ctx.stroke();
+    }
+    branch(6); branch(-6);
+    // arrows showing direction
+    ctx.fillStyle='#9E3B2E';
+    // mark loop region
+    ctx.strokeStyle='#9E3B2E';ctx.setLineDash([3,3]);ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(cx-6*sx,20);ctx.lineTo(cx-6*sx,H-20);ctx.moveTo(cx+6*sx,20);ctx.lineTo(cx+6*sx,H-20);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#9E3B2E';ctx.font='11px Trebuchet MS';ctx.fillText('laço (giro contra o leme)',cx-70,H-26);
+    document.getElementById('spiralRead').innerHTML='<b>Navio B (instável):</b> laço de histerese (dois ramos), inclinação negativa na origem (s₂ positivo). Largura/altura do laço = grau de instabilidade. Pode girar contra o leme.';
+  }
+}
+drawSpiral();
+
+/* ===== Nomoto response ===== */
+function drawNomoto(){
+  var cv=document.getElementById('nomotoCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=50,y0=H-32,pW=W-80,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  var K=(+document.getElementById('nK').value)/100*1.0; // 0.1..1.0
+  var T=(+document.getElementById('nT').value)/10;       // 0.5..10 s scaled
+  var d0=1; // delta normalized
+  var tMax=30;
+  function px(t){return x0+t/tMax*pW;}
+  var rMax=1.0;function py(r){return y0-r/rMax*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('r (taxa de guinada)',x0+4,24);ctx.fillText('tempo (s)',W-70,y0+18);
+  [0,10,20,30].forEach(function(t){ctx.fillStyle='#a99';ctx.fillText(t,px(t)-6,y0+16);});
+  // steady value K*d0
+  var rss=K*d0;
+  ctx.strokeStyle='#ddd2b0';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(x0,py(rss));ctx.lineTo(W-18,py(rss));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a99';ctx.font='11px Trebuchet MS';ctx.fillText('K·δ₀ (final)',W-90,py(rss)-5);
+  // response curve r=K*d0*(1-e^-t/T)
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.8;ctx.beginPath();var f=true;
+  for(var t=0;t<=tMax;t+=0.2){var r=K*d0*(1-Math.exp(-t/T));var X=px(t),Y=py(r);if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  // mark T (63%)
+  var r63=rss*0.632;
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(px(T),y0);ctx.lineTo(px(T),py(r63));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(px(T),py(r63),4,0,7);ctx.fill();
+  ctx.font='11px Trebuchet MS';ctx.fillText('t=T (63%)',px(T)+4,py(r63)+14);
+  document.getElementById('nRead').innerHTML='K=<b>'+K.toFixed(2)+'</b> → giro final '+(K>0.6?'amplo':'modesto')+' · T=<b>'+T.toFixed(1)+'</b>s → resposta '+(T<3?'rápida':'lenta');
+}
+drawNomoto();
+window.addEventListener('resize',function(){drawSpiral();drawNomoto();});
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Índices s₁, s₂",b:"As²+Bs+C=0. Estável (leme fixo) ⟺ ambos negativos. Só s₂ na prática."},
+  {f:"Critério de estabilidade",b:"A,B sempre + → só C decide. C = Y'_v N'_r − N'_v(Y'_r − D') > 0."},
+  {f:"C é o discriminante",b:"Diz SE é estável, não QUANTO. Medida quantitativa vem dos s e de T'."},
+  {f:"Independência da velocidade",b:"s não dependem da velocidade (Froude baixo/moderado). Estável em baixa = em alta."},
+  {f:"Espiral de Dieudonné",b:"Plota ṙ × δ_R. Estável = curva única; instável = laço de histerese."},
+  {f:"Laço de histerese",b:"Largura/altura = grau de instabilidade. Pode girar contra o leme."},
+  {f:"Inclinação na origem",b:"+ estável, − instável (analogia com momento restaurador, Abkowitz)."},
+  {f:"Laço falso",b:"Tempo de estabilização curto cria histerese aparente em navio estável (Strom-Tejsen)."},
+  {f:"Bech (inverso) / pullout",b:"Bech: guia a ṙ constante, mede δ. Pullout: leme ao meio, ṙ→0 estável."},
+  {f:"Equação de Nomoto",b:"T·ṙ + r = K·δ_R. r = Kδ₀(1−e^(−t/T))."},
+  {f:"Índice K'",b:"Ganho = N'_δ/N'_r. Maior K' = capacidade de giro (D₀/L = 2/K'δ)."},
+  {f:"Índice T'",b:"Tempo = n'_z/N'_r. T' = estabilidade de rumo. s₂ = −1/T'. T' negativo = instável."},
+  {f:"K'/T' vs K'·T'",b:"K'/T' = manobrabilidade (Norrbin P=K'/2T'). K'·T' ∝ overshoot (não discrimina)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"Para um navio ter estabilidade de rumo com leme fixo, os índices de estabilidade s₁ e s₂ devem ser:",
+   o:["Ambos positivos","Ambos negativos","s₁ positivo e s₂ negativo","Iguais a zero"],
+   a:1,e:"Ambos negativos → v' e r' decaem a zero e o navio retoma uma reta (Caso I). Se um for positivo, o navio nunca retoma a reta e pode girar com leme em zero."},
+  {q:"O critério de estabilidade dinâmica de rumo se reduz a uma única condição porque A e B são sempre positivos. Essa condição é:",
+   o:["A > 0","B > 0","C > 0 (discriminante)","s₁ = s₂"],
+   a:2,e:"Como A e B são sempre positivos (devido à massa virtual e momento de inércia virtual grandes), tudo se reduz a C > 0. C = Y'_v N'_r − N'_v(Y'_r − D') é o discriminante da estabilidade dinâmica."},
+  {q:"Os índices de estabilidade no plano horizontal, em números de Froude baixos e moderados, são:",
+   o:["Fortemente dependentes da velocidade","Independentes da velocidade","Sempre positivos","Iguais ao diâmetro tático"],
+   a:1,e:"Independentes da velocidade (as derivadas adimensionais são ~constantes). Logo, se o navio é estável em baixa velocidade, é estável em alta — e vice-versa."},
+  {q:"Na manobra espiral de Dieudonné, um navio direcionalmente INSTÁVEL produz:",
+   o:["Uma curva única","Um laço de histerese","Uma reta horizontal","Nenhuma curva"],
+   a:1,e:"Um laço de histerese (dois ramos). A largura e a altura do laço medem o grau de instabilidade. O navio estável produz uma curva única."},
+  {q:"A inclinação da curva ṙ × δ_R na origem, para um navio estável, é (analogia de Abkowitz com o momento restaurador):",
+   o:["Negativa","Positiva","Zero","Vertical"],
+   a:1,e:"Positiva = estável (igual à curva de momento restaurador × ângulo de banda). Negativa = instável. É a analogia entre estabilidade direcional e estabilidade transversal."},
+  {q:"Na equação de Nomoto T·ṙ + r = K·δ_R, com leme posto subitamente em δ₀, a taxa de guinada:",
+   o:["Cai exponencialmente a zero","Cresce exponencialmente até K·δ₀, com rapidez dada por T","É constante e igual a δ₀","Oscila indefinidamente"],
+   a:1,e:"r = Kδ₀(1−e^(−t/T)): cresce exponencialmente até o valor estacionário K·δ₀. Maior K = giro final maior; menor T = resposta inicial mais rápida."},
+  {q:"Sobre os índices de Nomoto, qual associação está correta?",
+   o:["K' = estabilidade de rumo; T' = capacidade de giro","K' = capacidade de giro; T' = estabilidade de rumo","Ambos medem a velocidade","K' = overshoot; T' = diâmetro tático"],
+   a:1,e:"K' = capacidade de giro (ganho); T' = estabilidade de rumo (e s₂ = −1/T'). 1/T' = responsividade ao leme. Navio manobrável: T' pequeno, K' grande."},
+  {q:"O ângulo de overshoot (do zigzag) é aproximadamente proporcional a K'·T'. Por que ele NÃO é um bom discriminador de controlabilidade?",
+   o:["Porque depende da velocidade","Porque não distingue navio bom (K' grande, T' pequeno) de ruim (K' pequeno, T' grande)","Porque é sempre zero","Porque ignora o leme"],
+   a:1,e:"K'·T' (produto) não discrimina: um navio bom e um ruim podem ter o mesmo produto. É a razão K'/T' (Parâmetro de Norrbin P=K'/2T') que mede a manobrabilidade."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>

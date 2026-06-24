@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Águas Rasas, Canais e Interação entre Navios — PNA Vol. III §13 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:720px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.verificar{border-left:6px solid var(--roxo);background:#f6f1fc}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+  .box.verificar h4{color:var(--roxo)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:18px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  #bankCanvas{height:280px}
+  #squatCanvas{height:260px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:110px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:160px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12.5px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .modulo{background:linear-gradient(135deg,#0D3D36,#1A7A6E);color:var(--creme);border-radius:12px;padding:20px 22px;margin:22px 0;box-shadow:var(--sombra2)}
+  .modulo h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;color:var(--ouro);font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+  .modulo p{margin:6px 0;font-size:14.5px}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:13px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · P1c — Controlabilidade</p>
+    <h1>Águas Rasas, Canais &amp; <em>Interação entre Navios</em></h1>
+    <p class="sub">A seção mais aplicada à praticagem: o efeito da profundidade no giro (Esso Osaka), o efeito de banco (atração para a margem), as posições de risco máximo entre dois navios em passagem, e o squat (afundamento + trim) com a velocidade crítica.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. III, Cap. IX, Seção 13. <b>⚠ Nota de tradução:</b> o original usa "sinkage" (afundamento), traduzido como "emborcamento" no texto-fonte — ver caixa [VERIFICAR].</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#geral">Definições</a>
+    <a href="#rasas">Águas rasas ▶</a>
+    <a href="#canais">Canais / banco ▶</a>
+    <a href="#interacao">Dois navios</a>
+    <a href="#squat">Squat ▶</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Última seção do P1b/P1c — fecha a revisão completa do Módulo I. Usa o conceito de estabilidade de rumo do <a href="pna_ix_sec4_estabilidade_rumo_nomoto.html">§4</a> (reversão em águas rasas) e o giro do <a href="pna_ix_sec6_capacidade_giro.html">§6</a>.
+</div>
+
+<!-- ===== GERAL ===== -->
+<section class="bloco" id="geral">
+  <h2 class="sec"><span class="n">13.1</span> Definições</h2>
+  <p class="lede">Em águas confinadas, os perigos de colisão e encalhe atingem sua maior concentração.</p>
+  <div class="box formula">
+    <h4>Águas rasas × águas restritas <span class="tag t-banca">BANCA</span></h4>
+    <p class="vars">
+    • <b>Águas rasas:</b> razão profundidade/calado <span class="hl">D<sub>w</sub>/T ≤ 3</span>. Acima disso, o efeito cai rápido com o aprofundamento.<br>
+    • <b>Águas restritas:</b> canais estreitos/artificiais, margens verticais ou em ressalto, áreas com píeres/quebra-mares. A maioria inclui águas rasas, correnteza e maré.</p>
+  </div>
+  <div class="box key">
+    <h4>As 5 categorias de efeito hidrodinâmico</h4>
+    <p>(a) profundidade vs. calado · (b) largura do canal vs. boca · (c) variações de profundidade/largura vs. dimensões do navio · (d) interação entre dois navios · (e) combinações. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== AGUAS RASAS ===== -->
+<section class="bloco" id="rasas">
+  <h2 class="sec"><span class="n">13.2</span> Efeitos de águas rasas (Esso Osaka)</h2>
+  <p class="lede">As forças laterais e momentos crescem com a diminuição de D<sub>w</sub>/T → o diâmetro de giro aumenta muito.</p>
+
+  <div class="ichart">
+    <h4>Taxa de giro × profundidade (D<sub>w</sub>/T)</h4>
+    <p class="hint">Deslize a razão profundidade/calado. Em água profunda a taxa de giro é 100%; quanto mais raso, menor a taxa (maior o diâmetro).</p>
+    <canvas id="rateCanvas" width="860" height="220" style="height:220px"></canvas>
+    <div class="ictrl"><label for="rDepth">D_w/T →</label><input type="range" id="rDepth" min="105" max="420" value="250" oninput="drawRate()">
+      <div class="iread" id="rateRead"></div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <h4>Dados quantitativos do giro <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Tomando a velocidade angular em água profunda como 100%:</p>
+    <table style="margin:6px 0 0">
+      <tr><th>Profundidade</th><th>Taxa de giro</th><th>Diâmetro de giro</th></tr>
+      <tr><td>D<sub>w</sub>/T = 2,5</td><td class="center">90–95%</td><td class="center">+5 a 10%</td></tr>
+      <tr><td>D<sub>w</sub>/T = 1,25</td><td class="center">50–60%</td><td class="center">+60 a 100%</td></tr>
+    </table>
+    <p class="vars" style="margin-top:8px">Esso Osaka (Crane, 1979): em D<sub>w</sub>/T = 1,2, o diâmetro de giro pode <strong>dobrar</strong>. <span class="tag t-banca">BANCA</span></p>
+  </div>
+
+  <div class="box trap">
+    <h4>A reversão da estabilidade em águas muito rasas</h4>
+    <p>Fenômeno do Esso Osaka: a estabilidade de rumo com controles fixos <strong>primeiro diminui</strong> (de profunda para intermediária, ~50% de folga), depois <strong>aumenta</strong> em água muito rasa (~20% de folga). A capacidade de verificar/contra-girar segue essa inversão. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+  <div class="box key">
+    <h4>Parada em águas rasas</h4>
+    <p>A <strong>distância de parada</strong> é amplamente <span class="hl">independente da profundidade</span>. Mas o <strong>desvio de rumo</strong> na parada cresce muito: 18° (profunda) → 50° (média) → 88° (rasa). Folgas reais: ~10% em águas baixas, ~5% ao atracar. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== CANAIS ===== -->
+<section class="bloco" id="canais">
+  <h2 class="sec"><span class="n">13.3</span> Canais estreitos: o efeito de banco</h2>
+  <p class="lede">Num canal raso e estreito, navegar deslocado do eixo perturba a simetria do escoamento — surge a sucção de banco.</p>
+
+  <div class="ichart">
+    <h4>Efeito de banco: atração para a margem próxima</h4>
+    <p class="hint">Deslize a posição do navio no canal. Mais perto da margem → maior atração lateral (Y) e momento que gira a proa para a margem distante (N).</p>
+    <canvas id="bankCanvas" width="860" height="280"></canvas>
+    <div class="ictrl"><label for="bPos">posição no canal →</label><input type="range" id="bPos" min="-80" max="80" value="40" oninput="drawBank()">
+      <div class="iread" id="bankRead"></div>
+    </div>
+  </div>
+
+  <div class="box formula">
+    <h4>As derivadas de posição Y<sub>y0</sub> e N<sub>y0</sub> <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">Ao navegar deslocado y₀ do eixo, a velocidade aumenta entre o casco e a parede próxima e diminui na distante → cria uma força que <span class="hl">atrai o navio para a parede próxima</span> e um momento que <span class="hl-amb">gira a proa para a parede distante</span>:<br>
+    • <b>Y<sub>y0</sub></b> sempre <strong>positiva</strong> (atração para a parede próxima).<br>
+    • <b>N<sub>y0</sub></b> sempre <strong>negativa</strong> (proa gira para longe da parede).<br>
+    A magnitude cresce à medida que a largura do canal diminui — uma "sensibilidade à posição" que não existe no mar aberto. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== INTERACAO ===== -->
+<section class="bloco" id="interacao">
+  <h2 class="sec"><span class="n">13.4</span> Interação entre dois navios</h2>
+  <p class="lede">A passagem próxima de outro navio gera forças e momentos de interação (Newton, 1960) — funções da separação longitudinal x₀, lateral y₀, ângulos de guinada e tamanhos relativos.</p>
+
+  <div class="box key">
+    <h4>As posições de risco máximo: 3 e 5 <span class="tag t-banca">BANCA</span></h4>
+    <p>Em certas posições, força E momento atraem um navio ao outro: <strong>posição 3 (Navio A)</strong> e <strong>posição 5 (Navio B)</strong> — imediatamente antes e depois da posição de través (posição 4). Aí o leme precisa não só vencer o momento de interação, mas introduzir um ângulo de guinada que crie força para fora contrabalançando atração + força de leme. <span class="hl">Entre as posições 3→4→5, o leme deve passar de grande deflexão a um bordo para o bordo oposto</span> — momento difícil de acertar. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+  <div class="box formula">
+    <h4>Ação corretiva (se colisão iminente)</h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Posição</th><th>Navio A</th><th>Navio B</th></tr>
+      <tr><td><strong>3</strong></td><td>reduz velocidade</td><td>aumenta velocidade</td></tr>
+      <tr><td><strong>5</strong></td><td>aumenta velocidade</td><td>reduz velocidade</td></tr>
+    </table>
+    <p class="vars" style="margin-top:8px">As forças de interação variam com <strong>V²</strong> (quadruplicam de 10 para 20 nós) e caem ~40% se a separação dobra (15,5 m → 30 m). Pior com mar agitado e vento forte.</p>
+  </div>
+</section>
+
+<!-- ===== SQUAT ===== -->
+<section class="bloco" id="squat">
+  <h2 class="sec"><span class="n">13.5</span> Squat: afundamento e trim</h2>
+  <p class="lede">Tuck (1966–67): o squat é o movimento combinado de afundamento (sinkage) + trim. Curva quase universal, independente da forma.</p>
+
+  <div class="box verificar">
+    <h4>⚠ Nota de tradução / terminologia <span class="tag t-verificar">VERIFICAR</span></h4>
+    <p>O texto-fonte traduz <strong>"sinkage"</strong> como <strong>"emborcamento"</strong>. Isso é um <span class="hl">erro de terminologia náutica</span>: o termo correto para <em>sinkage</em> é <strong>afundamento</strong> (ou abaixamento) — o deslocamento vertical para baixo do CG. <strong>Emborcamento</strong> em português náutico significa <em>capsizing</em> (virar de quilha), um fenômeno totalmente diferente. Para a prova: <strong>squat = afundamento (sinkage) + trim</strong>. Verifique como a banca PSCPP grafa o termo.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Definições <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">
+    • <b>Afundamento (sinkage):</b> deslocamento vertical para baixo do CG.<br>
+    • <b>Trim:</b> ângulo de rotação; pode ser negativo (caimento de ré) em baixa velocidade em águas rasas.<br>
+    • <b>Squat:</b> o movimento resultante de afundamento + trim.<br>
+    Número de Froude de profundidade: <b>Fn = U/√(g·D<sub>w</sub>)</b>.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Afundamento × número de Froude (Fn = U/√(gD<sub>w</sub>))</h4>
+    <p class="hint">Deslize o Froude. O afundamento cresce e dispara perto de Fn = 1 (velocidade crítica U = √(gD_w)).</p>
+    <canvas id="squatCanvas" width="860" height="260"></canvas>
+    <div class="ictrl"><label for="sFn">Fn →</label><input type="range" id="sFn" min="10" max="98" value="50" oninput="drawSquat()">
+      <div class="iread" id="squatRead"></div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <h4>Subcrítico × supercrítico <span class="tag t-banca">BANCA</span></h4>
+    <p>A <strong>velocidade crítica</strong> é U = √(g·D<sub>w</sub>), ou seja, <span class="hl">Fn = 1</span> (próxima à celeridade das ondas em água rasa). Abaixo dela (Fn &lt; 1, subcrítico), o <strong>afundamento domina</strong> e é sempre positivo (para baixo). Acima (Fn &gt; 1, supercrítico), o <strong>trim domina</strong> (positivo, caimento de vante). O efeito da largura finita do canal é muito maior para o afundamento que para o trim. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+  <div class="box key">
+    <h4>Aplicação do prático</h4>
+    <p>Folga de fundo suficiente é requisito crucial. As curvas de velocidade-limite (Eda, 1971) dão a velocidade máxima para o navio não tocar o fundo, em função de W/B e D<sub>w</sub>/pontal — diretamente aplicadas na avaliação de risco. A referência operacional de ~6 nós reaparece aqui.</p>
+  </div>
+</section>
+
+<!-- ===== MODULO ===== -->
+<div class="modulo">
+  <h4>🎓 Módulo I — Revisão completa</h4>
+  <p>Com este caderno, fecha-se a varredura integral do <strong>Capítulo IX (Controlabilidade)</strong>: §3 (estabilidade de movimento), §4 (estabilidade de rumo + Nomoto), §5 (zigzag de Kempf), §6 (giro), §10 (parada e ré), §12 (ambiente) e §13 (águas rasas) — somados aos cadernos de Resistência (Cap. V), Propulsão (Cap. VI) e Lemes (Vol. III §14).</p>
+  <p>Bom estudo, e firme no leme. ⚓</p>
+</div>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As definições e números de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Oito questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Águas Rasas, Canais e Interação (§13)</summary>
+  <ul>
+    <li><b>Águas rasas:</b> D_w/T ≤ 3. <b>Águas restritas:</b> canais estreitos, margens, píeres (geralmente incluem rasas).</li>
+    <li><b>5 categorias:</b> profundidade/calado · largura/boca · variações de profundidade/largura · interação entre navios · combinações.</li>
+    <li><b>Giro em águas rasas (Esso Osaka):</b> D_w/T=2,5 → taxa 90–95% (+5–10% diâmetro); D_w/T=1,25 → taxa 50–60% (+60–100%). Em D_w/T=1,2 o diâmetro pode dobrar.</li>
+    <li><b>Reversão da estabilidade:</b> estabilidade primeiro diminui (intermediária) e depois aumenta (muito rasa, ~20% folga).</li>
+    <li><b>Parada em águas rasas:</b> distância ~independente da profundidade; desvio de rumo cresce muito (18°→50°→88°).</li>
+    <li><b>Efeito de banco:</b> Y_y0 positiva (atrai para a parede próxima); N_y0 negativa (proa gira para a parede distante). Cresce com canal mais estreito.</li>
+    <li><b>Interação entre 2 navios:</b> posições 3 (Navio A) e 5 (Navio B) = risco máximo (antes/depois do través). Força ∝ V² (×4 de 10→20 nós).</li>
+    <li><b>Ação corretiva:</b> pos. 3 → A reduz, B aumenta; pos. 5 → A aumenta, B reduz.</li>
+    <li><b>Squat = afundamento (sinkage) + trim.</b> ⚠ "sinkage" ≠ emborcamento (= capsizing); o correto é afundamento.</li>
+    <li><b>Velocidade crítica:</b> Fn = U/√(gD_w) = 1. Subcrítico (Fn<1): afundamento domina (+, para baixo). Supercrítico (Fn>1): trim domina.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Águas Rasas, Canais e Interação entre Navios (PNA Vol. III §13) · Capital Sereno · fidelidade verificada contra o original em inglês · fecha o Módulo I.</div>
+</footer>
+
+<script>
+/* ===== Turn rate vs depth ===== */
+function drawRate(){
+  var cv=document.getElementById('rateCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-30,pW=W-78,pH=H-46;
+  ctx.clearRect(0,0,W,H);
+  var dt=(+document.getElementById('rDepth').value)/100; // 1.05..4.2
+  var dMax=4.2,dMin=1.0;
+  function px(d){return x0+(d-dMin)/(dMax-dMin)*pW;}
+  function py(r){return y0-r/110*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('taxa de giro (%)',6,24);ctx.fillText('D_w/T',W-50,y0+16);
+  [1,1.5,2,2.5,3,4].forEach(function(d){ctx.fillStyle='#a99';ctx.fillText(d,px(d)-6,y0+15);});
+  // 100% line
+  ctx.strokeStyle='#ddd2b0';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(x0,py(100));ctx.lineTo(W-18,py(100));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a99';ctx.font='10px Trebuchet MS';ctx.fillText('100% (água profunda)',W-160,py(100)-4);
+  // curve: rate rises toward 100 as depth grows; ~55% at 1.25, 92% at 2.5
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.8;ctx.beginPath();var f=true;
+  function rate(d){ if(d>=3)return 100; return 40 + 60*(1-Math.exp(-(d-1)*1.1)); }
+  for(var d=dMin;d<=dMax;d+=0.02){var X=px(d),Y=py(rate(d));if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  // marker
+  var rNow=rate(dt);
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(px(dt),py(rNow),5,0,7);ctx.fill();
+  document.getElementById('rateRead').innerHTML='D_w/T=<b>'+dt.toFixed(2)+'</b> → taxa de giro ≈ <b>'+rNow.toFixed(0)+'%</b> · diâmetro '+(dt<1.3?'~dobra':(dt<2.6?'+'+Math.round(100/rNow*100-100)+'%':'pouco afetado'));
+}
+drawRate();
+
+/* ===== Bank effect ===== */
+function drawBank(){
+  var cv=document.getElementById('bankCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var pos=(+document.getElementById('bPos').value)/100; // -0.8..0.8, +=toward right wall
+  // canal walls
+  var top=40, bot=H-40, cyMid=(top+bot)/2;
+  ctx.fillStyle='#e7efe9';ctx.fillRect(0,0,W,top);ctx.fillRect(0,bot,W,H-bot);
+  ctx.fillStyle='#5a6b62';ctx.font='12px Trebuchet MS';ctx.fillText('margem',12,top-8);ctx.fillText('margem',12,bot+22);
+  // water
+  ctx.fillStyle='#eaf3fa';ctx.fillRect(0,top,W,bot-top);
+  // centerline
+  ctx.strokeStyle='#cdbf99';ctx.setLineDash([8,6]);ctx.beginPath();ctx.moveTo(0,cyMid);ctx.lineTo(W,cyMid);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a99';ctx.fillText('eixo do canal',W/2-40,cyMid-6);
+  // ship position: pos>0 toward bottom wall (near wall)
+  var shipY=cyMid+pos*((bot-top)/2-30);
+  var shipX=W*0.42;
+  // yaw: bow turns toward far wall (away from near wall). near wall = direction of pos.
+  var yaw=-pos*0.32; // radians; if pos>0 (near bottom), bow turns up (negative)
+  ctx.save();ctx.translate(shipX,shipY);ctx.rotate(yaw);
+  ctx.fillStyle='#0D3D36';ctx.beginPath();ctx.ellipse(0,0,52,15,0,0,7);ctx.fill();
+  ctx.fillStyle='#C8A84B';ctx.beginPath();ctx.moveTo(58,0);ctx.lineTo(44,-9);ctx.lineTo(44,9);ctx.closePath();ctx.fill(); // bow
+  ctx.restore();
+  // attraction force arrow (toward near wall)
+  if(Math.abs(pos)>0.05){
+    var dir=pos>0?1:-1;
+    ctx.strokeStyle='#9E3B2E';ctx.lineWidth=3;ctx.beginPath();
+    ctx.moveTo(shipX,shipY+dir*20);ctx.lineTo(shipX,shipY+dir*48);ctx.stroke();
+    ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.moveTo(shipX,shipY+dir*56);ctx.lineTo(shipX-6,shipY+dir*44);ctx.lineTo(shipX+6,shipY+dir*44);ctx.closePath();ctx.fill();
+    ctx.font='11px Trebuchet MS';ctx.fillText('Y: atração p/ margem próxima',shipX+12,shipY+dir*40);
+    // yaw moment arrow
+    ctx.fillStyle='#2C5F8A';ctx.fillText('N: proa gira p/ margem distante',shipX-30,shipY-dir*44);
+  }
+  var mag=Math.abs(pos);
+  document.getElementById('bankRead').innerHTML='deslocamento do eixo = <b>'+(pos>0?'+':'')+(pos*100).toFixed(0)+'%</b> · '+(mag<0.1?'centrado: sem força lateral':'Y_y0 atrai p/ margem próxima · N_y0 gira proa p/ margem distante ('+(mag>0.5?'forte':'moderada')+')');
+}
+drawBank();
+
+/* ===== Squat vs Froude ===== */
+function drawSquat(){
+  var cv=document.getElementById('squatCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-30,pW=W-78,pH=H-46;
+  ctx.clearRect(0,0,W,H);
+  var Fn=(+document.getElementById('sFn').value)/100; // 0.10..0.98
+  function px(f){return x0+f/1.0*pW;}
+  function py(s){return y0-s*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('afundamento (sinkage) →',6,24);ctx.fillText('Fn = U/√(gD_w)',W-130,y0+16);
+  [0,0.25,0.5,0.75,1.0].forEach(function(f){ctx.fillStyle='#a99';ctx.fillText(f.toFixed(2),px(f)-10,y0+15);});
+  // critical line Fn=1
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([6,4]);ctx.beginPath();ctx.moveTo(px(1),14);ctx.lineTo(px(1),y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.font='11px Trebuchet MS';ctx.fillText('Fn=1 crítico',px(1)-66,28);
+  // squat ~ Fn^2 / sqrt(1-Fn^2) (Tuck-like), normalized
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.8;ctx.beginPath();var f=true;
+  function squat(fn){ if(fn>=0.99)fn=0.99; return Math.min(1,(fn*fn)/Math.sqrt(1-fn*fn)*0.6); }
+  for(var fn=0.05;fn<=0.985;fn+=0.005){var X=px(fn),Y=py(squat(fn));if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  var sNow=squat(Fn);
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(px(Fn),py(sNow),5,0,7);ctx.fill();
+  document.getElementById('squatRead').innerHTML='Fn=<b>'+Fn.toFixed(2)+'</b> · '+(Fn<1?'<b>subcrítico</b>: afundamento domina (p/ baixo)':'supercrítico')+' '+(Fn>0.85?'· <span style="color:#9E3B2E">afundamento disparando!</span>':'');
+}
+drawSquat();
+window.addEventListener('resize',function(){drawRate();drawBank();drawSquat();});
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Águas rasas",b:"D_w/T ≤ 3. Acima disso o efeito cai rápido com o aprofundamento."},
+  {f:"Águas restritas",b:"Canais estreitos, margens verticais, píeres. Geralmente incluem rasas + maré."},
+  {f:"Giro em águas rasas",b:"D_w/T=2,5 → 90–95%; D_w/T=1,25 → 50–60%. Em 1,2 o diâmetro pode dobrar (Esso Osaka)."},
+  {f:"Reversão da estabilidade",b:"Estabilidade primeiro cai (intermediária) e depois sobe (muito rasa, ~20% folga)."},
+  {f:"Parada em águas rasas",b:"Distância ~independente da profundidade; desvio de rumo cresce (18°→50°→88°)."},
+  {f:"Efeito de banco — Y_y0",b:"Sempre positiva: atrai o navio para a margem PRÓXIMA."},
+  {f:"Efeito de banco — N_y0",b:"Sempre negativa: gira a proa para a margem DISTANTE."},
+  {f:"Interação: posições 3 e 5",b:"Risco máximo (antes/depois do través). Força ∝ V² (×4 de 10→20 nós)."},
+  {f:"Ação corretiva",b:"Pos. 3 → A reduz, B aumenta. Pos. 5 → A aumenta, B reduz."},
+  {f:"Squat",b:"Afundamento (sinkage) + trim. ⚠ sinkage ≠ emborcamento (= capsizing)."},
+  {f:"Velocidade crítica",b:"Fn = U/√(gD_w) = 1 (≈ celeridade da onda em água rasa)."},
+  {f:"Sub × supercrítico",b:"Fn<1: afundamento domina (p/ baixo). Fn>1: trim domina."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"Para fins de desempenho de manobra, águas rasas são definidas pela razão profundidade/calado:",
+   o:["D_w/T ≤ 1","D_w/T ≤ 3","D_w/T ≤ 5","D_w/T ≤ 10"],
+   a:1,e:"D_w/T ≤ 3. Para razões maiores, os efeitos de águas rasas sobre a manobra tornam-se rapidamente menos significativos à medida que a água se aprofunda."},
+  {q:"Nos ensaios do Esso Osaka, à medida que a profundidade diminui (D_w/T = 1,2), o diâmetro de giro:",
+   o:["Diminui pela metade","Aumenta significativamente (pode dobrar)","Não se altera","Torna-se zero"],
+   a:1,e:"O diâmetro de giro aumenta significativamente em águas rasas, podendo dobrar em D_w/T = 1,2. A capacidade de manobra torna-se crítica em portos e hidrovias restritas."},
+  {q:"A distância de parada de um navio em águas rasas, comparada à de águas profundas, é:",
+   o:["Muito maior","Muito menor","Amplamente independente da profundidade","Sempre o dobro"],
+   a:2,e:"A distância de parada é amplamente independente da profundidade (Esso Osaka). O que muda muito é o desvio de rumo durante a parada: 18° (profunda) → 50° (média) → 88° (rasa)."},
+  {q:"No efeito de banco, ao navegar deslocado do eixo do canal, o navio sofre:",
+   o:["Atração para a margem distante","Atração para a margem próxima e momento que gira a proa para a distante","Repulsão de ambas as margens","Nenhuma força lateral"],
+   a:1,e:"A força (Y_y0 positiva) atrai o navio para a margem PRÓXIMA, e o momento (N_y0 negativa) gira a proa para a margem DISTANTE. A magnitude cresce com canal mais estreito."},
+  {q:"Na interação entre dois navios em passagem, as posições de risco máximo de colisão são:",
+   o:["Posições 1 e 7","Posições 3 e 5 (antes e depois do través)","Apenas a posição 4 (través)","Não há posição crítica"],
+   a:1,e:"Posição 3 (Navio A) e posição 5 (Navio B), imediatamente antes e depois do través (posição 4), onde força E momento atraem os navios um ao outro e o leme deve inverter rapidamente."},
+  {q:"Se uma colisão parecer iminente na posição 3 (interação entre navios), a ação corretiva é:",
+   o:["Navio A reduz velocidade, Navio B aumenta","Ambos param","Navio A aumenta, Navio B reduz","Ambos viram para a mesma margem"],
+   a:0,e:"Na posição 3: Navio A reduz velocidade e Navio B aumenta. (Na posição 5 é o oposto: A aumenta, B reduz.) As forças de interação variam com V²."},
+  {q:"O squat de um navio é definido como o movimento resultante de:",
+   o:["Apenas o afundamento","Apenas o trim","Afundamento (sinkage) e trim combinados","Balanço e cabeceio"],
+   a:2,e:"Squat = afundamento (sinkage) + trim. Atenção: o termo 'sinkage' não deve ser confundido com 'emborcamento' (que significa capsizing). O correto para sinkage é afundamento/abaixamento."},
+  {q:"A velocidade crítica em águas rasas, acima da qual o trim passa a dominar o afundamento, corresponde a:",
+   o:["Fn = U/√(gD_w) = 0,5","Fn = U/√(gD_w) = 1,0","Fn = 2,0","Não existe velocidade crítica"],
+   a:1,e:"Fn = U/√(gD_w) = 1,0 (U = √(gD_w), próxima à celeridade da onda em água rasa). Abaixo (subcrítico) o afundamento domina e é positivo (para baixo); acima (supercrítico) o trim domina."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>

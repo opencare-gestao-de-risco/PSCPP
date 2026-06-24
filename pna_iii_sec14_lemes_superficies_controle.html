@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Lemes e Superfícies de Controle — PNA Vol. III §14 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:690px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:250px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:84px}
+  .ictrl input[type=range]{flex:1;min-width:130px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  /* 4 control surfaces */
+  .views{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:18px 0}
+  .vcard{background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:12px;box-shadow:var(--sombra)}
+  .vcard svg{width:100%;height:110px;display:block;background:#eef5f3;border-radius:6px}
+  .vcard .vt{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:13px;color:var(--verde);margin-top:8px}
+  .vcard .vd{font-size:12.5px;color:#5a6f68;margin-top:2px}
+  .vcard .vtag{font-family:'Trebuchet MS',sans-serif;font-size:10px;font-weight:bold;color:#fff;background:var(--verde2);border-radius:4px;padding:1px 7px}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:155px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15.5px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:25px}.eq{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco C — Lemes</p>
+    <h1>Lemes e Superfícies de <em>Controle</em></h1>
+    <p class="sub">A hidrodinâmica do leme: geometria, sustentação e arrasto, centro de pressão e torque, estol, cavitação e aeração, razão de aspecto efetiva, e os tipos de leme (totalmente móvel, com flap, semi-balanceado de patilhão).</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. III, Cap. IX, Seção 14 (Hidrodinâmica das Superfícies de Controle).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#geometria">Geometria</a>
+    <a href="#forcas">Forças &amp; CP</a>
+    <a href="#estol">Estol &amp; CL×α ▶</a>
+    <a href="#cav">Cavitação &amp; aeração</a>
+    <a href="#aspecto">Razão de aspecto ▶</a>
+    <a href="#tipos">Tipos de leme</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===== 14.1 GEOMETRIA ===== -->
+<section class="bloco" id="geometria">
+  <h2 class="sec"><span class="n">14.1</span> Geometria do leme</h2>
+  <p class="lede">O leme é uma superfície de controle: gera força em função de sua orientação e movimento na água. Ao contrário da asa, deve sustentar nos <strong>dois sentidos</strong> → seção simétrica.</p>
+
+  <div class="box formula">
+    <h4>Nomenclatura (Fig. 121) <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">
+      <b>Corda (chord):</b> paralela ao movimento (c<sub>r</sub> raiz, c<sub>t</sub> ponta, c̄ média).<br>
+      <b>Envergadura (span) b̄:</b> normal ao movimento. <b>Espessura t̄:</b> normal a ambas.<br>
+      <b>Raiz (root):</b> borda junto ao casco · <b>Ponta (tip):</b> borda oposta.<br>
+      <b>Razão de aspecto geométrica:</b> b̄/c̄ · <b>Razão espessura-corda:</b> t̄/c̄ · <b>Razão de afilamento (taper):</b> c<sub>t</sub>/c<sub>r</sub>.<br>
+      <b>Área do perfil:</b> A<sub>R</sub> = b̄ × c̄. <b>Ângulo de enflechamento Λ:</b> da linha de quarto de corda.
+    </p>
+  </div>
+</section>
+
+<!-- ===== 14.1 FORÇAS ===== -->
+<section class="bloco" id="forcas">
+  <h2 class="sec"><span class="n">14.1</span> Forças, centro de pressão e torque</h2>
+  <p class="lede">Em fluido ideal 2D, a força é normal ao escoamento (só sustentação). No fluido real, surge arrasto e a resultante fica mais próxima da normal ao plano do leme, atuando no centro de pressão (CP).</p>
+
+  <div class="box formula">
+    <h4>Componentes e coeficientes</h4>
+    <p class="vars">A força resultante no CP decompõe-se em: <b>L</b> (sustentação, ⟂ ao movimento), <b>D</b> (arrasto, ∥ ao movimento) e <b>F</b> (força normal ao plano do leme — a que importa para o torque).</p>
+    <div class="eq">C<sub>L</sub> = L/[(ρ/2)A<sub>R</sub>U²] &nbsp;·&nbsp; C<sub>D</sub> = D/[(ρ/2)A<sub>R</sub>U²]</div>
+    <div class="eq">C<sub>N</sub> = F/[(ρ/2)A<sub>R</sub>U²] = C<sub>L</sub>·cos α + C<sub>D</sub>·sen α<span class="lbl">coeficiente de força normal</span></div>
+  </div>
+
+  <div class="box formula">
+    <h4>Torque no estoque do leme <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">Q<sub>H</sub> = F·(d − CP<sub>c̄</sub>)<span class="lbl">Eq. (121d) — d = distância do bordo de ataque à linha de centro do estoque</span></div>
+    <p class="vars">O sinal do torque depende de <strong>d ser maior ou menor que CP<sub>c̄</sub></strong> (não da regra da mão direita). Posicionar o estoque <em>atrás</em> do CP em ângulo pequeno é o que torna o leme "balanceado" (reduz torque). Momento de flexão na raiz: √(L²+D²)·CP<sub>s̄</sub>.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Força × momento — a pegadinha</h4>
+    <p>A força de controle (Y) e o <strong>torque/momento de torção</strong> (Q_H) são coisas diferentes: a força é F (ou Y); o torque é F × o braço até o estoque. Confundir força de leme com momento de torção é distrator clássico do Bloco C. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== 14.2 ESTOL ===== -->
+<section class="bloco" id="estol">
+  <h2 class="sec"><span class="n">14.2</span> Estol (stall)</h2>
+  <p class="lede">O estol é uma descontinuidade mais ou menos abrupta na curva de sustentação × ângulo de ataque. Acima do ângulo crítico, a sustentação cai.</p>
+
+  <div class="ichart">
+    <h4>Curva C_L × ângulo de ataque até o estol</h4>
+    <p class="hint">Deslize α. Veja a região linear, o ponto onde a inclinação começa a cair (separação avança) e o estol abrupto. Compare escoamento livre vs. esteira da hélice.</p>
+    <canvas id="stallCanvas" width="860" height="260"></canvas>
+    <div class="ictrl"><label for="stA">ângulo α →</label><input type="range" id="stA" min="0" max="450" value="120" oninput="drawStall()">
+      <div class="iread" id="stRead"></div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <h4>Como o estol se desenvolve</h4>
+    <p>Ao aumentar α, o ponto de separação no lado de sucção <strong>avança ao longo da corda</strong> → a inclinação da curva de sustentação começa a cair → no ângulo crítico, descontinuidade abrupta e a sustentação <strong>diminui</strong>. Na esteira da hélice, o estol é <span class="hl">retardado</span> (escoamento mais energizado). <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== 14.2 CAVITACAO ===== -->
+<section class="bloco" id="cav">
+  <h2 class="sec"><span class="n">14.2</span> Cavitação e aeração</h2>
+  <p class="lede">Dois outros limites do desempenho do leme, ambos no lado de sucção.</p>
+  <table>
+    <tr><th>Fenômeno</th><th>O que é</th><th>Comportamento</th></tr>
+    <tr><td><strong>Cavitação</strong></td><td>pressão local cai abaixo da pressão de vapor</td><td>retarda o crescimento da sustentação, mas <strong>não interrompe</strong>. Piora com a velocidade. Pode erodir o leme.</td></tr>
+    <tr><td><strong>Aeração / ventilação</strong></td><td>ar da atmosfera entra no lado de sucção (leme perto da superfície)</td><td>ocorre em ângulos/velocidades menores que a cavitação se a resistência à aspiração for baixa. Corrige-se com barreira física.</td></tr>
+  </table>
+  <div class="box key">
+    <h4>Cavitação × estol — qual limita mais?</h4>
+    <p>Em <strong>velocidades moderadas</strong>, o <span class="hl">estol é mais restritivo</span> que a cavitação (a cavitação só retarda, não interrompe a sustentação). Mas à medida que a velocidade aumenta, o efeito inibidor da cavitação cresce e pode <strong>igualar ou superar</strong> o estol. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+  <div class="box formula">
+    <h4>Número de Weber (aeração)</h4>
+    <div class="eq">W = V·√(ρ/(S·R))<span class="lbl">R = raio do bordo de ataque · S = tensão superficial</span></div>
+    <p class="vars">Se W ≥ 0,15×10⁻², a aeração deixa de depender do número de Weber. A separação (estol) é condição <strong>necessária mas não suficiente</strong> para a aeração.</p>
+  </div>
+</section>
+
+<!-- ===== 14.4 ASPECTO ===== -->
+<section class="bloco" id="aspecto">
+  <h2 class="sec"><span class="n">14.4</span> Efeito da razão de aspecto</h2>
+  <p class="lede">Razão de aspecto infinita → escoamento 2D, sem fluxo transversal. Razão finita → fluxo da face de alta para a de baixa pressão na raiz e na ponta, reduzindo a sustentação.</p>
+
+  <div class="box key">
+    <h4>Razão de aspecto efetiva — o conceito-chave <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Se a raiz do leme está <strong>colada ao casco</strong> (impede o fluxo transversal na raiz), o C_L é o de uma superfície com <span class="hl">o dobro da razão de aspecto geométrica</span> (efeito de imagem especular / groundboard). Razão de aspecto efetiva <strong>a = 2 × geométrica</strong> com ângulo zero — mas cai conforme o leme é colocado à banda (a folga aumenta).</p>
+  </div>
+
+  <div class="ichart">
+    <h4>C_L × ângulo de leme para várias razões de aspecto</h4>
+    <p class="hint">Deslize a razão de aspecto. Menor razão de aspecto → inclinação menor: o leme precisa de mais ângulo para o mesmo C_L.</p>
+    <canvas id="arCanvas" width="860" height="250"></canvas>
+    <div class="ictrl"><label for="arA">razão de aspecto a →</label><input type="range" id="arA" min="5" max="50" value="20" oninput="drawAR()">
+      <div class="iread" id="arRead"></div>
+    </div>
+  </div>
+
+  <div class="box formula">
+    <h4>Relações de Prandtl (distribuição elíptica)</h4>
+    <div class="eq">C'<sub>D</sub> = C<sub>D</sub> + (C<sub>L</sub>²/π)·(1/a' − 1/a)<span class="lbl">Eq. (122a) — arrasto induzido depende de 1/a</span></div>
+    <div class="eq">α' = α + (C<sub>L</sub>/π)·(1/a' − 1/a)<span class="lbl">Eq. (122b) — mesma sustentação exige mais ângulo com a menor</span></div>
+    <p class="vars">A inclinação ∂C<sub>L</sub>/∂α <strong>cai acentuadamente</strong> com a razão de aspecto. O arrasto induzido vai com C<sub>L</sub>²/(π·a·e) — quanto menor a razão de aspecto, maior o arrasto induzido. Teoria válida para a ≥ 2.</p>
+  </div>
+</section>
+
+<!-- ===== 14.7 TIPOS ===== -->
+<section class="bloco" id="tipos">
+  <h2 class="sec"><span class="n">14.7</span> Tipos de leme — as 4 variações</h2>
+  <p class="lede">Como a sustentação é gerada distingue os tipos: por ângulo de ataque, por curvatura, ou pelos dois (Fig. 142).</p>
+
+  <div class="views">
+    <div class="vcard">
+      <svg viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="55" x2="160" y2="55" stroke="#cdbf99" stroke-dasharray="3 3"/>
+        <g transform="rotate(15 90 55)"><ellipse cx="90" cy="55" rx="55" ry="9" fill="#1A7A6E"/></g>
+        <circle cx="78" cy="55" r="3" fill="#9E3B2E"/>
+      </svg>
+      <span class="vtag">(a)</span>
+      <div class="vt">Totalmente móvel</div>
+      <div class="vd">Sustentação só pelo <strong>ângulo de ataque</strong>. Toda a superfície gira no estoque.</div>
+    </div>
+    <div class="vcard">
+      <svg viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="55" x2="160" y2="55" stroke="#cdbf99" stroke-dasharray="3 3"/>
+        <path d="M30 55 Q90 38 150 55 Q90 60 30 55 Z" fill="#6B4E8E"/>
+      </svg>
+      <span class="vtag">(b)</span>
+      <div class="vt">Asa de avião</div>
+      <div class="vd">Sustentação por <strong>curvatura fixa</strong> (camber). Referência de comparação.</div>
+    </div>
+    <div class="vcard">
+      <svg viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="55" x2="160" y2="55" stroke="#cdbf99" stroke-dasharray="3 3"/>
+        <rect x="40" y="48" width="45" height="14" rx="3" fill="#7a6f55"/>
+        <g transform="rotate(20 95 55)"><ellipse cx="118" cy="55" rx="40" ry="8" fill="#1A7A6E"/></g>
+        <text x="48" y="44" font-size="9" fill="#7a6f55" font-family="sans-serif">fixo</text>
+      </svg>
+      <span class="vtag">(c)</span>
+      <div class="vt">Atrás de estrutura fixa</div>
+      <div class="vd">Sustentação por <strong>curvatura variável</strong>. Parte fixa (patilhão/bico) + parte móvel.</div>
+    </div>
+    <div class="vcard">
+      <svg viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="55" x2="160" y2="55" stroke="#cdbf99" stroke-dasharray="3 3"/>
+        <g transform="rotate(12 80 55)"><ellipse cx="80" cy="55" rx="42" ry="9" fill="#1A7A6E"/></g>
+        <g transform="rotate(32 122 55)"><ellipse cx="135" cy="55" rx="18" ry="6" fill="#C8A84B"/></g>
+        <text x="128" y="42" font-size="8" fill="#9a7e2e" font-family="sans-serif">flap</text>
+      </svg>
+      <span class="vtag">(d)</span>
+      <div class="vt">Móvel com flap de cauda</div>
+      <div class="vd">Sustentação por <strong>ângulo + curvatura variável</strong>. Maior C_L (tipo Becker).</div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <h4>Leme com flap / articulado (Becker) <span class="tag t-banca">BANCA</span></h4>
+    <p>O leme duplamente móvel com flap atinge C_L máximo <span class="hl">muito maior</span> que o totalmente móvel sem flap (Leme nº 5 de Kerwin: C_L,max ≈ 1,63 vs. 0,88 do sem flap). Aumentar o flap além de 20% pouco adiciona. Custo: maiores momentos de articulação, complexidade e manutenção.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Leme semi-balanceado de patilhão (skeg)</h4>
+    <p>Combina parte fixa (patilhão) + parte móvel com área de balanceamento. Comparado ao totalmente móvel: ângulo de estol <span class="hl-amb">atrasado em ~12°</span>, C_L,max só ~10% menor, mas <strong>maior arrasto</strong> para a mesma sustentação e menor L/D. A "quebra horizontal" prejudica as características.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Balanceamento e estrutura fixa</h4>
+    <p class="vars">
+      • <b>Área de balanceamento:</b> parte do leme à <em>vante</em> do estoque → reduz o torque (Q_H). Com balanceamento, surge folga inevitável em grandes ângulos.<br>
+      • <b>Estrutura fixa à vante (β<sub>R</sub>=0):</b> aumenta a sustentação (25% fixo + 75% móvel dá &gt;90% da sustentação de um totalmente móvel) e melhora a estabilidade de curso. Mas em <strong>curva</strong> (β<sub>R</sub>≠0) o ângulo de entrada na parte fixa prejudica esse efeito.<br>
+      • Selar folgas evita o estol precoce do flap.
+    </p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As definições e números de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Oito questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Lemes e Superfícies de Controle (§14)</summary>
+  <ul>
+    <li><b>Seção simétrica:</b> o leme sustenta nos dois sentidos (≠ asa). Geometria: corda, envergadura, espessura; razão de aspecto b̄/c̄, afilamento c_t/c_r.</li>
+    <li><b>Forças:</b> L (⟂ movimento), D (∥ movimento), F (⟂ ao plano do leme). C_N = C_L cos α + C_D sen α. Resultante atua no CP.</li>
+    <li><b>Torque:</b> Q_H = F(d − CP_c̄). Sinal depende de d vs CP, não da mão direita. Força ≠ momento de torção.</li>
+    <li><b>Estol:</b> descontinuidade abrupta na curva C_L×α; acima do ângulo crítico, C_L cai. Retardado na esteira da hélice.</li>
+    <li><b>Cavitação × estol:</b> em vel. moderada o estol limita mais; a cavitação só retarda (não interrompe) e piora com a velocidade.</li>
+    <li><b>Aeração:</b> ar entra no lado de sucção (leme na superfície). Weber W=V√(ρ/SR); separação é necessária mas não suficiente.</li>
+    <li><b>Razão de aspecto efetiva:</b> = 2× geométrica com raiz colada ao casco (imagem especular). Cai ao colocar o leme à banda.</li>
+    <li><b>Prandtl:</b> ∂C_L/∂α cai com a razão de aspecto; arrasto induzido ∝ C_L²/(πae). Válido a ≥ 2.</li>
+    <li><b>4 variações (Fig. 142):</b> (a) totalmente móvel (ângulo) · (b) asa (curvatura fixa) · (c) atrás de estrutura fixa (curvatura variável) · (d) móvel + flap (ângulo + curvatura).</li>
+    <li><b>Leme com flap (Becker):</b> C_L,max muito maior (1,63 vs 0,88). Custo: momentos de articulação, complexidade.</li>
+    <li><b>Patilhão (skeg):</b> estol atrasado ~12°, C_L,max ~10% menor, maior arrasto. Balanceamento (área à vante do estoque) reduz torque.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Lemes e Superfícies de Controle (PNA Vol. III §14) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== Stall curve ===== */
+function clStall(a){ // a degrees, stall ~35
+  var stall=35, slope=0.045;
+  if(a<=stall) return slope*a - 0.0009*a*a*0.5;
+  return (slope*stall - 0.0009*stall*stall*0.5) - 0.03*(a-stall);
+}
+function drawStall(){
+  var cv=document.getElementById('stallCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-32,pW=W-78,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  var aMax=45;
+  function px(a){return x0+a/aMax*pW;}
+  var clMax=1.8;function py(v){return y0-v/clMax*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('C_L',8,24);ctx.fillText('α (°)',W-40,y0+20);
+  [0,10,20,30,35,40].forEach(function(a){ctx.fillStyle='#a99';ctx.fillText(a,px(a)-6,y0+16);});
+  // free-stream curve
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.6;ctx.beginPath();var f=true;
+  for(var a=0;a<=aMax;a+=0.3){var X=px(a),Y=py(clStall(a));if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  // propeller race (stall delayed, higher CL) — schematic shift
+  ctx.strokeStyle='#C8A84B';ctx.lineWidth=2;ctx.setLineDash([5,3]);ctx.beginPath();f=true;
+  for(var a2=0;a2<=aMax;a2+=0.3){var st2=42;var c2=(a2<=st2)?0.045*a2-0.0009*a2*a2*0.4:(0.045*st2-0.0009*st2*st2*0.4)-0.03*(a2-st2);var X2=px(a2),Y2=py(c2);if(f){ctx.moveTo(X2,Y2);f=false;}else ctx.lineTo(X2,Y2);}ctx.stroke();ctx.setLineDash([]);
+  // stall marker
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(px(35),14);ctx.lineTo(px(35),y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.font='11px Trebuchet MS';ctx.fillText('estol',px(35)+3,26);
+  ctx.fillStyle='#1A7A6E';ctx.fillText('— escoamento livre',W-180,30);ctx.fillStyle='#9a7e2e';ctx.fillText('-- esteira da hélice',W-180,46);
+  // marker
+  var aSel=(+document.getElementById('stA').value)/10;
+  var mx=px(aSel),my=py(clStall(aSel));
+  ctx.fillStyle='#16302B';ctx.beginPath();ctx.arc(mx,my,5,0,7);ctx.fill();
+  var st = aSel<20?'região linear':(aSel<35?'inclinação caindo (separação avança)':'ESTOL: C_L diminui');
+  document.getElementById('stRead').innerHTML='α=<b>'+aSel.toFixed(1)+'°</b> · C_L≈<b>'+clStall(aSel).toFixed(2)+'</b> · '+st;
+}
+drawStall();
+
+/* ===== Aspect ratio CL vs delta ===== */
+function clSlope(a){ // per degree, approx 0.9*2*pi*a/(57.3*(sqrt(a^2+4)+1.8))
+  return 0.9*2*Math.PI*a/(57.3*(Math.sqrt(a*a+4)+1.8));
+}
+function drawAR(){
+  var cv=document.getElementById('arCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-32,pW=W-78,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  var dMax=35;
+  function px(d){return x0+d/dMax*pW;}
+  var clMax=1.6;function py(v){return y0-v/clMax*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('C_L',8,24);ctx.fillText('ângulo de leme (°)',W-110,y0+20);
+  [0,10,20,30].forEach(function(d){ctx.fillStyle='#a99';ctx.fillText(d,px(d)-6,y0+16);});
+  // reference curves for several AR (faint)
+  [0.5,1,2,5].forEach(function(aa){
+    ctx.strokeStyle='#e2d8bd';ctx.lineWidth=1;ctx.beginPath();var f=true;
+    for(var d=0;d<=dMax;d+=0.5){var cl=Math.min(clMax,clSlope(aa)*d);var X=px(d),Y=py(cl);if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  });
+  // selected AR
+  var a=(+document.getElementById('arA').value)/10;
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.8;ctx.beginPath();var f2=true;
+  for(var d2=0;d2<=dMax;d2+=0.3){var cl2=Math.min(clMax,clSlope(a)*d2);var X2=px(d2),Y2=py(cl2);if(f2){ctx.moveTo(X2,Y2);f2=false;}else ctx.lineTo(X2,Y2);}ctx.stroke();
+  ctx.fillStyle='#a99';ctx.font='10px Trebuchet MS';ctx.fillText('a=5',px(33),py(clSlope(5)*33)-4);ctx.fillText('a=0,5',px(33),py(clSlope(0.5)*33)-4);
+  document.getElementById('arRead').innerHTML='a = <b>'+a.toFixed(1)+'</b> · inclinação ∂C_L/∂α ≈ <b>'+clSlope(a).toFixed(3)+'</b>/° '+(a<1.5?'(baixa — precisa mais ângulo)':'(alta)');
+}
+drawAR();
+window.addEventListener('resize',function(){drawStall();drawAR();});
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Seção do leme",b:"Simétrica — sustenta nos DOIS sentidos (≠ asa de avião)."},
+  {f:"Razão de aspecto geométrica",b:"b̄/c̄ (envergadura/corda). Afilamento = c_t/c_r."},
+  {f:"3 componentes de força",b:"L (⟂ movimento) · D (∥ movimento) · F (⟂ ao plano do leme)."},
+  {f:"Coef. força normal",b:"C_N = C_L cos α + C_D sen α."},
+  {f:"Torque no estoque",b:"Q_H = F(d − CP_c̄). Sinal por d vs CP, não pela mão direita."},
+  {f:"Estol",b:"Descontinuidade abrupta na curva C_L×α. Acima do crítico, C_L cai. Retardado na esteira da hélice."},
+  {f:"Cavitação × estol",b:"Vel. moderada: estol limita mais. Cavitação só retarda, piora com a velocidade."},
+  {f:"Aeração",b:"Ar entra no lado de sucção (leme na superfície). Weber W=V√(ρ/SR)."},
+  {f:"Razão de aspecto efetiva",b:"= 2× geométrica com raiz colada ao casco. Cai ao colocar à banda."},
+  {f:"Prandtl",b:"∂C_L/∂α cai com a razão de aspecto; arrasto induzido ∝ C_L²/(πae)."},
+  {f:"4 variações (Fig.142)",b:"(a) móvel=ângulo · (b) asa=curvatura · (c) atrás de fixo=curvatura variável · (d) móvel+flap=ambos."},
+  {f:"Leme com flap (Becker)",b:"C_L,max muito maior (1,63 vs 0,88). Custo: momentos de articulação."},
+  {f:"Patilhão (skeg)",b:"Estol atrasado ~12°, C_L,max ~10% menor, mais arrasto. Balanceamento reduz torque."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"Por que a seção transversal de um leme é simétrica, ao contrário de uma asa de avião?",
+   o:["Para reduzir o peso","Porque deve desenvolver sustentação nos dois sentidos opostos","Para aumentar a velocidade","Por questões estéticas"],
+   a:1,e:"O leme precisa gerar força de controle para bombordo E boreste, então a seção é simétrica em relação ao plano de centro. A asa só precisa sustentar para cima (curvatura fixa)."},
+  {q:"O torque hidrodinâmico no estoque do leme é dado por Q_H = F(d − CP). Seu sinal depende de:",
+   o:["A regra da mão direita","Se d é maior ou menor que CP","A velocidade do navio","O número de pás da hélice"],
+   a:1,e:"O sinal depende de d (bordo de ataque ao estoque) ser maior ou menor que a posição do CP. Posicionar o estoque atrás do CP (área de balanceamento à vante) reduz o torque."},
+  {q:"O estol de um leme é definido como:",
+   o:["O ângulo de máxima eficiência","Uma descontinuidade abrupta na curva de sustentação × ângulo de ataque","O ponto de cavitação","A velocidade máxima do leme"],
+   a:1,e:"Estol = descontinuidade abrupta na curva C_L×α. Acima do ângulo crítico, a separação domina e a sustentação começa a DIMINUIR com o aumento do ângulo."},
+  {q:"Comparando cavitação e estol em velocidades MODERADAS, qual limita mais o leme?",
+   o:["A cavitação","O estol","Ambos igualmente","Nenhum dos dois"],
+   a:1,e:"Em velocidades moderadas, o estol é mais restritivo — a cavitação só RETARDA o crescimento da sustentação, não o interrompe. Em altas velocidades, a cavitação pode igualar/superar o estol."},
+  {q:"A razão de aspecto EFETIVA de um leme com a raiz colada ao casco é:",
+   o:["Igual à geométrica","Metade da geométrica","O dobro da geométrica","Quatro vezes a geométrica"],
+   a:2,e:"O dobro (efeito de imagem especular / groundboard): o casco impede o fluxo transversal na raiz. Mas a razão efetiva cai conforme o leme é colocado à banda."},
+  {q:"Sobre a inclinação da curva de sustentação (∂C_L/∂α) e a razão de aspecto:",
+   o:["A inclinação aumenta quando a razão de aspecto diminui","A inclinação cai acentuadamente quando a razão de aspecto diminui","A inclinação independe da razão de aspecto","A inclinação é sempre constante"],
+   a:1,e:"A inclinação CAI com a razão de aspecto menor (Prandtl). Lemes de baixa razão de aspecto precisam de MAIS ângulo para o mesmo C_L. O arrasto induzido ∝ C_L²/(πae)."},
+  {q:"Na Fig. 142, o leme 'totalmente móvel com flap de cauda' (tipo Becker) gera sustentação por:",
+   o:["Apenas ângulo de ataque","Apenas curvatura fixa","Ângulo de ataque + curvatura variável","Apenas pela velocidade"],
+   a:2,e:"O leme com flap combina ângulo de ataque E curvatura variável (o flap deflete) → C_L,max muito maior que o totalmente móvel sem flap (1,63 vs 0,88 nos ensaios de Kerwin)."},
+  {q:"O leme semi-balanceado de patilhão (skeg), comparado ao totalmente móvel, tem:",
+   o:["Menor ângulo de estol e menos arrasto","Ângulo de estol atrasado ~12° e maior arrasto para mesma sustentação","C_L,max muito maior","Eficiência idêntica"],
+   a:1,e:"O patilhão atrasa o estol em ~12° e tem C_L,max só ~10% menor, mas MAIOR arrasto (menor L/D) para a mesma sustentação. A 'quebra horizontal' prejudica as características."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>

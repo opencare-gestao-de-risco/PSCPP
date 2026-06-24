@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Estabilidade de Movimento e Equações Lineares — PNA Vol. III §3 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:700px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:250px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:84px}
+  .ictrl input[type=range]{flex:1;min-width:130px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:18px;padding:7px 16px;cursor:pointer}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  /* 4 cases buttons */
+  .caseBtns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .caseBtns button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 14px;cursor:pointer;transition:.15s}
+  .caseBtns button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:160px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15.5px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:25px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · P1b — Controlabilidade</p>
+    <h1>Estabilidade de Movimento e <em>Equações Lineares</em></h1>
+    <p class="sub">A base teórica da manobra: os quatro casos de estabilidade de movimento (Arentzen), a distinção controles fixos × operando, a linearização de Taylor e as equações lineares de movimento no plano horizontal.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. III, Cap. IX (Controlabilidade), Seção 3, pp. 195–199.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#def">Estabilidade</a>
+    <a href="#casos">4 casos ▶</a>
+    <a href="#fixos">Fixos × operando</a>
+    <a href="#taylor">Linearização ▶</a>
+    <a href="#eqs">Equações de movimento</a>
+    <a href="#leme">Forças do leme</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Este é o <strong>primeiro caderno do P1b/P1c</strong> (Controlabilidade — Cap. IX). É a base teórica para os próximos: índices K e T de Nomoto (§4), manobras definitivas (§5) e capacidade de giro (§6).
+</div>
+
+<!-- ===== 3.1 DEF ===== -->
+<section class="bloco" id="def">
+  <h2 class="sec"><span class="n">3.1</span> O que é estabilidade de movimento</h2>
+  <p class="lede">Um corpo é estável em equilíbrio (parado ou em movimento) se, perturbado momentaneamente, tende a retornar ao estado de equilíbrio anterior após cessar a perturbação.</p>
+
+  <div class="box key">
+    <p>Na manutenção de rota, a perturbação típica é uma <strong>onda ou rajada de vento</strong>. O ideal seria o navio retomar a rota original <span class="hl">sem intervenção do timoneiro</span> — se isso ocorre depende do tipo de estabilidade de movimento que o navio possui. Os tipos se classificam pelos <strong>atributos do equilíbrio inicial retidos na trajetória final</strong> do centro de gravidade. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== 3.1 4 CASOS ===== -->
+<section class="bloco" id="casos">
+  <h2 class="sec"><span class="n">3.1</span> Os quatro casos de estabilidade (Arentzen, 1960)</h2>
+  <p class="lede">A Fig. 3 do PNA é a peça mais cobrada do P1b (provas 2006, 2008, 2011, 2012). Os quatro casos formam uma hierarquia ascendente.</p>
+
+  <div class="ichart">
+    <h4>Diagrama interativo dos 4 casos</h4>
+    <p class="hint">Escolha o caso e clique em "Perturbar" para ver o que a trajetória final retém do estado inicial.</p>
+    <div class="caseBtns" id="caseBtns">
+      <button data-c="0" class="active">Caso I — Retilínea</button>
+      <button data-c="1">Caso II — Direcional (oscila)</button>
+      <button data-c="2">Caso III — Direcional (suave)</button>
+      <button data-c="3">Caso IV — Posicional</button>
+    </div>
+    <canvas id="caseCanvas" width="860" height="250"></canvas>
+    <div class="ictrl"><button onclick="perturb()">⚡ Perturbar</button>
+      <div class="iread" id="caseRead"></div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Caso</th><th>Nome</th><th>Retém da trajetória inicial</th></tr>
+    <tr><td class="center"><strong>I</strong></td><td>Retilínea / dinâmica</td><td>linha reta — <strong>mas direção alterada</strong></td></tr>
+    <tr><td class="center"><strong>II</strong></td><td>Direcional (índices complexos)</td><td>reta + direção — posição transversal diferente; <strong>oscila</strong></td></tr>
+    <tr><td class="center"><strong>III</strong></td><td>Direcional (índices reais)</td><td>igual ao II, mas <strong>sem oscilação</strong> (suave)</td></tr>
+    <tr><td class="center"><strong>IV</strong></td><td>Posicional</td><td>reta + direção + <strong>mesma posição transversal</strong></td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>A hierarquia <span class="tag t-decorar">DECORAR</span></h4>
+    <p>I ⊂ II ⊂ III ⊂ IV (cada um contém o anterior). O <span class="hl">objetivo prático do projetista é o Caso I</span> (estabilidade retilínea) para a maioria dos navios em governo manual. Os demais exigem graus crescentes de controle automático. A diferença II×III é só a presença de oscilação (índices complexos × reais).</p>
+  </div>
+</section>
+
+<!-- ===== 3.2 FIXOS ===== -->
+<section class="bloco" id="fixos">
+  <h2 class="sec"><span class="n">3.2</span> Controles fixos × controles em operação</h2>
+  <p class="lede">A estabilidade tem significado com o leme fixo em zero, livre, ou em operação. No uso náutico, "estabilidade" normalmente significa <strong>com controles fixos</strong>.</p>
+
+  <div class="box formula">
+    <h4>A distinção fundamental plano vertical × horizontal <span class="tag t-banca">BANCA</span></h4>
+    <p class="vars">
+      <b>Plano vertical</b> (navio de superfície, mar calmo): possui estabilidade <strong>posicional (Caso IV)</strong> com controles fixos — graças às forças <span class="hl">hidrostáticas (flutuabilidade)</span>. É um tipo único de estabilidade "de graça".<br><br>
+      <b>Plano horizontal</b> (mar aberto, propulsão de popa): <strong>não</strong> há estabilidade posicional nem direcional com controles fixos (não existe a flutuabilidade que estabiliza no vertical). O único tipo possível com controles fixos é a <strong>estabilidade retilínea (Caso I)</strong> — e muitos navios nem a possuem.
+    </p>
+  </div>
+
+  <div class="box trap">
+    <h4>A pegadinha do plano</h4>
+    <p>Confundir os planos é o distrator clássico: estabilidade <strong>posicional com controles fixos</strong> só existe no plano <strong>vertical</strong>. No horizontal, com controles fixos, no máximo retilínea. Direcional/posicional no horizontal exigem <span class="hl-amb">controles em operação</span>. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+
+  <div class="box key">
+    <h4>O índice de estabilidade</h4>
+    <p>A cada tipo de estabilidade com controles fixos associa-se um <strong>índice numérico</strong>: o <span class="hl">sinal</span> diz se é estável ou instável; a <span class="hl">magnitude</span> diz o grau. Determiná-lo exige as equações diferenciais de movimento. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== 3.3 TAYLOR ===== -->
+<section class="bloco" id="taylor">
+  <h2 class="sec"><span class="n">3.3</span> Linearização — a série de Taylor</h2>
+  <p class="lede">As forças X, Y e o momento N são funções das velocidades e acelerações. Para obter um índice, lineariza-se via série de Taylor, desprezando os termos de ordem superior.</p>
+
+  <div class="box formula">
+    <h4>Forma linearizada (uma variável)</h4>
+    <div class="eq">f(x) ≈ f(x₁) + dx·[df/dx]<sub>x₁</sub><span class="lbl">Eq. (7b) — reta tangente; precisa quando dx → 0</span></div>
+    <p class="vars">A estabilidade de movimento estuda se uma perturbação <strong>muito pequena</strong> cresce ou decai. Por isso é fisicamente consistente usar a expansão linearizada: a hipótese (dx pequeno) casa com o problema.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Por que a linearização funciona: curva real vs. reta tangente</h4>
+    <p class="hint">Deslize o dx (tamanho da perturbação). Veja o erro entre a curva real e a reta tangente crescer com dx — e sumir quando dx → 0.</p>
+    <canvas id="taylorCanvas" width="860" height="240"></canvas>
+    <div class="ictrl"><label for="tDx">dx →</label><input type="range" id="tDx" min="2" max="100" value="50" oninput="drawTaylor()">
+      <div class="iread" id="tRead"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3.4 EQS ===== -->
+<section class="bloco" id="eqs">
+  <h2 class="sec"><span class="n">3.4</span> Equações lineares de movimento</h2>
+  <p class="lede">Com a simetria do casco (plano xz) e o equilíbrio inicial (movimento retilíneo), muitos termos zeram, e sobram equações compactas com as derivadas hidrodinâmicas (notação SNAME).</p>
+
+  <div class="box formula">
+    <h4>As simplificações que zeram termos <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">
+      • Equilíbrio inicial = movimento retilíneo → u̇₁ = v̇₁ = ṙ₁ = 0.<br>
+      • Simetria em relação ao plano <strong>xz</strong> → ∂Y/∂u = ∂Y/∂u̇ = 0 (avanço não gera força lateral).<br>
+      • Em equilíbrio reto não há força Y → o termo constante zera.<br>
+      • Resultado: Y e N ficam com <strong>4 termos cada</strong>; X com 2.
+    </p>
+  </div>
+
+  <div class="box formula">
+    <h4>Notação SNAME de derivadas (1952)</h4>
+    <div class="eq">∂Y/∂v ≡ Y<sub>v</sub> &nbsp;·&nbsp; ∂N/∂ṙ ≡ N<sub>ṙ</sub> &nbsp; (e assim por diante)</div>
+    <p class="vars">As <strong>derivadas hidrodinâmicas</strong>. O apóstrofo (Y'<sub>v</sub>) marca a forma adimensional. Adimensionalização: forças ÷ (ρ/2)L²V²; momentos ÷ (ρ/2)L³V². As derivadas cruzadas (Y<sub>r</sub>, N<sub>v</sub>) são não nulas porque proa e popa são diferentes (sem simetria yz).</p>
+  </div>
+
+  <div class="box key">
+    <h4>Massa virtual / massa adicionada <span class="tag t-banca">BANCA</span></h4>
+    <p>A derivada <strong>Y'<sub>v̇</sub></strong> entra na equação como adição ao termo de massa → é o <span class="hl">coeficiente de massa virtual</span> (sempre negativo), idêntico ao conceito de <strong>massa adicionada</strong>: a força para acelerar um corpo num fluido é sempre maior que massa×aceleração. Analogamente, <strong>N'<sub>ṙ</sub></strong> é o momento virtual de inércia. Y'<sub>ṙ</sub> e N'<sub>v̇</sub> são coeficientes virtuais de inércia acoplados (≈ 0 em navios convencionais).</p>
+  </div>
+</section>
+
+<!-- ===== 3.5 LEME ===== -->
+<section class="bloco" id="leme">
+  <h2 class="sec"><span class="n">3.5</span> Forças e momentos do leme</h2>
+  <p class="lede">As equações com leme em zero descrevem a estabilidade. Para a manobra, somam-se ao lado direito os termos do leme defletido — e há um mecanismo de amplificação.</p>
+
+  <div class="box formula">
+    <h4>Termos de controle</h4>
+    <div class="eq">Força: Y<sub>δ</sub>·δ<sub>R</sub> &nbsp;·&nbsp; Momento: N<sub>δ</sub>·δ<sub>R</sub><span class="lbl">δ_R = ângulo de deflexão do leme; positivo → guinada para boreste (leme na popa)</span></div>
+  </div>
+
+  <div class="box key">
+    <h4>O mecanismo de amplificação leme → casco <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Sequência: <span class="hl">deflexão do leme → força lateral do leme → momento de giro → o navio desenvolve ângulo de ataque → o casco (atuando como um perfil) gera força lateral N<sub>v</sub>·v</span> que <strong>amplifica grandemente</strong> o momento do leme. É por isso que um leme relativamente pequeno consegue girar um navio enorme: o trabalho pesado é feito pelo casco. <span class="tag t-banca">BANCA</span></p>
+  </div>
+
+  <div class="box trap">
+    <h4>Quem faz o giro?</h4>
+    <p>O leme <strong>não</strong> gira o navio sozinho — ele inicia o ângulo de ataque, e o <strong>casco</strong> gera a maior parte da força lateral (N<sub>v</sub>·v ≫ N<sub>δ</sub>·δ<sub>R</sub>). Atribuir todo o giro à força direta do leme é distrator. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os casos e conceitos de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Oito questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Estabilidade de Movimento (§3)</summary>
+  <ul>
+    <li><b>Estabilidade:</b> tende a retornar ao equilíbrio após cessar a perturbação (onda/rajada). Classificada pelos atributos retidos na trajetória final.</li>
+    <li><b>4 casos (Arentzen):</b> I retilínea (reta, direção muda) · II direcional/oscila (reta+direção) · III direcional/suave · IV posicional (reta+direção+posição). Hierarquia ascendente.</li>
+    <li><b>Objetivo do projetista:</b> Caso I (retilínea), suficiente para governo manual.</li>
+    <li><b>II × III:</b> só diferem pela oscilação (índices complexos × reais).</li>
+    <li><b>Plano vertical:</b> estabilidade posicional (IV) com controles fixos — graças à flutuabilidade (hidrostática).</li>
+    <li><b>Plano horizontal:</b> com controles fixos, só retilínea (I). Direcional/posicional exigem controles em operação.</li>
+    <li><b>Índice de estabilidade:</b> sinal → estável/instável; magnitude → grau.</li>
+    <li><b>Linearização (Taylor):</b> válida para perturbações pequenas (consistente com o problema de estabilidade).</li>
+    <li><b>Derivadas SNAME:</b> Y_v, N_r, etc. Adimensional com apóstrofo. Forças ÷(ρ/2)L²V²; momentos ÷(ρ/2)L³V².</li>
+    <li><b>Massa virtual:</b> Y'_v̇ (sempre negativo) = massa adicionada. N'_ṙ = momento virtual de inércia.</li>
+    <li><b>δ_R positivo:</b> guinada para boreste (leme na popa).</li>
+    <li><b>Amplificação:</b> leme → ângulo de ataque → força lateral do casco (N_v·v) amplifica o momento do leme. O casco faz o giro.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Estabilidade de Movimento e Equações Lineares (PNA Vol. III §3) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== 4 casos de estabilidade ===== */
+var curCase=0, pert=0, animT=null;
+function drawCase(){
+  var cv=document.getElementById('caseCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var y0=H/2, xPert=W*0.42;
+  // original straight path (dashed reference)
+  ctx.strokeStyle='#cdbf99';ctx.setLineDash([6,5]);ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(20,y0);ctx.lineTo(W-20,y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a99';ctx.font='11px Trebuchet MS';ctx.fillText('trajetória original',24,y0-8);
+  // perturbation marker
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(xPert,y0);ctx.lineTo(xPert,y0-26);ctx.stroke();
+  ctx.fillStyle='#9E3B2E';ctx.fillText('⚡ perturbação',xPert-20,y0-30);
+  // path before perturbation (solid green)
+  ctx.strokeStyle='#0D3D36';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(20,y0);ctx.lineTo(xPert,y0);ctx.stroke();
+  // final path depends on case and animation progress p (0..1)
+  var p=pert;
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(xPert,y0);
+  var endX=W-20, span=endX-xPert;
+  if(curCase===0){ // retilinea: reta com nova direcao
+    var ang=-0.22; // changed direction
+    var ex=xPert+span*p, ey=y0+span*p*ang;
+    ctx.lineTo(ex,ey);
+  } else if(curCase===1){ // direcional oscila: volta a direcao, offset, com oscilacao
+    for(var t=0;t<=p;t+=0.02){var x=xPert+span*t;var off=-28*Math.exp(-3*t)*Math.cos(10*t);ctx.lineTo(x,y0+off);}
+  } else if(curCase===2){ // direcional suave: volta direcao, offset, sem oscilar
+    for(var t2=0;t2<=p;t2+=0.02){var x2=xPert+span*t2;var off2=-26*Math.exp(-3.5*t2);ctx.lineTo(x2,y0+off2);}
+  } else { // posicional: volta a trajetoria original
+    for(var t3=0;t3<=p;t3+=0.02){var x3=xPert+span*t3;var off3=-26*Math.exp(-3*t3)*Math.cos(7*t3);ctx.lineTo(x3,y0+off3);}
+  }
+  ctx.stroke();
+  // label
+  var labels=['Caso I: reta, direção MUDOU','Caso II: volta à direção, posição diferente, OSCILA','Caso III: volta à direção, posição diferente, SUAVE','Caso IV: volta à posição original'];
+  document.getElementById('caseRead').innerHTML='<b>'+labels[curCase]+'</b>';
+}
+function perturb(){
+  if(animT)clearInterval(animT);
+  pert=0;
+  animT=setInterval(function(){pert+=0.03;if(pert>=1){pert=1;clearInterval(animT);}drawCase();},25);
+}
+document.querySelectorAll('#caseBtns button').forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll('#caseBtns button').forEach(function(x){x.classList.remove('active');});
+    b.classList.add('active');curCase=+b.dataset.c;pert=1;drawCase();
+  };
+});
+drawCase();pert=1;drawCase();
+
+/* ===== Taylor linearization ===== */
+function drawTaylor(){
+  var cv=document.getElementById('taylorCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=50,y0=H-30,pW=W-80,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  // function f(x)=0.7+ a parabola-ish curve, x1 fixed
+  function f(x){return 0.25+0.5*x+0.9*x*x;} // x in 0..1 scaled
+  function fp(x){return 0.5+1.8*x;}
+  var x1=0.32;
+  function px(x){return x0+x*pW;}
+  function py(v){return y0-v/1.7*pH;}
+  // axes
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('f(x)',8,24);ctx.fillText('x',W-26,y0+18);
+  // real curve
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.6;ctx.beginPath();var f0=true;
+  for(var x=0;x<=1;x+=0.01){var X=px(x),Y=py(f(x));if(f0){ctx.moveTo(X,Y);f0=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  // tangent line at x1
+  var slope=fp(x1),fx1=f(x1);
+  ctx.strokeStyle='#C8A84B';ctx.lineWidth=2;ctx.setLineDash([6,4]);ctx.beginPath();
+  ctx.moveTo(px(0),py(fx1+slope*(0-x1)));ctx.lineTo(px(1),py(fx1+slope*(1-x1)));ctx.stroke();ctx.setLineDash([]);
+  // x1 point
+  ctx.fillStyle='#0D3D36';ctx.beginPath();ctx.arc(px(x1),py(fx1),5,0,7);ctx.fill();
+  ctx.fillStyle='#7a6f55';ctx.font='11px Trebuchet MS';ctx.fillText('x₁',px(x1)-5,y0+16);
+  // dx and error
+  var dx=(+document.getElementById('tDx').value)/100*0.6;
+  var x2=x1+dx;
+  var realV=f(x2), linV=fx1+slope*dx;
+  // mark x2
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(px(x2),y0);ctx.lineTo(px(x2),Math.min(py(realV),py(linV)));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(px(x2),py(realV),4,0,7);ctx.fill();
+  ctx.fillStyle='#9a7e2e';ctx.beginPath();ctx.arc(px(x2),py(linV),4,0,7);ctx.fill();
+  // error bar
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(px(x2)+6,py(realV));ctx.lineTo(px(x2)+6,py(linV));ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='11px Trebuchet MS';ctx.fillText('x₁+dx',px(x2)-12,y0+16);
+  ctx.fillStyle='#1A7A6E';ctx.fillText('— f(x) real',W-160,28);ctx.fillStyle='#9a7e2e';ctx.fillText('-- reta tangente (linear)',W-160,44);
+  var err=Math.abs(realV-linV);
+  document.getElementById('tRead').innerHTML='dx=<b>'+dx.toFixed(2)+'</b> · erro da linearização=<b>'+err.toFixed(3)+'</b> '+(dx<0.12?'(desprezível — válido!)':'(cresce com dx)');
+}
+drawTaylor();
+window.addEventListener('resize',function(){drawCase();drawTaylor();});
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Estabilidade de movimento",b:"Tende a retornar ao equilíbrio após cessar a perturbação (onda/rajada de vento)."},
+  {f:"Caso I — Retilínea",b:"Trajetória final reta, mas DIREÇÃO alterada. Objetivo do projetista (governo manual)."},
+  {f:"Caso II — Direcional",b:"Reta + mesma direção, posição diferente. OSCILA (índices complexos)."},
+  {f:"Caso III — Direcional",b:"Igual ao II mas SUAVE, sem oscilar (índices reais)."},
+  {f:"Caso IV — Posicional",b:"Reta + direção + mesma posição transversal. Volta à trajetória original."},
+  {f:"Hierarquia",b:"I ⊂ II ⊂ III ⊂ IV. Ascendente. Os superiores exigem controle automático."},
+  {f:"Plano vertical",b:"Estabilidade posicional (IV) com controles fixos — graças à flutuabilidade."},
+  {f:"Plano horizontal",b:"Com controles fixos: só retilínea (I). Direcional/posicional exigem controles em operação."},
+  {f:"Índice de estabilidade",b:"Sinal → estável/instável. Magnitude → grau."},
+  {f:"Linearização de Taylor",b:"f(x)≈f(x₁)+dx·f'(x₁). Válida para perturbações pequenas."},
+  {f:"Massa virtual Y'_v̇",b:"Sempre negativa; adiciona-se à massa = massa adicionada."},
+  {f:"Amplificação leme→casco",b:"Leme → ângulo de ataque → força lateral do casco (N_v·v) amplifica o giro."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"No Caso I (estabilidade retilínea/dinâmica), a trajetória final retém da original:",
+   o:["A linha reta e a direção","Apenas a linha reta — a direção é alterada","A posição transversal","Nada"],
+   a:1,e:"Caso I: a trajetória final é reta, mas a DIREÇÃO mudou. É o objetivo prático do projetista para governo manual."},
+  {q:"A diferença entre o Caso II e o Caso III de estabilidade direcional é:",
+   o:["O Caso III retém a posição transversal","O Caso II oscila (índices complexos) e o III é suave (índices reais)","O Caso II é no plano vertical","Não há diferença"],
+   a:1,e:"Ambos retêm reta + direção. A diferença: Caso II OSCILA (índices de estabilidade complexos), Caso III passa suavemente (índices reais)."},
+  {q:"Um navio de superfície em mar calmo possui estabilidade posicional (Caso IV) com controles fixos:",
+   o:["No plano horizontal","No plano vertical, graças às forças hidrostáticas","Em ambos os planos","Nunca"],
+   a:1,e:"No plano VERTICAL, graças à flutuabilidade (forças hidrostáticas). No plano horizontal não existe essa força estabilizadora."},
+  {q:"No plano horizontal, com controles fixos, o único tipo de estabilidade possível para navios autopropulsores é:",
+   o:["Posicional","Direcional","Retilínea","Nenhuma é possível"],
+   a:2,e:"Apenas a estabilidade retilínea (Caso I) — e muitos navios nem a possuem. Direcional e posicional no horizontal exigem controles em operação."},
+  {q:"O índice numérico de estabilidade indica, por seu SINAL e sua MAGNITUDE, respectivamente:",
+   o:["A velocidade e a direção","Se é estável/instável e o grau de estabilidade","A força e o momento","O ângulo de leme e o de deriva"],
+   a:1,e:"O SINAL indica se o corpo é estável ou instável; a MAGNITUDE indica o grau de estabilidade/instabilidade."},
+  {q:"A linearização das equações de movimento (série de Taylor) é fisicamente justificável porque:",
+   o:["Os navios são sempre lineares","A estabilidade estuda perturbações muito pequenas, compatíveis com dx pequeno","Elimina a necessidade de ensaios","Vale para qualquer ângulo de leme"],
+   a:1,e:"A estabilidade de movimento estuda se uma perturbação MUITO PEQUENA cresce ou decai. Isso casa exatamente com a hipótese da linearização (dx pequeno)."},
+  {q:"A derivada Y'_v̇ (que entra como adição ao termo de massa) é chamada de:",
+   o:["Momento de guinada","Coeficiente de massa virtual (massa adicionada), sempre negativo","Força do leme","Ângulo de deriva"],
+   a:1,e:"Coeficiente de massa virtual = massa adicionada (sempre negativo). A força para acelerar um corpo no fluido é sempre maior que massa×aceleração."},
+  {q:"No mecanismo de giro, o que amplifica grandemente o momento do leme?",
+   o:["A velocidade do navio","A força lateral do casco (N_v·v), gerada pelo ângulo de ataque","O peso do leme","A pressão atmosférica"],
+   a:1,e:"O leme inicia o ângulo de ataque; o CASCO (atuando como perfil) gera a força lateral N_v·v que amplifica o momento. Por isso um leme pequeno gira um navio grande."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>

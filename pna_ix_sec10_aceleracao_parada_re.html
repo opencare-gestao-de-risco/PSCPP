@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Aceleração, Parada e Marcha à Ré — PNA Vol. III §10 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:700px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  #forceCanvas{height:260px}
+  #pathCanvas{height:320px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:110px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:160px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12.5px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:24px}.eq{font-size:14px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · P1c — Controlabilidade</p>
+    <h1>Aceleração, Parada e <em>Marcha à Ré</em></h1>
+    <p class="sub">As manobras críticas do prático: alcance longitudinal (head reach) e lateral (side reach), o método de Chase et al. (potencial e impulso dinâmico), a reversão "80-50", a superioridade da guinada sobre a parada, e os dispositivos auxiliares.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. III, Cap. IX, Seção 10. Potencial/impulso dinâmico: Chase et al. (1957) via PNA.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#defs">Definições</a>
+    <a href="#aceler">Aceleração</a>
+    <a href="#forcas">Forças na parada ▶</a>
+    <a href="#chase">Chase / dinâmico</a>
+    <a href="#guinada">Guinada vs parada ▶</a>
+    <a href="#re">Marcha à ré</a>
+    <a href="#auxiliares">Dispositivos</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Complementar ao caderno <a href="caderno_aceleracao_parada_re_pna_secao10.html">Aceleração, Parada e Ré (§10)</a> já existente. Aqui o foco é o método de Chase, os gráficos de força e a comparação guinada × parada. Fecha o ciclo das manobras dinâmicas (após §6 giro).
+</div>
+
+<!-- ===== DEFINICOES ===== -->
+<section class="bloco" id="defs">
+  <h2 class="sec"><span class="n">10.1</span> Definições e os dois alcances</h2>
+  <p class="lede">Aceleração, parada e marcha à ré — manobras importantes especialmente perto de terra, embarcações e estruturas fixas.</p>
+
+  <table>
+    <tr><th>Termo</th><th>Definição</th></tr>
+    <tr><td><strong>Aceleração</strong></td><td>aumentar a velocidade a partir do repouso ou de uma velocidade até outra maior</td></tr>
+    <tr><td><strong>Parada (stopping)</strong></td><td>desacelerar até o repouso. Crash stop (emergência) e parada da velocidade de porto (~12 nós lento, ~15 rápido)</td></tr>
+    <tr><td><strong>Deriva por inércia (coasting)</strong></td><td>desacelerar SEM máquina a ré; tempo longo, raramente até parar</td></tr>
+    <tr><td><strong>Marcha à ré (backing)</strong></td><td>acelerar do repouso até uma velocidade/distância a ré</td></tr>
+    <tr><td><strong>Propulsor em marcha à ré</strong></td><td>pás giram com ângulo de ataque negativo, produzindo empuxo a ré</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>Head reach × side reach <span class="tag t-banca">BANCA</span></h4>
+    <p class="vars">Quando o navio se desvia da reta na parada, a distância é medida na trajetória curva, mas as projeções é que importam:<br>
+    • <b>Alcance longitudinal (head reach):</b> distância na direção <strong>original</strong> até o repouso.<br>
+    • <b>Alcance lateral (side reach):</b> desvio <strong>lateral</strong> durante a parada.<br>
+    A distinção head reach × side reach é cobrada em todas as bancas 2006–2012.</p>
+  </div>
+
+  <div class="box key">
+    <h4>O efeito de pá (paddle wheel) <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Em mono-hélice ou multi-hélice de rotação unidirecional, a rotação do propulsor a ré tende a arrastar a <strong>popa para um lado</strong>: hélice <span class="hl">dextrógiro (direita)</span> joga a popa para um bordo, <span class="hl">levógiro (esquerda)</span> para o outro. Por isso a trajetória de parada raramente é reta.</p>
+  </div>
+</section>
+
+<!-- ===== ACELERACAO ===== -->
+<section class="bloco" id="aceler">
+  <h2 class="sec"><span class="n">10.2</span> Aceleração</h2>
+  <p class="lede">A força de aceleração é a diferença entre o empuxo líquido disponível e a resistência, à mesma velocidade.</p>
+  <div class="box formula">
+    <h4>Equação da aceleração <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">R<sub>t</sub> + T<sub>a</sub>(1 − t) = (D − X<sub>u̇</sub>)·u̇<span class="lbl">Eq. (88) — força de aceleração = empuxo efetivo − resistência</span></div>
+    <div class="eq">R = kV<sup>n</sup> &nbsp;(submarino / navio lento: R = kV²)<span class="lbl">resistência ∝ V² em baixo Froude</span></div>
+    <p class="vars"><b>R<sub>t</sub></b> resistência · <b>T<sub>a</sub></b> empuxo líquido · <b>t</b> dedução de empuxo · <b>D</b> deslocamento/massa · <b>X<sub>u̇</sub></b> massa adicional longitudinal (≈ −0,08·m) · <b>u̇</b> aceleração. Atingir a velocidade máxima leva muito tempo (empuxo desequilibrado tende a zero perto do máximo).</p>
+  </div>
+  <div class="box key">
+    <h4>Hipóteses simplificadoras</h4>
+    <p>(a) <strong>aceleração instantânea do propulsor</strong> (o tempo de desenvolvimento do empuxo é pequeno frente ao tempo de aceleração); (b) <strong>dedução de empuxo constante</strong>. Ambas justificam a aplicabilidade dos métodos analíticos. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== FORCAS NA PARADA ===== -->
+<section class="bloco" id="forcas">
+  <h2 class="sec"><span class="n">10.3</span> As forças na parada</h2>
+  <p class="lede">Dois fatores desaceleram: a resistência do casco (alta no início, ∝ V²) e o empuxo a ré do propulsor. Contra eles, a inércia (massa + massa adicional).</p>
+
+  <div class="ichart">
+    <h4>Resistência e empuxo a ré × velocidade</h4>
+    <p class="hint">Deslize a velocidade inicial. A resistência (∝ V²) é grande em alta velocidade mas cai rápido; o empuxo a ré domina a baixa velocidade.</p>
+    <canvas id="forceCanvas" width="860" height="260"></canvas>
+    <div class="ictrl"><label for="fV">velocidade inicial →</label><input type="range" id="fV" min="2" max="16" value="12" oninput="drawForce()">
+      <div class="iread" id="forceRead"></div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <h4>Por que a velocidade de porto (~12 nós) é o critério <span class="tag t-banca">BANCA</span></h4>
+    <p>Operadores consideram o <span class="hl">head reach a partir da velocidade de porto (12 nós, Chase et al.)</span> o critério mais importante de frenagem. O head reach da velocidade máxima tem pouca relevância — a colisão em alta velocidade evita-se melhor por guinada que por parada.</p>
+  </div>
+</section>
+
+<!-- ===== CHASE ===== -->
+<section class="bloco" id="chase">
+  <h2 class="sec"><span class="n">10.3</span> O método de Chase: potencial e impulso dinâmico</h2>
+  <p class="lede">Chase et al. (1957) agruparam as variáveis em razões adimensionais. Esses termos pertencem exclusivamente a esse método (via PNA).</p>
+
+  <div class="box formula">
+    <h4>As três razões adimensionais <span class="tag t-verificar" style="font-size:9px">termos exclusivos: Chase et al.</span></h4>
+    <div class="eq">Potencial dinâmico: D = 2R₁S / [(D − X<sub>u̇</sub>)·V₁²]<span class="lbl">Eq. (92) — relaciona energia cinética efetiva à perda de quantidade de movimento → dá o head reach S</span></div>
+    <div class="eq">Impulso dinâmico: τ = R₁·t / [(D − X<sub>u̇</sub>)·V₁]<span class="lbl">Eq. (93) — relaciona o impulso da resistência à perda de q. de movimento → dá o tempo de parada</span></div>
+    <div class="eq">Razão resistência/empuxo a ré: R₁ / T₂</div>
+    <p class="vars"><b>V₁</b> velocidade inicial · <b>R₁</b> resistência em V₁ · <b>T₂</b> empuxo a ré constante (navio parado na água). O método é estritamente válido para <strong>n = 2</strong> (R ∝ V²), e preciso a poucos % para parada em reta.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Terminologia exclusiva — atenção à fonte</h4>
+    <p>"Potencial dinâmico" e "impulso dinâmico" pertencem <strong>exclusivamente</strong> a Chase et al. via PNA. Não confundir com termos de Crenshaw ou Bertram. Tratam de razões adimensionais do método de cálculo da parada, não conceitos gerais de física. <span class="tag t-verificar">VERIFICAR atribuição</span></p>
+  </div>
+
+  <div class="box key">
+    <h4>A reversão "80-50" <span class="tag t-decorar">DECORAR</span></h4>
+    <p>As turbinas a vapor da maioria dos navios mercantes foram projetadas para dar <span class="hl">80% do conjugado nominal a 50% da rotação nominal</span> a ré — a reversão "80-50". Empuxo a ré com navio parado: T₂ = 5,5·Q₂/P. A baixa velocidade, o empuxo varia com o quadrado do RPM → head reach e tempo seguem lei inversa do quadrado do RPM.</p>
+  </div>
+  <div class="box formula">
+    <h4>T₂ × T₁ — a distinção</h4>
+    <p class="vars"><b>T₁</b> = empuxo de avanço livre no início da manobra. <b>T₂</b> = empuxo a ré constante (navio parado na água). Ambos são empuxos <strong>líquidos</strong> (já com dedução de empuxo). O empuxo cai linearmente com a distância de T₁ até T₂ e depois fica constante (Chase). <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== GUINADA VS PARADA ===== -->
+<section class="bloco" id="guinada">
+  <h2 class="sec"><span class="n">10.4</span> Guinada × parada e a trajetória imprevisível</h2>
+  <p class="lede">No crash astern de mono-hélice, a trajetória é imprevisível (perda do controle direcional). E, em alta velocidade, guinar é melhor que parar.</p>
+
+  <div class="ichart">
+    <h4>Parada de emergência vs. guinada (head reach × side reach)</h4>
+    <p class="hint">Alterne entre parada e guinada. Em alta velocidade, a guinada (35° de leme) tem alcance longitudinal muito menor — evita o obstáculo com menos distância.</p>
+    <div class="ictrl" style="margin-bottom:8px">
+      <button id="bStop" class="active" onclick="setMode('stop')">Parada de emergência</button>
+      <button id="bTurn" onclick="setMode('turn')">Guinada (35° leme)</button>
+    </div>
+    <canvas id="pathCanvas" width="860" height="320"></canvas>
+    <div class="iread" id="pathRead" style="margin-top:10px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>O limite dos ~6 nós <span class="tag t-banca">BANCA</span></h4>
+    <p>A altas velocidades e com espaço, a <strong>guinada de um navio grande é muito superior à parada</strong> para evitar obstáculo (o avanço na guinada ≪ head reach na parada, e mantém o controle). A partir de ~<span class="hl">6 nós para baixo</span>, a parada ganha importância e a guinada perde — não há superioridade geral. Acima de 6 nós, rebocadores são impraticáveis (dificuldade de acoplamento). <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+  <div class="box key">
+    <h4>Ciclagem de leme (rudder cycling)</h4>
+    <p>Quatro voltas parciais alternadas em torno do rumo base, para <strong>parar sem perder o controle de leme</strong> (Esso Bernicia, 1969). A grande redução de velocidade vem do arrasto induzido pelas guinadas sucessivas.</p>
+  </div>
+</section>
+
+<!-- ===== MARCHA A RE ===== -->
+<section class="bloco" id="re">
+  <h2 class="sec"><span class="n">10.9</span> Marcha à ré</h2>
+  <p class="lede">Operadores definem o tempo de marcha à ré principalmente pela manobrabilidade em torno de diques — a velocidade a ré após percorrer um comprimento de navio é um critério.</p>
+  <div class="box formula">
+    <h4>Velocidade a ré a partir do repouso <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">S·X = ½·(D − X<sub>u̇</sub>)·V²<span class="lbl">Eq. (95) — força de aceleração × distância = energia cinética adquirida</span></div>
+    <p class="vars">Iguala o trabalho da força de aceleração (X × distância S) à energia cinética ½(D − X<sub>u̇</sub>)V² na velocidade a ré V. Expressão fundamental para o cálculo da velocidade de marcha à ré.</p>
+  </div>
+</section>
+
+<!-- ===== AUXILIARES ===== -->
+<section class="bloco" id="auxiliares">
+  <h2 class="sec"><span class="n">10.10</span> Dispositivos auxiliares de parada</h2>
+  <p class="lede">A resistência ∝ V² → dispositivos hidrodinâmicos são ineficazes justo onde mais se precisa (baixa velocidade).</p>
+  <table>
+    <tr><th>Dispositivo</th><th>Comportamento</th></tr>
+    <tr><td><strong>Paraquedas / flaps de frenagem</strong> (hidrodinâmicos)</td><td>ineficazes a velocidades moderadas (resistência ∝ V²). Mesmo 20× a resistência do casco ajuda pouco a baixa velocidade</td></tr>
+    <tr><td><strong>Força de retardamento fixa</strong> (foguete)</td><td>até 400 ton têm efeito limitado, especialmente a 6 nós</td></tr>
+    <tr><td><strong>Rebocadores</strong></td><td>força de retardamento constante; impraticáveis acima de ~6 nós (acoplamento)</td></tr>
+  </table>
+  <div class="box key">
+    <h4>A equivalência marcante <span class="tag t-banca">BANCA</span></h4>
+    <p>Para o petroleiro de 190.000 TPB: <span class="hl">6 rebocadores + RPM zero ≈ 0 rebocadores + 55 RPM a ré</span>. O RPM a ré do navio (acima de 40) predomina muito sobre o número de rebocadores. "Power tie-up" = rebocador fixo trabalhando em potência própria, acompanhando a velocidade (≠ rebocador só em cabos). <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As definições e números de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Oito questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Aceleração, Parada e Marcha à Ré (§10)</summary>
+  <ul>
+    <li><b>Head reach:</b> distância na direção original até parar. <b>Side reach:</b> desvio lateral na parada. Distinção cobrada 2006–2012.</li>
+    <li><b>Efeito de pá (paddle wheel):</b> hélice a ré arrasta a popa para um lado (dextrógiro vs levógiro) → trajetória não-reta.</li>
+    <li><b>Aceleração:</b> R_t + T_a(1−t) = (D−X_u̇)u̇. R = kV². Hipóteses: propulsor instantâneo + dedução de empuxo constante.</li>
+    <li><b>Velocidade de porto (~12 nós):</b> critério mais importante de frenagem (Chase). Head reach da velocidade máxima tem pouca relevância.</li>
+    <li><b>Método de Chase:</b> potencial dinâmico D = 2R₁S/[(D−X_u̇)V₁²] → head reach; impulso dinâmico τ = R₁t/[(D−X_u̇)V₁] → tempo. Válido para n=2.</li>
+    <li><b>Termos exclusivos:</b> "potencial/impulso dinâmico" = Chase et al. via PNA (≠ Crenshaw, ≠ Bertram).</li>
+    <li><b>Reversão "80-50":</b> 80% do conjugado a 50% do RPM (turbina a vapor). T₂ = 5,5 Q₂/P. Lei inversa do quadrado do RPM a baixa velocidade.</li>
+    <li><b>T₁ × T₂:</b> T₁ = empuxo de avanço livre inicial; T₂ = empuxo a ré com navio parado. Ambos líquidos.</li>
+    <li><b>Guinada × parada:</b> em alta velocidade, guinar > parar (avanço na guinada ≪ head reach). Abaixo de ~6 nós, sem superioridade. Mono-hélice = trajetória imprevisível.</li>
+    <li><b>Marcha à ré:</b> S·X = ½(D−X_u̇)V². Velocidade após 1 comprimento de navio é critério.</li>
+    <li><b>Auxiliares:</b> hidrodinâmicos (paraquedas/flaps) ineficazes a baixa velocidade. 6 rebocadores + 0 RPM ≈ 0 rebocadores + 55 RPM. Rebocadores impraticáveis acima de 6 nós.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Aceleração, Parada e Marcha à Ré (PNA Vol. III §10) · Capital Sereno · fidelidade verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== Forces in stopping ===== */
+function drawForce(){
+  var cv=document.getElementById('forceCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-32,pW=W-78,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  var V0=+document.getElementById('fV').value;
+  var vMax=16;
+  function px(v){return x0+v/vMax*pW;}
+  var fMax=1.0;function py(f){return y0-f/fMax*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('força',6,24);ctx.fillText('velocidade (nós)',W-110,y0+18);
+  [0,4,8,12,16].forEach(function(v){ctx.fillStyle='#a99';ctx.fillText(v,px(v)-6,y0+16);});
+  // resistance ~ V^2
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2.6;ctx.beginPath();var f=true;
+  for(var v=0;v<=vMax;v+=0.2){var r=(v*v)/(vMax*vMax);var X=px(v),Y=py(r);if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  // astern thrust ~ roughly constant (slightly decreasing with v)
+  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=2.6;ctx.beginPath();f=true;
+  for(var v2=0;v2<=vMax;v2+=0.2){var th=0.55-0.012*v2;var X2=px(v2),Y2=py(th);if(f){ctx.moveTo(X2,Y2);f=false;}else ctx.lineTo(X2,Y2);}ctx.stroke();
+  // total decel = R + thrust
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2;ctx.setLineDash([5,3]);ctx.beginPath();f=true;
+  for(var v3=0;v3<=vMax;v3+=0.2){var tot=(v3*v3)/(vMax*vMax)+0.55-0.012*v3;var X3=px(v3),Y3=py(Math.min(tot,1));if(f){ctx.moveTo(X3,Y3);f=false;}else ctx.lineTo(X3,Y3);}ctx.stroke();ctx.setLineDash([]);
+  // marker
+  ctx.strokeStyle='#16302B';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(px(V0),14);ctx.lineTo(px(V0),y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.font='11px Trebuchet MS';ctx.fillStyle='#9E3B2E';ctx.fillText('— resistência (∝V²)',W-170,30);ctx.fillStyle='#2C5F8A';ctx.fillText('— empuxo a ré',W-170,46);ctx.fillStyle='#1A7A6E';ctx.fillText('-- força total de parada',W-170,62);
+  var rNow=(V0*V0)/(vMax*vMax), thNow=0.55-0.012*V0;
+  document.getElementById('forceRead').innerHTML='V=<b>'+V0+'</b> nós · '+(V0>10?'resistência domina a parada inicial':'empuxo a ré domina (resistência pequena)');
+}
+drawForce();
+
+/* ===== path: stop vs turn ===== */
+var pmode='stop';
+function setMode(m){pmode=m;
+  document.getElementById('bStop').classList.toggle('active',m==='stop');
+  document.getElementById('bTurn').classList.toggle('active',m==='turn');
+  drawPath();}
+function drawPath(){
+  var cv=document.getElementById('pathCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var startX=W*0.18, startY=H-30;
+  // axes hint
+  ctx.strokeStyle='#cdbf99';ctx.setLineDash([6,5]);ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(startX,startY);ctx.lineTo(startX,24);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a99';ctx.font='11px Trebuchet MS';ctx.fillText('rumo original',startX+6,40);
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(startX,startY,5,0,7);ctx.fill();ctx.fillText('início',startX-50,startY+4);
+  if(pmode==='stop'){
+    // long head reach, slight side deviation
+    ctx.strokeStyle='#9E3B2E';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(startX,startY);
+    var hr=H-70; // long
+    for(var t=0;t<=1;t+=0.02){var y=startY-hr*t;var x=startX+18*t*t;ctx.lineTo(x,y);}ctx.stroke();
+    var endY=startY-hr;
+    // head reach bar
+    ctx.strokeStyle='#2C5F8A';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(startX-16,startY);ctx.lineTo(startX-16,endY);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#2C5F8A';ctx.fillText('head reach (longo)',startX-150,(startY+endY)/2);
+    ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(startX+18,endY,5,0,7);ctx.fill();ctx.fillText('parou',startX+24,endY);
+    document.getElementById('pathRead').innerHTML='<b>Parada de emergência:</b> head reach longo, trajetória pode desviar (efeito de pá no mono-hélice). A altas velocidades, evitar colisão assim exige muita distância.';
+  } else {
+    // turn: tight, small advance
+    ctx.strokeStyle='#1A7A6E';ctx.lineWidth=3;
+    var R=110, cxC=startX+R, cyC=startY;
+    ctx.beginPath();ctx.arc(cxC,cyC,R,Math.PI,Math.PI+Math.PI*0.6,false);ctx.stroke();
+    // advance (much smaller)
+    var p90y=cyC-R*Math.sin(Math.PI*0.4)*0+(- R*Math.sin(0));
+    ctx.strokeStyle='#2C5F8A';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(startX-16,startY);ctx.lineTo(startX-16,cyC-R);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#2C5F8A';ctx.fillText('avanço (curto)',startX-130,(startY+cyC-R)/2);
+    document.getElementById('pathRead').innerHTML='<b>Guinada (35° leme):</b> o avanço é muito menor que o head reach da parada, e o controle direcional é mantido. Em alta velocidade, guinar evita o obstáculo com menos distância.';
+  }
+}
+drawPath();
+window.addEventListener('resize',function(){drawForce();drawPath();});
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Head reach",b:"Alcance longitudinal: distância na direção original até parar."},
+  {f:"Side reach",b:"Alcance lateral: desvio lateral durante a parada."},
+  {f:"Efeito de pá",b:"Hélice a ré arrasta a popa para um lado (dextrógiro vs levógiro). Trajetória não-reta."},
+  {f:"Equação de aceleração",b:"R_t + T_a(1−t) = (D−X_u̇)u̇. R = kV² (baixo Froude)."},
+  {f:"Velocidade de porto",b:"~12 nós (Chase). Head reach a partir dela = critério de frenagem mais importante."},
+  {f:"Potencial dinâmico",b:"D = 2R₁S/[(D−X_u̇)V₁²] → dá o head reach. Chase et al. via PNA."},
+  {f:"Impulso dinâmico",b:"τ = R₁t/[(D−X_u̇)V₁] → dá o tempo de parada. Válido para n=2."},
+  {f:"Reversão 80-50",b:"80% do conjugado a 50% do RPM (turbina a vapor). T₂ = 5,5 Q₂/P."},
+  {f:"T₁ × T₂",b:"T₁ = empuxo de avanço livre inicial; T₂ = empuxo a ré com navio parado. Ambos líquidos."},
+  {f:"Guinada × parada",b:"Em alta velocidade, guinar > parar. Abaixo de ~6 nós, sem superioridade."},
+  {f:"Marcha à ré",b:"S·X = ½(D−X_u̇)V². Velocidade após 1 comprimento de navio é critério."},
+  {f:"6 rebocadores ≈ 55 RPM",b:"6 reb + RPM 0 ≈ 0 reb + 55 RPM a ré. RPM predomina. Reboc. impraticáveis >6 nós."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"O alcance longitudinal (head reach) de um navio é:",
+   o:["O desvio lateral durante a parada","A distância percorrida na direção original até o repouso","O raio de giro","A velocidade de porto"],
+   a:1,e:"Head reach = distância na direção ORIGINAL até parar. O side reach é o desvio lateral. A distinção entre os dois é cobrada em todas as bancas 2006–2012."},
+  {q:"Por que a trajetória de parada de um navio mono-hélice raramente é reta?",
+   o:["Por causa do vento","Pelo efeito de pá (paddle wheel): a rotação do propulsor a ré arrasta a popa para um lado","Pela resistência do casco","Pela massa adicional"],
+   a:1,e:"O efeito de pá: o propulsor em marcha à ré arrasta a popa para um bordo (depende de dextrógiro/levógiro), causando desvio. Por isso a parada de mono-hélice tem trajetória imprevisível."},
+  {q:"Para operadores de navios, o critério mais importante de capacidade de frenagem é o head reach a partir da:",
+   o:["Velocidade máxima em alto-mar","Velocidade de porto (~12 nós)","Velocidade de cruzeiro","Velocidade zero"],
+   a:1,e:"A partir da velocidade de porto (~12 nós, Chase et al.). O head reach da velocidade máxima tem pouca relevância, pois a colisão em alta velocidade evita-se melhor por guinada."},
+  {q:"No método de Chase et al., o 'potencial dinâmico' serve para calcular:",
+   o:["O tempo de parada","O alcance longitudinal (head reach)","O raio de giro","A velocidade de porto"],
+   a:1,e:"O potencial dinâmico D = 2R₁S/[(D−X_u̇)V₁²] dá o head reach S. O impulso dinâmico dá o tempo de parada. Ambos são termos exclusivos de Chase et al. via PNA, válidos para n=2."},
+  {q:"A reversão '80-50' das turbinas a vapor de navios mercantes significa:",
+   o:["80 nós a 50% de RPM","80% do conjugado nominal a 50% da rotação nominal a ré","80 toneladas a 50 segundos","80% de empuxo a 50% da velocidade"],
+   a:1,e:"80% do conjugado nominal de avanço a uma rotação a ré de 50% da rotação nominal de avanço. O empuxo a ré com navio parado é T₂ = 5,5 Q₂/P."},
+  {q:"A altas velocidades, para evitar um obstáculo, um navio grande deve preferencialmente:",
+   o:["Parar (crash astern)","Guinar (o avanço é muito menor que o head reach e mantém o controle)","Continuar em frente","Dar marcha à ré devagar"],
+   a:1,e:"Guinar é muito superior à parada a altas velocidades: o avanço na guinada é muito menor que o head reach na parada, e o controle direcional é mantido. Abaixo de ~6 nós não há superioridade geral."},
+  {q:"Os dispositivos hidrodinâmicos de parada (paraquedas, flaps de frenagem) são:",
+   o:["Muito eficazes a baixa velocidade","Relativamente ineficazes a velocidades moderadas (resistência ∝ V²)","Eficazes apenas em submarinos","Mais eficazes que o propulsor a ré"],
+   a:1,e:"Ineficazes a velocidades moderadas, justamente onde as paradas não planejadas são mais prováveis, porque a resistência hidrodinâmica é ∝ V² (pequena a baixa velocidade). Mesmo 20× a resistência do casco ajuda pouco."},
+  {q:"Para um petroleiro de 190.000 TPB, o efeito de 6 rebocadores com RPM zero do navio equivale aproximadamente a:",
+   o:["0 rebocadores e 55 RPM a ré do navio","20 rebocadores","Parar instantaneamente","Nenhum efeito"],
+   a:0,e:"6 rebocadores + RPM zero ≈ 0 rebocadores + 55 RPM a ré. O RPM a ré do navio (acima de 40) predomina muito sobre o número de rebocadores. Acima de 6 nós, rebocadores são impraticáveis."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Outros Componentes de Resistência — PNA Vol. II Cap. V §5 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:690px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  /* ---- interactive charts ---- */
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:240px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde)}
+  .ictrl input[type=range]{flex:1;min-width:150px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  /* wind compass mini */
+  .windwrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .windwrap canvas.compass{flex:0 0 140px;width:140px;height:140px;background:#fff;border:1px solid var(--linha);border-radius:50%}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:155px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15.5px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:26px}.eq{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco A — Resistência</p>
+    <h1>Outros Componentes de <em>Resistência</em></h1>
+    <p class="sub">Tudo que não é atrito de pele nem onda "limpa": arrasto de forma, pressão viscosa, separação, quebra de ondas, ar/vento, apêndices, trim, águas rasas e a resistência induzida da deriva.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. II, Cap. V, Seção 5 (van Manen &amp; van Oossanen) · cruzado com Larsson &amp; Raven Cap. 7.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#forma">Forma &amp; separação</a>
+    <a href="#ld">Arrasto × L/D ▶</a>
+    <a href="#quebra">Quebra de ondas</a>
+    <a href="#vento">Ar &amp; vento ▶</a>
+    <a href="#apend">Apêndices</a>
+    <a href="#trim">Trim</a>
+    <a href="#rasas">Águas rasas ▶</a>
+    <a href="#deriva">Deriva &amp; inclinação</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===== 5.1 FORMA ===== -->
+<section class="bloco" id="forma">
+  <h2 class="sec"><span class="n">5.1</span> Arrasto de forma, pressão viscosa e separação</h2>
+  <p class="lede">A camada-limite é feita de turbilhões (eddies). O "arrasto de forma" reúne tudo o que excede o atrito da placa plana equivalente — e tem <strong>três causas</strong>.</p>
+
+  <p>Quando se plota C<sub>TM</sub> contra log R<sub>n</sub>, a interseção com a curva da placa plana C<sub>FOM</sub> é o coeficiente de resistência <strong>residual</strong> C<sub>RM</sub>. Como a parcela de ondas (∝V⁴) é desprezível em R<sub>n</sub> baixo, essa interseção (BC) <strong>não é onda</strong> — vem do efeito de forma. Submarinos totalmente submersos (sem ondas) comprovam: têm resistência maior que a placa equivalente. <span class="tag t-banca">BANCA</span></p>
+
+  <div class="box key">
+    <h4>As 3 causas do arrasto de forma <span class="tag t-decorar">DECORAR</span></h4>
+    <ol style="margin:6px 0 0;padding-left:22px">
+      <li><strong>Curvatura do casco</strong> — alonga o percurso das linhas de corrente → velocidade média maior → atrito real maior que o da placa.</li>
+      <li><strong>Arrasto por pressão viscosa</strong> — a camada-limite alonga virtualmente a popa e reduz a inclinação das linhas d'água; corta o empuxo dianteiro das pressões de fechamento → aumenta a resistência vs. fluido ideal.</li>
+      <li><strong>Resistência por separação</strong> — se a popa é abrupta demais (bilge muito fechado, seções em U), o escoamento descola no <em>ponto de separação</em> e turbilhões preenchem o vazio.</li>
+    </ol>
+  </div>
+
+  <p>A separação ocorre porque, indo do meio-navio para a popa, as partículas perdem energia cinética pela tensão de cisalhamento <em>e</em> pelo gradiente de pressão <strong>adverso</strong> (crescente). Quando a energia é insuficiente para vencê-lo, o escoamento estagna e inverte — descolando do casco. A espessura da camada-limite é tomada onde a velocidade chega a <span class="hl">0,99 da do fluido não perturbado</span> (Prandtl, 1904).</p>
+</section>
+
+<!-- ===== L/D CHART ===== -->
+<section class="bloco" id="ld">
+  <h2 class="sec"><span class="n">▶</span> Arrasto de forma × razão L/D</h2>
+  <p class="lede">Quanto mais "rechonchudo" o corpo (L/D baixo), maior o arrasto de forma. Mas L/D alto demais aumenta a área molhada (atrito) — há um ótimo. Deslize.</p>
+
+  <div class="ichart">
+    <h4>Young (1939) — corpos de revolução</h4>
+    <p class="hint">Pontos medidos (5/17/30%) + curva de arrasto de forma e curva de resistência total esquemática.</p>
+    <canvas id="ldCanvas" width="860" height="240"></canvas>
+    <div class="ictrl">
+      <label for="ldR">Razão L/D →</label>
+      <input type="range" id="ldR" min="20" max="120" value="50" oninput="drawLD()">
+      <div class="iread" id="ldRead"></div>
+    </div>
+  </div>
+  <p>Young mediu o arrasto de forma em corpos de revolução: <span class="hl">L/D = 10 → 5% · L/D = 5 → 17% · L/D = 3,33 → 30%</span>. Como L/D alto aumenta a área (atrito), o <strong>ótimo de resistência total</strong> para corpos submersos fica tipicamente entre <span class="hl-amb">5 e 7</span>. Em navios de superfície, C<sub>RM</sub> vai de 5–15% de C<sub>FOM</sub> (navios de guerra) a 40%+ em cargueiros cheios. <span class="tag t-decorar">DECORAR</span></p>
+</section>
+
+<!-- ===== QUEBRA ===== -->
+<section class="bloco" id="quebra">
+  <h2 class="sec"><span class="n">5.1</span> Resistência por quebra de ondas</h2>
+  <p class="lede">Em formas cheias (grande bojo), o escoamento à frente da proa fica irregular e a onda quebra — perdendo momento.</p>
+
+  <p>Em F<sub>n</sub> &lt; 0,10 quase não há ondas; a superfície sobe ~V²/2g (Bernoulli). Baba (1969) batizou o fenômeno e propôs um modelo de <strong>ressalto hidráulico</strong> para a perda de momento. Kayo et al. (1981): a quebra de proa é, na essência, <strong>separação na superfície livre</strong>.</p>
+
+  <div class="box formula">
+    <h4>Critério de instabilidade de Taylor (1950)</h4>
+    <div class="eq">R ≥ V² / 50<span class="lbl">R em metros, V em m/s — raio de curvatura mínimo das linhas de corrente para evitar a quebra</span></div>
+    <p class="vars">A superfície livre fica instável e quebra quando a aceleração centrípeta <b>V²/R</b> excede um valor crítico. Evita-se a quebra de proa também exigindo que a tangente à curva de áreas na perpendicular dianteira não seja muito íngreme.</p>
+  </div>
+</section>
+
+<!-- ===== VENTO ===== -->
+<section class="bloco" id="vento">
+  <h2 class="sec"><span class="n">5.2</span> Resistência ao ar e ao vento</h2>
+  <p class="lede">A resistência das superestruturas é quase toda por vórtices → varia com <strong>V²</strong> e independe de R<sub>n</sub>. O ponto-chave da banca: o máximo ao avanço NÃO é com vento de través.</p>
+
+  <div class="box formula">
+    <h4>Fórmula básica e a regra de Taylor</h4>
+    <div class="eq">R<sub>AA</sub> = C × ½ρ·A<sub>T</sub>·V²<span class="lbl">Eq. (24) — A_T = área transversal projetada da obra morta</span></div>
+    <div class="eq">R<sub>AA</sub> = K·ρ·A<sub>T</sub>·V<sub>R</sub>²·cos α<span class="lbl">Eqs. (27–28): K ≈ 0,6 (vento de proa); V_R = vento relativo/aparente</span></div>
+    <p class="vars">Taylor (1943): obra morta ≈ placa plana de largura B (boca) e altura B/2, C<sub>D</sub> = 1,28. Vento aparente <b>V<sub>R</sub></b> = soma vetorial do vento real com a velocidade do navio.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Por que o pico fica a ~30° da proa <span class="tag t-banca">BANCA</span></h4>
+    <p class="hint">F cresce muito ao abrir do vento de proa (mais área exposta), mas cos α cai. O produto <strong>F·cos α</strong> (resistência ao avanço) pica perto de 30°.</p>
+    <div class="windwrap">
+      <canvas class="compass" id="windCompass" width="280" height="280"></canvas>
+      <div style="flex:1;min-width:240px">
+        <canvas id="windCanvas" width="520" height="210"></canvas>
+        <div class="ictrl" style="margin-top:10px">
+          <label for="windA">Ângulo do vento relativo (proa=0°) →</label>
+          <input type="range" id="windA" min="0" max="180" value="30" oninput="drawWind()">
+          <div class="iread" id="windRead"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box trap">
+    <h4>Pegadinha — través × 30° da proa</h4>
+    <p>A força <strong>resultante</strong> F é máxima com vento de <strong>través</strong> (maior área exposta) — mas ela atua a ~90° do movimento, então quase não freia o avanço. A <strong>resistência ao avanço</strong> (F·cos α) é máxima com o vento a <span class="hl-amb">~30° da proa</span>. Confundir os dois é o erro clássico. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+
+  <div class="box key">
+    <h4>Mais pontos cobrados</h4>
+    <p>• Coeficiente de rumo C<sub>γ</sub> (Wilson, 1970) é máximo perto de <strong>30° e 150°</strong>, com região plana em ~80°. C<sub>AA0</sub> ≈ 0,45 (porta-aviões), 0,70 (outros combatentes), 0,75 (auxiliares).<br>
+    • Efeito relativo do vento é <strong>muito maior no navio lento</strong>: em vento de proa de 40 nós, o petroleiro perde ~32,7% da velocidade; o transatlântico, só ~6,9%. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== APENDICES ===== -->
+<section class="bloco" id="apend">
+  <h2 class="sec"><span class="n">5.4</span> Resistência dos apêndices</h2>
+  <p class="lede">Quilhas de rolo, leme, eixos, escoras e coxins somam arrasto. O efeito de escala é grave porque os apêndices do modelo têm R<sub>n</sub> baixíssimo.</p>
+  <table>
+    <tr><th>Apêndice</th><th>Acréscimo típico</th></tr>
+    <tr><td>Quilhas de rolo (bem alinhadas)</td><td>1 a 3% da resistência do casco</td></tr>
+    <tr><td>Coxins (superfície molhada extra)</td><td>5 a 9% da resistência friccional</td></tr>
+    <tr><td>Eixos abertos + escoras (bem projetados)</td><td>6 a 9% da friccional; até 16–18% do modelo nu em casos extremos</td></tr>
+  </table>
+  <div class="box trap">
+    <h4>Armadilha de escala</h4>
+    <p>O ITTC-78 <strong>não</strong> faz escalonamento separado de R<sub>n</sub> para apêndices. As fórmulas (Kirkman et al., 1980) chegam a <span class="hl-amb">superestimar</span> o arrasto de apêndices em 30–40% — mas Von Kerczek mostrou que ficam aceitáveis se usadas as <strong>velocidades da camada-limite</strong> corretas no cálculo de R<sub>n</sub> e do termo ½ρV². <span class="tag t-verificar">VERIFICAR gabarito impresso</span></p>
+  </div>
+</section>
+
+<!-- ===== TRIM ===== -->
+<section class="bloco" id="trim">
+  <h2 class="sec"><span class="n">5.5</span> Efeitos de trim</h2>
+  <p class="lede">Taylor (1943): grandes variações de trim/afundamento são <strong>sintomas</strong>, não causas, de alta resistência.</p>
+  <p>Em baixa velocidade: afundamento geral + leve trim de proa. Em <span class="hl">F<sub>n</sub> ≈ 0,30</span> a proa começa a subir, a popa afunda e o navio trima decididamente à popa.</p>
+  <table>
+    <tr><th>Condição</th><th>Baixa velocidade</th><th>Alta velocidade</th></tr>
+    <tr><td>Trim extra pela popa (em repouso)</td><td><strong>aumenta</strong> R (popa mais cheia → forma/separação)</td><td><strong>diminui</strong> R (entrada mais fina → menos ondas)</td></tr>
+  </table>
+  <p>Em lastro, a maior superfície molhada por deslocamento aumenta o atrito, mas a forma mais fina reduz a residual; pelo menor deslocamento, a potência total cai e o navio em lastro faz mais velocidade na mesma potência. Em planeio, a posição do CG e o trim são <strong>decisivos</strong>.</p>
+</section>
+
+<!-- ===== RASAS ===== -->
+<section class="bloco" id="rasas">
+  <h2 class="sec"><span class="n">5.6</span> Efeitos de águas rasas</h2>
+  <p class="lede">A água passa por baixo do casco com menos espaço → acelera mais → mais queda de pressão, mais afundamento, trim e resistência. E o padrão de ondas muda radicalmente na velocidade crítica.</p>
+
+  <div class="ichart">
+    <h4>O ângulo de Kelvin abrindo até 90° na velocidade crítica</h4>
+    <p class="hint">Em água rasa, conforme V → √(gh), o cone de 19°28' abre até a onda virar uma única crista transversal (onda de translação). Deslize o Froude de profundidade.</p>
+    <canvas id="shallowCanvas" width="860" height="250"></canvas>
+    <div class="ictrl">
+      <label for="shF">F<sub>h</sub> = V/√(gh) →</label>
+      <input type="range" id="shF" min="20" max="160" value="50" oninput="drawShallow()">
+      <div class="iread" id="shRead"></div>
+    </div>
+  </div>
+
+  <div class="box formula">
+    <h4>Os números de águas rasas <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">Velocidade crítica: V<sub>c</sub> = √(g·h) &nbsp;⇒&nbsp; F<sub>h</sub> = V/√(gh) = 1<span class="lbl">Eq. (46) — a onda de translação concentra toda a energia numa crista transversal</span></div>
+    <p class="vars">
+      • <b>Abaixo de 0,4√(gh):</b> padrão como em água profunda (cone 19°28').<br>
+      • <b>Em V = √(gh):</b> ângulo → 90°, crista única perpendicular (onda de translação), pico de resistência.<br>
+      • <b>Acima de √(gh):</b> só ondas divergentes; cone fecha por sin²α = gh/V².<br>
+      • Início dos efeitos: <b>V<sub>K</sub> = 4,17√h</b> · Crítica: <b>V<sub>K</sub> = 6,09√h</b> (h em m, V em nós).
+    </p>
+  </div>
+
+  <div class="box formula">
+    <h4>Métodos práticos: Schlichting e Landweber</h4>
+    <p class="vars"><b>Schlichting:</b> assume R de ondas igual em água profunda/rasa e corrige a parte potencial via Vh/V∞ vs. √(A<sub>x</sub>)/h.<br>
+    <b>Landweber:</b> estende para canais com restrição lateral usando o raio hidráulico R<sub>H</sub> = área da seção / perímetro molhado. Canal retangular: R<sub>H</sub> = bh/(b+2h); se b→∞, R<sub>H</sub> = h (rasa irrestrita).</p>
+  </div>
+</section>
+
+<!-- ===== DERIVA ===== -->
+<section class="bloco" id="deriva">
+  <h2 class="sec"><span class="n">5.7</span> Resistência por deriva e inclinação (veleiros)</h2>
+  <p class="lede">Para casco simétrico, a única forma de gerar força lateral hidrodinâmica é adotar um ângulo de ataque (deriva). Isso cria <strong>resistência induzida</strong>.</p>
+  <p>Ângulos de deriva típicos: <span class="hl">3 a 6°</span>; inclinação até 30° é normal à orça. Para deriva &lt; ~5°, o acréscimo de resistência é quase todo <strong>induzido</strong> (associado à sustentação no casco/quilha/leme).</p>
+  <div class="box formula">
+    <h4>Resistência induzida</h4>
+    <div class="eq">R<sub>I</sub> = F·sin α<sub>i</sub> = L·tan α<sub>i</sub><span class="lbl">Fig. 55 — força a ~90° do escoamento defletido</span></div>
+    <div class="eq">C<sub>RI</sub> = C<sub>L</sub>² / (π·AR)<span class="lbl">Eq. (55) — válida para distribuição elíptica de sustentação</span></div>
+    <div class="eq">R<sub>I</sub> = ½ρV² · [C<sub>L</sub>²/(π·AR)] · A<span class="lbl">Eq. (56) — A = área lateral do casco/quilha; AR = razão de aspecto</span></div>
+    <p class="vars">A resistência induzida total ≈ soma das parcelas de casco + quilha + leme. Quanto maior a razão de aspecto AR da quilha, <strong>menor</strong> a resistência induzida.</p>
+  </div>
+  <div class="box trap">
+    <h4>A relação que cai</h4>
+    <p>C<sub>RI</sub> ∝ <strong>C<sub>L</sub>²</strong> (cresce com o <em>quadrado</em> da sustentação) e ∝ <strong>1/AR</strong> (cai com a razão de aspecto). Trocar por C<sub>L</sub> linear ou inverter o AR é distrator. <span class="tag t-calc">CALCULO</span></p>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Sete questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os números e conceitos de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Outros Componentes (§5)</summary>
+  <ul>
+    <li><b>3 causas do arrasto de forma:</b> curvatura do casco · arrasto por pressão viscosa · separação (ponto de separação por gradiente adverso).</li>
+    <li><b>Camada-limite:</b> espessura tomada onde V = 0,99 da do fluido livre (Prandtl, 1904).</li>
+    <li><b>Arrasto de forma × L/D (Young):</b> 10→5% · 5→17% · 3,33→30%. Ótimo de resistência total: L/D ≈ 5–7.</li>
+    <li><b>C<sub>RM</sub>:</b> 5–15% de C<sub>FOM</sub> (guerra) a 40%+ (cargueiros cheios).</li>
+    <li><b>Quebra de ondas — Taylor:</b> R ≥ V²/50 (m, m/s). Baba = ressalto hidráulico; quebra de proa = separação na superfície livre.</li>
+    <li><b>Ar/vento:</b> R<sub>AA</sub> ∝ V², independe de R<sub>n</sub>. Máx ao avanço (F·cos α) a ~30° da proa, NÃO de través. K ≈ 0,6 (proa); Taylor C<sub>D</sub>=1,28, placa B×B/2.</li>
+    <li><b>Cγ (Wilson):</b> máximo perto de 30° e 150°, platô ~80°.</li>
+    <li><b>Apêndices:</b> quilhas 1–3% · coxins 5–9% da friccional · eixos+escoras 6–9% (até 16–18% extremos). ITTC-78 não escala R<sub>n</sub> deles; fórmulas superestimam 30–40%.</li>
+    <li><b>Trim:</b> em F<sub>n</sub>≈0,30 a proa sobe e o navio trima à popa. Trim à popa: ↑R em baixa, ↓R em alta velocidade.</li>
+    <li><b>Águas rasas:</b> crítica V=√(gh) (F<sub>h</sub>=1); cone Kelvin abre de 19°28' a 90° (onda de translação). V<sub>K</sub>=4,17√h (início) · 6,09√h (crítica). Métodos Schlichting/Landweber (R<sub>H</sub>=bh/(b+2h)).</li>
+    <li><b>Deriva (veleiros):</b> resistência induzida C<sub>RI</sub> = C<sub>L</sub>²/(π·AR). Deriva 3–6°, inclinação até 30°.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Outros Componentes de Resistência (PNA Vol. II Cap. V §5) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ============ Chart 1: arrasto de forma × L/D ============ */
+function formDrag(ld){ // approx fit to Young: 30% @3.33, 17%@5, 5%@10
+  return 330/Math.pow(ld,1.55);
+}
+function frictRise(ld){ // friction grows with surface area ~ L/D
+  return 1.0 + 0.9*(ld-3)/9;
+}
+function drawLD(){
+  var cv=document.getElementById('ldCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-32,pW=W-80,pH=H-54;
+  ctx.clearRect(0,0,W,H);
+  var ldMin=3,ldMax=12;
+  function px(v){return x0+(v-ldMin)/(ldMax-ldMin)*pW;}
+  var maxY=32;
+  function py(v){return y0-(v/maxY)*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-20,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('% / total',6,24);ctx.fillText('L/D',W-34,y0+20);
+  // x ticks
+  [3,4,5,6,7,8,10,12].forEach(function(t){ctx.fillStyle='#a99';ctx.fillText(t,px(t)-5,y0+16);});
+  // form drag curve (vermelho)
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2.4;ctx.beginPath();
+  for(var ld=ldMin;ld<=ldMax;ld+=0.1){var X=px(ld),Y=py(formDrag(ld));if(ld===ldMin)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}
+  ctx.stroke();
+  // total resistance (esquemática, U-shape) — verde
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.4;ctx.beginPath();
+  for(var ld2=ldMin;ld2<=ldMax;ld2+=0.1){var tot=formDrag(ld2)*0.5+frictRise(ld2)*3.2+4;var X2=px(ld2),Y2=py(tot);if(ld2===ldMin)ctx.moveTo(X2,Y2);else ctx.lineTo(X2,Y2);}
+  ctx.stroke();
+  // Young data points
+  [[10,5],[5,17],[3.33,30]].forEach(function(p){ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(px(p[0]),py(p[1]),4.5,0,7);ctx.fill();});
+  // optimum band 5-7
+  ctx.fillStyle='rgba(200,168,75,.18)';ctx.fillRect(px(5),14,px(7)-px(5),pH);
+  ctx.fillStyle='#9a7e2e';ctx.font='11px Trebuchet MS';ctx.fillText('ótimo 5–7',px(5)+2,26);
+  // legend
+  ctx.font='11px Trebuchet MS';ctx.fillStyle='#9E3B2E';ctx.fillText('— arrasto de forma',W-180,30);
+  ctx.fillStyle='#1A7A6E';ctx.fillText('— resistência total (esq.)',W-180,46);
+  // marker
+  var ld3=(+document.getElementById('ldR').value)/10;
+  var mx=px(ld3),my=py(formDrag(ld3));
+  ctx.fillStyle='#16302B';ctx.beginPath();ctx.arc(mx,my,5,0,7);ctx.fill();
+  ctx.strokeStyle='#16302B';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(mx,my);ctx.lineTo(mx,y0);ctx.stroke();ctx.setLineDash([]);
+  document.getElementById('ldRead').innerHTML='L/D = <b>'+ld3.toFixed(1)+'</b> · arrasto de forma ≈ <b>'+formDrag(ld3).toFixed(0)+'%</b>'+(ld3>=5&&ld3<=7?' · faixa ótima':'');
+}
+drawLD();
+
+/* ============ Chart 2: vento F·cosα ============ */
+function windF(theta){ // F/(VR^2 AT) ~ grows as exposed area opens; peak near beam
+  var t=theta*Math.PI/180;
+  return 0.25 + 0.9*Math.pow(Math.sin(t),1.2); // resultant force coefficient
+}
+function drawWind(){
+  var cv=document.getElementById('windCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=40,y0=H-26,pW=W-58,pH=H-46;
+  ctx.clearRect(0,0,W,H);
+  function px(a){return x0+a/180*pW;}
+  var maxY=1.2;function py(v){return y0-(v/maxY)*pH;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,10);ctx.lineTo(x0,y0);ctx.lineTo(W-12,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='11px Trebuchet MS';
+  [0,30,60,90,120,150,180].forEach(function(a){ctx.fillStyle='#a99';ctx.fillText(a+'°',px(a)-8,y0+16);});
+  // F resultant (azul)
+  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=2;ctx.beginPath();
+  for(var a=0;a<=180;a+=2){var X=px(a),Y=py(windF(a));if(a===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}ctx.stroke();
+  // F cos α (resistência ao avanço) — vermelho
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2.6;ctx.beginPath();
+  for(var a2=0;a2<=180;a2+=2){var fc=windF(a2)*Math.cos(a2*Math.PI/180);var X2=px(a2),Y2=py(Math.abs(fc));if(a2===0)ctx.moveTo(X2,Y2);else ctx.lineTo(X2,Y2);}ctx.stroke();
+  // mark 30 and 90
+  ctx.strokeStyle='#eee0c0';[30,90].forEach(function(a){ctx.beginPath();ctx.moveTo(px(a),10);ctx.lineTo(px(a),y0);ctx.stroke();});
+  ctx.font='11px Trebuchet MS';ctx.fillStyle='#2C5F8A';ctx.fillText('F resultante',W-150,24);
+  ctx.fillStyle='#9E3B2E';ctx.fillText('F·cos α (avanço)',W-150,40);
+  // marker
+  var th=(+document.getElementById('windA').value);
+  var mx=px(th),my=py(Math.abs(windF(th)*Math.cos(th*Math.PI/180)));
+  ctx.fillStyle='#16302B';ctx.beginPath();ctx.arc(mx,my,5,0,7);ctx.fill();
+  // compass
+  drawCompass(th);
+  var label = (Math.abs(th-30)<8)?'≈ PICO da resistência ao avanço':(th<10?'vento de proa':(Math.abs(th-90)<10?'través: F máx, mas freia pouco':(th>170?'vento de popa':'')));
+  document.getElementById('windRead').innerHTML='θ = <b>'+th+'°</b> · '+label;
+}
+function drawCompass(th){
+  var cv=document.getElementById('windCompass'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,cx=W/2,cy=H/2,R=110;
+  ctx.clearRect(0,0,W,H);
+  // ship (proa para cima)
+  ctx.fillStyle='#0D3D36';ctx.beginPath();
+  ctx.moveTo(cx,cy-58);ctx.quadraticCurveTo(cx+20,cy,cx+14,cy+52);ctx.lineTo(cx-14,cy+52);ctx.quadraticCurveTo(cx-20,cy,cx,cy-58);ctx.fill();
+  ctx.fillStyle='#cfe3df';ctx.font='10px Trebuchet MS';ctx.fillText('proa',cx-12,cy-44);
+  // wind arrow from angle th (0 = from bow)
+  var ang=(-90+th)*Math.PI/180; // 0°->from top
+  var wx=cx+Math.cos(ang)*R, wy=cy+Math.sin(ang)*R;
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(wx,wy);ctx.lineTo(cx,cy);ctx.stroke();
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(wx,wy,5,0,7);ctx.fill();
+  ctx.font='10px Trebuchet MS';ctx.fillText('vento',wx-14,wy-8);
+}
+drawWind();
+
+/* ============ Chart 3: shallow water Kelvin angle ============ */
+function kelvinAngle(fh){ // fh = V/sqrt(gh)
+  if(fh<0.4) return 19.47;
+  if(fh<1.0) return 19.47 + (90-19.47)*Math.pow((fh-0.4)/0.6,1.4);
+  // above critical: sin^2 a = 1/fh^2  => a = asin(1/fh)
+  return Math.asin(Math.min(1,1/fh))*180/Math.PI;
+}
+function drawShallow(){
+  var cv=document.getElementById('shallowCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  // sea bg
+  ctx.fillStyle='#dcebe6';ctx.fillRect(0,0,W,H);
+  var ox=70,oy=H/2;
+  var fh=(+document.getElementById('shF').value)/100;
+  var ang=kelvinAngle(fh)*Math.PI/180;
+  // cone lines
+  ctx.strokeStyle='#C8A84B';ctx.lineWidth=1.8;ctx.setLineDash([6,5]);
+  ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+ (W-100)*Math.cos(ang), oy-(W-100)*Math.sin(ang));ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+ (W-100)*Math.cos(ang), oy+(W-100)*Math.sin(ang));ctx.stroke();
+  ctx.setLineDash([]);
+  // crest arcs (transverse) shrink as critical approached
+  var nWaves = fh<1.0?6:0;
+  for(var i=1;i<=nWaves;i++){
+    var x=ox+60+i*90*(1-0.3*Math.min(fh,1));
+    var r=14+i*8;
+    ctx.strokeStyle='rgba(20,60,80,'+(0.6-i*0.07)+')';ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(x,oy,r,Math.PI*0.5,Math.PI*1.5);ctx.stroke();
+  }
+  // at/above critical: single transverse crest
+  if(fh>=0.92 && fh<=1.10){
+    ctx.strokeStyle='#9E3B2E';ctx.lineWidth=4;
+    ctx.beginPath();ctx.moveTo(ox+150,oy-90);ctx.lineTo(ox+150,oy+90);ctx.stroke();
+    ctx.fillStyle='#9E3B2E';ctx.font='12px Trebuchet MS';ctx.fillText('onda de translação',ox+158,oy-70);
+  }
+  // ship
+  ctx.fillStyle='#0D3D36';ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox-26,oy-8);ctx.lineTo(ox-26,oy+8);ctx.fill();
+  // label angle
+  ctx.fillStyle='#7a5e18';ctx.font='bold 13px Trebuchet MS';
+  var deg=kelvinAngle(fh);
+  ctx.fillText('α ≈ '+deg.toFixed(0)+'°', ox+ (W-130)*Math.cos(ang)-30, oy-(W-130)*Math.sin(ang)-6);
+  var st = fh<0.4?'como água profunda (19°28\')':(fh<0.92?'cone abrindo →':(fh<=1.10?'CRÍTICA V=√(gh): crista única':'supercrítica: só divergentes, cone fecha'));
+  document.getElementById('shRead').innerHTML='F<sub>h</sub> = <b>'+fh.toFixed(2)+'</b> · '+st;
+}
+drawShallow();
+window.addEventListener('resize',function(){drawLD();drawWind();drawShallow();});
+
+/* ============ Quiz ============ */
+var QUIZ=[
+  {q:"Quais são as três causas principais do arrasto de forma?",
+   o:["Atrito de pele, ondas e ar","Curvatura do casco, arrasto por pressão viscosa e separação","Apêndices, trim e águas rasas","Rugosidade, incrustação e corrosão"],
+   a:1,e:"Curvatura do casco (atrito real > placa), arrasto por pressão viscosa (camada-limite corta o empuxo dianteiro) e separação (descolamento por gradiente adverso)."},
+  {q:"Nos dados de Young (1939), o arrasto de forma para razão L/D = 5 é de cerca de:",
+   o:["5%","17%","30%","50%"],
+   a:1,e:"L/D=10→5%, L/D=5→17%, L/D=3,33→30%. O ótimo de resistência total para corpos submersos fica entre L/D 5 e 7."},
+  {q:"A resistência ao avanço por vento (F·cos α) é máxima quando o vento relativo está:",
+   o:["De través (90°)","A cerca de 30° da proa","Exatamente de proa (0°)","De popa (180°)"],
+   a:1,e:"A FORÇA resultante é máxima de través, mas atua a ~90° do movimento. A resistência ao AVANÇO (F·cos α) pica a ~30° da proa, pois a área exposta cresce rápido enquanto cos α ainda é alto."},
+  {q:"O critério de instabilidade de Taylor para evitar quebra de ondas na popa é:",
+   o:["R ≥ V²/50 (R em m, V em m/s)","R ≥ V²/2g","R ≥ 50V²","Fn < 0,10"],
+   a:0,e:"R ≥ V²/50. A superfície quebra quando a aceleração centrípeta V²/R excede um valor crítico; daí o raio mínimo de curvatura das linhas de corrente."},
+  {q:"Em água rasa, a velocidade crítica em que o cone de Kelvin abre até 90° é:",
+   o:["V = √(g·L)","V = √(g·h) (Fh = 1)","V = 0,4√(gh)","V = 6,09√L"],
+   a:1,e:"V = √(gh), ou Fh = 1. Toda a energia se concentra numa única crista transversal — a onda de translação — e a resistência pica. VK = 6,09√h em nós."},
+  {q:"A resistência induzida de um veleiro (deriva pequena) varia como:",
+   o:["CL / AR (linear na sustentação)","CL² / (π·AR) (quadrática na sustentação, inversa no AR)","CL² · AR","independe de CL"],
+   a:1,e:"CRI = CL²/(π·AR): cresce com o QUADRADO da sustentação e cai com a razão de aspecto. Quilhas de alto AR geram a força lateral com menos resistência induzida."},
+  {q:"Sobre a resistência ao ar das superestruturas:",
+   o:["Varia com Rn e deve ser escalada cuidadosamente","É quase toda por vórtices, varia com V² e independe de Rn","Varia com V⁶ como as ondas","É desprezível em qualquer navio"],
+   a:1,e:"É majoritariamente por formação de vórtices → ∝ V² e praticamente independente de Rn. O efeito relativo é muito maior em navios lentos (ex.: petroleiro perde ~32,7% da velocidade em vento de proa de 40 nós)."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+
+/* ============ Flashcards ============ */
+var FC=[
+  {f:"3 causas do arrasto de forma",b:"Curvatura do casco · arrasto por pressão viscosa · separação."},
+  {f:"Ponto de separação",b:"Onde o gradiente de pressão adverso para/inverte o escoamento e ele descola do casco."},
+  {f:"Espessura da camada-limite",b:"Tomada onde V = 0,99 da velocidade do fluido não perturbado (Prandtl, 1904)."},
+  {f:"Arrasto de forma × L/D (Young)",b:"10→5% · 5→17% · 3,33→30%. Ótimo total: L/D ≈ 5–7."},
+  {f:"Critério de Taylor (quebra)",b:"R ≥ V²/50 (m, m/s). Baba: ressalto hidráulico. Quebra de proa = separação na superfície livre."},
+  {f:"Vento — pico ao avanço",b:"F·cos α máx a ~30° da proa (NÃO de través). R_AA ∝ V², independe de Rn."},
+  {f:"Coef. de vento (Taylor)",b:"Placa B × B/2, CD=1,28 → R_AA=0,783·½B²·VR². K≈0,6 (proa)."},
+  {f:"Cγ (Wilson)",b:"Coeficiente de rumo máximo perto de 30° e 150°; platô em ~80°."},
+  {f:"Apêndices",b:"Quilhas 1–3% · coxins 5–9% friccional · eixos+escoras 6–9% (até 16–18%). ITTC-78 não escala Rn deles."},
+  {f:"Trim em Fn≈0,30",b:"Proa sobe, popa afunda, navio trima à popa. Trim à popa: ↑R baixa vel., ↓R alta vel."},
+  {f:"Águas rasas — crítica",b:"V=√(gh), Fh=1: onda de translação, cone Kelvin 19°28'→90°. VK=6,09√h (crítica), 4,17√h (início)."},
+  {f:"Landweber — canal",b:"R_H = bh/(b+2h). Se b→∞, R_H=h (rasa irrestrita). Schlichting corrige a parte potencial."},
+  {f:"Resistência induzida",b:"C_RI = C_L²/(π·AR). Deriva 3–6°, inclinação até 30° em veleiros à orça."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+</script>
+</body>
+</html>

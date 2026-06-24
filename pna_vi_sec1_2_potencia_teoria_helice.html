@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Potência e Teoria do Hélice — PNA Vol. II Cap. VI §1-2 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:690px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:250px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde)}
+  .ictrl input[type=range]{flex:1;min-width:150px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:155px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15.5px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:26px}.eq{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco B — Propulsão</p>
+    <h1>Potência e Teoria do <em>Hélice</em></h1>
+    <p class="sub">As definições de potência (PI, PB, PS, PD, PE), o coeficiente quase-propulsivo e as três teorias clássicas: momento linear (disco atuador), elemento de pá e circulação.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. II, Cap. VI, Seções 1 e 2 (van Manen &amp; van Oossanen).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#potencia">Definições de potência</a>
+    <a href="#eficiencia">Eficiência propulsiva</a>
+    <a href="#momentum">Momento linear</a>
+    <a href="#etai">η_I × C_T ▶</a>
+    <a href="#angular">Com rotação (a')</a>
+    <a href="#palas">Elemento de pá</a>
+    <a href="#cl">C_L × α ▶</a>
+    <a href="#circulacao">Circulação</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===== 1.3 POTENCIA ===== -->
+<section class="bloco" id="potencia">
+  <h2 class="sec"><span class="n">1.3</span> Definições de potência</h2>
+  <p class="lede">A "potência" muda de nome conforme onde é medida — dos cilindros até a esteira. A banca cobra a cadeia inteira e onde cada perda acontece.</p>
+
+  <table>
+    <tr><th>Símbolo</th><th>Nome</th><th>Onde se mede</th></tr>
+    <tr><td><strong>PI</strong></td><td>Potência indicada</td><td>nos cilindros (cartão indicador): PI = p<sub>M</sub>·L·A·n</td></tr>
+    <tr><td><strong>PB</strong></td><td>Potência no freio</td><td>no virabrequim (freio): PB = 2πQn</td></tr>
+    <tr><td><strong>PS</strong></td><td>Potência no eixo</td><td>no eixo (torsímetro), perto do hélice</td></tr>
+    <tr><td><strong>PD</strong></td><td>Potência entregue</td><td>ao hélice, depois das perdas de mancal/tubo de popa</td></tr>
+    <tr><td><strong>PT</strong></td><td>Potência de empuxo</td><td>PT = T·V<sub>A</sub></td></tr>
+    <tr><td><strong>PE</strong></td><td>Potência efetiva</td><td>PE = R·V (vence a resistência)</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>Potência no eixo pelo torsímetro</h4>
+    <div class="eq">P<sub>S</sub> = π·(d<sub>s</sub>)⁴·G·θ·n / (32·L<sub>S</sub>)<span class="lbl">eixo sólido circular — θ é o ângulo de torção medido</span></div>
+    <p class="vars"><b>d<sub>s</sub></b> diâmetro do eixo (m) · <b>G</b> módulo de cisalhamento · <b>θ</b> ângulo de torção · <b>L<sub>S</sub></b> comprimento medido · <b>n</b> rps. Consumo típico: vapor tripla expansão ~0,70 kg/kWh · turbina ~0,30 · diesel ~0,20.</p>
+  </div>
+</section>
+
+<!-- ===== 1.4 EFICIENCIA ===== -->
+<section class="bloco" id="eficiencia">
+  <h2 class="sec"><span class="n">1.4</span> Eficiência propulsiva e coeficiente quase-propulsivo</h2>
+  <p class="lede">A medida que importa é PE / PD — a útil sobre a entregue ao hélice. Esse é o coeficiente quase-propulsivo η_D.</p>
+
+  <div class="box formula">
+    <h4>As razões-chave</h4>
+    <div class="eq">η<sub>D</sub> = P<sub>E</sub> / P<sub>D</sub><span class="lbl">coeficiente quase-propulsivo (quasi-propulsive coefficient)</span></div>
+    <div class="eq">η<sub>P</sub> = η<sub>D</sub> × η<sub>S</sub> &nbsp;=&nbsp; (P<sub>E</sub>/P<sub>D</sub>) × (P<sub>D</sub>/P<sub>S</sub>)<span class="lbl">eficiência propulsiva = quase-propulsivo × eficiência de transmissão do eixo</span></div>
+    <p class="vars"><b>η<sub>S</sub></b> = P<sub>D</sub>/P<sub>S</sub> é a eficiência de transmissão. Perda no eixo ≈ <strong>2%</strong> (máquinas à ré) ou <strong>3%</strong> (máquinas a meio-navio). <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+  <div class="box trap">
+    <h4>Pegadinha da cadeia de potência</h4>
+    <p>A ordem de grandeza decresce: <span class="hl-amb">PI &gt; PB &gt; PS &gt; PD &gt; PT</span>, e PE é a útil final. O quase-propulsivo usa <strong>PD</strong> no denominador (entregue ao hélice), não PS nem PB. Trocar o denominador é erro clássico. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== 2.1-2.3 MOMENTUM ===== -->
+<section class="bloco" id="momentum">
+  <h2 class="sec"><span class="n">2.1–2.3</span> Teoria do momento linear (disco atuador)</h2>
+  <p class="lede">O hélice gera empuxo acelerando o fluido (3ª lei de Newton). O modelo ideal é um "disco atuador" que dá um salto de pressão — sem dizer como.</p>
+
+  <p>Hipóteses: <strong>(a)</strong> aceleração uniforme sobre todo o disco (empuxo uniforme); <strong>(b)</strong> escoamento sem atrito; <strong>(c)</strong> afluxo ilimitado de água. A coluna de esteira se contrai, então parte da aceleração ocorre <em>antes</em> do disco.</p>
+
+  <div class="box formula">
+    <h4>Velocidades e empuxo</h4>
+    <p class="vars">À frente (seção 1): V<sub>A</sub>. No disco (seção 2): <b>V<sub>A</sub>(1+a)</b>, com <b>a</b> = fator de afluxo axial. Bem atrás (seção 3): <b>V<sub>A</sub>(1+b)</b>.</p>
+    <div class="eq">T = ρ·A₀·V<sub>A</sub>²·(1+a)·b<span class="lbl">empuxo = variação de momento por unidade de tempo</span></div>
+    <div class="eq">η<sub>I</sub> = T·V<sub>A</sub> / [T·V<sub>A</sub>(1+a)] = <strong>1/(1+a)</strong><span class="lbl">eficiência ideal do disco atuador</span></div>
+  </div>
+
+  <div class="box key">
+    <h4>A relação que define tudo: b = 2a <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Metade do aumento de velocidade ocorre antes do disco, metade depois: o deslizamento <strong>b = 2a</strong>. Definindo o deslizamento <strong>s = b = 2a</strong>:</p>
+    <div class="eq">η<sub>I</sub> = 1/(1 + s/2) = 2/(2 + s)</div>
+  </div>
+</section>
+
+<!-- ===== ETA_I CHART ===== -->
+<section class="bloco" id="etai">
+  <h2 class="sec"><span class="n">▶</span> Eficiência ideal × carregamento (C_T)</h2>
+  <p class="lede">A fórmula de banca: η_I em função do coeficiente de carregamento de empuxo. Quanto mais carregado o disco, menor a eficiência ideal. Deslize o C_T.</p>
+
+  <div class="box formula">
+    <div class="eq">η<sub>I</sub> = 2 / [1 + (C<sub>T</sub> + 1)<sup>½</sup>]<span class="lbl">com C_T = T / (½ρA₀V_A²) — coeficiente de carregamento de empuxo</span></div>
+  </div>
+
+  <div class="ichart">
+    <h4>η_I = 2/[1 + √(C_T + 1)]</h4>
+    <p class="hint">Os pontos marcados são os valores tabelados no PNA (C_T = 0,1,2,3,4).</p>
+    <canvas id="etaCanvas" width="860" height="250"></canvas>
+    <div class="ictrl">
+      <label for="etaC">C<sub>T</sub> (carregamento) →</label>
+      <input type="range" id="etaC" min="0" max="80" value="20" oninput="drawEta()">
+      <div class="iread" id="etaRead"></div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th class="center">C<sub>T</sub></th><td class="center">0</td><td class="center">1</td><td class="center">2</td><td class="center">3</td><td class="center">4</td></tr>
+    <tr><th class="center">η<sub>I</sub></th><td class="center">1,00</td><td class="center">0,827</td><td class="center">0,732</td><td class="center">0,667</td><td class="center">0,618</td></tr>
+  </table>
+  <p>Consequência prática: <span class="hl">o hélice de maior área de disco (menor C_T) é, em geral, o mais eficiente</span>, mantidos os demais fatores. Em V<sub>A</sub> = 0 (prova de doca/bollard pull) a eficiência é zero, mas o empuxo não — e (T/P)·√(T/A₀ρ) = √2 para o hélice ideal. <span class="tag t-banca">BANCA</span></p>
+</section>
+
+<!-- ===== 2.4 ANGULAR ===== -->
+<section class="bloco" id="angular">
+  <h2 class="sec"><span class="n">2.4</span> Momento linear com movimento angular</h2>
+  <p class="lede">O hélice real também imprime rotação ao fluido. Acrescentando o fator de afluxo rotacional a', surge o hélice de rosca ideal.</p>
+
+  <div class="box formula">
+    <h4>Eficiência com rotação</h4>
+    <div class="eq">η<sub>I</sub> = (1 − a') / (1 + a)<span class="lbl">Eq. (12) — disco que acelera axial E rotacionalmente</span></div>
+    <p class="vars">O torque obedece a Q = I<sub>P</sub>·dω/dt (análogo angular de Newton). O fator <b>(1 − a')</b> é sempre menor que 1, então o hélice de rosca ideal é <strong>menos</strong> eficiente que o disco atuador puro — pela fração (1 − a'). A energia gasta em girar a esteira é perda. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+  <div class="box trap">
+    <h4>Pegadinha do a'</h4>
+    <p>O disco atuador simples dá η_I = 1/(1+a); o de rosca dá (1−a')/(1+a). A diferença é a <strong>rotação da esteira</strong> (perda). Esquecer o (1−a') ou colocá-lo no numerador errado é distrator. <span class="tag t-calc">CALCULO</span></p>
+  </div>
+</section>
+
+<!-- ===== 2.5 ELEMENTO DE PA ===== -->
+<section class="bloco" id="palas">
+  <h2 class="sec"><span class="n">2.5</span> Teoria do elemento de pá</h2>
+  <p class="lede">Aqui, sim, olha-se a forma. Cada pá é fatiada em faixas; somam-se as forças de sustentação e arrasto de cada seção.</p>
+
+  <p>Decompõe-se a força de cada faixa em <strong>empuxo dT</strong> (avanço) e <strong>torque dQ</strong> (plano de rotação). Integrando do cubo à ponta, obtêm-se T e Q totais:</p>
+  <div class="box formula">
+    <div class="eq">η₀ = T·V<sub>A</sub> / (2π·n·Q)<span class="lbl">eficiência em águas livres (open water)</span></div>
+    <div class="eq">C<sub>L</sub> = L/(½ρAV²) &nbsp;·&nbsp; C<sub>D</sub> = D/(½ρAV²) &nbsp;·&nbsp; L/D = C<sub>L</sub>/C<sub>D</sub> = 1/tan γ</div>
+  </div>
+  <div class="box trap">
+    <h4>O erro histórico que a banca explora</h4>
+    <p>A teoria do elemento de pá <em>sozinha</em> levava ao resultado <strong>incorreto</strong> de que a eficiência ideal era unitária (=1). Já a teoria do momento linear acertava o limite superior mas não dizia a forma. Só a <strong>teoria da circulação</strong> conciliou as duas. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== CL CHART ===== -->
+<section class="bloco" id="cl">
+  <h2 class="sec"><span class="n">▶</span> Curva de sustentação × ângulo de incidência</h2>
+  <p class="lede">As cinco propriedades da curva C_L/C_D × α que a banca cobra — incluindo o ângulo de sustentação nula e o estol. Deslize o ângulo.</p>
+
+  <div class="ichart">
+    <h4>C_L e C_D × ângulo de incidência α (perfil aerodinâmico)</h4>
+    <p class="hint">Veja a sustentação nula em α₀ (negativo), a região linear, o estol e a explosão do arrasto.</p>
+    <canvas id="clCanvas" width="860" height="260"></canvas>
+    <div class="ictrl">
+      <label for="clA">Ângulo de incidência α →</label>
+      <input type="range" id="clA" min="-60" max="200" value="60" oninput="drawCL()">
+      <div class="iread" id="clRead"></div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <h4>As 5 propriedades da curva <span class="tag t-decorar">DECORAR</span></h4>
+    <ol style="margin:6px 0 0;padding-left:22px">
+      <li>C<sub>L</sub> é <strong>linear</strong> com α em pequenos ângulos.</li>
+      <li>Em α grande, C<sub>L</sub> deixa de crescer linearmente (aproxima do <strong>estol/stall</strong>).</li>
+      <li>Sustentação nula NÃO ocorre em α=0, mas num pequeno ângulo <strong>negativo</strong> α₀ (ângulo de sustentação nula).</li>
+      <li>C<sub>D</sub> fica pequeno e ~constante em α pequeno; quando C<sub>L</sub> cai, C<sub>D</sub> <strong>dispara</strong>.</li>
+      <li>L/D é <strong>máximo em α pequeno</strong> → seções eficientes trabalham em incidência pequena.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== 2.6 CIRCULACAO ===== -->
+<section class="bloco" id="circulacao">
+  <h2 class="sec"><span class="n">2.6</span> Teoria da circulação (vórtice)</h2>
+  <p class="lede">A base dos métodos modernos. Lanchester (1907), aplicada ao hélice por Betz e Prandtl. As pás viram filamentos de vórtice.</p>
+
+  <div class="box formula">
+    <h4>Equação de Kutta-Joukowski</h4>
+    <div class="eq">L = ρ·Γ·V₀<span class="lbl">Eq. (22) — Γ = 2πc = intensidade da circulação; V₀ = velocidade do escoamento uniforme</span></div>
+    <p class="vars">Uma das grandes generalizações da mecânica: <span class="hl-amb">aplica-se a qualquer corpo, independentemente da forma</span> — o efeito da forma está contido em Γ. A circulação fechada é Γ = ∮ ω·cos ξ·ds.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Teorema de Betz e o vórtice de ponta</h4>
+    <p>As pás têm continuações de vórtice nas pontas — os <strong>vórtices de ponta</strong> (como nas asas de avião). Betz: a perda induzida é mínima quando a folha de vórtice helicoidal se desloca como uma folha rígida. Regra de projeto: <span class="hl">para eficiência máxima, a velocidade de afluxo deve ser a mesma para cada elemento de pá</span>. A circulação permite calcular a velocidade induzida u<sub>n</sub>/2 e daí os fatores a e a'. <span class="tag t-banca">BANCA</span></p>
+  </div>
+
+  <div class="box formula">
+    <h4>Geometria do hélice (resumo)</h4>
+    <p class="vars">
+      • <b>Passo P:</b> avanço axial em 1 revolução em meio rígido.<br>
+      • <b>Ângulo de passo φ:</b> tan φ = P/(2πr).<br>
+      • <b>Deslizamento real s<sub>R</sub>:</b> s<sub>R</sub> = 1 − V<sub>A</sub>/(P·n).<br>
+      • <b>Razões:</b> P/D (passo) · A<sub>D</sub>/A₀ (área desenvolvida) · A<sub>P</sub>/A₀ (projetada).<br>
+      • <b>Rake</b> (inclinação) e <b>skew</b> (obliquidade).
+    </p>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Sete questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As fórmulas e conceitos de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Potência e Teoria do Hélice (§1-2)</summary>
+  <ul>
+    <li><b>Cadeia de potência:</b> PI &gt; PB &gt; PS &gt; PD &gt; PT; PE = R·V (útil). η_D = PE/PD (quase-propulsivo).</li>
+    <li><b>Perda no eixo:</b> ~2% (máquinas à ré), ~3% (a meio-navio). η_P = η_D × η_S.</li>
+    <li><b>Disco atuador:</b> η_I = 1/(1+a) = 2/(2+s). Deslizamento b = s = 2a.</li>
+    <li><b>η_I × carregamento:</b> η_I = 2/[1+√(C_T+1)]. C_T 0→1,00; 1→0,827; 2→0,732; 3→0,667; 4→0,618. Maior área de disco = mais eficiente.</li>
+    <li><b>Bollard pull (V_A=0):</b> η=0, mas há empuxo; (T/P)√(T/A₀ρ)=√2 (ideal).</li>
+    <li><b>Com rotação:</b> η_I = (1−a')/(1+a). Hélice de rosca &lt; disco atuador (perda na rotação da esteira).</li>
+    <li><b>Elemento de pá:</b> η₀ = TV_A/(2πnQ). Sozinha dava η ideal = 1 (incorreto).</li>
+    <li><b>Curva C_L×α:</b> linear → estol; sustentação nula em α₀ negativo; C_D dispara no estol; L/D máx em α pequeno.</li>
+    <li><b>Circulação:</b> Kutta-Joukowski L = ρΓV₀ (qualquer forma). Betz: afluxo igual em cada elemento = eficiência máxima.</li>
+    <li><b>Três teorias:</b> momento linear (limite de η, sem forma) · elemento de pá (forma, mas η=1 errado) · circulação (concilia).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Potência e Teoria do Hélice (PNA Vol. II Cap. VI §1-2) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== Chart η_I × C_T ===== */
+function etaI(ct){ return 2/(1+Math.sqrt(ct+1)); }
+function drawEta(){
+  var cv=document.getElementById('etaCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=48,y0=H-32,pW=W-78,pH=H-50;
+  ctx.clearRect(0,0,W,H);
+  var ctMax=8;
+  function px(v){return x0+v/ctMax*pW;}
+  function py(v){return y0-v*pH;} // eta 0..1
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('η_I',8,24);ctx.fillText('C_T',W-34,y0+20);
+  // y grid
+  [0,0.25,0.5,0.75,1].forEach(function(v){ctx.strokeStyle='#eee6d0';ctx.beginPath();ctx.moveTo(x0,py(v));ctx.lineTo(W-18,py(v));ctx.stroke();ctx.fillStyle='#a99';ctx.fillText(v.toFixed(2),x0-34,py(v)+4);});
+  [0,1,2,3,4,6,8].forEach(function(v){ctx.fillStyle='#a99';ctx.fillText(v,px(v)-3,y0+16);});
+  // curve
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.6;ctx.beginPath();
+  for(var ct=0;ct<=ctMax;ct+=0.05){var X=px(ct),Y=py(etaI(ct));if(ct===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}ctx.stroke();
+  // PNA data points
+  [[0,1.00],[1,0.827],[2,0.732],[3,0.667],[4,0.618]].forEach(function(p){ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(px(p[0]),py(p[1]),4.5,0,7);ctx.fill();});
+  // marker
+  var ct2=(+document.getElementById('etaC').value)/10;
+  var mx=px(ct2),my=py(etaI(ct2));
+  ctx.fillStyle='#16302B';ctx.beginPath();ctx.arc(mx,my,5,0,7);ctx.fill();
+  ctx.strokeStyle='#16302B';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(mx,my);ctx.lineTo(mx,y0);ctx.stroke();ctx.moveTo(mx,my);ctx.lineTo(x0,my);ctx.stroke();ctx.setLineDash([]);
+  document.getElementById('etaRead').innerHTML='C_T = <b>'+ct2.toFixed(1)+'</b> · η_I = <b>'+(etaI(ct2)*100).toFixed(1)+'%</b>'+(ct2<0.6?' (disco pouco carregado, alta η)':(ct2>4?' (muito carregado, baixa η)':''));
+}
+drawEta();
+
+/* ===== Chart C_L / C_D × α ===== */
+function clVal(a){ // a in degrees, alpha0 ~ -3, stall ~ +14
+  var stall=14, a0=-3;
+  if(a<stall) return 0.10*(a-a0);
+  // past stall: drop
+  return 0.10*(stall-a0) - 0.05*(a-stall);
+}
+function cdVal(a){
+  var base=0.02 + 0.0008*a*a*0.02;
+  if(a>14) base += 0.015*(a-14);
+  return Math.max(0.02, base);
+}
+function drawCL(){
+  var cv=document.getElementById('clCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=52,y0=H-34,pW=W-80,pH=H-54;
+  ctx.clearRect(0,0,W,H);
+  var aMin=-6,aMax=20;
+  function px(a){return x0+(a-aMin)/(aMax-aMin)*pW;}
+  var clMax=2.0;
+  function py(v){return y0-(v/clMax)*pH;}
+  // axes
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('C_L , C_D',6,24);ctx.fillText('α (°)',W-40,y0+20);
+  // zero line for x at CL=0 (since CL can be negative)
+  var yZero=py(0);
+  ctx.strokeStyle='#ddd2b0';ctx.beginPath();ctx.moveTo(x0,yZero);ctx.lineTo(W-18,yZero);ctx.stroke();
+  [-6,-3,0,5,10,14,18].forEach(function(a){ctx.fillStyle='#a99';ctx.fillText(a,px(a)-6,y0+16);});
+  // CL curve (verde)
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2.6;ctx.beginPath();var f=true;
+  for(var a=aMin;a<=aMax;a+=0.3){var X=px(a),Y=py(clVal(a));if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();
+  // CD curve (vermelho)
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2.2;ctx.beginPath();f=true;
+  for(var a2=aMin;a2<=aMax;a2+=0.3){var X2=px(a2),Y2=py(cdVal(a2));if(f){ctx.moveTo(X2,Y2);f=false;}else ctx.lineTo(X2,Y2);}ctx.stroke();
+  // alpha0 marker
+  ctx.fillStyle='#6B4E8E';ctx.beginPath();ctx.arc(px(-3),yZero,4,0,7);ctx.fill();
+  ctx.font='11px Trebuchet MS';ctx.fillStyle='#6B4E8E';ctx.fillText('α₀ (sust. nula)',px(-3)-30,yZero+18);
+  // stall marker
+  ctx.strokeStyle='#eecf9a';ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(px(14),14);ctx.lineTo(px(14),y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#b9892a';ctx.fillText('estol',px(14)+3,26);
+  // legend
+  ctx.font='11px Trebuchet MS';ctx.fillStyle='#1A7A6E';ctx.fillText('— C_L',W-110,30);ctx.fillStyle='#9E3B2E';ctx.fillText('— C_D',W-110,46);
+  // marker
+  var aSel=(+document.getElementById('clA').value)/10;
+  var mx=px(aSel),my=py(clVal(aSel));
+  ctx.fillStyle='#16302B';ctx.beginPath();ctx.arc(mx,my,5,0,7);ctx.fill();
+  var st = aSel<-3?'sustentação negativa':(Math.abs(aSel+3)<0.6?'≈ sustentação nula (α₀)':(aSel<10?'região linear (eficiente)':(aSel<14?'aproximando do estol':'ESTOL: C_L cai, C_D dispara')));
+  document.getElementById('clRead').innerHTML='α = <b>'+aSel.toFixed(1)+'°</b> · C_L ≈ <b>'+clVal(aSel).toFixed(2)+'</b> · '+st;
+}
+drawCL();
+window.addEventListener('resize',function(){drawEta();drawCL();});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"O coeficiente quase-propulsivo η_D é definido como:",
+   o:["PE / PS (efetiva sobre eixo)","PE / PD (efetiva sobre entregue ao hélice)","PE / PB (efetiva sobre freio)","PD / PE"],
+   a:1,e:"η_D = PE/PD. Usa a potência ENTREGUE ao hélice (PD), depois das perdas de mancal. A eficiência propulsiva total inclui ainda η_S (transmissão): η_P = η_D × η_S."},
+  {q:"Na teoria do disco atuador, a relação entre deslizamento (b) e fator de afluxo axial (a) é:",
+   o:["b = a","b = a/2","b = 2a","b = a²"],
+   a:2,e:"b = 2a: metade da aceleração ocorre antes do disco, metade depois. Daí η_I = 1/(1+a) = 1/(1+s/2) = 2/(2+s)."},
+  {q:"Segundo η_I = 2/[1+√(C_T+1)], um hélice trabalhando com C_T alto é:",
+   o:["Mais eficiente","Menos eficiente","Igualmente eficiente","A eficiência não depende de C_T"],
+   a:1,e:"Quanto maior o carregamento C_T, menor a eficiência ideal (C_T=0→100%, C_T=4→61,8%). Por isso o hélice de maior ÁREA de disco (menor C_T) tende a ser mais eficiente."},
+  {q:"A eficiência ideal de um hélice de rosca, incluindo a rotação da esteira, é:",
+   o:["1/(1+a)","(1−a')/(1+a)","(1+a')/(1−a)","sempre igual a 1"],
+   a:1,e:"η_I = (1−a')/(1+a). Como (1−a')<1, o hélice de rosca é MENOS eficiente que o disco atuador puro — a energia gasta em girar a esteira é perda."},
+  {q:"Qual teoria levava ao resultado INCORRETO de que a eficiência ideal era unitária?",
+   o:["Teoria do momento linear","Teoria do elemento de pá (isolada)","Teoria da circulação","Equação de Kutta-Joukowski"],
+   a:1,e:"A teoria do elemento de pá, sozinha, dava η ideal = 1. A do momento linear acertava o limite (mas não a forma). A teoria da CIRCULAÇÃO (Lanchester/Betz/Prandtl) conciliou as duas."},
+  {q:"Na curva C_L × α de um perfil, a sustentação nula ocorre:",
+   o:["Em α = 0 exatamente","Em um pequeno ângulo NEGATIVO α₀","Apenas no estol","Em α máximo"],
+   a:1,e:"A sustentação zero ocorre num pequeno ângulo NEGATIVO, o ângulo de sustentação nula α₀. C_L é linear em α pequeno, e o estol acontece em α grande positivo (C_L para de subir e C_D dispara)."},
+  {q:"A equação de Kutta-Joukowski (L = ρΓV₀) aplica-se a:",
+   o:["Apenas perfis aerodinâmicos finos","Apenas cilindros","Qualquer corpo, com o efeito da forma contido em Γ","Apenas escoamento turbulento"],
+   a:2,e:"É uma das grandes generalizações da mecânica: vale para qualquer corpo, independentemente da forma — o efeito da forma fica embutido na circulação Γ = 2πc."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Cadeia de potência",b:"PI > PB > PS > PD > PT; PE = R·V. η_D = PE/PD (quase-propulsivo)."},
+  {f:"PS pelo torsímetro",b:"PS = π·ds⁴·G·θ·n/(32·Ls). Mede o ângulo de torção do eixo."},
+  {f:"Perda de transmissão",b:"~2% (máquinas à ré), ~3% (a meio-navio). η_P = η_D × η_S."},
+  {f:"Disco atuador — η ideal",b:"η_I = 1/(1+a) = 2/(2+s). Deslizamento b = s = 2a."},
+  {f:"η_I × carregamento",b:"η_I = 2/[1+√(C_T+1)]. C_T 0→1,00 · 4→0,618. Mais área = mais eficiente."},
+  {f:"Bollard pull (V_A=0)",b:"η=0 mas há empuxo. (T/P)·√(T/A₀ρ)=√2 (hélice ideal)."},
+  {f:"Com rotação (a')",b:"η_I = (1−a')/(1+a). Hélice de rosca < disco (perda na esteira girada)."},
+  {f:"Elemento de pá",b:"η₀ = TV_A/(2πnQ). Sozinha dava η ideal = 1 (incorreto)."},
+  {f:"Curva C_L × α",b:"Linear → estol. Sust. nula em α₀ negativo. L/D máx em α pequeno. C_D dispara no estol."},
+  {f:"Kutta-Joukowski",b:"L = ρΓV₀. Vale p/ qualquer forma; forma embutida em Γ = 2πc."},
+  {f:"Teorema de Betz",b:"Eficiência máxima quando o afluxo é igual em cada elemento de pá."},
+  {f:"As 3 teorias",b:"Momento linear (limite η, sem forma) · Elemento de pá (forma, η=1 errado) · Circulação (concilia)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+</script>
+</body>
+</html>

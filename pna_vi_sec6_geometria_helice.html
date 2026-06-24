@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Geometria da Hélice — PNA Vol. II Cap. VI §6 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:690px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:250px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:84px}
+  .ictrl input[type=range]{flex:1;min-width:130px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:230px}
+  .iread b{color:var(--verde2)}
+
+  /* 4 views diagram */
+  .views{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0}
+  .vcard{background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:12px;box-shadow:var(--sombra)}
+  .vcard svg{width:100%;height:120px;display:block;background:#fbf8ef;border-radius:6px}
+  .vcard .vt{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:13px;color:var(--verde);margin-top:8px}
+  .vcard .vd{font-size:12.5px;color:#5a6f68;margin-top:2px}
+  .vcard .vtag{font-family:'Trebuchet MS',sans-serif;font-size:10px;font-weight:bold;color:#fff;background:var(--verde2);border-radius:4px;padding:1px 7px}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:155px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15.5px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:26px}.eq{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco B — Propulsão</p>
+    <h1>Geometria da <em>Hélice</em></h1>
+    <p class="sub">A superfície helicoidal, o passo e seu ângulo, as quatro vistas do desenho técnico, as razões de área (expandida, desenvolvida, projetada) e os detalhes construtivos — pás, rake, skew, materiais.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. II, Cap. VI, Seção 6 (van Manen &amp; van Oossanen) · cruzado com Bertram Cap. 2.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#superficie">Superfície helicoidal</a>
+    <a href="#passo">Passo &amp; ângulo ▶</a>
+    <a href="#vistas">As 4 vistas</a>
+    <a href="#areas">Razões de área ▶</a>
+    <a href="#palas">Número de pás</a>
+    <a href="#rakeskew">Rake &amp; skew</a>
+    <a href="#materiais">Materiais</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Complementar ao caderno <a href="geometria_pa_helice_areas_skew.html">Geometria da Pá e Projeto do Propulsor</a> (coeficientes J·K_T·K_Q e as 7 etapas de projeto). Aqui o foco é a <strong>geometria matemática e o desenho técnico</strong> do PNA §6.
+</div>
+
+<!-- ===== 6.1 SUPERFICIE ===== -->
+<section class="bloco" id="superficie">
+  <h2 class="sec"><span class="n">6.1</span> A superfície helicoidal</h2>
+  <p class="lede">Toda hélice começa de uma superfície helicoidal — a face da pá ou o referencial de onde se medem os offsets.</p>
+
+  <p>Uma superfície helicoidal é varrida por uma reta AB: a extremidade A avança a velocidade uniforme ao longo do eixo OO' enquanto a reta gira com velocidade angular ω. As curvas traçadas são <strong>hélices</strong>, que repousam sobre cilindros coaxiais e têm <span class="hl">o mesmo avanço por revolução — o mesmo passo P</span>.</p>
+
+  <div class="box key">
+    <h4>Verdadeira × geral (distorcida)</h4>
+    <p>A superfície helicoidal <strong>verdadeira</strong> tem dupla curvatura e cada elemento de linha é uma hélice de passo <em>constante</em>. Se os passos variam com o raio ou a linha radial é curva, obtém-se a superfície <strong>geral (distorcida)</strong> — a <em>superfície de passo</em>, que descreve qualquer hélice prática. <span class="tag t-banca">BANCA</span></p>
+  </div>
+
+  <div class="box formula">
+    <h4>Coordenadas de um ponto na hélice (6.2)</h4>
+    <div class="eq">x = Pθ/2π &nbsp;·&nbsp; y = r·sen θ &nbsp;·&nbsp; z = r·cos θ<span class="lbl">θ = ωt, medido da posição vertical da geratriz</span></div>
+    <p class="vars">O passo <b>P</b> é o avanço de r numa revolução (θ = 2π). Para outro θ, o avanço é Pθ/2π.</p>
+  </div>
+</section>
+
+<!-- ===== PASSO CHART ===== -->
+<section class="bloco" id="passo">
+  <h2 class="sec"><span class="n">▶</span> Passo e ângulo de passo: tan φ = P/(2πr)</h2>
+  <p class="lede">Planificando o cilindro de raio r, a hélice vira uma reta. O ângulo de passo φ depende do raio — para um mesmo passo P, φ é maior perto do cubo e menor na ponta.</p>
+
+  <div class="ichart">
+    <h4>Cilindro planificado (triângulo de passo)</h4>
+    <p class="hint">Deslize o raio r. O cateto vertical é o passo P (fixo); o horizontal é 2πr (circunferência). A hipotenusa é a hélice desenvolvida; o ângulo é φ.</p>
+    <canvas id="pitchCanvas" width="860" height="250"></canvas>
+    <div class="ictrl">
+      <label for="pR">raio r/R →</label>
+      <input type="range" id="pR" min="20" max="100" value="70" oninput="drawPitch()">
+      <div class="iread" id="pRead"></div>
+    </div>
+  </div>
+
+  <div class="box formula">
+    <div class="eq">tan φ = P / (2πr)<span class="lbl">ângulo de passo da seção no raio r</span></div>
+    <div class="eq">Comprimento desenvolvido: ac = (θ/2π)·(4π²r² + P²)<sup>½</sup> &nbsp;·&nbsp; raio de curvatura R<sub>n</sub> = r/cos²φ</div>
+    <p class="vars">Como φ cai com r (P fixo), a pá é "torcida": muito inclinada na raiz, quase plana na ponta. É por isso que cada seção radial tem um ângulo diferente. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+
+  <div class="box trap">
+    <h4>Pegadinha — passo nominal × ângulo</h4>
+    <p>O <strong>passo P é o mesmo em todos os raios</strong> (hélice de passo constante), mas o <strong>ângulo φ muda</strong> com r. Confundir "passo constante" com "ângulo constante" é erro clássico — são coisas opostas. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== 6.3 VISTAS ===== -->
+<section class="bloco" id="vistas">
+  <h2 class="sec"><span class="n">6.3</span> As quatro vistas do desenho da hélice</h2>
+  <p class="lede">O desenho de projeto tem quatro partes (Fig. 25 do PNA). A banca cobra qual vista mostra o quê.</p>
+
+  <div class="views">
+    <div class="vcard">
+      <svg viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="55" x2="140" y2="55" stroke="#cdbf99" stroke-width="1"/>
+        <path d="M30 55 Q60 20 90 30 Q120 38 130 55" fill="none" stroke="#0D3D36" stroke-width="2"/>
+        <line x1="80" y1="55" x2="92" y2="22" stroke="#9E3B2E" stroke-width="2"/>
+        <text x="94" y="22" font-size="9" fill="#9E3B2E" font-family="sans-serif">rake</text>
+      </svg>
+      <span class="vtag">(a)</span>
+      <div class="vt">Elevação lateral</div>
+      <div class="vd">Mostra o <strong>rake</strong> (caimento longitudinal) e a variação de espessura máxima da ponta à raiz.</div>
+    </div>
+
+    <div class="vcard">
+      <svg viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 55 Q80 15 120 55 Q80 95 40 55 Z" fill="#e7ddc2" stroke="#1A7A6E" stroke-width="2"/>
+        <line x1="40" y1="55" x2="120" y2="55" stroke="#9E3B2E" stroke-width="1" stroke-dasharray="3 2"/>
+      </svg>
+      <span class="vtag">(b)</span>
+      <div class="vt">Contorno desenvolvido</div>
+      <div class="vd">Formas das <strong>seções</strong> com faces de passo paralelas à base. Ao unir as pontas → contorno <em>expandido</em>.</div>
+    </div>
+
+    <div class="vcard">
+      <svg viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg">
+        <line x1="30" y1="90" x2="30" y2="20" stroke="#cdbf99"/>
+        <line x1="30" y1="90" x2="140" y2="90" stroke="#cdbf99"/>
+        <path d="M40 40 L100 40 Q120 40 125 70" fill="none" stroke="#6B4E8E" stroke-width="2"/>
+        <text x="34" y="18" font-size="8" fill="#7a6f55" font-family="sans-serif">P</text>
+        <text x="130" y="100" font-size="8" fill="#7a6f55" font-family="sans-serif">r</text>
+      </svg>
+      <span class="vtag">(c)</span>
+      <div class="vt">Diagrama de passo</div>
+      <div class="vd">Variação do <strong>passo com o raio</strong> (quando não-uniforme). Comum: passo reduzido na raiz em mono-hélice.</div>
+    </div>
+
+    <div class="vcard">
+      <svg viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="80" cy="55" r="6" fill="#0D3D36"/>
+        <path d="M80 55 Q70 25 95 18" fill="none" stroke="#1A7A6E" stroke-width="2"/>
+        <path d="M80 55 Q110 60 105 90" fill="none" stroke="#1A7A6E" stroke-width="2"/>
+        <path d="M80 55 Q55 70 35 50" fill="none" stroke="#1A7A6E" stroke-width="2"/>
+        <text x="96" y="16" font-size="8" fill="#9E3B2E" font-family="sans-serif">skew</text>
+      </svg>
+      <span class="vtag">(d)</span>
+      <div class="vt">Vista transversal</div>
+      <div class="vd">Projeção transversal, contorno desenvolvido, linha de espessura máxima e a quantidade de <strong>skew</strong>.</div>
+    </div>
+  </div>
+
+  <div class="box trap">
+    <h4>Os três contornos — não confundir <span class="tag t-decorar">DECORAR</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Contorno</th><th>Como é obtido</th></tr>
+      <tr><td><strong>Projetado</strong></td><td>projeção real da pá num plano (o que se "vê" de frente)</td></tr>
+      <tr><td><strong>Desenvolvido</strong></td><td>seções dispostas em arcos helicoidais (raio de curvatura da hélice)</td></tr>
+      <tr><td><strong>Expandido</strong></td><td>seções com linhas de passo paralelas ao eixo, pontas unidas</td></tr>
+    </table>
+    <p style="font-size:13px;color:var(--mute);margin-top:8px">A banca troca projetado ↔ desenvolvido ↔ expandido. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== AREAS CHART ===== -->
+<section class="bloco" id="areas">
+  <h2 class="sec"><span class="n">6.3</span> Razões de área adimensionais</h2>
+  <p class="lede">Todas referidas à área do disco A₀ = (π/4)D². A banca cobra as definições e a ordem A_E ≥ A_D ≥ A_P.</p>
+
+  <div class="box formula">
+    <h4>As razões características</h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Razão</th><th>Definição</th><th class="center">Expressão</th></tr>
+      <tr><td>Razão de passo</td><td>passo / diâmetro</td><td class="center">P/D</td></tr>
+      <tr><td>Área do disco</td><td>—</td><td class="center">A₀ = (π/4)D²</td></tr>
+      <tr><td>Área expandida</td><td>área expandida das pás (fora do cubo) / A₀</td><td class="center">A<sub>E</sub>/A₀</td></tr>
+      <tr><td>Área desenvolvida</td><td>área desenvolvida / A₀</td><td class="center">A<sub>D</sub>/A₀</td></tr>
+      <tr><td>Área projetada</td><td>área projetada / A₀</td><td class="center">A<sub>P</sub>/A₀</td></tr>
+      <tr><td>Fração de espessura</td><td>espessura máx. referida ao eixo / D</td><td class="center">t₀/D</td></tr>
+    </table>
+  </div>
+
+  <div class="ichart">
+    <h4>Disco e área de pás — quanto do disco as pás cobrem</h4>
+    <p class="hint">Deslize a razão de área expandida (A_E/A₀) e o número de pás. Veja a cobertura do disco e quando há sobreposição (A_E/A₀ &gt; 1).</p>
+    <canvas id="areaCanvas" width="860" height="250"></canvas>
+    <div class="ictrl"><label for="aAE">A_E/A₀ →</label><input type="range" id="aAE" min="30" max="150" value="70" oninput="drawArea()"></div>
+    <div class="ictrl"><label for="aZ">nº de pás Z →</label><input type="range" id="aZ" min="2" max="7" value="4" oninput="drawArea()">
+      <div class="iread" id="aRead"></div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <h4>Faixas típicas e a ordem das áreas</h4>
+    <p>A<sub>E</sub>/A₀ típico: <span class="hl">0,3 a 1,5</span> (Bertram); razões desenvolvidas de 0,35 a &gt;1 em navios muito rápidos. <span class="hl-amb">A_E/A₀ &gt; 1 significa pás sobrepostas</span> (caras de fabricar). Em ordem de grandeza: <strong>A<sub>E</sub> ≥ A<sub>D</sub> ≥ A<sub>P</sub></strong> (a projetada é a menor, pois "encurta" pela inclinação). <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== 6.4 PALAS ===== -->
+<section class="bloco" id="palas">
+  <h2 class="sec"><span class="n">6.4</span> Número de pás</h2>
+  <p class="lede">Historicamente 3 ou 4 (quase universal o 4 em mono-hélice). Hoje 5, 6 ou mais por causa da cavitação e da vibração.</p>
+  <div class="box key">
+    <h4>Por que aumentar o número de pás?</h4>
+    <p>Com mais potência por pá, crescem as <strong>forças periódicas</strong> (vibração do casco, na frequência de pá). Mais pás: <span class="hl">reduzem o empuxo por pá</span> (menos intensidade) e <span class="hl">aumentam a frequência</span> (evita ressonância). Bertram: <strong>Z ímpar</strong> tem melhor comportamento de vibração que par; navios grandes usam 4 a 7 pás; embarcações pequenas, 2 a 4. <span class="tag t-banca">BANCA</span></p>
+  </div>
+  <div class="box trap">
+    <h4>Trade-off da área expandida constante</h4>
+    <p>Mantendo A_E constante, mais pás → maior <strong>razão de aspecto</strong> e menor corda → a razão L/D da seção <strong>cai</strong> (pás mais finas exigem mais espessura relativa por resistência). Por isso mais pás não é "grátis" em eficiência. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+  <p>Construção: <strong>sólida</strong> (pás fundidas com o cubo) × <strong>articulada/built-up</strong> (aparafusadas — pás trocáveis e passo ajustável, mas mais caras, pesadas e com cubo maior). Cubo: 0,15D a 0,25D.</p>
+</section>
+
+<!-- ===== RAKE SKEW ===== -->
+<section class="bloco" id="rakeskew">
+  <h2 class="sec"><span class="n">6.4</span> Rake e skew</h2>
+  <div class="box formula">
+    <h4>Os dois deslocamentos da pá <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">
+      <b>Rake (caimento):</b> deslocamento <strong>axial</strong> (longitudinal) das seções em relação ao plano do hélice. Geralmente a ré → aumenta a folga com casco/bossings, beneficia eficiência e reduz vibração.<br><br>
+      <b>Skew (obliquidade):</b> deslocamento <strong>circunferencial</strong> (angular) do centro da corda em relação à linha de referência. Adimensionalizado pelo diâmetro. As pás oblíquas entram na esteira concentrada de forma mais suave → reduzem picos de pressão e vibração.
+    </p>
+  </div>
+  <div class="box trap">
+    <h4>Rake × skew — o par que a banca troca</h4>
+    <p>Rake = <strong>axial</strong> (de lado, na elevação). Skew = <strong>circunferencial</strong> (visto de frente, a pá "varre" para trás). Trocar os dois eixos é o distrator nº1. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+
+  <div class="box key">
+    <h4>Distribuição de passo</h4>
+    <p>P/D típico: 0,6 (muito carregadas, rebocadores) a 2,0+ (lanchas rápidas). Em mono-hélice, o passo é frequentemente reduzido na raiz (esteira concentrada nos raios internos) e, em hélices muito carregadas, também na ponta (reduz cavitação de vórtice de ponta).</p>
+  </div>
+</section>
+
+<!-- ===== MATERIAIS ===== -->
+<section class="bloco" id="materiais">
+  <h2 class="sec"><span class="n">6.4</span> Materiais</h2>
+  <p class="lede">Leves, lisos e resistentes à erosão. A escolha equilibra resistência mecânica, densidade e resistência à cavitação.</p>
+  <table>
+    <tr><th>Material</th><th>Características</th></tr>
+    <tr><td>Bronze manganês</td><td>tenaz, alto polimento, resistente à erosão → alta eficiência (referência)</td></tr>
+    <tr><td>Bronze níquel-alumínio</td><td>menor densidade, maior tensão admissível → pás mais finas e leves, ótimo acabamento e resistência à cavitação</td></tr>
+    <tr><td>Ferro fundido</td><td>barato, mas pouca resistência à tração → mais espesso/pesado, corrói em água salgada, baixa resistência à cavitação. Usado em rebocadores/quebra-gelos (quebra limpo ao bater)</td></tr>
+  </table>
+  <p style="font-size:13.5px;color:var(--mute)">A tensão admissível do ferro fundido é ~metade da do bronze manganês → hélices de ferro são bem mais espessas e pesadas.</p>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Sete questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As definições e números de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Geometria da Hélice (§6)</summary>
+  <ul>
+    <li><b>Passo P:</b> avanço axial por revolução. tan φ = P/(2πr): φ cai com o raio (P constante ≠ ângulo constante).</li>
+    <li><b>Coordenadas da hélice:</b> x = Pθ/2π · y = r·senθ · z = r·cosθ. Raio de curvatura R_n = r/cos²φ.</li>
+    <li><b>4 vistas:</b> (a) elevação lateral (rake) · (b) contorno desenvolvido (seções) · (c) diagrama de passo · (d) vista transversal (skew).</li>
+    <li><b>3 contornos:</b> projetado (menor) · desenvolvido (arcos helicoidais) · expandido (linhas de passo paralelas ao eixo).</li>
+    <li><b>Áreas:</b> A₀ = (π/4)D². Razões A_E/A₀, A_D/A₀, A_P/A₀. Ordem A_E ≥ A_D ≥ A_P. A_E/A₀ típico 0,3–1,5; &gt;1 = pás sobrepostas.</li>
+    <li><b>Número de pás:</b> 4 quase universal (mono); hoje 5–7. Z ímpar melhor p/ vibração. Mais pás → reduz empuxo/pá e aumenta frequência.</li>
+    <li><b>Trade-off:</b> A_E constante + mais pás → maior razão de aspecto, menor corda, L/D da seção cai.</li>
+    <li><b>Rake:</b> deslocamento AXIAL (folga, eficiência). <b>Skew:</b> deslocamento CIRCUNFERENCIAL (suaviza entrada na esteira, reduz vibração).</li>
+    <li><b>P/D:</b> 0,6 (rebocadores) a 2,0+ (lanchas). Cubo 0,15D–0,25D.</li>
+    <li><b>Materiais:</b> bronze manganês (referência) · níquel-alumínio (leve, anti-cavitação) · ferro fundido (barato, frágil, rebocadores).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Geometria da Hélice (PNA Vol. II Cap. VI §6) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ===== Pitch triangle ===== */
+function drawPitch(){
+  var cv=document.getElementById('pitchCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var r=(+document.getElementById('pR').value)/100; // r/R, 0.2..1.0
+  var P=2.4; // P/D fixed example (pitch ratio)
+  // circumference at radius: 2*pi*r (scaled). Use r*R with R=0.5D -> use r directly as fraction of tip
+  var circ=2*Math.PI*r;     // proportional to 2πr
+  var pitch=P*Math.PI;      // P = (P/D)*pi*D... keep proportional; use P/D so vertical ~ P
+  // we want tan phi = P/(2 pi r). Keep P fixed (pitch ratio*D). Represent vertical=P*scale, horizontal=2πr*scale
+  var ox=70,oy=H-40, scale=120;
+  var hx=circ*scale*0.5, vy=P*scale*0.5;
+  // clamp to canvas
+  var maxh=W-160; if(hx>maxh){var k=maxh/hx;hx*=k;}
+  // triangle
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+hx,oy);ctx.stroke(); // base = 2πr
+  ctx.beginPath();ctx.moveTo(ox+hx,oy);ctx.lineTo(ox+hx,oy-vy);ctx.stroke(); // vertical = P
+  ctx.strokeStyle='#0D3D36';ctx.lineWidth=2.6;
+  ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+hx,oy-vy);ctx.stroke(); // hypotenuse = helix
+  // angle arc
+  var phi=Math.atan2(vy,hx);
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2;ctx.beginPath();ctx.arc(ox,oy,34,-phi,0);ctx.stroke();
+  // labels
+  ctx.fillStyle='#7a6f55';ctx.font='13px Trebuchet MS';
+  ctx.fillText('2πr (circunferência)',ox+hx/2-50,oy+22);
+  ctx.save();ctx.translate(ox+hx+14,oy-vy/2);ctx.fillStyle='#7a6f55';ctx.fillText('P (passo)',0,0);ctx.restore();
+  ctx.fillStyle='#9E3B2E';ctx.font='bold 14px Trebuchet MS';ctx.fillText('φ',ox+40,oy-10);
+  ctx.fillStyle='#0D3D36';ctx.font='13px Trebuchet MS';
+  var deg=phi*180/Math.PI;
+  document.getElementById('pRead').innerHTML='r/R = <b>'+r.toFixed(2)+'</b> · φ = <b>'+deg.toFixed(1)+'°</b> (tan φ = P/2πr) — '+(r<0.4?'perto do cubo: φ alto':r>0.85?'perto da ponta: φ baixo':'φ intermediário');
+}
+drawPitch();
+
+/* ===== Area disc coverage ===== */
+function drawArea(){
+  var cv=document.getElementById('areaCanvas'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var ae=(+document.getElementById('aAE').value)/100; // A_E/A0
+  var Z=+document.getElementById('aZ').value;
+  var cx=W/2,cy=H/2,R=Math.min(H/2-14,150);
+  // disc
+  ctx.fillStyle='#eef3f0';ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.fill();
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
+  // hub
+  ctx.fillStyle='#0D3D36';ctx.beginPath();ctx.arc(cx,cy,R*0.18,0,7);ctx.fill();
+  // blades — area proportional to ae (each blade an angular sector "leaf")
+  var perBlade=ae/Z; // fraction of disc per blade
+  var halfAng=Math.min(Math.PI*0.95, Math.PI*perBlade*1.6); // visual sweep
+  for(var i=0;i<Z;i++){
+    var a0=i*2*Math.PI/Z;
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(a0);
+    var grd= ae>1 ? 'rgba(158,59,46,.55)' : 'rgba(200,168,75,.6)';
+    ctx.fillStyle=grd;ctx.strokeStyle='#0D3D36';ctx.lineWidth=1;
+    ctx.beginPath();
+    ctx.moveTo(R*0.18,0);
+    // leaf shape
+    ctx.quadraticCurveTo(R*0.6*Math.cos(halfAng), R*0.6*Math.sin(halfAng)*1.0, R*0.94*Math.cos(halfAng*0.3), R*0.94*Math.sin(halfAng*0.3));
+    ctx.quadraticCurveTo(R*0.6*Math.cos(-halfAng), R*0.6*Math.sin(-halfAng)*1.0, R*0.18,0);
+    ctx.fill();ctx.stroke();
+    ctx.restore();
+  }
+  ctx.fillStyle='#16302B';ctx.font='13px Trebuchet MS';
+  var over= ae>1?' · pás SOBREPOSTAS (caras)':'';
+  document.getElementById('aRead').innerHTML='A_E/A₀ = <b>'+ae.toFixed(2)+'</b> · Z = <b>'+Z+' pás</b>'+over;
+}
+drawArea();
+window.addEventListener('resize',function(){drawPitch();drawArea();});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"O ângulo de passo φ de uma seção de hélice no raio r é dado por:",
+   o:["tan φ = 2πr/P","tan φ = P/(2πr)","tan φ = P·r","tan φ = P/D"],
+   a:1,e:"tan φ = P/(2πr). Como r aumenta da raiz à ponta (P fixo), φ DIMINUI: a pá é torcida, muito inclinada na raiz e quase plana na ponta."},
+  {q:"Numa hélice de passo CONSTANTE, o que varia com o raio?",
+   o:["O passo P","O ângulo de passo φ","Nada varia","O diâmetro"],
+   a:1,e:"Passo constante = mesmo P em todos os raios, mas o ângulo φ varia (tan φ = P/2πr). 'Passo constante' não é 'ângulo constante' — são opostos."},
+  {q:"A área do disco de uma hélice de diâmetro D é:",
+   o:["πD²","(π/4)D²","πD","2πD"],
+   a:1,e:"A₀ = (π/4)D² — a área do círculo varrido pela ponta. Todas as razões de área (A_E/A₀, A_D/A₀, A_P/A₀) são referidas a ela."},
+  {q:"Sobre a ordem de grandeza das áreas de pá:",
+   o:["A_P ≥ A_D ≥ A_E","A_E ≥ A_D ≥ A_P","A_D ≥ A_E ≥ A_P","todas são iguais"],
+   a:1,e:"A_E ≥ A_D ≥ A_P. A projetada é a MENOR porque 'encurta' pela inclinação. A_E/A₀ > 1 significa pás sobrepostas."},
+  {q:"Qual é a diferença entre rake e skew?",
+   o:["Rake é circunferencial, skew é axial","Rake é axial (longitudinal), skew é circunferencial","São sinônimos","Ambos são axiais"],
+   a:1,e:"Rake = deslocamento AXIAL (caimento, visto na elevação lateral). Skew = deslocamento CIRCUNFERENCIAL (obliquidade, visto de frente). Trocar os eixos é o distrator clássico."},
+  {q:"Sobre o número de pás Z e a vibração:",
+   o:["Z par tem melhor comportamento que ímpar","Z ímpar tem melhor comportamento de vibração que par","O número de pás não afeta a vibração","Menos pás sempre é melhor"],
+   a:1,e:"Z ímpar geralmente tem melhor comportamento de vibração. Mais pás reduzem o empuxo por pá (menos intensidade das forças) e aumentam a frequência (evita ressonância)."},
+  {q:"Mantendo a área expandida CONSTANTE, aumentar o número de pás:",
+   o:["Aumenta a corda e a razão L/D","Aumenta a razão de aspecto e REDUZ a razão L/D da seção","Não altera a geometria das seções","Reduz a razão de aspecto"],
+   a:1,e:"A_E constante + mais pás → maior razão de aspecto, menor corda → L/D da seção CAI (pás mais finas precisam de mais espessura relativa). Por isso mais pás não é 'grátis'."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Passo P",b:"Avanço axial da pá em 1 revolução em meio rígido. Mesmo em todos os raios (passo constante)."},
+  {f:"Ângulo de passo φ",b:"tan φ = P/(2πr). Cai com o raio (P fixo) → pá torcida."},
+  {f:"Coordenadas da hélice",b:"x = Pθ/2π · y = r·senθ · z = r·cosθ. R_curvatura = r/cos²φ."},
+  {f:"4 vistas",b:"(a) elevação lateral=rake · (b) desenvolvido=seções · (c) diagrama de passo · (d) transversal=skew."},
+  {f:"3 contornos",b:"Projetado (menor) · desenvolvido (arcos helicoidais) · expandido (passo ∥ eixo)."},
+  {f:"Área do disco",b:"A₀ = (π/4)D². Razões: A_E/A₀, A_D/A₀, A_P/A₀."},
+  {f:"Ordem das áreas",b:"A_E ≥ A_D ≥ A_P. A_E/A₀ típico 0,3–1,5; >1 = pás sobrepostas."},
+  {f:"Número de pás",b:"4 quase universal (mono); hoje 5–7. Z ímpar melhor p/ vibração."},
+  {f:"Rake",b:"Deslocamento AXIAL (caimento), geralmente a ré → folga, eficiência, menos vibração."},
+  {f:"Skew",b:"Deslocamento CIRCUNFERENCIAL (obliquidade), adimensional pelo D → suaviza entrada na esteira."},
+  {f:"P/D e cubo",b:"P/D: 0,6 (rebocadores) a 2,0+ (lanchas). Cubo 0,15D–0,25D."},
+  {f:"Materiais",b:"Bronze manganês (referência) · níquel-alumínio (leve, anti-cavitação) · ferro fundido (barato, frágil)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+</script>
+</body>
+</html>

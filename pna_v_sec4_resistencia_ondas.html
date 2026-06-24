@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Resistência por Ondas — PNA Vol. II Cap. V §4 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:34px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:680px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:20px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  /* ---- KELVIN WEDGE (signature) ---- */
+  .kelvin{background:linear-gradient(180deg,#0d4a6b,#0a3a55);border:1px solid #0a3346;border-radius:12px;padding:16px;margin:18px 0}
+  .kelvin svg{width:100%;height:auto;display:block;border-radius:8px;background:linear-gradient(180deg,#1567a0,#0c4a73)}
+  .kcap{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#cfe3df;margin-top:10px;text-align:center}
+  .kcap b{color:var(--ouro)}
+
+  /* ---- HUMPS chart (signature) ---- */
+  .humps{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .humps canvas{width:100%;height:230px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .hctrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .hctrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde)}
+  .hctrl input[type=range]{flex:1;min-width:160px;accent-color:var(--verde2)}
+  .hread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:230px}
+  .hread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:155px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:16px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:13px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:27px}.eq{font-size:17px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco A — Resistência</p>
+    <h1>Resistência por <em>Ondas</em></h1>
+    <p class="sub">A força líquida das pressões normais que viram ondas. Cunha de Kelvin, saliências e depressões (humps &amp; hollows), Michell e Havelock — e por que velocidade econômica e comprimento andam juntos.</p>
+    <div class="src"><b>Fonte:</b> PNA (Lewis, SNAME, 3ª ed.) Vol. II, Cap. V, Seção 4 (van Manen &amp; van Oossanen) · cruzado com Larsson &amp; Raven Cap. 5.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#geral">O que é</a>
+    <a href="#kelvin">Cunha de Kelvin ▶</a>
+    <a href="#humps">Humps &amp; Hollows ▶</a>
+    <a href="#teoria">Michell &amp; Havelock</a>
+    <a href="#interf">Interferência (Wigley)</a>
+    <a href="#visc">Viscosidade &amp; escala</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===== 4.1 ===== -->
+<section class="bloco" id="geral">
+  <h2 class="sec"><span class="n">4.1</span> O que é a resistência por ondas</h2>
+  <p class="lede">É a força líquida proa-popa devida às pressões do fluido atuando <strong>normalmente</strong> ao casco — o espelho da friccional, que vem das forças <strong>tangenciais</strong>.</p>
+
+  <p>Um corpo submerso bem fundo, a velocidade constante, não forma ondas: as pressões normais variam ao longo do comprimento, mas em fluido não viscoso a força líquida proa-popa é <strong>zero</strong> (paradoxo de d'Alembert). <span class="hl">Perto da superfície, porém, essa variação de pressão gera ondas que alteram a distribuição de pressão</span>, e a força resultante é a resistência por ondas — igual, em energia, ao sistema de ondas deixado para trás.</p>
+
+  <div class="box key">
+    <h4>De onde ela nasce no casco</h4>
+    <p>Depende fortemente da <strong>curva de áreas</strong>, das <strong>linhas d'água</strong> e das <strong>seções transversais</strong>. Um achado importante (Eggert, 1939): <span class="hl-amb">grande parte da resistência por ondas é gerada pela parte superior do casco, perto da linha d'água em repouso</span>. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== 4.2 KELVIN ===== -->
+<section class="bloco" id="kelvin">
+  <h2 class="sec"><span class="n">4.2</span> Sistemas de ondas: a cunha de Kelvin</h2>
+  <p class="lede">Lord Kelvin (1887) modelou um ponto de pressão deslizando na superfície. O resultado é um padrão fixo dentro de um cone de <strong>19°28'</strong> de cada lado.</p>
+
+  <div class="kelvin">
+    <svg viewBox="0 0 700 300" id="kelvinSvg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#C8A84B"/></marker>
+      </defs>
+      <!-- cone lines 19°28' -->
+      <line x1="80" y1="150" x2="690" y2="40"  stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <line x1="80" y1="150" x2="690" y2="260" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text x="610" y="36" fill="#C8A84B" font-family="Trebuchet MS,sans-serif" font-size="13" font-weight="bold">19°28'</text>
+      <g id="kwaves"></g>
+      <!-- ship -->
+      <polygon points="80,150 110,143 110,157" fill="#0D3D36" stroke="#fff" stroke-width="1"/>
+      <line x1="80" y1="150" x2="690" y2="150" stroke="#cfe3df" stroke-width="1" stroke-dasharray="2 6" opacity=".5"/>
+      <text x="76" y="138" fill="#fff" font-family="Trebuchet MS,sans-serif" font-size="12">proa →</text>
+    </svg>
+    <div class="kcap"><b>Ondas transversais</b> (cristas ⟂ ao movimento, perto do casco) + <b>ondas divergentes</b> (em escalão, echelon), tudo contido no cone. A energia fica para trás porque a <b>velocidade de grupo é metade da de fase</b>.</div>
+  </div>
+
+  <div class="box formula">
+    <h4>Comprimento das ondas transversais</h4>
+    <div class="eq">L<sub>w</sub> = 2πV² / g<span class="lbl">ondas transversais correm na mesma direção e velocidade V do navio</span></div>
+    <p class="vars">Para as ondas <strong>divergentes</strong>, cuja normal à crista faz ângulo θ com o rumo: <b>L'<sub>w</sub></b> = (2πV²/g)·cos²θ. A componente de velocidade ao longo do rumo (V·cos θ) mantém o padrão fixo em relação ao navio.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Pegadinha — quem começa com crista?</h4>
+    <p>Proa e popa geram sistemas que <strong>começam com crista</strong>; os <strong>ombros</strong> (shoulders) geram sistemas que <strong>começam com cavado</strong> (depressão). Inverter isso quebra toda a lógica de interferência. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== 4.3 HUMPS ===== -->
+<section class="bloco" id="humps">
+  <h2 class="sec"><span class="n">4.3</span> Saliências e depressões (humps &amp; hollows)</h2>
+  <p class="lede">À medida que os sistemas de proa, popa e ombros se reforçam ou se cancelam, a curva de resistência ganha corcundas e vales. Deslize a velocidade e observe.</p>
+
+  <div class="humps">
+    <canvas id="hCanvas" width="860" height="230"></canvas>
+    <div class="hctrl">
+      <label for="hV">Número de Froude →</label>
+      <input type="range" id="hV" min="8" max="60" value="20" oninput="drawHumps()">
+      <div class="hread" id="hRead"></div>
+    </div>
+  </div>
+
+  <p>A baixas velocidades, a resistência é quase toda viscosa. Plotando C<sub>T</sub> contra F<sub>n</sub>, C<sub>T</sub> primeiro <em>cai</em>, depois cresce cada vez mais rápido. Perto de <span class="hl">F<sub>n</sub> ≈ 0,45 (V<sub>K</sub>/√L = 1,5)</span> a resistência pode variar com V<sup>6</sup> ou mais. As <strong>saliências</strong> (cristas que se somam) e <strong>depressões</strong> (crista anula cavado) explicam a relação estreita entre <strong>velocidade econômica e comprimento</strong>. A última saliência importante fica em <span class="hl">F<sub>n</sub> ≈ 0,5</span>. <span class="tag t-banca">BANCA</span></p>
+
+  <div class="box key">
+    <h4>Por que projetar para uma "depressão"?</h4>
+    <p>Operar numa <strong>velocidade favorável</strong> (numa depressão da curva) reduz a resistência por ondas. Mas a teoria <em>exagera</em> as saliências/depressões: na prática, a vantagem da depressão não é plenamente alcançada (Lunde, 1957), e os picos reais ocorrem em F<sub>n</sub> de 2 a 8% <em>maiores</em> que os teóricos — o navio se comporta como se fosse mais longo (alongamento virtual pela camada-limite). <span class="tag t-conflito">CONFLITO teoria × prática</span></p>
+  </div>
+</section>
+
+<!-- ===== 4.4 TEORIA ===== -->
+<section class="bloco" id="teoria">
+  <h2 class="sec"><span class="n">4.4</span> Cálculo teórico: Michell e Havelock</h2>
+  <p class="lede">Duas rotas, mesma expressão final. Ambas assumem fluido <strong>não viscoso e incompressível</strong> — então o navio só sente resistência por ondas.</p>
+
+  <table>
+    <tr><th>Método</th><th>Ideia</th><th>Autores</th></tr>
+    <tr><td><strong>Pressão integrada</strong></td><td>Achar o escoamento e a distribuição de pressão normal; integrar as componentes proa-popa sobre o casco.</td><td>Michell (1898), resgatado por Havelock (1951)</td></tr>
+    <tr><td><strong>Energia do rastro</strong></td><td>Calcular o padrão de ondas longe a ré; a resistência é o fluxo de energia para manter esse sistema.</td><td>Havelock; depois Inui (Japão)</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>As 4 condições restritivas da teoria de Michell <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">
+      <b>(a)</b> fluido não viscoso, escoamento irrotacional;<br>
+      <b>(b)</b> casco estreito em relação ao comprimento (inclinação superficial pequena);<br>
+      <b>(c)</b> ondas de altura pequena comparada ao comprimento;<br>
+      <b>(d)</b> sem afundamento (sinkage) nem trim.
+    </p>
+  </div>
+  <p>Havelock simula o casco por <strong>fontes e sumidouros</strong> (sources &amp; sinks): fontes na proa, sumidouros na popa, soma das intensidades = 0. Cada fonte/sumidouro em movimento gera um sistema de ondas; somando-os, obtém-se o padrão total e, por energia, a resistência.</p>
+</section>
+
+<!-- ===== 4.5 INTERFERENCIA ===== -->
+<section class="bloco" id="interf">
+  <h2 class="sec"><span class="n">4.5</span> Interferência — o corpo de cunha dupla de Wigley</h2>
+  <p class="lede">Wigley (1931) usou uma forma simples (duas cunhas + corpo paralelo) para mostrar como os sistemas de ondas interferem.</p>
+
+  <p>O perfil de onda ao longo do casco tem <strong>cinco contribuições</strong>:</p>
+  <table>
+    <tr><th class="center">#</th><th>Sistema</th><th>Começa com</th></tr>
+    <tr><td class="center">1</td><td>Perturbação simétrica (campo próximo, Bernoulli)</td><td>pico em proa e popa, depressão no centro</td></tr>
+    <tr><td class="center">2</td><td>Sistema de <strong>proa</strong></td><td>crista</td></tr>
+    <tr><td class="center">3</td><td>Ombro <strong>dianteiro</strong></td><td>cavado</td></tr>
+    <tr><td class="center">4</td><td>Ombro de <strong>popa</strong></td><td>cavado</td></tr>
+    <tr><td class="center">5</td><td>Sistema de <strong>popa</strong></td><td>crista</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>A forma da curva de resistência por ondas</h4>
+    <div class="eq">R<sub>W</sub> ∝ V<sup>6</sup> · (termo constante + 4 termos oscilatórios)<span class="lbl">Eq. (23)</span></div>
+    <div class="eq">C<sub>W</sub> = R<sub>W</sub>/(½ρSV²) ∝ V<sup>4</sup> · (termo constante + 4 termos oscilatórios)<span class="lbl">aumento estacionário ~V⁴ + 4 curvas de interferência</span></div>
+    <p class="vars">As 4 curvas oscilatórias cancelam-se a altíssima velocidade; acima de <strong>V/√(gL) ≈ 0,45</strong> não há mais saliência e R<sub>W</sub> decresce continuamente.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Armadilha do expoente — V⁶ vs V⁴</h4>
+    <p>A <strong>resistência</strong> R<sub>W</sub> ∝ V<sup>6</sup>; o <strong>coeficiente</strong> C<sub>W</sub> ∝ V<sup>4</sup> (perde-se V² ao dividir por ½ρSV²). A banca troca os dois ou confunde com a friccional (~V²). <span class="tag t-calc">CALCULO</span></p>
+  </div>
+</section>
+
+<!-- ===== 4.6 / 4.7 / 4.8 VISC ===== -->
+<section class="bloco" id="visc">
+  <h2 class="sec"><span class="n">4.6–4.8</span> Viscosidade, escala e a realidade</h2>
+  <p class="lede">A teoria ignora a viscosidade — e é por isso que a previsão erra. A camada-limite "alonga" virtualmente o casco.</p>
+
+  <h3>Efeito da viscosidade (4.6)</h3>
+  <p>A camada-limite separa o casco do escoamento potencial e cresce da proa à popa. Havelock (1926): a influência <em>direta</em> da viscosidade nas ondas é pequena; o efeito <em>indireto</em> equivale a alongar o corpo de popa e reduzir a inclinação das linhas d'água de popa — diminuindo o sistema de ondas de popa. Wigley (1962) estimou que a resistência do navio é <span class="hl">subestimada em ~9%</span> pelos cálculos usuais; o efeito some em baixa velocidade e acima de F<sub>n</sub> = 0,45.</p>
+
+  <h3>Efeito de escala (4.7) — as 3 causas de erro de C<sub>W</sub></h3>
+  <table>
+    <tr><th class="center">Causa</th><th>Origem do erro</th><th>Comportamento</th></tr>
+    <tr><td class="center">(a)</td><td>Simplificações matemáticas (velocidades de onda pequenas)</td><td>diminui com velocidade ↑</td></tr>
+    <tr><td class="center">(b)</td><td>Negligência da viscosidade sobre R<sub>W</sub></td><td>depende de R<sub>n</sub>; some para F<sub>n</sub> &gt; 0,45</td></tr>
+    <tr><td class="center">(c)</td><td>Efeito do movimento das ondas sobre R<sub>F</sub></td><td>importa quando F<sub>n</sub> &gt; 0,35 (afundamento/trim crescem)</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Conclusão prática (4.8)</h4>
+    <p>Saliências/depressões reais ocorrem em F<sub>n</sub> de <strong>2 a 8% maiores</strong> que os teóricos → o modelo se comporta como mais longo (camada-limite). A altíssima velocidade (F<sub>n</sub> &gt; 1,0), <span class="hl-amb">a resistência por ondas varia ~com o quadrado do deslocamento</span> — a forma perde importância e o que conta é o deslocamento por comprimento. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Seis questões com os distratores reais. Escolha e veja a explicação.</p>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os números e conceitos de cor.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Resistência por Ondas (§4)</summary>
+  <ul>
+    <li><b>Definição:</b> força líquida proa-popa das pressões <em>normais</em> (vs. friccional = tangenciais). Corpo fundo submerso não forma ondas.</li>
+    <li><b>Cunha de Kelvin:</b> 19°28' de cada lado. Transversais (⟂ ao movimento) + divergentes (em escalão). Vel. de grupo = ½ da de fase.</li>
+    <li><b>Comprimentos:</b> L<sub>w</sub> = 2πV²/g (transversais); L'<sub>w</sub> = (2πV²/g)cos²θ (divergentes).</li>
+    <li><b>Cinco sistemas (Wigley):</b> proa e popa começam com <em>crista</em>; ombros com <em>cavado</em>.</li>
+    <li><b>Humps &amp; hollows:</b> última saliência em F<sub>n</sub> ≈ 0,5; em F<sub>n</sub> ≈ 0,45 (V<sub>K</sub>/√L=1,5) R pode ir a V⁶.</li>
+    <li><b>Expoentes:</b> R<sub>W</sub> ∝ V⁶ · C<sub>W</sub> ∝ V⁴. Não confundir.</li>
+    <li><b>Michell — 4 condições:</b> não viscoso/irrotacional · casco estreito · ondas baixas · sem sinkage/trim.</li>
+    <li><b>Havelock:</b> fontes e sumidouros (soma = 0); resistência pela energia do rastro.</li>
+    <li><b>Escala (3 causas):</b> (a) simplificações, (b) viscosidade sobre R<sub>W</sub>, (c) ondas sobre R<sub>F</sub> (F<sub>n</sub>&gt;0,35). Picos reais 2–8% acima do teórico.</li>
+    <li><b>Alta velocidade (F<sub>n</sub>&gt;1):</b> R<sub>W</sub> ∝ deslocamento² — forma perde importância.</li>
+    <li><b>Distrator nº1:</b> resistência de ondas ≠ residual (residual inclui efeito de forma viscoso).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Resistência por Ondas (PNA Vol. II Cap. V §4) · Capital Sereno · fidelidade de fonte verificada contra o original em inglês.</div>
+</footer>
+
+<script>
+/* ---------- Kelvin wedge animation ---------- */
+(function(){
+  var g=document.getElementById('kwaves');
+  if(!g) return;
+  // transverse waves (arcs across the wake)
+  var html='';
+  for(var i=1;i<=7;i++){
+    var x=110+i*78;
+    var r=10+i*9;
+    // transverse crest: arc
+    html+='<path d="M '+x+' '+(150-r)+' Q '+(x-r*0.7)+' 150 '+x+' '+(150+r)+'" fill="none" stroke="#dff0ff" stroke-width="2" opacity="'+(0.85-i*0.07)+'"/>';
+  }
+  // diverging waves (echelon) — short strokes along the cone
+  for(var k=1;k<=9;k++){
+    var t=k/9;
+    var xu=80+t*610, yu=150-t*110;       // upper cone
+    var xl=80+t*610, yl=150+t*110;       // lower cone
+    html+='<line x1="'+(xu-14)+'" y1="'+(yu+10)+'" x2="'+(xu+8)+'" y2="'+(yu-4)+'" stroke="#bfe0ff" stroke-width="2.4" opacity="'+(0.8-t*0.5)+'"/>';
+    html+='<line x1="'+(xl-14)+'" y1="'+(yl-10)+'" x2="'+(xl+8)+'" y2="'+(yl+4)+'" stroke="#bfe0ff" stroke-width="2.4" opacity="'+(0.8-t*0.5)+'"/>';
+  }
+  g.innerHTML=html;
+})();
+
+/* ---------- Humps & Hollows chart ---------- */
+function ctModel(fn){
+  // schematic CT(Fn): viscous fall + wave rise with interference bumps
+  var visc = 0.6/Math.max(fn,0.06);            // viscous part falls
+  var base = 30*Math.pow(fn,4);                // steady wave rise ~Fn^4
+  var bump = 4*Math.cos(2*Math.PI/0.10*(fn-0.25))*Math.exp(-Math.pow((fn-0.30)/0.18,2)); // interference
+  var lastHump = 6*Math.exp(-Math.pow((fn-0.50)/0.05,2));
+  return visc + base + Math.max(0,bump) + lastHump + 1.0;
+}
+function drawHumps(){
+  var cv=document.getElementById('hCanvas'); if(!cv) return;
+  var ctx=cv.getContext('2d'); var W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);
+  var x0=46,y0=H-30,plotW=W-70,plotH=H-50;
+  var fnMin=0.10, fnMax=0.62;
+  // axes
+  ctx.strokeStyle='#cdbf99'; ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(x0,18);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55'; ctx.font='12px Trebuchet MS,sans-serif';
+  ctx.fillText('Cᴛ',8,28); ctx.fillText('Fn',W-30,y0+20);
+  // find max for scale
+  var maxC=0;
+  for(var fn=fnMin;fn<=fnMax;fn+=0.005){ maxC=Math.max(maxC,ctModel(fn)); }
+  function px(fn){return x0+(fn-fnMin)/(fnMax-fnMin)*plotW;}
+  function py(c){return y0-(c/maxC)*plotH;}
+  // gridlines at notable Fn
+  [0.25,0.32,0.45,0.50].forEach(function(f){
+    ctx.strokeStyle='#eee6d0';ctx.beginPath();ctx.moveTo(px(f),18);ctx.lineTo(px(f),y0);ctx.stroke();
+    ctx.fillStyle='#a99';ctx.fillText(f.toFixed(2),px(f)-10,y0+16);
+  });
+  // curve
+  ctx.strokeStyle='#1A7A6E'; ctx.lineWidth=2.5; ctx.beginPath();
+  var first=true;
+  for(var fn2=fnMin;fn2<=fnMax;fn2+=0.004){
+    var X=px(fn2),Y=py(ctModel(fn2));
+    if(first){ctx.moveTo(X,Y);first=false;}else ctx.lineTo(X,Y);
+  }
+  ctx.stroke();
+  // marker at chosen Fn
+  var fnSel=(+document.getElementById('hV').value)/100;
+  var mx=px(fnSel),my=py(ctModel(fnSel));
+  ctx.fillStyle='#9E3B2E'; ctx.beginPath();ctx.arc(mx,my,6,0,7);ctx.fill();
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(mx,my);ctx.lineTo(mx,y0);ctx.stroke();ctx.setLineDash([]);
+  // read-out
+  var label;
+  if(fnSel<0.20) label='quase só resistência viscosa';
+  else if(Math.abs(fnSel-0.45)<0.03 || Math.abs(fnSel-0.32)<0.03) label='região de SALIÊNCIA (sistemas somam)';
+  else if(Math.abs(fnSel-0.50)<0.03) label='última saliência importante (Fn≈0,5)';
+  else if(fnSel>0.52) label='além da última saliência — R por ondas cai';
+  else label='subindo: ondas dominam cada vez mais';
+  document.getElementById('hRead').innerHTML='Fn = <b>'+fnSel.toFixed(2)+'</b> · '+label;
+}
+drawHumps();
+window.addEventListener('resize',drawHumps);
+
+/* ---------- Quiz ---------- */
+var QUIZ=[
+  {q:"A resistência por formação de ondas resulta de quais forças do fluido sobre o casco?",
+   o:["Forças tangenciais (atrito de pele)","Forças normais (pressões), que geram ondas","Forças de turbilhão na esteira","Forças centrífugas das linhas de corrente"],
+   a:1,e:"Ondas = pressões NORMAIS ao casco (o espelho da friccional, que vem das tangenciais). Corpo fundo submerso varia a pressão mas, em fluido ideal, força líquida proa-popa = 0."},
+  {q:"O padrão de ondas de Kelvin está contido em um cone de meia-abertura de:",
+   o:["19°28' de cada lado da linha de movimento","39°56' de cada lado","45° de cada lado","Depende da velocidade do navio"],
+   a:0,e:"19°28' de cada lado — valor fixo, independente da velocidade. Decorre de a velocidade de grupo ser metade da de fase, deixando a energia para trás."},
+  {q:"No padrão de Wigley, os sistemas de ondas de PROA e POPA começam com:",
+   o:["Cavado (depressão)","Crista","Um começa com crista e o outro com cavado","Não há padrão definido"],
+   a:1,e:"Proa e popa começam com CRISTA; os ombros (shoulders) começam com CAVADO. Trocar isso destrói a lógica de interferência."},
+  {q:"Sobre a forma da curva de resistência por ondas:",
+   o:["R_W ∝ V² e C_W ∝ V","R_W ∝ V⁶ e C_W ∝ V⁴","R_W ∝ V⁴ e C_W ∝ V⁶","R_W e C_W ∝ V³"],
+   a:1,e:"R_W ∝ V⁶·(constante + 4 oscilatórios); ao dividir por ½ρSV² obtém-se C_W ∝ V⁴. Distrator: inverter os expoentes ou usar V² (friccional)."},
+  {q:"Qual NÃO é uma condição restritiva da teoria de Michell?",
+   o:["Fluido não viscoso e escoamento irrotacional","Casco estreito em relação ao comprimento","O navio sofre afundamento e trim apreciáveis","Ondas de altura pequena vs. comprimento"],
+   a:2,e:"Justamente o contrário: Michell assume SEM afundamento (sinkage) e SEM trim. As outras três são condições válidas."},
+  {q:"Na comparação teoria × prática, os picos (humps) reais da curva ocorrem em Fn:",
+   o:["Exatamente nos valores teóricos","2 a 8% MENORES que os teóricos","2 a 8% MAIORES que os teóricos","Aleatórios, sem padrão"],
+   a:2,e:"As saliências reais ocorrem em Fn 2–8% maiores: o navio se comporta como se fosse mais longo, por causa do alongamento virtual da camada-limite viscosa."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+
+/* ---------- Flashcards ---------- */
+var FC=[
+  {f:"Cunha de Kelvin",b:"Padrão de ondas contido em cone de 19°28' de cada lado. Independe da velocidade."},
+  {f:"Vel. de grupo vs fase",b:"Vel. de grupo = ½ da vel. de fase → energia fica para trás, cone fechado."},
+  {f:"L_w (transversais)",b:"L_w = 2πV²/g. Correm na direção e velocidade do navio."},
+  {f:"L'_w (divergentes)",b:"L'_w = (2πV²/g)·cos²θ, θ = ângulo da normal à crista com o rumo."},
+  {f:"5 sistemas (Wigley)",b:"Proa e popa: crista. Ombros (dianteiro e ré): cavado. + perturbação simétrica."},
+  {f:"Expoentes V",b:"R_W ∝ V⁶ · C_W ∝ V⁴. (perde V² ao dividir por ½ρSV²)"},
+  {f:"Última saliência",b:"Fn ≈ 0,5. Acima de V/√(gL)≈0,45, R por ondas decresce continuamente."},
+  {f:"Michell — 4 condições",b:"Não viscoso/irrotacional · casco estreito · ondas baixas · sem sinkage/trim."},
+  {f:"Havelock",b:"Fontes e sumidouros (Σ intensidades = 0); resistência pela energia do rastro."},
+  {f:"Eggert (1939)",b:"Boa parte da resistência por ondas nasce na parte superior do casco, perto da Ld'água."},
+  {f:"Escala — 3 causas de erro",b:"(a) simplificações; (b) viscosidade sobre R_W; (c) ondas sobre R_F (Fn>0,35)."},
+  {f:"Fn > 1,0",b:"R_W ∝ deslocamento². A forma perde importância; conta o deslocamento por comprimento."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+</script>
+</body>
+</html>
