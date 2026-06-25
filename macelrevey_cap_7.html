@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Caderno de fixacao PSCPP 2027 - Cap. 7 MacElrevey: Partida (Departure). Largar o pratico, velocidade de partida, agua rasa e vibracao, cartao de rumos, capacidade de manobra.">
+<meta name="theme-color" content="#0D3D36">
+<title>Cap. 7 - Partida (Departure) - MacElrevey - PSCPP 2027</title>
+<style>
+:root{--verde:#0D3D36;--verde2:#1A7A6E;--ouro:#C8A84B;--creme:#F7F3EA;--tinta:#1c2b28;--vermelho:#7a2230;--amarelo:#fff2a8;--ambar:#ffd98a}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--tinta);background:var(--creme);line-height:1.62;font-size:17px}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header.hero{background:linear-gradient(135deg,var(--verde) 0%,#0a2e29 100%);color:var(--creme);padding:38px 0 30px;border-bottom:4px solid var(--ouro)}
+header.hero .wrap{padding-top:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ouro);font-family:Arial,Helvetica,sans-serif;margin:0 0 8px}
+header.hero h1{margin:0 0 6px;font-size:30px;line-height:1.18;color:#fff}
+header.hero .sub{margin:10px 0 0;font-size:15px;color:#dfeae6;font-style:italic}
+.badge{display:inline-block;background:rgba(200,168,75,.18);border:1px solid var(--ouro);color:var(--ouro);font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:.04em;padding:4px 11px;border-radius:20px;margin-top:14px}
+main{padding:14px 0 60px}
+h2.sec{font-size:23px;color:var(--verde);margin:38px 0 4px;padding-bottom:7px;border-bottom:2px solid var(--ouro);line-height:1.25}
+h2.sec .en{font-size:15px;color:var(--verde2);font-style:italic;font-weight:normal}
+h3.subsec{font-size:18px;color:var(--verde2);margin:24px 0 2px}
+p{margin:11px 0}
+.lead{font-size:18px}
+.hl{background:var(--amarelo);padding:1px 3px;border-radius:3px}
+.hl-ambar{background:var(--ambar);padding:1px 3px;border-radius:3px}
+b,strong{color:#15211f}
+.eng{font-style:italic;color:#3a4a47}
+.cob{display:inline-block;background:var(--ambar);color:#5a3d00;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:.03em;padding:2px 7px;border-radius:10px;vertical-align:middle}
+.num{display:flex;gap:14px;align-items:flex-start;background:#fff;border-left:5px solid var(--ouro);border-radius:6px;padding:13px 16px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.num .big{font-size:30px;font-weight:bold;color:var(--verde);font-family:Arial,Helvetica,sans-serif;line-height:1;white-space:nowrap}
+.num .txt{font-size:15.5px}
+.quadro{background:#fff;border:1px solid #e2dccb;border-left:5px solid var(--verde2);border-radius:6px;padding:14px 18px;margin:16px 0;font-style:italic;color:#3a4a47}
+.quadro b{font-style:normal}
+.tab-wrap{overflow-x:auto;margin:16px 0;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
+th,td{border:1px solid #e2dccb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--verde);color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:13px;letter-spacing:.03em}
+tr:nth-child(even) td{background:#faf7ee}
+details.pscpp{margin:16px 0;border-radius:9px;background:#fff;overflow:hidden;border:2px solid var(--verde2);box-shadow:0 1px 4px rgba(0,0,0,.07)}
+details.pscpp.banca{border-color:var(--vermelho)}
+details.pscpp summary{cursor:pointer;padding:13px 16px;font-family:Arial,Helvetica,sans-serif;font-size:14.5px;font-weight:bold;letter-spacing:.02em;list-style:none;background:#f1f6f4;color:var(--verde);display:flex;align-items:center;gap:8px}
+details.pscpp.banca summary{background:#fbeff1;color:var(--vermelho)}
+details.pscpp summary::-webkit-details-marker{display:none}
+details.pscpp summary::after{content:"\25B8";margin-left:auto;transition:transform .2s}
+details.pscpp[open] summary::after{transform:rotate(90deg)}
+details.pscpp .body{padding:6px 18px 16px}
+details.pscpp .body p{font-size:15.5px}
+.alt{margin:8px 0;padding-left:4px}
+.alt b{color:var(--vermelho)}
+.gab{background:#eef6f2;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:14.5px}
+.painel{margin:40px 0 10px;text-align:center}
+#btnPainel{background:var(--verde);color:#fff;border:2px solid var(--ouro);border-radius:30px;font-family:Arial,Helvetica,sans-serif;font-size:15px;padding:13px 28px;cursor:pointer;letter-spacing:.03em;transition:background .2s}
+#btnPainel:hover{background:var(--verde2)}
+#statusPainel{margin-top:10px;font-size:14px;color:#5a665f;font-family:Arial,Helvetica,sans-serif}
+footer{background:var(--verde);color:#cfe0db;font-family:Arial,Helvetica,sans-serif;font-size:13px;padding:18px 0;text-align:center}
+.notas{font-size:13.5px;color:#5a665f;border-top:1px solid #ddd5c2;margin-top:34px;padding-top:14px}
+.notas h3{font-size:15px;color:var(--verde);font-family:Arial,Helvetica,sans-serif}
+.notas li{margin:5px 0}
+@media(max-width:520px){body{font-size:16px}header.hero h1{font-size:24px}h2.sec{font-size:20px}.num{flex-direction:column;gap:4px}.num .big{font-size:26px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">PSCPP 2027 - Modulo II - Arte Naval - Blocos E&middot;F</p>
+    <h1>Capitulo 7 - Partida (Departure)</h1>
+    <p class="sub">MacElrevey &amp; MacElrevey - <i>Shiphandling for the Mariner</i>, 4a ed., 2004 - "Departure" (pp. 156-162)</p>
+    <p class="sub" style="margin-top:4px">Caderno de fixacao Capital Sereno - terminologia cruzada com Fonseca (<i>Arte Naval</i>, 8a ed.) e BTM (Swift &amp; Bailey)</p>
+    <span class="badge">&#9875; MacElrevey - Shiphandling</span>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<p class="lead">Capitulo curto, mas <span class="hl">denso de pontos ja cobrados</span>: a saida do porto fecha o ciclo da praticagem. Dois nucleos de banca concentram-se aqui - a <b>velocidade de partida limitada pela agua rasa</b> (squat, succao, vibracao) e o <b>cartao de rumos / planejamento de derrota</b> - ambos cobrados em multiplas provas. Tres figuras do livro sao charges e uma pintura a oleo (Cap. Brian Hope); por nao serem diagramas tecnicos, sao aqui <i>descritas</i>, nao reproduzidas.</p>
+
+<!-- ===== 1 ABERTURA ===== -->
+<h2 class="sec">1. Abertura - a regulacao e o profissional ativo</h2>
+<p>A epigrafe (Cap. Charles P. Low) evoca o mentor que forma o oficial. O fio do capitulo: a partida exige <span class="hl">o mesmo profissionalismo da chegada</span> - planejamento, disciplina de passadico e respeito as limitacoes fisicas do navio e da via. Nada de "falsos heroismos com um navio que pertence a outra pessoa".</p>
+
+<!-- ===== 2 LARGANDO O PRATICO ===== -->
+<h2 class="sec">2. Largando o pratico <span class="en">- Dropping the Pilot</span></h2>
+<p>Faz-se um <b>anteparo de sotavento</b> (sotavento criado pelo proprio navio, <span class="eng">making a lee</span>) e o pratico desce pela escada para a lancha. Cuidados de seguranca no transbordo (cruza com o Cap. 1):</p>
+<div class="num"><span class="big">&#129518;</span><span class="txt"><b>Escada de pratico:</b> iluminacao boa na escada e no conves (sem ofuscar a lancha); retinida e boia com luz de prontidao; comunicacao por <b>walkie-talkie</b> entre a escada e o passadico; escada de quebra-peito (<span class="eng">accommodation ladder</span>) se a altura ao mar exceder <b>9 m</b>; <span class="hl-ambar">peia (frapping line) prendendo a escada de quebra-peito ao costado</span> para nao balancar.</span></div>
+
+<!-- ===== 3 VELOCIDADE DE PARTIDA ===== -->
+<h2 class="sec">3. Velocidade de partida <span class="en">- Departure Speed</span></h2>
+<p>Apos o pratico embarcar na lancha, o navio retoma o aproamento e segue ao ponto de partida <span class="hl">numa velocidade que acompanha o fluxo do trafego de saida</span>. Mover-se com o fluxo <b>reduz pela metade</b> o trafego a administrar (so cruzando e de encontro apresentam problema). "O tempo economizado nao justifica velocidade excessiva."</p>
+
+<div class="quadro"><b>Fig. 7-1 (charge):</b> o pratico, prestes a desembarcar, pede - "Comandante, o senhor poderia diminuir um pouco a velocidade enquanto eu embarco na lancha?" Reforca que a velocidade de partida tambem se ajusta a <b>seguranca do transbordo</b>.</div>
+
+<h3 class="subsec">A agua rasa limita a velocidade (nucleo de banca)</h3>
+<p>Forcar o navio acima da velocidade apropriada a profundidade causa <b>squat e succao excessivos</b>; como o fluxo de agua ao leme e restringido pela <b>folga abaixo da quilha (UKC)</b>, o navio <span class="hl">torna-se dificil de governar</span>. <span class="cob">JA COBRADO 2008-Q4 / 2012-Q44/Q45 / 2006-Q16/Q42</span></p>
+<div class="num"><span class="big">&#9888;</span><span class="txt"><b>Dois sinais certos de velocidade excessiva em agua rasa:</b> (1) <span class="hl">maior dificuldade de governo</span>; (2) <span class="hl-ambar">vibracao pronunciada sentida por todo o navio</span> (vibracao harmonica do casco). <span class="cob">JA COBRADO 2012-Q44</span></span></div>
+<div class="num"><span class="big">&#128200;</span><span class="txt"><b>Regra da saida:</b> aumente a velocidade <b>incrementalmente</b> a medida que alcanca aguas mais profundas - <span class="hl">nao leve a velocidade de mar logo na partida</span>. Vale ate o navio <i>deixar</i> a condicao de agua rasa, nao so dentro do porto. Cada vez mais critico com VLCCs (calado maior, mais potencia, maior tendencia a vibracao harmonica).</span></div>
+
+<div class="quadro"><b>Fig. 7-2 (charge):</b> um comandante experiente, ele proprio "vibrando", adverte o imediato sobre acelerar cedo demais em agua rasa. Liga-se a indicacao de agua rasa por vibracao (2012-Q44).</div>
+
+<details class="pscpp banca"><summary>&#127919; Banca - agua rasa: vibracao + governo dificil = velocidade excessiva</summary>
+<div class="body">
+<p>Tema de altissima incidencia, cruzando os blocos de <b>squat/UKC</b> (Cap. 2) e <b>partida</b> (Cap. 7). O encadeamento causal a fixar:</p>
+<p class="alt"><b>Velocidade alta em agua rasa</b> &rarr; squat e succao excessivos &rarr; UKC reduzida &rarr; fluxo de agua ao leme restringido &rarr; <b>governo dificil</b> + <b>vibracao por todo o casco</b>.</p>
+<p class="alt"><b>Citacao literal de MacElrevey confirmada em 2012-Q5</b> (squat em canal estreito). O Cap. 2 complementa: navio que faz 16 nos a 80 RPM em aguas abertas faz so 9-10 nos com as mesmas RPM em agua rasa ("puxando muita agua").</p>
+<p class="alt"><b>Distrator classico:</b> afirmar que se deve <i>aumentar</i> a velocidade para "sair logo" de uma situacao de trafego - o experiente faz o oposto: <span class="hl-ambar">reduz e deixa a situacao se resolver</span>.</p>
+</div></details>
+
+<!-- ===== 4 MANOBRANDO COM OUTROS NAVIOS ===== -->
+<h2 class="sec">4. Manobrando com outros navios</h2>
+<p>Empenhe-se em <span class="hl">mover-se com o fluxo do trafego</span>, haja ou nao esquema de separacao formal. Surgindo problema, <b>nao hesite em parar o navio</b> e deixar a situacao se resolver. Como comandante e imediatos ja desenvolveram a pericia, manobrar mantendo aproamento e posicao nao deve ser problema. <span class="hl-ambar">O manobrista inexperiente tende a aumentar a velocidade para "fugir" do perigo - o experiente nao.</span></p>
+
+<!-- ===== 5 CARTAO DE RUMOS ===== -->
+<h2 class="sec">5. Cartao de rumos e planejamento de derrota</h2>
+<p>A <b>derrota de saida</b> deve ser tao cuidadosamente planejada quanto a de entrada: carta na timoneira, rumos lancados a tinta e rotulados, e um <b>cartao de rumos</b> (<span class="eng">course card</span>) feito pelo comandante.</p>
+<div class="num"><span class="big">&#128203;</span><span class="txt"><b>O cartao de rumos:</b> minimiza distracoes e mantem o comandante na <b>janela da linha de centro</b> conduzindo a manobra. "O pratico desenha a carta do porto de memoria e ainda assim porta um cartao - como conduziria o comandante o navio sem um?" Deve conter, <span class="hl">em ordem, os trechos retos/enfiamentos com rumo, comprimento do trecho e ponto de guinada ao fim de cada um</span>. Cabe num cartao 3x5 polegadas no bolso. <span class="cob">JA COBRADO 2008-Q19/Q30 / 2011-Q1/Q13</span></span></div>
+
+<div class="quadro"><b>Fig. 7-3 (pintura a oleo, Cap. Brian Hope):</b> "O pratico parte ao largo do Cabo Henry" - um cargueiro descendo ao mar com a lancha de pratico a contrabordo, no desembarque. Ilustra artisticamente o "largar o pratico". (Obra autoral; nao reproduzida aqui.)</div>
+
+<details class="pscpp banca"><summary>&#127919; Banca - cartao de rumos / passage planning (BTM, Swift &amp; Bailey)</summary>
+<div class="body">
+<p>Cobrado em quatro questoes (2008-Q19, 2008-Q30, 2011-Q1, 2011-Q13). O conteudo do cartao e o ponto-chave: <b>trechos retos em ordem &middot; rumo &middot; comprimento &middot; ponto de guinada</b>. Cruza com o <b>passage planning</b> do BTM (Swift &amp; Bailey, fonte do edital) e com as <b>turning bearings</b> (marcacoes de guinada).</p>
+<p class="alt"><b>Distincao que a banca explora:</b> <i>voyage planning</i> (planejamento geral, formularios) e mais amplo que o <i>passage planning</i> operacional, que para aguas restritas exige <b>carta anotada + cartao de rumos</b>.</p>
+<p class="alt"><b>Distrator:</b> atribuir o cartao de rumos ao pratico em vez do comandante - o texto e claro: o comandante o elabora e o porta para conduzir o navio (ambos, pratico e comandante, portam o seu).</p>
+</div></details>
+
+<!-- ===== 6 CAPACIDADE DE MANOBRA ===== -->
+<h2 class="sec">6. Capacidade de manobra <span class="en">- Ability to Maneuver</span></h2>
+<p>A capacidade de manobrar deve ser <b>preservada ate o navio estar bem ao largo</b>. Pontos de fixacao:</p>
+<div class="tab-wrap"><table>
+<thead><tr><th>Fator</th><th>Cuidado na partida</th></tr></thead>
+<tbody>
+<tr><td><b>Combustivel de manobra</b></td><td>Muitos motores rodam com <b>oleo pesado (HFO)</b> em rota, mas exigem <b>diesel leve (MDO/MGO)</b> para manobra. <span class="hl-ambar">Trocar para oleo pesado cedo demais reduz a capacidade de manobra</span> - mantenha em diesel leve ate estar livre.</td></tr>
+<tr><td><b>Velocidade incremental</b></td><td>Subir a velocidade aos poucos preserva governo e evita vibracao/squat (Secao 3).</td></tr>
+<tr><td><b>Prontidao do leme/maquina</b></td><td>Manter maquina e leme prontos para manobra ate sair do <b>canal de trafego</b> (fairway) e das aguas rasas.</td></tr>
+</tbody>
+</table></div>
+
+<details class="pscpp"><summary>&#9875; Decorar - a partida em 4 chaves</summary>
+<div class="body">
+<p><b>"Sotavento, incremental, cartao, diesel leve."</b></p>
+<p>1. <b>Largar o pratico</b> com anteparo de sotavento + escada bem iluminada e peada. 2. <b>Velocidade incremental</b> - agua rasa limita; vibracao + governo dificil = excesso. 3. <b>Cartao de rumos</b> do comandante: trechos retos, rumo, comprimento, ponto de guinada. 4. <b>Diesel leve</b> ate estar livre - nao trocar para HFO cedo. E sempre: com problema de trafego, <b>parar</b>, nao acelerar.</p>
+</div></details>
+
+<!-- ===== SINTESE ===== -->
+<h2 class="sec">Sintese da entrega</h2>
+<p>A partida espelha a chegada em profissionalismo. Largue o pratico com sotavento e escada segura; <span class="hl">suba a velocidade incrementalmente</span> - a agua rasa limita, e <b>vibracao por todo o casco + governo dificil sao o sinal de excesso</b> (squat/succao/UKC). Mova-se com o fluxo do trafego e, em apuros, <b>pare em vez de acelerar</b>. Conduza pelo <b>cartao de rumos</b> (trechos retos, rumo, comprimento, ponto de guinada) e preserve a capacidade de manobra mantendo o <b>diesel leve</b> ate estar bem ao largo.</p>
+
+<div class="painel">
+  <button id="btnPainel" onclick="enviarPainel()">&#11014; Enviar ao Painel PSCPP</button>
+  <div id="statusPainel"></div>
+</div>
+
+<div class="notas">
+<h3>Notas de terminologia</h3>
+<ul>
+<li><b>Dropping the pilot</b> - largar o pratico; desembarque na estacao de pratico.</li>
+<li><b>Making a lee (anteparo de sotavento)</b> - usar o proprio casco para abrigar a lancha do pratico do vento/mar.</li>
+<li><b>Course card (cartao de rumos)</b> - cartao de bolso com trechos retos, rumos, comprimentos e pontos de guinada.</li>
+<li><b>Turning bearings (marcacoes de guinada)</b> - marcacao que indica o momento exato de cair.</li>
+<li><b>Fairway</b> - canal de trafego / via navegavel principal.</li>
+<li><b>HFO x MDO/MGO</b> - oleo pesado (rota) x diesel leve (manobra); nao trocar para HFO cedo demais.</li>
+<li><b>Harmonic vibration</b> - vibracao harmonica do casco em agua rasa a velocidade excessiva.</li>
+</ul>
+<p style="margin-top:14px"><b>Fonte:</b> MacElrevey, D. H. &amp; MacElrevey, D. E., <i>Shiphandling for the Mariner</i>, 4a ed., 2004 - Cap. 7, "Departure" (pp. 156-162). Traducao anotada para estudo PSCPP 2027; questoes [BANCA: 2006-Q16/Q42, 2008-Q4/Q19/Q30, 2011-Q1/Q13, 2012-Q5/Q44/Q45]; cruzamentos com Fonseca (<i>Arte Naval</i>, 8a ed.) e BTM (Swift &amp; Bailey). Gabaritos de 2011/2012 a [VERIFICAR gabarito impresso].</p>
+</div>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> &middot; Modulo II &middot; Arte Naval - Shiphandling/MacElrevey &middot; Cap. 7 &middot; Blocos E&middot;F &middot; Capital Sereno</div>
+</footer>
+
+<script>
+const SUPABASE_URL = "https://iftourtecxtmvuhptvmo.supabase.co";
+const TABELA = "respostas";
+const REGISTRO = {
+  caderno_id: "macelrevey_cap_7",
+  tipo: "caderno",
+  bloco: "F",
+  tema: "Governo Portuario",
+  assunto: "Cap. 7 - Partida (Departure)",
+  enunciado: "Largar o pratico (anteparo de sotavento, escada iluminada/peada, walkie-talkie, 9 m, frapping line); velocidade de partida (acompanhar o fluxo do trafego; agua rasa limita: squat/succao/UKC -> governo dificil + vibracao por todo o casco = excesso; subir velocidade incrementalmente, nao levar a velocidade de mar na partida); manobrar com outros navios (parar, nao acelerar); cartao de rumos do comandante (trechos retos, rumo, comprimento, ponto de guinada); capacidade de manobra (manter diesel leve, nao HFO cedo). JA COBRADO 2006-Q16/Q42, 2008-Q4/Q19/Q30, 2011-Q1/Q13, 2012-Q5/Q44/Q45.",
+  acertou: null,
+  sessao_data: new Date().toISOString().slice(0,10)
+};
+async function enviarPainel(){
+  const status = document.getElementById('statusPainel');
+  const btn = document.getElementById('btnPainel');
+  status.textContent = "Enviando..."; btn.disabled = true;
+  try{
+    const resp = await fetch(SUPABASE_URL + "/rest/v1/" + TABELA, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json", "Prefer":"return=minimal" },
+      body: JSON.stringify(REGISTRO)
+    });
+    status.textContent = resp.ok ? "\u2713 Registrado no Painel PSCPP."
+      : "Resposta " + resp.status + " - verifique a apikey/politicas RLS da tabela.";
+  }catch(e){
+    status.textContent = "Falha de rede ao enviar. Confira a URL e as permissoes.";
+  }finally{ btn.disabled = false; }
+}
+</script>
+</body>
+</html>
