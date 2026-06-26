@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Capacidades e Limitações dos Rebocadores — Hensen Cap. 4 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --teal:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E; --azul:#2C5F8A;
+    --amarelo-borda:#E6C700; --ambar-borda:#E08A1E;
+    --label-t:#185FA5; --label-p:#993C1D; --label-c:#3B6D11;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  /* ===== HERO ===== */
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:720px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  /* ===== TOC ===== */
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s;white-space:nowrap}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:30px 0 70px}
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:0 0 22px}
+  .related a{font-weight:bold}
+
+  /* ===== FICHA / INTRO ===== */
+  .ficha{background:var(--card);border:1px solid var(--linha);border-left:5px solid var(--verde2);border-radius:12px;padding:16px 20px;margin:0 0 26px;font-size:13.5px;line-height:1.6;box-shadow:var(--sombra)}
+  .ficha b{color:var(--verde)}
+  .intro{font-size:16px;margin:14px 0}
+
+  /* ===== HEADINGS DE SEÇÃO ===== */
+  h2.sec{color:var(--verde);font-size:23px;font-weight:normal;margin:42px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--linha);scroll-margin-top:64px}
+  h3.sub{color:var(--verde2);font-size:18px;font-weight:normal;margin:28px 0 10px}
+  p{margin:12px 0}
+
+  /* ===== MARCAÇÃO DUPLA (highlights) ===== */
+  mark.alto{background:linear-gradient(transparent 56%,var(--amarelo) 56%);padding:0 2px;color:inherit}
+  mark.cobrado{background:linear-gradient(transparent 56%,var(--ambar) 56%);padding:0 2px;color:inherit}
+  .legenda-marc{font-size:12.5px;background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:12px 16px;margin:18px 0;box-shadow:var(--sombra);font-family:'Trebuchet MS',sans-serif}
+  .legenda-marc span{display:inline-block;margin-right:18px}
+  .sw{display:inline-block;width:16px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+
+  /* ===== KEY BOX ===== */
+  .key-box{background:#e6f3f1;border:1px solid #bcd6cf;border-left:5px solid var(--verde2);border-radius:12px;padding:14px 18px;margin:18px 0;font-size:14px}
+  .key-box b{color:var(--verde)}
+
+  /* ===== TABELA COMPARATIVA ===== */
+  .tabela-wrap{overflow-x:auto;margin:18px 0;border-radius:10px;box-shadow:var(--sombra)}
+  table.cmp{width:100%;border-collapse:collapse;font-size:13px;background:var(--card)}
+  table.cmp th{background:var(--verde);color:var(--creme);text-align:left;padding:9px 11px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;border:1px solid #0a302b}
+  table.cmp td{padding:9px 11px;border:1px solid var(--linha);vertical-align:top}
+  table.cmp tr:nth-child(even) td{background:#faf7ee}
+  .tipo-conv{border-left:4px solid #993C1D}
+  .tipo-combi{border-left:4px solid #BA7517}
+  .tipo-trator{border-left:4px solid #0F6E56}
+  .tipo-rev{border-left:4px solid #534AB7}
+  .tipo-asd{border-left:4px solid #185FA5}
+  .pos{display:inline-block;background:#e7f1ef;color:var(--verde);border-radius:10px;padding:1px 8px;font-size:12px;white-space:nowrap}
+  .badge{display:inline-block;padding:2px 8px;border-radius:11px;font-size:11.5px;white-space:nowrap;font-family:'Trebuchet MS',sans-serif;font-weight:bold}
+  .b-good{background:#EAF3DE;color:#3B6D11}
+  .b-ok{background:#FAEEDA;color:#854F0B}
+  .b-bad{background:#FCEBEB;color:#A32D2D}
+  .b-na{background:#F1EFE8;color:#5F5E5A}
+  .legenda-tpc{font-size:13px;margin:10px 0 4px;color:#4a463c;font-family:'Trebuchet MS',sans-serif}
+
+  /* ===== CARTÕES DE REFERÊNCIA ===== */
+  .ref-grid{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0}
+  .ref-card{flex:1;min-width:200px;background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:14px 16px;box-shadow:var(--sombra)}
+  .ref-card h4{margin:0 0 9px;color:var(--verde);font-size:15px;font-weight:bold;font-family:'Trebuchet MS',sans-serif;border-bottom:1px solid var(--linha);padding-bottom:6px}
+  .ref-line{display:flex;justify-content:space-between;font-size:13px;margin:5px 0;gap:8px}
+  .lab-t{color:var(--label-t);font-weight:bold}
+  .lab-p{color:var(--label-p);font-weight:bold}
+  .lab-c{color:var(--label-c);font-weight:bold}
+
+  /* ===== DIAGRAMAS SVG ===== */
+  figure.diag{margin:24px 0;background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 18px 14px;box-shadow:var(--sombra)}
+  figure.diag svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  figcaption{font-size:13px;color:var(--mute);text-align:center;margin-top:10px;font-style:italic}
+  .diag-title{color:var(--verde2);font-size:16px;margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-weight:bold}
+
+  /* ===== CAIXAS PSCPP (details) ===== */
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:20px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px;display:flex;align-items:center;gap:10px;color:var(--creme)}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓";color:var(--ouro);font-size:15px}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp .corpo{padding:0 0 16px;font-size:14px;line-height:1.55}
+  details.pscpp .corpo b{color:var(--ouro)}
+  details.pscpp mark.alto{background:linear-gradient(transparent 56%,rgba(255,241,166,.5) 56%);color:#fff}
+  details.pscpp mark.cobrado{background:linear-gradient(transparent 56%,rgba(242,200,121,.55) 56%);color:#fff}
+  .tag{display:inline-block;font-size:10.5px;letter-spacing:.05em;border-radius:4px;padding:2px 8px;text-transform:uppercase;font-weight:bold}
+  .tag-cobrado{background:var(--ambar);color:#7a4708}
+  .tag-potencial{background:var(--amarelo);color:#6b5a00}
+
+  /* ===== ESTABILIDADE — num-cards / crit / timeline ===== */
+  .num-grid{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0}
+  .num-card{flex:1;min-width:150px;background:var(--card);border:1px solid var(--linha);border-radius:12px;border-top:4px solid var(--verde2);padding:14px 16px;box-shadow:var(--sombra)}
+  .num-card .val{font-size:26px;color:var(--verde);font-weight:bold;line-height:1.1;font-family:'Trebuchet MS',sans-serif}
+  .num-card .lab{font-size:12.5px;color:var(--mute);margin-top:6px;line-height:1.4}
+  table.crit{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border-radius:10px;overflow:hidden;margin:16px 0;box-shadow:var(--sombra)}
+  table.crit th{background:var(--verde2);color:#fff;text-align:left;padding:9px 11px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12px;border:1px solid #156258}
+  table.crit td{padding:9px 11px;border:1px solid var(--linha);vertical-align:top}
+  table.crit tr:nth-child(even) td{background:#f6f9f8}
+  table.crit td.grp{background:#e6f3f1;color:var(--verde);font-weight:bold}
+  .timeline{margin:18px 0;padding-left:6px}
+  .tl-item{display:flex;gap:14px;margin:0 0 4px}
+  .tl-date{min-width:118px;font-size:13px;color:var(--verde);font-weight:bold;text-align:right;padding-top:2px;font-family:'Trebuchet MS',sans-serif}
+  .tl-bar{position:relative;width:14px;flex:0 0 14px}
+  .tl-bar::before{content:"";position:absolute;left:5px;top:0;bottom:0;width:2px;background:var(--ouro)}
+  .tl-dot{position:absolute;left:1px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--verde2);border:2px solid var(--creme)}
+  .tl-body{flex:1;font-size:13.5px;padding:0 0 16px}
+  .tl-body b{color:var(--verde)}
+  ul.clean{margin:12px 0;padding-left:22px}
+  ul.clean li{margin:7px 0}
+
+  /* ===== NOTAS DE RODAPÉ ===== */
+  .footnotes{margin-top:42px;border-top:2px solid var(--ouro);padding-top:14px;font-size:13px;color:#4a463c}
+  .footnotes h4{color:var(--verde);font-weight:normal;font-size:15px;margin:0 0 10px}
+  .footnotes ol{margin:0;padding-left:20px}
+  .footnotes li{margin:7px 0}
+  sup.fn{color:var(--verde2);font-size:11px;cursor:help}
+
+  /* ===== FLASHCARDS / QUIZ ===== */
+  .secblk{margin:42px 0 0;scroll-margin-top:64px}
+  .secblk > h2{font-size:23px;color:var(--verde);margin:0 0 4px;font-weight:normal;border-bottom:2px solid var(--linha);padding-bottom:8px}
+  .secblk > .lede{color:var(--mute);font-size:15px;margin:12px 0 18px}
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12.5px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:14.5px;background:#fff;border:1.5px solid var(--linha);border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:13.5px;padding:11px 14px;border-radius:8px;display:none;line-height:1.5}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .backlink{display:inline-block;margin:24px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer.estante{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:36px}
+  footer.estante b{color:var(--ouro)}
+
+  @media(max-width:700px){
+    .hero h1{font-size:25px}
+    .ref-grid,.num-grid{flex-direction:column}
+    .tl-date{min-width:90px}
+  }
+  @media print{nav.toc{display:none}details.pscpp .corpo{display:block!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo II · Arte Naval · Bloco H — Rebocadores</p>
+    <h1>Capacidades e Limitações dos <em>Rebocadores</em></h1>
+    <p class="sub">A lógica T–P–C (ponto de reboque, propulsão, centro de pressão) e a razão a:b que governa a eficácia de cada tipo em cada posição e modo; mais a estabilidade do rebocador, as regras IMO (2008 IS Code) e os dois regimes de girting.</p>
+    <div class="src"><b>Fonte:</b> Hensen, <i>Tug Use in Port</i>, 4ª ed. (2021), Cap. 4 (Tug Capabilities and Limitations). <b>Subtópicos:</b> H3 (Bollard Pull e Desempenho) e H4 (Estabilidade / girting). <b>Correlação banca:</b> similaridade temática.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#s1">Razão a:b</a>
+    <a href="#s2">T·P·C por tipo</a>
+    <a href="#s3">Tabela comparativa</a>
+    <a href="#s4">Diagramas ▦</a>
+    <a href="#s5">Pontos-chave</a>
+    <a href="#s6">Estabilidade / IMO</a>
+    <a href="#s7">Sínteses</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Caderno do <strong>Bloco H — Rebocadores (Arte Naval)</strong>, subtópicos <strong>H3 (Bollard Pull / Desempenho)</strong> e <strong>H4 (Estabilidade / risco de girting)</strong>. Complementa o caderno de <em>Tipos de Rebocador</em> (Cap. 2): aqui o foco é <em>como</em> cada tipo rende em cada posição e os limites de segurança.
+</div>
+
+
+
+
+<div class="ficha">
+  <b>Fonte primária:</b> Hensen, H. — <i>Tug Use in Port: A Practical Guide</i>, 4ª ed., Capítulo 4 (Tug Capabilities and Limitations).<br>
+  <b>Bloco do edital:</b> I — Manobrabilidade · <b>Assunto:</b> Rebocadores (tipos, métodos de tração, posicionamento).<br>
+  <b>Tipos abordados:</b> convencional, combi-tug, trator (VS/azimutal), trator reverso, ASD.<br>
+  <b>Escopo:</b> síntese comparativa das posições de serviço (avante, à popa, no costado) relacionando T, P e C nos modos direto e indireto, mais estabilidade de rebocadores e as novas regras IMO (2008 IS Code).
+</div>
+
+<p class="intro">
+  O Capítulo 4 de Hensen detalha como três centros de força — o <span class="lab-t">ponto de reboque (T)</span>,
+  a <span class="lab-p">propulsão (P)</span> e o <span class="lab-c">centro lateral de pressão (C)</span> — governam o desempenho
+  e a segurança de cada tipo de rebocador. <mark class="alto">A relação mútua entre esses três pontos define não só a
+  eficácia, mas também a segurança da operação</mark><sup class="fn">1</sup>. O presente estudo reúne, em tabela e em diagramas
+  esquemáticos, como cada modelo se comporta nas diversas posições e nos modos de tração direto e indireto.
+</p>
+
+<div class="legenda-marc">
+  <span><span class="sw" style="background:var(--amarelo);border:1px solid var(--amarelo-borda);"></span>Alto potencial de cobrança</span>
+  <span><span class="sw" style="background:var(--ambar);border:1px solid var(--ambar-borda);"></span>Já cobrado em bancas anteriores</span>
+</div>
+
+<h2 class="sec" id="s1">1. Princípio organizador: a razão a:b</h2>
+
+<div class="key-box">
+  <b>Conceito-chave.</b> A capacidade de um rebocador trabalhar a 90° (empurrando) ou de gerar tração líquida (puxando)
+  depende da relação entre dois braços de alavanca:<br>
+  <b>a</b> = distância entre a propulsão (P) e o ponto de empurrão/reboque (Pu/T);<br>
+  <b>b</b> = distância entre o centro de pressão (C) e o mesmo ponto (Pu/T).<br>
+  <mark class="alto">Quanto maior <b>a</b> em relação a <b>b</b>, menos empuxo lateral é necessário para manter a posição — e
+  mais potência sobra para empurrar ou puxar efetivamente</mark><sup class="fn">2</sup>.
+</div>
+
+<h2 class="sec" id="s2">2. Referência rápida — posição dos elementos por tipo</h2>
+
+<p>Antes da tabela comparativa, vale fixar onde cada elemento se localiza em cada tipo de rebocador. <mark class="cobrado">A
+diferença fundamental entre tipos está na posição relativa de T e P</mark><sup class="fn">3</sup>: no convencional T fica
+à frente de P; no trator, T fica à popa (atrás de P).</p>
+
+<div class="ref-grid">
+  <div class="ref-card">
+    <h4>Convencional</h4>
+    <div class="ref-line"><span><span class="lab-t">T</span> Ponto de reboque</span><span>proa → meia-nau</span></div>
+    <div class="ref-line"><span><span class="lab-p">P</span> Propulsão</span><span>popa</span></div>
+    <div class="ref-line"><span><span class="lab-c">C</span> Centro de pressão</span><span>~0,3 × LWL da popa</span></div>
+  </div>
+  <div class="ref-card">
+    <h4>Trator (VS / azimutal)</h4>
+    <div class="ref-line"><span><span class="lab-t">T</span> Ponto de reboque</span><span>popa (skeg)</span></div>
+    <div class="ref-line"><span><span class="lab-p">P</span> Propulsão</span><span>proa / centro</span></div>
+    <div class="ref-line"><span><span class="lab-c">C</span> Centro de pressão</span><span>~0,4 × LWL da popa</span></div>
+  </div>
+  <div class="ref-card">
+    <h4>Trator reverso / ASD</h4>
+    <div class="ref-line"><span><span class="lab-t">T</span> Ponto de reboque</span><span>proa do rebocador</span></div>
+    <div class="ref-line"><span><span class="lab-p">P</span> Propulsão</span><span>popa</span></div>
+    <div class="ref-line"><span><span class="lab-c">C</span> Centro de pressão</span><span>próximo/à frente de meia-nau</span></div>
+  </div>
+  <div class="ref-card">
+    <h4>Combi-tug</h4>
+    <div class="ref-line"><span><span class="lab-t">T</span> Ponto de reboque</span><span>meia-nau + popa (gob rope)</span></div>
+    <div class="ref-line"><span><span class="lab-p">P</span> Propulsão</span><span>popa + thruster de proa</span></div>
+    <div class="ref-line"><span><span class="lab-c">C</span> Centro de pressão</span><span>~0,3 × LWL da popa</span></div>
+  </div>
+</div>
+
+<h2 class="sec" id="s3">3. Tabela comparativa — eficácia por tipo, posição e modo</h2>
+
+<div class="tabela-wrap">
+<table class="cmp">
+<thead>
+<tr>
+  <th>Tipo</th>
+  <th>Posição</th>
+  <th>Modo</th>
+  <th>Eficácia</th>
+  <th>Faixa vel.</th>
+  <th>Relação T–P–C e efeito principal</th>
+  <th>Risco girting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tipo-conv">
+  <td>Convencional</td><td><span class="pos">Proa (avante)</span></td><td>Direto</td>
+  <td><span class="badge b-good">Boa</span></td><td>0–5 nós</td>
+  <td>T à frente de P → braço longo. Gira em torno de T usando forças hidrodinâmicas. Eficácia <i>aumenta</i> com a velocidade (ângulo b). Gera componente de avanço no navio.</td>
+  <td><span class="badge b-bad">Alto</span></td>
+</tr>
+<tr class="tipo-conv">
+  <td>Convencional</td><td><span class="pos">Popa (ré)</span></td><td>Direto</td>
+  <td><span class="badge b-ok">Limitada</span></td><td>0–3 nós</td>
+  <td>T próximo à meia-nau, P na popa. Com velocidade só dirige um bordo. Acima de 3 nós, mover de pos. 1 → 2 é perigoso. Sem gob rope, sem frenagem efetiva.</td>
+  <td><span class="badge b-bad">Muito alto</span></td>
+</tr>
+<tr class="tipo-conv">
+  <td>Convencional</td><td><span class="pos">Costado (empurra)</span></td><td>Direto</td>
+  <td><span class="badge b-ok">Moderada</span></td><td>0–4 nós</td>
+  <td>C na popa → difícil manter 90°. Acima de 4 nós, forças longitudinais crescem rápido e aceleram o navio. Linhas de popa ajudam a manter posição.</td>
+  <td><span class="badge b-ok">Médio</span></td>
+</tr>
+<tr class="tipo-conv">
+  <td>Convencional</td><td><span class="pos">Popa (ré)</span></td><td>Indireto</td>
+  <td><span class="badge b-bad">Muito baixa</span></td><td>—</td>
+  <td>Operar de través à popa em velocidade é extremamente perigoso. O convencional <i>não</i> opera em modo indireto típico.</td>
+  <td><span class="badge b-bad">Extremo</span></td>
+</tr>
+<tr class="tipo-combi">
+  <td>Combi-tug</td><td><span class="pos">Popa (ré)</span></td><td>Direto</td>
+  <td><span class="badge b-ok">Moderada</span></td><td>0–4 nós</td>
+  <td>Thruster de proa amplia manobrabilidade. Com T extra na popa (via gob rope) opera de través. Melhor que convencional simples como rebocador de popa.</td>
+  <td><span class="badge b-ok">Médio</span></td>
+</tr>
+<tr class="tipo-combi">
+  <td>Combi-tug</td><td><span class="pos">Proa (avante)</span></td><td>Direto</td>
+  <td><span class="badge b-ok">Boa (≈ conv.)</span></td><td>0–5 nós</td>
+  <td>Comportamento similar ao convencional. Thruster de proa aumenta a resposta e a troca de bordo. Ainda gera componente de avanço.</td>
+  <td><span class="badge b-ok">Médio</span></td>
+</tr>
+<tr class="tipo-trator">
+  <td>Trator (VS/Az.)</td><td><span class="pos">Proa (avante)</span></td><td>Direto</td>
+  <td><span class="badge b-ok">Moderada</span></td><td>0–4 nós</td>
+  <td>T na popa, P na proa → distância T–C pequena → alto esforço lateral, reduz tração líquida. Menos eficaz que o convencional em velocidade. Azimutal &gt; VS aqui.</td>
+  <td><span class="badge b-good">Baixo</span></td>
+</tr>
+<tr class="tipo-trator">
+  <td>Trator (VS/Az.)</td><td><span class="pos">Popa (ré)</span></td><td>Direto</td>
+  <td><span class="badge b-good">Muito boa</span></td><td>0–6 nós</td>
+  <td>T na popa (skeg) → C próximo de T. Pouco esforço lateral. Dirige ambos os bordos, controla velocidade. Propulsão azimutal alterna posições 1a/1b/2 rapidamente.</td>
+  <td><span class="badge b-good">Muito baixo</span></td>
+</tr>
+<tr class="tipo-trator">
+  <td>Trator (VS/Az.)</td><td><span class="pos">Popa (ré)</span></td><td>Indireto</td>
+  <td><span class="badge b-good">Excelente</span></td><td>&gt; 5–6 nós</td>
+  <td>T na popa + skeg → grande área lateral. C move-se para a popa junto com T → momento de giro mínimo, máxima sustentação. Forças podem exceder muito o bollard pull estático.</td>
+  <td><span class="badge b-good">Mínimo</span></td>
+</tr>
+<tr class="tipo-trator">
+  <td>Trator (VS/Az.)</td><td><span class="pos">Costado (empurra)</span></td><td>Direto</td>
+  <td><span class="badge b-good">Boa</span></td><td>0–6 nós</td>
+  <td>Propulsão omnidirecional perto do ponto de empurrão → grande razão a:b. Popa afasta hélices do casco → perda mínima por wash. Eficaz acima do convencional.</td>
+  <td><span class="badge b-na">N/A</span></td>
+</tr>
+<tr class="tipo-rev">
+  <td>Trator reverso</td><td><span class="pos">Proa (avante)</span></td><td>Direto</td>
+  <td><span class="badge b-ok">Moderada</span></td><td>0–4 nós</td>
+  <td>Proa do rebocador → proa do navio (bow-to-bow). Comparável ao trator. Diferença depende de razão a:b, potência e <i>underwater plane</i>.</td>
+  <td><span class="badge b-good">Baixo</span></td>
+</tr>
+<tr class="tipo-rev">
+  <td>Trator reverso</td><td><span class="pos">Popa (ré)</span></td><td>Direto</td>
+  <td><span class="badge b-good">Muito boa</span></td><td>0–6 nós</td>
+  <td>Proa do rebocador → popa do navio. T na popa → mesma lógica do trator. Assiste ambos os bordos e controla velocidade.</td>
+  <td><span class="badge b-good">Muito baixo</span></td>
+</tr>
+<tr class="tipo-rev">
+  <td>Trator reverso</td><td><span class="pos">Popa (ré)</span></td><td>Indireto</td>
+  <td><span class="badge b-ok">Boa (≤ trator)</span></td><td>&gt; 5 nós</td>
+  <td>C tende a ficar à frente de meia-nau (sem skeg grande aft). Distância C–T maior que no trator VS → mais esforço lateral → força resultante menor.</td>
+  <td><span class="badge b-good">Baixo</span></td>
+</tr>
+<tr class="tipo-asd">
+  <td>ASD</td><td><span class="pos">Proa (avante, conv.)</span></td><td>Direto</td>
+  <td><span class="badge b-good">Boa</span></td><td>0–5 nós</td>
+  <td>Opera como convencional sobre a popa. T no guincho aft, P aft → altas forças de escora (maiores que convencional). C mais à frente → maior momento a vencer.</td>
+  <td><span class="badge b-bad">Alto</span></td>
+</tr>
+<tr class="tipo-asd">
+  <td>ASD</td><td><span class="pos">Proa (avante, rev.)</span></td><td>Direto</td>
+  <td><span class="badge b-ok">Moderada</span></td><td>0–4 nós</td>
+  <td>Opera como trator reverso (proa do ASD → proa do navio). Desempenho comparável ao trator reverso. Depende do skeg e da razão a:b.</td>
+  <td><span class="badge b-good">Baixo</span></td>
+</tr>
+<tr class="tipo-asd">
+  <td>ASD</td><td><span class="pos">Popa (ré)</span></td><td>Direto</td>
+  <td><span class="badge b-good">Muito boa</span></td><td>0–6 nós</td>
+  <td>Opera como trator reverso na popa. Proa do ASD → popa do navio. Alto governo em ambos os bordos. Excelente controle de velocidade.</td>
+  <td><span class="badge b-good">Muito baixo</span></td>
+</tr>
+<tr class="tipo-asd">
+  <td>ASD</td><td><span class="pos">Popa (ré)</span></td><td>Indireto</td>
+  <td><span class="badge b-ok">Boa (≤ trator)</span></td><td>&gt; 5 nós</td>
+  <td>C mais à frente que o trator → distância C–T maior → mais esforço lateral → tração líquida menor. Skeg <i>box keel</i> ou <i>twin fins</i> aproximam C de T. Designs específicos (Kinsman Hawk) otimizam.</td>
+  <td><span class="badge b-good">Baixo</span></td>
+</tr>
+<tr class="tipo-asd">
+  <td>ASD</td><td><span class="pos">Costado (push/pull)</span></td><td>Direto</td>
+  <td><span class="badge b-good">Excelente</span></td><td>0–8 nós (push)</td>
+  <td>C mais à frente + P atrás → grande razão a:b. Omnidirecional → forças em qualquer direção, sem componente longitudinal acelerador. A 8,5 nós, 80% da força transversal é sustentação. Superior ao convencional em toda a faixa.</td>
+  <td><span class="badge b-na">N/A</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="legenda-tpc">
+  <span class="lab-t">T</span> = ponto de reboque &nbsp;·&nbsp;
+  <span class="lab-p">P</span> = propulsão &nbsp;·&nbsp;
+  <span class="lab-c">C</span> = centro lateral de pressão &nbsp;·&nbsp;
+  a = dist. P→Pu &nbsp;·&nbsp; b = dist. C→Pu
+</div>
+<div style="font-size:13px;margin-bottom:8px;">
+  <span class="badge b-good">Boa / Baixo</span>
+  <span class="badge b-ok">Moderada / Médio</span>
+  <span class="badge b-bad">Baixa / Alto</span>
+  <span class="badge b-na">N/A</span>
+</div>
+
+<h3 class="sub">Figuras-fonte da tabela</h3>
+<p>As situações que preenchem a tabela acima derivam diretamente das figuras 4.18, 4.19 (painéis A–D) e 4.21 de Hensen.
+Os esquemas abaixo as reconstroem no estilo do livro — navio como bloco, rebocador como forma menor, com setas de força e
+marcação de T, P e C. <mark class="cobrado">A diferença básica entre os tipos está na posição do ponto de reboque em relação
+à propulsão</mark> (Fig. 4.18).</p>
+
+<!-- FIGURA 4.18 -->
+<figure class="diag">
+  <div class="diag-title">Fig. 4.18 · Diferença básica entre tipos de rebocador (towing on a line)</div>
+  <svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="f18" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <text x="170" y="28" font-size="14" font-weight="bold" fill="#993C1D" text-anchor="middle">Convencional</text>
+    <text x="170" y="46" font-size="12" fill="#5a5346" text-anchor="middle">T à frente da propulsão</text>
+    <rect x="90" y="70" width="160" height="64" rx="22" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+    <text x="100" y="106" font-size="12" fill="#5a5346">proa</text>
+    <text x="240" y="106" font-size="12" fill="#5a5346" text-anchor="end">popa</text>
+    <circle cx="130" cy="102" r="5" fill="#185FA5"/>
+    <text x="130" y="158" font-size="12" fill="#185FA5" text-anchor="middle">T (reboque)</text>
+    <line x1="130" y1="108" x2="130" y2="144" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <circle cx="220" cy="102" r="5" fill="#993C1D"/>
+    <text x="220" y="194" font-size="12" fill="#993C1D" text-anchor="middle">P (propulsão)</text>
+    <line x1="220" y1="108" x2="220" y2="180" stroke="#993C1D" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <circle cx="205" cy="102" r="4" fill="#3B6D11"/>
+    <text x="205" y="176" font-size="12" fill="#3B6D11" text-anchor="middle">C</text>
+    <line x1="205" y1="106" x2="205" y2="162" stroke="#3B6D11" stroke-width="0.5" stroke-dasharray="3 2"/>
+
+    <text x="510" y="28" font-size="14" font-weight="bold" fill="#0F6E56" text-anchor="middle">Trator</text>
+    <text x="510" y="46" font-size="12" fill="#5a5346" text-anchor="middle">T à ré da propulsão</text>
+    <rect x="430" y="70" width="160" height="64" rx="22" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+    <text x="440" y="106" font-size="12" fill="#5a5346">proa</text>
+    <text x="580" y="106" font-size="12" fill="#5a5346" text-anchor="end">popa</text>
+    <circle cx="470" cy="102" r="5" fill="#993C1D"/>
+    <text x="470" y="194" font-size="12" fill="#993C1D" text-anchor="middle">P (propulsão)</text>
+    <line x1="470" y1="108" x2="470" y2="180" stroke="#993C1D" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <circle cx="550" cy="102" r="5" fill="#185FA5"/>
+    <text x="550" y="158" font-size="12" fill="#185FA5" text-anchor="middle">T (reboque)</text>
+    <line x1="550" y1="108" x2="550" y2="144" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <circle cx="535" cy="102" r="4" fill="#3B6D11"/>
+    <text x="535" y="176" font-size="12" fill="#3B6D11" text-anchor="middle">C (skeg)</text>
+    <line x1="535" y1="106" x2="535" y2="162" stroke="#3B6D11" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <text x="340" y="260" font-size="12" fill="#5a5346" text-anchor="middle">Toda a diferença de desempenho deriva da posição relativa de T e P.</text>
+  </svg>
+  <figcaption>Reconstrução da Fig. 4.18 de Hensen. Convencional: T à frente de P. Trator: T à ré de P (sobre o skeg).</figcaption>
+</figure>
+
+<p style="margin-top:22px;">A Fig. 4.19 compara trator e convencional rebocando na linha, com o navio em seguimento. Cada painel mostra
+<mark class="alto">todas as posições previstas para o rebocador</mark> — não apenas uma. Reconstruo os quatro painéis (A–D)
+separadamente para que cada conjunto de posições fique completo e legível. Convenção: círculo azul = T (ponto de reboque),
+círculo vermelho = P (propulsão).</p>
+
+<!-- FIGURA 4.19 A -->
+<figure class="diag">
+  <div class="diag-title">Fig. 4.19 A · Trator (ou trator reverso) como rebocador avante</div>
+  <svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="f19a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <rect x="300" y="40" width="80" height="220" rx="22" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="340" y="154" font-size="12" fill="#5F5E5A" text-anchor="middle">navio</text>
+    <line x1="340" y1="70" x2="340" y2="44" stroke="#5F5E5A" stroke-width="2" marker-end="url(#f19a)"/>
+    <text x="340" y="88" font-size="11" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <!-- posição a bombordo: rebocador centrado em (200,100), proa apontando ao navio -->
+    <g transform="translate(200 100) rotate(118)">
+      <rect x="-18" y="-40" width="36" height="80" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <circle cx="0" cy="-32" r="3.5" fill="#993C1D"/>
+      <circle cx="0" cy="32" r="3.5" fill="#185FA5"/>
+    </g>
+    <line x1="226" y1="118" x2="300" y2="92" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="150" y="80" font-size="11" fill="#5a5346" text-anchor="middle">posição BB</text>
+    <!-- posição a boreste: rebocador centrado em (200,210) -->
+    <g transform="translate(200 210) rotate(62)">
+      <rect x="-18" y="-40" width="36" height="80" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <circle cx="0" cy="-32" r="3.5" fill="#993C1D"/>
+      <circle cx="0" cy="32" r="3.5" fill="#185FA5"/>
+    </g>
+    <line x1="226" y1="192" x2="300" y2="210" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="150" y="246" font-size="11" fill="#5a5346" text-anchor="middle">posição BE</text>
+    <text x="430" y="120" font-size="12" fill="#5a5346">Pode mudar de bombordo</text>
+    <text x="430" y="138" font-size="12" fill="#5a5346">a boreste rápido (propulsão</text>
+    <text x="430" y="156" font-size="12" fill="#5a5346">à proa). Mais alinhado à</text>
+    <text x="430" y="174" font-size="12" fill="#5a5346">linha → tração menos eficaz</text>
+    <text x="430" y="192" font-size="12" fill="#5a5346">que o convencional.</text>
+    <text x="430" y="232" font-size="11" fill="#993C1D">● P = propulsão (proa)</text>
+    <text x="430" y="250" font-size="11" fill="#185FA5">● T = reboque (popa)</text>
+  </svg>
+  <figcaption>Reconstrução da Fig. 4.19 A. O trator avante assiste a ambos os bordos; alterna lados rapidamente graças à propulsão na proa. P e T sobre o eixo longitudinal.</figcaption>
+</figure>
+
+<!-- FIGURA 4.19 B -->
+<figure class="diag">
+  <div class="diag-title">Fig. 4.19 B · Convencional (ou ASD sobre a popa) como rebocador avante</div>
+  <svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="f19b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <rect x="300" y="40" width="80" height="220" rx="22" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="340" y="154" font-size="12" fill="#5F5E5A" text-anchor="middle">navio</text>
+    <line x1="340" y1="70" x2="340" y2="44" stroke="#5F5E5A" stroke-width="2" marker-end="url(#f19b)"/>
+    <text x="340" y="88" font-size="11" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <!-- pos 1a: proa (T) apontando ao navio, popa (P) afastada -->
+    <g transform="translate(200 105) rotate(58)">
+      <rect x="-18" y="-40" width="36" height="80" rx="10" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+      <circle cx="0" cy="-32" r="3.5" fill="#185FA5"/>
+      <circle cx="0" cy="32" r="3.5" fill="#993C1D"/>
+    </g>
+    <line x1="226" y1="88" x2="300" y2="92" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="150" y="86" font-size="11" fill="#185FA5" text-anchor="middle">pos. 1a</text>
+    <!-- pos 1b: de través (broadside) -->
+    <g transform="translate(205 215) rotate(20)">
+      <rect x="-18" y="-40" width="36" height="80" rx="10" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+      <circle cx="0" cy="-32" r="3.5" fill="#185FA5"/>
+      <circle cx="0" cy="32" r="3.5" fill="#993C1D"/>
+    </g>
+    <line x1="232" y1="200" x2="300" y2="208" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="150" y="250" font-size="11" fill="#185FA5" text-anchor="middle">pos. 1b</text>
+    <text x="430" y="100" font-size="12" fill="#5a5346">pos. 1a: ângulo (b) grande,</text>
+    <text x="430" y="118" font-size="12" fill="#5a5346">gira em torno de T → tração</text>
+    <text x="430" y="136" font-size="12" fill="#5a5346">mais eficaz que o trator.</text>
+    <text x="430" y="162" font-size="12" fill="#5a5346">pos. 1b: muito baixa veloc.,</text>
+    <text x="430" y="180" font-size="12" fill="#5a5346">de través, governo sem</text>
+    <text x="430" y="198" font-size="12" fill="#5a5346">acelerar o navio.</text>
+    <text x="430" y="238" font-size="11" fill="#185FA5">● T = reboque (proa)</text>
+    <text x="430" y="256" font-size="11" fill="#993C1D">● P = propulsão (popa)</text>
+  </svg>
+  <figcaption>Reconstrução da Fig. 4.19 B. O convencional avante gira em torno de T; em pos. 1b (muito baixa velocidade) opera de través. P e T sobre o eixo longitudinal.</figcaption>
+</figure>
+
+<!-- FIGURA 4.19 C -->
+<figure class="diag">
+  <div class="diag-title">Fig. 4.19 C · Trator como rebocador à popa (after) — direto e indireto</div>
+  <svg viewBox="0 0 680 380" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="f19c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <rect x="300" y="36" width="80" height="110" rx="22" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="340" y="96" font-size="12" fill="#5F5E5A" text-anchor="middle">navio</text>
+    <line x1="340" y1="60" x2="340" y2="40" stroke="#5F5E5A" stroke-width="2" marker-end="url(#f19c)"/>
+    <text x="340" y="78" font-size="11" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <text x="340" y="138" font-size="11" fill="#5F5E5A" text-anchor="middle">popa do navio</text>
+    <!-- pos 1a: direto, alinhado, acelera -->
+    <g transform="translate(255 250) rotate(20)">
+      <rect x="-17" y="-36" width="34" height="72" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <circle cx="0" cy="-29" r="3.5" fill="#185FA5"/>
+      <circle cx="0" cy="29" r="3.5" fill="#993C1D"/>
+    </g>
+    <line x1="245" y1="216" x2="322" y2="150" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="255" y="306" font-size="11" fill="#0F6E56" text-anchor="middle">pos. 1a</text>
+    <!-- pos 1b: direto, alinhado, freia -->
+    <g transform="translate(340 256) rotate(0)">
+      <rect x="-17" y="-36" width="34" height="72" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <circle cx="0" cy="-29" r="3.5" fill="#185FA5"/>
+      <circle cx="0" cy="29" r="3.5" fill="#993C1D"/>
+    </g>
+    <line x1="340" y1="220" x2="340" y2="150" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="340" y="312" font-size="11" fill="#0F6E56" text-anchor="middle">pos. 1b</text>
+    <!-- pos 1c: indireto, casco a ângulo -->
+    <g transform="translate(440 248) rotate(50)">
+      <rect x="-17" y="-36" width="34" height="72" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <circle cx="0" cy="-29" r="3.5" fill="#185FA5"/>
+      <circle cx="0" cy="29" r="3.5" fill="#993C1D"/>
+    </g>
+    <line x1="418" y1="222" x2="362" y2="146" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="462" y="300" font-size="11" fill="#0F6E56" text-anchor="middle">pos. 1c</text>
+    <!-- pos 2: governo ao bordo oposto / standby -->
+    <g transform="translate(250 160) rotate(-34)">
+      <rect x="-17" y="-34" width="34" height="68" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <circle cx="0" cy="-27" r="3.5" fill="#185FA5"/>
+      <circle cx="0" cy="27" r="3.5" fill="#993C1D"/>
+    </g>
+    <line x1="276" y1="142" x2="302" y2="120" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="216" y="150" font-size="11" fill="#0F6E56" text-anchor="middle">pos. 2</text>
+    <text x="500" y="130" font-size="12" fill="#5a5346">1a: direto, acelera</text>
+    <text x="500" y="148" font-size="12" fill="#5a5346">1b: direto, freia</text>
+    <text x="500" y="166" font-size="12" fill="#5a5346">1c: indireto (&gt;5–6 nós)</text>
+    <text x="500" y="184" font-size="12" fill="#5a5346">2: bordo oposto / standby</text>
+    <text x="500" y="220" font-size="11" fill="#185FA5">● T = reboque (proa)</text>
+    <text x="500" y="238" font-size="11" fill="#993C1D">● P = propulsão (popa)</text>
+  </svg>
+  <figcaption>Reconstrução da Fig. 4.19 C. O trator à popa cobre pos. 1a (acelera), 1b (freia), 1c (indireto) e 2 (bordo oposto / standby). T na proa, P na popa, ambos no eixo central.</figcaption>
+</figure>
+
+<!-- FIGURA 4.19 D -->
+<figure class="diag">
+  <div class="diag-title">Fig. 4.19 D · Convencional como rebocador à popa (after)</div>
+  <svg viewBox="0 0 680 360" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="f19d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <rect x="300" y="36" width="80" height="110" rx="22" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="340" y="96" font-size="12" fill="#5F5E5A" text-anchor="middle">navio</text>
+    <line x1="340" y1="60" x2="340" y2="40" stroke="#5F5E5A" stroke-width="2" marker-end="url(#f19d)"/>
+    <text x="340" y="78" font-size="11" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <text x="340" y="138" font-size="11" fill="#5F5E5A" text-anchor="middle">popa do navio</text>
+    <!-- pos 1: direto, governo a um bordo -->
+    <g transform="translate(300 250) rotate(16)">
+      <rect x="-17" y="-36" width="34" height="72" rx="10" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+      <circle cx="0" cy="-29" r="3.5" fill="#185FA5"/>
+      <circle cx="0" cy="29" r="3.5" fill="#993C1D"/>
+    </g>
+    <line x1="292" y1="216" x2="330" y2="150" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="300" y="306" font-size="11" fill="#993C1D" text-anchor="middle">pos. 1</text>
+    <!-- pos 2: de través (broadside), só com gob rope -->
+    <g transform="translate(440 245) rotate(70)">
+      <rect x="-17" y="-36" width="34" height="72" rx="10" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+      <circle cx="0" cy="-29" r="3.5" fill="#185FA5"/>
+      <circle cx="0" cy="29" r="3.5" fill="#993C1D"/>
+    </g>
+    <line x1="418" y1="226" x2="362" y2="148" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="462" y="298" font-size="11" fill="#A32D2D" text-anchor="middle">pos. 2</text>
+    <text x="500" y="128" font-size="12" fill="#5a5346">pos. 1: governo só a um</text>
+    <text x="500" y="146" font-size="12" fill="#5a5346">bordo.</text>
+    <text x="500" y="172" font-size="12" fill="#A32D2D">pos. 2: de través — só com</text>
+    <text x="500" y="190" font-size="12" fill="#A32D2D">gob rope; &gt;3 nós há risco</text>
+    <text x="500" y="208" font-size="12" fill="#A32D2D">de girting / emborcar.</text>
+    <text x="500" y="244" font-size="11" fill="#185FA5">● T = reboque (proa)</text>
+    <text x="500" y="262" font-size="11" fill="#993C1D">● P = propulsão (popa)</text>
+  </svg>
+  <figcaption>Reconstrução da Fig. 4.19 D. O convencional à popa só governa um bordo na pos. 1; a pos. 2 (de través) exige gob rope e é perigosa acima de ~3 nós. T na proa, P na popa, no eixo central.</figcaption>
+</figure>
+
+<!-- FIGURA 4.21 -->
+<figure class="diag">
+  <div class="diag-title">Fig. 4.21 · Rebocador no costado: empurrando (A) e puxando (B) — razão a:b</div>
+  <svg viewBox="0 0 680 360" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="f21" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <text x="40" y="26" font-size="14" font-weight="bold" fill="#1A7A6E">A · Empurrando</text>
+    <rect x="40" y="44" width="100" height="280" rx="22" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="90" y="188" font-size="12" fill="#5F5E5A" text-anchor="middle">navio</text>
+    <line x1="90" y1="82" x2="90" y2="50" stroke="#5F5E5A" stroke-width="2" marker-end="url(#f21)"/>
+    <text x="90" y="98" font-size="11" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <rect x="150" y="166" width="120" height="44" rx="12" fill="#E6F1FB" stroke="#378ADD" stroke-width="1"/>
+    <line x1="146" y1="188" x2="124" y2="188" stroke="#378ADD" stroke-width="3" marker-end="url(#f21)"/>
+    <text x="200" y="156" font-size="11" fill="#5a5346" text-anchor="middle">empurra (Pu)</text>
+    <circle cx="160" cy="188" r="4" fill="#3B6D11"/>
+    <text x="160" y="234" font-size="11" fill="#3B6D11" text-anchor="middle">C</text>
+    <line x1="160" y1="192" x2="160" y2="220" stroke="#3B6D11" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <circle cx="256" cy="188" r="4" fill="#993C1D"/>
+    <text x="256" y="234" font-size="11" fill="#993C1D" text-anchor="middle">P</text>
+    <line x1="256" y1="192" x2="256" y2="220" stroke="#993C1D" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <line x1="150" y1="252" x2="160" y2="252" stroke="#5a5346" stroke-width="0.5"/>
+    <text x="208" y="256" font-size="11" fill="#5a5346" text-anchor="middle">b (C→Pu)</text>
+    <line x1="150" y1="272" x2="256" y2="272" stroke="#5a5346" stroke-width="0.5"/>
+    <text x="208" y="288" font-size="11" fill="#5a5346" text-anchor="middle">a (P→Pu)</text>
+    <text x="200" y="316" font-size="11" fill="#5a5346" text-anchor="middle">a &gt;&gt; b → 90° eficaz</text>
+
+    <text x="400" y="26" font-size="14" font-weight="bold" fill="#1A7A6E">B · Puxando</text>
+    <rect x="400" y="44" width="100" height="280" rx="22" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="450" y="188" font-size="12" fill="#5F5E5A" text-anchor="middle">navio</text>
+    <line x1="450" y1="82" x2="450" y2="50" stroke="#5F5E5A" stroke-width="2" marker-end="url(#f21)"/>
+    <text x="450" y="98" font-size="11" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <rect x="540" y="166" width="120" height="44" rx="12" fill="#E6F1FB" stroke="#378ADD" stroke-width="1"/>
+    <line x1="536" y1="188" x2="506" y2="188" stroke="#0F6E56" stroke-width="2"/>
+    <text x="560" y="156" font-size="11" fill="#5a5346" text-anchor="middle">linha (T)</text>
+    <circle cx="550" cy="188" r="4" fill="#3B6D11"/>
+    <text x="550" y="234" font-size="11" fill="#3B6D11" text-anchor="middle">C</text>
+    <line x1="550" y1="192" x2="550" y2="220" stroke="#3B6D11" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <circle cx="646" cy="188" r="4" fill="#993C1D"/>
+    <text x="646" y="234" font-size="11" fill="#993C1D" text-anchor="middle">P</text>
+    <line x1="646" y1="192" x2="646" y2="220" stroke="#993C1D" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <text x="590" y="288" font-size="11" fill="#5a5346" text-anchor="middle">omnidirecional aplica força</text>
+    <text x="590" y="304" font-size="11" fill="#5a5346" text-anchor="middle">na direção do movimento</text>
+  </svg>
+  <figcaption>Reconstrução da Fig. 4.21 de Hensen. O desempenho no costado depende da razão a:b (a = distância P→Pu; b = distância C→Pu). Quanto maior a em relação a b, mais empuxo sobra para empurrar/puxar a 90°.</figcaption>
+</figure>
+
+
+<h2 class="sec" id="s4">4. Diagramas esquemáticos por modo de emprego</h2>
+<p>Os cinco esquemas seguintes — no estilo dos desenhos do livro — mostram a posição do rebocador em relação ao navio,
+com as setas de força e a marcação de T, P e C.</p>
+
+<!-- DIAGRAMA 1 -->
+<figure class="diag">
+  <div class="diag-title">4.1 · Rebocador avante na linha — trator vs convencional</div>
+  <svg viewBox="0 0 680 380" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="ar1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <text x="40" y="28" font-size="12" fill="#5a5346">Fluxo de água (navio com seguimento) →</text>
+    <line x1="40" y1="44" x2="120" y2="44" stroke="#85B7EB" stroke-width="1" opacity="0.6" marker-end="url(#ar1)"/>
+    <line x1="40" y1="300" x2="120" y2="300" stroke="#85B7EB" stroke-width="1" opacity="0.6" marker-end="url(#ar1)"/>
+    <rect x="250" y="60" width="180" height="280" rx="40" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="340" y="196" font-size="14" font-weight="bold" fill="#2C2C2A" text-anchor="middle">Navio</text>
+    <text x="340" y="220" font-size="12" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <line x1="340" y1="120" x2="340" y2="80" stroke="#5F5E5A" stroke-width="2" marker-end="url(#ar1)"/>
+    <rect x="120" y="90" width="44" height="96" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+    <text x="142" y="206" font-size="14" font-weight="bold" fill="#0F6E56" text-anchor="middle">Trator</text>
+    <text x="142" y="222" font-size="12" fill="#5F5E5A" text-anchor="middle">T à popa</text>
+    <circle cx="142" cy="178" r="4" fill="#185FA5"/>
+    <text x="158" y="182" font-size="12" fill="#185FA5">T</text>
+    <circle cx="142" cy="105" r="4" fill="#993C1D"/>
+    <text x="108" y="109" font-size="12" fill="#993C1D" text-anchor="end">P</text>
+    <line x1="158" y1="178" x2="262" y2="110" stroke="#0F6E56" stroke-width="2"/>
+    <text x="200" y="156" font-size="12" fill="#5a5346" text-anchor="middle">linha</text>
+    <rect x="120" y="220" width="44" height="96" rx="12" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+    <text x="142" y="336" font-size="14" font-weight="bold" fill="#993C1D" text-anchor="middle">Convencional</text>
+    <text x="142" y="352" font-size="12" fill="#5F5E5A" text-anchor="middle">T avante de P</text>
+    <circle cx="142" cy="240" r="4" fill="#185FA5"/>
+    <text x="158" y="244" font-size="12" fill="#185FA5">T</text>
+    <circle cx="142" cy="305" r="4" fill="#993C1D"/>
+    <text x="108" y="309" font-size="12" fill="#993C1D" text-anchor="end">P</text>
+    <line x1="158" y1="240" x2="262" y2="300" stroke="#0F6E56" stroke-width="2"/>
+    <text x="500" y="120" font-size="12" fill="#5a5346">Trator: fica mais alinhado</text>
+    <text x="500" y="138" font-size="12" fill="#5a5346">à linha, mais resistência</text>
+    <text x="500" y="156" font-size="12" fill="#5a5346">lateral → tração menor.</text>
+    <text x="500" y="284" font-size="12" fill="#5a5346">Convencional: gira em</text>
+    <text x="500" y="302" font-size="12" fill="#5a5346">torno de T, menor ângulo</text>
+    <text x="500" y="320" font-size="12" fill="#5a5346">de ataque → mais eficaz.</text>
+  </svg>
+  <figcaption>Comparável à Fig. 4.19 A/B de Hensen. A vante, o convencional é mais eficaz que o trator quando o navio tem seguimento.</figcaption>
+</figure>
+
+<!-- DIAGRAMA 2 -->
+<figure class="diag">
+  <div class="diag-title">4.2 · Rebocador à popa — modos direto e indireto</div>
+  <svg viewBox="0 0 680 420" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <text x="40" y="30" font-size="14" font-weight="bold" fill="#1A7A6E">Modo direto (baixa velocidade)</text>
+    <rect x="60" y="50" width="120" height="150" rx="24" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="120" y="124" font-size="12" fill="#5F5E5A" text-anchor="middle">Navio (popa)</text>
+    <line x1="120" y1="80" x2="120" y2="55" stroke="#5F5E5A" stroke-width="2" marker-end="url(#ar2)"/>
+    <text x="120" y="96" font-size="12" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <rect x="98" y="240" width="44" height="86" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+    <text x="120" y="346" font-size="14" font-weight="bold" fill="#0F6E56" text-anchor="middle">Trator / ASD</text>
+    <line x1="120" y1="240" x2="120" y2="202" stroke="#0F6E56" stroke-width="2"/>
+    <text x="150" y="225" font-size="12" fill="#5a5346">linha alinhada</text>
+    <line x1="120" y1="326" x2="120" y2="362" stroke="#1D9E75" stroke-width="3" marker-end="url(#ar2)"/>
+    <text x="120" y="382" font-size="12" fill="#5a5346" text-anchor="middle">puxa / freia ↓</text>
+    <text x="380" y="30" font-size="14" font-weight="bold" fill="#1A7A6E">Modo indireto (&gt; 5–6 nós)</text>
+    <rect x="400" y="50" width="120" height="150" rx="24" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="460" y="124" font-size="12" fill="#5F5E5A" text-anchor="middle">Navio (popa)</text>
+    <line x1="460" y1="80" x2="460" y2="55" stroke="#5F5E5A" stroke-width="2" marker-end="url(#ar2)"/>
+    <text x="460" y="96" font-size="12" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <line x1="380" y1="250" x2="340" y2="250" stroke="#85B7EB" stroke-width="1" opacity="0.6" marker-end="url(#ar2)"/>
+    <text x="298" y="254" font-size="12" fill="#185FA5">fluxo</text>
+    <g transform="rotate(48 460 270)">
+      <rect x="438" y="240" width="44" height="86" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+    </g>
+    <text x="460" y="360" font-size="14" font-weight="bold" fill="#0F6E56" text-anchor="middle">Trator / ASD</text>
+    <text x="460" y="378" font-size="12" fill="#5F5E5A" text-anchor="middle">casco a ângulo</text>
+    <line x1="445" y1="232" x2="430" y2="202" stroke="#0F6E56" stroke-width="2"/>
+    <line x1="500" y1="288" x2="540" y2="300" stroke="#1D9E75" stroke-width="3" marker-end="url(#ar2)"/>
+    <text x="548" y="304" font-size="12" fill="#5a5346">força de</text>
+    <text x="548" y="320" font-size="12" fill="#5a5346">sustentação</text>
+  </svg>
+  <figcaption>Comparável à Fig. 4.8 de Hensen. No indireto, o casco a ângulo gera sustentação que pode exceder o bollard pull estático.</figcaption>
+</figure>
+
+<!-- DIAGRAMA 3 -->
+<figure class="diag">
+  <div class="diag-title">4.3 · Rebocador no costado — empurrando e puxando (push-pull)</div>
+  <svg viewBox="0 0 680 400" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <text x="40" y="30" font-size="14" font-weight="bold" fill="#1A7A6E">Empurrando (pushing)</text>
+    <rect x="40" y="50" width="120" height="280" rx="24" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="100" y="194" font-size="12" fill="#5F5E5A" text-anchor="middle">Navio</text>
+    <line x1="100" y1="90" x2="100" y2="58" stroke="#5F5E5A" stroke-width="2" marker-end="url(#ar3)"/>
+    <text x="100" y="104" font-size="12" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <g transform="rotate(-90 230 190)">
+      <rect x="208" y="150" width="44" height="80" rx="12" fill="#E6F1FB" stroke="#378ADD" stroke-width="1"/>
+    </g>
+    <text x="230" y="262" font-size="14" font-weight="bold" fill="#185FA5" text-anchor="middle">ASD / trator rev.</text>
+    <line x1="186" y1="190" x2="162" y2="190" stroke="#378ADD" stroke-width="3" marker-end="url(#ar3)"/>
+    <text x="180" y="178" font-size="12" fill="#5a5346" text-anchor="middle">empurra</text>
+    <circle cx="256" cy="190" r="4" fill="#993C1D"/>
+    <text x="264" y="186" font-size="12" fill="#993C1D">P (propulsão, na popa)</text>
+    <circle cx="206" cy="190" r="4" fill="#3B6D11"/>
+    <text x="206" y="248" font-size="12" fill="#3B6D11" text-anchor="middle">C (à frente)</text>
+    <line x1="206" y1="194" x2="206" y2="234" stroke="#3B6D11" stroke-width="0.5" stroke-dasharray="3 2"/>
+    <text x="230" y="290" font-size="12" fill="#5a5346" text-anchor="middle">grande razão a:b → 90° eficaz</text>
+    <text x="400" y="30" font-size="14" font-weight="bold" fill="#1A7A6E">Puxando (pulling)</text>
+    <rect x="400" y="50" width="120" height="280" rx="24" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="460" y="194" font-size="12" fill="#5F5E5A" text-anchor="middle">Navio</text>
+    <line x1="460" y1="90" x2="460" y2="58" stroke="#5F5E5A" stroke-width="2" marker-end="url(#ar3)"/>
+    <text x="460" y="104" font-size="12" fill="#5F5E5A" text-anchor="middle">avança ↑</text>
+    <g transform="rotate(-90 590 190)">
+      <rect x="568" y="150" width="44" height="80" rx="12" fill="#E6F1FB" stroke="#378ADD" stroke-width="1"/>
+    </g>
+    <text x="590" y="262" font-size="14" font-weight="bold" fill="#185FA5" text-anchor="middle">ASD / trator rev.</text>
+    <line x1="558" y1="190" x2="524" y2="190" stroke="#0F6E56" stroke-width="2"/>
+    <text x="544" y="178" font-size="12" fill="#5a5346" text-anchor="middle">linha</text>
+    <line x1="612" y1="190" x2="646" y2="190" stroke="#378ADD" stroke-width="3" marker-end="url(#ar3)"/>
+    <text x="590" y="290" font-size="12" fill="#5a5346" text-anchor="middle">omnidirecional aplica força</text>
+    <text x="590" y="306" font-size="12" fill="#5a5346" text-anchor="middle">na direção do movimento</text>
+  </svg>
+  <figcaption>Comparável à Fig. 4.21 de Hensen. A posição de C à frente e P atrás dá o grande braço a:b que torna o ASD eficaz a 90° em alta velocidade.</figcaption>
+</figure>
+
+<!-- DIAGRAMA 4 -->
+<figure class="diag">
+  <div class="diag-title">4.4 · Convencional à popa com gob rope — broadside</div>
+  <svg viewBox="0 0 680 380" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="ar4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <rect x="260" y="40" width="160" height="150" rx="30" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="340" y="109" font-size="12" fill="#5F5E5A" text-anchor="middle">Navio (popa)</text>
+    <line x1="340" y1="80" x2="340" y2="46" stroke="#5F5E5A" stroke-width="2" marker-end="url(#ar4)"/>
+    <text x="340" y="130" font-size="12" fill="#5F5E5A" text-anchor="middle">baixa velocidade ↑</text>
+    <text x="340" y="172" font-size="12" fill="#A32D2D" text-anchor="middle">descarga do hélice ↓</text>
+    <line x1="340" y1="190" x2="340" y2="215" stroke="#E24B4A" stroke-width="2" opacity="0.7" marker-end="url(#ar4)"/>
+    <g transform="rotate(-90 340 280)">
+      <rect x="300" y="250" width="80" height="60" rx="12" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+    </g>
+    <text x="340" y="345" font-size="14" font-weight="bold" fill="#993C1D" text-anchor="middle">Convencional (de través)</text>
+    <circle cx="318" cy="248" r="4" fill="#185FA5"/>
+    <text x="300" y="244" font-size="12" fill="#185FA5" text-anchor="end">T1 (bitt)</text>
+    <circle cx="362" cy="248" r="4" fill="#185FA5"/>
+    <text x="378" y="244" font-size="12" fill="#185FA5">T2 (popa, via gob rope)</text>
+    <line x1="362" y1="248" x2="345" y2="216" stroke="#0F6E56" stroke-width="2"/>
+    <text x="378" y="226" font-size="12" fill="#5a5346">linha ao navio</text>
+    <path d="M318 248 Q360 270 362 248" fill="none" stroke="#888780" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="340" y="297" font-size="12" fill="#5a5346" text-anchor="middle">gob rope desloca T1→T2</text>
+    <line x1="290" y1="305" x2="256" y2="305" stroke="#993C1D" stroke-width="2" marker-end="url(#ar4)"/>
+    <line x1="390" y1="305" x2="424" y2="305" stroke="#993C1D" stroke-width="2" marker-end="url(#ar4)"/>
+    <text x="340" y="372" font-size="12" fill="#5a5346" text-anchor="middle">motor a vante / a ré dirige o navio para ambos os bordos</text>
+  </svg>
+  <figcaption>Comparável à Fig. 4.7 de Hensen. O convencional só fica de través à popa transferindo T1→T2 via gob rope; a descarga do hélice é risco de escora.</figcaption>
+</figure>
+
+<!-- DIAGRAMA 5 -->
+<figure class="diag">
+  <div class="diag-title">4.5 · Ponto de pivô e efeito Donkey</div>
+  <svg viewBox="0 0 680 460" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="ar5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <text x="40" y="28" font-size="14" font-weight="bold" fill="#1A7A6E">A · Empurrão à ré</text>
+    <rect x="40" y="44" width="320" height="56" rx="20" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="56" y="76" font-size="12" fill="#5F5E5A">proa</text>
+    <text x="344" y="76" font-size="12" fill="#5F5E5A" text-anchor="end">popa</text>
+    <circle cx="120" cy="72" r="5" fill="#534AB7"/>
+    <text x="120" y="120" font-size="12" fill="#534AB7" text-anchor="middle">PP avante</text>
+    <line x1="300" y1="100" x2="300" y2="128" stroke="#1D9E75" stroke-width="3" marker-end="url(#ar5)"/>
+    <text x="300" y="146" font-size="12" fill="#5a5346" text-anchor="middle">empurra</text>
+    <text x="420" y="68" font-size="12" fill="#5a5346">Braço longo + resistência</text>
+    <text x="420" y="86" font-size="12" fill="#5a5346">lateral avante → giro forte.</text>
+    <text x="40" y="190" font-size="14" font-weight="bold" fill="#1A7A6E">B · Empurrão avante</text>
+    <rect x="40" y="206" width="320" height="56" rx="20" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="56" y="238" font-size="12" fill="#5F5E5A">proa</text>
+    <text x="344" y="238" font-size="12" fill="#5F5E5A" text-anchor="end">popa</text>
+    <circle cx="260" cy="234" r="5" fill="#534AB7"/>
+    <text x="260" y="282" font-size="12" fill="#534AB7" text-anchor="middle">PP à ré</text>
+    <line x1="100" y1="262" x2="100" y2="290" stroke="#1D9E75" stroke-width="3" marker-end="url(#ar5)"/>
+    <text x="100" y="308" font-size="12" fill="#5a5346" text-anchor="middle">empurra</text>
+    <line x1="100" y1="206" x2="100" y2="180" stroke="#E24B4A" stroke-width="2" opacity="0.7" marker-end="url(#ar5)"/>
+    <text x="420" y="230" font-size="12" fill="#5a5346">Força hidrodinâmica oposta,</text>
+    <text x="420" y="248" font-size="12" fill="#5a5346">também avante → efeito baixo.</text>
+    <text x="40" y="352" font-size="14" font-weight="bold" fill="#1A7A6E">C · Efeito Donkey</text>
+    <rect x="40" y="368" width="320" height="56" rx="20" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+    <text x="56" y="400" font-size="12" fill="#5F5E5A">proa</text>
+    <text x="344" y="400" font-size="12" fill="#5F5E5A" text-anchor="end">popa</text>
+    <circle cx="150" cy="396" r="5" fill="#993556"/>
+    <text x="150" y="360" font-size="12" fill="#993556" text-anchor="middle">centro hidrodin.</text>
+    <line x1="200" y1="448" x2="200" y2="404" stroke="#D85A30" stroke-width="3" marker-end="url(#ar5)"/>
+    <text x="200" y="460" font-size="12" fill="#993C1D" text-anchor="middle">empurra atrás do centro</text>
+    <text x="420" y="386" font-size="12" fill="#5a5346">Navio gira para o lado</text>
+    <text x="420" y="404" font-size="12" fill="#5a5346">contrário ao esperado.</text>
+    <text x="420" y="422" font-size="12" fill="#993C1D">Solução: empurrar mais avante.</text>
+  </svg>
+  <figcaption>Comparável à Fig. 4.1 de Hensen. A posição do ponto de pivô (PP) determina o braço de alavanca; o efeito Donkey inverte o sentido de giro.</figcaption>
+</figure>
+
+<h2 class="sec" id="s5">5. Pontos-chave do Capítulo 4</h2>
+<p>Quatro ideias centrais resumem a lógica de todo o capítulo e explicam por que cada tipo de rebocador se comporta como
+descrito na tabela.</p>
+
+<div class="key-box">
+  <b>1 · A lógica central é a razão a:b.</b> Quanto maior o braço de alavanca entre a propulsão e o ponto de
+  empurrão/reboque (a) em relação ao braço entre o centro de pressão e esse mesmo ponto (b),
+  <mark class="alto">menor o esforço lateral necessário para manter a posição — e mais potência sobra para tração
+  efetiva</mark>. É o critério que governa o desempenho em todas as posições.
+</div>
+
+<div class="key-box">
+  <b>2 · Por que o trator domina no modo indireto.</b> O ponto de reboque (T) na popa somado ao skeg desloca o centro
+  de pressão (C) para perto de T, minimizando o momento de giro a vencer. <mark class="cobrado">A velocidade do navio
+  gera força de sustentação (lift) no casco que pode superar várias vezes o bollard pull estático</mark> — mas só
+  funciona com C e T alinhados.
+</div>
+
+<div class="key-box">
+  <b>3 · Por que o convencional é superior na proa em velocidade.</b> Com T à frente de P, o rebocador gira em torno do
+  ponto de reboque aproveitando as forças hidrodinâmicas. <mark class="alto">O ASD operando como convencional ganha
+  eficácia de tração, mas paga com forças de escora maiores</mark> (C mais à frente → momento maior a vencer).
+</div>
+
+<div class="key-box">
+  <b>4 · O ASD é o mais versátil.</b> Pode operar como convencional, como trator reverso e como empurrador de alta
+  velocidade. O <i>trade-off</i> é que <mark class="cobrado">no modo indireto puro perde para o trator VS com skeg
+  dedicado</mark>, cujo C se alinha melhor a T.
+</div>
+
+<h2 class="sec" id="s6">6. Estabilidade de rebocadores — regras IMO e critérios</h2>
+
+<p class="intro">
+  A estabilidade operacional é um dos requisitos básicos de projeto e tem importância crucial para rebocadores de porto e
+  de terminal pela natureza do trabalho<sup class="fn">4</sup>. <mark class="alto">Não só o GM importa, mas também a faixa
+  da curva de estabilidade</mark>, e as razões entre as áreas sob a curva de braços de endireitamento e de adernamento
+  devem cumprir requisitos regulamentares.
+</p>
+
+<h3 class="sub">6.1 Princípios fundamentais de estabilidade</h3>
+
+<p>O básico da estabilidade do navio e do rebocador é indicado pela distância entre o metacentro (M) e o centro de
+gravidade (G) — o <b>GM</b>. <mark class="cobrado">Quanto mais alto o centro de gravidade G, menor o GM</mark>. A boa
+estabilidade estática e dinâmica é exigida pelas altas forças dinâmicas que o rebocador experimenta; ele precisa de
+considerável estabilidade dinâmica residual quando, por força súbita, aderna consideravelmente.</p>
+
+<div class="key-box">
+  <b>Boca e GM.</b> A boca tem grande influência sobre o GM. <mark class="alto">Tornar o rebocador mais largo (beamier)
+  resulta em maior GM e maior momento de endireitamento</mark>, mantidos os demais fatores. Contudo, aumentar só a boca
+  não basta: o <b>borda-livre também deve ser aumentado</b>, ou as bordas do convés submergem mais cedo. Nota: aumentar
+  a boca torna o rebocador <i>instável de rumo</i> (course unstable), exigindo controle de leme mais frequente.
+</div>
+
+<p>Meios de aumentar a estabilidade e reduzir os efeitos de adernamento das forças externas:</p>
+<ul class="clean">
+  <li><b>GM alto e boa estabilidade dinâmica</b> — razão comprimento/boca em queda; muitos rebocadores modernos têm ~2,8:1
+  ou menos. Exemplos: <i>Broward</i> (2,5:1), <i>Tiger Sun</i> (2,0), SDMs (1,8).</li>
+  <li><b>Sponsons</b> — seções fortemente alargadas nas laterais, na linha-d'água ou logo abaixo, que criam maiores
+  momentos de endireitamento em pequenos ângulos de adernamento, sem aumentar a boca na linha-d'água.</li>
+  <li><b>Reduzir a resistência transversal do casco</b> — minimizar área lateral submersa e apêndices (contraditório com a
+  performance de quem usa o casco no modo indireto).</li>
+  <li><b>Reduzir a altura do ponto de reboque e deslocá-lo para o lado baixo</b> — o gancho radial e o sistema carrossel
+  deslocam T para o lado que aderna, reduzindo o braço de adernamento.</li>
+  <li><b>Borda-livre adequado</b> — para que a borda do convés não submerja em ângulo muito pequeno.</li>
+</ul>
+
+<details class="pscpp">
+  <summary><span class="tag tag-potencial">Potencial</span> Gancho radial e sistema carrossel</summary>
+  <div class="corpo">
+    Ao usar um braço de reboque ou gancho radial, o rebocador aderna até que o momento de adernamento seja contrabalançado
+    pelo maior momento de endireitamento induzido. <mark class="alto">Pela Fig. 4.14: uma força aplicada no centro do
+    rebocador causa adernamento de 31°; a mesma força aplicada ao carrossel (raio = ½ boca) causa apenas 18°</mark> — com
+    grande reserva de estabilidade. O carrossel reduz o risco de emborcamento praticamente a zero.
+  </div>
+</details>
+
+<h3 class="sub">6.2 As novas regras IMO de estabilidade (2008 IS Code)</h3>
+
+<p>Devido à grande variedade de normas de estabilidade — recomendadas ou mandatórias — emitidas por sociedades
+classificadoras e autoridades nacionais, um grupo liderado pelo <b>Bureau Veritas</b> desenvolveu regras harmonizadas de
+estabilidade de reboque e escolta no âmbito do <b>SafeTug JIP</b> (organizado pela MARIN, Holanda), propostas à IMO.</p>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-date">25 nov 2016</div>
+    <div class="tl-bar"><span class="tl-dot"></span></div>
+    <div class="tl-body"><b>Adoção pela IMO</b> das emendas ao <i>International Code on Intact Stability, 2008</i>
+    (2008 IS Code), incluindo critérios de estabilidade para rebocadores.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">jul 2017</div>
+    <div class="tl-bar"><span class="tl-dot"></span></div>
+    <div class="tl-body"><b>Bureau Veritas</b> incorpora as novas regras IMO em suas regras de classe (aplicável a novas
+    construções) — exemplo de implementação antecipada.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">1 jan 2020</div>
+    <div class="tl-bar"><span class="tl-dot"></span></div>
+    <div class="tl-body"><b>Entrada em vigor</b> das regras (data de batimento de quilha), aplicáveis a novos rebocadores;
+    consideradas grande melhoria frente às regras anteriores.</div>
+  </div>
+</div>
+
+<div class="key-box">
+  <b>Aplicabilidade.</b> As regras IMO de estabilidade intacta aplicam-se a navios de <b>24 m de comprimento ou mais</b>
+  (conforme a Convenção de Linhas de Carga de 1966), operando em tráfego internacional. <mark class="cobrado">Embora se
+  pudesse interpretar que a maioria dos rebocadores de porto está dispensada, na prática a maioria é certificada para
+  viagem internacional</mark> e as autoridades nacionais exigem conformidade mesmo para embarcações domésticas. Rebocadores
+  abaixo de 24 m não estão vinculados, mas em geral são construídos sob regras de classe que aplicam os mesmos padrões.
+</div>
+
+<h3 class="sub">6.3 Classificação IMO dos rebocadores em três grupos</h3>
+
+<table class="crit">
+<thead><tr><th style="width:230px">Grupo</th><th>Definição</th></tr></thead>
+<tbody>
+<tr><td class="grp">Reboque portuário<br>(harbour towage)</td><td>Rebocadores destinados a assistir navios ou estruturas flutuantes em <b>águas abrigadas</b>.</td></tr>
+<tr><td class="grp">Reboque costeiro ou<br>oceânico</td><td>Assistência fora de águas abrigadas, onde as forças associadas ao reboque são frequentemente função do <b>bollard pull</b> do rebocador.</td></tr>
+<tr><td class="grp">Operações de escolta<br>(escort)</td><td>Rebocador especificamente engajado em <b>governo, frenagem e controle</b> do navio assistido em manobra ordinária ou de emergência, em que as forças são geradas pela hidrodinâmica do casco e pelo empuxo dos propulsores.</td></tr>
+</tbody>
+</table>
+
+<h3 class="sub">6.4 Situações de girting e critérios de estabilidade</h3>
+
+<p>As regras IMO (que são recomendações) tratam de <mark class="alto">duas situações distintas de <i>girting</i></mark><sup class="fn">5</sup>:</p>
+
+<table class="crit">
+<thead><tr><th style="width:160px">Situação</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td class="grp">Self-tripping</td><td>Tendência do rebocador a <b>emborcar a si mesmo</b> sob a influência do binário de adernamento criado pela força da linha de reboque e pelas forças do hélice.</td></tr>
+<tr><td class="grp">Tow-tripping</td><td>Tendência do rebocador a <b>desviar e ser arrastado</b> de través (ex.: por perda de propulsão ou governo). Questão clássica de estabilidade: a força da linha é oposta pela resistência do casco, criando momento de adernamento.</td></tr>
+</tbody>
+</table>
+
+<h3 class="sub">6.5 Critérios numéricos da IMO</h3>
+
+<div class="num-grid">
+  <div class="num-card">
+    <div class="val">15°</div>
+    <div class="lab">Ângulo máximo de adernamento estático para <b>rebocadores de escolta</b> — ponto de equilíbrio onde o braço de adernamento iguala o de endireitamento.</div>
+  </div>
+  <div class="num-card">
+    <div class="val">5 nós</div>
+    <div class="lab">Velocidade transversal usada no cálculo do braço de adernamento de <b>tow-tripping</b> (rebocador puxado de través pela água).</div>
+  </div>
+  <div class="num-card">
+    <div class="val">24 m</div>
+    <div class="lab">Comprimento a partir do qual as regras IMO de estabilidade intacta se aplicam (tráfego internacional).</div>
+  </div>
+</div>
+
+<table class="crit">
+<thead><tr><th style="width:230px">Critério</th><th>Requisito</th></tr></thead>
+<tbody>
+<tr><td class="grp">Reboque portuário / costeiro / oceânico — <i>self-tripping</i></td><td>A energia disponível para endireitar o rebocador (energia restauradora) deve ser <b>igual ou maior</b> que a energia disponível para aderná-lo (sob aplicação de empuxo transversal).</td></tr>
+<tr><td class="grp">Reboque portuário / costeiro / oceânico — <i>tow-tripping</i></td><td>Braço de adernamento calculado com base em momento transversal gerado ao puxar o rebocador de través a <b>5 nós</b>. O ângulo de equilíbrio na curva deve ser <b>menor que o ângulo de <i>down flooding</i></b>.</td></tr>
+<tr><td class="grp">Escolta — estabilidade residual</td><td>Requisitos de razão de área para a curva de estabilidade, mais <b>ângulo máximo de adernamento estático de 15°</b> (ponto de interseção dos braços).</td></tr>
+<tr><td class="grp">Guincho de reboque</td><td>Requisito mandatório de <b>liberação rápida (quick release)</b> aplicável também ao guincho de reboque.</td></tr>
+</tbody>
+</table>
+
+<details class="pscpp">
+  <summary><span class="tag tag-cobrado">Cobrado</span> Ângulo de down flooding</summary>
+  <div class="corpo">
+    É o <mark class="cobrado">ângulo de adernamento no qual a primeira abertura não-estanque submerge</mark> — a partir daí
+    o rebocador é considerado perdido. A principal preocupação são as aberturas de ventilação da praça de máquinas: na
+    maioria dos rebocadores de porto, devem ter dispositivos de fechamento estanque sob a ICLL, mas por razões operacionais
+    precisam ficar abertas (ar para os motores). Quando o fechamento é dificilmente praticável, as novas regras IMO
+    consideram essas aberturas como <i>down flooding points</i>.
+  </div>
+</details>
+
+<h3 class="sub">6.6 Critérios nacionais tradicionais (serão substituídos pela IMO)</h3>
+
+<table class="crit">
+<thead><tr><th style="width:130px">Autoridade</th><th>Critério</th></tr></thead>
+<tbody>
+<tr><td class="grp">USCG</td><td>Rebocadores devem atender ao critério <b>estático</b> de tração na linha (GM mínimo sem imersão da borda do convés sob empuxo defletido a leme todo) <b>ou</b> ao critério <b>dinâmico</b> (energia residual de endireitamento no ponto de equilíbrio).</td></tr>
+<tr><td class="grp">ABS</td><td>Estabilidade dinâmica residual baseada em tração na linha a 90° de <b>50% do bollard pull</b> (hélices normais, duplo) ou <b>70%</b> (azimutais/cicloidais). Braço de adernamento do topo do bitt ao centro de carena (ou ½ calado médio na aproximação).</td></tr>
+<tr><td class="grp">Noruega</td><td>Velocidade transversal de <b>5 nós</b> com reboque de <b>65% do bollard pull</b> deve ser possível sem imersão do convés.</td></tr>
+</tbody>
+</table>
+
+<div class="key-box">
+  <b>Atenção ao projeto.</b> No ambiente de trabalho do rebocador, <mark class="alto">grandes forças dinâmicas muito acima
+  dos valores estáticos (ou quase-estáticos) podem se desenvolver e são quase impossíveis de estimar com precisão</mark>.
+  Por isso a estabilidade — em particular a reserva de estabilidade — deve ser considerada com muito cuidado, levando em
+  conta tipo de rebocador, métodos de assistência exigidos, sistema de propulsão e condições de trabalho.
+</div>
+
+<h3 class="sub">6.7 Forças de adernamento sobre o rebocador</h3>
+
+<p>As forças de adernamento variam conforme o tipo e o modo de operação:</p>
+<ul class="clean">
+  <li><b>Rebocadores com propulsores azimutais</b> podem adernar apreciavelmente se o empuxo for aplicado subitamente de
+  través; nos tratores azimutais, o ponto de aplicação do empuxo profundamente imerso (braço de adernamento longo) resulta
+  em grande momento.</li>
+  <li><b>Convencional puxando na linha:</b> o empuxo transversal de governo <i>aumenta</i> o momento de adernamento criado
+  pela força da linha. O mesmo ocorre com ASD operando como convencional.</li>
+  <li><b>Trator azimutal:</b> o momento de adernamento da propulsão <i>contrabalança</i> o da força da linha (efeito
+  favorável).</li>
+  <li><mark class="cobrado">Linhas com pouco estiramento</mark> (cabos de aço ou HMPE como Dyneema/Spectra) aumentam as
+  forças dinâmicas súbitas.</li>
+</ul>
+
+<h2 class="sec" id="s7">7. Sínteses para fixação</h2>
+
+<details class="pscpp" open>
+  <summary><span class="tag tag-cobrado">Cobrado</span> Diferença fundamental entre tipos de rebocador</summary>
+  <div class="corpo">
+    A distinção entre convencional e trator está na posição de T relativa a P: <mark class="cobrado">no convencional o ponto
+    de reboque fica à frente da propulsão; no trator, fica à ré dela</mark>. Toda a diferença de comportamento (eficácia
+    avante vs à popa, risco de girting, modo indireto) deriva disso. O ASD opera <i>como convencional</i> sobre a popa ou
+    <i>como trator reverso</i> — daí sua versatilidade.
+  </div>
+</details>
+
+<details class="pscpp">
+  <summary><span class="tag tag-potencial">Potencial</span> Por que o trator domina no modo indireto</summary>
+  <div class="corpo">
+    O ponto de reboque à popa somado ao skeg desloca o centro de pressão para perto de T, minimizando o momento de giro a
+    vencer. <mark class="alto">A velocidade do navio gera força de sustentação no casco que pode superar várias vezes o
+    bollard pull estático</mark> — mas só funciona com C e T alinhados e a velocidades acima de ~5–6 nós. O trator reverso
+    e o ASD são menos eficazes no indireto porque C tende a ficar mais à frente, aumentando a distância C–T.
+  </div>
+</details>
+
+<details class="pscpp">
+  <summary><span class="tag tag-cobrado">Cobrado</span> Efeito Donkey</summary>
+  <div class="corpo">
+    Pegadinha clássica: quando um rebocador avante empurra <i>atrás</i> do centro de forças hidrodinâmicas (situado avante),
+    <mark class="cobrado">o navio gira para o lado contrário ao esperado</mark>. A correção é empurrar em posição mais a vante.
+    A localização desse centro depende de forma do casco, calado e trim — um petroleiro em lastro trimado pela popa o desloca
+    muito mais à ré, ampliando o efeito do rebocador avante.
+  </div>
+</details>
+
+<details class="pscpp">
+  <summary><span class="tag tag-potencial">Potencial</span> Limite de velocidade para empurrar (pushing)</summary>
+  <div class="corpo">
+    Para o convencional, <mark class="alto">3 a 4 nós é o limite prático para empurrar transversalmente com eficácia</mark>;
+    acima disso as forças longitudinais crescem rapidamente e aceleram o navio. O ASD/trator reverso empurra a 90° até cerca
+    de 8 nós (a C&nbsp;H&nbsp;Cates/Seaspan reivindicou 8 nós para seus trator reversos), pois a sustentação hidrodinâmica
+    contribui para o empurrão — a ~8,5 nós, 80% da força transversal é sustentação.
+  </div>
+</details>
+
+<details class="pscpp">
+  <summary><span class="tag tag-cobrado">Cobrado</span> Modos de frenagem do ASD (Aquamaster)</summary>
+  <div class="corpo">
+    Abaixo de ~8 nós, usa-se o <i>Reverse Arrest Mode</i> (propulsores girados 180°, alinhados ao eixo do rebocador);
+    acima de ~8 nós, o <i>Transverse Arrest Mode</i> (propulsores a ~90°, gerando força por <i>momentum drag</i>).
+    <mark class="cobrado">No modo direto, a frenagem pode chegar a 1,5× o bollard pull a ré</mark>. Nota: em ASD-tugs 2411
+    instrumentados, o ponto de transição observado foi 6 nós, não 8.
+  </div>
+</details>
+
+<details class="pscpp">
+  <summary><span class="tag tag-cobrado">Cobrado</span> Critérios IMO de estabilidade (números a decorar)</summary>
+  <div class="corpo">
+    <mark class="cobrado">Escolta: ângulo máximo de adernamento estático de <b>15°</b></mark> (ponto de equilíbrio onde
+    braço de adernamento = braço de endireitamento). <mark class="alto">Tow-tripping: velocidade transversal de
+    <b>5 nós</b></mark> no cálculo do braço de adernamento. Aplicabilidade a partir de <b>24 m</b>. Adoção em 25/11/2016,
+    vigência em 1/1/2020. Quick release agora <b>mandatório também no guincho</b>. ABS: 50% do BP (hélices normais) e
+    70% (azimutais/cicloidais).
+  </div>
+</details>
+
+<div class="footnotes">
+  <h4>Notas e referências</h4>
+  <ol>
+    <li id="fn1">Hensen, §4.2.2 — "as relações mútuas entre ponto de reboque, centro de empuxo e centro de pressão afetam não só a eficácia, mas também a segurança de um rebocador".</li>
+    <li id="fn2">Hensen, §4.2.2 (figura 4.5) e §4.3.1 (push/pull, figura 4.21) — definição dos braços a e b e seu efeito sobre o empuxo lateral necessário.</li>
+    <li id="fn3">Hensen, §4.3.1 (figura 4.18) — "Convencional: ponto de reboque à frente da propulsão; Trator: ponto de reboque à ré da propulsão".</li>
+    <li id="fn4">Hensen, §4.2.3 (Stability) — "estabilidade operacional, um dos requisitos básicos de projeto, é de grande importância para rebocadores de porto e de terminal pela natureza de seu trabalho". Refere ainda o livro <i>Tug Stability — A Practical Guide to Safe Operations</i> (The ABR Company).</li>
+    <li id="fn5">Hensen, §4.2.3.1 (Stability rules) — IMO adotou em 25/11/2016 as emendas ao 2008 IS Code (vigência 1/1/2020); as recomendações tratam de <i>self-tripping</i> e <i>tow-tripping</i>, com critério de 15° para escolta e 5 nós de velocidade transversal para tow-tripping.</li>
+  </ol>
+  <p style="margin-top:16px;font-size:12px;color:#7a7363;">
+    As caixas PSCPP e a marcação dupla refletem a frequência histórica nas bancas 2006–2012 e o potencial estimado para 2027;
+    devem ser conferidas contra os enunciados originais dos provões antes de uso definitivo.
+  </p>
+</div>
+
+
+
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="secblk" id="flash">
+  <h2>Flashcards — a lógica T·P·C e os números IMO</h2>
+  <p class="lede">Toque para virar. Foco nos pares que a banca inverte e nos valores de estabilidade a decorar.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="secblk" id="quiz">
+  <h2>Quiz — desempenho, posição e estabilidade</h2>
+  <p class="lede">Oito questões no padrão da banca, com feedback apontando a pegadinha (razão a:b, efeito Donkey, números IMO, modos de frenagem).</p>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav"><span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()">Próxima →</button>
+    </div>
+  </div>
+  <a class="backlink" href="index.html">← Voltar à estante</a>
+</section>
+
+</div>
+</main>
+
+<footer class="estante">
+  <div class="wrap"><b>PSCPP 2027</b> · Bloco H — Rebocadores (Arte Naval) · Hensen Cap. 4 · Capital Sereno</div>
+</footer>
+
+<script>
+/* ===== Flashcards ===== */
+var FC=[
+  {f:"Razão a:b",b:"a = distância P→ponto de reboque/empurrão; b = distância C→mesmo ponto. Quanto MAIOR a/b, menos esforço lateral e mais tração líquida."},
+  {f:"Convencional — T e P",b:"T (ponto de reboque) à FRENTE de P (propulsão). Eficaz avante em velocidade; alto risco de girting à popa."},
+  {f:"Trator — T e P",b:"T à RÉ de P. T na popa + skeg aproxima C de T → domina o modo indireto."},
+  {f:"Por que o trator domina no indireto",b:"C alinhado a T minimiza o momento de giro; a sustentação do casco pode superar VÁRIAS vezes o bollard pull estático (>5–6 nós)."},
+  {f:"Efeito Donkey",b:"Empurrar ATRÁS do centro hidrodinâmico (que fica avante) gira o navio para o lado contrário ao esperado. Correção: empurrar mais avante."},
+  {f:"Limite de pushing — convencional",b:"3–4 nós para empurrar de través com eficácia. Acima, as forças longitudinais aceleram o navio."},
+  {f:"Limite de pushing — ASD/trator reverso",b:"Até ~8 nós (a ~8,5 nós, 80% da força transversal é sustentação)."},
+  {f:"Frenagem do ASD (Aquamaster)",b:"<8 nós: Reverse Arrest (propulsores a 180°). >8 nós: Transverse Arrest (~90°, momentum drag). Direto pode dar 1,5× o BP a ré."},
+  {f:"Gancho radial / carrossel",b:"Desloca T para o lado que aderna → reduz o braço de adernamento. Fig.4.14: 31° no centro vs 18° no carrossel."},
+  {f:"Boca e GM",b:"Mais largo (beamier) = maior GM e maior momento de endireitamento. Mas exige borda-livre maior e torna o casco instável de rumo."},
+  {f:"IMO — escolta",b:"Ângulo máximo de adernamento estático = 15° (onde braço de adernamento = braço de endireitamento)."},
+  {f:"IMO — tow-tripping",b:"Velocidade transversal de 5 nós no cálculo do braço de adernamento. Ângulo de equilíbrio < ângulo de down flooding."},
+  {f:"IMO — aplicabilidade e datas",b:"A partir de 24 m. Adoção 25/11/2016; vigência 1/1/2020. Quick release agora mandatório também no guincho."},
+  {f:"Self-tripping × tow-tripping",b:"Self: o rebocador emborca a si mesmo pela linha + hélice. Tow: é arrastado de través (perda de propulsão/governo)."},
+  {f:"ABS — tração na linha a 90°",b:"50% do BP (hélices normais/duplo) ou 70% (azimutais/cicloidais). Noruega: 5 nós transversais com 65% do BP sem imergir o convés."},
+  {f:"Convencional de través à popa",b:"Só fica broadside transferindo T1→T2 via GOB ROPE. A descarga do hélice é fonte de escora."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== Quiz ===== */
+var QUIZ=[
+  {q:"Na razão a:b que governa o desempenho, um valor de a/b MAIOR significa:",
+   o:["Mais esforço lateral e menos tração efetiva","Menos esforço lateral para manter posição e mais potência para tração","Maior risco de girting sempre","Nenhum efeito sobre a tração"],
+   a:1,e:"a/b maior → menos empuxo lateral gasto para manter a posição → mais potência sobra para empurrar/puxar. É o critério central do Cap. 4."},
+  {q:"O que explica o domínio do trator (VS) no modo indireto?",
+   o:["A propulsão a ré","T na popa + skeg aproximam C de T, minimizando o momento de giro","O maior calado","A ausência de ponto de reboque"],
+   a:1,e:"T na popa somado ao skeg desloca C para perto de T → momento de giro mínimo e máxima sustentação. A força pode exceder muito o bollard pull estático."},
+  {q:"No efeito Donkey, empurrar ATRÁS do centro hidrodinâmico faz o navio:",
+   o:["Girar para o lado esperado, com mais força","Girar para o lado CONTRÁRIO ao esperado","Parar imediatamente","Acelerar para vante"],
+   a:1,e:"O centro hidrodinâmico fica avante; empurrar atrás dele inverte o giro. A correção é empurrar em posição mais a vante (Fig. 4.1)."},
+  {q:"O limite prático de velocidade para o convencional empurrar de través com eficácia é cerca de:",
+   o:["1 nó","3–4 nós","8 nós","15 nós"],
+   a:1,e:"3–4 nós para o convencional. Acima, as forças longitudinais crescem rápido e aceleram o navio. O ASD/trator reverso vai até ~8 nós."},
+  {q:"Pelas regras IMO, o ângulo máximo de adernamento estático para rebocadores de ESCOLTA é:",
+   o:["5°","10°","15°","31°"],
+   a:2,e:"15° — ponto de equilíbrio onde o braço de adernamento iguala o de endireitamento. A velocidade transversal de 5 nós entra no cálculo de tow-tripping (não confundir os dois números)."},
+  {q:"As regras IMO de estabilidade intacta (2008 IS Code, emendas) aplicam-se a partir de:",
+   o:["12 m","18 m","24 m de comprimento","40 m"],
+   a:2,e:"24 m (Convenção de Linhas de Carga de 1966), tráfego internacional. Adoção em 25/11/2016, vigência em 1/1/2020. Abaixo de 24 m, regras de classe costumam aplicar os mesmos padrões."},
+  {q:"No critério ABS de estabilidade dinâmica residual, a tração na linha a 90° usada para azimutais/cicloidais é:",
+   o:["50% do bollard pull","65% do bollard pull","70% do bollard pull","100% do bollard pull"],
+   a:2,e:"70% do BP para azimutais/cicloidais (50% para hélices normais/duplo). Noruega usa 5 nós transversais com 65% do BP sem imergir o convés."},
+  {q:"Nos modos de frenagem do ASD (Aquamaster), abaixo de ~8 nós usa-se o:",
+   o:["Transverse Arrest Mode (propulsores a 90°)","Reverse Arrest Mode (propulsores a 180°, alinhados ao eixo)","Indirect lift mode","Push mode"],
+   a:1,e:"Abaixo de ~8 nós: Reverse Arrest (180°). Acima: Transverse Arrest (~90°, momentum drag). No modo direto a frenagem pode chegar a 1,5× o BP a ré. Em ASD 2411 instrumentados a transição observada foi 6 nós."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>
