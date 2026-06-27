@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nayak C.14 — Manobras em Baixa Velocidade | PSCPP 2027</title>
+<style>
+:root{
+  --vd:#0D3D36;--vm:#1A7A6E;--do:#C8A84B;--cr:#F7F3EA;
+  --am:#E8A020;--rb:#6B1A1A;--tx:#1a1a1a;--gl:#eef2f0;
+  --az:#1565C0;--la:#7B1FA2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--cr);color:var(--tx);font-size:1rem;line-height:1.75}
+.hero{background:var(--vd);color:#fff;padding:2.5rem 2rem 2rem}
+.hero .kicker{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--do);margin-bottom:.5rem}
+.hero h1{font-size:1.9rem;line-height:1.25;margin-bottom:.6rem}
+.hero .sub{font-size:.85rem;color:#b0c8c4;font-style:italic}
+main{max-width:900px;margin:0 auto;padding:2rem 1.25rem 4rem}
+h2.sec{font-size:1.25rem;color:var(--vd);border-bottom:2px solid var(--do);padding-bottom:.3rem;margin:2.5rem 0 .9rem}
+h2.sec .en{font-size:.82rem;font-weight:normal;color:#666;margin-left:.5rem;font-style:italic}
+h3.subsec{font-size:1.05rem;color:var(--vm);margin:1.4rem 0 .45rem;border-left:3px solid var(--do);padding-left:.6rem}
+h4.sub4{font-size:.95rem;color:var(--vd);margin:1rem 0 .3rem;font-style:italic}
+p{margin-bottom:.85rem}
+.hl{background:#fff59d;padding:0 2px;border-radius:2px}
+.hl-am{background:#ffe082;padding:0 2px;border-radius:2px}
+.hl-rb{background:#ffcdd2;padding:0 2px;border-radius:2px}
+.num{background:var(--vd);color:var(--do);display:inline-block;font-size:.78rem;font-family:Arial,sans-serif;font-weight:bold;padding:.12rem .5rem;border-radius:3px;margin-right:.3rem;vertical-align:middle}
+.tab-wrap{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+th{background:var(--vd);color:var(--do);padding:.5rem .7rem;text-align:center}
+td{padding:.42rem .7rem;border-bottom:1px solid #ccc;text-align:center}
+tr:nth-child(even) td{background:#f0ece2}
+td.L{text-align:left}
+td.bold{font-weight:bold}
+.quadro{border-left:4px solid var(--do);background:#faf6ec;padding:.8rem 1rem;margin:1rem 0;font-style:italic;font-size:.9rem;color:#444}
+details.pscpp{margin:1.2rem 0;border-radius:5px;overflow:hidden}
+details.pscpp summary{cursor:pointer;padding:.65rem 1rem;font-family:Arial,sans-serif;font-size:.88rem;font-weight:bold;list-style:none;display:flex;align-items:center;gap:.4rem}
+details.pscpp summary::-webkit-details-marker{display:none}
+details.pscpp .body{padding:.8rem 1rem 1rem;font-size:.9rem}
+details.pscpp.decorar{border:2px solid var(--vm)}
+details.pscpp.decorar summary{background:#e8f5f2;color:var(--vd)}
+details.pscpp.decorar .body{background:#f2fbf8}
+details.pscpp.banca{border:2px solid var(--rb)}
+details.pscpp.banca summary{background:#fbeaea;color:var(--rb)}
+details.pscpp.banca .body{background:#fff5f5}
+.cob{display:inline-block;background:var(--am);color:#fff;font-family:Arial,sans-serif;font-size:.72rem;font-weight:bold;padding:.1rem .45rem;border-radius:3px;margin-left:.4rem;vertical-align:middle}
+ol.steps{padding-left:1.6rem;margin:.6rem 0}
+ol.steps li{margin-bottom:.5rem}
+ul.itens{padding-left:1.6rem;margin:.6rem 0}
+ul.itens li{margin-bottom:.4rem}
+/* FIGURA SVG */
+.fig-wrap{text-align:center;margin:1.2rem 0}
+.fig-wrap svg{max-width:100%;height:auto}
+.fig-cap{font-family:Arial,sans-serif;font-size:.78rem;color:#555;margin-top:.4rem;font-style:italic}
+/* GRID DE OPÇÕES */
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.9rem;margin:1rem 0}
+.opt-card{border-radius:6px;padding:.85rem 1rem;font-size:.88rem}
+.opt-card .oc-num{font-family:Arial,sans-serif;font-size:.75rem;font-weight:bold;color:#fff;background:var(--vm);display:inline-block;padding:.1rem .45rem;border-radius:3px;margin-bottom:.4rem}
+.opt-card .oc-title{font-weight:bold;color:var(--vd);font-size:.95rem;margin-bottom:.3rem}
+.opt-card{background:#f0f7f5;border:1px solid #c0dbd5}
+.opt-card.warn{background:#fdf6e3;border:1px solid #dfc070}
+/* TERMO */
+.termo-section{background:var(--gl);border-radius:6px;padding:1.2rem 1.3rem;margin-top:2.5rem}
+.termo-section h4{font-size:1rem;color:var(--vd);margin-bottom:.6rem}
+.termo-section dl dt{font-weight:bold;font-family:Arial,sans-serif;font-size:.83rem;color:var(--vm)}
+.termo-section dl dd{font-size:.87rem;margin-bottom:.5rem}
+/* BOTÃO */
+.painel-btn{display:block;margin:2rem auto 0;padding:.75rem 1.6rem;background:var(--do);color:var(--vd);font-family:Arial,sans-serif;font-weight:bold;font-size:.95rem;border:none;border-radius:5px;cursor:pointer;text-align:center;max-width:320px}
+.painel-btn:hover{background:#b8921a}
+footer{text-align:center;font-family:Arial,sans-serif;font-size:.75rem;color:#888;padding:1.5rem 1rem;border-top:1px solid #ccc;margin-top:3rem}
+/* SPEED TABLE */
+.speed-box{background:#e8f5f2;border:1px solid #9fd0c8;border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.88rem}
+/* ALERTA */
+.alerta{background:#fff8e1;border:2px solid var(--am);border-radius:5px;padding:.7rem 1rem;margin:.8rem 0;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="kicker">PSCPP 2027 · Módulo II — Arte Naval · Bloco F</div>
+  <h1>Nayak Cap. 14 — Manobras em Baixa Velocidade<br><em style="font-size:1.35rem;font-weight:normal">Slow Speed Manoeuvres</em></h1>
+  <div class="sub">NAYAK, S. — <em>Theory and Practice of Marine Pilotage</em>, Cap. 14, pp. 295–325 · 2020<br>
+  Cross-ref: MacElrevey Cap. 1, 5 · Fonseca Art. Naval Cap. 11–12</div>
+</div>
+
+<main>
+
+<!-- ══════ INTRODUÇÃO ══════ -->
+<h2 class="sec">1. O Que É Baixa Velocidade? <span class="en">What is Slow Speed Manoeuvring?</span></h2>
+
+<p>Para este capítulo, <span class="hl">baixa velocidade = abaixo de 5 nós</span>, com máquina em devagar avante mínimo, parada ou a ré. As características de manobrabilidade a baixa velocidade <strong>não estão documentadas</strong> em nenhum cartão de ponte — são adquiridas pela experiência do prático.</p>
+
+<h3 class="subsec">Por que a Alta Velocidade é Proibida no Porto?</h3>
+<div class="tab-wrap">
+<table>
+  <tr><th>Desvantagem da Alta Velocidade</th><th>Consequência</th></tr>
+  <tr><td class="L">Rebocadores ficam ineficazes</td><td>Risco de colisão sem controle lateral</td></tr>
+  <tr><td class="L">Squat aumenta com o quadrado da velocidade</td><td>Encalhe em porto raso</td></tr>
+  <tr><td class="L">Efeitos de águas rasas amplificados</td><td>Smelling ground, sucção de banco</td></tr>
+  <tr><td class="L">Dificuldade de reflutuação se tocar o fundo</td><td>Navio preso no porto</td></tr>
+  <tr><td class="L"><span class="hl-am">Máquina a ré ineficaz acima de 5–6 nós</span></td><td>Cavitação — sem frenagem real</td></tr>
+  <tr><td class="L">Menos tempo para avaliação</td><td>Reações impulsivas e erros</td></tr>
+</table>
+</div>
+
+<h3 class="subsec">Plano de Controle de Velocidade (Speed Control Plan)</h3>
+
+<p>O prático define velocidades ótimas por ponto de referência durante o MPX. Exemplo para graneleiro Panamax carregado, berço Nº 1 a Er, 2 rebocadores (Bb proa e través de ré):</p>
+
+<div class="tab-wrap">
+<table>
+  <tr><th>#</th><th>Distância ao Berço</th><th>Velocidade Ótima</th><th>Ponto de Referência</th></tr>
+  <tr><td>1</td><td>1 milha</td><td>4 nós</td><td>Bacia de evolução</td></tr>
+  <tr><td>2</td><td>5 cabos</td><td>3 nós</td><td>Passando berço Nº 10</td></tr>
+  <tr><td>3</td><td>2 cabos</td><td>2 nós</td><td>Passando berço Nº 5</td></tr>
+  <tr><td>4</td><td>1 cabo</td><td>1 nó</td><td>Passando berço Nº 3</td></tr>
+  <tr><td>5</td><td>100 m</td><td>0,8 nó</td><td>Passando berço Nº 2</td></tr>
+  <tr><td>6</td><td>50 m</td><td>0,5 nó</td><td>50 m da posição da proa</td></tr>
+  <tr><td>7</td><td>25 m</td><td>0,3 nó</td><td>25 m da proa</td></tr>
+  <tr><td>8</td><td>10 m</td><td>0,1 nó</td><td>10 m da posição da proa</td></tr>
+</table>
+</div>
+
+<details class="pscpp banca">
+  <summary>🎯 Banca — Velocidade ótima é proporcional à distância ao berço</summary>
+  <div class="body">
+    <p><strong>Regra geral:</strong> sem fatores externos, velocidade ótima é proporcional à distância ao berço. Com corrente ou vento favorável, pode ser modificada.</p>
+    <p><strong>Distrator:</strong> "A velocidade deve ser constante durante toda a manobra de atracação." — FALSO. Deve ser reduzida progressivamente conforme a distância diminui.</p>
+  </div>
+</details>
+
+<!-- ══════ POR QUE É CRÍTICO ══════ -->
+<h2 class="sec">2. Por Que a Baixa Velocidade é Crítica? <span class="en">Why Critical?</span></h2>
+
+<div class="opt-grid">
+  <div class="opt-card warn">
+    <div class="oc-num">a</div>
+    <div class="oc-title">Difícil de girar</div>
+    <p>Sem velocidade, leme não corta a água — efeito de leme mínimo.</p>
+  </div>
+  <div class="opt-card warn">
+    <div class="oc-num">b</div>
+    <div class="oc-title">Leme menos eficaz</div>
+    <p>A eficiência do leme é proporcional ao quadrado da velocidade.</p>
+  </div>
+  <div class="opt-card warn">
+    <div class="oc-num">c</div>
+    <div class="oc-title">Vento domina</div>
+    <p>Sem velocidade, o vento "captura" a superestrutura e deriva o navio.</p>
+  </div>
+  <div class="opt-card warn">
+    <div class="oc-num">d</div>
+    <div class="oc-title">Corrente aumenta</div>
+    <p>Deriva lateral maior quando a velocidade do navio é baixa.</p>
+  </div>
+  <div class="opt-card warn">
+    <div class="oc-num">e</div>
+    <div class="oc-title">Nº mínimo de partidas</div>
+    <p>Garrafas de ar com 12–18 partidas disponíveis. Cada start/stop consome uma. Esgotamento = motor indisponível.</p>
+  </div>
+  <div class="opt-card warn">
+    <div class="oc-num">f</div>
+    <div class="oc-title">RPM mínima indisponível</div>
+    <p>Muitos navios não têm RPM abaixo de devagar avante. Para manter velocidade baixa, é preciso parar e dar golpes avante.</p>
+  </div>
+  <div class="opt-card warn">
+    <div class="oc-num">g</div>
+    <div class="oc-title">Potência a ré reduzida</div>
+    <p><span class="hl-am">Potência a ré = 30–75% da avante</span>, raramente 100%. Não depender só dela.</p>
+  </div>
+  <div class="opt-card warn">
+    <div class="oc-num">h</div>
+    <div class="oc-title">Leme inoperante a ré</div>
+    <p>A ré, leme é ineficaz; fluxo helicoidal passa pela lateral do casco → empuxo transversal dominante.</p>
+  </div>
+</div>
+
+<!-- PROPULSOR RH -->
+<h3 class="subsec">Empuxo Transversal a Ré — Propulsor Destro (RH)</h3>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" style="max-width:560px">
+  <!-- Navio vista de cima: popa retangular, proa pontuda -->
+  <path d="M120,80 L380,80 Q420,80 445,105 Q420,130 380,130 L120,130 Z" fill="#c8ddd8" stroke="#0D3D36" stroke-width="2"/>
+  <text x="250" y="100" text-anchor="middle" font-family="Arial" font-size="13" fill="#0D3D36" font-weight="bold">NAVIO</text>
+  <text x="250" y="116" text-anchor="middle" font-family="Arial" font-size="10" fill="#0D3D36">(vista de cima)</text>
+  <text x="430" y="100" text-anchor="middle" font-family="Arial" font-size="10" fill="#0D3D36">PROA</text>
+  <text x="135" y="75" text-anchor="middle" font-family="Arial" font-size="10" fill="#0D3D36">POPA</text>
+  <!-- Hélice RH na popa -->
+  <circle cx="130" cy="105" r="16" fill="#ffe082" stroke="#C8A84B" stroke-width="2"/>
+  <text x="130" y="109" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">RH ↻</text>
+  <!-- Fluxo helicoidal subindo pelo estibordo (parte de baixo no desenho) -->
+  <path d="M118,122 Q160,150 210,128" stroke="#1565C0" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+  <polygon points="208,123 218,128 208,133" fill="#1565C0"/>
+  <text x="165" y="165" text-anchor="middle" font-family="Arial" font-size="10" fill="#1565C0">fluxo helicoidal (estibordo)</text>
+  <!-- POPA deriva para Bb (para cima no desenho) -->
+  <line x1="130" y1="80" x2="130" y2="40" stroke="#E53935" stroke-width="3"/>
+  <polygon points="124,44 130,32 136,44" fill="#E53935"/>
+  <text x="130" y="26" text-anchor="middle" font-family="Arial" font-size="11" fill="#E53935" font-weight="bold">POPA → Bombordo</text>
+  <!-- PROA vai para Er (para baixo) -->
+  <line x1="420" y1="130" x2="420" y2="170" stroke="#2E7D32" stroke-width="3"/>
+  <polygon points="414,166 420,178 426,166" fill="#2E7D32"/>
+  <text x="420" y="195" text-anchor="middle" font-family="Arial" font-size="11" fill="#2E7D32" font-weight="bold">PROA → Estibordo</text>
+  <!-- Legenda -->
+  <rect x="10" y="205" width="540" height="22" fill="#fff5f5" stroke="#6B1A1A" stroke-width="1" rx="4"/>
+  <text x="280" y="220" text-anchor="middle" font-family="Arial" font-size="10" fill="#6B1A1A">Leme INEFICAZ a ré — NÃO corrige o empuxo transversal (regra-chave da banca)</text>
+</svg>
+<div class="fig-cap">Empuxo Transversal a Ré — Hélice Destro (RH): POPA vai a Bombordo, PROA vai a Estibordo. (Para LH, inverte-se tudo.)</div>
+</div>
+
+<div class="alerta">⚠ <strong>CPP (Passo Controlável):</strong> o eixo gira sempre na mesma direção (avante ou ré), apenas o ângulo das pás muda. Com motor parado, o propulsor continua girando a "passo zero" e gera lavagem — prejudica o passar das espias. Recomendado: desengatar o propulsor e parar o motor antes de atracar.
+</div>
+
+<h3 class="subsec">Navios de Dois Hélices (Twin Screw)</h3>
+
+<div class="tab-wrap">
+<table>
+  <tr><th>Configuração</th><th>Manobrabilidade</th><th>Detalhe</th></tr>
+  <tr><td class="L bold">Hélices de giro externo (outward turning) ✅</td><td>Excelente</td><td>RH-Er + LH-Bb: torque gira para Er com ré-Er + avante-Bb. Pode girar no ponto a zero de velocidade.</td></tr>
+  <tr><td class="L bold">Hélices de giro interno (inward turning) ❌</td><td>Ruim</td><td>Lavagem da popa-Er deflecte o fluxo de Bb. Às vezes um dos eixos é parado para ter efeito de leme com o outro.</td></tr>
+  <tr><td class="L">Leme único centralizado</td><td>Ineficaz</td><td>Fora da descarga helicoidal — sem controle de direção adequado.</td></tr>
+</table>
+</div>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — Regras do Propulsor</summary>
+  <div class="body">
+    <p><strong>RH a ré:</strong> popa → Bb | proa → Er</p>
+    <p><strong>LH a ré:</strong> popa → Er | proa → Bb</p>
+    <p><strong>CPP parado:</strong> propulsor ainda gira (pitch = 0) e gera lavagem → desengatar para atracar</p>
+    <p><strong>Twin outward:</strong> pode girar no ponto a zero velocidade — melhor configuração</p>
+    <p><strong>Potência a ré = 30–75% da avante</strong> (raramente 100%)</p>
+    <p><strong>Máquina a ré ineficaz acima de 5–6 nós</strong></p>
+  </div>
+</details>
+
+<!-- ══════ REGRAS DO POLEGAR ══════ -->
+<h2 class="sec">3. Regras do Polegar <span class="en">Thumb Rules of Slow Speed Manoeuvring</span></h2>
+
+<ol class="steps">
+  <li><span class="hl">Manter velocidade no lado mais baixo</span> e reservar potência avante — com mais RPM o leme é mais eficaz e há mais margem para esquivar.</li>
+  <li>Se rebocadores ficarem ineficazes, o prático só tem máquina e leme — só funciona se a velocidade for baixa (pode então aumentar RPM para efeito de leme).</li>
+  <li><span class="hl-am">Perto do berço: todo aumento de velocidade deve ser morto nos próximos minutos</span> — gera igual ou maior quantidade de ré. Decisão de aumentar requer plano de redução imediato.</li>
+  <li>Com leme a toda e máquina em alta RPM, o aumento de velocidade é marginal (a força lateral do leme absorve parte da potência).</li>
+  <li>Potência a ré: 30–75%. Planejar de acordo.</li>
+  <li><span class="hl">Número de partidas consecutivas deve ser controlado</span> — pressão de ar esgotada = motor inoperável.</li>
+  <li>Com motor parado e navio com velocidade apreciável, o navio ainda governa por algum tempo — depende da estabilidade direcional.</li>
+  <li>A velocidade muito baixa sem motor, leme a toda pode dar movimento lateral à popa.</li>
+  <li>Velocidades ótimas devem estar no plano de atracação e discutidas com o Comandante no MPX.</li>
+</ol>
+
+<!-- ══════ OPÇÕES DE CONTROLE ══════ -->
+<h2 class="sec">4. Opções de Controle a Baixa Velocidade <span class="en">Control Options at Slow Speed</span></h2>
+
+<p><em>"Aumento de velocidade é suicida nos limites do porto — chama emergências indesejadas."</em></p>
+
+<!-- OPÇÃO 1 -->
+<h3 class="subsec">Opção 1 — Golpes Curtos Avante <span class="en">Short Bursts Ahead</span></h3>
+
+<p>Com motor parado, a velocidade decai naturalmente por resistência da água. O navio fica mais vulnerável ao vento e à corrente. Golpes curtos de avante são dados para manter a velocidade mínima necessária ao governo sem aumentar excessivamente. Cada golpe consome uma partida — gerenciar o número de starts disponíveis.</p>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 480 130" xmlns="http://www.w3.org/2000/svg" style="max-width:480px">
+  <rect x="0" y="0" width="480" height="130" fill="#f8f4ea" rx="6"/>
+  <!-- Eixo velocidade -->
+  <line x1="40" y1="100" x2="440" y2="100" stroke="#888" stroke-width="1.5"/>
+  <line x1="40" y1="20" x2="40" y2="105" stroke="#888" stroke-width="1.5"/>
+  <text x="240" y="118" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Tempo →</text>
+  <text x="15" y="60" text-anchor="middle" font-family="Arial" font-size="10" fill="#555" transform="rotate(-90,15,60)">Vel.</text>
+  <!-- Curva de decaimento com golpes -->
+  <polyline points="40,40 80,55 120,70 160,80 160,40 200,55 240,68 280,78 280,40 320,53 360,65 400,75 400,40 440,52" 
+    fill="none" stroke="#1A7A6E" stroke-width="2.5"/>
+  <!-- Golpes (linhas verticais verdes) -->
+  <line x1="160" y1="40" x2="160" y2="80" stroke="#C8A84B" stroke-width="2" stroke-dasharray="4,2"/>
+  <line x1="280" y1="40" x2="280" y2="78" stroke="#C8A84B" stroke-width="2" stroke-dasharray="4,2"/>
+  <line x1="400" y1="40" x2="400" y2="75" stroke="#C8A84B" stroke-width="2" stroke-dasharray="4,2"/>
+  <text x="160" y="35" text-anchor="middle" font-family="Arial" font-size="9" fill="#C8A84B">golpe</text>
+  <text x="280" y="35" text-anchor="middle" font-family="Arial" font-size="9" fill="#C8A84B">golpe</text>
+  <text x="400" y="35" text-anchor="middle" font-family="Arial" font-size="9" fill="#C8A84B">golpe</text>
+  <!-- Linha mínima de governo -->
+  <line x1="40" y1="85" x2="440" y2="85" stroke="#E53935" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="442" y="88" font-family="Arial" font-size="9" fill="#E53935">mín. governo</text>
+</svg>
+<div class="fig-cap">Golpes curtos avante mantêm a velocidade mínima de governo sem acumular excesso de velocidade.</div>
+</div>
+
+<!-- OPÇÃO 2 -->
+<h3 class="subsec">Opção 2 — Giro Híbrido <span class="en">Hybrid Turning</span></h3>
+
+<p>Combinação de alteração de rumo com redução de velocidade — aplicado quando ambos são igualmente necessários.</p>
+
+<ol class="steps">
+  <li>Com máquinas avante, leme a toda para o bordo de alteração.</li>
+  <li>Quando o balanço suficiente for gerado, <strong>parar a máquina</strong> enquanto o balanço continua.</li>
+  <li>Com motor parado, leme ao meio.</li>
+  <li>Dar ré nas máquinas até ré total. A ré cria empuxo transversal → navio continua girando para o mesmo bordo.</li>
+  <li>Velocidade cai continuamente enquanto o giro continua.</li>
+</ol>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" style="max-width:560px">
+  <rect x="0" y="0" width="560" height="220" fill="#f2fbf8" rx="6"/>
+  <!-- Canal -->
+  <rect x="30" y="10" width="500" height="200" fill="none" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="8,4"/>
+  <text x="280" y="25" text-anchor="middle" font-family="Arial" font-size="10" fill="#1565C0">Canal (berço próximo ao canal)</text>
+  <!-- Navio fase 1 - canal -->
+  <polygon points="100,100 180,85 180,115" fill="#c8ddd8" stroke="#0D3D36" stroke-width="1.5"/>
+  <text x="140" y="103" text-anchor="middle" font-family="Arial" font-size="9" fill="#0D3D36">① avante+leme</text>
+  <!-- Seta balanço -->
+  <path d="M200,100 Q280,60 350,90" stroke="#C8A84B" stroke-width="2" fill="none" marker-end="url(#ar1)"/>
+  <!-- Navio fase 2 - girando -->
+  <polygon points="330,120 350,85 370,120" fill="#ffe082" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="350" y="140" text-anchor="middle" font-family="Arial" font-size="9" fill="#C8A84B">② motor parado</text>
+  <text x="350" y="152" text-anchor="middle" font-family="Arial" font-size="9" fill="#C8A84B">balanço continua</text>
+  <!-- Navio fase 3 - ré -->
+  <polygon points="430,150 410,120 450,120" fill="#ffcdd2" stroke="#E53935" stroke-width="1.5"/>
+  <text x="430" y="170" text-anchor="middle" font-family="Arial" font-size="9" fill="#E53935">③ dá ré total</text>
+  <text x="430" y="182" text-anchor="middle" font-family="Arial" font-size="9" fill="#E53935">giro continua+vel↓</text>
+  <!-- Seta ré -->
+  <path d="M370,110 Q400,95 415,110" stroke="#E53935" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+  <!-- Berço -->
+  <rect x="460" y="60" width="60" height="130" fill="#e0e0e0" stroke="#555" stroke-width="1.5"/>
+  <text x="490" y="130" text-anchor="middle" font-family="Arial" font-size="10" fill="#333">BERÇO</text>
+  <!-- Aviso perigo -->
+  <text x="280" y="205" text-anchor="middle" font-family="Arial" font-size="9" fill="#6B1A1A">⚠ Capesize carregado: mesmo 4 reboques podem não controlar o balanço a ré → parar ré + avante com leme oposto</text>
+  <defs>
+    <marker id="ar1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#C8A84B"/>
+    </marker>
+  </defs>
+</svg>
+<div class="fig-cap">Giro Híbrido: avante+leme → parar motor → ré total (empuxo transversal mantém o giro enquanto a velocidade cai).</div>
+</div>
+
+<div class="alerta">⚠ <strong>Perigo do Giro Híbrido:</strong> a ré, o navio não está sob comando (leme ineficaz). Se o balanço for excessivo, rebocadores devem estar de sobreaviso para controlá-lo. Para navios Capesize carregados, às vezes 4 rebocadores a plena potência não são suficientes → parar a ré imediatamente e dar avante com leme para o lado oposto.
+</div>
+
+<!-- OPÇÃO 3 -->
+<h3 class="subsec">Opção 3 — Leme a Toda com Motor Parado <span class="en">Wheel Hard Over, Engine Stopped</span></h3>
+
+<p>Com motor parado, a esteira do hélice ainda passa pelo leme, fornecendo pequeno efeito de leme. <span class="hl">Usar lemes maiores para governar</span>. Objetivo: reduzir velocidade lentamente enquanto o navio ainda é controlado precariamente.</p>
+
+<p>Quando motor parado e leme a toda: <span class="hl-am">pode dar movimento lateral à popa</span> — útil para contrarrestar a deriva do vento na acomodação ou obter velocidade lateral da popa junto ao cais (sem usar rebocador de popa).</p>
+
+<!-- OPÇÃO 4 -->
+<h3 class="subsec">Opção 4 — Leme a Toda com Golpes de Máquina <span class="en">Wheel Hard Over + Short Engine Kicks</span></h3>
+
+<p>Com motor parado e navio com velocidade apreciável, o navio mantém o rumo. Quando começa a derivar e o leme a toda não consegue mais corrigir, dão-se golpes curtos de avante para restaurar o efeito de leme e estabilizar o rumo. Em seguida motor parado novamente.</p>
+
+<div class="alerta">⚠ Golpes frequentes consomem a pressão de ar de partida — controlar o número de kick starts disponíveis. Priorizar para os momentos mais críticos da manobra.
+</div>
+
+<!-- OPÇÃO 5 -->
+<h3 class="subsec">Opção 5 — Leme Sequencial a Toda <span class="en">Sequential Wheel Hard Over</span></h3>
+
+<p>Usado com espaço longitudinal disponível. O leme a toda inicia um balanço para um bordo, quebrando a inércia direcional e reduzindo a velocidade marginalmente. Antes de o navio se estabilizar no novo rumo, leme a toda para o bordo oposto → retorno ao rumo original quebrando a inércia novamente. Repetir conforme necessário.</p>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" style="max-width:520px">
+  <rect x="0" y="0" width="520" height="150" fill="#f8f4ea" rx="6"/>
+  <!-- Rumo original -->
+  <line x1="260" y1="10" x2="260" y2="140" stroke="#888" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="265" y="20" font-family="Arial" font-size="9" fill="#888">rumo original</text>
+  <!-- Trajetória zig-zag -->
+  <polyline points="260,130 220,105 260,80 300,55 260,30 230,15" 
+    fill="none" stroke="#1A7A6E" stroke-width="2.5"/>
+  <!-- Navio posições -->
+  <circle cx="260" cy="130" r="6" fill="#0D3D36"/>
+  <circle cx="220" cy="105" r="5" fill="#C8A84B"/>
+  <circle cx="260" cy="80" r="5" fill="#C8A84B"/>
+  <circle cx="300" cy="55" r="5" fill="#C8A84B"/>
+  <circle cx="260" cy="30" r="5" fill="#C8A84B"/>
+  <!-- Etiquetas leme -->
+  <text x="200" y="108" font-family="Arial" font-size="9" fill="#E53935">Bb←</text>
+  <text x="265" y="78" font-family="Arial" font-size="9" fill="#E53935">→Er</text>
+  <text x="305" y="53" font-family="Arial" font-size="9" fill="#E53935">←Bb</text>
+  <!-- Seta direção geral -->
+  <polygon points="225,20 230,10 235,20" fill="#0D3D36"/>
+  <text x="190" y="15" font-family="Arial" font-size="9" fill="#0D3D36">Direção geral</text>
+  <!-- Aviso -->
+  <text x="260" y="145" text-anchor="middle" font-family="Arial" font-size="9" fill="#6B1A1A">⚠ Exige espaço longitudinal | Uma vez iniciado, difícil reverter o balanço</text>
+</svg>
+<div class="fig-cap">Leme Sequencial a Toda: cada alternância quebra a inércia direcional e reduz a velocidade marginalmente.</div>
+</div>
+
+<!-- OPÇÃO 6 -->
+<h3 class="subsec">Opção 6 — Máquina a Ré no Momento Certo <span class="en">Astern Engines at Right Time</span></h3>
+
+<p><span class="hl">Máquina a ré eficaz apenas quando a velocidade é inferior a 5–6 nós.</span> Acima disso, a ré causa cavitação intensa e estresse enorme no motor sem frenagem apreciável. A ré cria empuxo transversal — pode ser aproveitado ou deve ser corrigido. O prático deve dar a ré <em>antes</em> de precisar urgentemente, para reservar potência avante para governo nos momentos críticos seguintes.</p>
+
+<!-- OPÇÃO 7 -->
+<h3 class="subsec">Opção 7 — Empuxo Transversal a Ré <span class="en">Transverse Thrust with Astern Engines</span></h3>
+
+<p>Com ponto de pivô à vante e máquina a ré, o empuxo transversal faz o navio guindar para Bb (RH) ou Er (LH). Pode ser usado:</p>
+<ul class="itens">
+  <li><strong>a.</strong> Para guindar o navio intencionalmente aproveitando o empuxo.</li>
+  <li><strong>b.</strong> Para afastar a popa de um obstáculo durante a redução de velocidade.</li>
+  <li><strong>c.</strong> Bordo adequado a ré: suficiente potência reduz a velocidade e aproxima a popa do berço simultaneamente.</li>
+</ul>
+
+<!-- OPÇÃO 8 -->
+<h3 class="subsec">Opção 8 — Momesting (Momentum Steering / Governo por Inércia)</h3>
+
+<p><span class="hl-am">Momesting</span> = forma abreviada de "Momentum Steering". Significa governar o navio usando a inércia do próprio navio, com motor parado, mantendo o rumo dentro de <span class="hl">1–2 graus de tolerância</span> por vários minutos — o que Nayak chama de "Pre-Decimal Steering".</p>
+
+<p>Aplicação: em trechos de canal onde qualquer desvio de 3–5 graus seria perigoso (colisão ou encalhe). O motor é parado para reduzir velocidade, mas a estabilidade direcional é mantida pelo leme. Quando o navio começa a derivar, golpes curtos de avante restauram o efeito de leme.</p>
+
+<div class="speed-box">
+<strong>Contexto:</strong> O navio segue o rumo com precisão decimal (ex.: rumo 275,3°) com motor parado, usando apenas a inércia e o leme. Parece aterrador, mas dá ao prático o <em>controle da velocidade</em> sem perder o rumo — uma das técnicas mais sofisticadas da praticagem moderna.
+</div>
+
+<!-- OPÇÃO 9 -->
+<h3 class="subsec">Opção 9 — Governo Normal com Velocidade de Reserva <span class="en">Normal Steering with Reserve Speed</span></h3>
+
+<p>Reduzir a velocidade a um nível subótimo antes da bacia de evolução (ex.: 3 nós em vez de 2) e prosseguir com motor em devagar avante contínuo. A velocidade <em>de reserva</em> permite ao prático aumentar marginalmente quando necessário para efeito de leme — sem pânico.</p>
+
+<!-- OPÇÃO 10 -->
+<h3 class="subsec">Opção 10 — Controle do Balanço com Golpes Preventivos <span class="en">Swing Management / Preventer Kicks</span></h3>
+
+<p>Quando a TDG (taxa de giro) aumenta além do controle com motor parado, o motor é acionado por alguns segundos com leme a toda para o bordo <em>oposto</em> ao balanço para conter a TDG. Esses golpes são chamados de <strong>"preventer kicks"</strong>. Com o uso correto, o balanço (ROT) pode ser controlado com precisão.</p>
+
+<!-- ══════ COM REBOCADORES ══════ -->
+<h2 class="sec">5. Opções com Rebocadores <span class="en">Options with Tugs</span></h2>
+
+<!-- OPÇÃO 11 -->
+<h3 class="subsec">Opção 11 — Máquina Avante + Rebocador Puxando a Ré <span class="en">Edging by Tugs</span></h3>
+
+<p>Quando o navio não pode dar ré ou parar o motor, um rebocador é posicionado a ré (pelo guia central) para puxar para ré enquanto o motor segue avante — mantendo o efeito de leme e reduzindo a velocidade simultaneamente. Rebocadores de proa e popa podem ser usados para este fim.</p>
+
+<div class="alerta">⚠ Rebocadores não puxam exatamente à ré — puxam em direção arbitrária, tendendo para o bordo do rebocador. Isso deriva marginalmente a popa. Se deriva lateral indesejada for observada → parar a tração momentaneamente.
+</div>
+
+<!-- OPÇÃO 12 -->
+<h3 class="subsec">Opção 12 — Rebocadores com Motor Parado ou a Ré <span class="en">Tugs with Engine Stopped / Astern</span></h3>
+
+<p>Quando é impossível usar avante em qualquer circunstância, depender totalmente dos rebocadores. <span class="hl">Avisar os rebocadores com antecedência e posicioná-los antes que o efeito apareça no navio</span> (uso proativo). Atraso no posicionamento desperdiça tempo crítico.</p>
+
+<!-- OPÇÃO 13 HOOKING -->
+<h3 class="subsec">Opção 13 — Hooking com 1 Rebocador <span class="en">Hooking by 1 Tug</span></h3>
+
+<p>Controle do movimento lateral com apenas 1 rebocador enquanto o navio está fazendo caminho (motor parado). Dois tipos:</p>
+
+<h4 class="sub4">A — Bow Hooking (Gancho de Proa)</h4>
+<p>Navio deriva para Er (navios atracados a Er em área restrita). Para parar a deriva ou trazer o navio de volta ao lado Bb:</p>
+<ol class="steps">
+  <li>Leme a toda para Er (lado da deriva). Isso para a deriva da popa para Er ou afasta a popa dos navios atracados.</li>
+  <li>Usar o rebocador de proa para puxar a proa para fora. Enquanto a proa não entra, a popa sai continuamente.</li>
+</ol>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+  <rect x="0" y="0" width="500" height="180" fill="#f2fbf8" rx="6"/>
+  <!-- Navios atracados -->
+  <rect x="380" y="20" width="50" height="60" fill="#c0c0c0" stroke="#555" stroke-width="1.5"/>
+  <rect x="380" y="90" width="50" height="60" fill="#c0c0c0" stroke="#555" stroke-width="1.5"/>
+  <text x="405" y="53" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Atracado</text>
+  <text x="405" y="123" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Atracado</text>
+  <!-- Navio principal -->
+  <polygon points="120,80 300,65 300,115 120,100" fill="#c8ddd8" stroke="#0D3D36" stroke-width="1.8"/>
+  <text x="210" y="93" text-anchor="middle" font-family="Arial" font-size="10" fill="#0D3D36">NAVIO</text>
+  <!-- Leme a toda Er -->
+  <path d="M295,90 Q315,90 320,80" stroke="#E53935" stroke-width="2"/>
+  <text x="325" y="75" font-family="Arial" font-size="8" fill="#E53935">leme Er→</text>
+  <!-- Seta deriva Er -->
+  <path d="M210,115 L210,145" stroke="#E53935" stroke-width="2" stroke-dasharray="4,2"/>
+  <polygon points="205,143 210,155 215,143" fill="#E53935"/>
+  <text x="220" y="155" font-family="Arial" font-size="8" fill="#E53935">deriva Er (atual)</text>
+  <!-- Rebocador proa -->
+  <rect x="40" y="75" width="50" height="25" fill="#ffe082" stroke="#C8A84B" stroke-width="1.5" rx="4"/>
+  <text x="65" y="91" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">Reboc. proa</text>
+  <!-- Cabo rebocador puxando Bb -->
+  <line x1="90" y1="82" x2="118" y2="82" stroke="#C8A84B" stroke-width="2"/>
+  <path d="M88,78 L78,82 L88,86" fill="#C8A84B"/>
+  <text x="70" y="120" text-anchor="middle" font-family="Arial" font-size="8" fill="#C8A84B">puxa proa → Bb</text>
+  <!-- Resultado -->
+  <text x="250" y="170" text-anchor="middle" font-family="Arial" font-size="9" fill="#1A7A6E">✅ Proa não entra → popa sai continuamente → navio desloca bodily para Bb</text>
+</svg>
+<div class="fig-cap">Bow Hooking: leme a toda para Er + rebocador de proa puxando para Bb → navio desloca bodily para Bb (Fig. 14.1a).</div>
+</div>
+
+<h4 class="sub4">B — Stern Hooking (Gancho de Popa)</h4>
+<p>Navio a ré e derivando a Er (por empuxo transversal RH). Para manter o rumo e evitar que a popa bata na margem:</p>
+<ol class="steps">
+  <li>Dar máquina a ré (popa começa a desenvolver empuxo transversal — popa → Bb para RH).</li>
+  <li>Rebocador de popa posicionado em sobreaviso para empurrar pelo través de popa-Bb. À medida que a TDG aumenta, aumentar o empurrão para anular o empuxo transversal.</li>
+</ol>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+  <rect x="0" y="0" width="500" height="180" fill="#f8f4ea" rx="6"/>
+  <!-- Canal com bancos rasas -->
+  <rect x="0" y="0" width="500" height="40" fill="#e8d5a3" opacity="0.5"/>
+  <text x="250" y="20" text-anchor="middle" font-family="Arial" font-size="9" fill="#8B6914">BANCO RASO (margem do canal)</text>
+  <!-- Navio -->
+  <polygon points="100,90 320,75 320,125 100,110" fill="#c8ddd8" stroke="#0D3D36" stroke-width="1.8"/>
+  <text x="210" y="103" text-anchor="middle" font-family="Arial" font-size="10" fill="#0D3D36">NAVIO (a ré)</text>
+  <!-- Seta a ré -->
+  <path d="M320,100 L380,100" stroke="#1565C0" stroke-width="2.5"/>
+  <polygon points="378,95 390,100 378,105" fill="#1565C0"/>
+  <text x="390" y="95" font-family="Arial" font-size="9" fill="#1565C0">← ré</text>
+  <!-- Popa deriva para Bb (acima) -->
+  <path d="M310,75 L310,45" stroke="#E53935" stroke-width="2" stroke-dasharray="4,2"/>
+  <polygon points="305,47 310,35 315,47" fill="#E53935"/>
+  <text x="315" y="45" font-family="Arial" font-size="8" fill="#E53935">popa→Bb(banco!)</text>
+  <!-- Rebocador popa empurrando Bb→Er -->
+  <rect x="330" y="118" width="55" height="25" fill="#ffe082" stroke="#C8A84B" stroke-width="1.5" rx="4"/>
+  <text x="357" y="134" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Reboc. popa</text>
+  <line x1="330" y1="130" x2="315" y2="115" stroke="#C8A84B" stroke-width="2"/>
+  <text x="342" y="155" text-anchor="middle" font-family="Arial" font-size="8" fill="#C8A84B">empurra Bb→Er para anular drift</text>
+  <!-- Resultado -->
+  <text x="250" y="172" text-anchor="middle" font-family="Arial" font-size="9" fill="#1A7A6E">✅ Rebocador de popa anula empuxo transversal → navio mantém rumo reduzindo velocidade</text>
+</svg>
+<div class="fig-cap">Stern Hooking: motor a ré (empuxo transversal RH → popa Bb) + rebocador de popa empurrando para neutralizar a deriva da popa (Fig. 14.2/14.3).</div>
+</div>
+
+<!-- OPÇÃO 14 -->
+<h3 class="subsec">Opção 14 — Leme por Rebocador <span class="en">Helming by a Tug</span></h3>
+
+<p>Quando todas as outras forças estão esgotadas, o rebocador fixo no través-de-popa (quarto) pode ser usado para controlar a TDG com esforço mínimo. O rebocador, apenas estando em "sobreaviso para puxar" ou "sobreaviso para empurrar", exerce força suficiente para manter ou alterar a TDG. Uma ordem de <em>"linha firme" (line tight)</em> ou <em>"toque de empurrão" (touch push)</em> é suficiente na maioria dos casos.</p>
+
+<div class="speed-box">
+<strong>Helming by Tugs:</strong> controlar a TDG de um navio com um rebocador no través. Usa-se força judiciosa passo a passo — força excessiva causa ultrapassagem (overshoot) da TDG e exige nova correção no sentido oposto, amplificando o problema.
+</div>
+
+<!-- OPÇÃO 15 -->
+<h3 class="subsec">Opção 15 — Apenas Rebocadores (sem máquina ou leme) <span class="en">Tugs Only</span></h3>
+
+<p>Motor e leme ambos indisponíveis. Rebocadores posicionados um na proa e um na popa para controlar os movimentos laterais independentemente e manter o navio nas margens de segurança. Quando os rebocadores trabalham perpendicularmente ao eixo do navio, criam arrasto adicional → velocidade reduz a uma taxa maior que o normal.</p>
+
+<!-- THRUSTER -->
+<h3 class="subsec">Opção 16 — Thruster de Proa Apenas <span class="en">Bow Thruster Only</span></h3>
+
+<p>O bow thruster é ferramenta adicional — útil a baixa velocidade para controle de rumo. <span class="hl-am">Eficaz apenas abaixo de 5 nós; praticamente inútil acima disso.</span> Em condição carregada, menos eficaz do que em lastro. Pode ser usado para:</p>
+<ul class="itens">
+  <li>Controle do rumo sem dar avante (evitar consumo de starts).</li>
+  <li>Desenvolver velocidade lateral ao aproximar o berço.</li>
+  <li>Bow Hooking quando rebocadores indisponíveis.</li>
+</ul>
+
+<h3 class="subsec">Opção 17 — Thruster + Leme (motor parado)</h3>
+<p>Combinação do thruster de proa com leme para gerar movimento lateral bodily enquanto o motor está parado. Substitui o rebocador de proa em navios sem rebocador disponível.</p>
+
+<!-- OPÇÃO 18 -->
+<h3 class="subsec">Opção 18 — Forças Externas a Favor <span class="en">Using Wind, Current & Tidal Streams</span></h3>
+
+<p>Vento e corrente: inimigos se negligenciados, aliados se conhecidos. A corrente segue padrões diurnos e sazonais — o prático deve antecipar força e direção em cada ponto da passagem. <span class="hl">O vento pode ser lido em tempo real</span> (superfície da água); a corrente não.</p>
+
+<h4 class="sub4">Fórmula de Hughes para Força do Vento</h4>
+<div class="speed-box">
+<strong>Ra = ½ × ρ × CRa × Va² × (A·cos²θ + B·sin²θ)</strong> [kgf]<br><br>
+<strong>ρ</strong> = 0,125 kg·s²/m⁴ (densidade do ar) | <strong>Va</strong> = velocidade do vento [m/s]<br>
+<strong>A</strong> = área projetada da proa [m²] | <strong>B</strong> = área projetada do través [m²]<br>
+<strong>θ</strong> = ângulo do vento da proa (vento relativo) | <strong>CRa</strong> = coeficiente de pressão<br><br>
+<strong>CRa para Tanqueiros/Graneleiros:</strong> 1,200 − 0,083cos2θ − 0,250cos4θ − 0,117cos6θ<br>
+<strong>CRa máximo (θ = 90°, través):</strong> +43% | <strong>CRa mínimo (θ = 0° ou 180°):</strong> −43%<br><br>
+<em>Exemplo: Porta-containers 255m, calado 11m, A=880m², B=6200m², vento 20 nós (10m/s) de 4 pontos Er-proa → Ra ≈ 29 ton. A través → 41 ton.</em>
+</div>
+
+<!-- OPÇÃO 19 -->
+<h3 class="subsec">Opção 19 — Espias e Ferros no Momento Certo</h3>
+<p>Espias e ferros usados com a avaliação correta do cenário, especialmente ao aproximar ou sair do berço. Detalhes nos capítulos de Atracação e Fundeio.</p>
+
+<!-- OPÇÃO 20 -->
+<h3 class="subsec">Opção 20 — Referências Terrestres <span class="en">Land References</span></h3>
+
+<p>Dentro do porto, prático e oficiais observam o rumo pelo mastro de vante ou luz de governo. Mas quando a <em>popa</em> se move, a leitura pelo mastro de vante dá o sentido <em>oposto</em> — causa confusão e ações impulsivas (Nayak chama de "sequel de erro: erro de julgamento → ação errada → ação corretiva excessiva").</p>
+
+<p><span class="hl">Dois alvos terrestres definem simultaneamente posição E movimento real do navio</span>. Os dados digitais do painel (penta-data) têm <em>delayed display phenomenon</em> (atraso de exibição) — as referências terrestres provêm dados em tempo real.</p>
+
+<div class="alerta">⚠ <strong>Erro clássico:</strong> popa move para Er → mastro de proa gira para Bb → prático acha que o navio está guindando para Bb → pede tração de proa para Bb → popa acelera para Er → problema amplificado. Uma referência terrestre na popa teria resolvido com 1/3 da força.
+</div>
+
+<!-- OPÇÃO 21 -->
+<h3 class="subsec">Opção 21 — Melhor Uso do Ponto de Pivô e Conjugados (Couples)</h3>
+
+<p>O ponto de pivô age como fulcro de um navio flutuando livremente. Forças desiguais em cada lado criam um conjugado (casal de forças) que gira o navio ao redor do ponto de pivô enquanto o desloca bodily para um bordo. <span class="hl">O trabalho do prático é criar conjugados favoráveis com força mínima.</span></p>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" style="max-width:560px">
+  <!-- Navio vista de cima -->
+  <path d="M90,90 L350,90 Q390,90 415,110 Q390,130 350,130 L90,130 Z" fill="#c8ddd8" stroke="#0D3D36" stroke-width="2"/>
+  <text x="220" y="115" text-anchor="middle" font-family="Arial" font-size="11" fill="#0D3D36">NAVIO</text>
+  <!-- Ponto de pivô -->
+  <circle cx="160" cy="110" r="8" fill="#E53935"/>
+  <text x="160" y="150" text-anchor="middle" font-family="Arial" font-size="10" fill="#E53935" font-weight="bold">PP</text>
+  <!-- CG -->
+  <circle cx="240" cy="110" r="5" fill="#1565C0"/>
+  <text x="240" y="150" text-anchor="middle" font-family="Arial" font-size="9" fill="#1565C0">CG</text>
+  <!-- Força proa Fa (para cima) -->
+  <line x1="110" y1="90" x2="110" y2="45" stroke="#C8A84B" stroke-width="3"/>
+  <polygon points="104,49 110,37 116,49" fill="#C8A84B"/>
+  <text x="110" y="32" text-anchor="middle" font-family="Arial" font-size="10" fill="#C8A84B" font-weight="bold">Fa (proa)</text>
+  <!-- Força popa Fb (para baixo) -->
+  <line x1="380" y1="130" x2="380" y2="175" stroke="#7B1FA2" stroke-width="3"/>
+  <polygon points="374,171 380,183 386,171" fill="#7B1FA2"/>
+  <text x="380" y="200" text-anchor="middle" font-family="Arial" font-size="10" fill="#7B1FA2" font-weight="bold">Fb (popa)</text>
+  <!-- Arco de rotação -->
+  <path d="M130,75 Q250,45 360,75" stroke="#1A7A6E" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+  <polygon points="356,70 364,78 352,80" fill="#1A7A6E"/>
+  <text x="245" y="40" text-anchor="middle" font-family="Arial" font-size="10" fill="#1A7A6E">conjugado (couple): Fa ≠ Fb → gira ao redor do PP</text>
+  <!-- Berço -->
+  <rect x="440" y="80" width="55" height="70" fill="#e0e0e0" stroke="#555" stroke-width="1.5"/>
+  <text x="467" y="118" text-anchor="middle" font-family="Arial" font-size="10" fill="#333">BERÇO</text>
+  <!-- Legenda -->
+  <rect x="10" y="205" width="540" height="22" fill="#f2fbf8" stroke="#1A7A6E" stroke-width="1" rx="4"/>
+  <text x="280" y="220" text-anchor="middle" font-family="Arial" font-size="10" fill="#0D3D36">PP avante: força na popa gira a proa com grande braço de alavanca — abordagem mais eficaz e econômica</text>
+</svg>
+<div class="fig-cap">Conjugado (Couple): forças desiguais em proa e popa geram rotação ao redor do PP. Um pequeno empurrão na popa (Fb), 50–75 m antes do FOF, traz a popa ao cais girando a proa ao berço.</div>
+</div>
+
+<div class="alerta">⚠ <strong>Erro de abordagem:</strong> muitos práticos trazem o navio paralelo ao berço 20–30m afastado e usam 2 rebocadores para empurrar bodily. Isso cria 2 conjugados instáveis, movimentos longitudinais residuais, risco de impacto em guindastes e maior consumo de força de reboque. A técnica correta: aproximar o cais em ângulo com a popa fora, e usar um pequeno empurrão na popa para girar a proa ao berço.
+</div>
+
+<!-- ══════ MANOBRAS EXTREMAS ══════ -->
+<h2 class="sec">6. Manobras Extremas em Baixíssima Velocidade <span class="en">Extreme Manoeuvres at Very Slow Speed</span></h2>
+
+<h3 class="subsec">6.1 Giro com 1 Rebocador — Raio e Fórmula do PP</h3>
+
+<p>Com 1 rebocador empurrando na popa (ou proa), o centro do giro é o <strong>Ponto de Pivô (PP)</strong>. Girar no ponto com raio de ½L <strong>não é possível</strong> com apenas 1 rebocador. O raio mínimo de giro é:</p>
+
+<div class="speed-box">
+<strong>Raio de giro: R = GP + ½L</strong><br>
+Onde: GP = k²/GC<br>
+k = raio de giração em torno do eixo vertical passando pelo CG (= 0,35L) → k² = 0,1225L²<br>
+G = centro de gravidade | C = ponto de aplicação do rebocador<br><br>
+<em>Com rebocador na popa (C = ½L à ré do G):</em> GP = 0,1225L² / (0,5L) = 0,245L<br>
+R = 0,245L + 0,5L ≈ <strong>0,75L</strong> (mínimo com 1 rebocador na popa)
+</div>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="max-width:400px">
+  <!-- Círculo de giro -->
+  <circle cx="200" cy="140" r="115" fill="none" stroke="#1A7A6E" stroke-width="1.5" stroke-dasharray="8,4"/>
+  <!-- Navio vista de cima (horizontal, popa à direita) -->
+  <path d="M120,132 L255,132 Q278,132 290,142 Q278,152 255,152 L120,152 Z" fill="#c8ddd8" stroke="#0D3D36" stroke-width="1.8"/>
+  <text x="180" y="146" text-anchor="middle" font-family="Arial" font-size="10" fill="#0D3D36">NAVIO</text>
+  <!-- PP no centro do círculo -->
+  <circle cx="200" cy="142" r="7" fill="#E53935"/>
+  <text x="200" y="172" text-anchor="middle" font-family="Arial" font-size="10" fill="#E53935" font-weight="bold">PP (pivô)</text>
+  <!-- G (centro de gravidade) -->
+  <circle cx="225" cy="142" r="4" fill="#1565C0"/>
+  <text x="225" y="128" text-anchor="middle" font-family="Arial" font-size="9" fill="#1565C0">G</text>
+  <!-- C (ponto do rebocador) -->
+  <circle cx="265" cy="142" r="4" fill="#7B1FA2"/>
+  <text x="265" y="128" text-anchor="middle" font-family="Arial" font-size="9" fill="#7B1FA2">C</text>
+  <!-- Rebocador na popa -->
+  <rect x="295" y="132" width="42" height="20" fill="#ffe082" stroke="#C8A84B" stroke-width="1.5" rx="3"/>
+  <text x="316" y="146" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Reboc.</text>
+  <!-- Força do rebocador (empurra para cima) -->
+  <line x1="265" y1="132" x2="265" y2="100" stroke="#7B1FA2" stroke-width="2.5"/>
+  <polygon points="260,103 265,92 270,103" fill="#7B1FA2"/>
+  <!-- Raio R (do PP ao topo) -->
+  <line x1="200" y1="142" x2="200" y2="27" stroke="#0D3D36" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="210" y="80" font-family="Arial" font-size="11" fill="#0D3D36" font-weight="bold">R = GP + ½L</text>
+  <!-- GP (do PP ao G) -->
+  <line x1="200" y1="200" x2="225" y2="200" stroke="#C8A84B" stroke-width="2"/>
+  <text x="212" y="215" text-anchor="middle" font-family="Arial" font-size="8" fill="#C8A84B">GP</text>
+  <line x1="200" y1="142" x2="200" y2="200" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <line x1="225" y1="142" x2="225" y2="200" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <!-- Legenda -->
+  <text x="200" y="278" text-anchor="middle" font-family="Arial" font-size="9" fill="#0D3D36" font-weight="bold">R ≈ 0,75 L com 1 rebocador na popa</text>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial" font-size="9" fill="#E53935">Girar no ponto (R = ½L) exige 2 rebocadores</text>
+</svg>
+<div class="fig-cap">Raio de giro com 1 rebocador na popa: R = GP + ½L ≈ 0,75L (Fig. 14.6). Bacia de porto típica ≥ 500 m (≥ 1 comprimento do maior navio).</div>
+</div>
+
+<h3 class="subsec">6.2 Giro com 2 Rebocadores sob Efeito do Vento</h3>
+
+<p>Com 2 rebocadores e vento de 20 nós: o navio de 255m precisa de bacia com <span class="hl-am">diâmetro = 2L (dois comprimentos)</span> para girar completamente sem máquina. Em vento acima de 20 nós, o diâmetro aumenta exponencialmente (vide Fig. 14.8 — curva assintótica). Com o motor funcionando bem, o navio pode ser manobrável mesmo com vento maior.</p>
+
+<h3 class="subsec">6.3 Giro Curto em Baixíssima Velocidade <span class="en">Short Round Turn at Slow Speed</span></h3>
+
+<ol class="steps">
+  <li>Leme a toda antes de dar avante.</li>
+  <li>Dar avante. O balanço começa. Manter o motor até o navio não ter velocidade apreciável.</li>
+  <li>Quando a velocidade atinge o limite de tolerância, <strong>parar o motor</strong>. O balanço continua.</li>
+  <li>Dar ré. Isso reduz a velocidade enquanto o navio continua a girar (empuxo transversal a ré ajuda o giro para Er em RH).</li>
+  <li>Quando a velocidade cai consideravelmente, parar a ré e dar avante com leme a toda → mais balanço.</li>
+  <li>Repetir até completar o giro.</li>
+</ol>
+
+<p><span class="hl">RH a ré → giro contínuo para Er (empuxo transversal a ré favorece) → planejar o sentido de giro de acordo com o tipo de propulsor.</span></p>
+
+<h3 class="subsec">6.4 Giro de ~180° com Seguimento a Ré <span class="en">Turning ~180° While Making Sternway</span></h3>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 580 340" xmlns="http://www.w3.org/2000/svg" style="max-width:560px">
+  <!-- Círculo de giro -->
+  <circle cx="230" cy="170" r="140" fill="none" stroke="#1A7A6E" stroke-width="1.5" stroke-dasharray="8,4"/>
+  <text x="230" y="20" text-anchor="middle" font-family="Arial" font-size="10" fill="#1A7A6E">Diâmetro do giro ≈ 1,5 × comprimento do navio</text>
+  <!-- Seta de sentido do giro (horário) -->
+  <path d="M340,90 A140,140 0 0 1 350,250" fill="none" stroke="#bbb" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <polygon points="346,246 352,258 356,245" fill="#bbb"/>
+  <text x="375" y="175" font-family="Arial" font-size="9" fill="#999">sentido</text>
+  <text x="375" y="188" font-family="Arial" font-size="9" fill="#999">horário (Er)</text>
+
+  <!-- ════ POS-1: topo. Proa à ESQUERDA, popa à direita. Navio faz RÉ (popa desloca p/ direita) ════ -->
+  <!-- casco: popa reta à direita, proa pontuda à esquerda -->
+  <path d="M250,60 L160,60 Q140,60 128,72 Q140,84 160,84 L250,84 Z" fill="#ffcdd2" stroke="#E53935" stroke-width="1.5"/>
+  <text x="205" y="76" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">Pos-1</text>
+  <!-- seta RÉ: popa (direita) move para a direita -->
+  <line x1="250" y1="72" x2="295" y2="72" stroke="#1565C0" stroke-width="2.5"/>
+  <polygon points="293,67 305,72 293,77" fill="#1565C0"/>
+  <text x="320" y="60" text-anchor="middle" font-family="Arial" font-size="9" fill="#1565C0">ré 3 kt</text>
+  <!-- reb. popa puxa a popa: cria balanço popa→Bb / proa→Er -->
+  <line x1="250" y1="78" x2="285" y2="92" stroke="#7B1FA2" stroke-width="2"/>
+  <polygon points="280,86 290,95 277,95" fill="#7B1FA2"/>
+  <text x="300" y="98" text-anchor="middle" font-family="Arial" font-size="8" fill="#7B1FA2">reb. popa puxa</text>
+  <text x="300" y="109" text-anchor="middle" font-family="Arial" font-size="8" fill="#7B1FA2">(gera balanço)</text>
+
+  <!-- ════ POS-2: esquerda, girou ~90°. Proa para BAIXO, popa para cima ════ -->
+  <path d="M118,150 L118,240 Q118,260 130,272 Q142,260 142,240 L142,150 Z" fill="#c8ddd8" stroke="#0D3D36" stroke-width="1.5"/>
+  <text x="130" y="205" text-anchor="middle" font-family="Arial" font-size="9" fill="#333" transform="rotate(-90,130,205)">Pos-2</text>
+  <!-- seta ré: popa (em cima) move para cima -->
+  <line x1="130" y1="150" x2="130" y2="120" stroke="#1565C0" stroke-width="2.5"/>
+  <polygon points="125,123 130,112 135,123" fill="#1565C0"/>
+  <text x="130" y="105" text-anchor="middle" font-family="Arial" font-size="9" fill="#1565C0">ré 1 kt</text>
+  <!-- reb. proa empurra a proa (embaixo) para continuar o giro horário -->
+  <line x1="130" y1="272" x2="160" y2="288" stroke="#C8A84B" stroke-width="2"/>
+  <polygon points="155,282 165,291 152,291" fill="#C8A84B"/>
+  <text x="55" y="270" text-anchor="middle" font-family="Arial" font-size="8" fill="#C8A84B">reb. proa</text>
+  <text x="55" y="281" text-anchor="middle" font-family="Arial" font-size="8" fill="#C8A84B">empurra</text>
+
+  <!-- ════ POS-3: base, girou ~180°. Proa à DIREITA (oposta à Pos-1) ════ -->
+  <path d="M210,260 L300,260 Q320,260 332,272 Q320,284 300,284 L210,284 Z" fill="#c8f5ea" stroke="#1A7A6E" stroke-width="1.5"/>
+  <text x="255" y="276" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">Pos-3</text>
+  <!-- seta pequena de avante (proa à direita, navio começa a ir avante) -->
+  <line x1="332" y1="272" x2="358" y2="272" stroke="#2E7D32" stroke-width="2"/>
+  <polygon points="356,267 366,272 356,277" fill="#2E7D32"/>
+  <text x="255" y="305" text-anchor="middle" font-family="Arial" font-size="9" fill="#0D3D36">nil sternway + pouco avante (giro completo)</text>
+
+  <!-- Caixa de parâmetros (direita, isolada) -->
+  <rect x="420" y="140" width="150" height="100" fill="#fff8e1" stroke="#C8A84B" stroke-width="1" rx="5"/>
+  <text x="495" y="160" text-anchor="middle" font-family="Arial" font-size="9" fill="#6B1A1A" font-weight="bold">2 rebocadores (55 t BP)</text>
+  <text x="495" y="178" text-anchor="middle" font-family="Arial" font-size="9" fill="#555">1 na proa + 1 no través-ré</text>
+  <text x="495" y="196" text-anchor="middle" font-family="Arial" font-size="9" fill="#555">vento &lt; 20 nós</text>
+  <text x="495" y="214" text-anchor="middle" font-family="Arial" font-size="9" fill="#555">diâmetro giro ≈ 1,5 L</text>
+  <text x="495" y="232" text-anchor="middle" font-family="Arial" font-size="9" fill="#E53935">RH → giro p/ Er (horário)</text>
+</svg>
+<div class="fig-cap">Giro de ~180° com seguimento a ré (Fig. 14.9), hélice RH girando para estibordo (horário): <strong>Pos-1</strong> proa à esquerda, ré 3 kt, reboc. de popa puxa criando o balanço (popa→Bb, proa→Er) · <strong>Pos-2</strong> ~90° girado, ré 1 kt, reboc. de proa empurra para manter o giro · <strong>Pos-3</strong> ~180° completo, proa à direita, zero ré e pouco avante.</div>
+</div>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — As 21 Opções de Controle (agrupadas)</summary>
+  <div class="body">
+    <p><strong>A. Motor + Leme apenas (1–10):</strong></p>
+    <ol class="steps">
+      <li>Golpes curtos avante (manter velocidade mínima de governo)</li>
+      <li><strong>Giro Híbrido</strong> (avante+leme → parar → ré total: balanço+velocidade↓)</li>
+      <li>Leme a toda com motor parado (movimento lateral da popa)</li>
+      <li>Leme a toda + golpes avante (manter rumo)</li>
+      <li>Leme sequencial a toda (zigzag controlado para reduzir velocidade)</li>
+      <li>Ré no momento certo (≤5–6 nós; 30–75% da potência avante)</li>
+      <li>Empuxo transversal a ré (aproveitado ou corrigido)</li>
+      <li><strong>Momesting</strong> (governo por inércia; precisão decimal; motor parado)</li>
+      <li>Governo normal com velocidade de reserva</li>
+      <li>Preventer kicks (golpes para controlar TDG excessiva)</li>
+    </ol>
+    <p><strong>B. Com Rebocadores (11–15):</strong></p>
+    <ol class="steps" start="11">
+      <li>Motor avante + rebocador puxando a ré (Edging)</li>
+      <li>Rebocador com motor parado ou a ré (dependência total de rebocadores)</li>
+      <li>Hooking com 1 rebocador: <em>Bow Hooking</em> ou <em>Stern Hooking</em></li>
+      <li><strong>Helming by Tugs</strong> (rebocador no través controla TDG)</li>
+      <li>Apenas rebocadores (motor e leme indisponíveis)</li>
+    </ol>
+    <p><strong>C. Thrusters + Outros (16–21):</strong></p>
+    <ol class="steps" start="16">
+      <li>Bow thruster apenas (eficaz &lt;5 nós)</li>
+      <li>Thruster + leme (motor parado; movimento lateral bodily)</li>
+      <li>Forças externas (vento, corrente) — Fórmula Hughes</li>
+      <li>Espias e ferros</li>
+      <li>Referências terrestres (2 alvos = posição + movimento)</li>
+      <li>Uso do Ponto de Pivô + conjugados (couples)</li>
+    </ol>
+  </div>
+</details>
+
+<details class="pscpp banca">
+  <summary>🎯 Banca — Distratores de Alto Risco no Cap. 14</summary>
+  <div class="body">
+    <p><strong>D1 — "Bow thruster eficaz a qualquer velocidade":</strong> FALSO. Eficaz apenas abaixo de 5 nós. Acima = inútil.</p>
+    <p><strong>D2 — "Potência a ré equivale à avante":</strong> FALSO. 30–75% da avante, raramente 100%.</p>
+    <p><strong>D3 — "Máquina a ré pode ser dada a qualquer velocidade para frear":</strong> FALSO. Acima de 5–6 nós, apenas causa estresse no motor e cavitação sem redução apreciável de velocidade.</p>
+    <p><strong>D4 — "CPP com motor parado não gera lavagem":</strong> FALSO. CPP em pitch zero ainda gera lavagem → desengatar propulsor para atracar.</p>
+    <p><strong>D5 — "Giro híbrido é sempre seguro":</strong> FALSO. A ré, leme ineficaz; balanço incontrolável em navios grandes carregados.</p>
+    <p><strong>D6 — "Helming by Tugs usa força máxima do rebocador":</strong> FALSO. Força judiciosa passo a passo; excesso causa overshoot da TDG.</p>
+    <p><strong>D7 — "Twin screw inward turning é mais manobrável":</strong> FALSO. Outward turning é superior; inward = manobrabilidade ruim.</p>
+    <p><strong>D8 — "2 alvos terrestres são redundância desnecessária":</strong> FALSO. São indispensáveis para distinguir rotação de translação bodily e corrigir o erro de index do mastro de vante.</p>
+  </div>
+</details>
+
+<!-- TERMINOLOGIA -->
+<div class="termo-section">
+  <h4>Terminologia Náutica — Nayak Cap. 14 (2020)</h4>
+  <dl>
+    <dt>Slow Speed Manoeuvring / Manobra em Baixa Velocidade</dt>
+    <dd>Controle do navio a menos de 5 nós, com motor em devagar mínimo, parado ou a ré. Técnicas não documentadas em cartões de bordo — adquiridas pela experiência.</dd>
+    <dt>Minimum Number of Kicks / Número Mínimo de Partidas</dt>
+    <dd>Garrafas de ar carregadas antes da entrada em águas restritas: 12–18 partidas. Cada start/stop consome uma.</dd>
+    <dt>Minimum RPM / RPM Mínima</dt>
+    <dd>RPM abaixo de devagar avante — não disponível na maioria dos navios. Exige parar e dar golpes avante para manter velocidade muito baixa.</dd>
+    <dt>Hybrid Turning / Giro Híbrido</dt>
+    <dd>Combinação de alteração de rumo (avante+leme) com redução de velocidade (parar+ré), aproveitando o empuxo transversal a ré para continuar o giro.</dd>
+    <dt>Momesting / Momentum Steering</dt>
+    <dd>Governo por inércia: navio segue o rumo com precisão decimal com motor parado por vários minutos, usando apenas o leme.</dd>
+    <dt>Pre-Decimal Steering / Governo Pré-Decimal</dt>
+    <dd>Termo original de Nayak para o Momesting — manter o rumo dentro da fração decimal do grau de rumo designado.</dd>
+    <dt>Preventer Kicks / Golpes Preventivos</dt>
+    <dd>Golpes curtos de motor com leme oposto ao balanço para controlar a TDG antes que ela se torne incontrolável.</dd>
+    <dt>Bow Hooking / Gancho de Proa</dt>
+    <dd>Usar 1 rebocador de proa para impedir a entrada da proa enquanto o leme faz a popa sair — move o navio bodily.</dd>
+    <dt>Stern Hooking / Gancho de Popa</dt>
+    <dd>Usar 1 rebocador de popa para anular o empuxo transversal a ré, mantendo o rumo enquanto se reduz a velocidade.</dd>
+    <dt>Helming by Tugs / Leme por Rebocador</dt>
+    <dd>Controlar a TDG (taxa de giro) usando o rebocador no través-de-popa com força mínima judiciosa.</dd>
+    <dt>Edging by Tugs / Redução por Rebocador</dt>
+    <dd>Motor avante + rebocador puxando a ré para reduzir velocidade mantendo efeito de leme.</dd>
+    <dt>Couple / Conjugado</dt>
+    <dd>Par de forças desiguais em proa e popa ao redor do ponto de pivô → rotação + deslocamento bodily lateral.</dd>
+    <dt>FOF / Fall on Fenders</dt>
+    <dd>"Cair nos defensores" — momento em que o casco toca os defensores do cais na atracação final.</dd>
+    <dt>Delayed Display Phenomenon / Atraso de Exibição</dt>
+    <dd>Dados digitais do painel exibem informação com pequeno atraso — usar referências terrestres para dados em tempo real.</dd>
+    <dt>Penta-data</dt>
+    <dd>Conjunto de cinco dados de navegação simultâneos (rumo, velocidade fundo, velocidade proa, TDG, deriva) monitorados pelo prático.</dd>
+    <dt>Hughes Formula / Fórmula de Hughes</dt>
+    <dd>Ra = ½ρ·CRa·Va²·(Acos²θ + Bsin²θ): calcula força do vento em quilogramas-força sobre o navio.</dd>
+    <dt>Turning Basin / Bacia de Evolução</dt>
+    <dd>Área designada dentro do porto para giro do navio. Diâmetro típico ≥ 500 m (diâmetro ≥ comprimento do maior navio usualmente manuseado).</dd>
+  </dl>
+</div>
+
+<button class="painel-btn" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+
+<script>
+async function enviarPainel(){
+  const URL='https://iftourtecxtmvuhptvmo.supabase.co';
+  const KEY=window.SUPABASE_ANON_KEY||'';
+  const p={caderno_id:'nayak_cap14_baixa_velocidade',tipo:'caderno',bloco:'F',
+    tema:'Governo Portuário',assunto:'Manobras em Baixa Velocidade — 21 opções · CPP · Twin screw · Giro Híbrido · Momesting · Hooking · Helming by Tugs · Pivot Point',
+    enunciado:'Revisão Nayak Cap. 14',acertou:true,sessao_data:new Date().toISOString()};
+  try{
+    const r=await fetch(`${URL}/rest/v1/respostas`,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':`Bearer ${KEY}`},body:JSON.stringify(p)});
+    alert(r.ok?'✅ Enviado ao painel PSCPP!':'⚠ Erro: '+r.status);
+  }catch(e){alert('⚠ Erro de conexão: '+e.message);}
+}
+</script>
+
+</main>
+<footer>
+  Capital Sereno × PSCPP 2027 · Nayak Cap. 14 · Junho 2026<br>
+  Fonte: NAYAK, S. — <em>Theory and Practice of Marine Pilotage</em>, 2020, Cap. 14, pp. 295–325
+</footer>
+</body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nayak C.18 — Emergências Portuárias | PSCPP 2027</title>
+<style>
+  :root {
+    --verde-escuro: #0D3D36;
+    --verde-medio: #1A7A6E;
+    --dourado: #C8A84B;
+    --creme: #F7F3EA;
+    --ambar: #E8A020;
+    --vermelho-banca: #6B1A1A;
+    --texto: #1a1a1a;
+    --cinza-leve: #eef2f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: var(--creme); color: var(--texto); font-size: 1rem; line-height: 1.75; }
+
+  /* HERO */
+  .hero { background: var(--verde-escuro); color: #fff; padding: 2.5rem 2rem 2rem; }
+  .hero .kicker { font-family: 'Arial', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dourado); margin-bottom: 0.5rem; }
+  .hero h1 { font-size: 2rem; line-height: 1.25; margin-bottom: 0.6rem; }
+  .hero .sub { font-size: 0.85rem; color: #b0c8c4; font-style: italic; }
+
+  /* LAYOUT */
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+  /* SEÇÕES */
+  h2.sec { font-size: 1.3rem; color: var(--verde-escuro); border-bottom: 2px solid var(--dourado); padding-bottom: 0.3rem; margin: 2.5rem 0 0.9rem; }
+  h2.sec .en { font-size: 0.85rem; font-weight: normal; color: #666; margin-left: 0.5rem; font-style: italic; }
+  h3.subsec { font-size: 1.05rem; color: var(--verde-medio); margin: 1.5rem 0 0.5rem; }
+
+  /* TEXTO */
+  p { margin-bottom: 0.9rem; }
+
+  /* HIGHLIGHTS */
+  .hl  { background: #fff59d; padding: 0 2px; border-radius: 2px; }
+  .hl-ambar { background: #ffe082; padding: 0 2px; border-radius: 2px; }
+
+  /* CAIXAS NUMÉRICAS */
+  .num { background: var(--verde-escuro); color: var(--dourado); display: inline-block; font-size: 0.8rem; font-family: Arial, sans-serif; font-weight: bold; padding: 0.15rem 0.55rem; border-radius: 3px; margin-right: 0.3rem; vertical-align: middle; }
+
+  /* TABELAS */
+  .tab-wrap { overflow-x: auto; margin: 1rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th { background: var(--verde-escuro); color: var(--dourado); padding: 0.5rem 0.7rem; text-align: center; }
+  td { padding: 0.45rem 0.7rem; border-bottom: 1px solid #ccc; text-align: center; }
+  tr:nth-child(even) td { background: #f0ece2; }
+  td.label { text-align: left; font-weight: bold; }
+
+  /* QUADRO DESCRITIVO */
+  .quadro { border-left: 4px solid var(--dourado); background: #faf6ec; padding: 0.8rem 1rem; margin: 1rem 0; font-style: italic; font-size: 0.9rem; color: #444; }
+
+  /* CAIXAS PSCPP */
+  details.pscpp { margin: 1.2rem 0; border-radius: 5px; overflow: hidden; }
+  details.pscpp summary { cursor: pointer; padding: 0.65rem 1rem; font-family: Arial, sans-serif; font-size: 0.88rem; font-weight: bold; list-style: none; display: flex; align-items: center; gap: 0.4rem; }
+  details.pscpp summary::-webkit-details-marker { display: none; }
+  details.pscpp .body { padding: 0.8rem 1rem 1rem; font-size: 0.9rem; }
+
+  details.pscpp.decorar { border: 2px solid var(--verde-medio); }
+  details.pscpp.decorar summary { background: #e8f5f2; color: var(--verde-escuro); }
+  details.pscpp.decorar .body { background: #f2fbf8; }
+
+  details.pscpp.banca { border: 2px solid var(--vermelho-banca); }
+  details.pscpp.banca summary { background: #fbeaea; color: var(--vermelho-banca); }
+  details.pscpp.banca .body { background: #fff5f5; }
+
+  /* BADGE JÁ COBRADO */
+  .cob { display: inline-block; background: var(--ambar); color: #fff; font-family: Arial, sans-serif; font-size: 0.72rem; font-weight: bold; padding: 0.1rem 0.45rem; border-radius: 3px; margin-left: 0.4rem; vertical-align: middle; }
+
+  /* LISTA ORDENADA ESTILIZADA */
+  ol.steps { padding-left: 1.6rem; margin: 0.6rem 0; }
+  ol.steps li { margin-bottom: 0.5rem; }
+  ul.itens { padding-left: 1.6rem; margin: 0.6rem 0; }
+  ul.itens li { margin-bottom: 0.4rem; }
+
+  /* NOTA TERMINOLÓGICA */
+  .termo-section { background: var(--cinza-leve); border-radius: 6px; padding: 1.2rem 1.3rem; margin-top: 2.5rem; }
+  .termo-section h4 { font-size: 1rem; color: var(--verde-escuro); margin-bottom: 0.6rem; }
+  .termo-section dl dt { font-weight: bold; font-family: Arial, sans-serif; font-size: 0.85rem; color: var(--verde-medio); }
+  .termo-section dl dd { font-size: 0.88rem; margin-bottom: 0.55rem; margin-left: 0; }
+
+  /* ALERTA WILLIAMSON */
+  .williamson-box { border: 2px solid var(--verde-escuro); border-radius: 6px; overflow: hidden; margin: 1.5rem 0; }
+  .williamson-box .wb-head { background: var(--verde-escuro); color: var(--dourado); padding: 0.6rem 1rem; font-family: Arial, sans-serif; font-size: 0.85rem; font-weight: bold; }
+  .williamson-box .wb-body { padding: 0.9rem 1rem; font-size: 0.9rem; }
+
+  /* BOTÃO SUPABASE */
+  .painel-btn { display: block; margin: 2rem auto 0; padding: 0.75rem 1.6rem; background: var(--dourado); color: var(--verde-escuro); font-family: Arial, sans-serif; font-weight: bold; font-size: 0.95rem; border: none; border-radius: 5px; cursor: pointer; text-align: center; max-width: 320px; }
+  .painel-btn:hover { background: #b8921a; }
+
+  /* FOOTER */
+  footer { text-align: center; font-family: Arial, sans-serif; font-size: 0.75rem; color: #888; padding: 1.5rem 1rem; border-top: 1px solid #ccc; margin-top: 3rem; }
+
+  /* COMPARAÇÃO VISUAL */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .compare-card { border-radius: 6px; padding: 0.9rem 1rem; font-size: 0.88rem; }
+  .compare-card.crash { background: #fbeaea; border: 1px solid #c0a0a0; }
+  .compare-card.giro  { background: #e8f5f2; border: 1px solid #80b8b0; }
+  .compare-card h4 { font-family: Arial, sans-serif; font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .compare-card h4.red { color: var(--vermelho-banca); }
+  .compare-card h4.green { color: var(--verde-escuro); }
+  @media (max-width: 560px) { .compare-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="kicker">PSCPP 2027 · Módulo II — Arte Naval · Bloco G</div>
+  <h1>Nayak Cap. 18 — Opções de Manobra de Emergência<br>+ Williamson Turn (MacElrevey Cap. 9)</h1>
+  <div class="sub">NAYAK, S. — <em>Theory and Practice of Marine Pilotage</em>, Cap. 18, pp. 367–384 · 2020<br>
+  MacELREVEY, D. H. — <em>Shiphandling for the Mariner</em>, 4ª ed., 2004, Cap. 9</div>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════
+     1. INTRODUÇÃO
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">1. Introdução <span class="en">Emergency Manoeuvring Options</span></h2>
+
+<p>Emergências ocorrem na vida marítima. As opções de manobra de emergência são os <strong>últimos recursos</strong> — acionados apenas quando todas as demais alternativas foram esgotadas e o prático precisa agir para evitar um sinistro real.</p>
+
+<p>Nos limites do porto, os cenários mais comuns incluem: <span class="hl">encalhe, colisão com infraestrutura, garreamento de âncora, falha de máquina, falha de governo, rebocador ineficaz, mau tempo súbito, homem ao mar e queda de visibilidade.</span></p>
+
+<p>A gestão de emergências em águas restritas é <em>fundamentalmente diferente</em> do alto mar: as consequências afetam navios próximos, embarcações, o porto e comunidades inteiras — e não existem procedimentos padronizados universais.</p>
+
+<details class="pscpp banca">
+  <summary>🎯 Banca — Distratores sobre cenários de emergência</summary>
+  <div class="body">
+    <p><strong>Distrator clássico:</strong> "Em porto, as emergências têm procedimentos padronizados globais, como no alto mar." — <strong>FALSO</strong>. Cada porto tem topografia, regras e desafios próprios; não há procedimentos universais para águas restritas.</p>
+    <p><strong>Distrator:</strong> "A presença das autoridades portuárias elimina os desafios adicionais da emergência." — <strong>FALSO</strong>. As autoridades podem assistir, mas surgem desafios adicionais: espaço restrito, navios vizinhos e impacto nas comunidades.</p>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════════════════════
+     2. CARACTERÍSTICAS DE MANOBRABILIDADE
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">2. Características de Manobrabilidade <span class="en">Manoeuvring Characteristics</span></h2>
+
+<p>Antes de qualquer emergência, o prático deve conhecer as quatro fontes de informação sobre o navio:</p>
+
+<ul class="itens">
+  <li><span class="hl"><strong>Cartão do Prático (Pilot Card)</strong></span> — IMO A.601(15): afixado no passadiço, contém velocidades, tempos de manobra, ângulos de leme e dimensões.</li>
+  <li><strong>Livro de Manobras (Manoeuvring Booklet)</strong> — tabelas de distâncias de parada e curvas de evolução obrigatórias pela IMO (MSC.137(76)).</li>
+  <li><strong>Âncoras</strong> — utilizáveis em emergência como último recurso de redução de velocidade (ver seção 6).</li>
+  <li><strong>Setor Cego na Proa</strong> — área não visível da ponte durante manobras de atracação; exige <em>vigia no castelo de proa</em> para reportar distâncias a obstáculos.</li>
+</ul>
+
+<!-- ══════════════════════════════════════════════════════
+     3. CAPACIDADE DE PARADA
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">3. Capacidade de Parada <span class="en">Stopping Ability</span></h2>
+
+<h3 class="subsec">3.1 Critério IMO — 15 Comprimentos</h3>
+
+<p>O <span class="hl-ambar">alcance de trajetória (<em>track reach</em>) em crash stop não deve exceder 15 comprimentos de navio</span> — critério dos padrões de manobrabilidade IMO (MSC.137(76)/MSC/Circ.1053). Para VLCCs e grandes tanqueiros, a administração pode modificar esse critério quando impraticável. <span class="cob">JÁ COBRADO · 2011/2012</span></p>
+
+<p>A maioria dos navios percorre <strong>5 a 12 comprimentos</strong> antes de parar a partir de avante total, levando <strong>4 a 10 minutos</strong>. Um VLCC com turbina a vapor de 300 m a 15 nós pode atingir 15,5 comprimentos — excedendo o critério.</p>
+
+<h3 class="subsec">3.2 Track Reach vs. Head Reach vs. Side Reach</h3>
+
+<div class="quadro">
+<strong>Track reach</strong> = distância total percorrida ao longo da trajetória (reta ou curva) desde a ordem de parada até o navio parar completamente. Não confundir com <em>head reach</em> = avanço longitudinal em linha reta.<br>
+<strong>Side reach</strong> = desvio lateral. Muito sensível ao vento e às condições iniciais. Em crash stop, o navio com hélice único gira a proa rapidamente para <em>estibordo</em> sob potência de ré.
+</div>
+
+<h3 class="subsec">3.3 Fórmula do Track Reach</h3>
+
+<p>Para navios em trajetória reta: <strong>S = A · log(1 + B) + C</strong>, onde S é dado em comprimentos do navio.</p>
+
+<p><strong>Exemplo da fonte (VLCC turbina a vapor):</strong> 300 m, 15 nós, 1 min para desenvolver tração de ré total. Coeficientes <span class="hl">A = 16, B = 1,5, C = 0,8</span> → S = 16·log(1 + 1,5) + 0,8 = <strong>15,5 comprimentos</strong> — excede o critério IMO de 15 L.</p>
+
+<div class="tab-wrap">
+<table>
+  <tr><th colspan="4">Coeficiente C por Comprimento (Tabela 18.7 — tempo = 60 s, velocidade = 15 nós)</th></tr>
+  <tr><th>Comprimento (m)</th><th>Tempo p/ tração de ré (s)</th><th>Velocidade (nós)</th><th>Coef. C</th></tr>
+  <tr><td>100</td><td>60</td><td>15</td><td>2,3</td></tr>
+  <tr><td>200</td><td>60</td><td>15</td><td>1,1</td></tr>
+  <tr><td>300</td><td>60</td><td>15</td><td>0,8</td></tr>
+</table>
+</div>
+
+<div class="quadro">
+<strong>Interpretação do coeficiente C:</strong> C é metade da distância (em comprimentos) percorrida enquanto o motor é invertido até desenvolver tração de ré total. <span class="hl-ambar">C é maior para navios menores</span> (100 m → C = 2,3) e aumenta se a inversão levar mais de 1 minuto.
+</div>
+
+<p><span class="hl">Fator de desaceleração do track reach: ~0,10 milhas/minuto</span> (exceto a partir de avante total/velocidade de mar, onde é 0,14–0,16 milhas/minuto). <span class="cob">ALTO POTENCIAL</span></p>
+
+<h3 class="subsec">3.4 Tabela de Distâncias de Parada — Graneleiro Handymax</h3>
+
+<div class="tab-wrap">
+<table>
+  <tr>
+    <th rowspan="2">Parar de:</th>
+    <th colspan="2">Track Reach (cabos)</th>
+    <th colspan="2">Head Reach (cabos)</th>
+    <th colspan="2">Side Reach (cabos)</th>
+    <th>Tempo (Carregado)</th>
+  </tr>
+  <tr><th>Carregado</th><th>Lastro</th><th>Carregado</th><th>Lastro</th><th>Carregado</th><th>Lastro</th><th></th></tr>
+  <tr><td class="label">Vel. de Mar → Stop</td><td>2,94</td><td>1,96</td><td>2,81</td><td>1,87</td><td>0,53</td><td>0,36</td><td>21min 26s</td></tr>
+  <tr><td class="label">Avante Total → Stop</td><td>1,90</td><td>1,26</td><td>1,44</td><td>0,96</td><td>0,74</td><td>0,50</td><td>18min 27s</td></tr>
+  <tr><td class="label">Avante Meia → Stop</td><td>1,63</td><td>1,05</td><td>1,23</td><td>0,80</td><td>0,64</td><td>0,41</td><td>15min 48s</td></tr>
+  <tr><td class="label">Avante Devagar → Stop</td><td>1,20</td><td>0,81</td><td>0,91</td><td>0,61</td><td>0,47</td><td>0,32</td><td>11min 10s</td></tr>
+</table>
+</div>
+
+<div class="tab-wrap">
+<table>
+  <tr>
+    <th rowspan="2">Ré Total a partir de:</th>
+    <th colspan="2">Track Reach (cabos)</th>
+    <th colspan="2">Head Reach (cabos)</th>
+    <th colspan="2">Side Reach (cabos)</th>
+    <th>Tempo (Carregado)</th>
+  </tr>
+  <tr><th>Carregado</th><th>Lastro</th><th>Carregado</th><th>Lastro</th><th>Carregado</th><th>Lastro</th><th></th></tr>
+  <tr><td class="label">Vel. de Mar → Ré Total</td><td>1,89</td><td>1,06</td><td>1,87</td><td>1,05</td><td>−0,04</td><td>−0,02</td><td>12min 02s</td></tr>
+  <tr><td class="label">Avante Total → Ré Total</td><td>0,88</td><td>0,59</td><td>0,83</td><td>0,56</td><td>−0,08</td><td>−0,05</td><td>08min 23s</td></tr>
+  <tr><td class="label">Avante Meia → Ré Total</td><td>0,75</td><td>0,51</td><td>0,71</td><td>0,48</td><td>−0,07</td><td>−0,05</td><td>07min 11s</td></tr>
+  <tr><td class="label">Avante Devagar → Ré Total</td><td>0,56</td><td>0,39</td><td>0,53</td><td>0,37</td><td>−0,03</td><td>−0,04</td><td>05min 22s</td></tr>
+</table>
+</div>
+
+<p><em>Nota: Side reach negativo = o navio encurta lateralmente (move-se ligeiramente para o bordo de origem) — efeito do efeito P a ré predominando sobre a deriva.</em></p>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — Critério IMO + Regra do VLCC</summary>
+  <div class="body">
+    <p><strong>Regra dos 15 comprimentos:</strong> crash stop ≤ 15 L — critério MSC.137(76). VLCCs podem exceder → administração pode flexibilizar.</p>
+    <p><strong>Tempo de reversão:</strong> motor pode ser invertido após ~3 min, ainda girando avante a ~30% das RPM. Navio em lastro leva menos tempo.</p>
+    <p><strong>Leme alternado reduz velocidade:</strong> aplicar leme todo de um bordo para o outro nos primeiros minutos após parada dos motores ajuda a reduzir o seguimento avante.</p>
+    <p><strong>Mnemônico:</strong> <em>"Stop a tempo — 5 a 12 L, 4 a 10 min. Crash — até 15 L."</em></p>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════════════════════
+     4. EXECUÇÃO DO CRASH STOP
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">4. Execução do Crash Stop <span class="en">How to Execute Crash Astern</span></h2>
+
+<p>A aplicação imediata de potência total a ré quando o motor ainda gira avante causa <span class="hl">cavitação no hélice</span>, reduzindo eficiência e <em>aumentando</em> a distância de parada. A sequência correta depende do modo de controle:</p>
+
+<h3 class="subsec">4.1 Modo Controle pela Casa de Máquinas</h3>
+
+<ol class="steps">
+  <li><strong>(a)</strong> Ponte ordena ré de emergência (crash astern). <span class="hl-ambar">Sinal convencional: telégrafo de avante → ré total → avante → ré total novamente.</span></li>
+  <li><strong>(b)</strong> Abastecimento de combustível do MP é imediatamente reduzido a zero.</li>
+  <li><strong>(c)</strong> Motor pode continuar girando avante por inércia; <span class="hl">tacômetro na ponte ainda pode mostrar RPM avante</span> — normal.</li>
+  <li><strong>(d)</strong> Aguardar RPM avante caírem até <span class="hl-ambar">nível de reversão: ~25–30% das RPM de MCR</span>.</li>
+  <li><strong>(e)</strong> Admite-se <em>ar de frenagem (braking air)</em> na direção de ré. <strong>⚠ Tentar antes disso pode quebrar o virabrequim.</strong></li>
+  <li><strong>(f)</strong> Golpes repetidos de ar de frenagem reduzem RPM a zero.</li>
+  <li><strong>(g)</strong> RPM = 0 → admite-se ar de partida na direção de ré.</li>
+  <li><strong>(h)</strong> Ao atingir RPM de partida a ré, injeta-se combustível.</li>
+  <li><strong>(i)</strong> Motor começa a girar a combustível na direção de ré.</li>
+  <li><strong>(j)</strong> <span class="hl">Pode ocorrer vibração pela perturbação da esteira</span> → aumentar RPM de ré gradualmente.</li>
+</ol>
+
+<h3 class="subsec">4.2 Modo Controle pela Ponte</h3>
+
+<p>Telégrafo diretamente conectado aos controles do motor (dispositivo de telégrafo de controle remoto). O oficial coloca o telégrafo em Ré Total — o motor obedece automaticamente. Sequência interna similar ocorre automaticamente.</p>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — Sequência do Crash Stop (10 passos)</summary>
+  <div class="body">
+    <p><strong>Mnemônico:</strong> <em>CZAR-Frenagem-Zero-Partida-Combustível</em></p>
+    <ol class="steps">
+      <li>Ordem crash astern</li>
+      <li>Combustível → zero</li>
+      <li>Motor gira avante por inércia (tacômetro ainda marca avante)</li>
+      <li>Aguardar 25–30% RPM de MCR</li>
+      <li>Ar de frenagem (braking air) — abaixo da velocidade de reversão!</li>
+      <li>Golpes repetidos → RPM a zero</li>
+      <li>Ar de partida direção ré</li>
+      <li>Atingir RPM partida ré → injeta combustível</li>
+      <li>Motor gira a combustível a ré</li>
+      <li>Aumentar RPM de ré gradualmente (vibração de esteira)</li>
+    </ol>
+  </div>
+</details>
+
+<details class="pscpp banca">
+  <summary>🎯 Banca — Distratores sobre Crash Stop</summary>
+  <div class="body">
+    <p><strong>Distrator:</strong> "Aplicar ré total imediatamente melhora a eficiência de frenagem." — <strong>FALSO</strong>. Causa cavitação e <em>aumenta</em> a distância de parada. Em navios menores/mais lentos, a ré o mais cedo possível pode ainda ser mais eficaz.</p>
+    <p><strong>Distrator:</strong> "O tacômetro mostrando RPM avante após a ordem de ré indica falha do telégrafo." — <strong>FALSO</strong>. É normal: inércia do motor ainda o faz girar avante.</p>
+    <p><strong>Distrator:</strong> "O ar de frenagem pode ser admitido em qualquer RPM." — <strong>FALSO</strong>. Apenas após atingir 25–30% MCR; acima disso, risco de quebrar o virabrequim.</p>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════════════════════
+     5. FALHA DO TELÉGRAFO
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">5. Falha do Telégrafo <span class="en">Telegraph Failure</span></h2>
+
+<p>Quando o telégrafo falha, a comunicação entre ponte e máquinas é estabelecida por <strong>telefone</strong>. Duas opções de controle local:</p>
+
+<h3 class="subsec">a) Controle Local pelo Motor Principal</h3>
+<p>O engenheiro opera o motor diretamente. <span class="hl">Pode ser feito com o motor parado ou em funcionamento — preferencialmente com o motor parado para facilitar a operação manual.</span></p>
+
+<h3 class="subsec">b) Painel Local próximo ao MP</h3>
+<ol class="steps">
+  <li>Receber a ordem da ponte via telefone; responder ao telégrafo e fornecer combustível e ar pelos controles locais.</li>
+  <li>Se o motor falhar na partida, fornecer combustível e ar extras (controle manual exige mais pressão).</li>
+  <li>Uma vez que o motor parte, seguir o telégrafo e manter a velocidade pela alavanca de combustível local.</li>
+</ol>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — Falha do Telégrafo</summary>
+  <div class="body">
+    <p>Sinal convencional de ré de emergência para a casa de máquinas: <span class="hl">avante total → ré total → avante total → ré total</span> (três movimentos de telégrafo).</p>
+    <p>Controle local possível <strong>com ou sem motor parado</strong>, mas preferencialmente com motor parado.</p>
+    <p>Pressão extra de combustível/ar necessária no controle manual (ligação mecânica exige mais força).</p>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════════════════════
+     6. REDUÇÃO DE VELOCIDADE APÓS FALHA DE MÁQUINA
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">6. Redução de Velocidade após Falha de Máquina <span class="en">Speed Reduction after Engine Failure</span></h2>
+
+<p>Com o motor avariado, o objetivo imediato é <span class="hl">levar o navio a local seguro e controlar a velocidade</span>. Duas técnicas principais:</p>
+
+<h3 class="subsec">6.1 Ciclagem do Leme (Rudder Cycling)</h3>
+
+<p>Usa o arrasto do leme e do casco para frear o <em>momentum</em>. Adequada em mares abertos e em locais com espaço em águas restritas.</p>
+
+<div class="tab-wrap">
+<table>
+  <tr><th>Modalidade</th><th>Distância de Parada</th><th>Procedimento</th><th>Limitações</th></tr>
+  <tr>
+    <td class="label">Alta Frequência<br><em>High Freq. Cycling</em></td>
+    <td><span class="hl">~10 × comprimento</span></td>
+    <td>Leme todo a um bordo → parar motor → ao guindar, leme todo ao outro bordo. Ciclar até parar. Breve golpe avante pode ser necessário para manter o rumo.</td>
+    <td>Não adequada para navios de forma plena (full form) carregados. Mais eficaz em navios de forma fina (fine form) em lastro.</td>
+  </tr>
+  <tr>
+    <td class="label">Baixa Frequência<br><em>Low Freq. Cycling</em></td>
+    <td><span class="hl-ambar">~6 × comprimento</span></td>
+    <td>Leme todo a Bb até 40° fora do rumo → todo a Er com ré total. Para o navio com pequeno desvio para Bb do rumo original.</td>
+    <td><span class="hl">Águas rasas reduzem a eficácia.</span> Desvio para Bb deve ser considerado.</td>
+  </tr>
+</table>
+</div>
+
+<h3 class="subsec">6.2 Tração de Ré pelos Rebocadores (Back Pull by Tugs)</h3>
+
+<p>Rebocadores já presos ao navio podem ser solicitados para tração de ré. <span class="hl">Avisar os rebocadores imediatamente ao detectar falha de máquina.</span> Um rebocador preso diretamente à ré pelo guia central é chamado de <em>rebocador de frenagem (braking tug)</em>.</p>
+
+<p><strong>Limitações:</strong></p>
+<ul class="itens">
+  <li>Rebocadores não puxam em direção exatamente a ré — tendem levemente para o bordo do rebocador, causando deriva lateral da popa.</li>
+  <li>Cabos de rebocadores presos ao costado podem raspar e romper se solicitados à tração de ré — cria cenário de emergência adicional e perda de tempo crítico.</li>
+</ul>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — Ciclagem de Leme</summary>
+  <div class="body">
+    <p><strong>Alta frequência:</strong> ~10 L de distância | arrasto do leme | funciona com motor parado | menos eficaz em navios plenos carregados.</p>
+    <p><strong>Baixa frequência:</strong> ~6 L de distância | arrasto do casco em evolução | 40° fora do rumo → ré total ao outro bordo | águas rasas reduzem eficácia.</p>
+    <p><strong>Mnemônico:</strong> <em>"Alta frequência = 10 lemes. Baixa frequência = 6 giros."</em></p>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════════════════════
+     7. MÉTODOS DE EMERGÊNCIA EXTREMOS
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">7. Métodos de Emergência Extremos <span class="en">Last Resort Speed Reduction</span></h2>
+
+<p>Quando todos os métodos anteriores falharam e há ameaça iminente de encalhe ou colisão, o prático recorre a métodos que podem causar danos à estrutura mas evitam sinistro maior.</p>
+
+<h3 class="subsec">7.1 Dragar Âncoras pelo Fundo (Dredging Anchors Underfoot)</h3>
+
+<p>A âncora é largada e arrastada pelo leito para criar resistência e reduzir a velocidade. <span class="hl">Decisão crítica: qual âncora usar e quantas malhas filar</span> — o lado em que a âncora é largada afeta a evolução do navio. Filar amarra excessiva pode fazer a âncora cravar e causar estresse severo no casco/molinete.</p>
+
+<h3 class="subsec">7.2 Tocar o Fundo pela Proa ou Través (Smelling Ground)</h3>
+
+<p>O navio é dirigido para uma área rasa em guinada controlada, tocando o fundo lateralmente pela proa ou popa. O contato marginal com o fundo causa <span class="hl">grande redução de velocidade quase instantânea</span>. O leme oposto deve estar pronto com RPM maiores para afastar o navio da área rasa. <strong>Fundo deve ser de natureza não danificante (lama mole, areia).</strong> Manobra muito precisa e difícil.</p>
+
+<h3 class="subsec">7.3 Encalhe Intencional para Evitar Colisão (Beaching)</h3>
+
+<p><span class="hl-ambar">Encalhe é preferível à colisão</span> — princípio clássico. Quando inevitável, é melhor encalhar pelo costado ou pela proa: causa menor dano e é mais fácil reflutuá-lo. Distinção importante: <em>grounding</em> (encalhe não intencional) vs. <em>beaching</em> (encalhe intencional, planejado).</p>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — Hierarquia dos Métodos de Emergência</summary>
+  <div class="body">
+    <p>Ordem crescente de gravidade / último recurso:</p>
+    <ol class="steps">
+      <li>Crash stop (máquina própria)</li>
+      <li>Ciclagem do leme (motor avariado)</li>
+      <li>Tração de ré por rebocadores</li>
+      <li>Dragar âncoras pelo fundo</li>
+      <li>Tocar o fundo (smelling ground)</li>
+      <li><strong>Encalhe intencional (beaching)</strong> — último recurso</li>
+    </ol>
+    <p><em>Mnemônico:</em> <strong>C-C-R-D-T-B</strong> → <em>"Crash, Cicla, Reboca, Draga, Toca, Beira"</em></p>
+  </div>
+</details>
+
+<details class="pscpp banca">
+  <summary>🎯 Banca — Distratores sobre Métodos Extremos</summary>
+  <div class="body">
+    <p><strong>Distrator:</strong> "O beaching (encalhe intencional) deve ser sempre evitado, mesmo que a colisão seja iminente." — <strong>FALSO</strong>. Encalhe é preferível à colisão.</p>
+    <p><strong>Distrator:</strong> "Dragar âncoras é idêntico a fundear — basta largar o ferro." — <strong>FALSO</strong>. Na dragagem, a âncora é mantida arrastando pelo fundo com amarra calculada; filar demais faz a âncora cravar (garrar de vez), o que é diferente e pode danificar o navio.</p>
+    <p><strong>Distrator:</strong> "Smelling ground funciona melhor em fundo de pedra ou coral." — <strong>FALSO</strong>. Exige fundo de <em>lama mole ou areia</em> para não danificar o casco.</p>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════════════════════
+     8. CURVA DE EVOLUÇÃO — ÁGUAS ABERTAS E RASAS
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">8. Curva de Evolução — Águas Abertas e Rasas <span class="en">Turning Ability</span></h2>
+
+<p>A curva de evolução é o caminho traçado pelo <em>ponto de pivô</em> quando o navio evolui com ângulo de leme fixo e RPM constantes. O <span class="hl">menor diâmetro de evolução</span> ocorre com motor avante total e leme todo para qualquer bordo.</p>
+
+<div class="tab-wrap">
+<table>
+  <tr><th>Parâmetro</th><th>Definição</th></tr>
+  <tr><td class="label">Avanço (Advance)</td><td>Distância longitudinal ao alterar 90° do rumo inicial</td></tr>
+  <tr><td class="label">Transferência (Transfer)</td><td>Distância transversal ao alterar 180° do rumo inicial</td></tr>
+  <tr><td class="label">Diâmetro Tático</td><td>Diâmetro da curva circular estabilizada</td></tr>
+</table>
+</div>
+
+<h3 class="subsec">8.1 Efeito das Águas Rasas</h3>
+
+<p><span class="hl-ambar">Águas rasas aumentam o diâmetro tático e reduzem a velocidade de evolução.</span> Exemplo: graneleiro carregado em águas profundas — DT ≈ 3,64 cabos (14,2 nós); em águas rasas — DT ≈ 4,00 cabos (13,0 nós). Em emergência, o prático deve contar com diâmetro de evolução <em>maior</em> em porto raso, comprometendo o espaço lateral disponível. <span class="cob">JÁ COBRADO · 2011 Q25</span></p>
+
+<div class="quadro">
+<strong>Regra prática (Fonseca/MacElrevey):</strong> Quando a profundidade se aproxima do calado, as distâncias de giro podem dobrar. Isso impacta diretamente as manobras de emergência em canais e bacias de evolução rasas.
+</div>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — Curva de Evolução: o que varia e o que não varia</summary>
+  <div class="body">
+    <p><strong>Avanço:</strong> diminui com ↑ ângulo do leme; aumenta com ↑ velocidade. Varia de 3 a 5 × L.</p>
+    <p><strong>Diâmetro Tático e Transferência:</strong> diminuem com ↑ ângulo de leme — <span class="hl">praticamente independentes da velocidade</span> (Fonseca). <span class="cob">JÁ COBRADO · 2011 Q25</span></p>
+    <p><strong>Velocidade no fundo:</strong> diminui 20–40% nos primeiros 90°; torna-se constante na parte circular.</p>
+    <p><strong>Águas rasas:</strong> ↑ DT + ↓ velocidade de evolução.</p>
+    <p><strong>2 hélices:</strong> DT menor quando se para/dá atrás com a <em>máquina de dentro</em> da curva.</p>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════════════════════
+     9. COMPARAÇÃO: CRASH ASTERN vs. GIRO
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">9. Comparação: Crash Astern vs. Giro <span class="en">Crash Astern vs. Hard-Over Turn</span></h2>
+
+<p>Esta é a comparação central do capítulo — e a decisão mais crítica do prático em emergência de colisão.</p>
+
+<div class="compare-grid">
+  <div class="compare-card crash">
+    <h4 class="red">🚨 Crash Astern (Ré Total)</h4>
+    <p><strong>Head Reach:</strong> 10,1 cabos (carregado) / 6,7 cab (lastro)</p>
+    <p><strong>Side Reach:</strong> 1,7 cabo (carregado)</p>
+    <p><strong>Tempo:</strong> 9 min 18 s (carregado)</p>
+    <p><strong>Usa:</strong> pouco espaço lateral — longa distância longitudinal</p>
+  </div>
+  <div class="compare-card giro">
+    <h4 class="green">🔄 Giro: Avante Total + Leme Todo Er</h4>
+    <p><strong>Avanço:</strong> 3,3 cabos em 2 min 06 s</p>
+    <p><strong>Transferência:</strong> 3,6 cabos em 4 min 00 s</p>
+    <p><strong>Usa:</strong> muito espaço lateral — distância longitudinal muito menor</p>
+  </div>
+</div>
+
+<p><span class="hl-ambar">Regra de decisão (Nayak):</span> Se o navio tiver folga lateral de <strong>4 a 5 cabos</strong>, o giro com avante total e leme todo é claramente preferível — percorre menor distância longitudinal em menor tempo. <strong>Porém</strong>, nos limites do porto o espaço lateral geralmente é restrito, tornando o crash astern a única opção viável.</p>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — A Regra dos 4–5 Cabos</summary>
+  <div class="body">
+    <p><strong>Se espaço lateral ≥ 4–5 cabos → Giro</strong> (mais rápido, menor distância longitudinal)</p>
+    <p><strong>Se espaço lateral &lt; 4–5 cabos → Crash Astern</strong> (lado reach de apenas 1,7 cab)</p>
+    <p><strong>Em porto (espaço restrito) → Crash Astern quase sempre</strong></p>
+    <p>Em lastro: ambas as distâncias diminuem proporcionalmente — o navio em lastro para mais rápido e com menor alcance lateral.</p>
+  </div>
+</details>
+
+<details class="pscpp banca">
+  <summary>🎯 Banca — Distratores Crash Astern vs. Giro</summary>
+  <div class="body">
+    <p><strong>Distrator:</strong> "Em emergência portuária, o giro com avante total é sempre preferível ao crash astern." — <strong>FALSO</strong>. O giro exige 4–5 cabos de espaço lateral — raro nos limites do porto.</p>
+    <p><strong>Distrator:</strong> "O crash astern é mais rápido que o giro em espaço aberto." — <strong>FALSO</strong>. O giro (2 min 06 s para avanço) é muito mais rápido longitudinalmente que o crash astern (9 min 18 s), mas consome mais espaço lateral.</p>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════════════════════
+     10. MANOBRA DE WILLIAMSON — BOX (MacElrevey C.9)
+══════════════════════════════════════════════════════ -->
+<h2 class="sec">10. Manobra de Williamson <span class="en">Williamson Turn — MacElrevey Cap. 9</span></h2>
+
+<div class="williamson-box">
+  <div class="wb-head">📖 Fonte: MacElrevey & MacElrevey — Shiphandling for the Mariner, 4ª ed., Cap. 9, p. 233</div>
+  <div class="wb-body">
+
+    <p>A Manobra de Williamson é a manobra padrão de retorno ao homem ao mar que recoloca o navio na <span class="hl">derrota recíproca, sobre a esteira anterior</span>. É especialmente eficaz à medida que o tamanho do navio aumenta: VLCCs com alto coeficiente de bloco perdem a maior parte do seguimento avante ao atingir o rumo recíproco, necessitando de pouca máquina a ré para parar e recolher.</p>
+
+    <h3 class="subsec">Procedimento — "Três Ordens de Leme" <span class="cob">JÁ COBRADO · 2011 Q38</span></h3>
+
+    <ol class="steps">
+      <li>Leme todo para o bordo pelo qual a pessoa caiu ao mar → manter até o navio estar a <span class="hl-ambar">35–50° do rumo inicial</span> (ponto pré-determinado por ensaio — pode variar: um VLCC específico usou 35°).</li>
+      <li>Mudar o leme todo para o lado oposto → manter enquanto o navio gira em direção ao <strong>recíproco do rumo inicial</strong>.</li>
+      <li>Quando o rumo estiver a <span class="hl">10–15° do recíproco</span>, mudar o leme todo novamente para que o navio se estabilize no rumo recíproco desejado.</li>
+    </ol>
+
+    <div class="quadro">
+    <strong>Fig. 9-15 (MacElrevey) — "Three Helm Order" Williamson Turn:</strong> Diagrama em forma de "P" — o navio parte de baixo, gira a boreste (sentido horário), avança e retorna ao ponto de origem vindo de cima. Ponto A (35–55°) e Ponto B (10° antes do recíproco) marcados ao longo da trajetória.
+    </div>
+
+    <p><strong>Velocidade:</strong> <span class="hl">a velocidade da máquina não é alterada durante a manobra</span> (apenas colocada em prontidão). Manter as rotações torna a taxa de guinada previsível, o navio retorna ao ponto no mínimo de tempo e a velocidade ainda é suficientemente reduzida.</p>
+
+    <p><strong>Prioridade absoluta:</strong> <span class="hl-ambar">a pessoa na água deve ser observada em todos os momentos — isso é ainda mais importante do que a execução correta da Manobra de Williamson.</span> Se a visão for perdida, é extremamente difícil localizar novamente.</p>
+
+    <h3 class="subsec">Comparação com outras manobras (Fonseca, Arte Naval Cap. 12)</h3>
+
+    <div class="tab-wrap">
+    <table>
+      <tr><th>Manobra</th><th>Quando usar</th><th>Ângulo 1ª Guinada</th><th>Velocidade</th></tr>
+      <tr><td class="label">Williamson (MacElrevey)</td><td>Baixa visibilidade, noite, homem não visível</td><td>35–50° (por ensaio)</td><td>Mantida</td></tr>
+      <tr><td class="label">Williamson (Fonseca)</td><td>Mar grosso, noite, baixa vis.</td><td>60° (clássico)</td><td>Aumentar ao máximo</td></tr>
+      <tr><td class="label">Anderson (Curva de Anderson)</td><td>Homem no visual</td><td>Leme todo → 180°</td><td>Aumentar ao máximo</td></tr>
+      <tr><td class="label">Boutakow</td><td>Mesmas que Williamson</td><td>70°</td><td>—</td></tr>
+      <tr><td class="label">Yankee / "V"</td><td>Águas restritas</td><td>Trajetória em "V"</td><td>—</td></tr>
+    </table>
+    </div>
+
+    <p><em>Nota de edição:</em> MacElrevey (4ª ed.) destaca que o ponto de 60° das instruções clássicas <strong>não é universal</strong> — deve ser determinado por ensaio para cada navio. Um VLCC diretamente instável que use 60° gira bem além do ponto desejado. <span class="cob">JÁ COBRADO · 2011 Q38</span></p>
+
+  </div>
+</div>
+
+<details class="pscpp decorar">
+  <summary>⚓ Decorar — Williamson Turn: 3 ordens, 2 pontos, 1 regra</summary>
+  <div class="body">
+    <p><strong>3 ordens de leme</strong> — nenhuma depende de julgamento subjetivo do timoneiro.</p>
+    <p><strong>Ponto A:</strong> 35–50° (por ensaio, não fixo) → mudar leme para o lado oposto.</p>
+    <p><strong>Ponto B:</strong> 10–15° antes do recíproco → mudar leme para estabilizar.</p>
+    <p><strong>Velocidade: NÃO alterar</strong> (apenas prontidão de máquina).</p>
+    <p><strong>Prioridade:</strong> MANTER VISUAL DO HOMEM > Execução correta da manobra.</p>
+    <p><strong>VLCC específico:</strong> mudou leme aos 35° (não 60°) — instabilidade direcional faz o navio girar mais rapidamente.</p>
+  </div>
+</details>
+
+<details class="pscpp banca">
+  <summary>🎯 Banca — Q38/2011: Williamson Turn</summary>
+  <div class="body">
+    <p><strong>Enunciado resumido (2011 Q38):</strong> Comandante executa Williamson com leme todo a Br até 45° defasados, inverte para Bb até faltarem 15° para a recíproca, inverte novamente. Velocidade mantida. Não se preocupou em manter o homem no visual.</p>
+    <p><strong>Afirmativas:</strong></p>
+    <ul class="itens">
+      <li><strong>I) "Deveria ter seguido o procedimento padrão de primeira guinada a 60° do rumo inicial."</strong> — <strong>VERDADEIRA</strong> (pelo gabarito). O comandante usou 45°. A afirmativa cobra o conhecimento do procedimento <em>clássico</em>, cuja base padrão é a guinada de 60°. MacElrevey, porém, faz a ressalva importante de que esse ponto deve ser determinado por ensaio para cada navio (35–50° na sua definição operacional) — ponto que a banca não explorou nesta questão.</li>
+      <li><strong>II) "Deveria ter aumentado a velocidade."</strong> — <strong>FALSA</strong>: MacElrevey é claro — a velocidade NÃO é alterada durante a manobra.</li>
+      <li><strong>III) "Manter o homem no visual é mais importante que a execução correta."</strong> — <strong>VERDADEIRA</strong>.</li>
+      <li><strong>IV) "A manobra resume-se a 3 movimentos de leme."</strong> — <strong>VERDADEIRA</strong>.</li>
+    </ul>
+    <p><strong>Gabarito 2011 Q38: (e) — I, III e IV verdadeiras.</strong> <span class="cob">JÁ COBRADO · 2011 Q38</span></p>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════════════════════
+     TERMINOLOGIA
+══════════════════════════════════════════════════════ -->
+<div class="termo-section">
+  <h4>Terminologia Náutica — Cap. 18 (Nayak, 2020) + MacElrevey (2004, Cap. 9)</h4>
+  <dl>
+    <dt>Track Reach / Alcance de Trajetória</dt>
+    <dd>Distância total percorrida ao longo da trajetória (reta ou curva) desde a ordem de parada até parar completamente. ≠ Head Reach (avanço longitudinal puro).</dd>
+    <dt>Side Reach / Alcance Lateral</dt>
+    <dd>Desvio lateral durante a manobra de parada. Muito sensível ao vento e condições iniciais.</dd>
+    <dt>Crash Stop / Parada de Emergência</dt>
+    <dd>Manobra de parada com máquina a ré total a partir de avante total. Apenas para emergências graves — risco de cavitação e dano ao virabrequim.</dd>
+    <dt>Braking Air / Ar de Frenagem</dt>
+    <dd>Ar de partida admitido na direção de ré para reduzir RPM avante a zero. Só aplicável após atingir 25–30% das RPM de MCR.</dd>
+    <dt>MCR (Maximum Continuous Rating)</dt>
+    <dd>Potência máxima de serviço contínuo do MP. As RPM de MCR são referência para o nível de reversão.</dd>
+    <dt>Rudder Cycling / Ciclagem do Leme</dt>
+    <dd>Técnica de frenagem por arrasto do leme/casco após falha de máquina. Alta frequência (~10 L) ou baixa frequência (~6 L).</dd>
+    <dt>Braking Tug / Rebocador de Frenagem</dt>
+    <dd>Rebocador preso ao guia central da ré para tração de ré e redução de velocidade.</dd>
+    <dt>Dredging Anchors / Dragar Âncoras</dt>
+    <dd>Uso da âncora arrastada pelo fundo como dispositivo de frenagem de emergência.</dd>
+    <dt>Smelling Ground / Tocar o Fundo</dt>
+    <dd>Dirigir o navio controladamente para área rasa para criar resistência e reduzir velocidade pelo contato marginal com o fundo.</dd>
+    <dt>Beaching / Encalhe Intencional</dt>
+    <dd>Encalhar o navio propositalmente para evitar colisão. Preferível pelo costado ou pela proa. Distingue-se de grounding (acidental).</dd>
+    <dt>Advance / Avanço</dt>
+    <dd>Distância longitudinal percorrida ao mudar 90° de rumo na curva de evolução.</dd>
+    <dt>Transfer / Transferência</dt>
+    <dd>Distância transversal percorrida ao mudar 180° de rumo na curva de evolução.</dd>
+    <dt>Tactical Diameter / Diâmetro Tático</dt>
+    <dd>Diâmetro da curva circular estabilizada. Diminui com ↑ ângulo de leme; praticamente independente da velocidade.</dd>
+    <dt>Williamson Turn / Manobra de Williamson</dt>
+    <dd>Manobra de retorno ao homem ao mar com 3 ordens de leme, retornando ao trajeto recíproco original. Velocidade mantida. Ponto de mudança determinado por ensaio.</dd>
+  </dl>
+</div>
+
+<!-- BOTÃO SUPABASE -->
+<button class="painel-btn" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+
+<script>
+async function enviarPainel() {
+  const SUPABASE_URL = 'https://iftourtecxtmvuhptvmo.supabase.co';
+  const SUPABASE_KEY = window.SUPABASE_ANON_KEY || '';
+  const payload = {
+    caderno_id: 'nayak_cap18_emergencias',
+    tipo: 'caderno',
+    bloco: 'G',
+    tema: 'Emergências Portuárias',
+    assunto: 'Crash Stop · Falha de Máquina · Ciclagem de Leme · Williamson Turn',
+    enunciado: 'Revisão Nayak Cap. 18 + MacElrevey Cap. 9',
+    acertou: true,
+    sessao_data: new Date().toISOString()
+  };
+  try {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/respostas`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`
+      },
+      body: JSON.stringify(payload)
+    });
+    alert(r.ok ? '✅ Enviado ao painel PSCPP!' : '⚠ Erro ao enviar: ' + r.status);
+  } catch(e) {
+    alert('⚠ Erro de conexão: ' + e.message);
+  }
+}
+</script>
+
+</main>
+
+<footer>
+  Capital Sereno × PSCPP 2027 · Nayak Cap. 18 + MacElrevey Cap. 9 · Junho 2026<br>
+  Fonte: NAYAK, S. — <em>Theory and Practice of Marine Pilotage</em>, 2020 · MacELREVEY, D.H. — <em>Shiphandling for the Mariner</em>, 4ª ed., 2004
+</footer>
+
+</body>
+</html>
