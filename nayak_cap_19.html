@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Caderno PSCPP 2027 - Nayak Cap. 19 Operacoes Especiais: STS ship-to-ship (SBL/SS), SBM monoboia (CALM/SALM), reboque portuario, formula de tracao de bolardo (bollard pull), girting e largada de emergencia.">
+<meta name="theme-color" content="#0D3D36">
+<title>Nayak Cap. 19 - Operacoes Especiais | PSCPP 2027</title>
+<style>
+:root{--verde:#0D3D36;--verde2:#1A7A6E;--ouro:#C8A84B;--creme:#F7F3EA;--tinta:#1c2b28;--vermelho:#7a2230;--amarelo:#fff2a8;--ambar:#ffd98a}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--tinta);background:var(--creme);line-height:1.62;font-size:17px}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+header.hero{background:linear-gradient(135deg,var(--verde) 0%,#0a2e29 100%);color:var(--creme);padding:38px 0 30px;border-bottom:4px solid var(--ouro)}
+header.hero .wrap{padding-top:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ouro);font-family:Arial,Helvetica,sans-serif;margin:0 0 8px}
+header.hero h1{margin:0 0 6px;font-size:30px;line-height:1.18;color:#fff}
+header.hero .sub{margin:10px 0 0;font-size:15px;color:#dfeae6;font-style:italic}
+.badge{display:inline-block;background:rgba(200,168,75,.18);border:1px solid var(--ouro);color:var(--ouro);font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:.04em;padding:4px 11px;border-radius:20px;margin-top:14px}
+main{padding:14px 0 60px}
+h2.sec{font-size:23px;color:var(--verde);margin:38px 0 4px;padding-bottom:7px;border-bottom:2px solid var(--ouro);line-height:1.25}
+h2.sec .en{font-size:15px;color:var(--verde2);font-style:italic;font-weight:normal}
+h3.subsec{font-size:18px;color:var(--verde2);margin:24px 0 2px}
+p{margin:11px 0}
+.lead{font-size:18px}
+.hl{background:var(--amarelo);padding:1px 3px;border-radius:3px}
+.hl-ambar{background:var(--ambar);padding:1px 3px;border-radius:3px}
+b,strong{color:#15211f}
+.eng{font-style:italic;color:#3a4a47}
+.num{display:flex;gap:14px;align-items:flex-start;background:#fff;border-left:5px solid var(--ouro);border-radius:6px;padding:13px 16px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.num .big{font-size:30px;font-weight:bold;color:var(--verde);font-family:Arial,Helvetica,sans-serif;line-height:1;white-space:nowrap}
+.num .txt{font-size:15.5px}
+.formula{background:#fff;border:1px solid #e2dccb;border-left:5px solid var(--verde2);border-radius:6px;padding:14px 18px;margin:16px 0;text-align:center;font-size:19px;font-family:Georgia,serif}
+.formula small{display:block;font-size:13px;color:#5a665f;margin-top:10px;text-align:left;line-height:1.5}
+.tab-wrap{overflow-x:auto;margin:16px 0;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:14.5px}
+th,td{border:1px solid #e2dccb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--verde);color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:12.5px;letter-spacing:.03em}
+tr:nth-child(even) td{background:#faf7ee}
+.toc{background:#fff;border-left:5px solid var(--verde2);border-radius:6px;padding:16px 20px;margin:18px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.toc h3{margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:15px;color:var(--verde)}
+.toc ol{margin:0;padding-left:22px}
+.toc li{margin:4px 0}
+.toc a{color:var(--verde2);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+details.pscpp{margin:16px 0;border-radius:9px;background:#fff;overflow:hidden;border:2px solid var(--verde2);box-shadow:0 1px 4px rgba(0,0,0,.07)}
+details.pscpp.banca{border-color:var(--vermelho)}
+details.pscpp summary{cursor:pointer;padding:13px 16px;font-family:Arial,Helvetica,sans-serif;font-size:14.5px;font-weight:bold;letter-spacing:.02em;list-style:none;background:#f1f6f4;color:var(--verde);display:flex;align-items:center;gap:8px}
+details.pscpp.banca summary{background:#fbeff1;color:var(--vermelho)}
+details.pscpp summary::-webkit-details-marker{display:none}
+details.pscpp summary::after{content:"\25B8";margin-left:auto;transition:transform .2s}
+details.pscpp[open] summary::after{transform:rotate(90deg)}
+details.pscpp .body{padding:6px 18px 16px}
+details.pscpp .body p{font-size:15.5px}
+.alt{margin:8px 0;padding-left:4px}
+.alt b{color:var(--vermelho)}
+.gab{background:#eef6f2;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:14.5px}
+.cob{display:inline-block;background:var(--ambar);color:#6b4e1a;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:.02em;padding:2px 8px;border-radius:10px;vertical-align:middle}
+.nayak{background:#eaf3f6;border:1px solid #bcd9e2;border-left:5px solid #1a6a7a;border-radius:8px;padding:13px 18px;margin:18px 0;font-size:15.5px}
+.nayak h4{margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:14px;letter-spacing:.02em;color:#1a6a7a}
+.nayak p{font-size:15.5px;margin:8px 0}
+.nayak .src{display:block;font-size:12.5px;color:#5a7e88;margin-top:10px;font-style:italic}
+.fonseca{background:#fdf6e3;border:1px solid #e8dab0;border-left:5px solid var(--ouro);border-radius:8px;padding:13px 18px;margin:18px 0;font-size:15.5px}
+.fonseca h4{margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:14px;letter-spacing:.02em;color:#8a6d1a}
+.fonseca p{font-size:15.5px;margin:8px 0}
+.fonseca .src{display:block;font-size:12.5px;color:#8a6d1a;margin-top:10px;font-style:italic}
+.quadro{background:#fff;border:1px dashed #bcb08c;border-radius:8px;padding:12px 16px;margin:16px 0;font-style:italic;color:#4a5a52;font-size:15px}
+figure{margin:20px 0;text-align:center}
+figure img{max-width:100%;height:auto;background:#fff;border:1px solid #e2dccb;border-radius:8px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+figure svg{max-width:100%;height:auto;background:#fff;border:1px solid #e2dccb;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+figcaption{font-size:13.5px;color:#5a665f;margin-top:8px;font-style:italic}
+figcaption.esq{color:#1a6a7a}
+.svg-stroke{stroke:#1c2b28;fill:none;stroke-width:2}
+.svg-dash{stroke:#7a2230;fill:none;stroke-width:1.6;stroke-dasharray:5 4}
+.svg-hull{fill:#f1f6f4;stroke:#0D3D36;stroke-width:2}
+.svg-lbl{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#15211f}
+.svg-lbl-en{font-family:Arial,Helvetica,sans-serif;font-size:11px;fill:#5a665f;font-style:italic}
+.svg-anchor{fill:#0D3D36}
+.svg-wind{stroke:#1A7A6E;fill:#1A7A6E;stroke-width:2}
+.painel{margin:40px 0 10px;text-align:center}
+#btnPainel{background:var(--verde);color:#fff;border:2px solid var(--ouro);border-radius:30px;font-family:Arial,Helvetica,sans-serif;font-size:15px;padding:13px 28px;cursor:pointer;letter-spacing:.03em;transition:background .2s}
+#btnPainel:hover{background:var(--verde2)}
+#statusPainel{margin-top:10px;font-size:14px;color:#5a665f;font-family:Arial,Helvetica,sans-serif}
+footer{background:var(--verde);color:#cfe0db;font-family:Arial,Helvetica,sans-serif;font-size:13px;padding:18px 0;text-align:center}
+.notas{font-size:13.5px;color:#5a665f;border-top:1px solid #ddd5c2;margin-top:34px;padding-top:14px}
+.notas h3{font-size:15px;color:var(--verde);font-family:Arial,Helvetica,sans-serif}
+.notas li{margin:5px 0}
+@media(max-width:520px){body{font-size:16px}header.hero h1{font-size:23px}h2.sec{font-size:20px}.num{flex-direction:column;gap:4px}.num .big{font-size:26px}table{font-size:13px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">PSCPP 2027 - Modulo II - Arte Naval - Bloco G</p>
+    <h1>Capitulo 19 - Operacoes Especiais</h1>
+    <p class="sub">NAYAK, S. - <i>Theory and Practice of Marine Pilotage</i>, Cap. 19 (pp. 385-406)</p>
+    <p class="sub" style="margin-top:4px">Traducao tecnica PSCPP 2027 - STS, SBM e reboque portuario - cruzamentos com MacElrevey C.9, Hensen e provas DPC</p>
+    <span class="badge">&#9881; Fonte nova no edital 2027</span>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<p class="lead">O Cap. 19 reune tres <b>operacoes especiais</b> da praticagem: <b>STS</b> (ship-to-ship, transbordo entre navios), <b>SBM</b> (amarracao a monoboia) e <b>reboque portuario habitual</b>. Nayak (2020) e fonte nova, mas estes temas ja foram cobrados nas bancas 2006-2012 via Hensen (<i>Tug Use in Port</i>), Fragoso/Cajaty e Fonseca. Pontos de alto retorno: a terminologia STS (SBL/SS), os tipos de fixacao do SBM (CALM/SALM), a <span class="hl">formula de tracao de bolardo (bollard pull)</span> e os perigos do reboque (<span class="hl">girting</span> e largada de emergencia).</p>
+
+<div class="toc">
+<h3>Indice do capitulo</h3>
+<ol>
+<li><a href="#s1">Introducao - operacoes especiais em praticagem</a></li>
+<li><a href="#s2">A. Operacoes STS (Ship-to-Ship)</a></li>
+<li><a href="#s3">B. Operacoes em Monoboia (SBM)</a></li>
+<li><a href="#s4">C. Reboque Portuario Habitual + Formula de Bollard Pull</a></li>
+<li><a href="#s5">Perigos do reboque: girting, interacao e largada de emergencia</a></li>
+<li><a href="#s6">Caixas de Banca - sintese</a></li>
+</ol>
+</div>
+
+<!-- ===== 1 ===== -->
+<h2 class="sec" id="s1">1. Introducao - operacoes especiais em praticagem</h2>
+<p>Alem da atracacao e desatracacao de rotina, a praticagem inclui operacoes especiais: <span class="hl">reboque, manobra a frio (cold move), transbordo, operacoes STS, manejo de graneleiros capesize carregados ou VLCCs, e movimentacao de objetos grandes sem propulsao</span>. A experiencia torna-as rotineiras; o desafio surge quando o pratico precisa executa-las ocasionalmente, sem pratica frequente.</p>
+<div class="num"><span class="big">&#9888;</span><span class="txt"><b>Principio universal (cobravel):</b> toda operacao especial comeca com uma <b>reuniao de todos os responsaveis</b> para discutir as questoes e elaborar uma <span class="hl-ambar">avaliacao de riscos</span>. Cada perigo listado recebe medidas de controle ate reduzir o risco ao trivial. So entao a operacao e iniciada.</span></div>
+
+<!-- ===== 2 ===== -->
+<h2 class="sec" id="s2">2. A. Operacoes STS <span class="en">(Ship-to-Ship)</span></h2>
+<p>A transferencia STS e o transbordo entre dois navios, tambem chamada <b>aliviamento (lightering)</b>. A terminologia de Nayak (diferente da de MacElrevey) e ponto de banca:</p>
+<div class="num"><span class="big">SBL<br>SS</span><span class="txt"><b>SBL</b> = <i>Ship to be Lightered</i> (navio a ser aliviado) - o navio <b>grande</b>, que mantem rumo/velocidade constante.<br><b>SS</b> = <i>Service Ship</i> (navio de servico) - o <b>menor</b>, que manobra e faz a aproximacao.<br>Posicionados lado a lado, parados ou em movimento, para transferir carga. <span class="hl">Compare com MacElrevey C.9, que chama os mesmos papeis de VLCC e offtaker (navio receptor).</span></span></div>
+<p><b>Motivacao:</b> falta de portos de aguas profundas e economia (evitar restricoes de calado e custos de atracacao); tambem para salvar carga de navio avariado e mitigar poluicao. O plano STS segue diretrizes <b>OCIMF e IMO</b> e contempla 6 etapas: <span class="hl-ambar">planejamento previo, aproximacao, amarracao, transferencia de carga, desamarracao e saida</span>.</p>
+
+<h3 class="subsec">Preparacoes do berco duplo</h3>
+<p>O navio-mae (SBL) e avaliado para o <b>berco duplo (double banking)</b>: grandes defensas <b>Yokohama</b> em bom estado, verificacao da combinacao de portes (pequeno+grande, tamanho igual, grande+pequeno) e da diferenca de franco-bordo, boas espias pelos guias designados (senao ocorre <i>raspa</i>) e tripulacao treinada.</p>
+
+<h3 class="subsec">Aproximacao 1: SBL fundeado ou atracado</h3>
+<p>Quando o SS aproxima-se de um SBL fundeado/atracado, valem as precaucoes basicas (Fig. 19.1):</p>
+<div class="num"><span class="big">&#9888;</span><span class="txt">&bull; <span class="hl">Nunca aproximar em angulo</span> - qualquer angulo causa contato metalico entre os cascos.<br>&bull; Aproveitar ao maximo o vento; encostar <b>lentamente</b> nas defensas.<br>&bull; Tocar <b>paralelo</b> as defensas e <span class="hl-ambar">sem qualquer velocidade avante ou a re</span> (senao rompe as espias).<br>&bull; Rebocadores, se usados, com parcimonia.</span></div>
+
+<h3 class="subsec">Aproximacao 2: SBL em navegacao (Manobra de Aproximacao Padrao)</h3>
+<p>Forma padrao do aliviamento: o <b>SBL mantem rumo constante a velocidade minima controlavel</b> (<span class="hl">5 nos ou menos</span>) ou deriva com vento/corrente; o SS aproxima-se e atraca <b>pelo bordo de sota-vento</b> do SBL em rumo constante. A manobra divide-se em duas fases:</p>
+<div class="tab-wrap"><table>
+<thead><tr><th>Fase</th><th>O que ocorre</th></tr></thead>
+<tbody>
+<tr><td><b>Fase 1 - evitacao de colisao</b></td><td>Da posicao atual ate a posicao final, buscando a distancia de seguranca - a <b>DCPA</b> (<i>Distance at Closest Point of Approach</i>). O SS aproxima-se em <span class="hl">rumo paralelo</span> e <b>ajusta a velocidade para igualar a do SBL</b>.</td></tr>
+<tr><td><b>Fase 2 - navios lado a lado</b></td><td>Mantida a DCPA, o SS reduz a distancia ate as defensas se tocarem. Ambos em <b>rumos paralelos, velocidade similar e manifolds alinhados</b>, para minimizar a forca de atracacao em todas as defensas simultaneamente.</td></tr>
+</tbody>
+</table></div>
+<div class="num"><span class="big">0,5<br>MN</span><span class="txt"><b>Distancias-chave (alto potencial - numericas) - Fig. 19.2:</b><br>&bull; A aproximacao comeca a <span class="hl-ambar">0,5 MN</span> do ponto de destino.<br>&bull; Termina na <span class="hl-ambar">DCPA de aproximadamente 50-100 m</span> (Pos-4 da sequencia, lado a lado).<br>&bull; As espias comecam a ser passadas a <span class="hl">20-30 m</span> de cada navio.<br>&bull; Normalmente com <b>vento e mar pela proa</b> (depende das condicoes locais).</span></div>
+
+<h3 class="subsec">Aproximacao 3: STS de emergencia (derramamento de oleo) e o papel de cada propulsor/leme</h3>
+<p>Na STS de emergencia, a manobra e feita <b>pelo lado de sota-vento e para o bordo de boreste</b> do navio em rumo constante, com a aproximacao <span class="hl">pelo lado oposto ao derramamento</span> (transbordo pelo costado nao avariado). E aqui que Nayak detalha o equipamento do SS e a funcao de cada elemento - ponto que a banca cobra:</p>
+<div class="fonseca">
+<h4>&#9881; Equipamento do Navio de Servico e o que cada elemento faz</h4>
+<p>O SS dedicado a STS e geralmente equipado com <b>propulsor principal a re</b>, <b>leme</b> e <b>propulsor de proa tipo tunel</b> (bow thruster):</p>
+<p>&bull; <b>Propulsor principal</b> - produz a <span class="hl">forca de avanco</span> necessaria para o transito (controle de velocidade).<br>&bull; <b>Leme</b> - produz o <span class="hl">momento de guinada</span> (controle de governo/rumo).<br>&bull; <b>Propulsor de tunel (proa)</b> - produz <span class="hl-ambar">forca de deriva (lateral) e e eficaz APENAS em baixa velocidade</span>.<br>&bull; <b>Propulsores azimutais</b> (se houver) - produzem <i>dois</i> componentes no plano horizontal: avanco <b>e</b> deriva.</p>
+<p class="src">Nayak, Marine Pilotage (2020), Cap. 19, "Aproximacao durante navegacao" / "STS de Emergencia".</p>
+</div>
+
+<p>Para controlar o movimento do SS, a aproximacao divide-se em <b>3 partes</b>, e a fronteira critica entre elas e a velocidade de <span class="hl">2 m/s</span>:</p>
+<div class="tab-wrap"><table>
+<thead><tr><th>Subfase</th><th>Velocidade</th><th>Quem governa o navio (cobravel)</th></tr></thead>
+<tbody>
+<tr><td><b>1. Planejamento / Rastreamento de Trajetoria</b> <span class="eng">(Trajectory Tracking/Planning)</span></td><td><span class="hl-ambar">Acima de 2 m/s</span> (moderada/alta)</td><td>Objetivo: minimizar o erro de rastreamento (rumo e velocidade). So sao eficazes o <b>leme</b> (controle de rumo / ROT - rate of turn) e o <b>propulsor principal</b> (controle de velocidade). O bow thruster <i>nao</i> e eficaz aqui.</td></tr>
+<tr><td><b>2. Manobra de Parada</b> <span class="eng">(Stopping Manoeuvre)</span></td><td>Reduzindo a velocidade</td><td>Reduz a velocidade ao longo da trajetoria (parada normal ou de emergencia). O operador <b>para o motor e mantem o rumo com o leme ao centro</b>; tambem pode usar a <b>maquina a re</b>.</td></tr>
+<tr><td><b>3. Posicionamento Dinamico</b> <span class="eng">(Dynamic Positioning - DP)</span></td><td><span class="hl">Abaixo de 2 m/s</span> (baixa)</td><td>So controle de rumo e posicao. O governo passa a ser feito por <b>propulsores azimutais, de proa e/ou popa</b>. <span class="hl-ambar">A eficiencia do leme cai significativamente em baixa velocidade.</span> Ativado na ultima fase para movimentos longitudinal, lateral, etc.</td></tr>
+</tbody>
+</table></div>
+<div class="num"><span class="big">2<br>m/s</span><span class="txt"><b>A fronteira de controle (regra de ouro da banca):</b> <span class="hl">acima de 2 m/s, o leme convencional governa; abaixo de 2 m/s, o leme perde eficacia e quem governa sao os propulsores (azimutal/tunel)</span>. O Posicionamento Dinamico so e eficaz <b>abaixo</b> de 2 m/s; o leme so e eficaz <b>acima</b> de 2 m/s.</span></div>
+
+<h3 class="subsec">Amarracao, transferencia e saida</h3>
+<p><b>Amarracao (mooring):</b> mantida a DCPA com SS e SBL em rumo e velocidade constantes (ou derivando proximo de zero), inicia-se a atracacao com o <b>propulsor de tunel</b> e o procedimento de espias.</p>
+<p><b>Transferencia de carga:</b> verificar as espias e de extrema importancia, sobretudo com tempo adverso, mudanca de mare, alteracao de franco-bordo, mudancas de calado/trim e mudanca do periodo de balanco (por variacao do GM, conforme a carga e transferida e os calados dos dois navios mudam em sentidos opostos).</p>
+<p><b>Desamarracao e saida (Fig. 19.4) - identica ao berco duplo do Cap. 17:</b> <span class="hl">largam-se as espias de proa e popa e mantem-se os lancantes de vante e re</span>; rebocadores, se houver, evitam empurrar o navio contra as Yokohama. Recolhidas proa/popa, largam-se os <b>lancantes do navio interno</b>; com todas as espias livres, os rebocadores puxam o navio <b>paralelamente</b> as defensas ate afasta-lo o suficiente. A situacao e sempre delicada (risco de contato metalico) - o numero, tamanho e condicao das Yokohama determinam a qualidade da distancia mantida.</p>
+
+<details class="pscpp banca"><summary>&#127919; Banca - distratores de STS</summary>
+<div class="body">
+<p class="alt"><b>Inverter SBL/SS:</b> SBL e o navio <i>grande</i> (a ser aliviado, mantem rumo); SS e o <i>menor</i> (de servico, manobra). A banca troca.</p>
+<p class="alt"><b>Velocidade do SBL na aproximacao padrao:</b> <i>5 nos ou menos</i> (minima controlavel) ou a deriva - substituicao numerica provavel.</p>
+<p class="alt"><b>Distancias da aproximacao:</b> inicio a 0,5 MN; DCPA final 50-100 m; espias a 20-30 m. A banca troca os valores entre si.</p>
+<p class="alt"><b>Fronteira do leme x propulsor (2 m/s):</b> <span class="hl">acima de 2 m/s governa o leme; abaixo, os propulsores</span> - inverter isso e o distrator classico. DP so abaixo de 2 m/s.</p>
+<p class="alt"><b>Bow thruster eficaz em qualquer velocidade:</b> falso - o propulsor de tunel so e eficaz em <i>baixa</i> velocidade.</p>
+<p class="alt"><b>Funcao de cada elemento:</b> propulsor principal = avanco; leme = momento de guinada; tunel = deriva lateral; azimutal = avanco + deriva. A banca embaralha funcao x elemento.</p>
+<p class="alt"><b>Aproximar em angulo / com seguimento:</b> falso - tocar paralelo as defensas e sem velocidade avante ou a re.</p>
+<p class="alt"><b>Lado de aproximacao na emergencia:</b> pelo <i>sota-vento</i> e pelo lado <i>oposto ao derramamento</i> (costado nao avariado).</p>
+<p class="alt"><b>Desamarracao - largar tudo de uma vez:</b> falso - largam-se proa/popa primeiro e <i>mantem-se os lancantes</i>; puxa-se paralelo. Diretrizes OCIMF/IMO; defensas Yokohama.</p>
+</div></details>
+
+<!-- ===== 3 ===== -->
+<h2 class="sec" id="s3">3. B. Operacoes em Monoboia <span class="en">(SBM - Single Buoy Mooring)</span></h2>
+<p>A monoboia (<b>SBM</b> ou <b>SPM</b>) e o arranjo em que VLCCs amarram a uma <b>unica boia</b> para carga/descarga via <span class="hl">manifold submarino</span>, quando nao ha terminal dedicado.</p>
+<div class="num"><span class="big">2</span><span class="txt"><b>Dois tipos de fixacao da boia ao leito (cobravel):</b><br><b>CALM</b> = <i>Catenary Anchor Leg Mooring</i> - amarracao por perna de ancora em <b>catenaria</b> (multiplas ancoras distribuidas).<br><b>SALM</b> = <i>Single Anchor Leg Mooring</i> - amarracao por perna de ancora <b>unica</b>.</span></div>
+<p><b>As 5 partes do SBM:</b> o corpo da boia; ancoras e amarras ate o leito; acessorios de amarracao; sistema de transferencia de produto (boia &rarr; manifold submarino); e as defensas que protegem a boia. Os acessorios permitem a boia <span class="hl">mover-se livremente dentro de limites definidos</span>.</p>
+
+<h3 class="subsec">Preparacao e manobra de aproximacao</h3>
+<p>O navio mantem prontas correntes de diametros variados (tipicamente <span class="hl-ambar">76 mm tipo B da OCIMF</span>), 2 tambores de amarracao livres no castelo de proa com mensageiras pelo stopper de proa, e o guindaste pronto para icar a mangueira.</p>
+<div class="num"><span class="big">&#189; no</span><span class="txt"><b>Velocidade de aproximacao:</b> ao chegar as espias de coleta (pickup ropes), reduz-se a velocidade para <span class="hl">menos de meio no</span>. As espias de coleta puxam as correntes de protecao a bordo; a folga e colhida lentamente e <b>as espias devem ser mantidas um pouco frouxas</b>.</span></div>
+<p><b>Rebocadores:</b> o pratico embarca de rebocador na estacao, a algumas milhas do SBM. Em geral <b>2 rebocadores</b> guiam a atracacao; depois um e dispensado e o outro fica de prontidao para operacao de recuo. O pratico pode ir ao castelo de proa para melhor <i>conning</i> (visao a frente melhor que da ponte). Em terminais sem rebocadores, <span class="hl">2 lanchas de espias</span> fazem a amarracao - uma afasta as mangueiras flutuantes da rota, a outra puxa as espias a proa.</p>
+<p><b>Saida:</b> ordem de maquina a re (ou tracao do rebocador de popa) faz o navio cair a re e <b>liberar as espias de coleta do castelo de proa</b>; livres todas, deixa o berco.</p>
+
+<details class="pscpp banca"><summary>&#127919; Banca - distratores de SBM</summary>
+<div class="body">
+<p class="alt"><b>Trocar CALM x SALM:</b> CALM = catenaria (multiplas ancoras); SALM = perna unica. A banca inverte as siglas.</p>
+<p class="alt"><b>Velocidade de aproximacao:</b> &lt; meio no nas espias de coleta. Substituicao numerica provavel.</p>
+<p class="alt"><b>Espias "bem tesas":</b> falso - devem ser mantidas <i>um pouco frouxas</i> ao colher a folga.</p>
+<p class="alt"><b>Numero de rebocadores:</b> 2 guiam; 1 fica de prontidao para recuo.</p>
+<p class="alt"><b>Corrente OCIMF:</b> 76 mm tipo B. A banca troca o diametro/tipo.</p>
+</div></details>
+
+<!-- ===== 4 ===== -->
+<h2 class="sec" id="s4">4. C. Reboque Portuario Habitual <span class="en">(Customary Towing)</span></h2>
+<p>Reboque e "um servico prestado por um navio para auxiliar a propulsao ou agilizar o movimento de outro navio". A maioria e rotina dentro dos limites do porto - o <b>reboque habitual</b>.</p>
+<div class="num"><span class="big">&#9878;</span><span class="txt"><b>Responsabilidade (ponto de banca - relacao comandante/pratico):</b> contratado o rebocador, ele pode receber ordens de <i>qualquer pratico a bordo</i>; mas <span class="hl">a responsabilidade por contratar a assistencia recai sobre o COMANDANTE</span> do navio - que pode ser considerado negligente se nao o contratar quando as circunstancias justificam e ocorre acidente. Direitos e deveres ficam no "contrato de reboque".</span></div>
+
+<h3 class="subsec">Formula de Tracao de Bolardo (Bollard Pull) - alto retorno</h3>
+<p>Para calcular a tracao de bolardo (BP) necessaria de um rebocador para uma barcaca de deslocamento &Delta; e dimensoes dadas, Nayak apresenta a formula-guia:</p>
+<div class="formula">
+BP = [ &Delta;<sup>2/3</sup> &middot; V<sup>3</sup> + (0,06 &middot; B &middot; D) &middot; 120 &middot; 60 ] &times; K &nbsp; (toneladas)
+<small><b>&Delta;</b> = deslocamento total do navio rebocado (t) &middot; <b>V</b> = velocidade de reboque (nos) &middot; <b>B</b> = boca do rebocado (m) &middot; <b>D</b> = profundidade da secao transversal exposta (incl. carga de convés) acima da linha d'agua (m) &middot; <b>K</b> = fator de tempo/mar.</small>
+</div>
+<div class="tab-wrap"><table>
+<thead><tr><th>Fator K (condicoes de tempo e mar)</th><th>Faixa</th></tr></thead>
+<tbody>
+<tr><td>Reboques costeiros <b>expostos</b></td><td><b>K = 1,0 a 3,0</b></td></tr>
+<tr><td>Reboques costeiros <b>abrigados</b></td><td><b>K = 0,75 a 2,0</b></td></tr>
+</tbody>
+</table></div>
+<p><b>Atencao operacional (cobravel):</b> se o rebocador usa um <span class="hl-ambar">alternador de eixo (shaft alternator)</span> durante o reboque, a potencia do motor principal e reduzida e <b>o BP cai</b> - deve sempre ser considerado. Outros fatores que reduzem a eficiencia: idade, crescimento no casco, condicao da helice e alta temperatura da agua do mar.</p>
+
+<h3 class="subsec">Conexao, comprimento do cabo e multiplas barcacas</h3>
+<p>A conexao tipica do cabo do rebocador: <span class="hl">linha de arremesso fina do navio &rarr; pega a mensageira maior do rebocador &rarr; ao tambor do guindaste para icar o cabo de reboque</span>. No reboque de varias barcacas, os cabos devem ser <b>de tamanho e material iguais, em comprimentos iguais e mesmo numero de voltas</b>, para distribuir a tensao uniformemente; barcacas carregadas a frente e vazias a re otimizam estabilidade.</p>
+
+<h3 class="subsec">Comprimento do cabo de reboque - longo x curto</h3>
+<p>O comprimento do cabo e funcao da <b>profundidade (UKC) e do espaco livre</b>, e equilibra dois efeitos opostos:</p>
+<div class="num"><span class="big">&#8596;</span><span class="txt"><b>Cabo LONGO:</b> <span class="hl">quanto menos agua sob a quilha, mais potencia o rebocador aplica - e mais lavagem (wash)</span>. Um cabo <i>mais longo</i> reduz ou evita o efeito de lavagem sobre a unidade rebocada; um cabo <b>curto em area confinada produz lavagem significativa</b>. Rebocadores trator (puxando pela popa) e ASD (puxando pela proa) reduzem a lavagem, pois os helices ficam mais afastados do casco rebocado.<br><b>Cabo CURTO:</b> da <b>melhor controle</b> da barcaca em espaco restrito.</span></div>
+
+<h3 class="subsec">Encurtando o comprimento do reboque (alto potencial de banca)</h3>
+<p>Em aguas de espaco livre restrito, o comandante considera <b>encurtar o cabo</b> para melhor controle da barcaca. O comprimento fica <span class="hl">a criterio do comandante</span>, conforme a situacao. Regras-chave:</p>
+<div class="num"><span class="big">&#9875;</span><span class="txt">&bull; <b>Onde encurtar:</b> de preferencia em <span class="hl-ambar">aguas profundas</span>, com tempo permitindo, e <b>bem antes de entrar em aguas congestionadas</b>. Encurtar em agua profunda <span class="hl">reduz muito o desgaste do cabo</span> que sofreria arrastando no leito. Se o tempo for severo, adia-se o quanto possivel.<br>&bull; <b>Nao encurtar demais:</b> com cabo muito curto, se algo der errado, o rebocador <span class="hl-ambar">nao consegue manobrar para fora da rota da barcaca</span> e pode entrar em contato com o proprio reboque.<br>&bull; <b>Reboque selvagem (cabo curto):</b> o comandante deve pedir assistencia <i>sem demora</i> para trazer a barcaca sob controle.<br>&bull; <b>Cautela em cabo curto:</b> evitar alteracoes bruscas - a barcaca pode desviar violentamente. Se isso ocorrer, o comandante deve imediatamente <span class="hl">largar algum comprimento de cabo para amortecer o movimento violento</span>.</span></div>
+<p><b>Mau tempo e o cabo:</b> entre as medidas para reduzir o risco em mau tempo, Nayak inclui <span class="hl">aumentar o comprimento do reboque</span> para compensar o surto de potencia e a tensao no cabo causados pelo movimento do reboque no mar/ondulacao (alem de atrasar a saida, fundear/amarrar, reduzir a velocidade, rebocar a re se estava a lado, ou alterar o rumo).</p>
+
+<p><b>Empurrar a vante (pushing ahead):</b> prende-se a barcaca ao rebocador por cabos nas <b>colunas de canto</b>, operando tudo como unidade unica, mais dois cabos da coluna central do rebocador as colunas de traves da barcaca.</p>
+
+<div class="nayak">
+<h4>&#9881; Troca de informacoes para o reboque (MPX especifico - cruza com C.4 e MacElrevey C.11)</h4>
+<p><b>Pratico &rarr; Comandante:</b> se usa espia do navio ou cabo do rebocador; metodo de passar a espia; posicao da linha de arremesso (qual guia); <span class="hl">velocidade maxima para prender o rebocador</span>; tracao de bolardo dos rebocadores; canais VHF.</p>
+<p><b>Comandante &rarr; Pratico:</b> a <b>CTS/SWL</b> do equipamento de amarracao; quais guias servem para prender (se fora do centro com um so rebocador, informar); resistencia dos pontos de empurre - ou, se houver cinto reforcado ao redor do casco, transmitir esse fato ao mestre do rebocador.</p>
+<p class="src">Nayak, Marine Pilotage (2020), Cap. 19, "Reboque Portuario Habitual" / "Troca de Informacoes" (pp. 385-406).</p>
+</div>
+
+<details class="pscpp banca"><summary>&#127919; Banca - distratores do reboque e bollard pull</summary>
+<div class="body">
+<p class="alt"><b>Responsabilidade de contratar rebocador:</b> e do <i>comandante</i>, nao do pratico (que apenas comanda os rebocadores presentes).</p>
+<p class="alt"><b>Variaveis da formula BP:</b> &Delta; (deslocamento), V (velocidade), B (boca), D (altura exposta), K (tempo/mar). A banca pode trocar o que e B ou D, ou alterar os expoentes (&Delta;^2/3, V^3).</p>
+<p class="alt"><b>Faixas de K:</b> exposto 1,0-3,0; abrigado 0,75-2,0. Substituicao numerica.</p>
+<p class="alt"><b>Alternador de eixo:</b> <i>reduz</i> o BP (tira potencia do motor principal) - a banca pode dizer que aumenta.</p>
+<p class="alt"><b>Cabos de multiplas barcacas:</b> iguais em tamanho, material, comprimento e voltas - para tensao uniforme. "Cabos diferentes" e distrator.</p>
+<p class="alt"><b>Cabo curto x lavagem (wash):</b> cabo <i>curto</i> em area confinada produz <i>mais</i> lavagem; cabo <i>longo</i> reduz a lavagem (helices mais afastados). A banca pode inverter.</p>
+<p class="alt"><b>Onde encurtar o reboque:</b> em <i>aguas profundas</i>, bem antes de aguas congestionadas - reduz desgaste do cabo no leito. "Encurtar so na area restrita" e distrator.</p>
+<p class="alt"><b>"Quanto mais curto melhor":</b> falso - cabo muito curto impede o rebocador de sair da rota da barcaca (risco de contato com o proprio reboque). Em reboque selvagem em cabo curto, pedir assistencia; e <i>largar</i> cabo para amortecer movimento violento.</p>
+<p class="alt"><b>Mau tempo:</b> uma das medidas e <i>aumentar</i> o comprimento do reboque (absorver surto/tensao da ondulacao).</p>
+</div></details>
+
+<!-- ===== 5 ===== -->
+<h2 class="sec" id="s5">5. Perigos do reboque: girting, interacao e largada de emergencia</h2>
+
+<h3 class="subsec">1. Girting / Girding / Tripping (GGT) - o perigo mortal</h3>
+<div class="num"><span class="big">&#9760;</span><span class="txt"><b>Girting</b> e a <span class="hl">razao mais prevalente para o tombamento de rebocadores</span> e pode causar mortes. Ocorre em qualquer extremidade do reboque e <b>muito rapidamente</b> - raramente lento o bastante para a tripulacao abandonar antes de virar. Acontece quando a tracao do cabo, transversal ao rebocador, o inclina a um angulo grande e perigoso.</span></div>
+
+<h3 class="subsec">2. Interacao (Interaction)</h3>
+<p>Particularmente perigosa quando um navio/barcaca maior se move em velocidade proximo a um rebocador menor - <span class="hl-ambar">agravada em aguas confinadas e rasas</span>. O fluxo de agua ao redor do navio maior atua sob o casco do rebocador, reduzindo a estabilidade efetiva e podendo tomba-lo, sobretudo <b>ao ser ultrapassado</b> por navio maior e mais rapido em canal estreito. Consequencias em agua rasa: efeitos de interacao aumentados, <span class="hl">eficacia do leme reduzida</span>, squat aumentado e maior risco de encalhe.</p>
+
+<h3 class="subsec">3. Vento e mau tempo</h3>
+<p>Mau tempo, para um rebocador pequeno, nao se restringe a vento forte: inclui a <b>acao do vento contra a mare</b>. O vento muda rumo, aumenta velocidade e faz o rebocado derivar, podendo causar rompimento de cabos, lesoes e girting. Atencao especial se o vento aumentar ou mudar de direcao subitamente.</p>
+
+<h3 class="subsec">Sistema de Largada de Emergencia do Cabo de Reboque</h3>
+<div class="num"><span class="big">&#9889;</span><span class="txt">Rebocadores com guincho de reboque tem um <b>sistema de "larga" (emergency release)</b>. <span class="hl">A tripulacao do NAVIO nao precisa fazer nada</span> - a desconexao e feita pelo <b>mestre do rebocador</b>, que poe o tambor do guindaste livre e deixa o cabo correr. E operacao perigosa, exige grande cuidado.</span></div>
+
+<details class="pscpp banca"><summary>&#127919; Banca - distratores dos perigos do reboque</summary>
+<div class="body">
+<p class="alt"><b>Girting:</b> e a principal causa de <i>tombamento</i> de rebocadores (nao de rompimento de cabo); ocorre rapido. A banca pode confundir com squat ou interacao.</p>
+<p class="alt"><b>Interacao no rebocador:</b> pior <i>ao ser ultrapassado</i> em agua rasa/confinada; reduz estabilidade e eficacia do leme. "Strong current/fluxo sempre ajuda" e trap.</p>
+<p class="alt"><b>Mau tempo:</b> inclui <i>vento contra mare</i> - nao so vento forte.</p>
+<p class="alt"><b>Largada de emergencia:</b> e o <i>mestre do rebocador</i> que solta (tambor livre); a tripulacao do navio nao age. A banca inverte.</p>
+</div></details>
+
+<!-- ===== 6 ===== -->
+<h2 class="sec" id="s6">6. Caixas de Banca - sintese</h2>
+<details class="pscpp banca"><summary>&#127919; Banca - sintese das pegadinhas do Cap. 19</summary>
+<div class="body">
+<p class="alt"><b>STS:</b> SBL = grande (a ser aliviado); SS = menor (servico); nunca aproximar em angulo; tocar paralelo sem seguimento; defensas Yokohama; diretrizes OCIMF/IMO.</p>
+<p class="alt"><b>SBM:</b> CALM = catenaria/multiplas ancoras; SALM = perna unica; aproximacao &lt; meio no; espias um pouco frouxas; correntes 76 mm tipo B OCIMF; 2 rebocadores (1 de prontidao).</p>
+<p class="alt"><b>Reboque:</b> contratar rebocador e responsabilidade do <i>comandante</i>; alternador de eixo reduz o BP; cabos de barcacas iguais para tensao uniforme.</p>
+<p class="alt"><b>Bollard Pull:</b> BP = [&Delta;^2/3 V^3 + (0,06 B D) 120 60] K; K exposto 1,0-3,0 / abrigado 0,75-2,0.</p>
+<p class="alt"><b>Perigos:</b> girting = principal causa de tombamento; interacao pior ao ultrapassar em agua rasa; largada de emergencia feita pelo mestre do rebocador.</p>
+</div></details>
+
+<div class="painel">
+<button id="btnPainel">&#11014; Enviar ao Painel PSCPP</button>
+<div id="statusPainel"></div>
+</div>
+
+<div class="notas">
+<h3>Fontes e notas</h3>
+<p>Traducao tecnica de <b>NAYAK, S.</b>, <i>Theory and Practice of Marine Pilotage</i> (2020), Cap. 19 "Special Operations" (pp. 385-406). Cruzamentos de banca apoiados em Hensen, <i>Tug Use in Port</i>; Fragoso/Cajaty, <i>Rebocadores Portuarios</i>; e Fonseca, <i>Arte Naval</i>. Nayak e fonte nova no edital 2027 - itens deduzidos de provas 2011/2012 a <b>[VERIFICAR gabarito impresso]</b>. As figuras do capitulo (19.1, 19.6 etc.) sao esquemas descritos em quadro no caderno-base, sem diagrama recortavel.</p>
+<p><b>Cruzamento de competencias:</b> a terminologia STS de Nayak (SBL/SS) difere da de MacElrevey C.9 (VLCC/offtaker) - em prova, responder pelo vocabulario da fonte citada no enunciado.</p>
+</div>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> &middot; Modulo II &middot; Arte Naval &middot; Nayak Cap. 19 - Operacoes Especiais &middot; Capital Sereno</div>
+</footer>
+
+<script>
+const CADERNO_ID="nayak_cap_19";
+const BLOCO="G";
+const TEMA="Operacoes especiais STS SBM reboque";
+document.getElementById('btnPainel').addEventListener('click',function(){
+  document.getElementById('statusPainel').textContent="Para registrar respostas, configure a chave Supabase no ambiente local (omitida deste arquivo publico).";
+});
+</script>
+
+</body>
+</html>
