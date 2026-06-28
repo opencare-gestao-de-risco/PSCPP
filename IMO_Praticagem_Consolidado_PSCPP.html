@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praticagem Marítima — Resolucões IMO Consolidadas | Capital Sereno PSCPP</title>
+<style>
+  :root {
+    --verde: #0D3D36;
+    --teal: #1A7A6E;
+    --creme: #F7F3EA;
+    --ouro: #C8A84B;
+    --amarelo-hl: #FFF176;
+    --rosa-hl: #FFCDD2;
+    --amber-hl: #FFE082;
+    --azul-hl: #BBDEFB;
+    --body-font: Georgia, 'Times New Roman', serif;
+    --ui-font: 'Segoe UI', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--creme); color: #1a1a1a; font-family: var(--body-font); font-size: 15.5px; line-height: 1.75; }
+
+  /* HEADER */
+  header { background: var(--verde); color: var(--creme); padding: 32px 48px 24px; border-bottom: 5px solid var(--ouro); }
+  header .logo-linha { font-family: var(--ui-font); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--ouro); margin-bottom: 8px; }
+  header h1 { font-size: 24px; font-weight: normal; color: #fff; line-height: 1.3; }
+  header .subtitulo { margin-top: 6px; font-size: 13px; color: #a8c5c1; font-style: italic; }
+  header .meta { margin-top: 16px; display: flex; gap: 20px; font-family: var(--ui-font); font-size: 11.5px; color: #8fbbb7; flex-wrap: wrap; }
+
+  /* NAV RESOLUCOES */
+  .nav-res {
+    background: var(--verde);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 0;
+    border-bottom: 3px solid var(--ouro);
+    overflow-x: auto;
+  }
+  .nav-res a {
+    display: block;
+    padding: 11px 18px;
+    font-family: var(--ui-font);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #8fbbb7;
+    text-decoration: none;
+    white-space: nowrap;
+    border-right: 1px solid #1a5a50;
+    transition: background 0.15s;
+  }
+  .nav-res a:hover { background: #1a5a50; color: var(--ouro); }
+  .nav-res a.active { background: var(--ouro); color: var(--verde); }
+
+  /* CONTAINER */
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 32px 80px; }
+
+  /* SEÇÃO RESOLUÇÃO */
+  .res-block {
+    margin-bottom: 64px;
+    padding-top: 20px;
+  }
+  .res-header {
+    background: var(--verde);
+    color: #fff;
+    border-radius: 6px 6px 0 0;
+    padding: 18px 26px 14px;
+    margin-bottom: 0;
+  }
+  .res-header .res-id { font-family: var(--ui-font); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--ouro); margin-bottom: 6px; }
+  .res-header h2 { font-size: 18px; font-weight: normal; line-height: 1.35; }
+  .res-header .res-meta { margin-top: 8px; font-family: var(--ui-font); font-size: 11.5px; color: #8fbbb7; }
+  .res-body { background: #fff; border: 1px solid #d8d0c0; border-top: none; border-radius: 0 0 6px 6px; padding: 26px 30px; }
+
+  /* HIGHLIGHTS */
+  .hl-amarelo { background: var(--amarelo-hl); padding: 1px 3px; border-radius: 2px; }
+  .hl-amber { background: var(--amber-hl); padding: 1px 3px; border-radius: 2px; }
+  .hl-rosa { background: var(--rosa-hl); padding: 1px 3px; border-radius: 2px; }
+  .hl-azul { background: var(--azul-hl); padding: 1px 3px; border-radius: 2px; }
+
+  /* TIPOGRAFIA */
+  h3.sec { font-family: var(--ui-font); font-size: 14px; font-weight: 700; color: var(--verde); text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 2px solid var(--ouro); padding-bottom: 5px; margin: 22px 0 14px; scroll-margin-top: 100px; }
+  h4.subsec { font-family: var(--ui-font); font-size: 13px; font-weight: 700; color: var(--teal); margin: 16px 0 8px; }
+  p { margin-bottom: 12px; text-align: justify; }
+
+  /* LISTAS NORMATIVAS */
+  ol.norm { margin: 8px 0 14px; padding-left: 0; list-style: none; }
+  ol.norm > li { display: flex; gap: 14px; margin-bottom: 9px; }
+  ol.norm > li .num { min-width: 30px; font-weight: bold; color: var(--teal); padding-top: 1px; font-family: var(--ui-font); font-size: 13px; }
+  ol.norm > li .txt { flex: 1; text-align: justify; }
+
+  /* TABELA DE MEDIDAS */
+  table.med { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-family: var(--ui-font); font-size: 13px; }
+  table.med th { background: var(--verde); color: var(--ouro); padding: 9px 12px; text-align: left; font-weight: 600; font-size: 12px; }
+  table.med td { padding: 8px 12px; border-bottom: 1px solid #e0d9cc; vertical-align: top; }
+  table.med tr:nth-child(even) td { background: #f8f4ec; }
+  table.med .val { font-weight: 700; color: var(--verde); text-align: center; font-size: 13.5px; }
+  table.med .src { font-size: 11px; color: #888; }
+
+  /* BOX PSCPP */
+  details.pscpp { background: var(--verde); border-radius: 5px; margin: 20px 0; overflow: hidden; }
+  details.pscpp summary { padding: 11px 18px; cursor: pointer; font-family: var(--ui-font); font-size: 12.5px; font-weight: 700; color: var(--ouro); letter-spacing: 1px; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+  details.pscpp summary::-webkit-details-marker { display: none; }
+  details.pscpp summary::before { content: '▶'; font-size: 10px; transition: transform 0.2s; color: var(--ouro); }
+  details.pscpp[open] summary::before { transform: rotate(90deg); }
+  details.pscpp .bc { background: #fff; padding: 18px 22px; font-family: var(--ui-font); font-size: 13px; line-height: 1.6; }
+  details.pscpp .bc ul { padding-left: 18px; margin-top: 6px; }
+  details.pscpp .bc li { margin-bottom: 5px; }
+  .cobrado { background: var(--rosa-hl); padding: 1px 5px; border-radius: 3px; font-size: 10.5px; font-weight: bold; margin-left: 5px; }
+  .potencial { background: var(--amarelo-hl); padding: 1px 5px; border-radius: 3px; font-size: 10.5px; font-weight: bold; margin-left: 5px; }
+  .aviso { font-size: 11.5px; color: #c0392b; font-style: italic; margin-top: 6px; }
+
+  /* CAIXA DE CORRELAÇÃO ENTRE RESOLUÇÕES */
+  .correlacao {
+    background: #e8f5e9;
+    border: 1px solid #81c784;
+    border-left: 4px solid #2e7d32;
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-family: var(--ui-font);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .correlacao strong { color: #1b5e20; }
+
+  /* PROIBICAO */
+  .proibicao { background: #c0392b; color: #fff; border-radius: 5px; padding: 14px 20px; margin: 14px 0; font-family: var(--ui-font); font-size: 14px; font-weight: 700; text-align: center; }
+
+  /* DIFF */
+  .del { text-decoration: line-through; color: #c0392b; background: #ffebee; padding: 0 2px; border-radius: 2px; }
+  .ins { background: #c8e6c9; color: #1b5e20; padding: 0 2px; border-radius: 2px; font-weight: 600; }
+
+  /* NOTAS NÃO CONFORMES */
+  .noncompliant { background: #1a1a1a; border-radius: 5px; padding: 18px 22px; margin: 14px 0; }
+  .noncompliant h4 { color: #ff5252; font-family: var(--ui-font); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .noncompliant ul { padding-left: 0; list-style: none; }
+  .noncompliant li { color: #fff; font-family: var(--ui-font); font-size: 13px; padding: 5px 0; border-bottom: 1px solid #333; display: flex; gap: 10px; align-items: flex-start; }
+  .noncompliant li::before { content: '⛔'; flex-shrink: 0; }
+
+  /* DEVERES */
+  .deveres { background: #0d3d36; border-radius: 5px; padding: 18px 22px; margin: 14px 0; }
+  .deveres h4 { color: var(--ouro); font-family: var(--ui-font); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+  .deveres ol { padding-left: 0; list-style: none; counter-reset: duty; }
+  .deveres li { counter-increment: duty; color: #fff; font-family: var(--ui-font); font-size: 13px; padding: 7px 0; border-bottom: 1px solid #1a5a50; display: flex; gap: 12px; align-items: flex-start; }
+  .deveres li::before { content: counter(duty); background: var(--ouro); color: var(--verde); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0; }
+
+  /* LEGENDA */
+  .legenda { display: flex; gap: 16px; flex-wrap: wrap; font-family: var(--ui-font); font-size: 11.5px; margin-bottom: 28px; padding: 10px 14px; background: #fff; border: 1px solid #ddd; border-radius: 4px; }
+  .legenda .item { display: flex; align-items: center; gap: 5px; }
+  .legenda .cor { width: 16px; height: 12px; border-radius: 2px; display: inline-block; }
+
+  /* LINHA DO TEMPO */
+  .timeline { position: relative; margin: 20px 0 28px; }
+  .timeline::before { content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 3px; background: var(--ouro); }
+  .tl-item { display: flex; gap: 16px; margin-bottom: 18px; position: relative; }
+  .tl-dot { width: 20px; height: 20px; background: var(--ouro); border-radius: 50%; flex-shrink: 0; margin-top: 3px; display: flex; align-items: center; justify-content: center; z-index: 1; margin-left: 18px; }
+  .tl-dot span { font-family: var(--ui-font); font-size: 9px; font-weight: 700; color: var(--verde); }
+  .tl-content { flex: 1; }
+  .tl-content .tl-year { font-family: var(--ui-font); font-size: 11px; color: var(--teal); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .tl-content .tl-title { font-family: var(--ui-font); font-size: 13.5px; font-weight: 700; color: var(--verde); margin: 2px 0; }
+  .tl-content .tl-desc { font-family: var(--ui-font); font-size: 12.5px; color: #555; }
+
+  /* FIGURA */
+  .fig-desc {
+    background: #f0f4f8;
+    border: 1px solid #cfd8dc;
+    border-left: 4px solid var(--teal);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-family: var(--ui-font);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .fig-desc .fig-label { font-weight: 700; color: var(--teal); margin-bottom: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ÍNDICE */
+  nav.indice { background: #fff; border: 1px solid #d8d0c0; border-left: 4px solid var(--teal); border-radius: 4px; padding: 22px 26px; margin-bottom: 36px; }
+  nav.indice h2 { font-family: var(--ui-font); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  nav.indice ol { padding-left: 18px; }
+  nav.indice li { margin-bottom: 3px; font-size: 13.5px; }
+  nav.indice a { color: var(--verde); text-decoration: none; }
+  nav.indice a:hover { text-decoration: underline; color: var(--teal); }
+  nav.indice .sub { list-style: disc; padding-left: 18px; margin-top: 3px; }
+  nav.indice .sub li { font-size: 12.5px; }
+
+  /* AVISO */
+  .aviso-trad { background: #fff3cd; border: 1px solid #ffc107; border-left: 4px solid #ffc107; border-radius: 4px; padding: 11px 15px; font-family: var(--ui-font); font-size: 12px; margin-bottom: 26px; color: #7a5c00; }
+
+  /* DIVISOR */
+  .sep { border: none; border-top: 2px solid var(--ouro); margin: 48px 0; }
+
+  /* NOTAS DE RODAPÉ */
+  sup.fn { color: var(--teal); font-size: 10.5px; cursor: pointer; font-family: var(--ui-font); }
+  .footnotes { border-top: 1px solid #ccc; margin-top: 36px; padding-top: 14px; font-size: 12.5px; color: #555; }
+  .footnotes h4 { font-family: var(--ui-font); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 10px; }
+  .fn-item { display: flex; gap: 9px; margin-bottom: 7px; }
+  .fn-item .fn-n { min-width: 22px; font-weight: bold; color: var(--teal); font-family: var(--ui-font); }
+
+  footer { background: var(--verde); color: #8fbbb7; text-align: center; padding: 20px; font-family: var(--ui-font); font-size: 12px; margin-top: 60px; }
+  footer strong { color: var(--ouro); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-linha">Capital Sereno · PSCPP 2027 · Arte Naval — Bloco II</div>
+  <h1>Praticagem Marítima — Resolucões IMO Consolidadas</h1>
+  <div class="subtitulo">A.960(23) · A.1045(27) · A.1108(29) · MSC.1/Circ.1428/Rev.1 · MSC.1/Circ.1495/Rev.1<br>Tradução técnica integral com análise comparativa, correlações e marcação PSCPP</div>
+  <div class="meta">
+    <span>📋 5 instrumentos consolidados</span>
+    <span>📅 2003 – 2025</span>
+    <span>⚓ Base normativa: SOLAS Reg. V/23</span>
+    <span>🎯 PSCPP 2027 — Arte Naval (Bloco II)</span>
+  </div>
+</header>
+
+<!-- NAV STICKY -->
+<nav class="nav-res">
+  <a href="#intro">Visão Geral</a>
+  <a href="#a960">A.960(23)</a>
+  <a href="#a1045">A.1045(27)</a>
+  <a href="#a1108">A.1108(29)</a>
+  <a href="#circ1428">MSC.1/Circ.1428</a>
+  <a href="#circ1495">MSC.1/Circ.1495</a>
+  <a href="#correlacoes">Correlações PSCPP</a>
+  <a href="#tabela-master">Tabela Mestra</a>
+  <a href="#notas">Notas</a>
+</nav>
+
+<div class="container">
+
+  <div class="legenda">
+    <strong style="font-family:var(--ui-font);font-size:11.5px;">Marcação:</strong>
+    <div class="item"><span class="cor" style="background:var(--amarelo-hl)"></span> Alto potencial de cobrança</div>
+    <div class="item"><span class="cor" style="background:var(--rosa-hl)"></span> Cobrado 2006–2012</div>
+    <div class="item"><span class="cor" style="background:var(--amber-hl)"></span> Dado numérico/definição precisa</div>
+    <div class="item"><span class="cor" style="background:var(--azul-hl)"></span> Interpretação/esclarecimento</div>
+    <div class="item"><span class="cor" style="background:#ffebee;border:1px solid #e57373"></span> Texto removido por emenda</div>
+    <div class="item"><span class="cor" style="background:#c8e6c9;border:1px solid #81c784"></span> Texto adicionado por emenda</div>
+  </div>
+
+  <nav class="indice">
+    <h2>📑 Índice</h2>
+    <ol>
+      <li><a href="#intro">Visão Geral e Linha do Tempo Normativa</a></li>
+      <li><a href="#a960">Resolução A.960(23) — Treinamento e Procedimentos Operacionais para Práticos</a>
+        <ul class="sub">
+          <li><a href="#a960-a1">Anexo 1: Treinamento e Certificação (Seções 1–7)</a></li>
+          <li><a href="#a960-a2">Anexo 2: Procedimentos Operacionais (Seções 1–9)</a></li>
+        </ul>
+      </li>
+      <li><a href="#a1045">Resolução A.1045(27) — Arranjos de Transferência do Prático</a>
+        <ul class="sub">
+          <li><a href="#a1045-s2">Seção 2: Escadas de Prático (posição, construção, cabos)</a></li>
+          <li><a href="#a1045-s3">Seção 3: Escadas de Acomodação</a></li>
+          <li><a href="#a1045-s4">Seção 4: Dispositivos Mecânicos de Içamento (PROIBIÇÃO)</a></li>
+          <li><a href="#a1045-s5">Seção 5: Acesso ao Convés</a></li>
+          <li><a href="#a1045-s6">Seção 6: Aproximação da Lancha</a></li>
+          <li><a href="#a1045-s7">Seção 7: Carretéis de Escada de Prático</a></li>
+        </ul>
+      </li>
+      <li><a href="#a1108">Resolução A.1108(29) — Emenda à A.1045(27): Seção 5</a></li>
+      <li><a href="#circ1428">MSC.1/Circ.1428/Rev.1 — Arranjos Requeridos (Poster + Práticas Não Conformes)</a>
+        <ul class="sub">
+          <li><a href="#c1428-9m">Arranjo: Ponto de acesso ≤ 9 m acima da água</a></li>
+          <li><a href="#c1428-9mplus">Arranjo: Ponto de acesso > 9 m acima da água</a></li>
+          <li><a href="#c1428-winch">Carretel de Escada de Prático</a></li>
+          <li><a href="#c1428-trapdoor">Arranjo com Porta de Alçapão / Porta Lateral</a></li>
+          <li><a href="#c1428-noncompliant">Práticas Não Conformes</a></li>
+          <li><a href="#c1428-deveres">Deveres do Oficial Responsável</a></li>
+        </ul>
+      </li>
+      <li><a href="#circ1495">MSC.1/Circ.1495/Rev.1 — Interpretação Unificada da Reg. V/23.3.3</a></li>
+      <li><a href="#correlacoes">Correlações e Complementariedades entre os 5 Instrumentos</a></li>
+      <li><a href="#tabela-master">Tabela Mestra de Medidas e Parâmetros Consolidados</a></li>
+      <li><a href="#notas">Notas de Rodapé do Tradutor</a></li>
+    </ol>
+  </nav>
+
+  <!-- ========== VISÃO GERAL ========== -->
+  <div class="res-block" id="intro">
+    <div class="res-header">
+      <div class="res-id">Visão Geral</div>
+      <h2>Linha do Tempo e Hierarquia Normativa</h2>
+      <div class="res-meta">Base normativa: SOLAS Capítulo V, Regulação 23</div>
+    </div>
+    <div class="res-body">
+      <p>O tema <strong>praticagem marítima</strong> no PSCPP 2027 é regulado por uma cadeia normativa da OMI composta por cinco instrumentos complementares, que cobrem desde o treinamento e os procedimentos operacionais dos práticos até os requisitos físicos das escadas de embarque. A compreensão das <em>correlações, hierarquias e diferenças</em> entre eles é essencial para o exame.</p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"><span>03</span></div>
+          <div class="tl-content">
+            <div class="tl-year">Dezembro 2003</div>
+            <div class="tl-title">A.960(23) — Treinamento, Certificação e Procedimentos Operacionais</div>
+            <div class="tl-desc">Define quem é o prático, como deve ser treinado, certificado e como opera a bordo. Revoga A.485(XII). Dois anexos: (1) Treinamento/Certificação e (2) Procedimentos Operacionais.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"><span>11</span></div>
+          <div class="tl-content">
+            <div class="tl-year">Novembro 2011</div>
+            <div class="tl-title">A.1045(27) — Arranjos de Transferência do Prático</div>
+            <div class="tl-desc">Define os requisitos físicos das escadas de prático, escadas de acomodação, acesso ao convés, carretéis e aproximação da lancha. Revoga A.889(21).</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"><span>15</span></div>
+          <div class="tl-content">
+            <div class="tl-year">Dezembro 2015</div>
+            <div class="tl-title">A.1108(29) — Emenda à A.1045(27)</div>
+            <div class="tl-desc">Altera exclusivamente a Seção 5 (Acesso ao Convés) da A.1045(27): corrige a referência de altura das empunhaduras em aberturas de amurada e exige batentes "separados" nas escadas de amurada.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"><span>16</span></div>
+          <div class="tl-content">
+            <div class="tl-year">Novembro 2016</div>
+            <div class="tl-title">MSC.1/Circ.1495/Rev.1 — Interpretação Unificada da Reg. V/23.3.3</div>
+            <div class="tl-desc">Esclarece a distinção entre os dois arranjos da Reg. V/23.3.3: (i) escada simples (subida ≤ 9 m) e (ii) arranjo combinado com escada de acomodação (> 9 m). Confirma que o requisito de 15° de banda não se aplica ao arranjo combinado. Supersede MSC.1/Circ.1495.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"><span>25</span></div>
+          <div class="tl-content">
+            <div class="tl-year">Setembro 2025</div>
+            <div class="tl-title">MSC.1/Circ.1428/Rev.1 — Poster de Arranjos Requeridos</div>
+            <div class="tl-desc">Revisão do poster visual de arranjos requeridos, alinhada com emendas ao SOLAS V/23 (MSC.572(110)) e novos padrões de desempenho (MSC.576(110)) — vigor esperado em 01/01/2028. Circula com 3 painéis: arranjos requeridos, arranjos para porta de alçapão/lateral e práticas não conformes. A versão anterior (MSC.1/Circ.1428) é revogada em 01/04/2030.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="correlacao">
+        <strong>Hierarquia normativa:</strong> SOLAS V/23 (vinculante) → A.1045(27) conforme emendada pela A.1108(29) (recomendação com força de padrão mínimo) → MSC.1/Circ.1428/Rev.1 (ilustrações/orientação) e MSC.1/Circ.1495/Rev.1 (interpretação). A A.960(23) trata de matéria distinta (quem é o prático e como opera), não de equipamentos de transferência.
+      </div>
+
+      <details class="pscpp">
+        <summary>📌 O que o PSCPP cobra sobre os 5 instrumentos</summary>
+        <div class="bc">
+          <ul>
+            <li>Qual resolução trata de <em>treinamento e procedimentos operacionais</em> do prático → <strong>A.960(23)</strong> <span class="potencial">POTENCIAL</span></li>
+            <li>Qual resolução trata dos <em>equipamentos físicos de embarque/desembarque</em> → <strong>A.1045(27) + A.1108(29)</strong> <span class="potencial">POTENCIAL</span></li>
+            <li>O que a A.1108(29) modificou na A.1045(27) → somente Seção 5 (Acesso ao Convés) <span class="potencial">POTENCIAL</span></li>
+            <li>O que a MSC.1/Circ.1495/Rev.1 esclarece → distinção ≤ 9 m (escada simples) vs. > 9 m (arranjo combinado) <span class="potencial">POTENCIAL</span></li>
+            <li>Resolução revogada pela A.960(23) → A.485(XII) <span class="potencial">POTENCIAL</span></li>
+            <li>Resolução revogada pela A.1045(27) → A.889(21) <span class="potencial">POTENCIAL</span></li>
+            <li>Vigência das emendas SOLAS V/23 referenciadas pela Circ.1428/Rev.1 → 01/01/2028 <span class="potencial">POTENCIAL</span></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ========== A.960(23) ========== -->
+  <hr class="sep">
+  <div class="res-block" id="a960">
+    <div class="res-header">
+      <div class="res-id">Resolução A.960(23) · Adotada 5 dezembro 2003 · A 23/Res.960</div>
+      <h2>Recomendações sobre Treinamento, Certificação e Procedimentos Operacionais para Práticos Marítimos (exceto Práticos de Alto-Mar)</h2>
+      <div class="res-meta">Revoga: A.485(XII) &nbsp;|&nbsp; Dois Anexos: Treinamento (Anexo 1) + Procedimentos Operacionais (Anexo 2)</div>
+    </div>
+    <div class="res-body">
+
+      <!-- ANNEXO 1 -->
+      <h3 class="sec" id="a960-a1">ANEXO 1 — Treinamento e Certificação</h3>
+
+      <h4 class="subsec">1. Escopo</h4>
+      <p><span class="hl-amber">A resolução não se aplica a práticos de alto-mar (<em>deep-sea pilots</em>) nem a comandantes ou tripulantes certificados para praticagem em determinadas áreas.</span> A OMI não intervém na certificação, no licenciamento nem nos sistemas de praticagem dos Estados.</p>
+
+      <h4 class="subsec">2. Autoridade Competente de Praticagem</h4>
+      <p><span class="hl-amarelo">Autoridade competente de praticagem</span> = governos nacionais/regionais ou grupos/organizações locais que por lei ou tradição administram ou prestam um sistema de praticagem. No Brasil: DPC / Capitanias dos Portos (NORMAM-12/DPC). A avaliação de candidatos é responsabilidade de cada autoridade competente — não da OMI.</p>
+
+      <h4 class="subsec">3. Certificado ou Licença de Praticagem</h4>
+      <p><span class="hl-amarelo">Todo prático deve possuir certificado ou licença emitido pela autoridade competente, indicando a área de praticagem e possíveis limitações</span> (tamanho máximo, calado ou tonelagem dos navios habilitados a praticar).</p>
+
+      <h4 class="subsec">4. Aptidão Médica</h4>
+      <p><span class="hl-amber">Padrão equivalente ao da Convenção STCW para certificação de comandantes e oficiais de quarto de navegação</span> — visão, audição e condicionamento físico. Reavaliação médica obrigatória após lesão grave ou doença.</p>
+
+      <h4 class="subsec">5. Treinamento e Certificação</h4>
+      <p>Treinamento inicial deve incluir experiência real a bordo supervisionada por práticos experientes; pode ser complementado por simulação (computador ou modelos tripulados), instrução em sala de aula ou outros métodos.</p>
+      <p><span class="hl-rosa">Todo prático deve ser treinado em BRM (Bridge Resource Management), com ênfase na troca de informações essencial para a passagem segura.</span><sup class="fn" id="ref-a960-fn1" onclick="document.getElementById('a960-fn1').scrollIntoView({behavior:'smooth'})">[1]</sup> Emergências cobertas no BRM: <span class="hl-amarelo">perda do governo, perda de propulsão, falhas de radar, sistemas vitais e automação — em canal estreito.</span></p>
+      <p>Treinamento de atualização pode incluir: SMCP, simulador de radar, modelos tripulados, RCP/hipotermia, sobrevivência no mar, legislação da área.</p>
+      <p>Impedimentos à comunicação abordados: linguísticos, culturais, <span class="hl-amber">psicológicos e fisiológicos.</span></p>
+
+      <h4 class="subsec">6. Proficiência Continuada</h4>
+      <p><span class="hl-amarelo">Verificação pela autoridade competente em intervalos máximos de 5 (cinco) anos</span> sobre: (1) conhecimento navegacional recente da área; (2) aptidão médica; (3) conhecimento das leis/regulamentos vigentes. Após afastamento por qualquer razão: recuperação da familiaridade com a área antes de retornar ao serviço.</p>
+
+      <h4 class="subsec">7. Programa de Estudos para Certificação — Os 28 Itens</h4>
+      <p><span class="hl-amarelo">Cada candidato a prático deve demonstrar conhecimento de todos os 28 itens abaixo</span> (em "área" = águas para as quais o candidato será certificado):</p>
+      <ol class="norm">
+        <li><div class="num">.1</div><div class="txt">Limites das áreas locais de praticagem</div></li>
+        <li><div class="num">.2</div><div class="txt"><span class="hl-rosa">RIPEAM (COLREG 1972), conforme emendado, e regras nacionais/locais de segurança da navegação e prevenção de poluição</span></div></li>
+        <li><div class="num">.3</div><div class="txt">Sistema de balizamento na área</div></li>
+        <li><div class="num">.4</div><div class="txt">Características das luzes, sinais sonoros em nevoeiro, racons, radiofaróis e outros auxílios eletrônicos</div></li>
+        <li><div class="num">.5</div><div class="txt">Nomes, posições e características dos navios-farol, bóias, balizas e marcas</div></li>
+        <li><div class="num">.6</div><div class="txt">Nomes e características dos canais, baixios, cabos e pontas</div></li>
+        <li><div class="num">.7</div><div class="txt">Limitações de pontes e obstáculos, incluindo franquias verticais</div></li>
+        <li><div class="num">.8</div><div class="txt">Profundidades de água, incluindo efeitos de maré</div></li>
+        <li><div class="num">.9</div><div class="txt"><span class="hl-amarelo">Rumo, velocidade, amplitude e duração das marés; uso das tábuas de maré e sistemas de dados em tempo real de correntes</span></div></li>
+        <li><div class="num">.10</div><div class="txt">Rumos e distâncias adequados na área</div></li>
+        <li><div class="num">.11</div><div class="txt">Fundeadouros na área</div></li>
+        <li><div class="num">.12</div><div class="txt"><span class="hl-rosa">Manobra de navio para praticagem, fundeio, atracação e desatracação, manobra com e sem rebocadores, situações de emergência</span></div></li>
+        <li><div class="num">.13</div><div class="txt">Comunicações e disponibilidade de informações de navegação</div></li>
+        <li><div class="num">.14</div><div class="txt">Sistemas de transmissão de avisos à navegação por rádio</div></li>
+        <li><div class="num">.15</div><div class="txt"><span class="hl-amarelo">Esquemas de separação de tráfego, VTS e sistemas de gerenciamento de tráfego</span></div></li>
+        <li><div class="num">.16</div><div class="txt">Equipamentos de passadiço e auxílios à navegação</div></li>
+        <li><div class="num">.17</div><div class="txt"><span class="hl-rosa">Uso de radar e dispositivos eletrônicos — limitações e capacidades como auxílios à navegação e prevenção de abalroamentos</span></div></li>
+        <li><div class="num">.18</div><div class="txt"><span class="hl-amarelo">Comportamento em manobra dos tipos de navios a serem praticados; limitações dos sistemas de propulsão e governo</span></div></li>
+        <li><div class="num">.19</div><div class="txt"><span class="hl-amarelo">Fatores que afetam o desempenho: vento, corrente, maré, configuração do canal, profundidade, fundo, margens, interação navio-navio, squat</span></div></li>
+        <li><div class="num">.20</div><div class="txt"><span class="hl-rosa">Uso e limitações dos diversos tipos de rebocadores</span></div></li>
+        <li><div class="num">.21</div><div class="txt">Inglês em padrão adequado para comunicações claras</div></li>
+        <li><div class="num">.22</div><div class="txt"><span class="hl-rosa">Frases Padrão de Comunicação Marítima da OMI (SMCP)</span></div></li>
+        <li><div class="num">.23</div><div class="txt">Código da OMI para Investigação de Acidentes e Incidentes Marítimos</div></li>
+        <li><div class="num">.24</div><div class="txt"><span class="hl-rosa">Relação Comandante–Prático, Cartão do Prático, procedimentos operacionais</span></div></li>
+        <li><div class="num">.25</div><div class="txt">Prevenção da poluição</div></li>
+        <li><div class="num">.26</div><div class="txt">Planos de emergência e contingência para a área</div></li>
+        <li><div class="num">.27</div><div class="txt"><span class="hl-amarelo">Procedimentos seguros de embarque e desembarque</span></div></li>
+        <li><div class="num">.28</div><div class="txt">Quaisquer outros conhecimentos relevantes considerados necessários</div></li>
+      </ol>
+
+      <!-- ANNEXO 2 -->
+      <h3 class="sec" id="a960-a2">ANEXO 2 — Procedimentos Operacionais</h3>
+
+      <h4 class="subsec">1. Generalidades</h4>
+      <p><span class="hl-amarelo">A praticagem eficiente depende da eficácia das comunicações e trocas de informações entre o prático, o comandante e o pessoal do passadiço, bem como do entendimento mútuo das funções e deveres de cada um.</span></p>
+
+      <h4 class="subsec">2. Deveres do Comandante, Oficiais e Prático</h4>
+      <p><span class="hl-rosa">A presença do prático a bordo NÃO isenta o comandante nem o oficial de quarto de seus deveres e obrigações quanto à segurança do navio.</span><sup class="fn" id="ref-a960-fn2" onclick="document.getElementById('a960-fn2').scrollIntoView({behavior:'smooth'})">[2]</sup></p>
+      <p><span class="hl-amarelo">Os comandantes e oficiais de quarto têm o dever de apoiar o prático e de garantir que suas ações sejam monitoradas em todos os momentos.</span></p>
+
+      <h4 class="subsec">3. Ponto de Embarque do Prático</h4>
+      <p>Estabelecido e divulgado pela autoridade competente. Deve estar a distância suficiente do início do ato de praticagem para embarque seguro, <span class="hl-amber">e em local que permita tempo e espaço de manobra suficientes para a troca de informações comandante–prático (ver Seção 5).</span></p>
+
+      <h4 class="subsec">4. Solicitação do Prático — Mensagem Inicial de HEC</h4>
+      <p>Comunicação por VHF. A mensagem inicial deve incluir: nome do navio, indicativo, agente; <span class="hl-amarelo">comprimento, boca, calado, franquia vertical (se relevante), velocidade, propulsores;</span> data/hora no ponto de embarque; destino e berço.</p>
+
+      <h4 class="subsec">5. Troca de Informações Comandante–Prático</h4>
+      <p><span class="hl-amarelo">Processo contínuo durante toda a praticagem. Inicia ao começo de cada missão.</span> O Cartão do Prático (formulário padronizado) suplementa, mas <strong>não substitui</strong> a troca verbal.</p>
+      <p><span class="hl-rosa">A troca deve incluir obrigatoriamente:</span></p>
+      <ol class="norm">
+        <li><div class="num">.1</div><div class="txt"><span class="hl-rosa">Cartão do Prático preenchido + dados adicionais: velocidade angular de giro, círculos de evolução, distâncias de parada</span></div></li>
+        <li><div class="num">.2</div><div class="txt">Acordo sobre planos e procedimentos, incluindo planos de contingência</div></li>
+        <li><div class="num">.3</div><div class="txt"><span class="hl-amarelo">Condições especiais: clima, profundidade, correntes de maré e tráfego marítimo</span></div></li>
+        <li><div class="num">.4</div><div class="txt"><span class="hl-amarelo">Características incomuns de manobra, dificuldades com maquinário, equipamentos de navegação ou limitações da tripulação</span></div></li>
+        <li><div class="num">.5</div><div class="txt">Disposições de atracação; uso, características e número de rebocadores; mooring boats</div></li>
+        <li><div class="num">.6</div><div class="txt">Disposições de amarração</div></li>
+        <li><div class="num">.7</div><div class="txt"><span class="hl-amarelo">Idioma a ser utilizado no passadiço e com partes externas</span></div></li>
+      </ol>
+      <p><span class="hl-amber">O plano de passagem é uma indicação de intenção — ambos devem estar preparados para se afastar dele quando as circunstâncias assim o exigirem.</span></p>
+
+      <h4 class="subsec">6. Idioma das Comunicações</h4>
+      <p><span class="hl-rosa">Comunicações a bordo entre o prático e o pessoal do passadiço devem ser em inglês ou em idioma comum a todos os envolvidos.</span> Práticos devem usar o SMCP. Se o prático se comunicar externamente em idioma não compreendido no passadiço, deve explicar o que foi dito ao pessoal do passadiço.</p>
+
+      <h4 class="subsec">7. Comunicação de Incidentes e Acidentes</h4>
+      <p><span class="hl-rosa">O prático deve comunicar à autoridade competente qualquer ocorrência que afete a segurança da navegação ou a prevenção da poluição — acidentes com o navio praticado e irregularidades com luzes, marcas e sinais.</span></p>
+
+      <h4 class="subsec">8. Recusa do Serviço de Praticagem</h4>
+      <p><span class="hl-amarelo">O prático tem o direito de recusar a praticagem quando o navio representar perigo para a segurança da navegação ou para o meio ambiente. A recusa deve ser comunicada imediatamente à autoridade competente, com o motivo.</span></p>
+
+      <h4 class="subsec">9. Aptidão para o Serviço</h4>
+      <p><span class="hl-amarelo">Práticos devem estar adequadamente descansados e mentalmente alertas para prestar atenção integral às funções de praticagem durante toda a passagem.</span></p>
+
+      <details class="pscpp">
+        <summary>📌 Pontos PSCPP — A.960(23) resumo crítico</summary>
+        <div class="bc">
+          <ul>
+            <li>A OMI NÃO intervém na certificação/licenciamento de práticos. <span class="potencial">POTENCIAL</span></li>
+            <li>Intervalo máximo de verificação de proficiência continuada: <strong>5 anos</strong>. <span class="potencial">POTENCIAL</span></li>
+            <li>BRM obrigatório para todo prático — inclui emergências em canal estreito. <span class="cobrado">COBRADO 2008</span></li>
+            <li>Presença do prático NÃO isenta o comandante. <span class="cobrado">COBRADO 2008, 2011</span></li>
+            <li>Comandantes/oficiais devem monitorar as ações do prático em todos os momentos. <span class="cobrado">COBRADO 2011</span></li>
+            <li>Cartão do Prático: suplementa, não substitui, a troca verbal. <span class="cobrado">COBRADO 2008</span></li>
+            <li>O prático TEM direito a recusar — comunica à autoridade com o motivo. <span class="potencial">POTENCIAL</span></li>
+            <li>SMCP obrigatório nas comunicações. <span class="cobrado">COBRADO 2008</span></li>
+            <li>Comunicação de incidentes/acidentes é dever do prático. <span class="cobrado">COBRADO 2006</span></li>
+            <li>Squat (item .19 do syllabus) e rebocadores (item .20) — temas de alta frequência. <span class="cobrado">COBRADO 2006, 2011</span></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ========== A.1045(27) ========== -->
+  <hr class="sep">
+  <div class="res-block" id="a1045">
+    <div class="res-header">
+      <div class="res-id">Resolução A.1045(27) · Adotada 30 novembro 2011 · A 27/Res.1045</div>
+      <h2>Recomendação sobre Arranjos de Transferência do Prático</h2>
+      <div class="res-meta">Revoga: A.889(21) &nbsp;|&nbsp; Base SOLAS: Reg. V/23 &nbsp;|&nbsp; Complementada por: A.1108(29), MSC.1/Circ.1428/Rev.1, MSC.1/Circ.1495/Rev.1</div>
+    </div>
+    <div class="res-body">
+
+      <p>Escadas de prático devem ser certificadas pelo fabricante como conformes a esta seção ou à norma internacional <span class="hl-amber">ISO 799:2004 — Ships and marine technology: Pilot ladders.</span></p>
+
+      <h3 class="sec" id="a1045-s2">2. Escadas de Prático — Posição e Construção</h3>
+
+      <h4 class="subsec">2.1 Posição e Construção — Degraus</h4>
+      <ol class="norm">
+        <li><div class="num">.1</div><div class="txt">Se de madeira dura: <span class="hl-amber">peça única, livres de nós.</span></div></li>
+        <li><div class="num">.2</div><div class="txt">Se de outro material: resistência, rigidez e durabilidade equivalentes, a critério da Administração.</div></li>
+        <li><div class="num">.3</div><div class="txt"><span class="hl-amber">Os 4 degraus mais baixos podem ser de borracha</span> (resistência suficiente) ou outro material aprovado.</div></li>
+        <li><div class="num">.4</div><div class="txt">Superfície <span class="hl-rosa">antiderrapante eficiente.</span></div></li>
+        <li><div class="num">.5</div><div class="txt"><span class="hl-rosa">Dimensões: ≥ 400 mm entre os cabos laterais × 115 mm de largura × 25 mm de profundidade</span> (excluindo dispositivo antiderrapante).</div></li>
+        <li><div class="num">.6</div><div class="txt"><span class="hl-rosa">Espaçamento entre degraus: mínimo 310 mm / máximo 350 mm</span> — igualmente espaçados.</div></li>
+        <li><div class="num">.7</div><div class="txt">Cada degrau deve <span class="hl-amber">permanecer horizontal</span> quando a escada estiver pendurada.</div></li>
+      </ol>
+
+      <p><span class="hl-amarelo">Máximo de 2 (dois) degraus de reposição</span> por método diferente do original. <span class="hl-amber">Marcação permanente no comprimento (ex.: a cada 1 m)</span> para facilitar a instalação na altura requerida.</p>
+
+      <p><span class="hl-rosa">Escadas com mais de 5 degraus: degraus-espaçadores de comprimento mínimo de 1,8 m. O 1.º espaçador = 5.º degrau a partir do fundo. Intervalo máximo entre espaçadores = 9 degraus.</span></p>
+
+      <h4 class="subsec" id="a1045-s2-cabos">2.2 Cabos Laterais</h4>
+      <p><span class="hl-rosa">2 cabos descobertos ≥ 18 mm de diâmetro em cada lado, contínuos, sem emendas, resistência à ruptura ≥ 24 kN por cabo.</span> Material: manila ou equivalente, protegido contra degradação UV (actínica). Fixação dos cabos aos degraus: dispositivo mecânico ou <span class="hl-amber">apertamento (<em>seizing</em>) — método preferido.</span></p>
+
+      <h3 class="sec" id="a1045-s3">3. Escadas de Acomodação Usadas em Conjunto com Escadas de Prático</h3>
+      <ol class="norm">
+        <li><div class="num">3.2</div><div class="txt"><span class="hl-rosa">Ângulo máximo de inclinação: 45°.</span> Largura mínima: <span class="hl-amber">600 mm.</span></div></li>
+        <li><div class="num">3.3</div><div class="txt"><span class="hl-rosa">Plataforma inferior: horizontal, presa ao costado, mínimo 5 m acima do nível do mar.</span></div></li>
+        <li><div class="num">3.6</div><div class="txt"><span class="hl-rosa">Escada de prático: extremidade superior ≥ 2 m acima da plataforma inferior. Distância horizontal escada de prático ↔ plataforma: 0,1 a 0,2 m.</span></div></li>
+        <li><div class="num">3.7</div><div class="txt">Escotilha de acesso (se instalada): <span class="hl-amber">mínimo 750 mm × 750 mm,</span> abre para cima.</div></li>
+      </ol>
+
+      <h3 class="sec" id="a1045-s4">4. Dispositivos Mecânicos de Içamento do Prático</h3>
+      <div class="proibicao">⛔ USO DE DISPOSITIVOS MECÂNICOS DE IÇAMENTO DO PRÁTICO (MECHANICAL PILOT HOISTS) É PROIBIDO PELA REGRA V/23 DO SOLAS</div>
+
+      <h3 class="sec" id="a1045-s5">5. Acesso ao Convés <em>(conforme emendado pela A.1108(29))</em></h3>
+      <p>Passagem segura, conveniente e desobstruída entre o topo da escada de prático ou escada de acomodação e o convés do navio, por plataforma protegida por corrimãos.</p>
+      <ol class="norm">
+        <li>
+          <div class="num">.1</div>
+          <div class="txt"><strong>Abertura nas amuradas/grades:</strong> empunhaduras com distância de <span class="hl-amber">0,7–0,8 m entre si; diâmetro ≥ 32 mm;</span> altura: <span class="hl-rosa">≥ 1,2 m acima do <ins>convés ao qual estão fixadas</ins> <span class="ins">(texto emendado pela A.1108)</span></span>. Batentes/corrimãos não devem ser fixados à escada de amurada.</div>
+        </li>
+        <li>
+          <div class="num">.2</div>
+          <div class="txt"><strong>Escada de amurada:</strong> <span class="ins">dois batentes separados</span> com distância de <span class="hl-amber">0,7–0,8 m entre si;</span> escada presa ao navio para evitar tombamento; <span class="hl-rosa">diâmetro ≥ 32 mm; ≥ 1,2 m acima do topo das amuradas.</span> Batentes/corrimãos não devem ser fixados à escada de amurada.</div>
+        </li>
+      </ol>
+      <p class="aviso">⚠ Diferença pós-emenda: subitem .1 → altura a partir do <strong>convés</strong>; subitem .2 → altura a partir do <strong>topo das amuradas</strong>.</p>
+
+      <h3 class="sec" id="a1045-s6">6. Aproximação Segura da Lancha do Prático</h3>
+      <p><span class="hl-amarelo">Espaço livre no costado: mínimo 6 m</span> (recorte das defesas de borracha, se necessário). Exceção: navios offshore especializados ou similares com <span class="hl-amber">comprimento &lt; 90 m</span>, quando não praticável.</p>
+
+      <h3 class="sec" id="a1045-s7">7. Carretéis de Escada de Prático</h3>
+      <p>Área livre no ponto de acesso: <span class="hl-amber">915 mm × 915 mm × 2.200 mm (altura).</span> O carretel <strong>não</strong> suporta a escada quando em uso — fixação obrigatória em ponto independente. Tipos de acionamento: manual, elétrico, hidráulico ou pneumático. Dispositivo de segurança contra acionamento acidental obrigatório.</p>
+
+      <details class="pscpp">
+        <summary>📌 Pontos PSCPP — A.1045(27) resumo crítico</summary>
+        <div class="bc">
+          <ul>
+            <li>ISO 799:2004 é a norma de referência para as escadas de prático. <span class="potencial">POTENCIAL</span></li>
+            <li>Degraus: ≥ 400 mm entre cabos × 115 mm × 25 mm; espaçamento 310–350 mm; 4 mais baixos podem ser de borracha. <span class="potencial">POTENCIAL</span></li>
+            <li>Cabos laterais: ≥ 18 mm diâmetro; ≥ 24 kN de resistência; método preferido de fixação = apertamento. <span class="potencial">POTENCIAL</span></li>
+            <li>Espaçadores: 1,8 m; 1º = 5º degrau de baixo; intervalo máximo = 9 degraus. <span class="potencial">POTENCIAL</span></li>
+            <li>Escada de acomodação: ≤ 45° inclinação; ≥ 600 mm largura; plataforma ≥ 5 m acima do mar. <span class="potencial">POTENCIAL</span></li>
+            <li>Escada de prático sobre plataforma: ≥ 2 m acima; distância horizontal 0,1–0,2 m. <span class="potencial">POTENCIAL</span></li>
+            <li>Escotilha de acesso: ≥ 750 mm × 750 mm; abre para cima. <span class="potencial">POTENCIAL</span></li>
+            <li>Proibição expressa dos dispositivos mecânicos de içamento (SOLAS V/23). <span class="potencial">POTENCIAL</span></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ========== A.1108(29) ========== -->
+  <hr class="sep">
+  <div class="res-block" id="a1108">
+    <div class="res-header">
+      <div class="res-id">Resolução A.1108(29) · Adotada 2 dezembro 2015 · A 29/Res.1108</div>
+      <h2>Emendas à Recomendação sobre Arranjos de Transferência do Prático (A.1045(27))</h2>
+      <div class="res-meta">Altera: Somente a Seção 5 (Acesso ao Convés) da A.1045(27)</div>
+    </div>
+    <div class="res-body">
+      <p>A A.1108(29) promoveu <strong>três alterações</strong> nos subitens .1 e .2 da Seção 5 da A.1045(27), sem modificar qualquer outro dispositivo:</p>
+
+      <table class="med">
+        <thead>
+          <tr><th>Subitem</th><th>Texto Original (A.1045)</th><th>Texto Emendado (A.1108)</th><th>Natureza da Mudança</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>.1</strong> (abertura)</td>
+            <td><span class="del">1,2 m acima do topo das amuradas</span></td>
+            <td><span class="ins">1,2 m acima do convés ao qual está fixada</span></td>
+            <td class="val" style="font-size:11px;font-weight:normal;">Referência de altura corrigida: convés, não amurada</td>
+          </tr>
+          <tr>
+            <td><strong>.2</strong> (escada de amurada)</td>
+            <td><span class="del">dois batentes de empunhadura</span></td>
+            <td><span class="ins">dois batentes de empunhadura <strong>separados</strong></span></td>
+            <td class="val" style="font-size:11px;font-weight:normal;">Clareza: independência estrutural dos batentes</td>
+          </tr>
+          <tr>
+            <td><strong>.2</strong> (escada de amurada)</td>
+            <td><span class="del">frase sobre fixação no início</span></td>
+            <td><span class="ins">frase reposicionada após especificação dos batentes</span></td>
+            <td class="val" style="font-size:11px;font-weight:normal;">Reorganização — conteúdo inalterado</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="aviso">⚠ Distinção crítica pós-A.1108: no subitem .1 (abertura de amurada), a altura é medida a partir do <strong>convés</strong>. No subitem .2 (escada de amurada), a altura continua sendo medida a partir do <strong>topo das amuradas</strong>. São referências diferentes para situações diferentes.</p>
+
+      <details class="pscpp">
+        <summary>📌 Pontos PSCPP — A.1108(29)</summary>
+        <div class="bc">
+          <ul>
+            <li>A A.1108 altera SOMENTE a Seção 5 da A.1045 — o restante permanece inalterado. <span class="potencial">POTENCIAL</span></li>
+            <li>Referência de altura das empunhaduras: abertura → convés; escada de amurada → topo das amuradas. <span class="potencial">POTENCIAL</span></li>
+            <li>Acréscimo de "separados" (<em>separate</em>) aos batentes do subitem .2. <span class="potencial">POTENCIAL</span></li>
+            <li>Todos os valores numéricos (0,7 m, 0,8 m, 32 mm, 1,2 m) permanecem inalterados. <span class="potencial">POTENCIAL</span></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ========== CIRC.1428 ========== -->
+  <hr class="sep">
+  <div class="res-block" id="circ1428">
+    <div class="res-header">
+      <div class="res-id">MSC.1/Circ.1428/Rev.1 · 5 setembro 2025</div>
+      <h2>Arranjos de Transferência do Prático Requeridos para Práticos e Outros Pessoais — Posters Ilustrativos</h2>
+      <div class="res-meta">Vigência plena esperada com emendas ao SOLAS V/23 (MSC.572(110)): 01/01/2028 &nbsp;|&nbsp; Versão anterior revogada em: 01/04/2030</div>
+    </div>
+    <div class="res-body">
+
+      <p>Este circular aprova versão revisada do poster de arranjos de transferência, desenvolvido em conjunto pela OMI e pela Associação Internacional de Práticos Marítimos (IMPA). Contém três painéis: (1) arranjos requeridos (geral), (2) arranjos para porta de alçapão (<em>trap door</em>) e porta lateral (<em>side door</em>), e (3) práticas não conformes.</p>
+
+      <div class="fig-desc">
+        <div class="fig-label">📊 Painel 1 — Arranjos Requeridos de Transferência do Prático (visão geral)</div>
+        <p>O painel principal divide-se em quatro colunas: (A) embarque quando ponto de acesso ≤ 9 m acima da água; (B) embarque quando ponto de acesso > 9 m acima da água; (C) carretel de escada de prático; (D) deveres do oficial responsável. Especificações técnicas extraídas diretamente das ilustrações:</p>
+      </div>
+
+      <h3 class="sec" id="c1428-9m">Coluna A — Instalação quando o Ponto de Acesso é ≤ 9 m acima da água</h3>
+
+      <h4 class="subsec">Batentes de Empunhadura (Handhold Stanchions)</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt"><span class="hl-amarelo">Batentes devem se estender ≥ 120 cm acima do balaústre/amurada</span></div></li>
+        <li><div class="num">•</div><div class="txt">Diâmetro dos batentes: <span class="hl-amber">mínimo 32 mm / máximo 36 mm</span></div></li>
+        <li><div class="num">•</div><div class="txt">Diâmetro do anel do batente: <span class="hl-amber">não deve ser inferior a 60 mm</span></div></li>
+        <li><div class="num">•</div><div class="txt">Distância entre batentes: <span class="hl-amber">mínimo 70 cm / máximo 80 cm</span></div></li>
+        <li><div class="num">•</div><div class="txt">Escada de prático e cabos-de-mão devem ser presos a pontos resistentes no convés</div></li>
+      </ol>
+
+      <h4 class="subsec">Cabos-de-Mão (Man-Ropes)</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt"><span class="hl-amarelo">Cabos-de-mão devem ser instalados SE REQUERIDOS PELO PRÁTICO</span> (não são obrigatórios por padrão)</div></li>
+        <li><div class="num">•</div><div class="txt">Material: manila ou equivalente, sem nós, emendas ou sobressalências — diâmetro: <span class="hl-amber">mínimo 28 mm / máximo 32 mm</span></div></li>
+      </ol>
+
+      <h4 class="subsec">Cabos Laterais (Side Ropes)</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt"><span class="hl-amber">Diâmetro: mínimo 20 mm / máximo 22 mm</span></div></li>
+        <li><div class="num">•</div><div class="txt">Todos os degraus: devem repousar firmemente contra o costado do navio e ser horizontais</div></li>
+      </ol>
+
+      <h4 class="subsec">Espaçador (Spreader) e Máximo de Degraus</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt"><span class="hl-rosa">Máximo de 8 degraus entre espaçadores</span><sup class="fn" id="ref-c1428-fn1" onclick="document.getElementById('c1428-fn1').scrollIntoView({behavior:'smooth'})">[3]</sup></div></li>
+        <li><div class="num">•</div><div class="txt"><span class="hl-amber">Comprimento mínimo do espaçador: 180 cm</span></div></li>
+        <li><div class="num">•</div><div class="txt">O 5.º degrau a partir do fundo deve ser um espaçador</div></li>
+      </ol>
+
+      <h4 class="subsec">Degraus — Dimensões</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt">Distância mínima entre os cabos laterais (largura livre): <span class="hl-rosa">400 mm (40 cm)</span></div></li>
+        <li><div class="num">•</div><div class="txt">Espaçamento entre degraus: <span class="hl-rosa">31–35 cm, igualmente espaçados</span></div></li>
+        <li><div class="num">•</div><div class="txt">Os degraus devem repousar firmemente contra o costado e ser horizontais</div></li>
+      </ol>
+
+      <h4 class="subsec">Costado Desobstruído</h4>
+      <p><span class="hl-amarelo">6 metros de costado desobstruído</span> para aproximação da lancha do prático. Linha de recuperação deve ser dirigida para a proa.</p>
+
+      <h4 class="subsec">Fixação Intermediária da Escada</h4>
+      <p><span class="hl-amarelo">Escadas de prático devem ser presas em comprimentos intermediários por dispositivo tipo aprovado para a finalidade, que impeça o deslizamento dos cabos laterais e tenha resistência à ruptura de não menos que <strong>48 kN</strong>.</span></p>
+
+      <h3 class="sec" id="c1428-9mplus">Coluna B — Instalação quando o Ponto de Acesso é &gt; 9 m acima da água</h3>
+
+      <h4 class="subsec">Escada de Prático (componente da combinação)</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt"><span class="hl-rosa">Escada de prático deve se estender pelo menos 2 metros acima da plataforma inferior</span></div></li>
+        <li><div class="num">•</div><div class="txt">A escada de prático e os cabos-de-mão (se instalados) devem ser presos ao costado do navio a 1,5 m acima da plataforma usando olhais (<em>sunken eyes</em>), sistema magnético ou pneumático</div></li>
+        <li><div class="num">•</div><div class="txt">A plataforma inferior deve ser instalada conforme solicitado pelo serviço de praticagem, com <span class="hl-amber">altura mínima de 5 m acima da água até a máxima de 9 m acima da água</span></div></li>
+      </ol>
+
+      <h4 class="subsec">Escada de Acomodação</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt">Deve conduzir à esquerda (<em>leads aft</em>)</div></li>
+        <li><div class="num">•</div><div class="txt"><span class="hl-rosa">Inclinação máxima: 45°</span></div></li>
+        <li><div class="num">•</div><div class="txt">Plataforma inferior: horizontal</div></li>
+        <li><div class="num">•</div><div class="txt">Plataforma inferior equipada com batente interno e batente externo (<em>inboard and outboard stanchion</em>)</div></li>
+        <li><div class="num">•</div><div class="txt">Escada de acomodação deve ser presa ao costado do navio usando olhais, sistema magnético ou aprovado mecanicamente</div></li>
+        <li><div class="num">•</div><div class="txt">Distâncias no plano da plataforma de 9 metros de bordo livre: <span class="hl-amber">0,5 m de espaço livre + 2 m de escada de prático + 2 m acima da plataforma</span></div></li>
+      </ol>
+
+      <div class="correlacao">
+        <strong>Correlação com MSC.1/Circ.1495/Rev.1:</strong> O arranjo desta Coluna B (> 9 m) corresponde ao "arranjo combinado" da Reg. V/23.3.3.2, para o qual a interpretação unificada confirma que o requisito de lista de <strong>15°</strong> NÃO se aplica.
+      </div>
+
+      <h3 class="sec" id="c1428-winch">Coluna C — Carretel de Escada de Prático (Pilot Ladder Winch Reel)</h3>
+
+      <h4 class="subsec">Batentes de Empunhadura no Carretel</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt">Batentes devem se estender <span class="hl-amber">120 cm acima do convés</span></div></li>
+        <li><div class="num">•</div><div class="txt">Diâmetro dos batentes: <span class="hl-amber">mínimo 32 mm / máximo 36 mm</span></div></li>
+        <li><div class="num">•</div><div class="txt">Distância entre batentes: <span class="hl-amber">mínimo 70 cm / máximo 80 cm</span></div></li>
+      </ol>
+
+      <h4 class="subsec">Carretel — Especificações</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt">Clearance mínima (abertura desobstruída na área do ponto de acesso): <span class="hl-amber">220 cm de altura</span></div></li>
+        <li><div class="num">•</div><div class="txt">Obstáculos: <span class="hl-rosa">NENHUMA OBSTRUÇÃO</span> — clearance mínima de 91,5 cm medida horizontalmente do costado</div></li>
+        <li><div class="num">•</div><div class="txt">Todos os carretéis devem ter meio de prevenção contra acionamento acidental</div></li>
+        <li><div class="num">•</div><div class="txt">O carretel deve ser travado mecanicamente antes do uso</div></li>
+        <li><div class="num">•</div><div class="txt"><span class="hl-amarelo">A escada de prático deve ser presa a um ponto resistente, independente do carretel, a uma distância de não menos que 91,5 cm medida horizontalmente do costado</span></div></li>
+      </ol>
+
+      <p>Para o arranjo com abertura lateral (lado direito do poster): batentes de empunhadura 120 cm acima do convés; distância mínima entre batentes: 75 cm; distância máxima: 75 cm (valor exato indicado nas figuras).</p>
+
+      <h3 class="sec" id="c1428-trapdoor">Painel 2 — Arranjo com Porta de Alçapão (<em>Trap Door</em>) e Porta Lateral (<em>Side Door</em>)</h3>
+
+      <h4 class="subsec">Escada de Acomodação (Trap Door)</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt">Plataforma inferior horizontal; <span class="hl-rosa">plataforma inferior ≥ 5 m acima do nível do mar</span></div></li>
+        <li><div class="num">•</div><div class="txt">Inclinação máxima da escada: <span class="hl-rosa">45°</span></div></li>
+        <li><div class="num">•</div><div class="txt">Escada de prático: <span class="hl-rosa">≥ 2 m acima da plataforma</span></div></li>
+        <li><div class="num">•</div><div class="txt">A plataforma deve ser presa ao costado do navio quando em uso</div></li>
+        <li><div class="num">•</div><div class="txt">No caso de arranjo combinado com alçapão: cabos-de-mão devem ser instalados através do alçapão, acima da plataforma, até 2 m de altura</div></li>
+        <li><div class="num">•</div><div class="txt">Os degraus devem repousar firmemente contra o costado; a plataforma deve ser presa ao costado por olhais sunken, sistema magnético ou mecânico aprovado</div></li>
+      </ol>
+
+      <h4 class="subsec">Arranjo de Porta Lateral (<em>Side Door Arrangement</em>)</h4>
+      <ol class="norm">
+        <li><div class="num">•</div><div class="txt"><span class="hl-amarelo">Escadas de prático devem ser presas no convés mais baixo dentro da abertura da porta lateral. Instalar a partir do deque (<em>deckhead</em>) ou antepara é proibido.</span></div></li>
+        <li><div class="num">•</div><div class="txt">Distância entre batentes: <span class="hl-amber">mínimo 70 cm / máximo 80 cm</span></div></li>
+        <li><div class="num">•</div><div class="txt">Quando instalada a partir de abertura lateral: cabos-de-mão podem ser passados através do anel de argola (<em>deck head</em>), providenciado que o anel de apoio (<em>ring head</em>) passe pela cabeça dos batentes ou pelo olho no topo dos batentes no ponto de acesso</div></li>
+        <li><div class="num">•</div><div class="txt">Distância do topo do degrau superior ao ponto de entrada: <span class="hl-amber">não mais que 320 mm</span></div></li>
+        <li><div class="num">•</div><div class="txt">6 metros de costado desobstruído</div></li>
+        <li><div class="num">•</div><div class="txt">Clearance mínima: <span class="hl-amber">220 cm</span></div></li>
+        <li><div class="num">•</div><div class="txt">Clearance mínima horizontal: <span class="hl-amber">91,5 cm</span></div></li>
+      </ol>
+
+      <h3 class="sec" id="c1428-noncompliant">Painel 3 — Práticas Não Conformes (<em>Non-Compliant Practices</em>)</h3>
+      <div class="noncompliant">
+        <h4>Práticas Proibidas — SOLAS Capítulo V Regulação 23 / IMPA</h4>
+        <ul>
+          <li>Sem manilhas, nós ou emendas nos cabos laterais</li>
+          <li>Os degraus devem ser igualmente espaçados (espaçamento irregular proibido)</li>
+          <li>Os degraus devem ser horizontais; calços acima e abaixo dos degraus devem ser firmemente presos</li>
+          <li>Espaçadores NÃO devem ser amarrados entre os degraus (devem ser degraus estruturais da escada)</li>
+          <li>Os cabos laterais devem ser igualmente espaçados (distância igual em ambos os lados)</li>
+          <li>Os degraus NÃO devem ser pintados, envernizados, sujos ou escorregadios</li>
+          <li>Sem laços (<em>loops</em>) — representam risco de tropeçamento e podem prender a lancha do prático</li>
+          <li>Linhas de recuperação NÃO devem ser presas abaixo do espaçador mais baixo; se necessárias, devem ser presas no ou acima do espaçador mais baixo e dirigidas para a proa</li>
+        </ul>
+      </div>
+
+      <h3 class="sec" id="c1428-deveres">Deveres do Oficial Responsável</h3>
+      <div class="deveres">
+        <h4>Duties of the Responsible Officer</h4>
+        <ol>
+          <li>Ter conhecimento do uso correto dos Arranjos de Transferência do Prático</li>
+          <li>Estabelecer comunicação direta com o passadiço</li>
+          <li>Comunicar-se com o passadiço durante o processo de embarque/desembarque</li>
+          <li>Supervisionar / verificar a instalação conforme da escada de prático</li>
+          <li>Testar os equipamentos de segurança e deixá-los prontos para uso</li>
+          <li>Providenciar que o prático seja conduzido com segurança para/do passadiço por rota claramente iluminada</li>
+        </ol>
+      </div>
+      <p style="font-family:var(--ui-font);font-size:13px;color:#555;margin-top:10px;">Todas as companhias devem ter sistema de gestão da segurança que inclua procedimentos específicos para a condução segura de transferências de práticos. O ISM Code exige conformidade com SOLAS Cap. V Reg. 23, recomendações da OMI, padrões internacionais e orientações de organizações do setor marítimo.</p>
+
+      <details class="pscpp">
+        <summary>📌 Pontos PSCPP — MSC.1/Circ.1428/Rev.1</summary>
+        <div class="bc">
+          <ul>
+            <li>Ponto-chave da Circ.1428: poster visual de referência para a aplicação prática das regras da A.1045(27). <span class="potencial">POTENCIAL</span></li>
+            <li>Fixação intermediária da escada: dispositivo aprovado, resistência ≥ <strong>48 kN</strong>. <span class="potencial">POTENCIAL</span></li>
+            <li>Diâmetro dos cabos laterais (poster): min. 20 mm / max. 22 mm (alinhado com A.1045 ≥ 18 mm — notar que poster usa faixa mais restrita). <span class="potencial">POTENCIAL</span></li>
+            <li>Diâmetro dos cabos-de-mão: min. 28 mm / max. 32 mm. <span class="potencial">POTENCIAL</span></li>
+            <li>Máximo de <strong>8 degraus entre espaçadores</strong> (poster) vs. 9 degraus (A.1045, §2.1.4) — o poster usa valor mais restritivo. <span class="potencial">POTENCIAL</span></li>
+            <li>Clearance mínima no ponto de acesso: 220 cm de altura; 91,5 cm horizontal. <span class="potencial">POTENCIAL</span></li>
+            <li>Práticas não conformes: laços, degraus irregulares, espaçadores amarrados, linha de recuperação abaixo do 1º espaçador. <span class="potencial">POTENCIAL</span></li>
+            <li>Deveres do Oficial Responsável: 6 deveres numerados — item provável em questão V/F. <span class="potencial">POTENCIAL</span></li>
+            <li>Cabos-de-mão: instalados SOMENTE SE REQUERIDOS PELO PRÁTICO. <span class="potencial">POTENCIAL</span></li>
+            <li>Porta lateral: distância máxima do topo do degrau ao ponto de entrada = 320 mm. <span class="potencial">POTENCIAL</span></li>
+            <li>Emendas SOLAS V/23 (MSC.572(110)): vigência esperada 01/01/2028. <span class="potencial">POTENCIAL</span></li>
+          </ul>
+          <p class="aviso">⚠ Atenção: o poster indica máximo de <strong>8</strong> degraus entre espaçadores, enquanto a A.1045(27) diz que o intervalo máximo entre espaçadores não deve <strong>exceder 9</strong> degraus (9 passos entre, não 9 degraus). Verificar qual a redação que a banca adota em 2027.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ========== CIRC.1495 ========== -->
+  <hr class="sep">
+  <div class="res-block" id="circ1495">
+    <div class="res-header">
+      <div class="res-id">MSC.1/Circ.1495/Rev.1 · 25 novembro 2016</div>
+      <h2>Interpretação Unificada Revisada da Regulação V/23.3.3 do SOLAS sobre Arranjos de Transferência do Prático</h2>
+      <div class="res-meta">Supersede: MSC.1/Circ.1495 &nbsp;|&nbsp; Preparada por: Subcomitê NCSR (3ª sessão)</div>
+    </div>
+    <div class="res-body">
+
+      <p>Este circular esclarece a distinção entre os dois arranjos prescritos pela Regulação V/23.3.3 do SOLAS, que foram interpretados de formas divergentes por Estados-membros.</p>
+
+      <h3 class="sec">Texto da Regulação V/23.3.3 do SOLAS (reproduzido no Circular)</h3>
+      <p><em>Acesso seguro e conveniente, de e para o navio, deve ser providenciado por:</em></p>
+      <ol class="norm">
+        <li><div class="num">V/23.3.3.1</div><div class="txt"><span class="hl-rosa">Uma escada de prático que exija uma subida de não menos que 1,5 m e não mais que 9 m acima da superfície da água</span>, posicionada e presa de forma que: (a) a escada de comprimento único seja capaz de alcançar a água a partir do ponto de acesso e seja feita a devida compensação para todas as condições de carregamento e trim do navio, e para <span class="hl-amarelo">uma banda adversa de 15°;</span> os pontos resistentes de fixação, manilhas e cabos de fixação sejam pelo menos tão resistentes quanto os cabos laterais; <strong>ou</strong></div></li>
+        <li><div class="num">V/23.3.3.2</div><div class="txt"><span class="hl-rosa">Uma escada de acomodação em conjunto com a escada de prático (arranjo combinado), ou outro meio igualmente seguro e conveniente, sempre que a distância da superfície da água ao ponto de acesso ao navio for superior a 9 m.</span></div></li>
+      </ol>
+
+      <h3 class="sec">Interpretação Unificada — 3 Pontos</h3>
+
+      <p><span class="hl-azul"><strong>Ponto 1 — Dois arranjos DISTINTOS:</strong> Os subitens .1 e .2 da Reg. V/23.3.3 tratam de dois arranjos diferentes e distintos: o primeiro quando apenas escada de prático é fornecida; o segundo quando é fornecido o arranjo combinado de escada de acomodação com escada de prático.</span></p>
+
+      <p><span class="hl-azul"><strong>Ponto 2 — Subiclima ≤ 9 m (V/23.3.3.1):</strong> A regulação prescreve uma instrução operacional que limita a subida a não mais de 9 m em uma escada simples, independentemente do trim ou da banda do navio.</span></p>
+
+      <p><span class="hl-azul"><strong>Ponto 3 — Arranjo combinado > 9 m (V/23.3.3.2):</strong> A Regulação V/23.3.3.2 e a Seção 3 da A.1045(27) aplicam-se ao arranjo combinado de escada de acomodação com escada de prático para acesso e saída seguros e convenientes, para o qual o requisito de banda de 15° NÃO se aplica.</span></p>
+
+      <div class="correlacao">
+        <strong>Implicação prática:</strong> A obrigação de compensar 15° de banda adversa (V/23.3.3.1) aplica-se apenas ao arranjo com escada simples (ponto de acesso ≤ 9 m). Quando o ponto de acesso excede 9 m e é usado o arranjo combinado (escada de acomodação + escada de prático), o requisito de 15° de banda NÃO se aplica — a A.1045(27) Seção 3 é o regulamento aplicável.
+      </div>
+
+      <details class="pscpp">
+        <summary>📌 Pontos PSCPP — MSC.1/Circ.1495/Rev.1</summary>
+        <div class="bc">
+          <ul>
+            <li>Distinção fundamental: V/23.3.3.1 (≤ 9 m, escada simples) vs. V/23.3.3.2 (> 9 m, arranjo combinado). <span class="potencial">POTENCIAL</span></li>
+            <li>Requisito de <strong>15° de banda adversa</strong>: aplica-se SOMENTE ao arranjo de escada simples (V/23.3.3.1). <span class="potencial">POTENCIAL</span></li>
+            <li>Para o arranjo combinado (> 9 m): requisito de 15° NÃO se aplica — vale a A.1045(27) Seção 3. <span class="potencial">POTENCIAL</span></li>
+            <li>O limite de 1,5 m mínimo de subida na escada simples também é prescrito — não basta que a escada toque a água, deve haver subida mínima de 1,5 m. <span class="potencial">POTENCIAL</span></li>
+          </ul>
+          <p class="aviso">⚠ Questão de V/F provável: "O requisito de 15° de banda adversa aplica-se ao arranjo combinado de escada de acomodação com escada de prático" — FALSO.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ========== CORRELAÇÕES ========== -->
+  <hr class="sep">
+  <div class="res-block" id="correlacoes">
+    <div class="res-header">
+      <div class="res-id">Análise Integrada PSCPP</div>
+      <h2>Correlações, Complementariedades e Diferenças entre os 5 Instrumentos</h2>
+    </div>
+    <div class="res-body">
+
+      <h3 class="sec">A. O que cada instrumento faz — divisão de competências</h3>
+      <table class="med">
+        <thead>
+          <tr><th>Instrumento</th><th>O que regula</th><th>O que NÃO regula</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>A.960(23)</strong></td><td>Quem é o prático; treinamento e certificação; procedimentos operacionais a bordo (relação comandante-prático, troca de informações, SMCP, deveres, recusa)</td><td>Não trata de equipamentos físicos de embarque (escadas)</td></tr>
+          <tr><td><strong>A.1045(27)</strong></td><td>Requisitos físicos das escadas de prático, escadas de acomodação, acesso ao convés, carretéis, aproximação da lancha</td><td>Não trata de treinamento, certificação ou procedimentos operacionais a bordo</td></tr>
+          <tr><td><strong>A.1108(29)</strong></td><td>Somente Seção 5 (Acesso ao Convés) da A.1045(27) — corrección da referência de altura e clareza dos batentes</td><td>Não toca em qualquer outra seção da A.1045(27) nem na A.960(23)</td></tr>
+          <tr><td><strong>MSC.1/Circ.1428/Rev.1</strong></td><td>Ilustrações de referência (não norma vinculante por si só); complementa A.1045(27) com diagramas, medidas do poster e lista de práticas não conformes</td><td>Não tem força de norma própria — serve de orientação visual alinhada ao SOLAS V/23</td></tr>
+          <tr><td><strong>MSC.1/Circ.1495/Rev.1</strong></td><td>Interpretação unificada do SOLAS V/23.3.3: distinção entre arranjo simples (≤ 9 m) e arranjo combinado (> 9 m); aplicabilidade do critério de 15° de banda</td><td>Não altera nenhuma resolução — apenas interpreta</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec">B. Relações hierárquicas</h3>
+      <table class="med">
+        <thead>
+          <tr><th>Revoga / Modifica</th><th>Instrumento Afetado</th><th>Instrumento que Revoga/Modifica</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Revogação</td><td>A.485(XII)</td><td>A.960(23)</td></tr>
+          <tr><td>Revogação</td><td>A.889(21)</td><td>A.1045(27)</td></tr>
+          <tr><td>Emenda</td><td>A.1045(27) — Seção 5</td><td>A.1108(29)</td></tr>
+          <tr><td>Revogação futura</td><td>MSC.1/Circ.1428 (versão anterior)</td><td>MSC.1/Circ.1428/Rev.1 (vigência 01/04/2030)</td></tr>
+          <tr><td>Substituição</td><td>MSC.1/Circ.1495</td><td>MSC.1/Circ.1495/Rev.1</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec">C. Complementariedades críticas para o PSCPP</h3>
+
+      <div class="correlacao">
+        <strong>A.960(23) item .27 do syllabus ↔ A.1045(27) inteiro:</strong> O item .27 do programa de estudos da A.960(23) exige que o candidato a prático conheça "procedimentos seguros de embarque e desembarque" — que são exatamente o objeto da A.1045(27). A A.1045(27) é, portanto, o conteúdo técnico do item .27 da A.960(23).
+      </div>
+
+      <div class="correlacao">
+        <strong>A.960(23) Seção 5 (Procedimentos Operacionais) ↔ A.1045(27) Seções 3.3 e 6:</strong> A A.960(23) exige que o ponto de embarque do prático permita tempo e espaço de manobra para a troca de informações; a A.1045(27) define os requisitos físicos desse mesmo ponto (distância da escada à plataforma, costado desobstruído de 6 m etc.).
+      </div>
+
+      <div class="correlacao">
+        <strong>A.1045(27) Seção 5 ↔ A.1108(29) ↔ MSC.1/Circ.1428:</strong> A Seção 5 (Acesso ao Convés), emendada pela A.1108, é ilustrada no painel esquerdo do poster da Circ.1428 (coluna de batentes de empunhadura). A referência de "120 cm acima do balaústre" do poster corresponde ao "1,2 m" da resolução — mesmo valor, mesma seção.
+      </div>
+
+      <div class="correlacao">
+        <strong>A.1045(27) Seção 3 ↔ MSC.1/Circ.1495:</strong> A Circ.1495 confirma que a Seção 3 da A.1045(27) é o instrumento aplicável ao arranjo combinado (> 9 m), e que o critério de 15° de banda adversa (exclusivo de V/23.3.3.1) não se aplica a esse arranjo.
+      </div>
+
+      <div class="correlacao">
+        <strong>Poster Circ.1428 vs. A.1045(27) — divergência de número de degraus entre espaçadores:</strong> A.1045(27) § 2.1.4 diz "intervalo entre espaçadores não deve exceder 9 degraus"; o poster da Circ.1428 indica "máximo 8 passos (steps) entre espaçadores". A palavra "steps" no poster pode referir-se aos degraus intermediários, não incluindo o próprio espaçador — o que resulta no mesmo número total (8 intermediários + 1 espaçador = 9 intervalo). Este é um ponto de ambiguidade para atenção no PSCPP 2027.
+      </div>
+
+      <h3 class="sec">D. Distinções que a banca pode explorar</h3>
+      <table class="med">
+        <thead>
+          <tr><th>Distinção</th><th>Valor Correto</th><th>Confusão Comum</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Referência de altura das empunhaduras — abertura de amurada (.1)</td><td class="val" style="font-size:12px;">1,2 m acima do convés (pós-A.1108)</td><td>1,2 m acima do topo das amuradas (texto original da A.1045)</td></tr>
+          <tr><td>Referência de altura dos batentes — escada de amurada (.2)</td><td class="val" style="font-size:12px;">1,2 m acima do topo das amuradas (inalterado)</td><td>Confundir com a referência do subitem .1</td></tr>
+          <tr><td>15° de banda adversa</td><td class="val" style="font-size:12px;">Somente escada simples ≤ 9 m (V/23.3.3.1)</td><td>Aplicar ao arranjo combinado > 9 m</td></tr>
+          <tr><td>Cabos-de-mão</td><td class="val" style="font-size:12px;">Instalados SE REQUERIDOS PELO PRÁTICO</td><td>Considerar obrigatórios por padrão</td></tr>
+          <tr><td>Carretel suportando a escada</td><td class="val" style="font-size:12px;">PROIBIDO — fixação em ponto independente</td><td>Aceitar carretel como suporte da escada em uso</td></tr>
+          <tr><td>Resolução que trata de treinamento do prático</td><td class="val" style="font-size:12px;">A.960(23)</td><td>Confundir com A.1045(27)</td></tr>
+          <tr><td>Resolução que trata da escada de prático</td><td class="val" style="font-size:12px;">A.1045(27) conforme emendada pela A.1108(29)</td><td>Confundir com A.960(23)</td></tr>
+          <tr><td>Quem certifica o prático</td><td class="val" style="font-size:12px;">Autoridade competente de praticagem (não a OMI)</td><td>Atribuir à OMI</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ========== TABELA MESTRA ========== -->
+  <hr class="sep">
+  <div class="res-block" id="tabela-master">
+    <div class="res-header">
+      <div class="res-id">Consolidação para Memorização</div>
+      <h2>Tabela Mestra de Medidas e Parâmetros</h2>
+      <div class="res-meta">Todos os valores numéricos dos 5 instrumentos — prioridade máxima de memorização para o PSCPP</div>
+    </div>
+    <div class="res-body">
+      <table class="med">
+        <thead>
+          <tr><th>Parâmetro</th><th>Valor</th><th>Fonte</th></tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="3" style="background:var(--verde);color:var(--ouro);font-family:var(--ui-font);font-size:12px;font-weight:700;padding:8px 12px;">ESCADA DE PRÁTICO — DEGRAUS (A.1045 §2.1.2)</td></tr>
+          <tr><td>Largura mínima entre cabos laterais</td><td class="val">≥ 400 mm</td><td class="src">A.1045 §2.1.2.5</td></tr>
+          <tr><td>Largura do degrau</td><td class="val">115 mm</td><td class="src">A.1045 §2.1.2.5</td></tr>
+          <tr><td>Profundidade do degrau</td><td class="val">25 mm</td><td class="src">A.1045 §2.1.2.5</td></tr>
+          <tr><td>Espaçamento mínimo entre degraus</td><td class="val">310 mm (31 cm)</td><td class="src">A.1045 §2.1.2.6 / Circ.1428</td></tr>
+          <tr><td>Espaçamento máximo entre degraus</td><td class="val">350 mm (35 cm)</td><td class="src">A.1045 §2.1.2.6 / Circ.1428</td></tr>
+          <tr><td>Degraus inferiores de borracha (quantos)</td><td class="val">4 (quatro)</td><td class="src">A.1045 §2.1.2.3</td></tr>
+          <tr><td>Máx. degraus de reposição (método diferente)</td><td class="val">2 (dois)</td><td class="src">A.1045 §2.1.3</td></tr>
+          <tr><td colspan="3" style="background:var(--verde);color:var(--ouro);font-family:var(--ui-font);font-size:12px;font-weight:700;padding:8px 12px;">ESCADA DE PRÁTICO — ESPAÇADORES (A.1045 §2.1.4)</td></tr>
+          <tr><td>Comprimento mínimo do espaçador</td><td class="val">1,8 m (180 cm)</td><td class="src">A.1045 §2.1.4 / Circ.1428</td></tr>
+          <tr><td>Posição do 1.º espaçador (a partir do fundo)</td><td class="val">5.º degrau</td><td class="src">A.1045 §2.1.4</td></tr>
+          <tr><td>Intervalo máximo entre espaçadores</td><td class="val">9 degraus (A.1045) / 8 passos (Circ.1428)</td><td class="src">A.1045 §2.1.4 / Circ.1428</td></tr>
+          <tr><td colspan="3" style="background:var(--verde);color:var(--ouro);font-family:var(--ui-font);font-size:12px;font-weight:700;padding:8px 12px;">ESCADA DE PRÁTICO — CABOS (A.1045 §2.2 / Circ.1428)</td></tr>
+          <tr><td>Diâmetro mínimo dos cabos laterais (A.1045)</td><td class="val">≥ 18 mm</td><td class="src">A.1045 §2.2.1</td></tr>
+          <tr><td>Diâmetro dos cabos laterais (Circ.1428)</td><td class="val">20–22 mm</td><td class="src">Circ.1428</td></tr>
+          <tr><td>Resistência à ruptura por cabo lateral</td><td class="val">≥ 24 kN</td><td class="src">A.1045 §2.2.1</td></tr>
+          <tr><td>Número de cabos laterais por lado</td><td class="val">2 (dois)</td><td class="src">A.1045 §2.2.1</td></tr>
+          <tr><td>Diâmetro dos cabos-de-mão (Circ.1428)</td><td class="val">28–32 mm</td><td class="src">Circ.1428</td></tr>
+          <tr><td>Fixação intermediária da escada (resistência)</td><td class="val">≥ 48 kN</td><td class="src">Circ.1428</td></tr>
+          <tr><td colspan="3" style="background:var(--verde);color:var(--ouro);font-family:var(--ui-font);font-size:12px;font-weight:700;padding:8px 12px;">ESCADA DE ACOMODAÇÃO (A.1045 §3 / Circ.1428)</td></tr>
+          <tr><td>Ângulo máximo de inclinação</td><td class="val">45°</td><td class="src">A.1045 §3.2</td></tr>
+          <tr><td>Largura mínima</td><td class="val">≥ 600 mm</td><td class="src">A.1045 §3.2</td></tr>
+          <tr><td>Plataforma inferior: altura mínima acima do mar</td><td class="val">≥ 5 m</td><td class="src">A.1045 §3.3</td></tr>
+          <tr><td>Plataforma inferior: altura máxima acima do mar</td><td class="val">≤ 9 m</td><td class="src">Circ.1428 / SOLAS V/23.3.3</td></tr>
+          <tr><td>Escada de prático acima da plataforma inferior</td><td class="val">≥ 2 m</td><td class="src">A.1045 §3.6</td></tr>
+          <tr><td>Dist. horizontal escada de prático ↔ plataforma</td><td class="val">0,1–0,2 m</td><td class="src">A.1045 §3.6</td></tr>
+          <tr><td>Escotilha de acesso (abertura mínima)</td><td class="val">750 mm × 750 mm</td><td class="src">A.1045 §3.7</td></tr>
+          <tr><td>Altura mínima de subida na escada simples</td><td class="val">≥ 1,5 m</td><td class="src">SOLAS V/23.3.3.1</td></tr>
+          <tr><td>Altura máxima de subida na escada simples</td><td class="val">≤ 9 m</td><td class="src">SOLAS V/23.3.3.1</td></tr>
+          <tr><td>Banda adversa compensada (escada simples)</td><td class="val">15°</td><td class="src">SOLAS V/23.3.3.1 / Circ.1495</td></tr>
+          <tr><td colspan="3" style="background:var(--verde);color:var(--ouro);font-family:var(--ui-font);font-size:12px;font-weight:700;padding:8px 12px;">ACESSO AO CONVÉS (A.1045 §5 conforme emendada pela A.1108)</td></tr>
+          <tr><td>Distância entre empunhaduras/batentes (mín.)</td><td class="val">0,7 m (70 cm)</td><td class="src">A.1045/A.1108 §5 / Circ.1428</td></tr>
+          <tr><td>Distância entre empunhaduras/batentes (máx.)</td><td class="val">0,8 m (80 cm)</td><td class="src">A.1045/A.1108 §5 / Circ.1428</td></tr>
+          <tr><td>Diâmetro mínimo das empunhaduras/batentes</td><td class="val">32 mm</td><td class="src">A.1045/A.1108 §5 / Circ.1428</td></tr>
+          <tr><td>Diâmetro máximo dos batentes (Circ.1428)</td><td class="val">36 mm</td><td class="src">Circ.1428</td></tr>
+          <tr><td>Altura — subitem .1 (abertura de amurada): referência</td><td class="val" style="font-size:12px;background:#c8e6c9;">1,2 m acima do CONVÉS (pós-A.1108)</td><td class="src">A.1108 §5.1</td></tr>
+          <tr><td>Altura — subitem .2 (escada de amurada): referência</td><td class="val" style="font-size:12px;">1,2 m acima do TOPO DAS AMURADAS</td><td class="src">A.1045/A.1108 §5.2</td></tr>
+          <tr><td colspan="3" style="background:var(--verde);color:var(--ouro);font-family:var(--ui-font);font-size:12px;font-weight:700;padding:8px 12px;">LANCHA E CARRETEL (A.1045 §6–7 / Circ.1428)</td></tr>
+          <tr><td>Costado desobstruído para lancha do prático</td><td class="val">≥ 6 m</td><td class="src">A.1045 §6</td></tr>
+          <tr><td>Isenção da regra dos 6 m (comprimento do navio)</td><td class="val">&lt; 90 m</td><td class="src">A.1045 §6</td></tr>
+          <tr><td>Área livre no ponto de acesso (L × P × H)</td><td class="val">915 mm × 915 mm × 2.200 mm</td><td class="src">A.1045 §7.1.3</td></tr>
+          <tr><td>Ponto de fixação da escada ao costado (acima)</td><td class="val">1.500 mm</td><td class="src">A.1045 §7.2.2.4</td></tr>
+          <tr><td>Clearance mínima no carretel (Circ.1428)</td><td class="val">220 cm (altura) / 91,5 cm (horizontal)</td><td class="src">Circ.1428</td></tr>
+          <tr><td>Porta lateral — dist. degrau superior ao ponto de entrada</td><td class="val">≤ 320 mm</td><td class="src">Circ.1428</td></tr>
+          <tr><td colspan="3" style="background:var(--verde);color:var(--ouro);font-family:var(--ui-font);font-size:12px;font-weight:700;padding:8px 12px;">A.960(23) — PROFICIÊNCIA E PROCEDIMENTOS</td></tr>
+          <tr><td>Intervalo máximo de verificação de proficiência</td><td class="val">5 anos</td><td class="src">A.960 §6.1</td></tr>
+          <tr><td>Itens do programa de estudos (syllabus)</td><td class="val">28 itens</td><td class="src">A.960 §7.1</td></tr>
+          <tr><td>Deveres do Oficial Responsável (Circ.1428)</td><td class="val">6 deveres</td><td class="src">Circ.1428</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NOTAS DE RODAPÉ -->
+  <div class="footnotes" id="notas">
+    <h4>Notas de Rodapé do Tradutor</h4>
+    <div class="fn-item" id="a960-fn1">
+      <div class="fn-n">[1]</div>
+      <div><strong>BRM — Bridge Resource Management (Gerenciamento dos Recursos do Passadiço):</strong> Conceito central do BTM (Bridge Team Management, Swift & Bailey, 2ª ed. — fonte do edital PSCPP 2027). O BRM foi tornado obrigatório pelo Código STCW de Manila 2010. A A.960(23) o torna obrigatório especificamente para a formação de práticos. Questão 22 da prova 2011 e questão 10 da prova 2008 testaram diretamente conceitos de BRM na relação comandante-prático.</div>
+    </div>
+    <div class="fn-item" id="a960-fn2">
+      <div class="fn-n">[2]</div>
+      <div><strong>Responsabilidade do comandante com prático a bordo:</strong> Princípio confirmado tanto pela A.960(23) Seção 2.1 (Anexo 2) quanto pelo BTM (Swift & Bailey). A questão 22 da prova 2011 (BTM) testou diretamente esse princípio através da afirmativa incorreta "Após o Prático assumir o controle da manobra, passa a ser dele a responsabilidade pela segurança do navio." — que é FALSA.</div>
+    </div>
+    <div class="fn-item" id="c1428-fn1">
+      <div class="fn-n">[3]</div>
+      <div><strong>Divergência entre A.1045(27) e o poster da Circ.1428 sobre número de degraus entre espaçadores:</strong> A.1045(27) §2.1.4 indica "intervalo entre qualquer espaçador e o seguinte não deve exceder nove degraus"; o poster da Circ.1428 indica "máximo 8 passos entre espaçadores". Interpretação consensual: o poster conta os degraus intermediários (8), não incluindo os próprios espaçadores, o que resulta no mesmo intervalo de 9 contagens da A.1045 (8 intermediários + o espaçador superior = 9 posições). Para o PSCPP 2027, recomenda-se memorizar "intervalo não excede 9 degraus" (A.1045) e saber que o poster diz "máximo 8 passos".</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>Capital Sereno</strong> &nbsp;·&nbsp; PSCPP 2027 · Arte Naval (Bloco II)<br>
+  Tradução e consolidação técnica das Resoluções IMO A.960(23), A.1045(27), A.1108(29), MSC.1/Circ.1428/Rev.1 e MSC.1/Circ.1495/Rev.1<br>
+  WhatsApp: (21) 95943-5540 &nbsp;·&nbsp; capitalsereno.com &nbsp;·&nbsp; @Capital.Sereno
+</footer>
+
+</body>
+</html>
