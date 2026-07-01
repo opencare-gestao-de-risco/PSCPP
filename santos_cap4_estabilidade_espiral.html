@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Estabilidade Dinâmica e Curva Espiral — Santos Cap. 4 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:5px 11px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-hist{background:#fbe6c9;color:#7a4d12}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.hist{border-left:6px solid var(--mute);background:#faf6ef}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  figure.real{margin:18px 0;background:#fff;border:1px solid var(--linha);border-radius:12px;padding:14px;box-shadow:var(--sombra)}
+  figure.real img{width:100%;display:block;border-radius:6px}
+  figure.real figcaption{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:var(--mute);margin-top:10px;line-height:1.5}
+  figure.real figcaption b{color:var(--verde)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  .supa{background:linear-gradient(160deg,var(--verde) 0%,#0a322c 100%);border-radius:12px;padding:20px;margin:26px 0;text-align:center;color:var(--creme);font-family:'Trebuchet MS',sans-serif}
+  .supa button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:15px;background:var(--ouro);color:var(--verde);border:none;border-radius:24px;padding:12px 26px;cursor:pointer;box-shadow:var(--sombra)}
+  .supa button:disabled{opacity:.55;cursor:default}
+  .supa .st{font-size:12.5px;color:#a9c8c1;margin-top:10px}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco F — Estabilidade Direcional</p>
+    <h1>Estabilidade Dinâmica do Navio &amp; a <em>Curva Espiral</em></h1>
+    <p class="sub">O capítulo teórico central da manobrabilidade em Santos: os quatro tipos de estabilidade de movimento (Arentzen &amp; Mandel), a equação característica Aσ²+Bσ+C=0, o significado físico das derivadas hidrodinâmicas, e as manobras que revelam a estabilidade — <strong>Dieudonné, Bech e pull-out</strong> — com o loop de histerese e os padrões IMO.</p>
+    <div class="src"><b>Fonte:</b> Santos, <em>Manobrabilidade do Navio</em>, Capítulo 4 — "A estabilidade dinâmica do navio e a curva espiral" (seções 4.1 a 4.14). Cruza com PNA Vol. III Cap. IX §4-5. Figura 68 reproduzida do original (Strom-Tejsen).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#conceito">4.1 Conceito</a>
+    <a href="#tipos">4.2 Os 4 tipos</a>
+    <a href="#hierarquia">4.3 Hierarquia</a>
+    <a href="#linear">4.4–4.6 Equações</a>
+    <a href="#derivadas">4.7 Derivadas</a>
+    <a href="#criterio">Critério C</a>
+    <a href="#espiral">4.9 Dieudonné ▶</a>
+    <a href="#histerese">Histerese</a>
+    <a href="#abkowitz">4.10 Abkowitz</a>
+    <a href="#bech">4.11 Bech</a>
+    <a href="#pullout">4.12 Pull-out ▶</a>
+    <a href="#imo">4.13–4.14 IMO</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Par-Santos direto do card <a href="pna_ix_sec4_estabilidade_rumo_nomoto.html">Estabilidade de Rumo &amp; K-T de Nomoto (PNA §4)</a> — onde PNA usa notação SNAME, Santos deriva a física. Complementa também o <a href="santos_bloco_d_padroes_imo.html">Bloco D — Padrões IMO</a> (a espiral aparece lá como ensaio alternativo para instabilidade).
+</div>
+
+<!-- ===== 4.1 CONCEITO ===== -->
+<section class="bloco" id="conceito">
+  <h2 class="sec"><span class="n">4.1</span> O conceito de estabilidade de movimento</h2>
+  <p class="lede">A intuição das penas na flecha: a asa-casco do navio precisa de arrasto a ré para funcionar como a "empenagem" de um avião e manter a trajetória em movimento avante.</p>
+
+  <p>Santos abre com uma imagem física poderosa: as penas na cauda da flecha e a empenagem do avião existem para <span class="hl">estabilizar a trajetória</span>. A popa do navio (a "empenagem") gera o arrasto que resiste à guinada. Formalmente, o <strong>estado</strong> de um sistema dinâmico é o menor conjunto de variáveis (as <em>variáveis de estado</em>) que, conhecidas em t₀, determinam todo o comportamento futuro.</p>
+
+  <div class="box key">
+    <h4>Definição de estabilidade <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Estabilidade é a <span class="hl">capacidade de retornar a uma condição de equilíbrio assim que cessa a ação momentânea de uma força externa</span>. Um navio em movimento é estável num estado de equilíbrio se, perturbado momentaneamente por força/momento externo, tende a retornar — após cessar a perturbação — ao estado que existia antes. Analiticamente, isso é a <strong>estabilidade no sentido de Lyapunov</strong> (1857–1918): investiga-se pelos atributos de estado do sistema, sem precisar resolver as equações diferenciais não lineares.</p>
+  </div>
+</section>
+
+<!-- ===== 4.2 OS 4 TIPOS ===== -->
+<section class="bloco" id="tipos">
+  <h2 class="sec"><span class="n">4.2</span> Os quatro tipos de estabilidade de movimento</h2>
+  <p class="lede">Classificação de <strong>Arentzen &amp; Mandel (1961)</strong>, no clássico "O projeto de submarinos sob o ponto de vista da arquitetura naval". O critério é o que o navio conserva do estado de equilíbrio inicial.</p>
+
+  <p>A análise compara os <strong>atributos das variáveis de estado</strong> (velocidades u, v e razão de guinada r) no início e no fim da trajetória, depois de cessada a perturbação. O quadro abaixo é o mapa mental de toda a primeira metade do capítulo.</p>
+
+  <table>
+    <tr><th class="center">#</th><th>Tipo</th><th>Controle</th><th>O que conserva após a perturbação</th><th>Trajetória final</th></tr>
+    <tr><td class="center">1</td><td><strong>Estabilidade em linha reta</strong> (dinâmica / direcional com controles fixos)</td><td>Leme fixo em zero</td><td>v=0 e r=0 (retoma o movimento retilíneo)</td><td>Nova reta, direção <span class="hl">diferente</span> da original</td></tr>
+    <tr><td class="center">2</td><td><strong>Estabilidade direcional</strong></td><td>Controles móveis (timoneiro/piloto)</td><td>O sentido (rumo) da trajetória inicial</td><td>Reta paralela / mesmo rumo</td></tr>
+    <tr><td class="center">3</td><td><strong>Direcional com índices complexos</strong></td><td>Timoneiro / piloto automático</td><td>O sentido da trajetória inicial (com oscilação)</td><td>Mesmo rumo</td></tr>
+    <tr><td class="center">4</td><td><strong>Estabilidade posicional</strong> (de trajetória)</td><td>Posicionamento dinâmico</td><td>A própria trajetória (posição no referencial inercial)</td><td><span class="hl">Igual</span> à trajetória original</td></tr>
+  </table>
+
+  <div class="ichart">
+    <h4>Os quatro tipos — estável × instável</h4>
+    <p class="hint">Escolha o tipo. Veja o que o navio conserva e como fica a trajetória após a perturbação (losango azul).</p>
+    <div class="ictrl" style="margin-bottom:8px">
+      <button class="tipoBtn active" data-t="0" onclick="setTipo(0)">1 · Linha reta</button>
+      <button class="tipoBtn" data-t="1" onclick="setTipo(1)">2 · Direcional</button>
+      <button class="tipoBtn" data-t="3" onclick="setTipo(3)">4 · Posicional</button>
+    </div>
+    <svg id="svgTipos" viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tipos de estabilidade"></svg>
+    <div class="iread" id="tiposRead" style="margin-top:10px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>A distinção que a banca cobra <span class="tag t-banca">BANCA</span></h4>
+    <p>A <strong>estabilidade em linha reta</strong> (tipo 1, controles fixos) conserva apenas <span class="hl">v=0 e r=0</span> — o navio vira uma nova reta, mas <strong>não</strong> na direção original. Já a <strong>direcional</strong> e a <strong>posicional</strong> exigem controle ativo e conservam, respectivamente, o rumo e a trajetória. A hierarquia é ascendente: cada tipo é mais exigente que o anterior.</p>
+  </div>
+</section>
+
+<!-- ===== 4.3 HIERARQUIA ===== -->
+<section class="bloco" id="hierarquia">
+  <h2 class="sec"><span class="n">4.3</span> A hierarquia da estabilidade</h2>
+  <p class="lede">Os quatro casos têm hierarquia ascendente. Alcançar a estabilidade em linha reta é a meta usual do projetista para navios de governo manual; os demais exigem controle automático.</p>
+
+  <p>Fisicamente, um sistema estável a pequenas perturbações tem <strong>fontes naturais de amortecimento</strong> — no navio, o arrasto produzido na popa. A força hidrodinâmica do casco em <em>surge</em> (X<sub>H</sub>), <em>sway</em> (Y<sub>H</sub>) e o momento em <em>yaw</em> (N<sub>H</sub>) dependem das velocidades e acelerações. Um ponto central: <span class="hl">a instabilidade em linha reta não é necessariamente uma falha de projeto</span> — muitos navios mercantes de grande porte a adotam de propósito, porque melhora a capacidade de giro. O momento de <strong>Munk</strong> é um dos momentos hidrodinâmicos desestabilizadores gerados no casco; o arrasto da forma da popa (com o leme neutro) é o que estabiliza.</p>
+</section>
+
+<!-- ===== 4.4-4.6 EQUAÇÕES ===== -->
+<section class="bloco" id="linear">
+  <h2 class="sec"><span class="n">4.4–4.6</span> A equação linear e a equação característica</h2>
+  <p class="lede">Da série de Taylor às raízes que decidem tudo. A base matemática já vista no Cap. 3, aplicada agora à estabilidade.</p>
+
+  <h3>Linearização por série de Taylor</h3>
+  <p>As forças e o momento sobre o casco (X<sub>H</sub>, Y<sub>H</sub>, N<sub>H</sub>) são expandidos em série de Taylor em torno da condição de equilíbrio, <strong>mantendo apenas os termos lineares</strong>. Por simetria do plano xz (a maioria dos navios é simétrica e navega com ângulo de ataque zero), muitas derivadas se anulam: ∂X/∂v = ∂X/∂r = ∂Y/∂u = ∂N/∂u = 0. A condição inicial de equilíbrio para a análise é o movimento retilíneo uniforme: v₀ = r₀ = 0.</p>
+
+  <div class="box formula">
+    <h4>A equação característica <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">A·σ² + B·σ + C = 0<span class="lbl">σ = índices de estabilidade (autovalores); solução por Bhaskara</span></div>
+    <p class="vars">Substituindo a solução da forma x = x₀·e<sup>σt</sup> nas equações lineares acopladas de <em>sway</em> e <em>yaw</em>, chega-se à equação característica. Os <strong>índices de estabilidade σ₁, σ₂</strong> são suas raízes. Se ambos forem <span class="hl">negativos</span>, v e r tendem a zero com o tempo → o navio assume novo rumo em linha reta (estável em linha reta).</p>
+  </div>
+
+  <div class="box key">
+    <h4>A condição de estabilidade <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Para que <strong>ambos os índices sejam negativos</strong> é necessário e suficiente que <span class="hl">C/A &gt; 0 e B/A &gt; 0</span>. Como se verá, A e B são sempre positivos para navios — logo tudo se reduz ao <strong>sinal de C</strong>. Há ainda uma condição em <em>surge</em> (movimento em x, tratado isoladamente na 4.6.1) que não pode ser esquecida.</p>
+  </div>
+
+  <h3>A equação linear de movimento (3 GL)</h3>
+  <p>A equação de movimento em três graus de liberdade (surge, sway, yaw), como no Cap. 2, é linearizada aplicando as condições de equilíbrio (u=u₀, v₀=r₀=0) e descartando os termos não lineares (produtos como v·r). O resultado, em notação SNAME e forma adimensional, alimenta a equação característica acima.</p>
+</section>
+
+<!-- ===== 4.7 DERIVADAS ===== -->
+<section class="bloco" id="derivadas">
+  <h2 class="sec"><span class="n">4.7</span> O significado físico das derivadas hidrodinâmicas</h2>
+  <p class="lede">Quatro derivadas de velocidade decidem a estabilidade (Y<sub>v</sub>, N<sub>v</sub>, Y<sub>r</sub>, N<sub>r</sub>); duas de aceleração entram no coeficiente A (Y<sub>v̇</sub>, N<sub>ṙ</sub>). Entender o sinal de cada uma é entender o critério.</p>
+
+  <h3>4.7.1 — Coeficiente A: as derivadas de aceleração Y<sub>v̇</sub> e N<sub>ṙ</sub></h3>
+  <p>São os coeficientes de <strong>massa adicional em sway</strong> (Y<sub>v̇</sub>) e <strong>momento de inércia adicional em yaw</strong> (N<sub>ṙ</sub>). Não dependem da viscosidade — são termos potenciais de reação à aceleração (o conceito de massa adicional, verificado por Du Buat em 1776 e formalizado por Green/Stokes). A reação inercial da água acelerada opõe-se ao movimento: proa e popa somam-se dando um <span class="hl">grande valor negativo</span>. Aproximações práticas: Y<sub>v̇</sub> ≈ deslocamento Δ; N<sub>ṙ</sub> ≈ momento de inércia I<sub>z</sub>. <strong>Ambos sempre negativos</strong> — por isso A é sempre positivo.</p>
+
+  <h3>4.7.2 — As derivadas de velocidade Y<sub>v</sub>, N<sub>v</sub>, Y<sub>r</sub>, N<sub>r</sub></h3>
+  <p>O casco é uma asa movendo-se com ângulo de ataque β. A tabela resume o comportamento de sinal de cada uma — este é o conteúdo mais cobrado da seção:</p>
+
+  <table>
+    <tr><th class="center">Derivada</th><th>Efeito físico</th><th>Proa × popa</th><th class="center">Sinal</th></tr>
+    <tr><td class="sym">Y<sub>v</sub></td><td>Força lateral por velocidade lateral</td><td>Efeitos se <strong>somam</strong></td><td class="center">Negativo</td></tr>
+    <tr><td class="sym">N<sub>v</sub></td><td>Momento de guinada por velocidade lateral</td><td>Efeitos <strong>competem</strong>: proa domina → negativo; popa domina → positivo</td><td class="center">Varia ★</td></tr>
+    <tr><td class="sym">Y<sub>r</sub></td><td>Força lateral por razão de guinada</td><td>Competem (Y<sub>r</sub> não é o parâmetro mais importante em (Y<sub>r</sub>−Δ'))</td><td class="center">Varia</td></tr>
+    <tr><td class="sym">N<sub>r</sub></td><td>Momento de guinada por razão de guinada (amortecimento)</td><td>Efeitos se <strong>somam</strong></td><td class="center">Negativo</td></tr>
+  </table>
+  <p class="vars">★ <strong>N<sub>v</sub> é a chave da estabilidade.</strong> Se a popa domina (N<sub>v</sub> positivo), o navio é muito estável em linha reta — mas isso pode comprometer a manobrabilidade. Skegs, leme-skeg e trim pela popa aumentam N<sub>v</sub> na direção estabilizadora; um bulbo na proa age como "skeg de proa" e <span class="hl">diminui</span> a estabilidade direcional.</p>
+
+  <div class="box key">
+    <h4>O compromisso estabilidade × manobrabilidade <span class="tag t-banca">BANCA</span></h4>
+    <p>Poderia-se projetar N<sub>v</sub> positivo para um navio "muito estável" — mas o navio é <strong>governado pelo leme</strong>, que também gera forças a partir de perturbações. Um navio <span class="hl">muito estável compromete a manobrabilidade</span>; um instável exige uso constante do leme. O ideal é <strong>estabilidade moderada</strong>; se não for possível, que tenha <strong>pouca</strong> instabilidade. Skeg na popa aumenta Y<sub>r</sub> e a estabilidade; por isso a maioria dos navios modernos tem skeg fixo (parcial ou total) integrando o leme.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Aproximações práticas de projeto <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">
+      <b>Y<sub>v̇</sub></b> ≈ −Δ (deslocamento) · <b>N<sub>ṙ</sub></b> ≈ −I<sub>z</sub> (momento de inércia) · <b>Y<sub>v̇</sub></b> e <b>N<sub>ṙ</sub></b> <strong>sempre negativos</strong> (opõem-se ao movimento).<br>
+      As derivadas cruzadas de aceleração <b>Y<sub>ṙ</sub></b> e <b>N<sub>v̇</sub></b> têm valores muito pequenos → na prática <b>Y<sub>ṙ</sub> ≈ 0</b> e <b>N<sub>v̇</sub> ≈ 0</b>.
+    </p>
+  </div>
+</section>
+
+<!-- ===== CRITERIO C ===== -->
+<section class="bloco" id="criterio">
+  <h2 class="sec"><span class="n">4.7.4</span> O critério de estabilidade e a manobrabilidade</h2>
+  <p class="lede">Quatro derivadas (Y<sub>v</sub>, N<sub>v</sub>, Y<sub>r</sub>, N<sub>r</sub>) entram no critério. O discriminante C decide o sinal.</p>
+
+  <div class="box formula">
+    <h4>O discriminante C <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">C = Y<sub>v</sub>·N<sub>r</sub> − N<sub>v</sub>·(Y<sub>r</sub> − Δ') &gt; 0<span class="lbl">critério de estabilidade dinâmica de rumo (controles fixos)</span></div>
+    <p class="vars">Como A &gt; 0 e B &gt; 0 sempre (massa e inércia adicionais grandes e negativas), a estabilidade reduz-se a <strong>C &gt; 0</strong>. C diz <em>se</em> o navio é estável, mas <strong>não quanto</strong> — a medida quantitativa vem dos índices σ e da constante de tempo T de Nomoto. É o mesmo C do card do PNA §4 (mesma física, notação equivalente).</p>
+  </div>
+
+  <div class="box hist">
+    <h4>Efeito da geometria e das condições operacionais (4.8)</h4>
+    <p>É difícil generalizar — o que vale para uma forma de casco pode não valer para outra. Tendências firmes: <strong>trim pela popa</strong> melhora a estabilidade direcional e aumenta o diâmetro de giro; <strong>trim pela proa</strong> piora a estabilidade e diminui o diâmetro de giro. Aumentar L/T e a área de skeg na popa caminha para mais estabilidade; um leme-skeg grande pode melhorar a estabilidade <em>e</em> dar giro menor ao mesmo tempo.</p>
+  </div>
+</section>
+
+<!-- ===== 4.9 DIEUDONNE ===== -->
+<section class="bloco" id="espiral">
+  <h2 class="sec"><span class="n">4.9</span> A curva espiral direta (Dieudonné)</h2>
+  <p class="lede">O teste definitivo da estabilidade em linha reta. Plota a razão de guinada (ṙ) em regime × ângulo de leme (δ). Origem histórica: Maurice Roy (aeronáutica, 1931) → Jean Dieudonné (1900–1972).</p>
+
+  <p>A ideia nasceu na França: <strong>Maurice Roy</strong> avaliou em 1931 a estabilidade de aviões sob rajadas de vento; os arquitetos navais franceses adaptaram o método para navios. Em 1938 construiu-se um tanque experimental com braço rotatório; destruído em 1939 e reconstruído em 1945, foi lá que <strong>Jean Dieudonné</strong> realizou a manobra que leva seu nome — a <em>espiral direta</em>.</p>
+
+  <h3>4.9.1 — Procedimento (resumo)</h3>
+  <p>(a) Estabilizar em rumo reto e velocidade pré-selecionada por ~1 min; (b) após atingir regime, o maquinário também é mantido em regime até o fim; (c) carregar o leme a ~15° (ex.: BE) e observar a razão de guinada até estabilizar por ~1 min, gravando ṙ e δ; (d) aliviar o leme para 10° e esperar novo valor constante; (e) 5°; (f) 1°; (g) leme a meio; (h) inverter para o outro bordo (BB 1°, 5°, 10°, 15°...), sempre esperando estabilizar. O resultado é a relação <strong>ṙ × δ</strong>.</p>
+
+  <div class="ichart">
+    <h4>Curva espiral — navio estável × instável</h4>
+    <p class="hint">Estável: curva única em S (uma razão de guinada por ângulo de leme). Instável: loop de histerese (dois ramos), com região de giro contra o leme.</p>
+    <div class="ictrl" style="margin-bottom:8px">
+      <button id="bE" class="active" onclick="setEsp(true)">Estável</button>
+      <button id="bI" onclick="setEsp(false)">Instável</button>
+    </div>
+    <svg id="svgEsp" viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Curva espiral"></svg>
+    <div class="iread" id="espRead" style="margin-top:10px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>O ângulo neutro <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Para o navio <strong>estável</strong>, o ângulo de leme em ṙ=0 é o <span class="hl">ângulo neutro</span> — o leme para manter rumo reto. Para o <strong>instável</strong>, o ângulo neutro corresponde à <strong>metade da altura/largura da faixa de histerese</strong>. Assimetrias na espiral (deslocada para um bordo) surgem da rotação do propulsor — sempre existe um pequeno ângulo de leme neutro em navios de número ímpar de hélices ou hélices que giram no mesmo sentido.</p>
+  </div>
+</section>
+
+<!-- ===== HISTERESE + FIG 68 REAL ===== -->
+<section class="bloco" id="histerese">
+  <h2 class="sec"><span class="n">4.9</span> O loop de histerese e o laço falso</h2>
+  <p class="lede">"Histerese" vem do grego, significa "atraso". Quanto maior o ciclo de histerese, maior a instabilidade. Mas cuidado: um laço pode ser <em>falso</em>.</p>
+
+  <p>Num navio instável, a curva espiral forma um <strong>loop de histerese</strong> (dois ramos): existe uma faixa de ângulos de leme em que o navio pode <span class="hl">girar contra o leme</span>, saltando bruscamente de uma razão de guinada para a oposta ao atingir o limite do laço. A largura e a altura do loop medem o grau de instabilidade. <strong>A simples existência de um ciclo de histerese já basta para caracterizar o navio como instável.</strong></p>
+
+  <div class="box trap">
+    <h4>O laço FALSO de Strom-Tejsen <span class="tag t-hist">CUIDADO</span> <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>É <span class="hl">essencial dar tempo suficiente</span> em cada ângulo para o equilíbrio se estabelecer. Se as deflexões forem rápidas demais, aparece um loop de histerese <strong>falso</strong> num navio que, na verdade, é estável (Strom-Tejsen). A figura abaixo mostra o mesmo navio com três intervalos: 60 s (loop aparente), 120 s (loop menor) e sem limite de tempo (curva única) — provando a estabilidade. A teoria linear não prevê o laço; é preciso teoria não linear.</p>
+  </div>
+
+  <figure class="real">
+    <img id="fig68" alt="Figura 68 de Santos — curva espiral com 60 s, 120 s e sem limite de tempo, mostrando o laço de histerese falso de Strom-Tejsen">
+    <figcaption><b>Figura 68 (Santos, Cap. 4).</b> Curva espiral do mesmo navio com deflexões consecutivas a cada 60 s (esq.), 120 s (centro) e sem limite de tempo (dir.). O loop aparente com intervalos curtos é o <b>laço falso de Strom-Tejsen</b>: sem pressa, a curva é única — o navio é estável. Reproduzida do original para estudo.</figcaption>
+  </figure>
+</section>
+
+<!-- ===== 4.10 ABKOWITZ ===== -->
+<section class="bloco" id="abkowitz">
+  <h2 class="sec"><span class="n">4.10</span> A analogia de Abkowitz (linha reta × transversal)</h2>
+  <p class="lede">Em 1964, o prof. Martin Abkowitz (MIT), em ano sabático na Dinamarca, mostrou que os princípios da estabilidade em linha reta e da estabilidade transversal estática são <strong>idênticos</strong>.</p>
+
+  <p>A escola marítima dominava a estabilidade transversal (a curva de braço de endireitamento × ângulo de banda) mas tinha dificuldade com a estabilidade de rumo. Abkowitz mostrou a correspondência direta: a curva <strong>ṙ × δ</strong> da espiral é análoga à curva de <strong>momento restaurador × ângulo de banda</strong>. A leitura da inclinação na origem é a mesma:</p>
+
+  <div class="box key">
+    <h4>A regra da inclinação na origem <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p><span class="hl">Inclinação positiva na origem = estável; negativa = instável.</span> O navio instável em rumo é como um navio sem estabilidade transversal: não fica na "vertical" (rumo reto), aderna a um lado até uma posição de equilíbrio (gira até uma razão de guinada residual). É a analogia que fecha o entendimento conceitual da espiral.</p>
+  </div>
+</section>
+
+<!-- ===== 4.11 BECH ===== -->
+<section class="bloco" id="bech">
+  <h2 class="sec"><span class="n">4.11</span> A curva espiral reversa (Bech)</h2>
+  <p class="lede">Em 1968, o dinamarquês <strong>Mogens Bech</strong> criou a espiral reversa: mais rápida, executável em espaço confinado, e — crucial — capaz de resolver <em>dentro</em> do loop de histerese.</p>
+
+  <table>
+    <tr><th>Aspecto</th><th>Espiral direta (Dieudonné)</th><th>Espiral reversa (Bech)</th></tr>
+    <tr><td>O que se fixa</td><td>O <strong>ângulo de leme</strong> (mede-se ṙ)</td><td>A <strong>razão de guinada</strong> ṙ (mede-se o ângulo de leme médio)</td></tr>
+    <tr><td>Sequência temporal</td><td>Ordenada, cada δ por vez, esperando estabilizar</td><td>Pontos podem ser tomados <span class="hl">em qualquer ordem</span></td></tr>
+    <tr><td>Espaço/tempo</td><td>Exige muito espaço e tempo</td><td>Espaço confinado; mais rápida</td></tr>
+    <tr><td>Instrumentação</td><td>Indicador de leme</td><td>Medidor de razão de guinada calibrado + indicador de leme (ou piloto automático)</td></tr>
+    <tr><td>No loop de histerese</td><td>Não resolve dentro do laço</td><td><strong>Resolve dentro do laço</strong> — dá a forma completa do loop</td></tr>
+  </table>
+
+  <p>No teste de Bech, o navio é conduzido a uma razão de guinada constante (ex.: 0,5°/s) e mede-se o ângulo de leme médio necessário (média das pequenas oscilações BE/BB). Repete-se para um intervalo de razões de guinada (ex.: 0,5°/s BB até 0,5°/s BE). Navios estáveis dão resultado semelhante ao da espiral direta; para instáveis, os resultados <span class="hl">fornecem a forma do loop</span> para avaliar o grau de instabilidade. Atualmente a curva de Bech é plotada na mesma formatação da espiral, seguindo recomendação da IMO.</p>
+</section>
+
+<!-- ===== 4.12 PULLOUT ===== -->
+<section class="bloco" id="pullout">
+  <h2 class="sec"><span class="n">4.12</span> A manobra de pull-out</h2>
+  <p class="lede">O teste mais simples: leva-se o navio a uma razão de guinada em regime, retorna-se o leme a meio (neutro) e mede-se a razão de guinada final.</p>
+
+  <div class="ichart">
+    <h4>Pull-out — resposta de ṙ após o leme voltar ao neutro</h4>
+    <p class="hint">Estável: ṙ cai a zero (leme neutro → rumo reto). Instável: ṙ tende a uma razão residual (o navio continua girando). Faz-se a BE e BB para ver assimetria.</p>
+    <div class="ictrl" style="margin-bottom:8px">
+      <button id="pE" class="active" onclick="setPull(true)">Estável</button>
+      <button id="pI" onclick="setPull(false)">Instável</button>
+    </div>
+    <canvas id="cvPull" width="860" height="300"></canvas>
+    <div class="iread" id="pullRead" style="margin-top:8px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>Leitura do pull-out <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Em um navio <strong>estável</strong>, com a progressão do tempo, a variação do yaw cai a zero após o leme voltar ao neutro. Em um <strong>instável</strong>, permanece uma <span class="hl">razão de guinada residual</span> — e ela é diferente para os dois bordos, o que revela a assimetria. Compara-se com a curva espiral (Fig. 73 do original mostra estável × instável lado a lado).</p>
+  </div>
+</section>
+
+<!-- ===== 4.13-4.14 IMO ===== -->
+<section class="bloco" id="imo">
+  <h2 class="sec"><span class="n">4.13–4.14</span> Padrões IMO para a curva espiral</h2>
+  <p class="lede">A IMO define a largura máxima admissível do loop de histerese em função da capacidade de um timoneiro mediano governar o navio manualmente.</p>
+
+  <p>Para <strong>todo navio maior que L, e para gaseiros/quimiqueiros de qualquer comprimento</strong>, os padrões definem a largura máxima aceitável do loop de histerese, em função da razão <strong>L/V</strong>:</p>
+
+  <div class="box formula">
+    <h4>Largura máxima do loop de histerese <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Faixa de L/V</th><th class="center">Largura máxima admissível do loop</th></tr>
+      <tr><td>L/V &lt; 9 s</td><td class="center">0°</td></tr>
+      <tr><td>9 s ≤ L/V &lt; 45 s</td><td class="center">(L/V − 3) / ... · faixa crescente*</td></tr>
+      <tr><td>L/V &gt; 45 s</td><td class="center">≈ 12°</td></tr>
+    </table>
+    <p class="vars">* Faixa que cresce linearmente entre os extremos (0° em L/V≈9 s até ~12° em L/V≈45 s). A Figura 74 do original plota as margens "aceitável × inaceitável" da largura do loop contra o tempo adimensional L/V. Onde L = comprimento entre perpendiculares (m) e V = velocidade (m/s).</p>
+  </div>
+
+  <h3>4.14 — A curva espiral simplificada da IMO</h3>
+  <p>Reduz a complexidade da espiral a <strong>três pontos</strong> medidos ao fim de um teste de curva de giro:</p>
+  <table>
+    <tr><th class="center">Ponto</th><th>Como se mede</th></tr>
+    <tr><td class="center">1</td><td>Razão de guinada em regime com o <strong>leme no ângulo máximo</strong></td></tr>
+    <tr><td class="center">2</td><td>Leme retornado ao <strong>neutro</strong>; mede-se ṙ em regime. Se ṙ→0, o navio é estável e a manobra encerra</td></tr>
+    <tr><td class="center">3</td><td>(Só se não retornou a zero) Leme no bordo oposto ao ponto 2, num ângulo igual à <strong>metade da largura do loop permitido</strong> (item 4.13)</td></tr>
+  </table>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os personagens, os sinais das derivadas e os testes.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Doze questões com os distratores reais do capítulo. Escolha e veja a explicação.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUPABASE ===== -->
+<div class="supa">
+  <button id="btnSupa" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+  <div class="st" id="supaSt">Envia o resultado do quiz desta sessão ao painel (tabela <code>respostas</code>).</div>
+</div>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Estabilidade Dinâmica e Curva Espiral (Santos Cap. 4)</summary>
+  <ul>
+    <li><b>4 tipos (Arentzen &amp; Mandel, 1961):</b> linha reta (controles fixos, conserva v=0/r=0, nova reta diferente) · direcional (controles móveis, conserva rumo) · direcional c/ índices complexos · posicional (DP, conserva a trajetória). Hierarquia ascendente.</li>
+    <li><b>Estabilidade (Lyapunov):</b> retornar ao equilíbrio após cessar a perturbação. Instabilidade em linha reta NÃO é falha — melhora o giro.</li>
+    <li><b>Equação característica:</b> Aσ²+Bσ+C=0. Estável ⟺ ambos os índices σ negativos ⟺ C/A>0 e B/A>0. A e B sempre positivos → só C decide.</li>
+    <li><b>Critério:</b> C = Y_v·N_r − N_v·(Y_r − Δ') > 0. Diz SE, não QUANTO.</li>
+    <li><b>Aceleração:</b> Y_v̇ (massa adicional sway) e N_ṙ (inércia adicional yaw) sempre negativos; Y_v̇≈−Δ, N_ṙ≈−I_z. Y_ṙ≈0 e N_v̇≈0.</li>
+    <li><b>Velocidade:</b> Y_v e N_r somam (negativos). N_v e Y_r competem (proa domina→negativo; popa domina→positivo). <b>N_v é a chave.</b></li>
+    <li><b>Compromisso:</b> muito estável compromete manobra; instável exige leme constante. Ideal = estabilidade moderada. Skeg/leme-skeg e trim de popa ↑ estabilidade; bulbo de proa ↓.</li>
+    <li><b>Dieudonné (espiral direta):</b> fixa δ, mede ṙ. Estável = curva única em S; instável = loop de histerese (dois ramos, giro contra o leme). Origem: Roy 1931.</li>
+    <li><b>Ângulo neutro:</b> δ em ṙ=0 (estável) ou metade da altura do loop (instável).</li>
+    <li><b>Laço FALSO (Strom-Tejsen):</b> intervalo curto entre deflexões cria histerese aparente em navio estável (Fig. 68: 60 s×120 s×sem limite).</li>
+    <li><b>Abkowitz (1964):</b> analogia linha reta × transversal. Inclinação na origem: + estável, − instável.</li>
+    <li><b>Bech (1968, reversa):</b> fixa ṙ, mede δ médio. Rápida, espaço confinado, RESOLVE dentro do loop. Pull-out: leme ao neutro, ṙ→0 (estável) ou residual (instável).</li>
+    <li><b>IMO loop:</b> 0° (L/V<9 s) · crescente (9–45 s) · ~12° (L/V>45 s). Espiral simplificada = 3 pontos ao fim da curva de giro.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Estabilidade Dinâmica do Navio e a Curva Espiral (Santos, Cap. 4) · Capital Sereno · Figura 68 reproduzida do original para fins de estudo.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function svgEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function svgTxt(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+
+/* ===== 4.2 TIPOS DE ESTABILIDADE ===== */
+var tipoAtual=0;
+function setTipo(t){tipoAtual=t;
+  document.querySelectorAll('.tipoBtn').forEach(function(b){b.classList.toggle('active',+b.dataset.t===t);});
+  drawTipos();}
+function drawTipos(){
+  var svg=document.getElementById('svgTipos');svg.innerHTML='';
+  var y0=150;
+  // trajetória original (reta horizontal tracejada)
+  svgEl(svg,'line',{x1:40,y1:y0,x2:820,y2:y0,stroke:'#cdbf99','stroke-width':1.5,'stroke-dasharray':'6 5'});
+  svgTxt(svg,660,y0-8,'trajetória original',{fill:'#7a6f55',fs:12});
+  // ponto de perturbação
+  var px=300;
+  svgEl(svg,'rect',{x:px-5,y:y0-5,width:10,height:10,fill:'#2C5F8A',transform:'rotate(45 '+px+' '+y0+')'});
+  svgTxt(svg,px-6,y0+24,'perturbação',{fill:'#2C5F8A',fs:12,ta:'middle'});
+  // linha antes da perturbação
+  svgEl(svg,'line',{x1:40,y1:y0,x2:px,y2:y0,stroke:'#1A7A6E','stroke-width':3});
+  var read='';
+  if(tipoAtual===0){ // linha reta: nova reta com direção diferente
+    // ramo estável: reta inclinada
+    svgEl(svg,'line',{x1:px,y1:y0,x2:760,y2:y0-70,stroke:'#1A7A6E','stroke-width':3});
+    svgTxt(svg,560,y0-58,'nova reta (rumo diferente)',{fill:'#1A7A6E',fs:12,fw:'bold'});
+    // ramo instável: curva que fecha em círculo
+    svgEl(svg,'path',{d:'M '+px+' '+y0+' Q 470 '+(y0+10)+' 540 '+(y0+50)+' A 55 55 0 1 1 560 '+(y0+52),fill:'none',stroke:'#9E3B2E','stroke-width':2.5,'stroke-dasharray':'5 4'});
+    svgTxt(svg,600,y0+90,'instável: giro circular final',{fill:'#9E3B2E',fs:12});
+    read='<b>Tipo 1 — Linha reta (controles fixos):</b> conserva v=0 e r=0. Estável → nova reta em direção DIFERENTE da original. Instável → curva circular com raio de giro final constante, leme fixo em zero.';
+  } else if(tipoAtual===1){ // direcional: reta paralela (mesmo rumo)
+    svgEl(svg,'line',{x1:px,y1:y0,x2:520,y2:y0-30,stroke:'#1A7A6E','stroke-width':3});
+    svgEl(svg,'line',{x1:520,y1:y0-30,x2:800,y2:y0-30,stroke:'#1A7A6E','stroke-width':3});
+    svgTxt(svg,600,y0-40,'reta paralela (mesmo rumo)',{fill:'#1A7A6E',fs:12,fw:'bold'});
+    read='<b>Tipo 2 — Direcional (controles móveis):</b> timoneiro/piloto atuam. Conserva o SENTIDO (rumo) da trajetória inicial — recompõe uma reta paralela à original. Instável não consegue manter o rumo.';
+  } else { // posicional: volta à mesma trajetória
+    svgEl(svg,'path',{d:'M '+px+' '+y0+' Q 420 '+(y0-40)+' 500 '+y0+' T 800 '+y0,fill:'none',stroke:'#1A7A6E','stroke-width':3});
+    svgTxt(svg,560,y0-30,'retorna à trajetória original',{fill:'#1A7A6E',fs:12,fw:'bold'});
+    read='<b>Tipo 4 — Posicional (DP):</b> posicionamento dinâmico. Conserva a própria TRAJETÓRIA (posição no referencial inercial): após a perturbação, volta exatamente à linha original. É o mais exigente da hierarquia.';
+  }
+  document.getElementById('tiposRead').innerHTML=read;
+}
+drawTipos();
+
+/* ===== 4.9 CURVA ESPIRAL ===== */
+var espEstavel=true;
+function setEsp(s){espEstavel=s;
+  document.getElementById('bE').classList.toggle('active',s);
+  document.getElementById('bI').classList.toggle('active',!s);
+  drawEsp();}
+function drawEsp(){
+  var svg=document.getElementById('svgEsp');svg.innerHTML='';
+  var cx=430,cy=160,sx=11,sy=95;
+  // eixos
+  svgEl(svg,'line',{x1:40,y1:cy,x2:820,y2:cy,stroke:'#cdbf99','stroke-width':1.5});
+  svgEl(svg,'line',{x1:cx,y1:20,x2:cx,y2:300,stroke:'#cdbf99','stroke-width':1.5});
+  svgTxt(svg,cx+8,30,'ṙ (razão de guinada)',{fill:'#7a6f55',fs:12});
+  svgTxt(svg,700,cy-8,'δ (ângulo de leme)',{fill:'#7a6f55',fs:12});
+  svgTxt(svg,795,cy+16,'BE',{fill:'#7a6f55',fs:11});
+  svgTxt(svg,50,cy+16,'BB',{fill:'#7a6f55',fs:11});
+  if(espEstavel){
+    var d='';for(var g=-33;g<=33;g+=0.5){var r=Math.tanh(g/11);var X=cx+g*sx,Y=cy-r*sy;d+=(g===-33?'M ':'L ')+X.toFixed(1)+' '+Y.toFixed(1)+' ';}
+    svgEl(svg,'path',{d:d,fill:'none',stroke:'#1A7A6E','stroke-width':3});
+    svgEl(svg,'circle',{cx:cx,cy:cy,r:4,fill:'#0D3D36'});
+    svgTxt(svg,cx+8,cy+20,'ângulo neutro (ṙ=0)',{fill:'#0D3D36',fs:11});
+    document.getElementById('espRead').innerHTML='<b>Navio estável:</b> curva única em S, inclinação POSITIVA na origem. Uma só razão de guinada por ângulo de leme. Ângulo neutro em ṙ=0.';
+  } else {
+    function ramo(off,color){var d='';for(var g=-33;g<=33;g+=0.5){var r=Math.tanh((g+off)/6);var X=cx+g*sx,Y=cy-r*sy;d+=(g===-33?'M ':'L ')+X.toFixed(1)+' '+Y.toFixed(1)+' ';}svgEl(svg,'path',{d:d,fill:'none',stroke:color,'stroke-width':2.6});}
+    ramo(7,'#9E3B2E');ramo(-7,'#9E3B2E');
+    svgEl(svg,'line',{x1:cx-7*sx,y1:20,x2:cx-7*sx,y2:300,stroke:'#e0b9b0','stroke-width':1,'stroke-dasharray':'3 3'});
+    svgEl(svg,'line',{x1:cx+7*sx,y1:20,x2:cx+7*sx,y2:300,stroke:'#e0b9b0','stroke-width':1,'stroke-dasharray':'3 3'});
+    svgTxt(svg,cx+7*sx+6,60,'largura do loop',{fill:'#9E3B2E',fs:11});
+    svgTxt(svg,cx-7*sx-6,270,'giro contra o leme',{fill:'#9E3B2E',fs:11,ta:'end'});
+    document.getElementById('espRead').innerHTML='<b>Navio instável:</b> loop de histerese (dois ramos), inclinação NEGATIVA na origem. Largura/altura do loop = grau de instabilidade. Existe faixa de giro contra o leme. Ângulo neutro = metade da altura do loop.';
+  }
+}
+drawEsp();
+
+/* ===== 4.12 PULL-OUT ===== */
+var pullEstavel=true;
+function setPull(s){pullEstavel=s;
+  document.getElementById('pE').classList.toggle('active',s);
+  document.getElementById('pI').classList.toggle('active',!s);
+  drawPull();}
+function drawPull(){
+  var cv=document.getElementById('cvPull'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=54,y0=H-40,pW=W-90,pH=H-70;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('ṙ (razão de guinada)',x0+4,24);ctx.fillText('tempo →',W-70,y0+22);
+  // momento em que o leme volta ao neutro
+  var tRet=0.30;
+  var xRet=x0+tRet*pW;
+  ctx.strokeStyle='#C8A84B';ctx.lineWidth=2;ctx.setLineDash([5,3]);ctx.beginPath();ctx.moveTo(xRet,14);ctx.lineTo(xRet,y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9a7d1f';ctx.font='bold 11px Trebuchet MS';ctx.fillText('leme → neutro',xRet+4,30);
+  // regime inicial (razão de guinada constante) até tRet
+  var rReg=0.75;
+  function py(r){return y0 - r*pH*0.9;}
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x0,py(rReg));ctx.lineTo(xRet,py(rReg));
+  // após o retorno
+  var res = pullEstavel?0:0.32;
+  for(var t=tRet;t<=1;t+=0.01){
+    var k=(t-tRet)/(1-tRet);
+    var r = res + (rReg-res)*Math.exp(-k*4.5);
+    ctx.lineTo(x0+t*pW, py(r));
+  }
+  ctx.stroke();
+  // linha da razão residual
+  if(!pullEstavel){
+    ctx.strokeStyle='#9E3B2E';ctx.setLineDash([4,4]);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(xRet,py(res));ctx.lineTo(W-18,py(res));ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#9E3B2E';ctx.font='11px Trebuchet MS';ctx.fillText('ṙ residual (instável)',W-160,py(res)-6);
+  } else {
+    ctx.strokeStyle='#2E7D52';ctx.setLineDash([4,4]);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(xRet,py(0));ctx.lineTo(W-18,py(0));ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#2E7D52';ctx.font='11px Trebuchet MS';ctx.fillText('ṙ → 0 (estável)',W-140,py(0)-6);
+  }
+  document.getElementById('pullRead').innerHTML = pullEstavel
+    ? '<b>Navio estável:</b> após o leme voltar ao neutro, a razão de guinada decai a ZERO. O navio retoma o rumo reto.'
+    : '<b>Navio instável:</b> a razão de guinada tende a um valor RESIDUAL (o navio continua girando). O valor difere entre BE e BB (assimetria).';
+}
+drawPull();
+window.addEventListener('resize',function(){drawPull();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Estabilidade (Lyapunov)",b:"Retornar ao equilíbrio após cessar a perturbação. Investigada pelos atributos de estado, sem resolver as EDOs não lineares."},
+  {f:"Arentzen & Mandel (1961)",b:"Classificaram os 4 tipos de estabilidade de movimento no estudo de projeto de submarinos."},
+  {f:"Tipo 1 — linha reta",b:"Controles fixos. Conserva v=0, r=0. Estável → nova reta em direção DIFERENTE. Instável → giro circular final."},
+  {f:"Tipo 4 — posicional",b:"Posicionamento dinâmico. Conserva a própria trajetória (referencial inercial). O mais exigente."},
+  {f:"Instabilidade em linha reta",b:"NÃO é falha de projeto: navios grandes a adotam de propósito para ter giro melhor."},
+  {f:"Equação característica",b:"Aσ²+Bσ+C=0. Índices σ (autovalores) por Bhaskara. Ambos negativos = estável em linha reta."},
+  {f:"Condição de estabilidade",b:"C/A>0 e B/A>0. A e B sempre positivos → só o sinal de C decide."},
+  {f:"Critério C",b:"C = Y_v·N_r − N_v·(Y_r − Δ') > 0. Diz SE é estável, não QUANTO."},
+  {f:"Y_v̇ e N_ṙ",b:"Massa adicional (sway) e inércia adicional (yaw). SEMPRE negativas. Y_v̇≈−Δ, N_ṙ≈−I_z. Fazem A>0."},
+  {f:"Y_v e N_r",b:"Somam proa+popa → sempre NEGATIVAS."},
+  {f:"N_v (a chave)",b:"Proa domina→negativo; popa domina→positivo. Skeg/trim de popa a torna estabilizadora; bulbo de proa desestabiliza."},
+  {f:"Y_ṙ e N_v̇",b:"Muito pequenas → aproxima-se Y_ṙ≈0 e N_v̇≈0."},
+  {f:"Dieudonné (direta)",b:"Fixa δ, mede ṙ. Origem: Roy 1931. Estável=curva única; instável=loop de histerese."},
+  {f:"Ângulo neutro",b:"Estável: δ em ṙ=0. Instável: metade da altura/largura do loop."},
+  {f:"Laço FALSO (Strom-Tejsen)",b:"Intervalo curto entre deflexões cria histerese aparente em navio estável. Sem pressa = curva única (Fig. 68)."},
+  {f:"Abkowitz (1964)",b:"Analogia linha reta × transversal. Inclinação na origem: + estável, − instável."},
+  {f:"Bech (1968, reversa)",b:"Fixa ṙ, mede δ médio. Rápida, espaço confinado, RESOLVE dentro do loop. Ordem livre."},
+  {f:"Pull-out",b:"Leme ao neutro; ṙ→0 (estável) ou residual (instável). BE e BB para ver assimetria."},
+  {f:"IMO — largura do loop",b:"0° (L/V<9s) · crescente (9–45s) · ~12° (L/V>45s). Fig. 74: aceitável × inaceitável."},
+  {f:"Espiral simplificada IMO",b:"3 pontos ao fim da curva de giro: leme máx → neutro → (se não zerou) metade da largura do loop no bordo oposto."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"A classificação tradicional dos quatro tipos de estabilidade de movimento do navio foi definida em 1961 por:",
+   o:["Dieudonné e Roy","Arentzen e Mandel","Abkowitz e Bech","Nomoto e Norrbin"],a:1,
+   e:"Comandante E. S. Arentzen e professor Philip Mandel, no estudo 'O projeto de submarinos sob o ponto de vista da arquitetura naval' (1961)."},
+  {q:"Na estabilidade em linha reta (controles fixos), o navio estável, após a perturbação:",
+   o:["Retorna exatamente à trajetória original","Assume uma nova reta, em direção diferente da original","Mantém o mesmo rumo original","Gira em círculo permanentemente"],a:1,
+   e:"Conserva apenas v=0 e r=0 → retoma o movimento retilíneo, mas numa NOVA reta com direção diferente. Manter o rumo original é estabilidade direcional (tipo 2); voltar à trajetória é posicional (tipo 4)."},
+  {q:"Sobre a instabilidade direcional em linha reta de um navio, é correto afirmar:",
+   o:["É sempre uma falha grave de projeto","Não é necessariamente ruim; muitos navios de grande porte a adotam para melhorar o giro","Impede totalmente a navegação","Só ocorre em submarinos"],a:1,
+   e:"A instabilidade em linha reta não é necessariamente uma falha — melhora a capacidade de giro. O ideal é estabilidade moderada; se não, pouca instabilidade."},
+  {q:"Os índices de estabilidade σ, raízes de Aσ²+Bσ+C=0, garantem estabilidade em linha reta quando:",
+   o:["Ambos são positivos","Ambos são negativos","A soma é zero","C é negativo"],a:1,
+   e:"Ambos negativos → v e r decaem a zero com o tempo. Isso exige C/A>0 e B/A>0; como A e B são sempre positivos, tudo se reduz a C>0."},
+  {q:"As derivadas de aceleração Y_v̇ (massa adicional em sway) e N_ṙ (inércia adicional em yaw) são:",
+   o:["Sempre positivas","Sempre negativas","Dependentes da viscosidade","Iguais a zero"],a:1,
+   e:"Sempre negativas — a reação inercial da água opõe-se ao movimento; proa e popa se somam. São termos potenciais (não viscosos). Aproxima-se Y_v̇≈−Δ e N_ṙ≈−I_z."},
+  {q:"A derivada N_v (momento de guinada por velocidade lateral) tem sinal que:",
+   o:["É sempre negativo","É sempre positivo","Varia: proa dominando é negativo, popa dominando é positivo","É sempre zero"],a:2,
+   e:"N_v é a derivada-chave: proa e popa competem. Se a popa domina (N_v positivo), o navio é muito estável. Skeg e trim de popa a empurram para estabilizadora; bulbo de proa reduz a estabilidade."},
+  {q:"O teste de curva espiral direta (Dieudonné) consiste essencialmente em:",
+   o:["Fixar a razão de guinada e medir o ângulo de leme","Fixar o ângulo de leme e medir a razão de guinada em regime","Parar o navio e medir a distância","Aplicar leme alternado a cada bordo"],a:1,
+   e:"Fixa-se o ângulo de leme em incrementos (15°, 10°, 5°, 1°, meio, e o outro bordo) e mede-se a razão de guinada em regime. Fixar ṙ e medir δ é a espiral REVERSA de Bech."},
+  {q:"Num navio direcionalmente instável, a curva espiral direta apresenta:",
+   o:["Uma curva única em S","Um loop de histerese (dois ramos)","Uma reta horizontal","Uma parábola"],a:1,
+   e:"O navio instável forma um loop de histerese: dois ramos, com faixa em que o navio gira contra o leme. A largura/altura do loop mede o grau de instabilidade."},
+  {q:"O 'laço de histerese falso' descrito por Strom-Tejsen ocorre quando:",
+   o:["O navio é realmente instável","O intervalo de tempo entre deflexões do leme é curto demais num navio estável","O leme quebra durante o teste","A velocidade é muito alta"],a:1,
+   e:"Se não se dá tempo suficiente em cada ângulo, aparece um loop aparente num navio que é estável. Com 60 s → loop; 120 s → menor; sem limite → curva única (Fig. 68). A teoria linear não prevê laço."},
+  {q:"A analogia do professor Abkowitz (1964) relaciona a estabilidade em linha reta com:",
+   o:["A resistência ao avanço","A estabilidade transversal estática do navio","A cavitação do hélice","O consumo de combustível"],a:1,
+   e:"Abkowitz mostrou que os princípios da estabilidade de rumo e da estabilidade transversal são idênticos. A curva ṙ×δ é análoga à de momento restaurador×banda: inclinação na origem + = estável, − = instável."},
+  {q:"A principal vantagem da curva espiral reversa (Bech, 1968) sobre a direta é que ela:",
+   o:["Dispensa qualquer instrumento","Pode ser feita em espaço confinado, é mais rápida e resolve dentro do loop de histerese","Só funciona em navios estáveis","Mede a distância de parada"],a:1,
+   e:"Bech fixa a razão de guinada e mede o leme médio; os pontos podem ser tomados em qualquer ordem, em espaço confinado, e — ao contrário da direta — resolve dentro do loop, dando sua forma completa."},
+  {q:"Na manobra de pull-out, um navio ESTÁVEL, após o leme voltar à posição neutra:",
+   o:["Mantém uma razão de guinada residual","Tem a razão de guinada caindo a zero","Aumenta a razão de guinada","Inverte o sentido de giro"],a:1,
+   e:"No navio estável, a variação de yaw cai a zero (retoma rumo reto). No instável, permanece uma razão de guinada residual, diferente para BE e BB — revelando a assimetria."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+
+/* ===== SUPABASE ===== */
+var SUPA_URL="https://iftourtecxtmvuhptvmo.supabase.co";
+var CADERNO_ID="santos_cap4_estabilidade_espiral";
+function enviarPainel(){
+  var st=document.getElementById('supaSt'), btn=document.getElementById('btnSupa');
+  if(tot===0){st.textContent="Responda ao menos uma questão do quiz antes de enviar.";return;}
+  var payload={caderno_id:CADERNO_ID,tipo:"quiz",bloco:"F",tema:"Estabilidade Dinâmica e Curva Espiral",
+    assunto:"Santos Cap. 4 — Dieudonné · Bech · pull-out",enunciado:"Sessão de quiz — "+tot+" questões",
+    acertou:(hits===tot),sessao_data:new Date().toISOString()};
+  btn.disabled=true;st.textContent="Enviando…";
+  fetch(SUPA_URL+"/rest/v1/respostas",{method:"POST",headers:{"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(payload)})
+   .then(function(r){if(r.ok){st.innerHTML="✓ Enviado ao painel ("+hits+"/"+tot+").";}
+     else{st.innerHTML="⚠ Falha ("+r.status+"). Verifique a API key/anon no painel pscpp-buddy.";btn.disabled=false;}})
+   .catch(function(e){st.innerHTML="⚠ Sem conexão com o Supabase. Configure endpoint/anon-key no painel.";btn.disabled=false;});
+}
+</script>
+<script id="figdata" type="text/plain">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</script>
+<script>
+document.getElementById('fig68').src="data:image/jpeg;base64,"+document.getElementById('figdata').textContent.trim();
+</script>
+</body>
+</html>

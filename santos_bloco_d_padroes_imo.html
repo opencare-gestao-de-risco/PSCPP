@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Padrões IMO de Manobrabilidade — Bloco D · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:33px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:720px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:40px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.12em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:19px;margin:26px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.crit{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+  .tbl-crit th{background:var(--verde2)}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:340px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+  .verdict{font-family:'Trebuchet MS',sans-serif;font-weight:bold;padding:3px 10px;border-radius:6px;display:inline-block}
+  .verdict.ok{background:#eaf6ee;color:var(--verde-ok)}
+  .verdict.no{background:#fbeeec;color:var(--vermelho)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:170px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12.5px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  .supa{background:linear-gradient(160deg,var(--verde) 0%,#0a322c 100%);border-radius:12px;padding:20px;margin:26px 0;text-align:center;color:var(--creme);font-family:'Trebuchet MS',sans-serif}
+  .supa button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:15px;background:var(--ouro);color:var(--verde);border:none;border-radius:24px;padding:12px 26px;cursor:pointer;box-shadow:var(--sombra)}
+  .supa button:disabled{opacity:.55;cursor:default}
+  .supa .st{font-size:12.5px;color:#a9c8c1;margin-top:10px}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:24px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco D — Padrões IMO</p>
+    <h1>Padrões IMO de <em>Manobrabilidade</em></h1>
+    <p class="sub">Os quatro instrumentos que a banca cobra: <strong>A.601(15)</strong> (informações a bordo), <strong>MSC.137(76)</strong> (os critérios numéricos), <strong>MSC/Circ.1053</strong> (as notas explicativas) e <strong>MSC.1/Circ.1228</strong>. O núcleo: os valores-limite de avanço, diâmetro tático, ultrapassagem e distância de parada.</p>
+    <div class="src"><b>Fontes:</b> IMO Res. A.601(15) · Res. MSC.137(76) · MSC/Circ.1053 (Notas Explicativas) · Santos, <em>Manobrabilidade do Navio</em>, Cap. 2 (fundamentos). Valores conferidos contra as traduções PT da base do projeto.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#mapa">Mapa dos 4</a>
+    <a href="#a601">A.601(15)</a>
+    <a href="#qualidades">6 qualidades</a>
+    <a href="#criterios">Critérios ★</a>
+    <a href="#giro">Círculo de giro ▶</a>
+    <a href="#zigzag">Zigzag ▶</a>
+    <a href="#overshoot">Calc. overshoot ▶</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Este caderno abre o <b>Bloco D</b>. Conecta-se a jusante com <a href="pna_ix_sec4_estabilidade_rumo_nomoto.html">Estabilidade de Rumo &amp; K-T de Nomoto (§4)</a> (o zigzag e a espiral), <a href="pna_ix_sec6_capacidade_giro.html">Capacidade de Giro (§6)</a> (avanço/transferência/diâmetro tático) e <a href="pna_ix_sec10_aceleracao_parada_re.html">Parada e Marcha à Ré (§10)</a> (alcance de trajetória).
+</div>
+
+<!-- ===== MAPA ===== -->
+<section class="bloco" id="mapa">
+  <h2 class="sec"><span class="n">D.0</span> O mapa dos quatro instrumentos</h2>
+  <p class="lede">Antes dos números, saber <em>quem faz o quê</em>. A banca troca a função de um documento pela do outro — este é o primeiro distrator do bloco.</p>
+
+  <table>
+    <tr><th>Instrumento</th><th>O que é</th><th>Papel</th><th class="center">Tem números-critério?</th></tr>
+    <tr><td><strong>A.601(15)</strong> (1987)</td><td>Provisão e exibição de informações de manobra <em>a bordo</em></td><td>Define os 3 documentos que o navio deve ter: cartão do prático, pôster da casa do leme, caderno de manobra</td><td class="center">Não</td></tr>
+    <tr><td><strong>MSC.137(76)</strong> (2002)</td><td>Normas para manobrabilidade de navios</td><td>Fixa os <span class="hl">valores-limite</span> (avanço, diâmetro tático, ultrapassagem, parada). É o coração da prova</td><td class="center"><strong>Sim</strong></td></tr>
+    <tr><td><strong>MSC/Circ.1053</strong> (2002)</td><td>Notas Explicativas às Normas</td><td>Explica <em>como</em> medir, corrigir para lastro/águas rasas, e define as 6 qualidades e as figuras</td><td class="center">Não (métodos)</td></tr>
+    <tr><td><strong>MSC.1/Circ.1228</strong> (2007)</td><td>Orientações provisórias p/ estimar desempenho manobral</td><td>Métodos de estimativa em fase de projeto (revisão da 1053 para previsão)</td><td class="center">Não</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Hierarquia e revogações <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>A <strong>A.601(15) substitui a A.209(VII)</strong> — questão clássica de "qual está em vigor". A <strong>MSC.137(76) substitui as Normas Provisórias da A.751(18)</strong> e aplica-se a navios construídos <span class="hl">em ou após 1.º de janeiro de 2004</span>. A Circ.1053 é a nota explicativa <em>da</em> MSC.137 — não tem força de critério por si.</p>
+  </div>
+</section>
+
+<!-- ===== A.601 ===== -->
+<section class="bloco" id="a601">
+  <h2 class="sec"><span class="n">D.1</span> A.601(15) — os três documentos de manobra</h2>
+  <p class="lede">A resolução obriga o navio a exibir informações de manobra em três formatos. A banca explora <em>quem preenche</em> e <em>onde fica exposto</em>.</p>
+
+  <table>
+    <tr><th>Documento</th><th>Quem preenche / onde fica</th><th>Conteúdo</th></tr>
+    <tr><td><strong>Cartão do prático</strong> (Pilot Card, Apêndice 1)</td><td>Preenchido pelo <span class="hl">COMANDANTE</span>; entregue ao prático na chegada</td><td>Condições <em>atuais</em> do navio (calado, praça, propulsão). <strong>Não</strong> requer provas de manobra especiais</td></tr>
+    <tr><td><strong>Pôster da casa do leme</strong> (Wheelhouse Poster)</td><td>Exposição <span class="hl">PERMANENTE</span> na ponte/casa do leme</td><td>Características gerais de manobra do navio, de rápida consulta</td></tr>
+    <tr><td><strong>Caderno de manobra</strong> (Manoeuvring Booklet)</td><td>A bordo, disponível para consulta</td><td>Inclui <span class="hl">tudo do pôster + informações adicionais</span>; parte pode ser <strong>estimada</strong>, parte vem de provas; pode ser complementado ao longo da vida do navio</td></tr>
+  </table>
+
+  <div class="box trap">
+    <h4>Os dois erros que a banca planta aqui</h4>
+    <p>1) Atribuir o preenchimento do cartão ao <strong>prático</strong> — é do <strong>comandante</strong>. 2) Dizer que o <strong>caderno de manobra</strong> é subconjunto do pôster — é o inverso: o <span class="hl">caderno contém o pôster</span> mais dados adicionais. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- ===== QUALIDADES ===== -->
+<section class="bloco" id="qualidades">
+  <h2 class="sec"><span class="n">D.2</span> As seis qualidades de manobra (Circ.1053 §1.2.3)</h2>
+  <p class="lede">A Circ.1053 organiza toda a avaliação em seis qualidades. Cada critério numérico da MSC.137 avalia uma delas — este é o mapa mental do bloco inteiro.</p>
+
+  <table>
+    <tr><th class="center">#</th><th>Qualidade</th><th>O que mede</th><th>Ensaio que avalia</th></tr>
+    <tr><td class="center">1</td><td><strong>Estabilidade dinâmica inerente</strong></td><td>Após pequena perturbação, retomar rumo reto <span class="hl">sem leme corretivo</span></td><td>Espiral / pull-out</td></tr>
+    <tr><td class="center">2</td><td><strong>Manutenção de rumo</strong> (course-keeping)</td><td>Manter trajetória reta sem oscilações excessivas de leme</td><td>Zigzag (2.º overshoot)</td></tr>
+    <tr><td class="center">3</td><td><strong>Virada inicial</strong> (initial turning)</td><td>Desvio de rumo por unidade de distância a leme moderado</td><td>Zigzag (tempo/dist. ao 1.º execute)</td></tr>
+    <tr><td class="center">4</td><td><strong>Verificação da guinada</strong> (yaw-checking)</td><td>Resposta ao <span class="hl">contra-leme</span> num giro — o overshoot</td><td>Zigzag (1.º overshoot)</td></tr>
+    <tr><td class="center">5</td><td><strong>Capacidade de giro</strong> (turning)</td><td>Girar com leme a todo → avanço, transferência, diâmetro tático</td><td>Círculo de evolução (35°)</td></tr>
+    <tr><td class="center">6</td><td><strong>Capacidade de parada</strong> (stopping)</td><td>Alcance de trajetória e tempo até parar na água</td><td>Parada a toda a ré (crash stop)</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>A frase que define a qualidade #1 <span class="tag t-banca">BANCA</span></h4>
+    <p>"Um navio é dinamicamente estável em rumo reto se, após uma pequena perturbação, <span class="hl">estabelecer-se em breve em um novo rumo reto sem qualquer leme corretivo</span>." Note: <strong>novo</strong> rumo, não o original. O desvio final depende do grau de estabilidade e da magnitude/duração da perturbação. É o mesmo conceito do card de Nomoto (estabilidade = s₂ negativo).</p>
+  </div>
+</section>
+
+<!-- ===== CRITERIOS (tabela-resumo) ===== -->
+<section class="bloco" id="criterios">
+  <h2 class="sec"><span class="n">D.3</span> ★ Os critérios numéricos da MSC.137(76)</h2>
+  <p class="lede">A tabela que decide a maioria das questões de múltipla escolha do bloco. Todos os valores em <strong>comprimentos de navio (L)</strong>, entre perpendiculares.</p>
+
+  <table class="tbl-crit">
+    <tr><th>Qualidade avaliada</th><th>Manobra / medida</th><th class="center">Critério-limite</th><th>Item na norma</th></tr>
+    <tr><td>Capacidade de giro</td><td>Avanço (Advance)</td><td class="crit">≤ 4,5 L</td><td>5.3.1</td></tr>
+    <tr><td>Capacidade de giro</td><td>Diâmetro tático (Tactical Diameter)</td><td class="crit">≤ 5,0 L</td><td>5.3.1</td></tr>
+    <tr><td>Virada inicial</td><td>Distância percorrida até Δrumo=10° (leme 10°)</td><td class="crit">≤ 2,5 L</td><td>5.3.2</td></tr>
+    <tr><td>Verificação da guinada</td><td>1.º overshoot — zigzag 10°/10°, se L/V &lt; 10 s</td><td class="crit">≤ 10°</td><td>5.3.3.1</td></tr>
+    <tr><td>Verificação da guinada</td><td>1.º overshoot — zigzag 10°/10°, se 10 ≤ L/V &lt; 30 s</td><td class="crit">≤ (5 + ½·L/V)°</td><td>5.3.3.1</td></tr>
+    <tr><td>Verificação da guinada</td><td>1.º overshoot — zigzag 10°/10°, se L/V ≥ 30 s</td><td class="crit">≤ 20°</td><td>5.3.3.1</td></tr>
+    <tr><td>Manutenção de rumo</td><td>2.º overshoot — zigzag 10°/10°, se L/V &lt; 10 s</td><td class="crit">≤ 25°</td><td>5.3.3.2</td></tr>
+    <tr><td>Manutenção de rumo</td><td>2.º overshoot — zigzag 10°/10°, se 10 ≤ L/V &lt; 30 s</td><td class="crit">≤ (17,5 + 0,75·L/V)°</td><td>5.3.3.2</td></tr>
+    <tr><td>Manutenção de rumo</td><td>2.º overshoot — zigzag 10°/10°, se L/V ≥ 30 s</td><td class="crit">≤ 40°</td><td>5.3.3.2</td></tr>
+    <tr><td>Verificação da guinada</td><td>1.º overshoot — zigzag 20°/20°</td><td class="crit">≤ 25°</td><td>5.3.3.3</td></tr>
+    <tr><td>Capacidade de parada</td><td>Alcance de trajetória (Track Reach)</td><td class="crit">≤ 15 L*</td><td>5.3.4</td></tr>
+  </table>
+  <p class="vars">* Regra geral: <strong>15 L</strong>. Para navios de <strong>grande deslocamento</strong>, a Administração pode ampliar até <span class="hl">20 L</span> — nunca além, e o critério <strong>nunca é dispensado</strong>. L = comprimento entre perpendiculares (m); V = velocidade de prova (m/s); L/V em segundos.</p>
+
+  <div class="box formula">
+    <h4>Onde estão os cálculos <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">1.º overshoot (10 ≤ L/V &lt; 30 s) ≤ (5 + <sup>1</sup>&frasl;<sub>2</sub>·<sup>L</sup>&frasl;<sub>V</sub>) graus<span class="lbl">interpolação linear entre 10° (L/V=10) e 20° (L/V=30)</span></div>
+    <div class="eq">2.º overshoot (10 ≤ L/V &lt; 30 s) ≤ (17,5 + 0,75·<sup>L</sup>&frasl;<sub>V</sub>) graus<span class="lbl">interpolação linear entre 25° (L/V=10) e 40° (L/V=30)</span></div>
+    <p class="vars">Verifique os extremos: em L/V=10 → 5+5=10° e 17,5+7,5=25°. Em L/V=30 → 5+15=20° e 17,5+22,5=40°. As fórmulas são apenas a reta que liga esses pontos. Use o calculador da seção D.6.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Condições de validade dos ensaios (5.2) <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Todos os critérios só valem sob quatro condições: <span class="hl">(1) águas profundas e irrestritas; (2) ambiente calmo; (3) plena carga — linha d'água de verão — e quilha reta (even keel, trim nulo); (4) aproximação estável na velocidade de prova.</span> A velocidade de prova é <strong>≥ 90% da velocidade correspondente a 85% da potência máxima (MCR)</strong> do motor. O círculo de evolução usa leme de <strong>35°</strong> (ou o máximo permitido).</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Os distratores clássicos do bloco</h4>
+    <p>• <strong>Avanço × diâmetro tático:</strong> avanço é longitudinal (até 90° de rumo); diâmetro tático é transversal (até 180°). Trocar os valores 4,5 e 5,0 é o erro nº1. <br>• <strong>1.º × 2.º overshoot:</strong> 1.º avalia verificação da guinada; 2.º avalia manutenção de rumo. Faixas de limite diferentes. <br>• <strong>Diâmetro tático × diâmetro de giro final:</strong> o critério é sobre o <em>tático</em> (a 180°), não o estacionário. <span class="tag t-conflito">CONFLITO</span></p>
+  </div>
+</section>
+
+<!-- ===== FIGURA 2 — CIRCULO DE GIRO (SVG recriado do original IMO) ===== -->
+<section class="bloco" id="giro">
+  <h2 class="sec"><span class="n">D.4</span> A geometria do círculo de giro (Fig. 2 da Circ.1053)</h2>
+  <p class="lede">Recriação fiel do diagrama oficial. Passe o mouse / toque nas grandezas. É a figura mais cobrada do bloco.</p>
+
+  <div class="ichart">
+    <h4>Círculo de evolução — avanço, transferência, diâmetro tático</h4>
+    <p class="hint">Verde = trajetória do ponto de meia-nau. Ouro = as grandezas-critério. Vermelho = ângulo de deriva.</p>
+    <svg id="svgGiro" viewBox="0 0 860 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama do círculo de giro"></svg>
+    <div class="iread" id="giroRead" style="margin-top:10px"><b>Avanço</b> ≤ 4,5 L (a 90°) · <b>Diâmetro tático</b> ≤ 5,0 L (a 180°) · <b>Transferência</b> = desloc. transversal a 90° · <b>Ângulo de deriva</b> = entre o rumo e o vetor velocidade.</div>
+  </div>
+</section>
+
+<!-- ===== FIGURA 3 — ZIGZAG (SVG recriado) ===== -->
+<section class="bloco" id="zigzag">
+  <h2 class="sec"><span class="n">D.5</span> O ensaio de zigzague e os overshoots (Fig. 3 da Circ.1053)</h2>
+  <p class="lede">O traçado do zigzag 10°/10°: a proa (linha) persegue o leme (degraus), sempre ultrapassando. Essa ultrapassagem é o <em>overshoot</em>.</p>
+
+  <div class="ichart">
+    <h4>Zigzag 10°/10° — leme, rumo e ângulos de ultrapassagem</h4>
+    <p class="hint">Degraus dourados = ângulo de leme (±10°). Linha verde = rumo do navio. Os picos além de 10° são o 1.º e o 2.º overshoot.</p>
+    <svg id="svgZig" viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama do ensaio de zigzague"></svg>
+    <div class="iread" style="margin-top:10px"><b>1.º overshoot</b> → verifica a <em>capacidade de verificação da guinada</em>. <b>2.º overshoot</b> → verifica a <em>manutenção de rumo</em>. O "tempo para o 2.º execute" mede a <em>virada inicial</em>.</div>
+  </div>
+</section>
+
+<!-- ===== CALCULADOR OVERSHOOT ===== -->
+<section class="bloco" id="overshoot">
+  <h2 class="sec"><span class="n">D.6</span> Calculador interativo dos critérios de overshoot</h2>
+  <p class="lede">Deslize L/V e veja qual faixa se aplica e o limite exato. Reproduz o cálculo <code>[CALCULO]</code> que a banca pede.</p>
+
+  <div class="ichart">
+    <h4>Critério de overshoot × parâmetro L/V</h4>
+    <p class="hint">A curva mostra o limite do 1.º (azul) e do 2.º (roxo) overshoot em função de L/V. A linha vertical é o seu valor.</p>
+    <canvas id="cvOver" width="860" height="340"></canvas>
+    <div class="ictrl"><label for="lv">L/V (s) →</label><input type="range" id="lv" min="4" max="45" step="0.5" value="18" oninput="drawOver()"></div>
+    <div class="iread" id="overRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>Exemplo resolvido <span class="tag t-calc">CALCULO</span></h4>
+    <p>Navio com L = 180 m, V de prova = 9 m/s → L/V = 20 s (faixa intermediária). 1.º overshoot-limite = 5 + ½·20 = <strong>15°</strong>. 2.º overshoot-limite = 17,5 + 0,75·20 = <strong>32,5°</strong>. Se o ensaio medir 1.º = 13° e 2.º = 30°, o navio <span class="verdict ok">CUMPRE</span> ambos.</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os valores-critério e as funções dos documentos.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Dez questões com os distratores reais do bloco. Escolha e veja a explicação com o item da norma.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUPABASE ===== -->
+<div class="supa">
+  <button id="btnSupa" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+  <div class="st" id="supaSt">Envia o resultado do quiz desta sessão ao painel (tabela <code>respostas</code>).</div>
+</div>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Padrões IMO (Bloco D)</summary>
+  <ul>
+    <li><b>4 instrumentos:</b> A.601(15) = informações a bordo · MSC.137(76) = critérios numéricos · Circ.1053 = notas explicativas · MSC.1/Circ.1228 = estimativa em projeto.</li>
+    <li><b>A.601(15)</b> substitui A.209(VII). <b>MSC.137(76)</b> substitui A.751(18); aplica-se a navios de 1/1/2004 em diante; L ≥ 100 m (e quimiqueiros/gaseiros de qualquer comprimento).</li>
+    <li><b>3 documentos (A.601):</b> cartão do prático (preenchido pelo COMANDANTE) · pôster da casa do leme (PERMANENTE na ponte) · caderno de manobra (inclui o pôster + mais).</li>
+    <li><b>Avanço ≤ 4,5 L</b> (a 90°) · <b>Diâmetro tático ≤ 5,0 L</b> (a 180°). Não trocar os valores.</li>
+    <li><b>Virada inicial:</b> ≤ 2,5 L percorridos até 10° de rumo com leme 10°.</li>
+    <li><b>1.º overshoot (10°/10°):</b> ≤ 10° (L/V&lt;10) · ≤ (5 + ½·L/V)° (10–30) · ≤ 20° (≥30).</li>
+    <li><b>2.º overshoot (10°/10°):</b> ≤ 25° (L/V&lt;10) · ≤ (17,5 + 0,75·L/V)° (10–30) · ≤ 40° (≥30).</li>
+    <li><b>Zigzag 20°/20°:</b> 1.º overshoot ≤ 25°.</li>
+    <li><b>Parada:</b> alcance de trajetória ≤ 15 L (até 20 L p/ grande deslocamento; nunca dispensado).</li>
+    <li><b>Condições dos ensaios:</b> águas profundas/irrestritas, calmo, plena carga + quilha reta, velocidade de prova estável. Velocidade de prova = ≥90% da velocidade a 85% MCR. Leme de giro = 35°.</li>
+    <li><b>6 qualidades:</b> estabilidade dinâmica · manutenção de rumo · virada inicial · verificação da guinada · giro · parada.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Padrões IMO de Manobrabilidade (Bloco D) — A.601(15) · MSC.137(76) · MSC/Circ.1053 · Capital Sereno · valores conferidos contra as traduções PT da base do projeto.</div>
+</footer>
+
+<script>
+/* =========================================================
+   FIGURA 2 — CÍRCULO DE GIRO (SVG recriado do original IMO)
+   ========================================================= */
+(function(){
+  var svg=document.getElementById('svgGiro');
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(x,y,s,a){var e=el('text',{x:x,y:y,fill:(a&&a.fill)||'#16302B','font-family':'Trebuchet MS,sans-serif','font-size':(a&&a.fs)||13,'font-weight':(a&&a.fw)||'normal','text-anchor':(a&&a.ta)||'start'});e.textContent=s;svg.appendChild(e);return e;}
+  // --- Geometria consistente ---
+  // Rumo original = vertical, para CIMA. Navio parte do execute subindo e gira a ESTIBORDO (direita).
+  // Círculo de giro: centro Cx à direita do execute, mesma altura. Ponto de partida = execute (esquerda do círculo).
+  var exX=210, exY=420;            // ponto de execute do leme
+  var R=150;                        // raio de giro
+  var Cx=exX+R, Cy=exY;             // centro do círculo (à direita do execute)
+  // parametrização: ângulo θ medido do centro, começando em 180° (execute, à esquerda)
+  // subindo pela esquerda → topo (90° de mudança de rumo) → direita (180° de mudança de rumo)
+  function pt(theta){return [Cx+R*Math.cos(theta), Cy+R*Math.sin(theta)];}
+  var P0=pt(Math.PI);              // execute (esquerda)
+  var P90=pt(-Math.PI/2);          // topo → rumo variou 90°
+  var P180=pt(0);                  // direita → rumo variou 180°
+  // rumo original (linha vertical tracejada passando pelo execute)
+  svg.appendChild(el('line',{x1:exX,y1:445,x2:exX,y2:30,stroke:'#cdbf99','stroke-width':1.5,'stroke-dasharray':'5 4'}));
+  txt(exX+6,42,'rumo original',{fill:'#7a6f55',fs:12});
+  // círculo estacionário pontilhado
+  svg.appendChild(el('circle',{cx:Cx,cy:Cy,r:R,fill:'none',stroke:'#ddd2b0','stroke-width':1.5,'stroke-dasharray':'4 4'}));
+  // trajetória sólida: reta de aproximação + arco de 180° (execute → topo → direita)
+  var dd='M '+exX+' 445 L '+P0[0].toFixed(1)+' '+P0[1].toFixed(1)+' ';
+  for(var a=Math.PI; a>=0; a-=0.04){var p=pt(a);dd+='L '+p[0].toFixed(1)+' '+p[1].toFixed(1)+' ';}
+  svg.appendChild(el('path',{d:dd,fill:'none',stroke:'#1A7A6E','stroke-width':3}));
+  // execute
+  svg.appendChild(el('circle',{cx:exX,cy:exY,r:5,fill:'#0D3D36'}));
+  txt(exX-10,exY+18,'«execute» do leme',{fill:'#0D3D36',fs:12,ta:'end',fw:'bold'});
+  // AVANÇO: vertical, do nível do execute até o nível de P90 (topo)
+  var axX=exX-46;
+  svg.appendChild(el('line',{x1:axX,y1:exY,x2:axX,y2:P90[1],stroke:'#C8A84B','stroke-width':2}));
+  svg.appendChild(el('line',{x1:axX-6,y1:exY,x2:axX+6,y2:exY,stroke:'#C8A84B','stroke-width':2}));
+  svg.appendChild(el('line',{x1:axX-6,y1:P90[1],x2:axX+6,y2:P90[1],stroke:'#C8A84B','stroke-width':2}));
+  txt(axX-10,(exY+P90[1])/2-4,'AVANÇO',{fill:'#9a7d1f',fs:12,ta:'end',fw:'bold'});
+  txt(axX-10,(exY+P90[1])/2+12,'≤ 4,5 L',{fill:'#9a7d1f',fs:11,ta:'end'});
+  // P90
+  svg.appendChild(el('circle',{cx:P90[0],cy:P90[1],r:4,fill:'#9E3B2E'}));
+  txt(P90[0]-8,P90[1]-10,'rumo variou 90°',{fill:'#9E3B2E',fs:12,ta:'middle'});
+  // TRANSFERÊNCIA: horizontal do rumo original (exX) até P90
+  svg.appendChild(el('line',{x1:exX,y1:P90[1],x2:P90[0],y2:P90[1],stroke:'#C8A84B','stroke-width':2,'stroke-dasharray':'2 2'}));
+  txt((exX+P90[0])/2,P90[1]-28,'TRANSFERÊNCIA',{fill:'#9a7d1f',fs:11,fw:'bold',ta:'middle'});
+  txt((exX+P90[0])/2,P90[1]-14,'(a 90°)',{fill:'#9a7d1f',fs:10,ta:'middle'});
+  // P180
+  svg.appendChild(el('circle',{cx:P180[0],cy:P180[1],r:4,fill:'#9E3B2E'}));
+  txt(P180[0]+8,P180[1]+4,'rumo variou 180°',{fill:'#9E3B2E',fs:12});
+  // DIÂMETRO TÁTICO: horizontal do rumo original até P180, cotado abaixo
+  var dtY=exY+34;
+  svg.appendChild(el('line',{x1:exX,y1:dtY,x2:P180[0],y2:dtY,stroke:'#C8A84B','stroke-width':2}));
+  svg.appendChild(el('line',{x1:exX,y1:dtY-6,x2:exX,y2:dtY+6,stroke:'#C8A84B','stroke-width':2}));
+  svg.appendChild(el('line',{x1:P180[0],y1:dtY-6,x2:P180[0],y2:dtY+6,stroke:'#C8A84B','stroke-width':2}));
+  // guias verticais finas até P180
+  svg.appendChild(el('line',{x1:P180[0],y1:P180[1],x2:P180[0],y2:dtY,stroke:'#e6d9b3','stroke-width':1,'stroke-dasharray':'2 2'}));
+  txt((exX+P180[0])/2,dtY+18,'DIÂMETRO TÁTICO ≤ 5,0 L',{fill:'#9a7d1f',fs:12,fw:'bold',ta:'middle'});
+  // ângulo de deriva — no ponto a ~135° do giro (quadrante superior direito da trajetória)
+  var dpt=pt(-Math.PI/4);
+  svg.appendChild(el('circle',{cx:dpt[0],cy:dpt[1],r:3,fill:'#6B4E8E'}));
+  txt(dpt[0]+8,dpt[1]-4,'ângulo de deriva (β)',{fill:'#6B4E8E',fs:12});
+  // raio de giro (linha centro→P90) e rótulo do centro
+  svg.appendChild(el('line',{x1:Cx,y1:Cy,x2:P90[0],y2:P90[1],stroke:'#c9bd97','stroke-width':1,'stroke-dasharray':'3 3'}));
+  svg.appendChild(el('circle',{cx:Cx,cy:Cy,r:3,fill:'#7a6f55'}));
+  txt(Cx+6,Cy+16,'raio de giro (R)',{fill:'#7a6f55',fs:11});
+})();
+
+/* =========================================================
+   FIGURA 3 — ZIGZAG 10/10 (SVG recriado)
+   ========================================================= */
+(function(){
+  var svg=document.getElementById('svgZig');
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(x,y,s,a){var e=el('text',{x:x,y:y,fill:(a&&a.fill)||'#16302B','font-family':'Trebuchet MS,sans-serif','font-size':(a&&a.fs)||12,'font-weight':(a&&a.fw)||'normal','text-anchor':(a&&a.ta)||'start'});e.textContent=s;svg.appendChild(e);return e;}
+  var x0=50,y0=190,W=790,H=150; // y0 = eixo zero
+  // eixos
+  svg.appendChild(el('line',{x1:x0,y1:y0,x2:x0+W,y2:y0,stroke:'#cdbf99','stroke-width':1.5}));
+  svg.appendChild(el('line',{x1:x0,y1:30,x2:x0,y2:340,stroke:'#cdbf99','stroke-width':1.5}));
+  txt(x0+W-40,y0+18,'tempo →',{fill:'#7a6f55'});
+  txt(x0+6,40,'ângulo (°)',{fill:'#7a6f55'});
+  // linhas de referência ±10
+  [10,-10].forEach(function(v){
+    var y=y0 - v*4;
+    svg.appendChild(el('line',{x1:x0,y1:y,x2:x0+W,y2:y,stroke:'#ddd2b0','stroke-width':1,'stroke-dasharray':'3 3'}));
+    txt(x0-8,y+4,(v>0?'+':'')+v+'°',{fill:'#a99',fs:11,ta:'end'});
+  });
+  // LEME: degraus dourados ±10
+  var seg=[[0,10],[95,-10],[300,10],[520,-10],[720,10]]; // t, valor
+  var lemePts='';
+  var lx=x0;
+  var lastV=10;
+  // construir degrau
+  var stepXs=[0,95,300,520,720,790];
+  var stepVs=[10,-10,10,-10,10];
+  var dpath='M '+x0+' '+(y0-stepVs[0]*4)+' ';
+  for(var i=0;i<stepVs.length;i++){
+    var xA=x0+stepXs[i], xB=x0+stepXs[i+1];
+    var y=y0-stepVs[i]*4;
+    dpath+='L '+xA+' '+y+' L '+xB+' '+y+' ';
+  }
+  svg.appendChild(el('path',{d:dpath,fill:'none',stroke:'#C8A84B','stroke-width':2.4}));
+  txt(x0+330,y0-10*4-8,'ângulo de leme ±10°',{fill:'#9a7d1f',fs:12,fw:'bold'});
+  // RUMO: curva verde que persegue e ultrapassa
+  // gerar curva senoidal-amortecida qualitativa com picos de overshoot
+  var rp='M '+x0+' '+y0+' ';
+  var ov1=null, ov2=null, ov1v=-99, ov2v=99;
+  for(var t=0;t<=W;t+=2){
+    var ph=(t/W)*3*Math.PI;
+    var amp=13; // graus de pico > 10
+    var val=amp*Math.sin(ph - 0.5);
+    var y=y0 - val*4;
+    rp+='L '+(x0+t)+' '+y.toFixed(1)+' ';
+    // capturar o pico REAL (máximo) do 1o lobo e o vale do 2o lobo
+    if(t>60 && t<210 && val>ov1v){ov1v=val;ov1=[x0+t,y];}
+    if(t>300 && t<470 && val<ov2v){ov2v=val;ov2=[x0+t,y];}
+  }
+  svg.appendChild(el('path',{d:rp,fill:'none',stroke:'#1A7A6E','stroke-width':3}));
+  txt(x0+540,y0+52,'rumo do navio (ψ)',{fill:'#1A7A6E',fs:12,fw:'bold'});
+  // marcar overshoots
+  if(ov1){svg.appendChild(el('circle',{cx:ov1[0],cy:ov1[1],r:5,fill:'#9E3B2E'}));
+    svg.appendChild(el('line',{x1:ov1[0],y1:ov1[1],x2:ov1[0],y2:y0-10*4,stroke:'#9E3B2E','stroke-width':1.5,'stroke-dasharray':'3 3'}));
+    txt(ov1[0]+8,ov1[1]-6,'1.º overshoot',{fill:'#9E3B2E',fs:12,fw:'bold'});}
+  if(ov2){svg.appendChild(el('circle',{cx:ov2[0],cy:ov2[1],r:5,fill:'#6B4E8E'}));
+    svg.appendChild(el('line',{x1:ov2[0],y1:ov2[1],x2:ov2[0],y2:y0+10*4,stroke:'#6B4E8E','stroke-width':1.5,'stroke-dasharray':'3 3'}));
+    txt(ov2[0]+8,ov2[1]+16,'2.º overshoot',{fill:'#6B4E8E',fs:12,fw:'bold'});}
+})();
+
+/* =========================================================
+   CALCULADOR DE OVERSHOOT
+   ========================================================= */
+function lim1(lv){ if(lv<10) return 10; if(lv>=30) return 20; return 5+0.5*lv; }
+function lim2(lv){ if(lv<10) return 25; if(lv>=30) return 40; return 17.5+0.75*lv; }
+function drawOver(){
+  var cv=document.getElementById('cvOver'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=54,y0=H-36,pW=W-84,pH=H-58;
+  ctx.clearRect(0,0,W,H);
+  var lvMax=45;
+  function px(lv){return x0+(lv-4)/(lvMax-4)*pW;}
+  function py(a){return y0-a/45*pH;}
+  // eixos
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-16,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('overshoot limite (°)',x0+4,24);ctx.fillText('L/V (s)',W-70,y0+22);
+  [10,20,30,40].forEach(function(a){var y=py(a);ctx.strokeStyle='#eee3c6';ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(W-16,y);ctx.stroke();ctx.fillStyle='#a99';ctx.fillText(a+'°',x0-30,y+4);});
+  [10,30].forEach(function(lv){var x=px(lv);ctx.strokeStyle='#ddd2b0';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(x,14);ctx.lineTo(x,y0);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#a99';ctx.fillText('L/V='+lv,x-18,y0+16);});
+  // curva 1o overshoot (azul)
+  function curve(fn,color){ctx.strokeStyle=color;ctx.lineWidth=2.8;ctx.beginPath();var f=true;for(var lv=4;lv<=lvMax;lv+=0.3){var X=px(lv),Y=py(fn(lv));if(f){ctx.moveTo(X,Y);f=false;}else ctx.lineTo(X,Y);}ctx.stroke();}
+  curve(lim2,'#6B4E8E'); // 2o
+  curve(lim1,'#2C5F8A'); // 1o
+  ctx.fillStyle='#2C5F8A';ctx.font='bold 12px Trebuchet MS';ctx.fillText('1.º overshoot',px(34),py(lim1(34))-8);
+  ctx.fillStyle='#6B4E8E';ctx.fillText('2.º overshoot',px(34),py(lim2(34))-8);
+  // valor atual
+  var lv=+document.getElementById('lv').value;
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2;ctx.setLineDash([5,3]);ctx.beginPath();ctx.moveTo(px(lv),14);ctx.lineTo(px(lv),y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(px(lv),py(lim1(lv)),5,0,7);ctx.fill();ctx.beginPath();ctx.arc(px(lv),py(lim2(lv)),5,0,7);ctx.fill();
+  var faixa = lv<10?'L/V &lt; 10 s':(lv>=30?'L/V ≥ 30 s':'10 ≤ L/V &lt; 30 s');
+  document.getElementById('overRead').innerHTML='L/V = <b>'+lv.toFixed(1)+' s</b> ('+faixa+') → 1.º overshoot-limite = <b>'+lim1(lv).toFixed(1)+'°</b> · 2.º overshoot-limite = <b>'+lim2(lv).toFixed(1)+'°</b>';
+}
+drawOver();
+window.addEventListener('resize',function(){drawOver();});
+
+/* =========================================================
+   FLASHCARDS
+   ========================================================= */
+var FC=[
+  {f:"A.601(15) — o que regula?",b:"Provisão e exibição de INFORMAÇÕES de manobra a bordo. Substitui A.209(VII). Não tem valores-critério."},
+  {f:"MSC.137(76) — o que regula?",b:"Os CRITÉRIOS NUMÉRICOS. Substitui A.751(18). Navios de 1/1/2004 em diante, L≥100 m (+ quimiqueiros/gaseiros)."},
+  {f:"Circ.1053 — o que é?",b:"Notas Explicativas da MSC.137. Explica como medir/corrigir e define as 6 qualidades e as figuras. Sem força de critério."},
+  {f:"Cartão do prático — quem preenche?",b:"O COMANDANTE. Reflete condições atuais. Não exige provas especiais."},
+  {f:"Pôster da casa do leme",b:"Exposição PERMANENTE na ponte. Características gerais de manobra."},
+  {f:"Caderno de manobra",b:"Inclui o pôster + info adicional. Parte estimada, parte de provas. Pode ser complementado."},
+  {f:"Avanço — critério",b:"≤ 4,5 L. Distância longitudinal até o rumo variar 90°."},
+  {f:"Diâmetro tático — critério",b:"≤ 5,0 L. Distância transversal até o rumo variar 180°."},
+  {f:"Virada inicial — critério",b:"≤ 2,5 L percorridos até 10° de rumo, com leme a 10°."},
+  {f:"1.º overshoot (10/10)",b:"≤10° (L/V<10) · ≤(5+½·L/V)° (10–30) · ≤20° (≥30). Avalia verificação da guinada."},
+  {f:"2.º overshoot (10/10)",b:"≤25° (L/V<10) · ≤(17,5+0,75·L/V)° (10–30) · ≤40° (≥30). Avalia manutenção de rumo."},
+  {f:"Zigzag 20/20",b:"1.º overshoot ≤ 25°."},
+  {f:"Parada — critério",b:"Alcance de trajetória ≤ 15 L (até 20 L p/ grande deslocamento; nunca dispensado)."},
+  {f:"Velocidade de prova",b:"≥ 90% da velocidade correspondente a 85% da potência máxima (MCR). Leme de giro = 35°."},
+  {f:"Condições dos ensaios",b:"Águas profundas/irrestritas · ambiente calmo · plena carga + quilha reta · aproximação estável."},
+  {f:"Estabilidade dinâmica inerente",b:"Após pequena perturbação, retoma um NOVO rumo reto sem leme corretivo."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* =========================================================
+   QUIZ + PLACAR
+   ========================================================= */
+var QUIZ=[
+  {q:"Qual documento IMO fixa os valores-limite numéricos de manobrabilidade (avanço, diâmetro tático, overshoot)?",
+   o:["A.601(15)","MSC.137(76)","MSC/Circ.1053","MSC.1/Circ.1228"],a:1,
+   e:"MSC.137(76) — Normas para manobrabilidade de navios. A A.601 trata de informações a bordo; a Circ.1053 são as notas explicativas; a Circ.1228 trata de estimativa em projeto."},
+  {q:"O critério de avanço e o de diâmetro tático no círculo de evolução são, respectivamente:",
+   o:["≤ 5,0 L e ≤ 4,5 L","≤ 4,5 L e ≤ 5,0 L","≤ 2,5 L e ≤ 4,5 L","≤ 4,5 L e ≤ 4,5 L"],a:1,
+   e:"Avanço ≤ 4,5 L (longitudinal, a 90°); diâmetro tático ≤ 5,0 L (transversal, a 180°). Inverter os dois valores é o distrator nº1 do bloco."},
+  {q:"O Cartão do Prático (Pilot Card) da A.601(15) é preenchido por quem?",
+   o:["Pelo prático ao embarcar","Pelo comandante","Pela Autoridade Marítima","Pelo oficial de quarto"],a:1,
+   e:"Pelo COMANDANTE. Reflete as condições atuais do navio e é entregue ao prático — não exige provas de manobra especiais para seu preenchimento."},
+  {q:"Para um navio com L/V = 20 s, o limite do 1.º ângulo de ultrapassagem no zigzag 10°/10° é:",
+   o:["10°","15°","20°","25°"],a:1,
+   e:"Faixa intermediária (10 ≤ L/V < 30): limite = 5 + ½·L/V = 5 + 10 = 15°."},
+  {q:"Para o mesmo navio (L/V = 20 s), o limite do 2.º ângulo de ultrapassagem é:",
+   o:["25°","30°","32,5°","40°"],a:2,
+   e:"2.º overshoot = 17,5 + 0,75·L/V = 17,5 + 15 = 32,5°."},
+  {q:"O critério de capacidade de parada (alcance de trajetória) é, como regra geral:",
+   o:["≤ 10 L","≤ 15 L","≤ 20 L sempre","≤ 5 L"],a:1,
+   e:"≤ 15 L. Para navios de grande deslocamento a Administração pode ampliar até 20 L — nunca além, e o critério nunca é dispensado."},
+  {q:"O 1.º e o 2.º ângulos de ultrapassagem do zigzag 10°/10° avaliam, respectivamente, as qualidades de:",
+   o:["Giro e parada","Verificação da guinada e manutenção de rumo","Virada inicial e giro","Estabilidade e parada"],a:1,
+   e:"1.º overshoot → verificação da guinada (yaw-checking); 2.º overshoot → manutenção de rumo (course-keeping). Faixas de limite distintas."},
+  {q:"Segundo a A.601(15), a relação entre o pôster da casa do leme e o caderno de manobra é:",
+   o:["São documentos idênticos","O caderno inclui o pôster + informações adicionais","O pôster inclui o caderno","Nenhum contém o outro"],a:1,
+   e:"O caderno de manobra INCLUI as informações do pôster e acrescenta outras (parte estimada, parte de provas). Dizer o inverso é distrator."},
+  {q:"As Normas da MSC.137(76) aplicam-se a navios de todos os tipos de leme e propulsão com comprimento:",
+   o:["Igual ou superior a 50 m","Igual ou superior a 100 m (e quimiqueiros/gaseiros de qualquer comprimento)","Apenas acima de 200 m","Qualquer comprimento, sem exceção"],a:1,
+   e:"L ≥ 100 m em geral; quimiqueiros e gaseiros independentemente do comprimento. Aplica-se a navios construídos em/após 1/1/2004."},
+  {q:"A velocidade de prova (test speed) usada nas Normas é definida como:",
+   o:["100% da velocidade máxima","≥ 90% da velocidade correspondente a 85% da potência máxima (MCR)","85% da velocidade de serviço","A velocidade econômica"],a:1,
+   e:"≥ 90% da velocidade do navio correspondente a 85% da potência máxima do motor (MCR). É a base das condições de ensaio do item 5.2."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent = (qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+
+/* =========================================================
+   SUPABASE — botão Enviar ao Painel
+   ========================================================= */
+var SUPA_URL="https://iftourtecxtmvuhptvmo.supabase.co";
+var CADERNO_ID="bloco_d_padroes_imo";
+function enviarPainel(){
+  var st=document.getElementById('supaSt'), btn=document.getElementById('btnSupa');
+  if(tot===0){st.textContent="Responda ao menos uma questão do quiz antes de enviar.";return;}
+  var payload={
+    caderno_id:CADERNO_ID, tipo:"quiz", bloco:"D", tema:"Padrões IMO de Manobrabilidade",
+    assunto:"A.601 · MSC.137(76) · Circ.1053", enunciado:"Sessão de quiz — "+tot+" questões",
+    acertou:(hits===tot), sessao_data:new Date().toISOString()
+  };
+  btn.disabled=true; st.textContent="Enviando…";
+  fetch(SUPA_URL+"/rest/v1/respostas",{method:"POST",
+    headers:{"Content-Type":"application/json","Prefer":"return=minimal"},
+    body:JSON.stringify(payload)})
+   .then(function(r){ if(r.ok){st.innerHTML="✓ Enviado ao painel ("+hits+"/"+tot+").";}
+     else{st.innerHTML="⚠ Falha ("+r.status+"). Verifique a API key/anon no painel pscpp-buddy.";btn.disabled=false;} })
+   .catch(function(e){ st.innerHTML="⚠ Sem conexão com o Supabase. Configure endpoint/anon-key no painel.";btn.disabled=false; });
+}
+</script>
+</body>
+</html>

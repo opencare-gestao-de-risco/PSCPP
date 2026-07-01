@@ -124,6 +124,27 @@
    ====================================================================== */
 const CADERNOS = [
   {
+    materia:"manobrabilidade", badge:"Bloco H · Santos Cap. 6",
+    titulo:"A Curva de Giro — camadas próprias (Santos Cap. 6)",
+    arquivo:"santos_cap6_curva_giro.html",
+    desc:"Card COMPLEMENTAR (não duplica o PNA §6 nem os critérios IMO do Bloco D). Foca o que Santos aprofunda: história (Davidson &amp; Schiff 1946), os 4 parâmetros e a distinção máximos×principais, ponto de pivô (x_P=R·tan β), a MATEMÁTICA das 3 fases (Fase 1: u̇≠0,r≈0, escora p/ dentro · Fase 2: transiente, surgem β e r · Fase 3: u̇=v̇=ṙ=0, r constante, escora p/ fora) com SVG interativo, o RAIO DE GIRO na teoria linear ligado às derivadas (N_r previsível) com gráfico, o ADERNAMENTO fase a fase (v·δ·Y_δ=Δ·GM·sin θ) e a influência da velocidade no diâmetro tático (Esso Osaka, D_T/L insensível à velocidade) + trim. Flashcards, quiz de 8 questões e Supabase.",
+    tags:["BANCA","Curva de giro","3 fases","Ponto de pivô","Adernamento","Escora","Raio de giro","Diâmetro tático","Davidson-Schiff","Esso Osaka","Trim","Bloco H"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Bloco F · Santos Cap. 4",
+    titulo:"Estabilidade Dinâmica do Navio e a Curva Espiral (Santos Cap. 4)",
+    arquivo:"santos_cap4_estabilidade_espiral.html",
+    desc:"Capítulo teórico central da estabilidade direcional, completo (seções 4.1 a 4.14). Os 4 tipos de estabilidade de movimento (Arentzen &amp; Mandel 1961: linha reta, direcional, índices complexos, posicional) com SVG interativo. Estabilidade de Lyapunov. Equação característica Aσ²+Bσ+C=0 e critério C = Y_v·N_r − N_v·(Y_r−Δ')>0. Significado físico de TODAS as derivadas (Y_v̇, N_ṙ, Y_v, N_v, Y_r, N_r) com sinais e o papel-chave de N_v (skeg/trim/bulbo). Curva espiral de Dieudonné (Roy 1931) estável×instável interativa; loop de histerese e o laço FALSO de Strom-Tejsen (Figura 68 REAL do livro). Analogia de Abkowitz (1964). Espiral reversa de Bech (1968) e pull-out (gráfico interativo). Padrões IMO do loop (0°/crescente/~12°) e espiral simplificada (3 pontos). Par-Santos do PNA §4. Flashcards, quiz de 12 questões e Supabase.",
+    tags:["BANCA","Estabilidade direcional","Dieudonné","Bech","Pull-out","Histerese","Strom-Tejsen","Abkowitz","Arentzen","Derivadas","N_v","Lyapunov","Curva espiral","Bloco F"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Bloco D · Padrões IMO",
+    titulo:"Padrões IMO de Manobrabilidade (A.601 · MSC.137 · Circ.1053)",
+    arquivo:"santos_bloco_d_padroes_imo.html",
+    desc:"Os 4 instrumentos IMO e seus papéis (A.601 informações a bordo · MSC.137 critérios · Circ.1053 notas explicativas · Circ.1228 estimativa). Os 3 documentos da A.601 (cartão do prático preenchido pelo COMANDANTE · pôster PERMANENTE · caderno de manobra). As 6 qualidades de manobra. TABELA-RESUMO dos critérios MSC.137(76): avanço ≤4,5L, diâmetro tático ≤5,0L, virada inicial ≤2,5L, 1.º/2.º overshoot (faixas L/V), zigzag 20/20 ≤25°, parada ≤15L (até 20L). Fig. 2 (círculo de giro) e Fig. 3 (zigzag) recriadas em SVG + calculador interativo de overshoot × L/V. Flashcards, quiz estilo banca e botão Supabase.",
+    tags:["BANCA","IMO","MSC.137","A.601","Circ.1053","Overshoot","Diâmetro tático","Avanço","Zigzag","Crash stop","Cartão do prático","L/V","Bloco D"]
+  },
+  {
     materia:"manobrabilidade", badge:"Bloco E",
     titulo:"Derivadas hidrodinâmicas",
     arquivo:"derivadas_hidrodinamicas.html",
@@ -204,8 +225,8 @@ const CADERNOS = [
     materia:"manobrabilidade", badge:"Alto retorno",
     titulo:"Estabilidade de Movimento e Equações Lineares (PNA Cap. IX §3)",
     arquivo:"pna_ix_sec3_estabilidade_movimento.html",
-    desc:"Base teórica do P1b: os 4 casos de estabilidade de movimento (Arentzen), controles fixos × operando (plano vertical × horizontal), linearização de Taylor, equações lineares de movimento, derivadas hidrodinâmicas (SNAME), massa virtual e amplificação leme→casco. Diagrama dos 4 casos e linearização interativos.",
-    tags:["BANCA","Manobra","Estabilidade","Nomoto","Derivadas"]
+    desc:"Base teórica do P1b: os 4 casos de estabilidade de movimento (Arentzen), controles fixos × operando (plano vertical × horizontal), linearização de Taylor, equações lineares de movimento, derivadas hidrodinâmicas (SNAME), massa virtual e amplificação leme→casco. Diagrama dos 4 casos e linearização interativos. ✚ Inclui box SANTOS Cap. 2 (a equação de movimento): referenciais fixo×inercial, os 6 graus de liberdade com SVG, montagem 6→3 GL (surge/sway/yaw) da 2.ª lei de Newton.",
+    tags:["BANCA","Manobra","Estabilidade","Nomoto","Derivadas","6 GL","Santos Cap. 2","Equação de movimento"]
   },
   {
     materia:"manobrabilidade", badge:"Alto retorno",

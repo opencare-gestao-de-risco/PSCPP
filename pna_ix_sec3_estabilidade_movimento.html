@@ -73,6 +73,7 @@
   th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
   tr:nth-child(even) td{background:#faf7ee}
   td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
 
   .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
   .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
@@ -145,6 +146,7 @@
 <nav class="toc">
   <div class="wrap"><div class="row">
     <a href="#def">Estabilidade</a>
+    <a href="#cap2santos">Base Santos C.2 ▶</a>
     <a href="#casos">4 casos ▶</a>
     <a href="#fixos">Fixos × operando</a>
     <a href="#taylor">Linearização ▶</a>
@@ -170,6 +172,52 @@
 
   <div class="box key">
     <p>Na manutenção de rota, a perturbação típica é uma <strong>onda ou rajada de vento</strong>. O ideal seria o navio retomar a rota original <span class="hl">sem intervenção do timoneiro</span> — se isso ocorre depende do tipo de estabilidade de movimento que o navio possui. Os tipos se classificam pelos <strong>atributos do equilíbrio inicial retidos na trajetória final</strong> do centro de gravidade. <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== SANTOS CAP. 2 (fundamento) ===== -->
+<section class="bloco" id="cap2santos">
+  <h2 class="sec"><span class="n">Santos&nbsp;Cap.&nbsp;2</span> A base: a equação de movimento do navio</h2>
+  <p class="lede">Antes de classificar a estabilidade, é preciso a equação de movimento. Santos (Cap. 2) monta a física a partir da 2.ª lei de Newton — a camada que antecede a linearização do PNA e alimenta os índices de estabilidade do Cap. 4.</p>
+
+  <div class="box key" style="border-left-color:#6B4E8E">
+    <h4 style="color:#4b2e7a">Por que este box existe</h4>
+    <p>O PNA §3 (acima e abaixo) entra direto na <em>linearização</em> e nas derivadas SNAME. Santos Cap. 2 fornece o <span class="hl">degrau anterior</span>: os referenciais, os vetores e a montagem da equação de movimento em 6 e depois 3 graus de liberdade. Mesma física, notação compatível — as equações finais X, Y, N são as que o §3 lineariza.</p>
+  </div>
+
+  <h3>Referenciais: por que fixar os eixos no navio</h3>
+  <p>Um <strong>referencial inercial</strong> é aquele em que valem as leis de Newton (qualquer referencial em velocidade constante em relação a ele também é inercial). O problema: no referencial inercial, a geometria do casco varia com o tempo à medida que o navio se move. A solução de Santos é <span class="hl">fixar os eixos no próprio navio</span> — aproveitando o <strong>plano de simetria</strong> (BE/BB espelhados) — para calcular as forças hidrodinâmicas com facilidade. O custo é ter de somar os <strong>termos de Coriolis</strong> (os eixos giram com o navio); o ganho de simetria compensa largamente.</p>
+
+  <div class="ichart">
+    <h4>Os seis graus de liberdade (Fig. 1 de Santos)</h4>
+    <p class="hint">Três translações e três rotações. Em manobra no plano horizontal, só três importam (surge, sway, yaw).</p>
+    <svg id="svg6gl" viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Seis graus de liberdade"></svg>
+    <div class="iread" id="read6gl" style="margin-top:10px"></div>
+  </div>
+
+  <table>
+    <tr><th>Eixo</th><th>Vetor unitário</th><th>Translação</th><th>Rotação</th><th class="center">Plano horiz.?</th></tr>
+    <tr><td><strong>x</strong> — longitudinal (positivo à vante, ~paralelo à quilha)</td><td class="sym">i</td><td><strong>Surge</strong> (X)</td><td><strong>Roll</strong> (K) — em torno de x</td><td class="center">Surge sim / Roll não</td></tr>
+    <tr><td><strong>y</strong> — transversal (positivo p/ BE)</td><td class="sym">j</td><td><strong>Sway</strong> (Y)</td><td><strong>Pitch</strong> (M) — em torno de y</td><td class="center">Sway sim / Pitch não</td></tr>
+    <tr><td><strong>z</strong> — vertical (positivo p/ baixo)</td><td class="sym">k</td><td><strong>Heave</strong> (Z)</td><td><strong>Yaw</strong> (N) — em torno de z</td><td class="center">Heave não / Yaw sim</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>Da 2.ª lei de Newton ao plano horizontal <span class="tag t-calc">CALCULO</span></h4>
+    <p class="vars">A equação vetorial de partida é <b>F = dH/dt</b> (força = variação da quantidade de movimento). Em 6 GL, fora do centro de gravidade, aparecem os termos de Coriolis e os que multiplicam x<sub>G</sub>, y<sub>G</sub>, z<sub>G</sub>. Reduzindo ao <strong>plano horizontal</strong> e ao <strong>centro de gravidade</strong> (2.8), sobram três equações — as mesmas que o §3 e o Cap. 4 linearizam:</p>
+    <div class="eq">X = Δ(u̇ − v·r − x<sub>G</sub>·r²)<span class="lbl">surge — força longitudinal</span></div>
+    <div class="eq">Y = Δ(v̇ + u·r + x<sub>G</sub>·ṙ)<span class="lbl">sway — força lateral</span></div>
+    <div class="eq">N = I<sub>z</sub>·ṙ + Δ·x<sub>G</sub>·(v̇ + u·r)<span class="lbl">yaw — momento de guinada</span></div>
+    <p class="vars">Se o centro de gravidade está no plano longitudinal de simetria, y<sub>G</sub>=0. Com x<sub>G</sub>=0 (CG no centro), as equações se reduzem ainda mais. Os termos <b>v·r</b> e <b>u·r</b> são <strong>não lineares</strong> — é exatamente o que a série de Taylor do §3 (abaixo) trata para obter as equações lineares.</p>
+  </div>
+
+  <div class="box key">
+    <h4>A ponte para o resto do P1b <span class="tag t-banca">BANCA</span></h4>
+    <p>Guarde a cadeia: <span class="hl">Cap. 2 (equação de movimento, 6→3 GL) → §3 / Cap. 3 (linearização de Taylor, derivadas) → Cap. 4 / §4 (equação característica Aσ²+Bσ+C=0, índices de estabilidade)</span>. A banca cobra os seis nomes (surge/sway/heave/roll/pitch/yaw), qual eixo cada um gira/transla, e quais sobram no plano horizontal (surge, sway, yaw).</p>
+  </div>
+
+  <div class="related" style="margin-top:16px">
+    📎 Aprofundamento: a estabilidade que estas equações permitem analisar está detalhada no card <a href="santos_cap4_estabilidade_espiral.html">Estabilidade Dinâmica e Curva Espiral (Santos Cap. 4)</a>.
   </div>
 </section>
 
@@ -507,6 +555,48 @@ function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
   if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
 function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
 loadQ();
+</script>
+<script>
+/* ===== SANTOS CAP.2 — diagrama dos 6 graus de liberdade (bloco isolado) ===== */
+(function(){
+  var NS="http://www.w3.org/2000/svg";
+  var svg=document.getElementById('svg6gl');
+  if(!svg) return;
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+  function tx(x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+  var cx=340,cy=160;
+  el('ellipse',{cx:cx,cy:cy,rx:150,ry:44,fill:'#eef5f3',stroke:'#1A7A6E','stroke-width':2});
+  el('path',{d:'M '+(cx+150)+' '+cy+' l 34 -14 l 0 28 z',fill:'#1A7A6E'});
+  tx(cx+178,cy+4,'proa',{fill:'#1A7A6E',fs:11});
+  el('line',{x1:cx-180,y1:cy,x2:cx+195,y2:cy,stroke:'#9E3B2E','stroke-width':2});
+  tx(cx+198,cy-6,'x',{fill:'#9E3B2E',fs:14,fw:'bold'});
+  el('line',{x1:cx,y1:cy,x2:cx+90,y2:cy+70,stroke:'#2C5F8A','stroke-width':2});
+  tx(cx+94,cy+80,'y',{fill:'#2C5F8A',fs:14,fw:'bold'});
+  el('line',{x1:cx,y1:cy-90,x2:cx,y2:cy+95,stroke:'#6B4E8E','stroke-width':2});
+  tx(cx-14,cy+108,'z',{fill:'#6B4E8E',fs:14,fw:'bold'});
+  tx(cx-175,cy-10,'Surge (X)',{fill:'#9E3B2E',fs:12,fw:'bold'});
+  tx(cx+40,cy+52,'Sway (Y)',{fill:'#2C5F8A',fs:12,fw:'bold'});
+  tx(cx+6,cy-78,'Heave (Z)',{fill:'#6B4E8E',fs:12,fw:'bold'});
+  function arc(ax,ay,r,col,lbl,lx,ly){
+    el('path',{d:'M '+(ax-r)+' '+ay+' A '+r+' '+(r*0.5)+' 0 1 1 '+(ax+r)+' '+ay,fill:'none',stroke:col,'stroke-width':1.8,'stroke-dasharray':'4 3'});
+    el('path',{d:'M '+(ax+r)+' '+ay+' l -8 -6 l 2 10 z',fill:col});
+    tx(lx,ly,lbl,{fill:col,fs:11,fw:'bold'});
+  }
+  arc(cx-90,cy-6,26,'#9E3B2E','Roll (K)',cx-118,cy-30);
+  arc(cx+60,cy-6,22,'#2C5F8A','Pitch (M)',cx+40,cy-26);
+  el('path',{d:'M '+(cx-40)+' '+(cy+118)+' A 40 40 0 1 1 '+(cx+40)+' '+(cy+118),fill:'none',stroke:'#0D3D36','stroke-width':1.8,'stroke-dasharray':'4 3'});
+  el('path',{d:'M '+(cx+40)+' '+(cy+118)+' l -8 -6 l 2 10 z',fill:'#0D3D36'});
+  tx(cx-6,cy+140,'Yaw (N)',{fill:'#0D3D36',fs:12,fw:'bold',ta:'middle'});
+  el('rect',{x:600,y:60,width:230,height:180,rx:10,fill:'#f3f8f6',stroke:'#cfe3df','stroke-width':1});
+  tx(615,86,'No plano horizontal',{fill:'#0D3D36',fs:13,fw:'bold'});
+  tx(615,110,'sobram 3 GL:',{fill:'#7a6f55',fs:12});
+  tx(625,138,'• Surge (X) — avanço',{fill:'#9E3B2E',fs:12.5,fw:'bold'});
+  tx(625,162,'• Sway (Y) — deriva',{fill:'#2C5F8A',fs:12.5,fw:'bold'});
+  tx(625,186,'• Yaw (N) — guinada',{fill:'#0D3D36',fs:12.5,fw:'bold'});
+  tx(615,216,'Heave, roll e pitch',{fill:'#7a6f55',fs:11});
+  tx(615,232,'ficam para seakeeping.',{fill:'#7a6f55',fs:11});
+  document.getElementById('read6gl').innerHTML='<b>6 GL:</b> 3 translações (surge/sway/heave) + 3 rotações (roll/pitch/yaw). Na manobra em águas tranquilas o navio opera essencialmente no <b>plano horizontal</b> → surge, sway e yaw. Os outros três dominam o comportamento em ondas (seakeeping).';
+})();
 </script>
 </body>
 </html>

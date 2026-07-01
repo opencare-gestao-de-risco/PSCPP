@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>A Curva de Giro — Santos Cap. 6 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:170px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  .supa{background:linear-gradient(160deg,var(--verde) 0%,#0a322c 100%);border-radius:12px;padding:20px;margin:26px 0;text-align:center;color:var(--creme);font-family:'Trebuchet MS',sans-serif}
+  .supa button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:15px;background:var(--ouro);color:var(--verde);border:none;border-radius:24px;padding:12px 26px;cursor:pointer;box-shadow:var(--sombra)}
+  .supa button:disabled{opacity:.55;cursor:default}
+  .supa .st{font-size:12.5px;color:#a9c8c1;margin-top:10px}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco H — Giro</p>
+    <h1>A Habilidade para Executar uma Curva &amp; a <em>Curva de Giro</em></h1>
+    <p class="sub">A última das manobras definitivas em Santos (Cap. 6). Este caderno foca as camadas que Santos aprofunda além do PNA §6: a matemática das <strong>três fases</strong>, o <strong>raio de giro na teoria linear</strong> ligado às derivadas, o <strong>ângulo de adernamento fase a fase</strong>, e a influência da velocidade no diâmetro tático.</p>
+    <div class="src"><b>Fonte:</b> Santos, <em>Manobrabilidade do Navio</em>, Cap. 6 — "A habilidade para executar uma curva e a curva de giro" (Davidson &amp; Schiff, 1946). Complementa o card PNA §6; os critérios IMO estão no card do Bloco D.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#escopo">O que este card cobre</a>
+    <a href="#params">4 parâmetros</a>
+    <a href="#pivo">Ponto de pivô</a>
+    <a href="#fases">3 fases ▶</a>
+    <a href="#raio">Raio linear ▶</a>
+    <a href="#escora">Adernamento</a>
+    <a href="#veloc">Velocidade</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 <strong>Card complementar, não duplicado.</strong> A geometria básica do giro (avanço, transferência, diâmetro tático, pivô, deriva) já está no card <a href="pna_ix_sec6_capacidade_giro.html">Capacidade de Giro (PNA §6)</a>; os <strong>critérios numéricos IMO</strong> (avanço ≤4,5L, diâmetro tático ≤5,0L) estão no card <a href="santos_bloco_d_padroes_imo.html">Bloco D — Padrões IMO</a>. Aqui aprofundamos a física que Santos detalha a mais.
+</div>
+
+<!-- ===== ESCOPO ===== -->
+<section class="bloco" id="escopo">
+  <h2 class="sec"><span class="n">6.0</span> Por que este card é enxuto</h2>
+  <p class="lede">A curva de giro é a última das três manobras definitivas (espiral, zigzag, giro). Muito do Cap. 6 já é coberto por outros cards — aqui isolamos o valor próprio de Santos.</p>
+
+  <p>Contexto histórico: até ~1940 as qualidades de manobra de navios mercantes eram subjetivas. Os primeiros parâmetros quantitativos vieram de <strong>Hovgaard</strong> (navios de guerra, ~1910) e sobretudo de <strong>Davidson &amp; Schiff (1946)</strong>, cujo trabalho no Instituto Stevens deu origem aos parâmetros objetivos da curva de giro (os laboratórios de lá levam o nome de Davidson em sua homenagem).</p>
+
+  <table>
+    <tr><th>Tema do Cap. 6</th><th>Onde estudar</th></tr>
+    <tr><td>Definição de avanço, transferência, diâmetro tático; 3 fases (visão geral); pivô e deriva</td><td>Card PNA §6 (base)</td></tr>
+    <tr><td>Critérios numéricos IMO (4,5L / 5,0L)</td><td>Card Bloco D — Padrões IMO</td></tr>
+    <tr><td><span class="hl">Matemática das 3 fases · raio de giro linear × derivadas · adernamento fase a fase · influência da velocidade</span></td><td><strong>Este card</strong></td></tr>
+  </table>
+</section>
+
+<!-- ===== PARAMS ===== -->
+<section class="bloco" id="params">
+  <h2 class="sec"><span class="n">6.1</span> Os quatro parâmetros — e os "máximos"</h2>
+  <p class="lede">A curva de giro tem quatro parâmetros numéricos principais, adimensionalizados pelo comprimento entre perpendiculares (Lpp), conforme o padrão IMO.</p>
+
+  <table>
+    <tr><th>Parâmetro</th><th>Definição (Santos)</th></tr>
+    <tr><td><strong>Avanço</strong> (Advance)</td><td>Distância longitudinal do centro do navio, no sentido da trajetória inicial, do <em>execute</em> do leme até <span class="hl">90° de mudança de aproamento</span></td></tr>
+    <tr><td><strong>Transferência</strong> (Transfer)</td><td>Distância transversal do centro do navio, até <span class="hl">90° de mudança de aproamento</span></td></tr>
+    <tr><td><strong>Diâmetro tático</strong> (Tactical Diameter)</td><td>Distância transversal até <span class="hl">180° de mudança de aproamento</span></td></tr>
+    <tr><td><strong>Diâmetro de giro estacionário</strong></td><td>Diâmetro do círculo em regime permanente (fase 3), geralmente alcançado entre 90° e 180°</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Máximos × principais <span class="tag t-banca">BANCA</span> <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>Santos alerta: <strong>avanço e transferência máximos</strong> (relacionados à trajetória total descrita) <span class="hl">não se confundem</span> com o avanço e a transferência <strong>principais</strong> (a 90°). A prova pode plantar o "máximo" no lugar do "principal". A curva costuma ser finalizada quando variam ao menos 90° e 180° do aproamento original (algumas classificações vão até 720° para futura correção de perturbações ambientais).</p>
+  </div>
+</section>
+
+<!-- ===== PIVO ===== -->
+<section class="bloco" id="pivo">
+  <h2 class="sec"><span class="n">6.2</span> O ponto de pivô</h2>
+  <p class="lede">Ponto notável da trajetória do centro de gravidade, definido pelo raio de giro e o ângulo de deriva.</p>
+
+  <p>O <strong>ponto de pivô</strong> é o ponto do navio que, para um observador a bordo, parece ter velocidade lateral nula — o navio "gira em torno dele". Sua posição relativa ao centro de gravidade é dada por uma função cinemática do <span class="hl">raio de giro (descrito pelo CG) e do ângulo de deriva β</span>. Em avanço, situa-se tipicamente a ~⅓ do comprimento a partir da proa; com seguimento a ré, desloca-se para a popa.</p>
+
+  <div class="box formula">
+    <h4>Relação de posição <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">x<sub>P</sub> = R · tan(β)<span class="lbl">posição longitudinal do pivô em relação ao CG, em função do raio de giro R e do ângulo de deriva β</span></div>
+    <p class="vars">Quanto maior o ângulo de deriva, mais o pivô avança para a proa. É o mesmo ponto que aparece na prática de atracação (cards de shiphandling), aqui com a base cinemática.</p>
+  </div>
+</section>
+
+<!-- ===== 3 FASES ===== -->
+<section class="bloco" id="fases">
+  <h2 class="sec"><span class="n">6.3</span> As três fases do giro — a matemática</h2>
+  <p class="lede">O diferencial de Santos: cada fase é definida pelo estado das variáveis (u̇, v̇, ṙ) e da velocidade de guinada r. É o que o card PNA §6 resume, mas não deriva.</p>
+
+  <div class="ichart">
+    <h4>As três fases — estado das variáveis ao longo do tempo</h4>
+    <p class="hint">Selecione a fase. Veja quais variáveis estão ativas e o que fisicamente acontece.</p>
+    <div class="ictrl" style="margin-bottom:8px">
+      <button class="faseBtn active" data-f="1" onclick="setFase(1)">Fase 1 — inicial</button>
+      <button class="faseBtn" data-f="2" onclick="setFase(2)">Fase 2 — transiente</button>
+      <button class="faseBtn" data-f="3" onclick="setFase(3)">Fase 3 — permanente</button>
+    </div>
+    <svg id="svgFases" viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Três fases do giro"></svg>
+    <div class="iread" id="faseRead" style="margin-top:10px"></div>
+  </div>
+
+  <table>
+    <tr><th>Fase</th><th>Estado das variáveis</th><th>O que acontece fisicamente</th></tr>
+    <tr><td><strong>1 — inicial</strong></td><td>u̇≠0, v̇≈0, r≈0 (começa a deflexão do leme)</td><td>O leme é carregado (ex.: BE). Surge desaceleração longitudinal; o navio ainda não desenvolveu deriva nem guinada apreciável. Aparece um ângulo de ataque no leme</td></tr>
+    <tr><td><strong>2 — transiente</strong></td><td>u̇≠0, v̇≠0, ṙ≠0, r≠0 (tudo variando)</td><td>Fase acelerada: surgem o ângulo de deriva β e a velocidade de guinada r; a trajetória curva-se. É a fase mais complexa (todas as derivadas atuam)</td></tr>
+    <tr><td><strong>3 — permanente</strong></td><td>u̇=v̇=ṙ=0, r=constante</td><td>Equilíbrio dinâmico: a asa-casco mantém ângulo de ataque constante; o navio descreve um <span class="hl">círculo de raio constante</span> a taxa de guinada constante</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>A leitura-chave <span class="tag t-decorar">DECORAR</span></h4>
+    <p>A fase 3 é a única em que <span class="hl">todas as acelerações se anulam</span> (u̇=v̇=ṙ=0) e a taxa de guinada é constante — é dela que se extrai o diâmetro de giro estacionário. O diâmetro tático (a 180°) geralmente já ocorre dentro dessa fase permanente.</p>
+  </div>
+</section>
+
+<!-- ===== RAIO LINEAR ===== -->
+<section class="bloco" id="raio">
+  <h2 class="sec"><span class="n">6.4</span> O raio de giro na teoria linear</h2>
+  <p class="lede">A equação linear prevê como as derivadas hidrodinâmicas afetam o raio de giro em navios estáveis — a ponte direta com o Cap. 4.</p>
+
+  <div class="box formula">
+    <h4>Raio de giro × derivadas <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">R = <sup>[ Y'<sub>v</sub>·N'<sub>δ</sub> − N'<sub>v</sub>·Y'<sub>δ</sub> ]</sup> &frasl; <sub>[ Y'<sub>δ</sub>·(N'<sub>r</sub>) − N'<sub>δ</sub>·(Y'<sub>r</sub>−Δ') ]</sup> · <sup>1</sup>&frasl;<sub>δ</sub><span class="lbl">forma da teoria linear — o numerador contém o critério de estabilidade</span></div>
+    <p class="vars">A equação vem da solução simultânea das equações lineares de sway e yaw em regime (fase 3). Serve para <strong>prever o efeito de mudanças nas derivadas</strong> sobre o raio, em navios estáveis. Note que o denominador tem a mesma estrutura do discriminante C do Cap. 4.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Como as derivadas movem o raio de giro</h4>
+    <p class="hint">Deslize a derivada N<sub>r</sub> (amortecimento em guinada) e veja o efeito qualitativo no raio. R ∝ L/δ; maior amortecimento → giro mais aberto.</p>
+    <canvas id="cvRaio" width="860" height="300"></canvas>
+    <div class="ictrl"><label for="nr">|N<sub>r</sub>| →</label><input type="range" id="nr" min="20" max="100" value="55" oninput="drawRaio()"></div>
+    <div class="iread" id="raioRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>Efeitos previsíveis das derivadas <span class="tag t-banca">BANCA</span></h4>
+    <p>• <strong>N<sub>r</sub></strong> (amortecimento em guinada): efeito bem previsível — mais amortecimento tende a <span class="hl">aumentar</span> R (giro mais aberto).<br>
+    • <strong>Y<sub>v</sub></strong>: sua diminuição (ex.: navio em lastro, ↑L/T) pode ter efeito desestabilizador; aumentar o calado não garante menor raio.<br>
+    • <strong>Y<sub>δ</sub></strong> (força do leme): não é previsível apenas pela equação — depende do arranjo leme-casco.<br>
+    Um <strong>leme-skeg grande na popa</strong> pode melhorar a estabilidade direcional <em>e</em> dar giro menor ao mesmo tempo.</p>
+  </div>
+</section>
+
+<!-- ===== ADERNAMENTO ===== -->
+<section class="bloco" id="escora">
+  <h2 class="sec"><span class="n">6.6</span> O ângulo de adernamento (escora) fase a fase</h2>
+  <p class="lede">A inclinação transversal do navio muda de sentido entre as fases — o distrator que a banca adora. Santos deriva o momento em cada fase.</p>
+
+  <p>Ao girar, o navio aderna (escora). O sentido da escora <strong>não é o mesmo nas três fases</strong>: na entrada e no regime, o navio inclina para bordos diferentes. Santos decompõe os momentos gerados com o leme carregado (ex.: para BE) em cada fase:</p>
+
+  <table>
+    <tr><th>Fase</th><th>Momento dominante</th><th class="center">Escora (leme a BE)</th></tr>
+    <tr><td><strong>1 — inicial</strong></td><td>Momento do leme (força lateral do leme abaixo do CG)</td><td class="center">Para <strong>BE</strong> (para dentro da curva)</td></tr>
+    <tr><td><strong>2 — transiente</strong></td><td>Transição: força centrífuga começa a dominar</td><td class="center">Invertendo</td></tr>
+    <tr><td><strong>3 — permanente</strong></td><td>Força centrífuga / hidrodinâmica do casco</td><td class="center">Para <strong>BB</strong> (para fora da curva)</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>O equilíbrio de escora em regime <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">v·δ(Y<sub>δ</sub>) = Δ·GM·sin(θ)<span class="lbl">momento escorante = momento restaurador transversal (GM = altura metacêntrica)</span></div>
+    <p class="vars">Na fase 3, o adernamento estabiliza-se num valor θ tal que o momento escorante (da força lateral) iguala o momento restaurador transversal (Δ·GM·sin θ). É o elo entre a manobrabilidade e a estabilidade transversal estática — a mesma GM da arte naval.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>A armadilha da escora <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>Muitos assumem que o navio sempre "cai para fora" da curva. Na <strong>fase 1</strong>, o navio escora <span class="hl">para dentro</span> (mesmo bordo do leme) porque o momento do leme domina; só na <strong>fase 3</strong> (regime) ele escora para fora, quando a força centrífuga vence. Confundir a fase é o erro típico.</p>
+  </div>
+</section>
+
+<!-- ===== VELOCIDADE ===== -->
+<section class="bloco" id="veloc">
+  <h2 class="sec"><span class="n">6.9</span> A influência da velocidade no diâmetro tático</h2>
+  <p class="lede">Durante o giro, o navio perde velocidade. Santos usa o VLCC Esso Osaka (o mesmo do Cap. 9) para mostrar as perdas de velocidade e as razões de guinada.</p>
+
+  <p>Ao executar a curva de giro, há <strong>perda de velocidade</strong> significativa — o casco em ângulo de deriva gera muito arrasto. Um resultado importante e contra-intuitivo: em <strong>águas profundas e para um dado ângulo de leme</strong>, o diâmetro tático adimensional (D<sub>T</sub>/L) é <span class="hl">relativamente insensível à velocidade de aproximação</span> — porque os índices de estabilidade não dependem da velocidade (Froude baixo/moderado). A curva foi validada no VLCC <strong>Esso Osaka</strong>, referência de muitas pesquisas de manobra.</p>
+
+  <div class="box key">
+    <h4>Trim e diâmetro <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Ligação com o Cap. 4: <strong>trim pela popa</strong> melhora a estabilidade direcional e <span class="hl">aumenta</span> o diâmetro de giro; <strong>trim pela proa</strong> piora a estabilidade e <span class="hl">diminui</span> o diâmetro. O compromisso estabilidade × manobrabilidade aparece de novo aqui.</p>
+  </div>
+
+  <div class="related" style="margin-top:16px">
+    📎 As perdas de velocidade em giro e o Esso Osaka reaparecem em águas rasas — ver, quando publicado, o caderno de <strong>Águas Rasas (Santos Cap. 9)</strong>, escopo P1c.
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. As camadas próprias de Santos sobre o giro.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Oito questões focadas nas peças próprias do Cap. 6.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUPABASE ===== -->
+<div class="supa">
+  <button id="btnSupa" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+  <div class="st" id="supaSt">Envia o resultado do quiz desta sessão ao painel (tabela <code>respostas</code>).</div>
+</div>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — A Curva de Giro (Santos Cap. 6, camadas próprias)</summary>
+  <ul>
+    <li><b>Davidson &amp; Schiff (1946):</b> primeiros parâmetros quantitativos objetivos da curva de giro para mercantes (antes: Hovgaard, ~1910, navios de guerra).</li>
+    <li><b>4 parâmetros:</b> avanço (90°) · transferência (90°) · diâmetro tático (180°) · diâmetro estacionário (fase 3). Máximos ≠ principais.</li>
+    <li><b>Ponto de pivô:</b> x_P = R·tan(β). Avança para a proa com maior ângulo de deriva; recua com seguimento a ré.</li>
+    <li><b>3 fases:</b> Fase 1 (leme carregado; u̇≠0, r≈0) · Fase 2 (transiente; tudo variando, surge β e r) · Fase 3 (permanente; u̇=v̇=ṙ=0, r constante, círculo de raio fixo).</li>
+    <li><b>Raio linear:</b> R depende das derivadas; N_r previsível (↑amortecimento → ↑R). Leme-skeg grande pode dar estabilidade E giro menor.</li>
+    <li><b>Adernamento fase a fase:</b> Fase 1 escora PARA DENTRO (bordo do leme, momento do leme domina); Fase 3 escora PARA FORA (força centrífuga). Equilíbrio: v·δ(Y_δ)=Δ·GM·sin θ.</li>
+    <li><b>Velocidade:</b> há perda de velocidade no giro; D_T/L é pouco sensível à velocidade de aproximação (índices independem da velocidade). Validação: VLCC Esso Osaka.</li>
+    <li><b>Trim:</b> popa → +estabilidade, +diâmetro; proa → −estabilidade, −diâmetro.</li>
+    <li><b>Critérios numéricos IMO (4,5L/5,0L):</b> ver card Bloco D. Geometria base: ver card PNA §6.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · A Curva de Giro (Santos, Cap. 6 — camadas próprias) · Capital Sereno · complementa PNA §6 e Bloco D sem duplicação.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+
+/* ===== 6.3 TRÊS FASES ===== */
+var faseAtual=1;
+function setFase(f){faseAtual=f;
+  document.querySelectorAll('.faseBtn').forEach(function(b){b.classList.toggle('active',+b.dataset.f===f);});
+  drawFases();}
+function drawFases(){
+  var svg=document.getElementById('svgFases');svg.innerHTML='';
+  var R=100, Cx=290, Cy=155;
+  var exX=Cx-R, exY=Cy;  // execute = ponto esquerdo do círculo
+  function pt(a){return [Cx+R*Math.cos(a), Cy+R*Math.sin(a)];}
+  // rumo original (vertical passando pelo execute)
+  sEl(svg,'line',{x1:exX,y1:300,x2:exX,y2:16,stroke:'#cdbf99','stroke-width':1.5,'stroke-dasharray':'5 4'});
+  sTx(svg,exX+6,28,'rumo original',{fill:'#7a6f55',fs:12});
+  // círculo estacionário
+  sEl(svg,'circle',{cx:Cx,cy:Cy,r:R,fill:'none',stroke:'#eee3c6','stroke-width':1.4,'stroke-dasharray':'4 4'});
+  // execute
+  sEl(svg,'circle',{cx:exX,cy:exY,r:5,fill:'#0D3D36'});
+  sTx(svg,exX-8,exY+20,'«execute» do leme',{fill:'#0D3D36',fs:11,ta:'end',fw:'bold'});
+  var read='';
+  // trajetória por fase
+  if(faseAtual===1){
+    // pequeno arco inicial
+    var d='M '+exX+' 300 L '+exX+' '+exY+' ';
+    for(var a=Math.PI;a>=Math.PI-0.5;a-=0.03){var p=pt(a);d+='L '+p[0].toFixed(1)+' '+p[1].toFixed(1)+' ';}
+    sEl(svg,'path',{d:d,fill:'none',stroke:'#9E3B2E','stroke-width':3.5});
+    var pe=pt(Math.PI-0.5);
+    sEl(svg,'circle',{cx:pe[0],cy:pe[1],r:5,fill:'#9E3B2E'});
+    sTx(svg,pe[0]+8,pe[1],'fim da fase 1',{fill:'#9E3B2E',fs:12,fw:'bold'});
+    read='<b>Fase 1 (inicial):</b> u̇≠0, v̇≈0, r≈0. O leme é carregado; o navio desacelera longitudinalmente mas ainda quase não guina nem deriva. Aparece o ângulo de ataque no leme. Escora PARA DENTRO da curva.';
+  } else if(faseAtual===2){
+    var d='M '+exX+' 300 L '+exX+' '+exY+' ';
+    for(var a=Math.PI;a>=Math.PI-1.7;a-=0.03){var p=pt(a);d+='L '+p[0].toFixed(1)+' '+p[1].toFixed(1)+' ';}
+    sEl(svg,'path',{d:d,fill:'none',stroke:'#C8A84B','stroke-width':3.5});
+    var pe=pt(Math.PI-1.7);
+    sEl(svg,'circle',{cx:pe[0],cy:pe[1],r:5,fill:'#9a7d1f'});
+    // vetor de deriva
+    sEl(svg,'line',{x1:pe[0],y1:pe[1],x2:pe[0]+30,y2:pe[1]-6,stroke:'#6B4E8E','stroke-width':2});
+    sTx(svg,pe[0]+8,pe[1]-14,'β (deriva) e r surgem',{fill:'#6B4E8E',fs:12,fw:'bold'});
+    read='<b>Fase 2 (transiente):</b> u̇≠0, v̇≠0, ṙ≠0, r≠0 — tudo variando. Surgem o ângulo de deriva β e a velocidade de guinada r; a trajetória curva-se. Fase mais complexa; escora invertendo.';
+  } else {
+    var d='M '+exX+' 300 L '+exX+' '+exY+' ';
+    for(var a=Math.PI;a>=-Math.PI+0.2;a-=0.03){var p=pt(a);d+='L '+p[0].toFixed(1)+' '+p[1].toFixed(1)+' ';}
+    sEl(svg,'path',{d:d,fill:'none',stroke:'#1A7A6E','stroke-width':3.5});
+    // raio
+    var p3=pt(-Math.PI/2);
+    sEl(svg,'line',{x1:Cx,y1:Cy,x2:p3[0],y2:p3[1],stroke:'#7a6f55','stroke-width':1,'stroke-dasharray':'3 3'});
+    sTx(svg,Cx+4,Cy+16,'R constante',{fill:'#7a6f55',fs:11});
+    sEl(svg,'circle',{cx:Cx,cy:Cy,r:3,fill:'#7a6f55'});
+    read='<b>Fase 3 (permanente):</b> u̇=v̇=ṙ=0, r=constante. Equilíbrio dinâmico: círculo de RAIO CONSTANTE a taxa de guinada constante. Daqui sai o diâmetro estacionário. Escora PARA FORA da curva.';
+  }
+  document.getElementById('faseRead').innerHTML=read;
+}
+drawFases();
+
+/* ===== 6.4 RAIO × Nr ===== */
+function drawRaio(){
+  var cv=document.getElementById('cvRaio'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var nr=+document.getElementById('nr').value; // 20..100
+  // raio cresce com |Nr| (qualitativo)
+  var Rpx=40+nr*1.2;
+  var cx=W*0.5, cy=H*0.5;
+  // navio no topo do círculo
+  ctx.strokeStyle='#eee3c6';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(cx,cy,Rpx,0,7);ctx.stroke();ctx.setLineDash([]);
+  // trajetória sólida (¾ de volta)
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=3;ctx.beginPath();ctx.arc(cx,cy,Rpx,-Math.PI/2,Math.PI,false);ctx.stroke();
+  // centro e raio
+  ctx.fillStyle='#7a6f55';ctx.beginPath();ctx.arc(cx,cy,3,0,7);ctx.fill();
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx,cy-Rpx);ctx.stroke();
+  ctx.fillStyle='#9E3B2E';ctx.font='bold 12px Trebuchet MS';ctx.fillText('R',cx+6,cy-Rpx/2);
+  ctx.fillStyle='#0D3D36';ctx.font='13px Trebuchet MS';
+  var giro = nr<45?'fechado':(nr>75?'muito aberto':'moderado');
+  document.getElementById('raioRead').innerHTML='|N<sub>r</sub>| = <b>'+nr+'</b> (amortecimento em guinada) → raio de giro <b>'+giro+'</b>. Maior amortecimento em yaw tende a abrir o giro (R ↑). Efeito previsível pela teoria linear.';
+}
+drawRaio();
+window.addEventListener('resize',function(){drawRaio();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Davidson & Schiff (1946)",b:"Primeiros parâmetros quantitativos objetivos da curva de giro para navios mercantes. Antes: Hovgaard (~1910, guerra)."},
+  {f:"Avanço",b:"Distância longitudinal do execute até 90° de mudança de aproamento."},
+  {f:"Transferência",b:"Distância transversal até 90° de mudança de aproamento."},
+  {f:"Diâmetro tático",b:"Distância transversal até 180° de mudança de aproamento."},
+  {f:"Máximos × principais",b:"Avanço/transferência MÁXIMOS (trajetória total) ≠ PRINCIPAIS (a 90°). A banca troca."},
+  {f:"Ponto de pivô",b:"x_P = R·tan(β). Avança p/ proa com maior deriva; recua com seguimento a ré."},
+  {f:"Fase 1 (inicial)",b:"u̇≠0, v̇≈0, r≈0. Leme carregado, aparece ângulo de ataque. Escora PARA DENTRO."},
+  {f:"Fase 2 (transiente)",b:"u̇≠0, v̇≠0, ṙ≠0, r≠0. Surgem β e r. Fase mais complexa."},
+  {f:"Fase 3 (permanente)",b:"u̇=v̇=ṙ=0, r constante. Círculo de raio fixo. Escora PARA FORA. Sai o diâmetro estacionário."},
+  {f:"Raio linear × Nr",b:"Maior amortecimento |N_r| → maior R (giro mais aberto). Previsível pela teoria linear."},
+  {f:"Leme-skeg grande",b:"Pode melhorar estabilidade E dar giro menor ao mesmo tempo."},
+  {f:"Adernamento fase a fase",b:"Fase 1: escora para dentro (momento do leme). Fase 3: escora para fora (centrífuga)."},
+  {f:"Equilíbrio de escora",b:"v·δ(Y_δ) = Δ·GM·sin θ. Momento escorante = restaurador transversal (GM)."},
+  {f:"Velocidade × D_T",b:"D_T/L é pouco sensível à velocidade (índices independem da velocidade). Validação: Esso Osaka."},
+  {f:"Trim × diâmetro",b:"Popa → +estabilidade, +diâmetro. Proa → −estabilidade, −diâmetro."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"Os primeiros parâmetros quantitativos objetivos da curva de giro para navios mercantes vieram do trabalho de:",
+   o:["Dieudonné e Bech","Davidson e Schiff (1946)","Nomoto e Norrbin","Arentzen e Mandel"],a:1,
+   e:"Kenneth Davidson (Instituto Stevens) e Leonard Schiff, 1946. Antes, Hovgaard (~1910) fornecera parâmetros para navios de guerra, muitas vezes confidenciais."},
+  {q:"O avanço e a transferência PRINCIPAIS da curva de giro são medidos até uma mudança de aproamento de:",
+   o:["45°","90°","180°","360°"],a:1,
+   e:"Ambos a 90°. O diâmetro tático é que se mede a 180°. Não confundir com os avanço/transferência MÁXIMOS (relacionados à trajetória total)."},
+  {q:"Na FASE 1 do giro (com o leme carregado para BE), o navio tende a escorar (adernar):",
+   o:["Para BB (para fora da curva)","Para BE (para dentro da curva)","Não escora","Para vante"],a:1,
+   e:"Na fase 1 o momento do leme domina → o navio escora PARA DENTRO (mesmo bordo do leme, BE). Só na fase 3 (regime), com a força centrífuga dominando, ele escora para fora (BB)."},
+  {q:"A fase 3 (permanente) do giro caracteriza-se por:",
+   o:["Todas as acelerações variando","u̇=v̇=ṙ=0 e taxa de guinada r constante","Ausência de deriva","Leme retornando ao neutro"],a:1,
+   e:"Equilíbrio dinâmico: as acelerações se anulam e r é constante — o navio descreve um círculo de raio constante. Dela se extrai o diâmetro de giro estacionário."},
+  {q:"Segundo a teoria linear, aumentar o amortecimento em guinada |N_r| tende a:",
+   o:["Diminuir o raio de giro","Aumentar o raio de giro (giro mais aberto)","Não afetar o raio","Inverter o sentido do giro"],a:1,
+   e:"O efeito de N_r no raio é bem previsível: mais amortecimento em yaw abre o giro (R ↑). Já Y_δ (força do leme) não é previsível só pela equação."},
+  {q:"O equilíbrio do ângulo de adernamento na fase permanente do giro é dado pela igualdade entre o momento escorante e:",
+   o:["A força de arrasto","O momento restaurador transversal (Δ·GM·sin θ)","O empuxo do hélice","O momento de Munk"],a:1,
+   e:"v·δ(Y_δ) = Δ·GM·sin θ: o momento escorante iguala o momento restaurador transversal, ligando a manobra à estabilidade transversal estática (a mesma GM da arte naval)."},
+  {q:"Sobre a influência da velocidade de aproximação no diâmetro tático adimensional (D_T/L), em águas profundas:",
+   o:["É fortemente dependente da velocidade","É relativamente insensível à velocidade","Aumenta linearmente com a velocidade","Só depende da potência"],a:1,
+   e:"D_T/L é relativamente insensível à velocidade porque os índices de estabilidade independem da velocidade (Froude baixo/moderado). Validado no VLCC Esso Osaka."},
+  {q:"Quanto ao efeito do trim na curva de giro, é correto:",
+   o:["Trim de popa diminui o diâmetro de giro","Trim de popa aumenta o diâmetro e melhora a estabilidade direcional","Trim de proa aumenta o diâmetro","O trim não afeta o giro"],a:1,
+   e:"Trim pela popa → +estabilidade direcional e +diâmetro de giro. Trim pela proa → −estabilidade e −diâmetro. É o compromisso estabilidade × manobrabilidade."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+
+/* ===== SUPABASE ===== */
+var SUPA_URL="https://iftourtecxtmvuhptvmo.supabase.co";
+var CADERNO_ID="santos_cap6_curva_giro";
+function enviarPainel(){
+  var st=document.getElementById('supaSt'), btn=document.getElementById('btnSupa');
+  if(tot===0){st.textContent="Responda ao menos uma questão do quiz antes de enviar.";return;}
+  var payload={caderno_id:CADERNO_ID,tipo:"quiz",bloco:"H",tema:"A Curva de Giro",
+    assunto:"Santos Cap. 6 — fases, raio linear, adernamento",enunciado:"Sessão de quiz — "+tot+" questões",
+    acertou:(hits===tot),sessao_data:new Date().toISOString()};
+  btn.disabled=true;st.textContent="Enviando…";
+  fetch(SUPA_URL+"/rest/v1/respostas",{method:"POST",headers:{"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(payload)})
+   .then(function(r){if(r.ok){st.innerHTML="✓ Enviado ao painel ("+hits+"/"+tot+").";}
+     else{st.innerHTML="⚠ Falha ("+r.status+"). Verifique a API key/anon no painel pscpp-buddy.";btn.disabled=false;}})
+   .catch(function(e){st.innerHTML="⚠ Sem conexão com o Supabase. Configure endpoint/anon-key no painel.";btn.disabled=false;});
+}
+</script>
+</body>
+</html>
