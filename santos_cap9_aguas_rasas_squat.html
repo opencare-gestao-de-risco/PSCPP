@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Águas Rasas e Squat — Santos Cap. 9 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#eaf3fa;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Efeitos Externos e de Contorno</p>
+    <h1>Efeitos de <em>Águas Rasas</em> e o Squat</h1>
+    <p class="sub">Como o comportamento do navio muda quando o fundo se aproxima. A classificação h/T, os sinais a bordo, o petroleiro Esso Osaka (a referência mundial), e o coração do capítulo: o <strong>squat</strong> — afundamento e trim dinâmico — com o número de Froude de profundidade e os métodos de cálculo.</p>
+    <div class="src"><b>Fonte:</b> Santos, <em>Manobrabilidade do Navio</em>, Cap. 9 — "Efeitos de águas rasas" (seções 9.1 a 9.8). Cruza com PNA Vol. III §13. Fórmulas de squat conferidas contra a literatura padrão (Barrass, ICORELS, Tuck).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#classificacao">9.1 Classificação</a>
+    <a href="#sinais">9.2 Sinais a bordo</a>
+    <a href="#osaka">9.3 Esso Osaka</a>
+    <a href="#forcas">9.5 Forças</a>
+    <a href="#squat">9.7 Squat ▶</a>
+    <a href="#froude">Froude prof.</a>
+    <a href="#metodos">Métodos</a>
+    <a href="#manobra">9.8 Manobra</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Abre a matéria <strong>Efeitos Externos e de Contorno</strong>. Par-PNA: <a href="pna_ix_sec13_aguas_rasas_canais_interacao.html">Águas Rasas, Canais e Interação (§13)</a>. Continua em <strong>Águas Restritas e Efeito de Banco (Cap. 10)</strong> e <strong>Forças Ambientais (Cap. 8)</strong>. O Esso Osaka também aparece no card de <a href="santos_cap6_curva_giro.html">Curva de Giro (Cap. 6)</a>.
+</div>
+
+<!-- ===== 9.1 CLASSIFICAÇÃO ===== -->
+<section class="bloco" id="classificacao">
+  <h2 class="sec"><span class="n">9.1</span> Classificação de águas rasas</h2>
+  <p class="lede">Tudo gira em torno da razão profundidade/calado (h/T). Há duas classificações que a banca cobra: a da SNAME (simples) e a da PIANC (em faixas).</p>
+
+  <table>
+    <tr><th>Fonte</th><th>Critério</th><th class="center">Faixas (h/T)</th></tr>
+    <tr><td><strong>SNAME</strong></td><td>Águas rasas para desempenho de manobra</td><td class="center">h/T &lt; <span class="hl">3,0</span></td></tr>
+    <tr><td rowspan="4"><strong>PIANC</strong> (Bulletin 77, 1992)</td><td>Águas profundas</td><td class="center">h/T &gt; 3,0</td></tr>
+    <tr><td>Águas meio rasas</td><td class="center">1,5 &lt; h/T &lt; 3,0</td></tr>
+    <tr><td>Águas rasas</td><td class="center">1,2 &lt; h/T &lt; 1,5</td></tr>
+    <tr><td>Águas muito rasas</td><td class="center">h/T &lt; 1,2</td></tr>
+  </table>
+  <p class="vars">h = profundidade da água; T = calado. Escopo do capítulo: águas rasas <strong>sem restrição lateral</strong> (largura ilimitada) — a restrição lateral é o Cap. 10.</p>
+
+  <div class="box key">
+    <h4>A folga abaixo da quilha (FAQ / UKC) <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Segundo o relatório 121 da PIANC, a folga abaixo da quilha (FAQ, <em>under keel clearance</em>) <span class="hl">não pode ser menor que 5%</span> do calado, em baixas velocidades, para garantir margem de manobrabilidade. Santos observa: esse limite é reconhecidamente <strong>muito pequeno</strong> por quem manobra. A física: em profundidade limitada mas largura ilimitada, a água que passa por baixo do casco <span class="hl">acelera mais</span> que em águas profundas → maior redução de pressão → maior afundamento e trim.</p>
+  </div>
+</section>
+
+<!-- ===== 9.2 SINAIS ===== -->
+<section class="bloco" id="sinais">
+  <h2 class="sec"><span class="n">9.2</span> Os sinais a bordo — como o prático percebe</h2>
+  <p class="lede">Santos lista os sinais observáveis quando o navio entra em águas rasas. São questões diretas da banca ("qual NÃO é um sinal?").</p>
+
+  <table>
+    <tr><th>Sinal observável em águas rasas</th></tr>
+    <tr><td>a) As respostas às ações de controle ficam <strong>mais lentas</strong></td></tr>
+    <tr><td>b) Os indicadores de calado alteram leituras nas extremidades (vante/ré)</td></tr>
+    <tr><td>c) O indicador de RPM do propulsor <strong>cai</strong> (quedas de até <span class="hl">15%</span> comuns)</td></tr>
+    <tr><td>d) Queda na velocidade do navio (até <span class="hl">30%</span> em profundidades baixas)</td></tr>
+    <tr><td>e) O navio pode <strong>vibrar</strong> repentinamente (novas frequências ressonantes)</td></tr>
+    <tr><td>f) Os movimentos oscilatórios em ondas são <strong>reduzidos</strong></td></tr>
+    <tr><td>g) Em fundos lamosos, a lama pode aflorar junto à descarga do propulsor</td></tr>
+    <tr><td>h) O <strong>diâmetro tático</strong> da curva de giro pode aumentar até <span class="hl">100%</span></td></tr>
+    <tr><td>i) Geralmente aumentam a distância e o tempo de parada (mas depende do navio)</td></tr>
+    <tr><td>j) A eficiência do leme é reduzida (em razões de profundidade muito baixas)</td></tr>
+    <tr><td>k) Mais facilidade para <strong>quebrar a guinada</strong>: os overshoots do zigzag ficam <span class="hl">menores</span></td></tr>
+    <tr><td>l) Mais dificuldade para executar curva fechada se a velocidade não é baixa</td></tr>
+    <tr><td>m) A força lateral e o momento do propulsor são <strong>aumentados</strong> (avante e a ré)</td></tr>
+    <tr><td>n) A onda irradiada na proa tem altura <strong>elevada</strong> vs. águas profundas</td></tr>
+  </table>
+
+  <div class="box trap">
+    <h4>As inversões que a banca explora <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>Cuidado com dois pares: os overshoots do zigzag <span class="hl">diminuem</span> (o navio quebra a guinada mais fácil — mais estável direcionalmente), mas o <span class="hl">diâmetro tático aumenta</span> (giro mais aberto). Trocar "aumenta/diminui" nesses dois é o distrator clássico. A estabilidade direcional aumenta em águas rasas, o que torna o giro mais difícil mas a manutenção de rumo mais fácil.</p>
+  </div>
+</section>
+
+<!-- ===== 9.3 ESSO OSAKA ===== -->
+<section class="bloco" id="osaka">
+  <h2 class="sec"><span class="n">9.3</span> O petroleiro Esso Osaka — a referência mundial</h2>
+  <p class="lede">Até 1977, o desempenho em águas rasas era só empírico (prático e comandante). Os testes do Esso Osaka mudaram isso — e viraram o padrão de validação de todos os modelos numéricos.</p>
+
+  <p>Em <strong>1977</strong>, no <strong>Golfo do México</strong>, realizaram-se testes de manobra em escala real com o petroleiro <strong>Esso Osaka</strong>. Patrocínio: US Maritime Administration (MARAD), guarda costeira americana e o AIMS, com a Exxon; gerência técnica do <strong>Laboratório Davidson</strong>, coordenação de <strong>Lincoln Crane Jr.</strong> (1931–1989), assistido pelo comandante do navio, G. Gomes.</p>
+
+  <div class="box key">
+    <h4>Os três valores de h/T testados <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Os testes cobriram <strong>três razões de profundidade</strong>: <span class="hl">h/T = 1,2 · 1,5 · 4,2</span> (esta última representando águas profundas). Resultado histórico: forneceram os primeiros dados em escala real para validar modelos numéricos e definir padrões de segurança. É a mesma referência que aparece na curva de giro (Cap. 6). <span class="tag t-banca">BANCA</span></p>
+  </div>
+</section>
+
+<!-- ===== 9.5 FORÇAS ===== -->
+<section class="bloco" id="forcas">
+  <h2 class="sec"><span class="n">9.5</span> As forças da asa-casco em águas rasas</h2>
+  <p class="lede">O fundamento do Cap. 3 (casco como asa) aplicado ao fundo próximo: todas as derivadas hidrodinâmicas mudam de magnitude conforme h/T cai.</p>
+
+  <p>Com o fundo próximo, o escoamento por baixo do casco é confinado, alterando o escoamento potencial em torno dele. Consequências nas derivadas: a <strong>massa adicional em sway (Y<sub>v̇</sub>)</strong> aumenta muito conforme h/T diminui; as forças e momentos hidrodinâmicos do casco (Y<sub>v</sub>, N<sub>v</sub>, Y<sub>r</sub>, N<sub>r</sub>) crescem — especialmente perto de h/T = 1,2. A força lateral do casco pode variar enormemente com a redução da profundidade.</p>
+
+  <div class="box key">
+    <h4>Por que a estabilidade direcional aumenta <span class="tag t-banca">BANCA</span></h4>
+    <p>Em águas rasas, as forças hidrodinâmicas do casco crescem de tal modo que a <span class="hl">estabilidade direcional aumenta</span> — daí os overshoots menores e o giro mais aberto (diâmetro tático maior). É o mesmo casco-asa do Cap. 3, agora com "efeito de solo" (ground effect) que intensifica a sustentação e o amortecimento. O efeito da força lateral e do momento do propulsor também é ampliado.</p>
+  </div>
+</section>
+
+<!-- ===== 9.7 SQUAT ===== -->
+<section class="bloco" id="squat">
+  <h2 class="sec"><span class="n">9.7</span> O efeito squat</h2>
+  <p class="lede">O fenômeno mais cobrado do capítulo. Squat = mudança na posição vertical do navio em movimento: afundamento total + mudança dinâmica no trim. Existe em águas profundas, mas é <em>amplificado</em> em águas rasas.</p>
+
+  <p>Ao mover-se, o navio acelera a água ao seu redor; em águas rasas, a água por baixo acelera ainda mais, a pressão cai (Bernoulli) e o navio <strong>afunda e trima</strong>. Proa e popa afundam em quantidades diferentes. Se o squat leva a quilha ao fundo em trânsito, há toque — por isso é crítico para a segurança.</p>
+
+  <div class="ichart">
+    <h4>O efeito squat — afundamento com a velocidade (Fig. 243A)</h4>
+    <p class="hint">Deslize a velocidade. Veja a água acelerar por baixo (setas), a pressão cair e o navio afundar/trimar. Note a onda irradiada na proa crescer.</p>
+    <svg id="svgSquat" viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Efeito squat"></svg>
+    <div class="ictrl"><label for="vel">Velocidade →</label><input type="range" id="vel" min="0" max="100" value="45" oninput="drawSquat()"></div>
+    <div class="iread" id="squatRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>A regra de Barrass: proa ou popa? <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>C. Bryan Barrass (1979) mostrou que <strong>onde ocorre o máximo afundamento depende do coeficiente de bloco C<sub>b</sub></strong>:</p>
+    <table style="margin:6px 0 0">
+      <tr><th>Coeficiente de bloco</th><th>Trima / afunda mais pela</th><th>Exemplos de navio</th></tr>
+      <tr><td class="center">C<sub>b</sub> &gt; 0,7 (formas cheias)</td><td class="center"><span class="hl">PROA</span></td><td>petroleiros, graneleiros</td></tr>
+      <tr><td class="center">C<sub>b</sub> &lt; 0,7 (formas finas)</td><td class="center"><span class="hl">POPA</span></td><td>passageiros, contêineros pequenos, velozes</td></tr>
+    </table>
+    <p class="vars">Regra-âncora: <strong>navio cheio (Cb alto) → afunda pela proa</strong>. É o caso da maioria dos navios mercantes que o prático conduz. Rômisch: squat na proa se C<sub>b</sub> &gt; 0,1·L<sub>pp</sub>/B (critério geométrico alternativo).</p>
+  </div>
+</section>
+
+<!-- ===== FROUDE PROFUNDIDADE ===== -->
+<section class="bloco" id="froude">
+  <h2 class="sec"><span class="n">9.7.1</span> O número de Froude de profundidade e a velocidade crítica</h2>
+  <p class="lede">O parâmetro adimensional que governa o squat. Mede a velocidade do navio como fração da velocidade crítica de propagação de uma perturbação em água rasa.</p>
+
+  <div class="box formula">
+    <h4>Froude de profundidade e velocidade crítica <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">F<sub>nh</sub> = V / √(g·h)<span class="lbl">número de Froude de profundidade — V da velocidade, h da profundidade, g da gravidade</span></div>
+    <div class="eq">V<sub>c</sub> = √(g·h)<span class="lbl">velocidade crítica em águas rasas (celeridade da onda longa) — F_nh = 1</span></div>
+    <p class="vars">A velocidade crítica <strong>V<sub>c</sub> = √(g·h)</strong> é a velocidade máxima de propagação de uma perturbação na superfície em água rasa. Quando o navio se aproxima dela (F<sub>nh</sub> → 1), o squat cresce muito rapidamente. Regimes:</p>
+    <table style="margin:8px 0 0">
+      <tr><th>Regime</th><th class="center">F<sub>nh</sub></th><th>Comportamento</th></tr>
+      <tr><td>Subcrítico</td><td class="center">&lt; 0,7</td><td>Squat cresce ~com V²; regime usual de navegação</td></tr>
+      <tr><td>Transcrítico</td><td class="center">0,7 – 1,0</td><td>Squat cresce rapidamente; região perigosa</td></tr>
+      <tr><td>Crítico</td><td class="center">≈ 1,0</td><td>Máximo squat; a onda não "escapa" da proa</td></tr>
+      <tr><td>Supercrítico</td><td class="center">&gt; 1,0</td><td>Raro (navios muito rápidos / água muito rasa)</td></tr>
+    </table>
+    <p class="vars">A maioria das fórmulas empíricas de squat é válida apenas para F<sub>nh</sub> &lt; 0,7 (algumas até 0,4, como Norrbin).</p>
+  </div>
+</section>
+
+<!-- ===== MÉTODOS ===== -->
+<section class="bloco" id="metodos">
+  <h2 class="sec"><span class="n">9.7.2</span> Os métodos de cálculo do squat</h2>
+  <p class="lede">De Tuck (1966) em diante, dezenas de métodos empíricos foram propostos. A banca cobra reconhecer os principais e o pioneiro.</p>
+
+  <p>O tratamento matemático pioneiro do squat foi de <strong>E. O. Tuck (1966)</strong>, que fez uma análise dimensional da solução numérica e chegou à "fórmula universal de Tuck". Dela derivaram vários métodos empíricos:</p>
+
+  <table>
+    <tr><th>Método</th><th>Autor / ano</th><th>Nota</th></tr>
+    <tr><td><strong>Fórmula de Tuck</strong></td><td>E. O. Tuck, 1966</td><td>Pioneira; base matemática. Método simplificado com coef. de forma C ≈ 2,5</td></tr>
+    <tr><td><strong>Hooft</strong></td><td>Hooft</td><td>Squat pela proa; base para o ICORELS</td></tr>
+    <tr><td><strong>ICORELS</strong></td><td>ICORELS, 1980</td><td><span class="hl">Padrão internacional</span> (Comissão para Recepção de Navios de Grande Porte). Similar a Hooft, aperfeiçoada</td></tr>
+    <tr><td><strong>Barrass</strong></td><td>Barrass, 1979–81</td><td>Muito usada; usa C<sub>b</sub> e bloqueio do canal. Dá proa e popa</td></tr>
+    <tr><td><strong>Eryuzlu-Hausser</strong></td><td>—</td><td>Validada com modelos autopropelidos; proa (F<sub>nh</sub> &lt; 0,4)</td></tr>
+    <tr><td><strong>Norrbin</strong></td><td>Norrbin</td><td>Válida para F<sub>nh</sub> &lt; 0,4</td></tr>
+    <tr><td><strong>Römisch</strong></td><td>Römisch</td><td>Proa e popa; critério de trim por C<sub>b</sub></td></tr>
+    <tr><td><strong>Millward</strong></td><td>Millward</td><td>—</td></tr>
+    <tr><td><strong>Ankudinov / Hirano-Takashina</strong></td><td>—</td><td>Métodos citados; função de B, C<sub>b</sub> e comprimento</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>A forma consagrada (ICORELS / Hooft) <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">s<sub>proa</sub> = C<sub>s</sub> · (∇/L<sub>pp</sub>²) · [ F<sub>nh</sub>² / √(1 − F<sub>nh</sub>²) ]<span class="lbl">squat máximo pela proa — ∇ = volume deslocado, C_s ≈ 2,4 (ICORELS)</span></div>
+    <p class="vars">O termo F<sub>nh</sub>²/√(1−F<sub>nh</sub>²) explode quando F<sub>nh</sub> → 1: é a assinatura matemática da velocidade crítica. Barrass, alternativamente, usa uma forma com C<sub>b</sub> e o fator de bloqueio do canal (S = área da seção do navio / área da seção do canal).</p>
+  </div>
+
+  <div class="box key">
+    <h4>A mensagem prática <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Todas as fórmulas concordam em uma coisa: o squat <span class="hl">cresce fortemente com a velocidade</span> (≈ V²) e com a proximidade do fundo. A regra operacional de ouro do prático: <strong>reduzir a velocidade</strong> é a forma mais eficaz de reduzir o squat. O squat foi originalmente estudado (anos 1930) não pela manobra, mas pela sua contribuição à <strong>resistência</strong> (friccional e de ondas) do casco.</p>
+  </div>
+</section>
+
+<!-- ===== 9.8 MANOBRA ===== -->
+<section class="bloco" id="manobra">
+  <h2 class="sec"><span class="n">9.8</span> A manobra do navio em águas rasas</h2>
+  <p class="lede">Fecha o capítulo com os efeitos sobre a condução: comportamento, ondulações internas, resistência e a manobrabilidade global.</p>
+
+  <ul>
+    <li><strong>Comportamento em função da profundidade:</strong> respostas mais lentas, giro mais aberto, guinada mais fácil de quebrar (estabilidade direcional maior).</li>
+    <li><strong>Ondulações internas (interface):</strong> em água estratificada (camada de água doce sobre salgada, comum em estuários), pode surgir o fenômeno de <em>dead water</em> — ondas internas na interface que aumentam muito a resistência sem aumento de velocidade.</li>
+    <li><strong>Resistência e propulsão:</strong> a resistência aumenta (o squat foi originalmente estudado por esse ângulo); a RPM cai e a velocidade cai.</li>
+    <li><strong>Manobrabilidade:</strong> segundo a PIANC (relatório 121), fenômenos similares limitam a operação; a FAQ mínima de 5% é o guarda-corpo.</li>
+  </ul>
+
+  <div class="related">
+    📎 A continuação natural é a restrição <strong>lateral</strong>: quando o canal também é estreito, entram o efeito de banco e o bloqueio — o <strong>Cap. 10 (Águas Restritas)</strong>, próximo card desta matéria.
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Classificações, sinais e o squat.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Dez questões com os distratores reais do capítulo.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Águas Rasas e Squat (Santos Cap. 9)</summary>
+  <ul>
+    <li><b>Classificação:</b> SNAME → águas rasas se h/T < 3,0. PIANC → profundas >3,0 · meio rasas 1,5–3,0 · rasas 1,2–1,5 · muito rasas <1,2.</li>
+    <li><b>FAQ/UKC mínima:</b> 5% do calado (PIANC rel. 121), em baixa velocidade. Reconhecidamente pequena.</li>
+    <li><b>Sinais a bordo:</b> respostas lentas · RPM cai (~15%) · velocidade cai (~30%) · vibração · diâmetro tático até +100% · overshoots do zigzag MENORES · leme menos eficiente · força/momento do propulsor aumentam · onda de proa mais alta.</li>
+    <li><b>Inversão da banca:</b> overshoot DIMINUI (mais estável), diâmetro tático AUMENTA (giro mais aberto).</li>
+    <li><b>Esso Osaka (1977, Golfo do México):</b> 1.ª validação em escala real. Lincoln Crane / Lab. Davidson. h/T = 1,2 · 1,5 · 4,2.</li>
+    <li><b>Forças:</b> massa adicional (Y_v̇) e derivadas do casco crescem quando h/T cai → estabilidade direcional AUMENTA (efeito de solo).</li>
+    <li><b>Squat:</b> afundamento total + trim dinâmico. Amplificado em águas rasas (água acelera por baixo, pressão cai).</li>
+    <li><b>Barrass:</b> Cb > 0,7 (cheio) → afunda pela PROA · Cb < 0,7 (fino) → pela POPA.</li>
+    <li><b>Froude de profundidade:</b> Fnh = V/√(gh). Velocidade crítica Vc = √(gh) (Fnh=1). Squat explode com Fnh→1. Fórmulas válidas p/ Fnh<0,7.</li>
+    <li><b>Métodos:</b> Tuck (1966, pioneiro) · Hooft · ICORELS (1980, padrão) · Barrass (Cb + bloqueio) · Eryuzlu-Hausser · Norrbin (Fnh<0,4) · Römisch · Millward.</li>
+    <li><b>ICORELS:</b> s_proa = C_s·(∇/Lpp²)·Fnh²/√(1−Fnh²).</li>
+    <li><b>Regra de ouro:</b> reduzir a velocidade é a forma mais eficaz de reduzir o squat (~V²).</li>
+    <li><b>9.8:</b> dead water (ondas internas na interface) aumenta resistência; a resistência foi o motivo original de estudar squat (anos 1930).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Efeitos de Águas Rasas e o Squat (Santos, Cap. 9) · Capital Sereno · matéria Efeitos Externos e de Contorno.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+
+/* ===== SQUAT (Fig.243A) ===== */
+function drawSquat(){
+  var svg=document.getElementById('svgSquat'); if(!svg) return; svg.innerHTML='';
+  var v=+document.getElementById('vel').value; // 0..100
+  var frac=v/100;
+  // fundo do mar
+  var seabed=270;
+  sEl(svg,'rect',{x:0,y:seabed,width:860,height:50,fill:'#c9b58a'});
+  sTx(svg,12,seabed+30,'fundo (profundidade h)',{fill:'#7a5a2a',fs:12,fw:'bold'});
+  // linha d'água de repouso
+  var wl=110;
+  sEl(svg,'line',{x1:0,y1:wl,x2:860,y2:wl,stroke:'#8fb8d8','stroke-width':1.5,'stroke-dasharray':'6 5'});
+  sTx(svg,760,wl-8,'linha d\u2019água',{fill:'#5a86ab',fs:11});
+  // navio: afunda com a velocidade e trima pela proa (Cb alto)
+  var sink=frac*38;           // afundamento total
+  var trim=frac*14;           // trim pela proa (proa afunda mais)
+  var cx=430, len=300, hgt=52;
+  var proaY=wl+sink+trim, popaY=wl+sink-trim*0.4;
+  // casco (trapézio inclinado): proa à direita
+  var xL=cx-len/2, xR=cx+len/2;
+  sEl(svg,'path',{d:'M '+xL+' '+popaY+' L '+xR+' '+proaY+' L '+(xR)+' '+(proaY+hgt)+' L '+xL+' '+(popaY+hgt)+' Z',fill:'#3a4a52',stroke:'#1b2a30','stroke-width':2});
+  // superestrutura (popa)
+  sEl(svg,'rect',{x:xL+18,y:popaY-26,width:46,height:28,fill:'#5a6a72'});
+  // proa (bico)
+  sEl(svg,'path',{d:'M '+xR+' '+proaY+' l 26 '+(hgt/2)+' l -26 '+(hgt/2)+' z',fill:'#3a4a52'});
+  sTx(svg,xR+30,proaY+hgt/2+4,'proa',{fill:'#3a4a52',fs:11});
+  // água acelerada por baixo (setas), intensidade com v
+  var na=8;
+  for(var i=0;i<na;i++){
+    var ax=xL+20+i*(len-40)/(na-1);
+    var alen=10+frac*26;
+    sEl(svg,'line',{x1:ax,y1:(proaY+popaY)/2+hgt+18,x2:ax-alen,y2:(proaY+popaY)/2+hgt+18,stroke:'#2C5F8A','stroke-width':1.5+frac*2});
+    sEl(svg,'path',{d:'M '+(ax-alen)+' '+((proaY+popaY)/2+hgt+18)+' l 6 -4 l 0 8 z',fill:'#2C5F8A'});
+  }
+  sTx(svg,cx-90,seabed-14,'água acelera por baixo → pressão cai',{fill:'#2C5F8A',fs:12,fw:'bold'});
+  // onda de proa (cresce com v)
+  var wave=6+frac*22;
+  sEl(svg,'path',{d:'M '+(xR+26)+' '+wl+' q 20 '+(-wave)+' 40 0 q 20 '+wave+' 40 0',fill:'none',stroke:'#5a86ab','stroke-width':2});
+  sTx(svg,xR+40,wl-wave-6,'onda de proa',{fill:'#5a86ab',fs:11});
+  // cota do squat (afundamento)
+  sEl(svg,'line',{x1:xL-30,y1:wl,x2:xL-30,y2:proaY+hgt*0.2,stroke:'#9E3B2E','stroke-width':2});
+  sEl(svg,'line',{x1:xL-36,y1:wl,x2:xL-24,y2:wl,stroke:'#9E3B2E','stroke-width':2});
+  sEl(svg,'line',{x1:xL-36,y1:proaY+hgt*0.2,x2:xL-24,y2:proaY+hgt*0.2,stroke:'#9E3B2E','stroke-width':2});
+  sTx(svg,xL-40,(wl+proaY)/2,'squat',{fill:'#9E3B2E',fs:12,fw:'bold',ta:'end'});
+  // FAQ (folga abaixo da quilha)
+  var faq = seabed-(proaY+hgt);
+  var faqcol = faq<18?'#9E3B2E':'#2E7D52';
+  sEl(svg,'line',{x1:xR-10,y1:proaY+hgt,x2:xR-10,y2:seabed,stroke:faqcol,'stroke-width':2});
+  sTx(svg,xR+2,seabed-6,'FAQ',{fill:faqcol,fs:11,fw:'bold'});
+  var fnh=(0.1+frac*0.85).toFixed(2);
+  var reg = fnh<0.7?'subcrítico':(fnh<1?'transcrítico (perigoso)':'crítico');
+  document.getElementById('squatRead').innerHTML='F<sub>nh</sub> ≈ <b>'+fnh+'</b> ('+reg+') · squat cresce com V² · afundamento pela PROA (Cb alto). '+(faq<18?'<b style="color:#9E3B2E">FAQ crítica — risco de toque no fundo!</b>':'FAQ ainda com margem.');
+}
+drawSquat();
+window.addEventListener('resize',function(){drawSquat();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Águas rasas (SNAME)",b:"h/T < 3,0 para desempenho de manobra."},
+  {f:"PIANC — faixas de h/T",b:"Profundas >3,0 · meio rasas 1,5–3,0 · rasas 1,2–1,5 · muito rasas <1,2."},
+  {f:"FAQ / UKC mínima",b:"5% do calado (PIANC rel. 121), em baixa velocidade. Reconhecidamente pequena."},
+  {f:"Física das águas rasas",b:"Água por baixo acelera mais → pressão cai mais → afundamento e trim maiores."},
+  {f:"RPM e velocidade",b:"RPM cai até ~15%; velocidade cai até ~30% em profundidades baixas."},
+  {f:"Diâmetro tático",b:"Pode AUMENTAR até 100% (giro mais aberto)."},
+  {f:"Overshoot do zigzag",b:"DIMINUI: navio quebra a guinada mais fácil (mais estável direcionalmente)."},
+  {f:"Esso Osaka (1977)",b:"1.ª validação em escala real. Golfo do México. Lincoln Crane / Lab. Davidson. h/T = 1,2 · 1,5 · 4,2."},
+  {f:"Forças em águas rasas",b:"Massa adicional e derivadas do casco crescem quando h/T cai → estabilidade direcional aumenta."},
+  {f:"Squat — definição",b:"Mudança na posição vertical do navio em movimento: afundamento total + trim dinâmico."},
+  {f:"Barrass — proa ou popa?",b:"Cb > 0,7 (cheio) → afunda pela PROA · Cb < 0,7 (fino) → pela POPA."},
+  {f:"Froude de profundidade",b:"Fnh = V/√(gh). Governa o squat."},
+  {f:"Velocidade crítica",b:"Vc = √(gh) (Fnh=1). Squat explode com Fnh→1. Fórmulas válidas p/ Fnh<0,7."},
+  {f:"Tuck (1966)",b:"Tratamento matemático pioneiro do squat; 'fórmula universal de Tuck'."},
+  {f:"ICORELS (1980)",b:"Método padrão internacional. s_proa = C_s·(∇/Lpp²)·Fnh²/√(1−Fnh²)."},
+  {f:"Métodos de squat",b:"Tuck, Hooft, ICORELS, Barrass, Eryuzlu-Hausser, Norrbin, Römisch, Millward."},
+  {f:"Regra de ouro do squat",b:"Reduzir a velocidade é a forma mais eficaz de reduzir o squat (~V²)."},
+  {f:"Dead water",b:"Ondas internas na interface (água estratificada) aumentam a resistência sem ganho de velocidade."},
+  {f:"Origem do estudo do squat",b:"Anos 1930 — motivado pela RESISTÊNCIA (friccional e de ondas), não pela manobra."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"Segundo a SNAME, para fins de desempenho de manobra, considera-se águas rasas quando a razão profundidade/calado (h/T) é:",
+   o:["Menor que 1,2","Menor que 3,0","Maior que 3,0","Entre 5 e 10"],a:1,
+   e:"SNAME: h/T < 3,0 já configura águas rasas para manobra. Acima disso os efeitos são cada vez menos significativos. A PIANC subdivide esse intervalo em faixas."},
+  {q:"Pela classificação da PIANC, a faixa 1,2 < h/T < 1,5 corresponde a:",
+   o:["Águas profundas","Águas meio rasas","Águas rasas","Águas muito rasas"],a:2,
+   e:"PIANC: profundas >3,0; meio rasas 1,5–3,0; rasas 1,2–1,5; muito rasas <1,2."},
+  {q:"Sobre os overshoots das curvas de zigue-zague e o diâmetro tático em águas rasas, é correto:",
+   o:["Ambos aumentam","Overshoots aumentam e diâmetro tático diminui","Overshoots diminuem e diâmetro tático aumenta","Ambos diminuem"],a:2,
+   e:"Em águas rasas a estabilidade direcional aumenta: os overshoots do zigzag DIMINUEM (guinada mais fácil de quebrar), mas o diâmetro tático AUMENTA (giro mais aberto, até +100%). Trocar isso é o distrator clássico."},
+  {q:"A folga abaixo da quilha (FAQ/UKC) mínima recomendada pela PIANC, em baixas velocidades, é de aproximadamente:",
+   o:["5% do calado","20% do calado","50% do calado","100% do calado"],a:0,
+   e:"5% do calado (PIANC relatório 121) — um limite reconhecidamente pequeno por quem manobra, apenas para garantir margem de manobrabilidade."},
+  {q:"Os testes de manobra em escala real que se tornaram a referência mundial para águas rasas foram feitos em 1977 com o navio:",
+   o:["Titanic","Esso Osaka","Queen Mary","Exxon Valdez"],a:1,
+   e:"O petroleiro Esso Osaka, no Golfo do México (1977), coordenado por Lincoln Crane (Lab. Davidson). Testou h/T = 1,2, 1,5 e 4,2 — 1.ª validação em escala real."},
+  {q:"O efeito squat pode ser definido como:",
+   o:["A perda de estabilidade transversal","A mudança na posição vertical do navio em movimento (afundamento + trim dinâmico)","O aumento do calado por carregamento","A vibração do casco"],a:1,
+   e:"Squat = afundamento total + mudança dinâmica no trim, devido à queda de pressão sob o casco em movimento. Existe em águas profundas, mas é amplificado em rasas."},
+  {q:"Segundo Barrass, um navio com coeficiente de bloco Cb > 0,7 (formas cheias, como petroleiros) tende a afundar mais pela:",
+   o:["Popa","Proa","Meia-nau","Não afunda"],a:1,
+   e:"Cb > 0,7 (cheio) → afunda/trima pela PROA. Cb < 0,7 (fino, como passageiros) → pela POPA. A maioria dos mercantes é cheia → proa."},
+  {q:"O número de Froude de profundidade é definido como Fnh = V/√(gh). A velocidade crítica (Fnh = 1) é:",
+   o:["V = g·h","V = √(g·h)","V = 2·√h","V = g/h"],a:1,
+   e:"Vc = √(gh): a celeridade da onda longa em água rasa. Ao se aproximar dela (Fnh→1), o squat cresce muito rapidamente. A maioria das fórmulas vale só para Fnh < 0,7."},
+  {q:"O tratamento matemático pioneiro do squat, base para os métodos empíricos posteriores, foi desenvolvido por:",
+   o:["Barrass (1979)","Tuck (1966)","ICORELS (1980)","Norrbin (1970)"],a:1,
+   e:"E. O. Tuck (1966): análise dimensional da solução numérica → 'fórmula universal de Tuck'. Dela derivaram Hooft, ICORELS, Barrass, Norrbin, Römisch, Millward, etc."},
+  {q:"Qual é a forma operacional mais eficaz de reduzir o efeito squat?",
+   o:["Aumentar a RPM","Reduzir a velocidade","Aumentar o calado","Mudar o trim de carga"],a:1,
+   e:"O squat cresce aproximadamente com V². Reduzir a velocidade é a medida mais eficaz — e é a regra de ouro do prático em águas rasas."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

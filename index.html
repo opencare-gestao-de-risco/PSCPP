@@ -124,6 +124,20 @@
    ====================================================================== */
 const CADERNOS = [
   {
+    materia:"manobra-ambiente", badge:"Santos Cap. 9 · Águas Rasas",
+    titulo:"Efeitos de Águas Rasas e o Squat (Santos Cap. 9)",
+    arquivo:"santos_cap9_aguas_rasas_squat.html",
+    desc:"Abre a matéria Efeitos Externos e de Contorno, completo (seções 9.1 a 9.8). Classificação SNAME (h/T<3) e PIANC (profundas>3 · meio rasas 1,5–3 · rasas 1,2–1,5 · muito rasas<1,2); FAQ/UKC mínima 5%. Os 14 sinais a bordo (RPM cai ~15%, velocidade ~30%, diâmetro tático até +100%, overshoots MENORES — a inversão que a banca explora). O petroleiro Esso Osaka (1977, Golfo do México, Lincoln Crane, h/T=1,2·1,5·4,2). Forças da asa-casco em águas rasas (estabilidade direcional aumenta). O SQUAT com SVG interativo (afundamento×velocidade, FAQ, onda de proa): regra de Barrass (Cb>0,7→proa, Cb<0,7→popa), número de Froude de profundidade Fnh=V/√(gh), velocidade crítica Vc=√(gh), e os métodos (Tuck 1966, Hooft, ICORELS 1980, Barrass, Norrbin, Römisch, Millward). Regra de ouro: reduzir velocidade. Par-PNA §13. Flashcards e quiz de 10 questões.",
+    tags:["BANCA","Águas rasas","Squat","h/T","Froude de profundidade","Barrass","ICORELS","Tuck","Esso Osaka","UKC","FAQ","PIANC","Efeitos de contorno"]
+  },
+  {
+    materia:"manobrabilidade", badge:"Bloco E · Santos Cap. 3",
+    titulo:"A Asa-Casco do Navio e as Derivadas Hidrodinâmicas (Santos Cap. 3)",
+    arquivo:"santos_cap3_asa_casco.html",
+    desc:"O alicerce físico do P1b, completo (seções 3.1 a 3.10). O princípio central: o casco é uma ASA de baixa razão de aspecto (envergadura↔calado, corda↔comprimento, ângulo de ataque↔deriva β) com SVG do casco-asa. História náutica×aeronáutica (Bryan 1911, Munk 1922, Weinblum 1937, Jones 1952, Lanchester, Abkowitz/Norrbin 1970, Obokata/Faltinsen). Sustentação × arrasto decompostos em X e Y com gráfico interativo do ângulo de deriva. Momento de MUNK (∝sin 2β, momento puro sem força, d'Alembert, desestabilizador) e momento viscoso (∝sin β·|sin β|). Arrasto induzido, corpo duplo/groundboard (RA efetiva=2T/L), leme como FLAPE. Série de Taylor e as 3 HIPÓTESES simplificadoras. Significado físico de cada derivada (SNAME). Cross flow / teoria do quadrado absoluto de Norrbin (v·|v|). Adimensionalização. Base do PNA §3-4 e do Cap. 4. Flashcards e quiz de 10 questões.",
+    tags:["BANCA","Asa-casco","Derivadas hidrodinâmicas","Momento de Munk","Sustentação","Arrasto","Cross flow","Norrbin","Razão de aspecto","Série de Taylor","SNAME","Corpo duplo","Bloco E"]
+  },
+  {
     materia:"manobrabilidade", badge:"Bloco H · Santos Cap. 6",
     titulo:"A Curva de Giro — camadas próprias (Santos Cap. 6)",
     arquivo:"santos_cap6_curva_giro.html",
@@ -433,10 +447,11 @@ const MATERIAS = {
   "manobra-prop":{ titulo:"Manobrabilidade — Propulsão", sub:"Módulo I · Bloco B · Propulsão e Propulsores", cor:"#1A7A6E" },
   "manobra-leme":{ titulo:"Manobrabilidade — Lemes", sub:"Módulo I · Bloco C · Lemes e Superfícies de Controle", cor:"#9E3B2E" },
   "manobrabilidade":{ titulo:"Manobrabilidade", sub:"Módulo I · Blocos D–H", cor:"#1A7A6E" },
+  "manobra-ambiente":{ titulo:"Efeitos Externos e de Contorno", sub:"Módulo I · Vento · Corrente · Onda · Águas Rasas · Restritas (Santos Cap. 8·9·10)", cor:"#3a7bb5" },
   "shiphandling":{ titulo:"Arte Naval — Shiphandling/MacElrevey", sub:"Módulo II · Blocos D·E·F·G · MacElrevey 4ª ed.", cor:"#0D3D36" },
   "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" }
 };
-const ORDEM = ["manobra-resist","manobra-prop","manobra-leme","manobrabilidade","shiphandling","arte-naval"];
+const ORDEM = ["manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","shiphandling","arte-naval"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }

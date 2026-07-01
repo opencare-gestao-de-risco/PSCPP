@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>A Asa-Casco do Navio — Santos Cap. 3 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:5px 11px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-hist{background:#fbe6c9;color:#7a4d12}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.hist{border-left:6px solid var(--mute);background:#faf6ef}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo I · Bloco E — Dinâmica e Forças</p>
+    <h1>A Asa-Casco do Navio &amp; as <em>Derivadas Hidrodinâmicas</em></h1>
+    <p class="sub">O capítulo que muda a forma de ver o navio: o casco é uma <strong>asa de baixa razão de aspecto</strong>. Deste princípio nascem sustentação, arrasto, o momento de Munk, o cross flow — e o significado físico de cada derivada hidrodinâmica que os cards de estabilidade e giro usam.</p>
+    <div class="src"><b>Fonte:</b> Santos, <em>Manobrabilidade do Navio</em>, Cap. 3 — "A asa-casco do navio: as derivadas hidrodinâmicas" (seções 3.1 a 3.10). Base do PNA §3-4. Figuras recriadas dos originais.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#historia">3.1 História</a>
+    <a href="#asa">3.2 Casco = asa ▶</a>
+    <a href="#forcas">Sustentação × arrasto ▶</a>
+    <a href="#munk">3.2.3 Munk</a>
+    <a href="#induzido">3.2.4 Induzido</a>
+    <a href="#leme">3.2.5 Leme = flape</a>
+    <a href="#taylor">3.4 Taylor · 3 hipóteses</a>
+    <a href="#significado">3.5 Significado</a>
+    <a href="#crossflow">3.8 Cross flow</a>
+    <a href="#adimensional">3.9 Adimensional</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Este é o <strong>alicerce físico</strong> do P1b. As derivadas cujo sinal e significado nascem aqui são usadas em <a href="pna_ix_sec3_estabilidade_movimento.html">Estabilidade de Movimento (PNA §3)</a> e no critério C de <a href="santos_cap4_estabilidade_espiral.html">Estabilidade e Curva Espiral (Santos Cap. 4)</a>. A montagem da equação de movimento vem de <a href="pna_ix_sec3_estabilidade_movimento.html#cap2santos">Santos Cap. 2</a>.
+</div>
+
+<!-- ===== 3.1 HISTÓRIA ===== -->
+<section class="bloco" id="historia">
+  <h2 class="sec"><span class="n">3.1</span> Resumo histórico — náutica e aeronáutica</h2>
+  <p class="lede">A ideia central: a manobra do navio é análoga à dinâmica de aeronaves. No início do século XX, a aeronáutica <em>nasceu</em> da arquitetura naval — e depois devolveu o conhecimento.</p>
+
+  <p>Pioneiros da aerodinâmica (David Taylor, William Durand, Jerome Hunsaker) começaram como arquitetos navais; a NACA (hoje NASA) foi criada nos moldes das instalações da Marinha (o David Taylor Research Center). Mas a partir dos anos 1930, o fluxo se inverteu: a aeronáutica trocou o empirismo pela física fundamental, e passou a guiar os projetos navais.</p>
+
+  <div class="box hist">
+    <h4>A linha do tempo que a banca aprecia <span class="tag t-hist">HISTÓRIA</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Ano/autor</th><th>Contribuição</th></tr>
+      <tr><td><strong>1908 — Lanchester</strong></td><td>Teoria da circulação / corpo duplo (base da sustentação)</td></tr>
+      <tr><td><strong>1911 — G. H. Bryan</strong></td><td>Equações de movimento em 6 GL para aeronaves; 1.º uso de <span class="hl">derivadas</span> (aeronáuticas)</td></tr>
+      <tr><td><strong>1922 — Max Munk</strong></td><td>O momento de Munk (momento puro em fluido ideal)</td></tr>
+      <tr><td><strong>1937 — Weinblum</strong></td><td>1.º modelo matemático de manobra do navio com derivadas hidrodinâmicas</td></tr>
+      <tr><td><strong>1952 — R. T. Jones</strong></td><td>Teoria de asa de baixa razão de aspecto → "fórmula de Jones" (base NACA, Re 0,4–3,0×10⁶)</td></tr>
+      <tr><td><strong>1970 — Abkowitz / Norrbin</strong></td><td>Modelos por série de Taylor (Abkowitz); teoria do quadrado absoluto (Norrbin)</td></tr>
+      <tr><td><strong>1980 — Obokata / Faltinsen</strong></td><td>Navio como asa: cross flow + sustentação/arrasto de asa de baixa razão de aspecto</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 3.2 CASCO = ASA ===== -->
+<section class="bloco" id="asa">
+  <h2 class="sec"><span class="n">3.2</span> A teoria de asas aplicada ao casco</h2>
+  <p class="lede">A analogia estrutural: o casco é uma asa de baixíssima razão de aspecto. Envergadura ↔ calado; corda ↔ comprimento do navio.</p>
+
+  <div class="ichart">
+    <h4>O casco como asa (Fig. 16 de Santos)</h4>
+    <p class="hint">A área perfilada do casco é enorme (o leme tem só ~1% dela). Por isso, mesmo com razão de aspecto baixa, o casco gera as forças principais.</p>
+    <svg id="svgAsa" viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Casco como asa"></svg>
+    <div class="iread" id="asaRead" style="margin-top:10px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>As equivalências <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Asa</th><th>Casco do navio</th></tr>
+      <tr><td>Envergadura (span)</td><td><span class="hl">Calado (T)</span></td></tr>
+      <tr><td>Corda (chord)</td><td><span class="hl">Comprimento do navio (L)</span></td></tr>
+      <tr><td>Razão de aspecto = env./corda</td><td>T/L (muito baixa)</td></tr>
+      <tr><td>Razão de espessura/corda</td><td>Boca/comprimento (B/L)</td></tr>
+      <tr><td>Ângulo de ataque</td><td>Ângulo de deriva β</td></tr>
+    </table>
+    <p class="vars" style="margin-top:10px">O ângulo de enflechamento (sweep) do navio é geralmente <strong>levemente negativo</strong>, e a seção média corresponde à forma do plano de flutuação a meio calado. Efeito de escala: em Froude &lt; 0,25, a irradiação de ondas pode ser desprezada e a superfície livre tratada como <strong>base plana sólida</strong> (groundboard) — o "corpo duplo", cuja razão de aspecto efetiva é <span class="hl">2×(calado/comprimento)</span>.</p>
+  </div>
+</section>
+
+<!-- ===== FORÇAS: SUSTENTAÇÃO × ARRASTO ===== -->
+<section class="bloco" id="forcas">
+  <h2 class="sec"><span class="n">3.2.1–2</span> Sustentação e arrasto do casco</h2>
+  <p class="lede">Com movimento avante e ângulo de deriva β, o casco gera sustentação (perpendicular ao fluxo) e arrasto (contra o fluxo) — decompostos em X (longitudinal) e Y (lateral).</p>
+
+  <div class="ichart">
+    <h4>Decomposição das forças com o ângulo de deriva β (Fig. 17)</h4>
+    <p class="hint">Deslize o ângulo de deriva β e veja como sustentação (L) e arrasto (D) se projetam em X e Y. É a origem física das forças laterais do casco.</p>
+    <svg id="svgForcas" viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sustentação e arrasto"></svg>
+    <div class="ictrl"><label for="beta">β (deriva) →</label><input type="range" id="beta" min="0" max="40" value="18" oninput="drawForcas()"></div>
+    <div class="iread" id="forcasRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>As projeções em cada seção <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">X<sub>D</sub>(x) = −D(x)·cos β(x) &nbsp;·&nbsp; Y<sub>D</sub>(x) = D(x)·sin β(x)<span class="lbl">contribuição do ARRASTO D em cada seção x</span></div>
+    <div class="eq">X<sub>L</sub>(x) = −L(x)·sin β(x) &nbsp;·&nbsp; Y<sub>L</sub>(x) = −L(x)·cos β(x)<span class="lbl">contribuição da SUSTENTAÇÃO L em cada seção x</span></div>
+    <p class="vars">Integrando ao longo do comprimento obtêm-se as forças totais X e Y do casco. O <strong>arrasto</strong> decompõe-se em três parcelas: resistência <strong>friccional</strong> (camada-limite), amortecimento <strong>potencial</strong> (pressão, maior à frente que atrás), e o descolamento de <strong>vórtices</strong> (separação da camada-limite em contornos íngremes).</p>
+  </div>
+
+  <div class="box key">
+    <h4>Por que o casco domina, não o leme <span class="tag t-banca">BANCA</span></h4>
+    <p>Poderia-se supor que o casco gera pouca sustentação (razão de aspecto baixa). Mas a <span class="hl">área perfilada do casco é ~100× a do leme</span> (o leme tem só ~1% da área do casco). Resultado: as forças de sustentação do casco são da mesma ordem das forças de controle do leme. <strong>As forças principais do movimento vêm da asa-casco; o leme apenas gera forças de controle — como um flape na aviação.</strong></p>
+  </div>
+</section>
+
+<!-- ===== 3.2.3 MUNK ===== -->
+<section class="bloco" id="munk">
+  <h2 class="sec"><span class="n">3.2.3</span> O momento de Munk</h2>
+  <p class="lede">Max Munk (1922): num fluido ideal, um corpo com ângulo de ataque sofre um <strong>momento puro</strong> — sem força resultante, mas com momento não nulo. É o momento desestabilizador central da manobra.</p>
+
+  <p>O <strong>paradoxo de d'Alembert</strong> prevê, em fluido invíscido, somatório de forças igual a zero — mas <span class="hl">não</span> momento zero. O momento de Munk é composto de forças iguais e opostas (não há força líquida), porém gera um binário que tende a <strong>aumentar o ângulo de deriva</strong> (desestabilizador). É a razão física de o casco "querer atravessar" ao fluxo.</p>
+
+  <div class="box formula">
+    <h4>A dependência angular <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">M<sub>Munk</sub> ∝ sin(2β)<span class="lbl">momento de Munk — máximo em β = 45°, nulo em 0° e 90°</span></div>
+    <div class="eq">M<sub>viscoso</sub> ∝ sin β·|sin β|<span class="lbl">momento devido ao arrasto viscoso (vorticidade) — Lamb / Faltinsen</span></div>
+    <p class="vars">O momento de Munk varia com <strong>sin 2β</strong> (pico a 45°); o momento por vorticidade viscosa varia com <strong>sin β·|sin β|</strong>. A dependência angular entre os dois foi estabelecida por <strong>Horace Lamb</strong> (1849–1934, Cambridge); aproximações modernas por <strong>Odd Faltinsen</strong> (MIT, anos 1980). Em fluido real, as vorticidades alteram a distribuição de forças laterais ao longo do casco.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>A armadilha do "momento sem força" <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>É contra-intuitivo: o momento de Munk existe <span class="hl">sem força resultante</span> (par de forças iguais e opostas). Dizer que "sem força não há momento" é o erro — d'Alembert garante força nula em fluido ideal, mas não momento nulo. O momento de Munk é <strong>desestabilizador</strong> (aumenta a guinada).</p>
+  </div>
+</section>
+
+<!-- ===== 3.2.4 INDUZIDO ===== -->
+<section class="bloco" id="induzido">
+  <h2 class="sec"><span class="n">3.2.4</span> O arrasto induzido e o arrasto cruzado</h2>
+  <p class="lede">Toda asa que gera sustentação gera também arrasto induzido — o preço da sustentação, ligado aos vórtices de ponta (aqui, no fundo e nas quinas do casco).</p>
+
+  <p>O <strong>arrasto induzido</strong> é a componente de arrasto associada à geração de sustentação: os vórtices que se desprendem (na proa e na popa, como pontas de asa) "inclinam" a sustentação para trás, criando arrasto. Em cada seção transversal com coeficiente de arrasto próximo a 1, formam-se <strong>dois vórtices</strong> responsáveis pela força lateral local. O <strong>princípio do arrasto cruzado</strong> (cross flow) trata justamente essa força lateral em ângulos de deriva altos — detalhado na seção 3.8.</p>
+</section>
+
+<!-- ===== 3.2.5 LEME = FLAPE ===== -->
+<section class="bloco" id="leme">
+  <h2 class="sec"><span class="n">3.2.5</span> A asa-leme — o flape da asa-casco</h2>
+  <p class="lede">O leme também é uma asa. Mas seu papel é de superfície de controle: um flape que modula as forças da asa-casco.</p>
+
+  <p>A força normal do leme define a <strong>força lateral de controle Y<sub>δ</sub>·δ</strong>, obtida em função de suas componentes. Reforçando a hierarquia do capítulo: <span class="hl">o casco gera a força principal (sustentação da asa-casco); o leme gera a força de controle (como um flape)</span>. É por isso que, na manobra, entender o casco vem antes de entender o leme.</p>
+
+  <div class="related">
+    📎 A geometria e as forças do leme em detalhe estão no card <a href="pna_iii_sec14_lemes_superficies_controle.html">Lemes e Superfícies de Controle (PNA §14)</a> — aqui o leme aparece só como flape da asa-casco.
+  </div>
+</section>
+
+<!-- ===== 3.4 TAYLOR ===== -->
+<section class="bloco" id="taylor">
+  <h2 class="sec"><span class="n">3.4</span> O aparecimento das derivadas: a série de Taylor</h2>
+  <p class="lede">As forças hidrodinâmicas são função de muitas variáveis (u, v, r e suas acelerações). A série de Taylor as expressa como soma de derivadas — mas o número de termos explode. Três hipóteses salvam o dia.</p>
+
+  <p>Na equação de movimento em 3 GL (águas profundas e calmas), o lado esquerdo tem <strong>quatro tipos de força</strong>: (1) as que atuam no casco/apêndices — função de velocidade, aceleração, deflexão do leme e rotação do propulsor; (2) as causadas pela aceleração do navio (massa adicional); (3) reações inerciais de equilíbrio; (4) forças externas (rebocadores, impelidores). Sem excitação externa, restam só as hidrodinâmicas, expandidas em Taylor até 3.ª ordem.</p>
+
+  <div class="box formula">
+    <h4>As três hipóteses simplificadoras <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th class="center">#</th><th>Hipótese</th><th>Consequência</th></tr>
+      <tr><td class="center">1</td><td>Dependência da força é <strong>linear na aceleração</strong> (2.ª lei de Newton)</td><td>Termos de aceleração de 2.ª e 3.ª ordem = <strong>zero</strong></td></tr>
+      <tr><td class="center">2</td><td><strong>Sem acoplamento</strong> entre velocidades e acelerações</td><td>Todo termo que mistura aceleração × velocidade = <strong>zero</strong></td></tr>
+      <tr><td class="center">3</td><td>Casco de <strong>baixa razão de aspecto, simétrico em BE/BB</strong>, navegando com β=0</td><td>Muitas derivadas se anulam por simetria (ex.: N<sub>u</sub>, N<sub>u̇</sub> = 0)</td></tr>
+    </table>
+  </div>
+
+  <div class="box key">
+    <h4>Notação SNAME <span class="tag t-decorar">DECORAR</span></h4>
+    <p>As derivadas são abreviadas pela convenção <strong>SNAME</strong>: por exemplo ∂X/∂u = X<sub>u</sub>, ∂Y/∂v = Y<sub>v</sub>, ∂N/∂r = N<sub>r</sub>, e as de aceleração X<sub>u̇</sub>, Y<sub>v̇</sub>, N<sub>ṙ</sub>. As razões numéricas da série são incluídas nas derivadas quando elas são determinadas. É a mesma notação usada nos cards do PNA §3-4.</p>
+  </div>
+</section>
+
+<!-- ===== 3.5 SIGNIFICADO ===== -->
+<section class="bloco" id="significado">
+  <h2 class="sec"><span class="n">3.5–3.6</span> O significado físico das derivadas</h2>
+  <p class="lede">Cada derivada que sobra tem um significado físico ligado à sustentação, ao arrasto ou à massa adicional. Este é o elo com o critério de estabilidade do Cap. 4.</p>
+
+  <table>
+    <tr><th class="center">Derivada</th><th>Origem física</th><th>Papel</th></tr>
+    <tr><td class="sym">X<sub>u̇</sub></td><td>Massa adicional em surge</td><td>Compõe o coef. de massa virtual longitudinal</td></tr>
+    <tr><td class="sym">Y<sub>v̇</sub>, N<sub>ṙ</sub></td><td>Massa/inércia adicional (sway/yaw)</td><td>Sempre negativas; compõem o coef. A da eq. característica</td></tr>
+    <tr><td class="sym">Y<sub>v</sub></td><td>Sustentação + arrasto lateral do casco</td><td>Força lateral por velocidade lateral (negativa)</td></tr>
+    <tr><td class="sym">N<sub>v</sub></td><td>Momento de Munk + vorticidade</td><td>A derivada-chave da estabilidade (proa×popa)</td></tr>
+    <tr><td class="sym">Y<sub>r</sub>, N<sub>r</sub></td><td>Resposta à velocidade angular</td><td>N<sub>r</sub> = amortecimento em guinada (negativo)</td></tr>
+    <tr><td class="sym">Y<sub>δ</sub>, N<sub>δ</sub></td><td>Força normal do leme (flape)</td><td>Forças/momento de controle</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>A leitura de código de cores de Santos <span class="tag t-banca">BANCA</span></h4>
+    <p>No livro, Santos <strong>colore os termos</strong> da expansão: os que correspondem ao <span class="hl">arrasto</span>, à <span class="hl">sustentação</span> e à <span class="hl">massa adicional</span> aparecem em cores distintas. A ideia-chave: <span class="hl">toda derivada hidrodinâmica tem uma origem física identificável</span> — não é mais um coeficiente "de simulação" sem sentido, como nos primeiros modelos. C<sub>D</sub> é o coeficiente de arrasto ao longo do comprimento do navio.</p>
+  </div>
+</section>
+
+<!-- ===== 3.8 CROSS FLOW ===== -->
+<section class="bloco" id="crossflow">
+  <h2 class="sec"><span class="n">3.8</span> O escoamento cruzado (cross flow) em baixas velocidades</h2>
+  <p class="lede">Quando a velocidade lateral se aproxima da longitudinal e β passa de ~25°, a teoria linear falha. Entra o cross flow — e a teoria do quadrado absoluto de Norrbin (1970).</p>
+
+  <p>Em ângulos de deriva altos (β &gt; ~25°), típicos de manobras a baixa velocidade, a força lateral já não é linear em v. Modela-se como <strong>arrasto cruzado</strong>: cada seção transversal do casco se comporta como um cilindro atravessado pelo fluxo lateral, gerando força ∝ v². Integrando ao longo do comprimento obtém-se a força lateral de escoamento cruzado.</p>
+
+  <div class="box formula">
+    <h4>A teoria do quadrado absoluto (Norrbin, 1970) <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">Y<sub>cross</sub> ∝ v·|v|<span class="lbl">v·|v| em vez de v² — mantém o sinal correto (função ímpar)</span></div>
+    <p class="vars">O professor sueco <strong>Nils Norrbin</strong> (1926–2011) propôs escrever os termos de velocidade ao quadrado como o <strong>produto da velocidade pelo seu módulo</strong> (v·|v|), tratando-os como duas variáveis distintas. Assim o termo quadrático se comporta como <strong>função ímpar</strong> (troca de sinal com o sentido de v), fisicamente correto. Ficou conhecida como <span class="hl">teoria do quadrado absoluto</span>. As derivadas de cross flow: Y<sub>v|v|</sub>, Y<sub>v|r|</sub>, Y<sub>r|v|</sub>, Y<sub>r|r|</sub>.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Por que importa para o prático <span class="tag t-banca">BANCA</span></h4>
+    <p>O cross flow domina exatamente onde o prático trabalha: <span class="hl">manobras a baixa velocidade e grandes ângulos de deriva</span> (atracação, giro apertado). É a física por trás da força lateral do casco quando o navio "atravessa". Ligação com os cards de shiphandling.</p>
+  </div>
+</section>
+
+<!-- ===== 3.9 ADIMENSIONAL ===== -->
+<section class="bloco" id="adimensional">
+  <h2 class="sec"><span class="n">3.9–3.10</span> A equação de movimento e a adimensionalização</h2>
+  <p class="lede">Reunidas as derivadas, monta-se a equação de movimento em águas calmas e profundas. Adimensionalizar permite comparar navios de formas semelhantes.</p>
+
+  <p>A equação de movimento do navio, em função das derivadas hidrodinâmicas, é escrita em águas calmas e profundas a partir de todas as considerações do capítulo. A <strong>adimensionalização</strong> (dividindo por ρ, L, V apropriados — o sistema "primo" da SNAME) é importante para <span class="hl">tratar diferentes navios de formas semelhantes de modo comparável</span>: as derivadas adimensionais (Y'<sub>v</sub>, N'<sub>r</sub>, etc.) tornam-se aproximadamente constantes para uma família de cascos, independentes da escala e da velocidade (em Froude baixo/moderado).</p>
+
+  <div class="box key">
+    <h4>O emprego na avaliação da manobra <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Com as derivadas adimensionais em mãos, o comportamento do navio numa manobra <span class="hl">deixa de ser conhecido só na prática ou pela "arte"</span> — passa a ser previsível pela física. É o que alimenta: o critério de estabilidade C (Cap. 4), os índices K e T de Nomoto (§4), e o raio de giro linear (Cap. 6). Este capítulo é a fonte de tudo isso.</p>
+  </div>
+
+  <div class="related">
+    📎 As derivadas montadas aqui são linearizadas e resolvidas em <a href="pna_ix_sec4_estabilidade_rumo_nomoto.html">Estabilidade de Rumo &amp; K-T de Nomoto (§4)</a> e <a href="santos_cap4_estabilidade_espiral.html">Santos Cap. 4</a>.
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os conceitos, os autores e as equivalências asa-casco.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Dez questões com os distratores reais do capítulo.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — A Asa-Casco do Navio (Santos Cap. 3)</summary>
+  <ul>
+    <li><b>Princípio central:</b> o casco é uma ASA de baixa razão de aspecto. Envergadura↔calado (T); corda↔comprimento (L); espessura/corda↔B/L; ângulo de ataque↔ângulo de deriva β.</li>
+    <li><b>Casco domina:</b> a área do casco é ~100× a do leme (leme ≈ 1% da área). O casco gera a força principal; o leme é um FLAPE (força de controle).</li>
+    <li><b>Arrasto:</b> 3 parcelas — friccional (camada-limite) · potencial/pressão · descolamento de vórtices (separação).</li>
+    <li><b>Decomposição:</b> X_D=−D·cos β, Y_D=D·sin β; X_L=−L·sin β, Y_L=−L·cos β.</li>
+    <li><b>Momento de Munk (1922):</b> momento PURO em fluido ideal (par de forças, sem força líquida — d'Alembert). ∝ sin 2β (pico a 45°). DESESTABILIZADOR. Momento viscoso ∝ sin β·|sin β| (Lamb, Faltinsen).</li>
+    <li><b>Corpo duplo:</b> Froude<0,25 → superfície livre = base plana (groundboard); razão de aspecto efetiva = 2·(T/L).</li>
+    <li><b>Fórmula de Jones (1952):</b> asa de baixa razão de aspecto; base NACA (Re 0,4–3,0×10⁶).</li>
+    <li><b>Série de Taylor — 3 hipóteses:</b> (1) força linear na aceleração (Newton) → termos de aceleração de ordem>1 = 0; (2) sem acoplamento velocidade×aceleração; (3) casco simétrico de baixa razão de aspecto → derivadas se anulam por simetria.</li>
+    <li><b>Notação SNAME:</b> X_u, Y_v, N_r, Y_v̇, N_ṙ...</li>
+    <li><b>N_v:</b> origem no momento de Munk + vorticidade → derivada-chave da estabilidade.</li>
+    <li><b>Cross flow (β>~25°):</b> força lateral ∝ v². Norrbin (1970) — teoria do quadrado absoluto: v·|v| (função ímpar, sinal correto). Domina em baixa velocidade / atracação.</li>
+    <li><b>Adimensionalização:</b> sistema primo (ρ,L,V); derivadas adimensionais ~constantes por família de cascos, independentes de escala e velocidade (Froude baixo/moderado).</li>
+    <li><b>Autores:</b> Bryan (1911, derivadas), Munk (1922), Weinblum (1937), Jones (1952), Lanchester (1908), Abkowitz/Norrbin (1970), Obokata/Faltinsen (1980).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · A Asa-Casco do Navio e as Derivadas Hidrodinâmicas (Santos, Cap. 3) · Capital Sereno · alicerce físico do P1b.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+
+/* ===== CASCO = ASA (Fig.16) ===== */
+(function(){
+  var svg=document.getElementById('svgAsa'); if(!svg) return;
+  // casco em perspectiva: retângulo alongado (planta) + cota de envergadura
+  var x0=120,y0=90,W=520,H=90;
+  // corpo do casco (perspectiva simples)
+  sEl(svg,'path',{d:'M '+x0+' '+y0+' L '+(x0+W)+' '+(y0-14)+' L '+(x0+W)+' '+(y0-14+H)+' L '+x0+' '+(y0+H)+' Z',fill:'#dfeaf5',stroke:'#2C5F8A','stroke-width':2});
+  // face lateral (dá volume)
+  sEl(svg,'path',{d:'M '+x0+' '+(y0+H)+' L '+(x0+W)+' '+(y0-14+H)+' L '+(x0+W)+' '+(y0-14+H+26)+' L '+x0+' '+(y0+H+26)+' Z',fill:'#c3d6ec',stroke:'#2C5F8A','stroke-width':2});
+  // proa (bico à direita)
+  sEl(svg,'path',{d:'M '+(x0+W)+' '+(y0-14)+' l 40 '+(H/2)+' l -40 '+(H/2+12)+' z',fill:'#2C5F8A'});
+  sTx(svg,x0+W+44,y0+H/2+2,'proa',{fill:'#2C5F8A',fs:12});
+  // CORDA (comprimento) — cota horizontal embaixo
+  var cy=y0+H+40;
+  sEl(svg,'line',{x1:x0,y1:cy,x2:x0+W,y2:cy,stroke:'#C8A84B','stroke-width':2});
+  sEl(svg,'line',{x1:x0,y1:cy-6,x2:x0,y2:cy+6,stroke:'#C8A84B','stroke-width':2});
+  sEl(svg,'line',{x1:x0+W,y1:cy-6,x2:x0+W,y2:cy+6,stroke:'#C8A84B','stroke-width':2});
+  sTx(svg,x0+W/2,cy+20,'CORDA = comprimento do navio (L)',{fill:'#9a7d1f',fs:13,fw:'bold',ta:'middle'});
+  // ENVERGADURA (calado) — cota vertical à direita
+  var ex=x0+W+70;
+  sEl(svg,'line',{x1:ex,y1:y0-14,x2:ex,y2:y0-14+H+26,stroke:'#9E3B2E','stroke-width':2});
+  sEl(svg,'line',{x1:ex-6,y1:y0-14,x2:ex+6,y2:y0-14,stroke:'#9E3B2E','stroke-width':2});
+  sEl(svg,'line',{x1:ex-6,y1:y0-14+H+26,x2:ex+6,y2:y0-14+H+26,stroke:'#9E3B2E','stroke-width':2});
+  sTx(svg,ex+10,y0+H/2+6,'ENVERGADURA',{fill:'#9E3B2E',fs:12,fw:'bold'});
+  sTx(svg,ex+10,y0+H/2+22,'= calado (T)',{fill:'#9E3B2E',fs:11});
+  document.getElementById('asaRead').innerHTML='O casco é uma <b>asa de razão de aspecto muito baixa</b> (T/L pequeno). Mas sua área perfilada é enorme (~100× a do leme) — por isso gera as forças principais da manobra.';
+})();
+
+/* ===== SUSTENTAÇÃO × ARRASTO (Fig.17) ===== */
+function drawForcas(){
+  var svg=document.getElementById('svgForcas'); if(!svg) return; svg.innerHTML='';
+  var beta=+document.getElementById('beta').value;
+  var b=beta*Math.PI/180;
+  var cx=330,cy=180;
+  // casco (elipse inclinada pelo ângulo de deriva)
+  var g=sEl(svg,'g',{transform:'rotate('+(-beta)+' '+cx+' '+cy+')'});
+  var e=document.createElementNS(NS,'ellipse');e.setAttribute('cx',cx);e.setAttribute('cy',cy);e.setAttribute('rx',130);e.setAttribute('ry',30);e.setAttribute('fill','#f6d9a8');e.setAttribute('stroke','#C8A84B');e.setAttribute('stroke-width','2');g.appendChild(e);
+  var pr=document.createElementNS(NS,'path');pr.setAttribute('d','M '+(cx+130)+' '+cy+' l 26 -10 l 0 20 z');pr.setAttribute('fill','#C8A84B');g.appendChild(pr);
+  // vetor velocidade V (horizontal, para a esquerda relativo = fluxo)
+  sEl(svg,'line',{x1:cx,y1:cy,x2:cx-160,y2:cy,stroke:'#7a6f55','stroke-width':2,'stroke-dasharray':'5 4'});
+  sTx(svg,cx-175,cy+4,'V',{fill:'#7a6f55',fs:14,fw:'bold'});
+  // eixo do navio (rumo) inclinado por beta
+  var axX=cx+150*Math.cos(-b), axY=cy+150*Math.sin(-b);
+  sEl(svg,'line',{x1:cx,y1:cy,x2:axX,y2:axY,stroke:'#C8A84B','stroke-width':1.5,'stroke-dasharray':'3 3'});
+  // arco do ângulo de deriva
+  sEl(svg,'path',{d:'M '+(cx-40)+' '+cy+' A 40 40 0 0 1 '+(cx-40*Math.cos(b))+' '+(cy-40*Math.sin(b))+' ',fill:'none',stroke:'#6B4E8E','stroke-width':1.5});
+  sTx(svg,cx-55,cy-14,'β',{fill:'#6B4E8E',fs:14,fw:'bold'});
+  // ARRASTO D: ao longo de -V (para a esquerda)
+  var Dlen=110;
+  sEl(svg,'line',{x1:cx,y1:cy,x2:cx-Dlen,y2:cy,stroke:'#9E3B2E','stroke-width':3});
+  sEl(svg,'path',{d:'M '+(cx-Dlen)+' '+cy+' l 10 -5 l 0 10 z',fill:'#9E3B2E'});
+  sTx(svg,cx-Dlen-8,cy-8,'Arrasto (D)',{fill:'#9E3B2E',fs:13,fw:'bold',ta:'end'});
+  // SUSTENTAÇÃO L: perpendicular a V (para cima)
+  var Llen=90+beta*1.5;
+  sEl(svg,'line',{x1:cx,y1:cy,x2:cx,y2:cy-Llen,stroke:'#1A7A6E','stroke-width':3});
+  sEl(svg,'path',{d:'M '+cx+' '+(cy-Llen)+' l -5 10 l 10 0 z',fill:'#1A7A6E'});
+  sTx(svg,cx+8,cy-Llen+4,'Sustentação (L)',{fill:'#1A7A6E',fs:13,fw:'bold'});
+  // componentes de L em X e Y (projeções tracejadas)
+  var Ylat=Llen*Math.cos(b), Xlong=Llen*Math.sin(b);
+  // leitura
+  document.getElementById('forcasRead').innerHTML='β = <b>'+beta+'°</b> → a sustentação cresce com β (até o estol). Projeções: Y<sub>L</sub>=−L·cos β (força lateral, domina) · X<sub>L</sub>=−L·sin β (freia o avanço). Arrasto sempre contra V.';
+}
+drawForcas();
+window.addEventListener('resize',function(){drawForcas();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Princípio central do Cap. 3",b:"O casco é uma ASA de baixa razão de aspecto. Dele vêm as forças principais da manobra."},
+  {f:"Envergadura ↔ ?",b:"Calado (T). A corda ↔ comprimento (L). Razão de aspecto = T/L (muito baixa)."},
+  {f:"Espessura/corda ↔ ?",b:"Boca/comprimento (B/L). Ângulo de ataque ↔ ângulo de deriva β."},
+  {f:"Casco × leme (áreas)",b:"O leme tem só ~1% da área do casco. Casco gera força principal; leme é FLAPE (controle)."},
+  {f:"3 parcelas do arrasto",b:"Friccional (camada-limite) · potencial/pressão · descolamento de vórtices (separação)."},
+  {f:"Decomposição do arrasto",b:"X_D=−D·cos β; Y_D=D·sin β."},
+  {f:"Decomposição da sustentação",b:"X_L=−L·sin β; Y_L=−L·cos β."},
+  {f:"Momento de Munk (1922)",b:"Momento PURO em fluido ideal: par de forças iguais e opostas, sem força líquida (d'Alembert). Desestabilizador."},
+  {f:"Munk — dependência angular",b:"∝ sin 2β (máximo a 45°, nulo a 0° e 90°). Momento viscoso ∝ sin β·|sin β| (Lamb, Faltinsen)."},
+  {f:"Corpo duplo / groundboard",b:"Froude<0,25: superfície livre = base plana sólida. Razão de aspecto efetiva = 2·(T/L)."},
+  {f:"Fórmula de Jones (1952)",b:"Asa de baixa razão de aspecto (base NACA, Re 0,4–3,0×10⁶)."},
+  {f:"Taylor — hipótese 1",b:"Força linear na aceleração (Newton) → termos de aceleração de 2.ª/3.ª ordem = zero."},
+  {f:"Taylor — hipótese 2",b:"Sem acoplamento velocidade×aceleração → termos mistos = zero."},
+  {f:"Taylor — hipótese 3",b:"Casco simétrico de baixa razão de aspecto, β=0 → derivadas se anulam por simetria (ex.: N_u=0)."},
+  {f:"N_v — origem física",b:"Momento de Munk + vorticidade. Derivada-chave da estabilidade (proa×popa)."},
+  {f:"Cross flow (β>25°)",b:"Força lateral ∝ v². Domina em baixa velocidade / atracação."},
+  {f:"Norrbin (1970)",b:"Teoria do quadrado absoluto: v·|v| em vez de v² (função ímpar, sinal correto)."},
+  {f:"Adimensionalização",b:"Sistema primo (ρ,L,V). Derivadas adimensionais ~constantes por família de cascos, independem de escala/velocidade."},
+  {f:"Leme = flape",b:"O leme é uma asa, mas de controle: modula as forças da asa-casco (Y_δ·δ)."},
+  {f:"Bryan (1911)",b:"1.ª formulação de derivadas (aeronáuticas) em 6 GL para aeronaves."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"O princípio central do Cap. 3 de Santos é que, para a manobra, o casco do navio deve ser tratado como:",
+   o:["Um cilindro","Uma asa de baixa razão de aspecto","Uma esfera","Uma placa plana rígida"],a:1,
+   e:"O casco é uma asa de razão de aspecto muito baixa. Da teoria de asas vêm sustentação, arrasto e o significado das derivadas hidrodinâmicas."},
+  {q:"Na analogia asa-casco, a envergadura e a corda correspondem, respectivamente, a:",
+   o:["Comprimento e boca","Calado e comprimento","Boca e calado","Comprimento e calado"],a:1,
+   e:"Envergadura ↔ calado (T); corda ↔ comprimento do navio (L). A razão de aspecto do casco (T/L) é muito baixa."},
+  {q:"Por que as forças de sustentação do casco são relevantes, apesar da baixa razão de aspecto?",
+   o:["Porque o casco tem razão de aspecto alta","Porque a área perfilada do casco é ~100× a do leme","Porque o leme não gera forças","Porque a velocidade é sempre alta"],a:1,
+   e:"O leme tem só ~1% da área do casco. Mesmo com razão de aspecto baixa, a área enorme faz o casco gerar as forças principais; o leme é apenas o flape de controle."},
+  {q:"O momento de Munk, observado em fluido ideal, caracteriza-se por:",
+   o:["Ter força resultante grande e momento nulo","Não ter força resultante, mas ter momento não nulo","Ter força e momento nulos","Só existir em fluido viscoso"],a:1,
+   e:"Par de forças iguais e opostas: força líquida nula, mas momento não nulo. O paradoxo de d'Alembert garante força zero em fluido ideal, não momento zero. O momento de Munk é desestabilizador."},
+  {q:"A dependência angular do momento de Munk com o ângulo de deriva β é:",
+   o:["∝ sin β","∝ sin 2β (máximo a 45°)","∝ cos β","Constante"],a:1,
+   e:"M_Munk ∝ sin 2β: nulo a 0° e 90°, máximo a 45°. Já o momento por vorticidade viscosa varia com sin β·|sin β| (Lamb, Faltinsen)."},
+  {q:"Na aproximação do corpo duplo (Froude < 0,25), a razão de aspecto efetiva do casco é:",
+   o:["Igual a T/L","2·(calado/comprimento)","Igual a L/T","Metade de T/L"],a:1,
+   e:"Tratando a superfície livre como base plana sólida (groundboard), o casco 'espelhado' tem razão de aspecto efetiva = 2·(T/L). Válido em Froude baixo, onde a irradiação de ondas é desprezível."},
+  {q:"Uma das três hipóteses que simplificam a expansão em série de Taylor das forças é:",
+   o:["A força é quadrática na aceleração","A força é linear na aceleração (2.ª lei de Newton)","Há forte acoplamento velocidade-aceleração","O casco é assimétrico"],a:1,
+   e:"Hipótese 1: dependência linear na aceleração → zera termos de aceleração de 2.ª/3.ª ordem. As outras: (2) sem acoplamento velocidade×aceleração; (3) casco simétrico de baixa razão de aspecto."},
+  {q:"A teoria do quadrado absoluto, de Norrbin (1970), propõe escrever os termos de velocidade ao quadrado como:",
+   o:["v² simples","v·|v| (produto pela velocidade e seu módulo)","√v","v³"],a:1,
+   e:"v·|v| em vez de v²: mantém o comportamento de função ímpar (troca de sinal com o sentido de v), fisicamente correto para a força de cross flow. Aplica-se em β alto / baixa velocidade."},
+  {q:"O escoamento cruzado (cross flow) torna-se dominante quando:",
+   o:["A velocidade é muito alta e β pequeno","O ângulo de deriva é alto (β > ~25°), típico de baixa velocidade","O navio está parado","Não há ângulo de deriva"],a:1,
+   e:"Em β > ~25° (velocidade lateral próxima da longitudinal), típico de manobras a baixa velocidade e atracação, a força lateral vira ∝ v² e a teoria linear falha."},
+  {q:"A adimensionalização das equações (sistema primo da SNAME) é importante porque:",
+   o:["Elimina as derivadas","Permite comparar navios de formas semelhantes de modo independente de escala","Aumenta o número de termos","Só serve para navios de guerra"],a:1,
+   e:"As derivadas adimensionais tornam-se ~constantes para uma família de cascos, independentes da escala e da velocidade (Froude baixo/moderado) — permitindo comparar e prever a manobra."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>
