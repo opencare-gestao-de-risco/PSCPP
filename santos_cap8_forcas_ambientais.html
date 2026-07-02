@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Forças Externas Ambientais — Santos Cap. 8 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#eaf3fa;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:110px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Efeitos Externos e de Contorno</p>
+    <h1>A Ação das <em>Forças Externas Ambientais</em> sobre o Navio</h1>
+    <p class="sub">Vento, corrente e onda — as três forças que o prático antecipa, compensa ou aproveita. O vento verdadeiro × aparente, os coeficientes OCIMF e Blendermann, o caranguejar (crabbing), o bollard pull, e as forças de onda de 1ª e 2ª ordem.</p>
+    <div class="src"><b>Fonte:</b> Santos, <em>Manobrabilidade do Navio</em>, Cap. 8 — "A ação das forças externas ambientais sobre o navio" (seções 8.1 a 8.4). Par-PNA: §12 (Vento, Corrente, Ondas). Fecha a matéria Efeitos Externos e de Contorno.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#geral">8.1 As 3 forças</a>
+    <a href="#vento">8.2 Vento ▶</a>
+    <a href="#coefs">Coeficientes</a>
+    <a href="#comportamento">Orçar × arribar</a>
+    <a href="#praticas">Recomendações ▶</a>
+    <a href="#corrente">8.3 Corrente</a>
+    <a href="#onda">8.4 Onda</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Fecha a matéria <strong>Efeitos Externos e de Contorno</strong>, junto com <a href="santos_cap9_aguas_rasas_squat.html">Águas Rasas e Squat (Cap. 9)</a> e <a href="santos_cap10_aguas_restritas_interacoes.html">Águas Restritas e Interações (Cap. 10)</a>. Par-PNA: <a href="pna_ix_sec12_vento_corrente_ondas.html">Vento, Corrente e Ondas (§12)</a>. O movimento do navio em ondas terá matéria própria (Seakeeping — Blocos I e J).
+</div>
+
+<!-- ===== 8.1 GERAL ===== -->
+<section class="bloco" id="geral">
+  <h2 class="sec"><span class="n">8.1</span> As forças ambientais — o quadro geral</h2>
+  <p class="lede">O navio opera na transição entre dois fluidos — ar e água — e responde a cada força ambiental conforme o ângulo de incidência, a intensidade e o período de encontro.</p>
+
+  <p>Quanto <strong>menor a velocidade do navio</strong>, maior o efeito relativo das forças ambientais — gerando desvios de trajetória e de aproamento com risco de acidente. Mas os efeitos podem ser <span class="hl">vantajosos ou desvantajosos</span>: práticos e comandantes experientes se <strong>antecipam</strong> a eles, compensando-os ou aproveitando-os. Duas técnicas-síntese:</p>
+
+  <ul>
+    <li><strong>Caranguejar (crabbing):</strong> compensar o abatimento controlando trajetória, aproamento e velocidade, levando em conta o ângulo de ataque resultante na asa-casco;</li>
+    <li><strong>Bollard pull:</strong> nas operações de atracação e navegação restrita, os valores prevalecentes das forças ambientais definem a <span class="hl">tonelagem de tração estática necessária</span> dos rebocadores de assistência.</li>
+  </ul>
+
+  <div class="box key">
+    <h4>De onde vêm os números <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Os procedimentos mais precisos para estimar forças de vento, corrente e ondas são <strong>testes com modelos em escala reduzida</strong> (túnel de vento / tanque). A força resultante, medida no centro do modelo, é distribuída em componentes e momentos → geram-se os <span class="hl">coeficientes adimensionais de força e momento</span>, aplicáveis a navios de geometria similar — a base dos modelos numéricos de manobra. Para vento e corrente, consideram-se em geral só as componentes no <strong>plano horizontal</strong>.</p>
+  </div>
+</section>
+
+<!-- ===== 8.2 VENTO ===== -->
+<section class="bloco" id="vento">
+  <h2 class="sec"><span class="n">8.2</span> O vento — verdadeiro × relativo (aparente)</h2>
+  <p class="lede">A distinção que abre a seção: o vento que existe (verdadeiro) e o vento que o navio sente (aparente = soma vetorial). E o gradiente: perto da água, o vento verdadeiro é mais fraco.</p>
+
+  <table>
+    <tr><th>Conceito</th><th>Definição</th></tr>
+    <tr><td><strong>Vento verdadeiro (V<sub>w</sub>)</strong></td><td>Devido a causas naturais; existe no ponto <span class="hl">independentemente do navio</span>. "Verdadeiro zero" = still air</td></tr>
+    <tr><td><strong>Vento relativo / aparente (V<sub>wr</sub>)</strong></td><td><span class="hl">Soma vetorial</span> da velocidade do navio (V<sub>s</sub>, sem correção de gradiente) com o vento verdadeiro (com correção de gradiente)</td></tr>
+  </table>
+
+  <div class="ichart">
+    <h4>O triângulo do vento — verdadeiro × aparente (interativo)</h4>
+    <p class="hint">Deslize a velocidade do navio. Veja o vento aparente girar para a proa e crescer — o mesmo efeito que os velejadores conhecem.</p>
+    <svg id="svgVento" viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vento verdadeiro e aparente"></svg>
+    <div class="ictrl"><label for="vs">Veloc. do navio →</label><input type="range" id="vs" min="0" max="100" value="40" oninput="drawVento()"></div>
+    <div class="iread" id="ventoRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>O gradiente de velocidade (camada-limite atmosférica) <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">V(z) = V(10) · (z/10)<sup>1/n</sup> , &nbsp; n = 7<span class="lbl">lei de potência — correção da velocidade medida na altura z para a altura-padrão de 10 m</span></div>
+    <div class="eq">V<sub>w</sub>(10) ≈ 0,836 · Bft<sup>3/2</sup> &nbsp; [m/s]<span class="lbl">relação com a escala Beaufort (Bft) na altura de 10 m</span></div>
+    <p class="vars">Perto da superfície a velocidade do vento cai (gradiente acentuado). Valores de n variam com a intensidade; <span class="hl">para fins práticos adota-se n = 7, como recomendado pela OCIMF</span>. A altura de referência para a força do vento é geralmente a <strong>altura média da projeção lateral</strong> do casco acima d'água. Como o vento verdadeiro é fraco junto à água e a velocidade do navio não tem gradiente, <strong>perto da superfície domina o efeito da velocidade do navio</strong>; com a altura, o vento verdadeiro cresce (o efeito das velas dos veleiros).</p>
+  </div>
+</section>
+
+<!-- ===== COEFICIENTES ===== -->
+<section class="bloco" id="coefs">
+  <h2 class="sec"><span class="n">8.2.2</span> Os coeficientes da força do vento — OCIMF e Blendermann</h2>
+  <p class="lede">Dois conjuntos de referência: os coeficientes OCIMF (petroleiros e gaseiros) e os de Blendermann (anos 1990, vários tipos de navio).</p>
+
+  <p>Os coeficientes usuais: <strong>C<sub>xw</sub></strong> (força longitudinal), <strong>C<sub>yw</sub></strong> (força lateral) e <strong>C<sub>nw</sub></strong> (momento em yaw), tabelados contra o <strong>ângulo de ataque do vento</strong>. O procedimento de cálculo: (1) meça/estime a velocidade do vento e anote a altura h da medição; (2) corrija para a altura-padrão de 10 m pelo gradiente; (3) aplique os coeficientes com as áreas projetadas.</p>
+
+  <div class="box key">
+    <h4>Lastro × carregado — o resultado que a banca cobra <span class="tag t-banca">BANCA</span></h4>
+    <p>Para petroleiros (OCIMF): os <span class="hl">coeficientes de força são maiores em LASTRO do que carregados</span> — e o navio em lastro ainda tem <strong>área vélica projetada muito maior</strong>. Resultado: a força lateral do vento no navio em lastro supera em muito a do carregado, pelos dois fatores somados. Gaseiros: coeficientes laterais semelhantes aos petroleiros em lastro, porém mais altos; <strong>tanques esféricos</strong> elevam ainda mais.</p>
+  </div>
+
+  <p><strong>Blendermann</strong> (Werner Blendermann, Universidade de Hamburgo, anos 1990) mediu coeficientes para vários tipos: Ro-Ro transportador de carros, contêinero e outros — cobrindo a diversidade de superestruturas que a OCIMF (focada em petroleiros/gaseiros) não cobria.</p>
+</section>
+
+<!-- ===== COMPORTAMENTO ===== -->
+<section class="bloco" id="comportamento">
+  <h2 class="sec"><span class="n">8.2.2</span> Orçar × arribar — o comportamento típico</h2>
+  <p class="lede">A convenção e as tendências por posição do vento. Cada item é uma afirmativa de prova.</p>
+
+  <table>
+    <tr><th>Conceito</th><th>Definição / tendência</th></tr>
+    <tr><td><strong>Orçar</strong></td><td>Girar a proa <span class="hl">para o vento</span> (momento anti-horário na convenção usada, com vento por BE)</td></tr>
+    <tr><td><strong>Arribar</strong></td><td>Girar a proa <span class="hl">para sotavento</span> (afastando do vento)</td></tr>
+    <tr><td>Vento por <strong>ante a vante do través</strong></td><td>O navio tende a <strong>orçar</strong></td></tr>
+    <tr><td>Vento por <strong>ante a ré do través</strong></td><td>Tendência de <strong>arribar</strong> (girar para fora do vento) e leve movimento a ré com vento pelo través</td></tr>
+    <tr><td>Vento <strong>pelo través</strong></td><td><span class="hl">Força máxima de abatimento lateral</span>; sem tendência dominante de orçar/arribar quando com velocidade (o vento aparente fica ~pelo través)</td></tr>
+    <tr><td>Navio <strong>parado ou muito lento</strong></td><td>Comportamento dominado pelo vento verdadeiro e pela distribuição de área vélica (proa/popa) — varia por tipo de navio</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>O exemplo do caranguejar <span class="tag t-calc">CALCULO</span></h4>
+    <p class="vars">Contêinero pós-Panamax, h/T = 1,2, velocidade 5 nós, vento relativo de 25 nós entrando a 75°: pela tabela do método, com K = razão vento/navio = 5, obtém-se <b>δ = K²·B<sub>δ</sub> = 25×0,559 ≈ 14° de leme</b> e <b>β = K²·B<sub>β</sub> = 25×0,059 ≈ 1,5° de ângulo de deriva</b> para caranguejar. <span class="hl">Alerta de Santos:</span> em velocidade baixa, ângulo de deriva &gt; 5° pode <strong>desestabilizar o casco mesmo com todo o leme carregado</strong>, impedindo o movimento em linha reta.</p>
+  </div>
+</section>
+
+<!-- ===== RECOMENDAÇÕES ===== -->
+<section class="bloco" id="praticas">
+  <h2 class="sec"><span class="n">8.2.2.6</span> Recomendações práticas — a força cresce com V²</h2>
+  <p class="lede">A seção mais "de prático" do capítulo. A lei quadrática e suas consequências operacionais.</p>
+
+  <div class="ichart">
+    <h4>Força do vento × velocidade (∝ V²) + efeito de rajadas</h4>
+    <p class="hint">Deslize a velocidade do vento. A força cresce com o quadrado — e as rajadas amplificam ainda mais.</p>
+    <canvas id="cvForca" width="860" height="300"></canvas>
+    <div class="ictrl"><label for="vw">Vento (nós) →</label><input type="range" id="vw" min="5" max="50" value="15" oninput="drawForca()"></div>
+    <div class="iread" id="forcaRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>As regras operacionais <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>• <strong>Triplicar a velocidade do vento → força 9×</strong> (V²). Com rajadas, de 10 para 30 nós a força pode passar de <span class="hl">10× a inicial</span>.<br>
+    • <strong>Giro sob vento:</strong> a curva de giro fica <span class="hl">achatada</span> e o <strong>diâmetro tático aumenta</strong>; curvas fechadas com máxima cautela.<br>
+    • <strong>Rebocadores:</strong> a disposição correta deve considerar não só o abatimento lateral, mas também o <strong>momento de guinada</strong> gerado pelo vento.<br>
+    • <strong>Atracação sob vento desfavorável:</strong> medidas de antecipação; o comportamento dos navios é diversificado e às vezes <span class="hl">contraintuitivo</span>. <strong>É preferível abortar uma manobra na dúvida do que conduzir a um acidente.</strong></p>
+  </div>
+</section>
+
+<!-- ===== 8.3 CORRENTE ===== -->
+<section class="bloco" id="corrente">
+  <h2 class="sec"><span class="n">8.3</span> A corrente</h2>
+  <p class="lede">Oceânica, de maré, de rios ou canais — a corrente age na obra viva, e é tratada pelos mesmos coeficientes hidrodinâmicos do casco (Cap. 3).</p>
+
+  <p>Diferente do vento (que age na obra morta com coeficientes aerodinâmicos), o efeito da corrente em águas profundas usa a <strong>velocidade relativa navio-água</strong> e o ângulo de incidência, com os <span class="hl">coeficientes hidrodinâmicos do movimento na água — os mesmos do Cap. 3</span> (a asa-casco). A corrente também tem <strong>gradiente vertical</strong> (camada-limite com o fundo), corrigido pela mesma lei de potência 1/7.</p>
+
+  <div class="box key">
+    <h4>O dado-chave do ângulo de incidência <span class="tag t-banca">BANCA</span></h4>
+    <p>Com o navio em velocidade <strong>moderada ou alta</strong>, o ângulo de incidência relativo da corrente é <span class="hl">sempre pequeno — inferior a ~25°</span> — porque a velocidade do navio supera a da corrente. A ação sobre o casco equivale a uma força hidrodinâmica com pequeno ângulo de ataque numa asa de baixa razão de aspecto. Contraste com o vento: o vento aparente fica <strong>predominantemente pelo través</strong> quando o navio ganha velocidade. Esse contraste (corrente ~pela proa relativa × vento ~pelo través relativo) é distrator de prova.</p>
+  </div>
+
+  <p>Em <strong>mar aberto e profundo</strong>, a corrente é aproximadamente constante — o que reduz sua importância relativa na manobra (soma-se vetorialmente à navegação). Em <strong>águas rasas, restritas ou canais (e em curvas)</strong>, a corrente varia em intensidade e direção — e aí seu efeito na manobra é crítico, somando-se aos efeitos de banco do Cap. 10.</p>
+</section>
+
+<!-- ===== 8.4 ONDA ===== -->
+<section class="bloco" id="onda">
+  <h2 class="sec"><span class="n">8.4</span> A onda — os dois movimentos característicos</h2>
+  <p class="lede">A ponte para o Seakeeping: as ondas geram no navio uma resposta oscilatória (1ª ordem) e uma deriva média (2ª ordem). E a ressonância é o perigo.</p>
+
+  <table>
+    <tr><th>Componente</th><th>Natureza</th><th>Efeito</th></tr>
+    <tr><td><strong>Força de 1ª ordem</strong></td><td>Oscilatória, na <span class="hl">frequência de encontro</span></td><td>Movimentos oscilatórios (heave, roll, pitch; e no plano horizontal surge, sway, yaw) — média zero</td></tr>
+    <tr><td><strong>Deriva de 2ª ordem</strong> (wave drift)</td><td>Média não nula, proporcional ao quadrado da amplitude</td><td>Empurra o navio lentamente — o "abatimento de onda" que o prático compensa</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Ressonância e frequência de encontro <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Navios deslocados do equilíbrio oscilam em heave, roll e pitch nas suas <strong>frequências naturais</strong>. Se o período dominante das forças de onda se aproxima do período natural → <span class="hl">ressonância e amplificação</span> dos movimentos. Pontos numéricos: <strong>o período natural de resposta de navios de projeto fica entre 10 s e 17 s</strong> (águas profundas); <span class="hl">ondas com período &lt; 6 s produzem resposta insignificante em navios &gt; 100 m</span>. Sem velocidade: o navio oscila na frequência <em>da onda</em>; com velocidade: na <strong>frequência de encontro</strong>. A resposta tende a ser máxima quando o <strong>comprimento da onda ≈ comprimento do navio</strong>.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Ondas em águas rasas — os 3 efeitos PIANC (rel. 121) <span class="tag t-decorar">DECORAR</span></h4>
+    <p class="vars">Para um dado período de onda, em águas rasas: (1) o <b>comprimento da onda é menor</b> → altera a força de excitação relativa ao comprimento do navio; (2) a <b>celeridade é menor</b> → muda a frequência de encontro e desloca o pico de resposta; (3) a <b>massa adicional em heave e a inércia adicional em pitch são muito maiores</b> → períodos naturais aumentam → movimentos verticais reduzidos. <span class="hl">Combinados: a resposta do navio em ondas tende a ser MENOR em águas rasas do que em profundas.</span></p>
+  </div>
+
+  <div class="related">
+    📎 A física completa do movimento em ondas — RAOs, heave/pitch/roll, espectros de mar (Pierson-Moskowitz, JONSWAP) — é o tema da matéria <strong>Comportamento no Mar (Seakeeping)</strong>, Blocos I e J (Santos, livro de ondas, Caps. 3 e 4).
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Vento, corrente e onda.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Dez questões com os distratores reais do capítulo.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Forças Externas Ambientais (Santos Cap. 8)</summary>
+  <ul>
+    <li><b>3 forças:</b> vento (obra morta, aerodinâmica) · corrente (obra viva, hidrodinâmica) · onda (1ª + 2ª ordem). Quanto MENOR a velocidade do navio, maior o efeito relativo delas.</li>
+    <li><b>Técnicas:</b> caranguejar/crabbing (compensar o abatimento) · bollard pull (forças ambientais definem a tração estática dos rebocadores).</li>
+    <li><b>Vento verdadeiro × aparente:</b> verdadeiro existe sem o navio; aparente = soma vetorial (Vs sem gradiente + Vw com gradiente).</li>
+    <li><b>Gradiente:</b> lei de potência 1/n com n=7 (OCIMF); correção para 10 m. Beaufort: Vw(10) ≈ 0,836·Bft^(3/2) m/s. Junto à água domina a velocidade do navio.</li>
+    <li><b>Coeficientes:</b> Cxw, Cyw, Cnw × ângulo de ataque. OCIMF (petroleiros/gaseiros): LASTRO tem coeficientes E área vélica maiores → força lateral muito maior. Gaseiros de tanques esféricos: ainda mais. Blendermann (Hamburgo, anos 1990): Ro-Ro, contêineros etc.</li>
+    <li><b>Tendências:</b> vento ante a vante do través → ORÇA · ante a ré → ARRIBA · pelo través → abatimento lateral MÁXIMO. Parado/lento: domina a distribuição de área vélica.</li>
+    <li><b>Caranguejar (exemplo):</b> K = vento/navio; δ = K²·B_δ; β = K²·B_β. Deriva > 5° em baixa velocidade pode desestabilizar o casco mesmo com todo o leme.</li>
+    <li><b>Lei V²:</b> triplicar o vento → força 9×; rajadas (10→30 nós) → pode passar de 10×. Giro sob vento: curva achatada, diâmetro tático AUMENTA. Na dúvida, abortar a manobra.</li>
+    <li><b>Corrente:</b> velocidade relativa + coeficientes hidrodinâmicos do Cap. 3; gradiente 1/7 com o fundo. Navio em velocidade → incidência relativa < ~25° (≠ vento, que fica pelo través). Mar aberto: ~constante; águas rasas/canais/curvas: variável e crítica.</li>
+    <li><b>Onda:</b> 1ª ordem = oscilatória (frequência de encontro, média zero) · 2ª ordem = deriva média (wave drift). Ressonância se período da onda ≈ período natural (10–17 s). Ondas < 6 s: resposta insignificante em navios > 100 m. Resposta máxima com λ ≈ L.</li>
+    <li><b>PIANC águas rasas:</b> λ menor + celeridade menor + massa adicional maior → resposta em ondas MENOR que em profundas.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · A Ação das Forças Externas Ambientais (Santos, Cap. 8) · Capital Sereno · matéria Efeitos Externos e de Contorno — completa.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+function arrow(svg,x1,y1,x2,y2,col,w){
+  sEl(svg,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':w||3});
+  var ang=Math.atan2(y2-y1,x2-x1);
+  var ah=10;
+  sEl(svg,'path',{d:'M '+x2+' '+y2+' L '+(x2-ah*Math.cos(ang-0.45))+' '+(y2-ah*Math.sin(ang-0.45))+' L '+(x2-ah*Math.cos(ang+0.45))+' '+(y2-ah*Math.sin(ang+0.45))+' Z',fill:col});
+}
+
+/* ===== TRIÂNGULO DO VENTO ===== */
+function drawVento(){
+  var svg=document.getElementById('svgVento'); if(!svg) return; svg.innerHTML='';
+  var vs=+document.getElementById('vs').value/100; // 0..1
+  var cx=380, cy=170;
+  // navio (proa para a direita)
+  var len=180,hh=26;
+  var hull=document.createElementNS(NS,'path');
+  hull.setAttribute('d','M '+(cx-len/2)+' '+(cy+hh/2)+' L '+(cx+len/2-28)+' '+(cy+hh/2)+' Q '+(cx+len/2+8)+' '+cy+' '+(cx+len/2-28)+' '+(cy-hh/2)+' L '+(cx-len/2)+' '+(cy-hh/2)+' Z');
+  hull.setAttribute('fill','#3a4a52');hull.setAttribute('stroke','#1b2a30');hull.setAttribute('stroke-width','2');
+  svg.appendChild(hull);
+  sTx(svg,cx+len/2+4,cy+4,'proa →',{fill:'#3a4a52',fs:11});
+  // vento verdadeiro: fixo, vindo do través (de cima), módulo constante
+  var Vw=90; // px
+  arrow(svg,cx,cy-40-Vw,cx,cy-44,'#2C5F8A',3.5);
+  sTx(svg,cx+10,cy-40-Vw/2,'vento VERDADEIRO (Vw)',{fill:'#2C5F8A',fs:12,fw:'bold'});
+  // vento devido ao avanço: da proa (para trás) proporcional a vs
+  var Vs=vs*130;
+  if(Vs>4){
+    arrow(svg,cx+40+Vs,cy-44,cx+44,cy-44,'#C8A84B',3.5);
+    sTx(svg,cx+50,cy-56,'vento do avanço (−Vs)',{fill:'#9a7d1f',fs:12,fw:'bold'});
+  }
+  // aparente = soma vetorial (verdadeiro para baixo + do avanço para a esquerda... na tela: Vw aponta para baixo (chegando), avanço aponta para ré (esquerda→? ) )
+  // vetores como chegam ao navio: Vw = (0,+Vw) chegando de cima; vento do avanço = (-Vs,0) chegando da proa
+  var ax=cx- Vs*0.0 ; // ponto de aplicação no navio
+  var vwx=0, vwy=Vw; var vsx=-Vs, vsy=0;
+  var rx=vwx+vsx, ry=vwy+vsy;
+  var norm=Math.sqrt(rx*rx+ry*ry);
+  // desenhar aparente a partir de (cx, cy-44-?) chegando ao navio
+  var sx=cx-rx, sy=(cy-44)-ry;
+  arrow(svg,sx,sy,cx,cy-44,'#9E3B2E',4);
+  sTx(svg,sx-6,sy-8,'vento APARENTE (Vwr)',{fill:'#9E3B2E',fs:12.5,fw:'bold',ta:'start'});
+  // ângulo aparente em relação à proa
+  var angApar=Math.atan2(ry,-rx)*180/Math.PI; // relativo ao eixo de avanço
+  var angRel=(180-Math.abs(Math.atan2(ry,rx)*180/Math.PI)).toFixed(0);
+  var angProa=(Math.atan2(norm? ry:1, -rx)*180/Math.PI).toFixed(0);
+  document.getElementById('ventoRead').innerHTML='V<sub>navio</sub> = <b>'+(vs*20).toFixed(0)+' nós</b> · O aparente = soma vetorial: quanto mais rápido o navio, mais o vento aparente <b>gira para a proa</b> e cresce em módulo. Parado: aparente = verdadeiro (través). Este é o vento que os coeficientes C<sub>xw</sub>/C<sub>yw</sub>/C<sub>nw</sub> usam.';
+}
+drawVento();
+window.addEventListener('resize',function(){drawVento();});
+
+/* ===== FORÇA ∝ V² ===== */
+function drawForca(){
+  var cv=document.getElementById('cvForca'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=56,y0=H-38,pW=W-90,pH=H-64;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x0,14);ctx.lineTo(x0,y0);ctx.lineTo(W-18,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('força relativa do vento',x0+4,24);ctx.fillText('vento (nós)',W-84,y0+22);
+  function px(v){return x0+(v-5)/(50-5)*pW;}
+  var Fmax=50*50;
+  function py(F){return y0-(F/Fmax)*pH;}
+  // curva V²
+  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=2.8;ctx.beginPath();
+  for(var v=5;v<=50;v+=0.5){var X=px(v),Y=py(v*v);if(v===5)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}ctx.stroke();
+  ctx.fillStyle='#2C5F8A';ctx.font='bold 12px Trebuchet MS';ctx.fillText('F ∝ V²',px(42),py(42*42)-10);
+  // curva com rajadas (fator 1.4 na velocidade → ~2x na força)
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([5,4]);ctx.lineWidth=2;ctx.beginPath();
+  for(var v=5;v<=36;v+=0.5){var X=px(v),Y=py(Math.min((v*1.4)*(v*1.4),Fmax));if(v===5)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.fillText('com rajadas',px(26),py(Math.min((26*1.4)**2,Fmax))-10);
+  // marcador do valor atual
+  var vw=+document.getElementById('vw').value;
+  ctx.strokeStyle='#0D3D36';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(px(vw),14);ctx.lineTo(px(vw),y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#0D3D36';ctx.beginPath();ctx.arc(px(vw),py(vw*vw),5,0,7);ctx.fill();
+  var rel=((vw*vw)/(10*10)).toFixed(1);
+  document.getElementById('forcaRead').innerHTML='Vento = <b>'+vw+' nós</b> → força ≈ <b>'+rel+'×</b> a força de um vento de 10 nós. Triplicar o vento = 9× a força; rajadas amplificam ainda mais.';
+}
+drawForca();
+window.addEventListener('resize',function(){drawForca();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"As 3 forças ambientais",b:"Vento (obra morta, aerodinâmica) · corrente (obra viva, hidrodinâmica, coefs. do Cap. 3) · onda (1ª + 2ª ordem)."},
+  {f:"Velocidade do navio × efeito",b:"Quanto MENOR a velocidade do navio, MAIOR o efeito relativo das forças ambientais."},
+  {f:"Caranguejar (crabbing)",b:"Compensar o abatimento controlando trajetória, aproamento e velocidade, considerando o ângulo de ataque na asa-casco."},
+  {f:"Bollard pull",b:"Tração estática dos rebocadores; dimensionada pelos valores prevalecentes das forças ambientais."},
+  {f:"Vento verdadeiro × aparente",b:"Verdadeiro: existe sem o navio. Aparente = soma vetorial (Vs sem gradiente + Vw com gradiente)."},
+  {f:"Gradiente do vento",b:"Lei de potência 1/n, n=7 (OCIMF); correção para 10 m. Junto à água, domina a velocidade do navio."},
+  {f:"Beaufort → m/s",b:"Vw(10) ≈ 0,836·Bft^(3/2) m/s."},
+  {f:"OCIMF — lastro × carregado",b:"Em LASTRO: coeficientes maiores E área vélica maior → força lateral do vento muito maior."},
+  {f:"Blendermann",b:"Univ. Hamburgo, anos 1990: coeficientes para Ro-Ro, contêineros e outros tipos além de petroleiros/gaseiros."},
+  {f:"Orçar × arribar",b:"Orçar = proa PARA o vento (ante a vante do través). Arribar = proa para sotavento (ante a ré do través)."},
+  {f:"Vento pelo través",b:"Força de abatimento lateral MÁXIMA; sem tendência dominante de orçar/arribar quando com velocidade."},
+  {f:"Lei V² do vento",b:"Triplicar o vento → força 9×. Rajadas (10→30 nós) → força pode passar de 10× a inicial."},
+  {f:"Giro sob vento",b:"Curva de giro ACHATADA e diâmetro tático AUMENTA. Curvas fechadas com máxima cautela."},
+  {f:"Corrente — incidência",b:"Navio em velocidade: ângulo relativo < ~25° (a velocidade do navio supera a da corrente). O vento aparente, ao contrário, fica pelo través."},
+  {f:"Corrente — tratamento",b:"Velocidade relativa navio-água + coeficientes hidrodinâmicos do Cap. 3. Gradiente 1/7 com o fundo."},
+  {f:"Onda — 1ª × 2ª ordem",b:"1ª: oscilatória, frequência de encontro, média zero. 2ª: deriva média (wave drift), empurra o navio."},
+  {f:"Ressonância",b:"Período da onda ≈ período natural (10–17 s em profundas) → amplificação. Sem velocidade: freq. da onda; com velocidade: freq. de ENCONTRO."},
+  {f:"Ondas curtas",b:"Período < 6 s: resposta insignificante em navios > 100 m. Resposta máxima com λ ≈ L do navio."},
+  {f:"PIANC — ondas em águas rasas",b:"λ menor + celeridade menor + massa adicional maior → resposta em ondas MENOR que em profundas."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"O vento relativo (aparente) que atua sobre o navio é definido como:",
+   o:["O vento medido na estação meteorológica","A soma vetorial da velocidade do navio com o vento verdadeiro","O vento verdadeiro corrigido apenas para 10 m","O vento medido no topo do mastro"],a:1,
+   e:"Vwr = soma vetorial de Vs (sem correção de gradiente) + Vw verdadeiro (com correção de gradiente). É o vento que os coeficientes de força usam."},
+  {q:"Para a correção do gradiente vertical da velocidade do vento, a OCIMF recomenda a lei de potência com índice:",
+   o:["n = 2","n = 7","n = 10","n = 1"],a:1,
+   e:"Lei de potência 1/n com n = 7 (perfil de camada-limite atmosférica), corrigindo a velocidade medida na altura h para a altura-padrão de 10 m."},
+  {q:"Para petroleiros, segundo os coeficientes OCIMF, a força lateral do vento é maior quando o navio está:",
+   o:["Carregado (coeficientes maiores)","Em lastro (coeficientes maiores E área vélica maior)","Em qualquer condição, é igual","A meia-carga"],a:1,
+   e:"Em lastro os coeficientes de força são maiores E a área vélica projetada é muito maior — os dois fatores se somam."},
+  {q:"Com vento verdadeiro entrando por ante a vante do través, o navio em movimento tende a:",
+   o:["Arribar","Orçar (girar a proa para o vento)","Manter o rumo","Ir para ré"],a:1,
+   e:"Ante a vante do través → orça. Ante a ré do través → arriba. Pelo través → abatimento lateral máximo, sem tendência dominante quando com velocidade."},
+  {q:"Triplicando a velocidade do vento, sua força sobre o navio será aproximadamente:",
+   o:["3 vezes maior","6 vezes maior","9 vezes maior","27 vezes maior"],a:2,
+   e:"F ∝ V²: 3² = 9×. Com rajadas, o aumento pode ser ainda maior (de 10 para 30 nós, mais de 10× com rajadas)."},
+  {q:"Sob ação de vento significativo, a curva de giro do navio tende a:",
+   o:["Ficar mais fechada","Ficar achatada, com aumento do diâmetro tático","Não se alterar","Diminuir o avanço"],a:1,
+   e:"A curva fica achatada e o diâmetro tático aumenta — curvas fechadas devem ser executadas com máxima cautela sob vento."},
+  {q:"Quando o navio navega com velocidade moderada ou alta, o ângulo de incidência relativo da CORRENTE é:",
+   o:["Sempre próximo de 90° (través)","Sempre pequeno, inferior a cerca de 25°","Sempre pela popa","Igual ao do vento"],a:1,
+   e:"A velocidade do navio supera a da corrente → incidência relativa < ~25°. Contraste: o vento aparente fica predominantemente pelo través. Esse contraste é distrator de prova."},
+  {q:"As forças que as ondas exercem sobre o navio compõem-se de:",
+   o:["Apenas forças oscilatórias","Força oscilatória de 1ª ordem (média zero) + deriva média de 2ª ordem (wave drift)","Apenas deriva média","Forças constantes"],a:1,
+   e:"1ª ordem: oscilatória na frequência de encontro, média zero. 2ª ordem: deriva média que empurra o navio (o abatimento de onda que o prático compensa)."},
+  {q:"O período natural de resposta de navios de projeto, em águas profundas, situa-se tipicamente entre:",
+   o:["2 e 5 segundos","10 e 17 segundos","30 e 60 segundos","1 e 2 segundos"],a:1,
+   e:"10–17 s. Por isso ondas com período < 6 s produzem resposta insignificante em navios > 100 m; e a ressonância ocorre quando o período da onda se aproxima do natural."},
+  {q:"Segundo a PIANC (rel. 121), a resposta do navio em ondas, em águas rasas, tende a ser:",
+   o:["Maior que em águas profundas","Menor que em águas profundas","Idêntica","Imprevisível"],a:1,
+   e:"Três efeitos combinados: λ menor, celeridade menor (desloca o pico de resposta) e massa adicional em heave/pitch muito maior (períodos naturais aumentam) → resposta MENOR em águas rasas."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

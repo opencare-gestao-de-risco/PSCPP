@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Águas Restritas, Efeito de Banco e Interações — Santos Cap. 10 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:31px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:5px 11px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart svg{width:100%;height:auto;display:block;background:#eaf3fa;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Efeitos Externos e de Contorno</p>
+    <h1>Águas Restritas, <em>Efeito de Banco</em> e Interações entre Navios</h1>
+    <p class="sub">Quando além do fundo raso há restrição lateral — fixa (bancos, canais) ou móvel (outro navio) — surgem <strong>novas derivadas hidrodinâmicas</strong>. O clássico do prático: força de atração ao banco + momento de proa para fora, o bloqueio em canais, e a coreografia de forças na ultrapassagem e no cruzamento.</p>
+    <div class="src"><b>Fonte:</b> Santos, <em>Manobrabilidade do Navio</em>, Cap. 10 — "Efeitos de águas restritas ou confinadas e interações" (seções 10.1 a 10.9). Cruza com PNA §13 e com os cards de shiphandling.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#definicoes">10.1 ITTC: 3 efeitos</a>
+    <a href="#parametros">Parâmetros</a>
+    <a href="#banco">10.3 Efeito de banco ▶</a>
+    <a href="#canal">10.4 Canais</a>
+    <a href="#curvos">10.5 Curvos</a>
+    <a href="#bloqueio">10.6 Bloqueio</a>
+    <a href="#squatcanal">10.7 Squat em canais</a>
+    <a href="#interacao">10.8 Interação ▶</a>
+    <a href="#cruzamento">10.9 Cruzamento</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Continuação de <a href="santos_cap9_aguas_rasas_squat.html">Águas Rasas e Squat (Cap. 9)</a> — aqui soma-se a restrição LATERAL. Par-PNA: <a href="pna_ix_sec13_aguas_rasas_canais_interacao.html">Águas Rasas, Canais e Interação (§13)</a>. A prática desses efeitos vive nos cards de shiphandling (MacElrevey).
+</div>
+
+<!-- ===== 10.1 DEFINIÇÕES ===== -->
+<section class="bloco" id="definicoes">
+  <h2 class="sec"><span class="n">10.1</span> As definições da ITTC: os três efeitos</h2>
+  <p class="lede">Segundo a ITTC 2002, há três efeitos distintos quando uma geometria restringe o escoamento em torno do casco. Saber distingui-los é a primeira questão do bloco.</p>
+
+  <table>
+    <tr><th>Efeito</th><th>Definição (ITTC 2002)</th><th>Exemplo típico</th></tr>
+    <tr><td><strong>Efeito de banco</strong> (bank effect)</td><td>Forças e momentos devidos a movimento longitudinal com orientação principalmente <span class="hl">paralela</span> ao banco</td><td>Navegar junto à margem de um canal</td></tr>
+    <tr><td><strong>Efeito de amortecimento</strong> (cushion effect)</td><td>Navio movendo-se <span class="hl">lateralmente em direção</span> a um limite sólido: a resistência lateral do casco aumenta ao se aproximar</td><td>Atracação em cais de parede vertical (quay)</td></tr>
+    <tr><td><strong>Memória hidrodinâmica</strong> (memória fluida)</td><td>Forças dependentes do domínio da <span class="hl">frequência</span> (massa/inércia adicional) sob grandes acelerações ou desacelerações</td><td>Contato com defensas durante a atracação</td></tr>
+  </table>
+
+  <p>O quadro geral: em vias restritas, as forças hidrodinâmicas são <strong>mais fortemente alteradas do que em águas rasas sem restrição lateral</strong>. Surgem <span class="hl">novas derivadas hidrodinâmicas</span> dependentes da restrição lateral, cuja intensidade cresce com a redução da largura do canal ou da distância a um banco ou a outro navio. A restrição pode ser <strong>fixa/estática</strong> (bancos, canais) ou <strong>móvel/dinâmica</strong> (cruzamento e ultrapassagem de embarcações).</p>
+</section>
+
+<!-- ===== PARÂMETROS ===== -->
+<section class="bloco" id="parametros">
+  <h2 class="sec"><span class="n">10.1</span> Os parâmetros que governam a interação navio-banco</h2>
+  <p class="lede">A ITTC lista de que dependem as forças e momentos de interação. Cada item rende uma afirmativa I–V na prova.</p>
+
+  <table>
+    <tr><th>Parâmetro</th><th>Comportamento</th></tr>
+    <tr><td><strong>Distância ao banco</strong></td><td>Efeitos <span class="hl">aumentam com a diminuição da distância</span>; o momento de yaw para fora pode, em folgas muito pequenas, diminuir</td></tr>
+    <tr><td><strong>Velocidade do navio</strong></td><td>Efeitos dominados por fenômenos potenciais: <span class="hl">∝ V²</span> (em águas rasas podem crescer mais que quadraticamente)</td></tr>
+    <tr><td><strong>Razão de profundidade</strong></td><td>O momento de guinada para fora cresce monotonicamente com a redução de h/T; a força lateral aponta para a margem mais próxima. Exceção: modelos <em>rebocados</em> em h/T 1,1–1,25 e alta velocidade mostram <span class="hl">repulsão</span> (nível d'água sobe entre costado e banco junto à popa) — não ocorre em autopropelidos</td></tr>
+    <tr><td><strong>Ação do propulsor</strong></td><td>A pressão na popa gera <span class="hl">força de atração adicional popa-banco</span>, independente do sentido de rotação — reforça o momento para fora. Em h/T baixa, transforma a repulsão (de rebocados) em atração</td></tr>
+    <tr><td><strong>Geometria do banco</strong></td><td>Classificação: bancos <strong>verticais</strong> (quay walls) · <strong>inclinados com margem visível</strong> (taludes) · <strong>submersos</strong></td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Pesquisadores de referência <span class="tag t-decorar">DECORAR</span></h4>
+    <p><strong>Nils Norrbin</strong> (1974–1985): série de estudos com modelos e numéricos sobre diversos tipos de banco — a base dos modelos atuais. <strong>Hironori Yasukawa</strong> (1991): refez os testes de Norrbin (petroleiro 280.000 TPB, banco circular) pelo método dos painéis. <strong>Kijima &amp; Quing</strong> (1987): banco em cunha. <strong>Ian W. Dand</strong>: canais e bancos. <strong>Eda</strong>: estabilidade direcional em canais.</p>
+  </div>
+</section>
+
+<!-- ===== 10.3 EFEITO DE BANCO ===== -->
+<section class="bloco" id="banco">
+  <h2 class="sec"><span class="n">10.3</span> O efeito de banco — atração + proa para fora</h2>
+  <p class="lede">O comportamento clássico que todo prático conhece: o costado é sugado para o banco enquanto a proa é empurrada para fora. A física: assimetria de pressões (Bernoulli) no espaço confinado.</p>
+
+  <div class="ichart">
+    <h4>O efeito de banco — forças e momento (interativo)</h4>
+    <p class="hint">Deslize a distância ao banco. Veja a força de atração (sucção) no costado crescer e o momento de proa para fora se intensificar.</p>
+    <svg id="svgBanco" viewBox="0 0 860 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Efeito de banco"></svg>
+    <div class="ictrl"><label for="dist">Distância →</label><input type="range" id="dist" min="0" max="100" value="55" oninput="drawBanco()"></div>
+    <div class="iread" id="bancoRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>A física do fenômeno <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Entre o costado e o banco, a água acelera (seção reduzida) → pressão cai (Bernoulli) → <span class="hl">força lateral de ATRAÇÃO em direção ao banco</span> (aplicada tipicamente mais perto da popa). Ao mesmo tempo, o acúmulo de pressão na proa gera o <span class="hl">momento de guinada PARA FORA do banco</span> (bow-out). O resultado combinado: o navio é sugado de costado enquanto a proa abre — se não corrigido com leme <strong>para o banco</strong>, o navio atravessa no canal. A ação do propulsor <strong>reforça</strong> a atração da popa.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Detalhes finos que a banca cobra <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>1) A dependência V² <span class="hl">só vale em regime</span> — quando o navio já passou as extremidades do banco (Yasukawa mostrou picos transientes nas extremidades). Só com estabilização se aplica Bernoulli numa linha de corrente. 2) Yasukawa (h/T=1,1): as forças foram <strong>sempre de atração</strong>; o momento predominante foi de repulsão (proa para fora), mas <span class="hl">logo após passar o centro do banco surgiu momento de proa para dentro</span>. 3) O efeito de banco pode ser causado por geometria fixa (banco: efeito <em>estacionário</em>) ou pelo costado de outro navio (efeito <em>dinâmico</em> = interação).</p>
+  </div>
+</section>
+
+<!-- ===== 10.4 CANAL ===== -->
+<section class="bloco" id="canal">
+  <h2 class="sec"><span class="n">10.4</span> Efeitos de canal — entre duas margens</h2>
+  <p class="lede">Canal = navio contido entre duas geometrias paralelas. As derivadas hidrodinâmicas são fortemente alteradas, e a estabilidade direcional no canal vira critério de projeto da via.</p>
+
+  <p>No centro de um canal simétrico, as atrações dos dois bancos <strong>se equilibram</strong> — mas o equilíbrio é <span class="hl">instável</span>: qualquer desvio aproxima o navio de uma margem, que o atrai mais, ampliando o desvio. Os estudos de <strong>Eda</strong> (canal de 158,5 m de largura, 14 m de profundidade) mediram a resposta a uma perturbação de 2° no aproamento: dependendo do navio, da velocidade e do ganho do controle do leme, o movimento é convergente ou <strong>divergente oscilatório</strong> ao longo do canal.</p>
+
+  <div class="box key">
+    <h4>Limites de segurança em canais (10.4.2) <span class="tag t-banca">BANCA</span></h4>
+    <p>Os limites operacionais podem ser apresentados em <strong>curvas de contorno-limite</strong> para a estabilidade direcional em canais, em função da geometria do canal e das características do navio (e das constantes de ganho do controle). <strong>Alargar e aprofundar o canal reduz muito as forças de interação</strong> e melhora expressivamente a estabilidade. Assimetria do canal e mudanças abruptas de profundidade geram força na direção do banco e momento de guinada para fora — mesmo sem o navio mudar de posição.</p>
+  </div>
+
+  <h3>10.4.3 — Bancos e canais de largura variável</h3>
+  <p>Quando as margens variam de largura, as forças deixam de ser constantes: perto das <strong>extremidades dos bancos</strong> surgem os picos transientes. As combinações estudadas (banco só de um lado com largura variável; bancos dos dois lados) mostram que a força na direção do banco e o momento para fora acompanham a geometria local.</p>
+</section>
+
+<!-- ===== 10.5 CURVOS ===== -->
+<section class="bloco" id="curvos">
+  <h2 class="sec"><span class="n">10.5</span> O efeito de canais curvos</h2>
+  <p class="lede">Nas curvas de um canal, a assimetria do escoamento é geométrica: o navio sente forças diferentes de cada margem mesmo centrado.</p>
+
+  <p>Em trechos curvos, a margem externa e a interna impõem restrições diferentes ao escoamento — o navio centrado na curva já experimenta força lateral e momento de guinada. Somam-se a corrente (geralmente mais intensa no lado externo da curva) e a necessidade de guinar: é o trecho de maior demanda de leme e onde os limites de segurança do canal são mais críticos.</p>
+</section>
+
+<!-- ===== 10.6 BLOQUEIO ===== -->
+<section class="bloco" id="bloqueio">
+  <h2 class="sec"><span class="n">10.6</span> Parâmetros geométricos: o fator de bloqueio</h2>
+  <p class="lede">O número que resume o canal: a razão entre a seção mestra do navio e a seção transversal do canal.</p>
+
+  <div class="box formula">
+    <h4>Fator de bloqueio <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">S = A<sub>navio</sub> / A<sub>canal</sub> = (B·T) / A<sub>c</sub><span class="lbl">fator de bloqueio (blockage factor) — seção mestra submersa / seção molhada do canal</span></div>
+    <p class="vars">Referência de ordem de grandeza: <span class="hl">S = 0,10 equivale a um rio ou canal típico</span>. Quanto maior S, mais intensa a corrente de retorno (a água deslocada precisa voltar pelo espaço restante), maior a queda de pressão, maior o squat e mais fortes os efeitos de banco. O fator de bloqueio entra diretamente nas fórmulas de squat em canais (Barrass) e na velocidade-limite do canal.</p>
+  </div>
+</section>
+
+<!-- ===== 10.7 SQUAT EM CANAIS ===== -->
+<section class="bloco" id="squatcanal">
+  <h2 class="sec"><span class="n">10.7</span> O squat em canais — a amplificação</h2>
+  <p class="lede">O squat do Cap. 9 revisitado: com restrição lateral, a corrente de retorno intensifica a queda de pressão e o squat aumenta em relação a águas rasas abertas.</p>
+
+  <p>Os métodos empíricos de squat ganham versões para canais, incorporando o fator de bloqueio S e a geometria (profundidade do canal, altura do talude, trim inicial, proa bulbosa):</p>
+
+  <table>
+    <tr><th>Método</th><th>Característica</th></tr>
+    <tr><td><strong>Huuska/Guliev</strong></td><td>Fatores de correção em série: coeficiente de bloco, canal (K<sub>c</sub>), proa bulbosa, popa transônica, trim inicial</td></tr>
+    <tr><td><strong>Römisch</strong></td><td>Squat na proa e na popa; validade B/T &lt; 2,6; talude 1:4 nos exemplos</td></tr>
+    <tr><td><strong>Barrass 3</strong></td><td>O mais usado: squat máximo (proa ou popa) em função da <span class="hl">velocidade em nós (V<sub>k</sub>), do C<sub>b</sub> e do fator de bloqueio S</span></td></tr>
+    <tr><td><strong>Yoshimura (método japonês)</strong></td><td>Emprega velocidade equivalente V<sub>e</sub> que embute o efeito do bloqueio; aplicável a canais e águas abertas</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>Barrass 3 — a forma consagrada <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">S<sub>max</sub> = C<sub>b</sub> · S<sup>0,81</sup> · V<sub>k</sub><sup>2,08</sup> / 20 &nbsp; [m]<span class="lbl">squat máximo (proa ou popa) — C_b coef. de bloco, S fator de bloqueio, V_k velocidade em nós</span></div>
+    <p class="vars">Note o expoente ~2 na velocidade (∝V²) e a dependência direta do bloqueio. Para águas abertas, usa-se S equivalente pequeno. O squat também <strong>aumenta quando o navio se aproxima da margem</strong> ou quando interage com outro navio (cruzando ou ultrapassando) — as duas restrições se somam.</p>
+  </div>
+
+  <div class="box key">
+    <h4>A velocidade-limite do canal <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Em canais, além do squat, existe a <strong>velocidade crítica do canal</strong> (inferior à √(gh) de águas abertas, reduzida pelo bloqueio): aproximar-se dela dispara squat, corrente de retorno e rebaixamento do nível. A regra do prático permanece: <span class="hl">a velocidade é o único fator sob controle imediato</span> — reduzir V reduz tudo (∝V²).</p>
+  </div>
+</section>
+
+<!-- ===== 10.8 INTERAÇÃO ===== -->
+<section class="bloco" id="interacao">
+  <h2 class="sec"><span class="n">10.8</span> Interação entre navios — a ultrapassagem</h2>
+  <p class="lede">O efeito de banco "dinâmico": o costado do outro navio é um banco móvel. A sequência de forças na passagem é a coreografia mais cobrada do capítulo.</p>
+
+  <p>O caso de referência de Santos: um petroleiro de 30.000 TPB passando por um navio atracado (distância costado-costado ~30 m, h/T = 1,15, velocidade 7 nós, proa com proa). As forças e momentos <strong>medidos no navio atracado</strong> mudam de sinal conforme a posição relativa — cada fase é uma pergunta de prova:</p>
+
+  <div class="ichart">
+    <h4>Ultrapassagem — forças no navio atracado, fase a fase (interativo)</h4>
+    <p class="hint">Deslize a posição do navio que passa. Veja as forças de repulsão/atração e o momento de guinada mudarem de sinal no navio parado.</p>
+    <svg id="svgInter" viewBox="0 0 860 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interação entre navios"></svg>
+    <div class="ictrl"><label for="pos">Posição →</label><input type="range" id="pos" min="0" max="100" value="20" oninput="drawInter()"></div>
+    <div class="iread" id="interRead" style="margin-top:6px"></div>
+  </div>
+
+  <table>
+    <tr><th>Fase (posição do navio que passa)</th><th>Sway no atracado</th><th>Yaw no atracado</th></tr>
+    <tr><td>Proa do passante ~1 L da popa do atracado</td><td class="center">Pequena <strong>repulsão</strong></td><td class="center">Pequeno, p/ fora</td></tr>
+    <tr><td>Proa do passante junto à popa do atracado</td><td class="center"><strong>Repulsão</strong> (aumenta)</td><td class="center">Positivo (p/ fora)</td></tr>
+    <tr><td>Costado a costado (meio a meio)</td><td class="center"><span class="hl"><strong>ATRAÇÃO</strong> (máxima)</span></td><td class="center">Transição</td></tr>
+    <tr><td>Proa do passante nas bochechas do atracado</td><td class="center">Atração crescente</td><td class="center"><strong>Grande e negativo</strong></td></tr>
+    <tr><td>Passante se afastando pela proa</td><td class="center">Repulsão de novo</td><td class="center">Pequeno, invertendo</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>O padrão para memorizar <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>A sequência no navio parado é: <span class="hl">repulsão → atração (no través) → repulsão</span>, com o momento de guinada trocando de sinal duas vezes. A explicação: campos de pressão — a proa do passante empurra (sobrepressão), o corpo médio suga (depressão de Bernoulli), a popa volta a alterar o campo. Os efeitos crescem com: menor distância lateral, menor profundidade, maior velocidade do passante e maior porte relativo. As seções 10.8.3–10.8.7 detalham os efeitos da geometria do canal, profundidade, comprimento relativo dos navios e o <strong>requisito de largura</strong> da via para ultrapassagem segura.</p>
+  </div>
+</section>
+
+<!-- ===== 10.9 CRUZAMENTO ===== -->
+<section class="bloco" id="cruzamento">
+  <h2 class="sec"><span class="n">10.9</span> O cruzamento (encontro em rumos opostos)</h2>
+  <p class="lede">No cruzamento, a interação é mais breve mas mais intensa em pico: as velocidades se somam na passagem relativa.</p>
+
+  <p>No encontro em rumos opostos, a <strong>velocidade relativa é a soma</strong> das velocidades — a sequência repulsão→atração→repulsão acontece em muito menos tempo, com picos maiores e menos tempo de reação para o leme. Nas vias estreitas, a recomendação prática decorre da física: <span class="hl">reduzir a velocidade antes do encontro, manter-se no seu bordo do canal (aceitando um efeito de banco controlado) e encontrar o outro navio com folga lateral máxima disponível</span>. O momento de proa para fora do banco, neste caso, ajuda a "abrir" os navios um do outro após a passagem.</p>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os 3 efeitos ITTC, o efeito de banco e a interação.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Dez questões com os distratores reais do capítulo.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Águas Restritas, Efeito de Banco e Interações (Santos Cap. 10)</summary>
+  <ul>
+    <li><b>3 efeitos (ITTC 2002):</b> efeito de banco (movimento PARALELO ao banco) · cushion effect (movimento LATERAL em direção ao limite; atracação em quay) · memória hidrodinâmica (dependência de frequência; grandes acelerações, defensas).</li>
+    <li><b>Restrições:</b> fixas/estáticas (bancos, canais) × móveis/dinâmicas (outro navio). Surgem NOVAS derivadas hidrodinâmicas dependentes da restrição lateral.</li>
+    <li><b>Parâmetros:</b> distância (↓dist → ↑efeito) · velocidade (∝V², mais que quadrático em águas rasas) · h/T (momento p/ fora cresce ao raso) · propulsor (atração adicional popa-banco, independe do sentido de rotação) · geometria (vertical/quay · talude visível · submerso).</li>
+    <li><b>Efeito de banco clássico:</b> ATRAÇÃO lateral ao banco (Bernoulli entre costado e margem, mais na popa) + momento de PROA PARA FORA (bow-out). Correção: leme PARA o banco.</li>
+    <li><b>Finos:</b> V² só vale em regime (após as extremidades do banco — picos transientes, Yasukawa) · repulsão só em modelos rebocados, h/T 1,1–1,25 · banco = efeito estacionário; costado de outro navio = efeito dinâmico (interação).</li>
+    <li><b>Pesquisadores:</b> Norrbin (1974–85, base) · Yasukawa (1991, painéis) · Kijima &amp; Quing (1987, cunha) · Dand · Eda (estabilidade em canais).</li>
+    <li><b>Canal:</b> centro = equilíbrio INSTÁVEL (desvio → atração da margem próxima → amplia). Alargar/aprofundar reduz muito as interações. Curvas de contorno-limite (Eda) definem o operacional.</li>
+    <li><b>Fator de bloqueio:</b> S = B·T/A_canal. S=0,10 ≈ rio/canal típico. ↑S → ↑corrente de retorno, ↑squat, ↑efeitos.</li>
+    <li><b>Squat em canais:</b> Huuska/Guliev · Römisch (B/T<2,6) · Barrass 3 (S_max = Cb·S^0,81·Vk^2,08/20) · Yoshimura (japonês, V equivalente). Squat aumenta perto da margem e na interação.</li>
+    <li><b>Ultrapassagem (navio parado):</b> repulsão → ATRAÇÃO no través → repulsão; yaw troca de sinal 2×. Cresce com ↓distância, ↓profundidade, ↑velocidade, ↑porte.</li>
+    <li><b>Cruzamento:</b> velocidade relativa = soma → picos maiores, menos tempo. Reduzir V antes, manter o bordo, folga máxima.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Águas Restritas, Efeito de Banco e Interações (Santos, Cap. 10) · Capital Sereno · matéria Efeitos Externos e de Contorno.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+
+/* ===== EFEITO DE BANCO ===== */
+function drawBanco(){
+  var svg=document.getElementById('svgBanco'); if(!svg) return; svg.innerHTML='';
+  var d=+document.getElementById('dist').value; // 0 (colado) .. 100 (longe)
+  var frac=1-d/100; // intensidade
+  // banco (margem à direita)
+  sEl(svg,'rect',{x:700,y:0,width:160,height:330,fill:'#c9b58a'});
+  sEl(svg,'line',{x1:700,y1:0,x2:700,y2:330,stroke:'#8a6f3a','stroke-width':3});
+  sTx(svg,760,40,'BANCO',{fill:'#7a5a2a',fs:14,fw:'bold'});
+  sTx(svg,712,60,'(margem)',{fill:'#7a5a2a',fs:11});
+  // posição do navio: mais perto do banco quando frac alto
+  var shipX=280+ (1-frac)*90; // 280 (perto? não) — recalcular: perto do banco = x maior
+  shipX = 300 + frac*220; // frac=1 → 520 (colado), frac=0 → 300 (longe)
+  var shipY=165, len=260, hh=34;
+  // casco (visto de cima), proa para cima
+  sEl(svg,'g',{});
+  var hull=document.createElementNS(NS,'path');
+  hull.setAttribute('d','M '+(shipX-hh/2)+' '+(shipY+len/2)+' L '+(shipX-hh/2)+' '+(shipY-len/2+40)+' Q '+shipX+' '+(shipY-len/2-14)+' '+(shipX+hh/2)+' '+(shipY-len/2+40)+' L '+(shipX+hh/2)+' '+(shipY+len/2)+' Z');
+  hull.setAttribute('fill','#3a4a52');hull.setAttribute('stroke','#1b2a30');hull.setAttribute('stroke-width','2');
+  svg.appendChild(hull);
+  sTx(svg,shipX-8,shipY-len/2+2,'proa',{fill:'#3a4a52',fs:11,ta:'end'});
+  // fluxo acelerado entre costado e banco (setas descendo, mais intensas com frac)
+  var gap=700-(shipX+hh/2);
+  var na=5;
+  for(var i=0;i<na;i++){
+    var ay=shipY-len/2+50+i*(len-70)/(na-1);
+    var alen=8+frac*22;
+    var ax=(shipX+hh/2+700)/2;
+    sEl(svg,'line',{x1:ax,y1:ay,x2:ax,y2:ay+alen,stroke:'#2C5F8A','stroke-width':1.5+frac*2});
+    sEl(svg,'path',{d:'M '+ax+' '+(ay+alen)+' l -4 -6 l 8 0 z',fill:'#2C5F8A'});
+  }
+  sTx(svg,(shipX+hh/2+700)/2-6,shipY+len/2+26,'água acelera → pressão cai',{fill:'#2C5F8A',fs:11,ta:'middle'});
+  // FORÇA DE ATRAÇÃO (no costado, perto da popa, apontando ao banco)
+  var Flen=20+frac*70;
+  var fy=shipY+len/4;
+  sEl(svg,'line',{x1:shipX+hh/2,y1:fy,x2:shipX+hh/2+Flen,y2:fy,stroke:'#9E3B2E','stroke-width':4});
+  sEl(svg,'path',{d:'M '+(shipX+hh/2+Flen)+' '+fy+' l -10 -6 l 0 12 z',fill:'#9E3B2E'});
+  sTx(svg,shipX+hh/2+6,fy+20,'ATRAÇÃO (sucção)',{fill:'#9E3B2E',fs:12,fw:'bold'});
+  // MOMENTO PROA PARA FORA (seta curva na proa apontando para longe do banco)
+  var Mlen=16+frac*40;
+  var py=shipY-len/2+46;
+  sEl(svg,'path',{d:'M '+(shipX+6)+' '+py+' Q '+(shipX-30)+' '+(py-16)+' '+(shipX-24-Mlen)+' '+py,fill:'none',stroke:'#6B4E8E','stroke-width':3});
+  sEl(svg,'path',{d:'M '+(shipX-24-Mlen)+' '+py+' l 10 -6 l 0 12 z',fill:'#6B4E8E'});
+  sTx(svg,shipX-30,py-22,'PROA PARA FORA',{fill:'#6B4E8E',fs:12,fw:'bold',ta:'end'});
+  // leitura
+  var nivel = frac>0.7?'FORTE':(frac>0.35?'moderado':'fraco');
+  document.getElementById('bancoRead').innerHTML='Efeito de banco <b>'+nivel+'</b> · atração lateral ∝ V² e ∝ 1/distância · Correção do prático: <b>leme PARA o banco</b> (contrariando o momento de proa para fora).';
+}
+drawBanco();
+window.addEventListener('resize',function(){drawBanco();});
+
+/* ===== INTERAÇÃO (ultrapassagem) ===== */
+function drawInter(){
+  var svg=document.getElementById('svgInter'); if(!svg) return; svg.innerHTML='';
+  var p=+document.getElementById('pos').value; // 0..100
+  // navio atracado (fixo, embaixo)
+  var ax=430, ay=250, alen=280, ah=32;
+  sEl(svg,'rect',{x:0,y:300,width:860,height:30,fill:'#c9b58a'}); // cais
+  sTx(svg,12,320,'cais',{fill:'#7a5a2a',fs:11,fw:'bold'});
+  var hullA=document.createElementNS(NS,'path');
+  hullA.setAttribute('d','M '+(ax-alen/2)+' '+(ay+ah/2)+' L '+(ax+alen/2-36)+' '+(ay+ah/2)+' Q '+(ax+alen/2+10)+' '+ay+' '+(ax+alen/2-36)+' '+(ay-ah/2)+' L '+(ax-alen/2)+' '+(ay-ah/2)+' Z');
+  hullA.setAttribute('fill','#5a6a72');hullA.setAttribute('stroke','#2b3a42');hullA.setAttribute('stroke-width','2');
+  svg.appendChild(hullA);
+  sTx(svg,ax-alen/2,ay+ah/2+18,'navio ATRACADO (proa →)',{fill:'#3a4a52',fs:11});
+  // navio passante (em cima), move com p
+  var bx=60+(p/100)*740, by=110, blen=240, bh=28;
+  var hullB=document.createElementNS(NS,'path');
+  hullB.setAttribute('d','M '+(bx-blen/2)+' '+(by+bh/2)+' L '+(bx+blen/2-32)+' '+(by+bh/2)+' Q '+(bx+blen/2+8)+' '+by+' '+(bx+blen/2-32)+' '+(by-bh/2)+' L '+(bx-blen/2)+' '+(by-bh/2)+' Z');
+  hullB.setAttribute('fill','#3a4a52');hullB.setAttribute('stroke','#1b2a30');hullB.setAttribute('stroke-width','2');
+  svg.appendChild(hullB);
+  sTx(svg,bx-blen/2,by-bh/2-8,'navio PASSANDO → 7 nós',{fill:'#1b2a30',fs:11,fw:'bold'});
+  // forças no atracado conforme a posição relativa
+  // fases: p<30 repulsão pequena; 30-45 repulsão; 45-60 atração máxima (través); 60-80 atração+yaw grande; >80 repulsão
+  var swayF=0, yawM=0, lbl='';
+  if(p<28){swayF=-0.3;yawM=0.2;lbl='proa do passante se aproxima da popa: pequena REPULSÃO + yaw p/ fora';}
+  else if(p<45){swayF=-0.65;yawM=0.5;lbl='proa junto à popa do atracado: REPULSÃO aumenta, yaw positivo (p/ fora)';}
+  else if(p<60){swayF=1.0;yawM=0.05;lbl='costado a costado (través): ATRAÇÃO MÁXIMA (depressão de Bernoulli)';}
+  else if(p<80){swayF=0.7;yawM=-0.9;lbl='proa do passante nas bochechas do atracado: atração + GRANDE yaw negativo';}
+  else{swayF=-0.4;yawM=-0.15;lbl='passante se afasta pela proa: repulsão de novo, yaw pequeno invertendo';}
+  // seta de sway (no atracado, vertical: atração = para cima, em direção ao passante)
+  var Flen=Math.abs(swayF)*70;
+  if(Flen>4){
+    var dir=swayF>0?-1:1; // atração = para cima (rumo ao passante)
+    var fx=ax, fy0=ay-ah/2*(swayF>0?1:-1);
+    var fy1=fy0+dir*Flen*(swayF>0?1:1);
+    fy1=(swayF>0)?(ay-ah/2-Flen):(ay+ah/2+Flen);
+    var y0=(swayF>0)?(ay-ah/2):(ay+ah/2);
+    sEl(svg,'line',{x1:fx,y1:y0,x2:fx,y2:fy1,stroke:(swayF>0?'#9E3B2E':'#2C5F8A'),'stroke-width':4});
+    sEl(svg,'path',{d:'M '+fx+' '+fy1+' l -6 '+(swayF>0?10:-10)+' l 12 0 z',fill:(swayF>0?'#9E3B2E':'#2C5F8A')});
+    sTx(svg,fx+10,(y0+fy1)/2,(swayF>0?'ATRAÇÃO':'repulsão'),{fill:(swayF>0?'#9E3B2E':'#2C5F8A'),fs:12,fw:'bold'});
+  }
+  // seta de momento (curva na proa do atracado)
+  if(Math.abs(yawM)>0.1){
+    var mcol='#6B4E8E';
+    var mx=ax+alen/2-30, my=ay;
+    var sgn=yawM>0?-1:1; // p/ fora do cais = proa sobe
+    sEl(svg,'path',{d:'M '+mx+' '+my+' Q '+(mx+40)+' '+(my+sgn*30)+' '+(mx+14)+' '+(my+sgn*46),fill:'none',stroke:mcol,'stroke-width':3});
+    sEl(svg,'path',{d:'M '+(mx+14)+' '+(my+sgn*46)+' l '+(sgn>0?'-2 -11':'-2 11')+' l 11 '+(sgn>0?'3':'-3')+' z',fill:mcol});
+    sTx(svg,mx+50,my+sgn*40,'yaw '+(yawM>0?'+':'−'),{fill:mcol,fs:12,fw:'bold'});
+  }
+  document.getElementById('interRead').innerHTML='<b>Fase:</b> '+lbl+'.';
+}
+drawInter();
+window.addEventListener('resize',function(){drawInter();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"3 efeitos (ITTC 2002)",b:"Efeito de banco (paralelo) · cushion effect (lateral, atracação) · memória hidrodinâmica (frequência/aceleração)."},
+  {f:"Cushion effect",b:"Movimento LATERAL rumo a um limite sólido: resistência lateral cresce ao se aproximar. Ex.: atracação em quay."},
+  {f:"Memória hidrodinâmica",b:"Forças dependentes de frequência (massa/inércia adicional) em grandes acelerações. Ex.: contato com defensas."},
+  {f:"Restrições fixas × móveis",b:"Fixas: bancos e canais. Móveis (dinâmicas): cruzamento e ultrapassagem de navios."},
+  {f:"Efeito de banco — clássico",b:"ATRAÇÃO lateral ao banco (Bernoulli, mais na popa) + momento de PROA PARA FORA. Correção: leme PARA o banco."},
+  {f:"Dependência da velocidade",b:"∝ V² (potencial). Em águas rasas pode crescer mais que quadraticamente. Só vale em regime (após extremidades)."},
+  {f:"Ação do propulsor no banco",b:"Atração ADICIONAL popa-banco, independente do sentido de rotação. Reforça o momento p/ fora."},
+  {f:"Geometria dos bancos",b:"Verticais (quay walls) · inclinados com margem visível (taludes) · submersos."},
+  {f:"Repulsão do banco (exceção)",b:"Só em modelos REBOCADOS, h/T 1,1–1,25 e alta velocidade (nível sobe junto à popa). Não ocorre autopropelido."},
+  {f:"Norrbin (1974–85)",b:"Série de estudos (modelos + numéricos) sobre tipos de banco. Base dos modelos atuais."},
+  {f:"Yasukawa (1991)",b:"Refez Norrbin (petroleiro 280k TPB, banco circular) com método dos painéis. Atração sempre; yaw p/ fora predominante."},
+  {f:"Canal — equilíbrio",b:"No centro: atrações se equilibram, mas o equilíbrio é INSTÁVEL (desvio → atração da margem próxima)."},
+  {f:"Eda — canais",b:"Estabilidade direcional em canais (158,5 m): curvas de contorno-limite definem o operacional. Alargar/aprofundar melhora muito."},
+  {f:"Fator de bloqueio",b:"S = B·T/A_canal. S=0,10 ≈ rio/canal típico. ↑S → ↑corrente de retorno, ↑squat."},
+  {f:"Squat em canais — métodos",b:"Huuska/Guliev · Römisch (B/T<2,6) · Barrass 3 (Cb·S^0,81·Vk^2,08/20) · Yoshimura (japonês)."},
+  {f:"Ultrapassagem — sequência",b:"No navio parado: repulsão → ATRAÇÃO (través) → repulsão; yaw troca de sinal 2×."},
+  {f:"Interação cresce com",b:"↓distância lateral · ↓profundidade · ↑velocidade do passante · ↑porte relativo."},
+  {f:"Cruzamento",b:"Velocidade relativa = soma → picos maiores, menos tempo de reação. Reduzir V, manter o bordo, folga máxima."},
+  {f:"Efeito estacionário × dinâmico",b:"Banco fixo = estacionário. Costado de outro navio = dinâmico (interação entre navios)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"Segundo a ITTC 2002, o efeito que ocorre quando o navio se move LATERALMENTE em direção a um limite sólido (ex.: atracação em cais de parede vertical) é o:",
+   o:["Efeito de banco (bank effect)","Efeito de amortecimento (cushion effect)","Memória hidrodinâmica","Efeito squat"],a:1,
+   e:"Cushion effect: a resistência lateral do casco aumenta com a aproximação do limite. O bank effect é para movimento PARALELO ao banco; a memória hidrodinâmica envolve dependência de frequência em grandes acelerações."},
+  {q:"O comportamento clássico do efeito de banco sobre um navio navegando paralelo a uma margem é:",
+   o:["Repulsão lateral + proa para dentro","Atração lateral ao banco + momento de proa para fora","Atração lateral + proa para dentro","Nenhuma força"],a:1,
+   e:"A água acelera entre costado e banco (pressão cai, Bernoulli) → ATRAÇÃO (mais perto da popa); a sobrepressão na proa gera momento de PROA PARA FORA. Correção: leme para o banco."},
+  {q:"Os efeitos de banco são dominados por fenômenos potenciais e, em geral, proporcionais:",
+   o:["À velocidade do navio","Ao quadrado da velocidade (V²)","Ao cubo da velocidade","Independem da velocidade"],a:1,
+   e:"∝V² (em águas rasas podem crescer mais que quadraticamente). Detalhe fino: a dependência V² só vale em regime, após o navio passar as extremidades do banco (picos transientes, Yasukawa)."},
+  {q:"Sobre a ação do propulsor na interação navio-banco, é correto afirmar:",
+   o:["Anula o efeito de banco","Gera força de atração adicional entre a popa e o banco, independente do sentido de rotação","Só afeta com rotação à direita","Gera repulsão da popa"],a:1,
+   e:"A distribuição de pressão na popa gera atração adicional popa-banco, independente do sentido de rotação — o que reforça o momento de proa para fora."},
+  {q:"No centro de um canal simétrico, o equilíbrio lateral do navio é:",
+   o:["Estável — o navio retorna sozinho ao centro","Instável — qualquer desvio o aproxima de uma margem que o atrai mais","Neutro","Inexistente"],a:1,
+   e:"As atrações dos dois bancos se equilibram no centro, mas o equilíbrio é INSTÁVEL: um desvio aproxima o navio de uma margem, que o atrai mais, ampliando o desvio (estudos de Eda)."},
+  {q:"O fator de bloqueio (blockage factor) de um canal é definido como:",
+   o:["Profundidade / calado","Seção mestra submersa do navio / seção transversal molhada do canal","Comprimento do navio / largura do canal","Boca / calado"],a:1,
+   e:"S = (B·T)/A_canal. Referência: S = 0,10 equivale a um rio ou canal típico. Quanto maior S, mais intensa a corrente de retorno e maior o squat."},
+  {q:"No método Barrass 3 para squat em canais, o squat máximo depende de:",
+   o:["Apenas da profundidade","Do coeficiente de bloco (Cb), do fator de bloqueio (S) e da velocidade em nós (Vk)","Apenas do comprimento do navio","Do ângulo do leme"],a:1,
+   e:"S_max = Cb·S^0,81·Vk^2,08/20 [m]. Note a dependência ~V² e o papel direto do bloqueio. Outros métodos: Huuska/Guliev, Römisch (B/T<2,6), Yoshimura (japonês)."},
+  {q:"Na ultrapassagem de um navio atracado, quando os navios estão costado a costado (través), o navio atracado experimenta:",
+   o:["Repulsão máxima","Atração máxima (depressão de Bernoulli)","Força nula","Apenas momento de guinada"],a:1,
+   e:"A sequência é repulsão → ATRAÇÃO (máxima no través) → repulsão, com o momento de yaw trocando de sinal duas vezes. No través, a depressão do corpo médio do passante suga o navio parado."},
+  {q:"Os efeitos de interação entre navios aumentam com:",
+   o:["Maior distância lateral e maior profundidade","Menor distância lateral, menor profundidade e maior velocidade do passante","Menor velocidade","Menor porte do navio que passa"],a:1,
+   e:"Interação cresce com ↓distância, ↓profundidade (h/T), ↑velocidade e ↑porte relativo do passante. Por isso a redução de velocidade é a primeira medida."},
+  {q:"No cruzamento (encontro em rumos opostos), em comparação com a ultrapassagem, a interação é:",
+   o:["Mais longa e mais fraca","Mais breve, com picos mais intensos (velocidade relativa = soma das velocidades)","Idêntica","Inexistente"],a:1,
+   e:"No cruzamento as velocidades se somam: a sequência repulsão→atração→repulsão ocorre em menos tempo e com picos maiores — menos tempo de reação para o leme. Recomendação: reduzir V antes e manter o bordo com folga máxima."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

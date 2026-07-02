@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>O Movimento do Navio em Ondas Regulares — Santos Ondas Cap. 3 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(107,78,142,.30),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--roxo)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#c9b3e8;font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:31px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;text-decoration:none;color:var(--roxo);
+    border:1.5px solid var(--roxo);border-radius:20px;padding:5px 11px;transition:.15s}
+  nav.toc a:hover{background:var(--roxo);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--roxo);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-hist{background:#fbe6c9;color:#7a4d12}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.hist{border-left:6px solid var(--mute);background:#faf6ef}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:110px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--roxo)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--roxo);background:#fff;color:var(--roxo);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--roxo);color:#fff;border-color:var(--roxo)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f4f0fa;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--roxo)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--roxo);background:#f4f0fa}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--roxo);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--roxo);color:#f3edfc;font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:#d9c8f0;font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#f1ecf8;border:1px solid #d9c8f0;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:22px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Comportamento no Mar (Seakeeping) · Bloco I</p>
+    <h1>O Movimento do Navio em <em>Ondas Regulares</em></h1>
+    <p class="sub">O alicerce do seakeeping: o mar regular, a <strong>frequência de encontro</strong> (com o enigma do mar de ré), o navio como sistema massa-mola-amortecedor, as <strong>quatro forças de excitação</strong> (Froude-Krylov, difração, radiação, restauração), a teoria das faixas, e as respostas — <strong>RAO de heave, pitch e o roll ressonante</strong> — até os acoplamentos que explicam o broaching.</p>
+    <div class="src"><b>Fonte:</b> Santos, livro de <em>Ondas</em>, Cap. 3 — "O movimento do navio em ondas regulares" (seções 3.1 a 3.10, abordagem linear). Continua no Bloco J (mar irregular e espectros, Cap. 4).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#regular">3.1 Mar regular</a>
+    <a href="#encontro">Freq. de encontro ▶</a>
+    <a href="#tipos">3.2 Tipos</a>
+    <a href="#plano">3.3–3.4 O plano</a>
+    <a href="#heavelivre">3.5 Heave livre</a>
+    <a href="#forcas">4 forças</a>
+    <a href="#teorias">Teorias</a>
+    <a href="#amort">Amortecimento</a>
+    <a href="#rao">RAO heave ▶</a>
+    <a href="#pitch">3.6 Pitch</a>
+    <a href="#roll">3.7 Roll ▶</a>
+    <a href="#acoplados">3.8–3.10 Acoplados</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Abre a matéria <strong>Comportamento no Mar (Seakeeping)</strong> — Blocos I e J. As bases vêm de <a href="pna_ix_sec3_estabilidade_movimento.html#cap2santos">Santos Cap. 2 (6 GL)</a>; a força de onda como força ambiental foi introduzida em <a href="santos_cap8_forcas_ambientais.html">Forças Ambientais (Cap. 8)</a>. Continua no <strong>Bloco J — Mar Irregular e Espectros (Ondas Cap. 4)</strong>.
+</div>
+
+<!-- ===== 3.1 MAR REGULAR ===== -->
+<section class="bloco" id="regular">
+  <h2 class="sec"><span class="n">3.1</span> O mar regular e a convenção de referência</h2>
+  <p class="lede">O mar real é irregular — mas o mar regular (altura, comprimento e período constantes) permite aplicar a mecânica clássica e validar resultados em tanque de provas. Este capítulo é a abordagem linear.</p>
+
+  <p>O perfil da onda regular é <strong>η(x,t) = a·cos(kx − ωt)</strong> — amplitude a, número de onda k, frequência ω. A hipótese central de todo o capítulo: <span class="hl">as perturbações são pequenas</span> (amplitudes de movimento ÷ L pequenas; amplitude da onda ÷ L pequena) — o que autoriza a <strong>teoria linear das pequenas perturbações</strong>.</p>
+
+  <table>
+    <tr><th>Convenção SNAME</th><th>Movimento</th><th class="center">Índice</th></tr>
+    <tr><td rowspan="3">Translações</td><td>Surge (x)</td><td class="center">1</td></tr>
+    <tr><td>Sway (y)</td><td class="center">2</td></tr>
+    <tr><td>Heave (z)</td><td class="center">3</td></tr>
+    <tr><td rowspan="3">Rotações</td><td>Roll (φ)</td><td class="center">4</td></tr>
+    <tr><td>Pitch (θ)</td><td class="center">5</td></tr>
+    <tr><td>Yaw (ψ)</td><td class="center">6</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Mar de vante, de ré e de través (ângulo μ) <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Com o ângulo μ entre a direção de propagação da onda e o rumo: <span class="hl">90° &lt; μ &lt; 270° → mar vindo de VANTE</span> (μ=180° é mar de proa exato); <span class="hl">0° ≤ μ &lt; 90° e 270° &lt; μ ≤ 360° → mar vindo de RÉ</span>; μ = 90° ou 270° → <strong>mar de través</strong>. Os coeficientes de restauração e as forças usam o sistema solidário ao navio (2ª lei de Newton), como no Cap. 2 de manobrabilidade.</p>
+  </div>
+</section>
+
+<!-- ===== FREQ ENCONTRO ===== -->
+<section class="bloco" id="encontro">
+  <h2 class="sec"><span class="n">3.1</span> A frequência de encontro — o Doppler do navio</h2>
+  <p class="lede">Com o navio em movimento, ele não sente a frequência da onda, mas a frequência de encontro. Em mar de ré, o resultado é surpreendente: três ondas diferentes podem dar a mesma frequência de encontro.</p>
+
+  <div class="box formula">
+    <h4>A fórmula central do capítulo <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">ω<sub>e</sub> = ω · [ 1 − (ω·V/g)·cos μ ]<span class="lbl">frequência de encontro (águas profundas) — ω da onda, V do navio, μ do aproamento relativo</span></div>
+    <p class="vars">O período de encontro é T<sub>e</sub> = λ / (c − V·cos μ), com a celeridade c. É o mesmo conceito do <strong>efeito Doppler</strong>. Corolários imediatos: <span class="hl">mar de través (μ=90°) → ω<sub>e</sub> = ω</span> (o navio sente a frequência da própria onda); mar de proa (cos μ negativo) → ω<sub>e</sub> <strong>sempre maior que ω e sempre positiva</strong>; mar de ré (cos μ positivo) → comportamento complexo.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>ω<sub>e</sub> × ω — o gráfico que resolve o mar de ré (interativo)</h4>
+    <p class="hint">Escolha a direção do mar. Em mar de ré, a curva tem máximo, zero e região negativa: trace uma horizontal e encontre 3 ondas com a mesma |ω<sub>e</sub>|.</p>
+    <canvas id="cvEnc" width="860" height="320"></canvas>
+    <div class="ictrl" style="margin-bottom:2px">
+      <button class="encBtn active" data-m="vante" onclick="setEnc('vante')">Mar de vante</button>
+      <button class="encBtn" data-m="traves" onclick="setEnc('traves')">Través</button>
+      <button class="encBtn" data-m="re" onclick="setEnc('re')">Mar de ré</button>
+    </div>
+    <div class="iread" id="encRead" style="margin-top:8px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>O enigma do mar de ré <span class="tag t-banca">BANCA</span></h4>
+    <p>Em mar vindo de ré, a curva ω<sub>e</sub>(ω) tem um <strong>máximo</strong> em ω = g/(2V·cos μ) — que coincide com a <span class="hl">velocidade de grupo</span> — e um <strong>zero</strong> em ω = g/(V·cos μ). Depois do zero, ω<sub>e</sub> é <span class="hl">negativa</span>: o navio ultrapassa as ondas (o observador de bordo acha que o mar é de proa!). Casos: V<sub>w</sub> = V = 0 (<strong>estático</strong>); V<sub>w</sub> − V·cos μ = 0 (<strong>semiestático</strong>, ω<sub>e</sub>=0); V<sub>w</sub> &gt; V·cos μ (ondas ultrapassam o navio); V<sub>w</sub> &lt; V·cos μ (navio ultrapassa as ondas).</p>
+  </div>
+
+  <div class="box hist">
+    <h4>O exemplo de Lloyd (Seakeeping) <span class="tag t-hist">CLÁSSICO</span></h4>
+    <p>Navio a 20 nós, mar exatamente pela popa, |ω<sub>e</sub>| = 0,2 rad/s → <strong>três ondas possíveis</strong>: (1) onda longa de 0,75 km, rápida, que ultrapassa o navio a ~47 nós relativos; (2) onda curta e lenta que o ultrapassa a ~8,5 nós; (3) onda muito curta a ~16 nós, <em>ultrapassada</em> pelo navio (ω<sub>e</sub> negativa). Comprimento longo compensa velocidade alta, e vice-versa — por isso não há solução única. Em mar pela alheta (μ=45°, 20 nós), <span class="hl">todas as ondas de ~50 a ~400 m têm a mesma frequência de encontro (~0,3 rad/s)</span>.</p>
+  </div>
+</section>
+
+<!-- ===== 3.2 TIPOS ===== -->
+<section class="bloco" id="tipos">
+  <h2 class="sec"><span class="n">3.2</span> Os três tipos de movimento em função da frequência</h2>
+  <p class="lede">Nem todo movimento em ondas é oscilação: há também as derivas — a média (2ª ordem) e a lenta (grupos de ondas).</p>
+
+  <table>
+    <tr><th class="center">#</th><th>Tipo</th><th>Característica</th></tr>
+    <tr><td class="center">1</td><td><strong>Movimento na frequência da onda</strong></td><td>Linearmente excitado na faixa com energia significativa — em navios, <span class="hl">períodos de 6 a 20 s</span></td></tr>
+    <tr><td class="center">2</td><td><strong>Deriva média</strong></td><td>Componentes de <strong>2ª ordem</strong> em mar regular. No plano vertical a deriva média é zero; no horizontal (surge, sway, yaw), <span class="hl">sem restauração</span>, o navio abate como sob corrente/vento constantes</td></tr>
+    <tr><td class="center">3</td><td><strong>Deriva lenta</strong></td><td>Em mar <em>irregular</em>: frequências muito baixas ligadas aos <strong>grupos de ondas</strong> — excursões lentas mas amplas no plano horizontal</td></tr>
+  </table>
+</section>
+
+<!-- ===== 3.3-3.4 PLANO ===== -->
+<section class="bloco" id="plano">
+  <h2 class="sec"><span class="n">3.3–3.4</span> O plano de ataque: massa-mola-amortecedor em 4 passos</h2>
+  <p class="lede">Todo grau de liberdade do navio é, matematicamente, um sistema massa-mola com amortecimento sob força oscilatória. Santos monta a análise em quatro camadas.</p>
+
+  <p><strong>Quem tem restauração e quem não tem:</strong> heave, roll e pitch possuem forças hidrostáticas de restauração (o navio "quer voltar"); <span class="hl">surge, sway e yaw NÃO têm restauração</span> — e por isso são dominados pelas derivas. Heave, pitch e roll são <strong>fortemente acoplados</strong> entre si; a simetria BE/BB desacopla alguns pares. O foco inicial é o plano vertical; os horizontais ficam para o fim do capítulo, porque neles mora o risco: <span class="hl">embarcações de baixa GM com mar de ré podem atravessar às ondas (broaching), com risco de emborcar em baixas frequências de encontro</span>.</p>
+
+  <table>
+    <tr><th class="center">Passo</th><th>Análise</th><th>O que introduz</th></tr>
+    <tr><td class="center">1</td><td>Oscilação <strong>livre sem amortecimento</strong></td><td>Restauração hidrostática e <strong>frequência natural</strong></td></tr>
+    <tr><td class="center">2</td><td>Oscilação <strong>livre com amortecimento</strong></td><td>Dissipação de energia (termos em velocidade)</td></tr>
+    <tr><td class="center">3</td><td>Movimento <strong>forçado</strong></td><td>Força de <strong>radiação</strong>: massa adicional e amortecimento potencial — "erros por não os incluir são fatais"</td></tr>
+    <tr><td class="center">4</td><td>Sob <strong>onda incidente</strong></td><td>Força de <strong>difração</strong> + solução completa (RAO)</td></tr>
+  </table>
+</section>
+
+<!-- ===== 3.5 HEAVE LIVRE ===== -->
+<section class="bloco" id="heavelivre">
+  <h2 class="sec"><span class="n">3.5</span> Heave em oscilação livre — a frequência natural</h2>
+  <p class="lede">Empurre o navio para baixo e solte: empuxo × peso alternam-se num movimento harmônico simples. Daí saem a restauração c₃₃, a massa adicional a₃₃ e o período natural.</p>
+
+  <div class="box formula">
+    <h4>Restauração, massa virtual e frequência natural <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">c<sub>33</sub> = ρ·g·A<sub>wp</sub><span class="lbl">coeficiente de restauração em heave — A_wp = área do plano de flutuação (parentesco com o TPC)</span></div>
+    <div class="eq">ω<sub>n3</sub> = √[ ρgA<sub>wp</sub> / (Δ + a<sub>33</sub>) ] &nbsp;·&nbsp; T<sub>n3</sub> = 2π·√[ (Δ + a<sub>33</sub>) / ρgA<sub>wp</sub> ]<span class="lbl">frequência e período naturais — Δ + a₃₃ = massa virtual em heave</span></div>
+    <p class="vars">Conclusão direta: <span class="hl">quanto MENOR a área do plano de flutuação, MAIOR o período natural</span> (e vice-versa). O período natural independe da amplitude (para movimentos pequenos/moderados).</p>
+  </div>
+
+  <div class="box key">
+    <h4>Massa adicional: não é massa, é força <span class="tag t-banca">BANCA</span> <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>Ao acelerar, o navio acelera o fluido junto ao casco; pela 3ª lei de Newton o fluido reage com uma força de resistência proporcional à aceleração — o coeficiente a₃₃. <span class="hl">"Não é uma massa que é adicionada, e sim uma força de resistência que é acrescida"</span> — quando a aceleração é zero, a massa adicional "some". O par (Δ + a₃₃) chama-se <strong>massa virtual</strong>. É o mesmo conceito das derivadas de aceleração da manobrabilidade (Y<sub>v̇</sub>, N<sub>ṙ</sub>).</p>
+  </div>
+</section>
+
+<!-- ===== 4 FORÇAS ===== -->
+<section class="bloco" id="forcas">
+  <h2 class="sec"><span class="n">3.5.4</span> As quatro forças de excitação</h2>
+  <p class="lede">A decomposição clássica que estrutura todo o seakeeping: Froude-Krylov + difração (= excitação da onda), radiação e restauração.</p>
+
+  <table>
+    <tr><th>Força</th><th>Origem física</th><th>Condição de análise</th></tr>
+    <tr><td><strong>Froude-Krylov (F<sub>I</sub>)</strong></td><td>Pressão da onda incidente <span class="hl">não perturbada</span> — o navio é "transparente"/"fantasma". F = ∫p·n·ds na área molhada</td><td>Navio não perturba a onda</td></tr>
+    <tr><td><strong>Difração (F<sub>D</sub>)</strong></td><td>Impenetrabilidade: a onda não atravessa o casco e é difratada (não simplesmente refletida). Anula as velocidades normais na superfície</td><td><span class="hl">Navio FIXO</span>, onda incidindo</td></tr>
+    <tr><td><strong>Radiação (F<sub>R</sub>)</strong></td><td>O navio oscilando <span class="hl">em mar calmo</span> cria seu próprio sistema de ondas + acelera o escoamento. F<sub>R</sub> = −a·z̈ − b·ż (massa adicional + amortecimento)</td><td>Navio oscilando, <span class="hl">sem onda incidente</span></td></tr>
+    <tr><td><strong>Restauração (F<sub>C</sub>)</strong></td><td>Diferença hidrostática pela oscilação (afundou → mais empuxo). Linear, parente do TPC. F<sub>C</sub> = −c₃₃·z</td><td>Deslocado do equilíbrio</td></tr>
+  </table>
+
+  <div class="box hist">
+    <h4>A história por trás dos nomes <span class="tag t-hist">HISTÓRIA</span></h4>
+    <p><strong>William Froude (1861)</strong> estudou o roll — os navios a vapor perderam o amortecimento natural das velas. <strong>Alexei Krylov (1896)</strong> investigou heave e pitch. Ambos, de forma independente, consideraram só a pressão da onda incidente não perturbada — daí "força de Froude-Krylov", em homenagem aos pais da moderna arquitetura naval. Em <strong>1883, W. E. Smith</strong> documentou que a pressão da onda decai com o calado: o fator e<sup>−kT</sup> é o <span class="hl">efeito Smith</span>.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>A equação completa do heave <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">(Δ + a<sub>33</sub>)·z̈ + b<sub>33</sub>·ż + c<sub>33</sub>·z = F<sub>e</sub>(t) = F<sub>I</sub> + F<sub>D</sub><span class="lbl">massa virtual × aceleração + amortecimento × velocidade + restauração × deslocamento = excitação da onda</span></div>
+    <p class="vars">Weinblum &amp; St. Denis (1950, "On the motions of a ship at sea"): a força de Froude-Krylov é pequena quando o comprimento efetivo da onda é &lt; L/2; tende a zero quando λ<sub>efetivo</sub>/L iguala o coeficiente da área de flutuação; e seu adimensional tende a C<sub>wp</sub> quando λ → ∞. A matriz de restauração tem só c₃₃, c₃₅/c₅₃, c₄₄ e c₅₅ não nulos (navio simétrico BE/BB).</p>
+  </div>
+</section>
+
+<!-- ===== TEORIAS ===== -->
+<section class="bloco" id="teorias">
+  <h2 class="sec"><span class="n">3.5.6</span> As teorias de cálculo — da faixa de Ursell à strip theory</h2>
+  <p class="lede">Como calcular a₃₃ e b₃₃ de um casco real: reduzir o 3D a uma sucessão de problemas 2D — a teoria das faixas.</p>
+
+  <div class="box hist">
+    <h4>A linha do tempo das teorias <span class="tag t-hist">HISTÓRIA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Ano / autor</th><th>Contribuição</th></tr>
+      <tr><td><strong>1949 — Ursell</strong></td><td>Teoria das faixas: problema 2D de cilindro semicircular oscilando em heave na superfície livre (singularidades + multipolos)</td></tr>
+      <tr><td><strong>1957 — Korvin-Kroukovsky &amp; Jacobs</strong> (Stevens)</td><td><span class="hl">Primeiros a incluir a velocidade do navio e a frequência de encontro</span>; primeira descrição adequada de heave e pitch com seguimento em mar de vante — base das strip theories seguintes</td></tr>
+      <tr><td><strong>1959–60 — Tasai, Grim, Porter</strong></td><td>Transformação conforme de <strong>Lewis</strong> + método de Ursell para seções arbitrárias</td></tr>
+    </table>
+  </div>
+
+  <div class="box formula">
+    <h4>Como funciona a teoria das faixas <span class="tag t-calc">CALCULO</span></h4>
+    <p class="vars">O navio é dividido em ~<b>20 seções transversais</b> (faixas). Cada faixa é tratada como um semicilindro 2D infinito; as ondas irradiadas propagam-se <strong>perpendiculares ao eixo x</strong>. Hipóteses: navio <span class="hl">esbelto</span>, velocidade pequena, ondas curtas em relação a L. Integra-se ao longo do comprimento: <b>a₃₃ = ∫a₃₃²ᴰ(x)·dx</b>. Grim relaciona a massa adicional 2D de cada seção com <b>a₃₃²ᴰ = C·ρπB²/8</b>, onde C é um coeficiente de ajuste (função de calado/boca, coeficiente de área da seção e frequência).</p>
+  </div>
+</section>
+
+<!-- ===== AMORTECIMENTO ===== -->
+<section class="bloco" id="amort">
+  <h2 class="sec"><span class="n">3.5.7</span> O coeficiente de amortecimento</h2>
+  <p class="lede">No plano vertical, o amortecimento É a irradiação de ondas — pura dissipação de energia. No horizontal, é viscoso.</p>
+
+  <p>O coeficiente b₃₃ vem do <strong>princípio de conservação de energia</strong>: o trabalho da força de amortecimento numa oscilação completa é igual à energia das ondas irradiadas (para os dois bordos). Resultado notável: <span class="hl">b₃₃ nunca pode ser negativo</span>, e está diretamente ligado à razão Ā entre a amplitude da onda irradiada e a amplitude do movimento (b₃₃²ᴰ = ρg²Ā²/ω³).</p>
+
+  <div class="box key">
+    <h4>Os dois comportamentos-chave <span class="tag t-banca">BANCA</span></h4>
+    <p>1) <span class="hl">b₃₃ → 0 tanto em frequências muito baixas quanto muito altas</span>: um corpo oscilando devagar quase não irradia; oscilando muito rápido, irradia ondas de amplitude desprezível. O amortecimento tem um máximo em frequências intermediárias.<br>
+    2) <strong>Plano vertical × horizontal:</strong> o amortecimento por ondas vale para heave/pitch; no plano horizontal de navios mercantes o amortecimento dominante é <span class="hl">viscoso</span> (fricção + vórtices) — que a teoria potencial não captura (o de ondas só importa em Froude &gt; 0,30).</p>
+  </div>
+</section>
+
+<!-- ===== RAO ===== -->
+<section class="bloco" id="rao">
+  <h2 class="sec"><span class="n">3.5.8–9</span> A resposta em heave — o RAO</h2>
+  <p class="lede">RAO = razão entre a amplitude de resposta e a amplitude da onda, em função da frequência. A curva de ressonância do navio.</p>
+
+  <div class="ichart">
+    <h4>RAO de heave — a curva de ressonância (interativo)</h4>
+    <p class="hint">Deslize o amortecimento. Veja o pico de ressonância crescer (pouco amortecimento) ou achatar. O pico ocorre um pouco ANTES da frequência natural.</p>
+    <canvas id="cvRAO" width="860" height="320"></canvas>
+    <div class="ictrl"><label for="zeta">Amortecimento →</label><input type="range" id="zeta" min="8" max="70" value="25" oninput="drawRAO()"></div>
+    <div class="iread" id="raoRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>A leitura do RAO de heave <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Comparando as direções: <span class="hl">a amplitude máxima de resposta em heave ocorre com mar pelo TRAVÉS</span>, e a mínima com mar de vante. No través, todo o navio sobe e desce com a onda — a resposta pode até <strong>superar a amplitude da onda</strong>, com pico <span class="hl">um pouco antes da frequência natural</span>. Em frequências muito baixas (ondas longas), o navio "acompanha a onda" (RAO→1); em muito altas, não responde (RAO→0). A fase máxima ocorre <em>depois</em> da frequência natural; em outras direções há inversões de fase.</p>
+  </div>
+</section>
+
+<!-- ===== PITCH ===== -->
+<section class="bloco" id="pitch">
+  <h2 class="sec"><span class="n">3.6</span> O movimento de pitch</h2>
+  <p class="lede">Rotação em torno de y, com restauração pela altura metacêntrica longitudinal. A inércia adicional aqui é grande — da ordem da própria inércia.</p>
+
+  <div class="box formula">
+    <h4>Restauração e período natural de pitch <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">c<sub>55</sub> = Δ·g·GM<sub>L</sub> &nbsp;·&nbsp; ω<sub>n5</sub> = √[ c<sub>55</sub> / (I<sub>yy</sub> + a<sub>55</sub>) ]<span class="lbl">GM_L = altura metacêntrica LONGITUDINAL; I_yy + a₅₅ = inércia virtual em pitch</span></div>
+    <p class="vars">Raio de giração em pitch: <b>k<sub>yy</sub> ≈ 0,24L a 0,26L</b> (CG próximo de meia-nau). Em mercantes, GM<sub>L</sub> é da ordem do <strong>comprimento do navio</strong>. Ordem de grandeza do período natural: <span class="hl">navio de 200 m → T<sub>n5</sub> ≈ 10 s</span>; de 300 m → ~11 s.</p>
+  </div>
+
+  <div class="box key">
+    <h4>A inércia adicional em pitch é GRANDE <span class="tag t-banca">BANCA</span></h4>
+    <p><span class="hl">a₅₅ é da mesma ordem de grandeza do próprio momento de inércia I<sub>yy</sub></span> — confirmado experimentalmente por <strong>John Gerritsma</strong> (final dos anos 1950). Pela teoria das faixas, a₅₅ vem da massa adicional em heave de cada seção multiplicada pelo braço ao quadrado: a₅₅ = ∫a₃₃²ᴰ(x)·x²·dx. Contraste que a banca adora: em <strong>roll</strong>, a inércia adicional é <em>pequena</em> (próxima seção).</p>
+  </div>
+</section>
+
+<!-- ===== ROLL ===== -->
+<section class="bloco" id="roll">
+  <h2 class="sec"><span class="n">3.7</span> O movimento de roll — o ressonante perigoso</h2>
+  <p class="lede">O roll quase não irradia ondas: pouco amortecimento potencial → grandes amplitudes na ressonância. O amortecimento que salva é viscoso — e das quilhas de balanço.</p>
+
+  <div class="box formula">
+    <h4>Restauração e período natural de roll <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">c<sub>44</sub> = Δ·g·GM<sub>T</sub> &nbsp;·&nbsp; T<sub>n4</sub> = 2π·√[ (I<sub>xx</sub> + a<sub>44</sub>) / Δ·g·GM<sub>T</sub> ]<span class="lbl">GM_T = altura metacêntrica TRANSVERSAL — a mesma da estabilidade estática</span></div>
+    <p class="vars">Raio de giração em roll: <b>k<sub>xx</sub> ≈ 0,4·B</b>. A precisão de T<sub>n4</sub> depende só da estimativa de GM<sub>T</sub>. Períodos naturais típicos: <span class="hl">mercantes 10–17 s; rebocadores e offshore 5–7 s</span>. Bhattacharya: o raio de giração <em>virtual</em> k'<sub>xx</sub> fica entre 0,33B e 0,45B.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Os dois contrastes de roll <span class="tag t-banca">BANCA</span> <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>1) <strong>Inércia adicional pequena:</strong> a₄₄ ≈ 10–20% de I<sub>xx</sub> (na prática a₄₄ ≈ 0,15·I<sub>xx</sub>) — ao contrário do pitch, onde a₅₅ ~ I<sub>yy</sub>. Sua determinação exata quase não muda o resultado.<br>
+    2) <strong>Amortecimento potencial baixo:</strong> a geometria do casco <span class="hl">não consegue irradiar ondas em fase com a velocidade angular</span> → o roll dissipa pouca energia → <strong>grandes amplitudes perto da ressonância</strong>. A teoria potencial, que funciona para heave e pitch, <span class="hl">falha para o roll na ressonância</span>: os efeitos dominantes são viscosos não lineares + apêndices (quilhas de balanço). Solução prática: teoria potencial + amortecimento viscoso adicional (linearizado).</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Ressonância de roll — o efeito das quilhas de balanço (interativo)</h4>
+    <p class="hint">Compare o navio sem e com quilhas de balanço. Sem elas, o pico ressonante dispara — o sincronismo perigoso.</p>
+    <canvas id="cvRoll" width="860" height="320"></canvas>
+    <div class="ictrl" style="margin-bottom:2px">
+      <button id="rSem" class="active" onclick="setRoll(false)">Sem quilha de balanço</button>
+      <button id="rCom" onclick="setRoll(true)">Com quilhas de balanço</button>
+    </div>
+    <div class="iread" id="rollRead" style="margin-top:8px"></div>
+  </div>
+
+  <div class="box trap">
+    <h4>O sincronismo — a leitura do prático <span class="tag t-conflito">PERIGO</span></h4>
+    <p>Quando o <strong>período de encontro</strong> das ondas se aproxima do <strong>período natural de roll</strong> (10–17 s nos mercantes), o navio entra em <span class="hl">sincronismo</span>: cada onda chega "no tempo certo" de amplificar a banda. Como o amortecimento natural do roll é baixo, as amplitudes crescem rápido. As saídas operacionais decorrem da fórmula de ω<sub>e</sub>: <strong>mudar o rumo ou a velocidade</strong> muda a frequência de encontro e tira o navio da ressonância.</p>
+  </div>
+</section>
+
+<!-- ===== ACOPLADOS ===== -->
+<section class="bloco" id="acoplados">
+  <h2 class="sec"><span class="n">3.8–3.10</span> Os movimentos sem restauração e os acoplamentos</h2>
+  <p class="lede">Surge, sway e yaw não têm mola. E os acoplamentos — heave-pitch e sway-yaw-roll — fecham o capítulo apontando para o broaching.</p>
+
+  <p><strong>3.8 — Surge, sway e yaw puros:</strong> as equações são as mesmas <em>sem o termo de restauração</em> (c = 0). Os coeficientes hidrodinâmicos precisam ser <span class="hl">corrigidos para a frequência de encontro</span> quando o navio tem velocidade (termos com V/ω<sub>e</sub>² ligando massa adicional e amortecimento).</p>
+
+  <p><strong>3.9 — Heave-pitch acoplado:</strong> o sistema de duas equações acopladas (termos cruzados a₃₅, a₅₃, b₃₅, c₃₅...) foi resolvido pela primeira vez por <strong>Korvin-Kroukovsky &amp; Jacobs (1957, Stevens Institute)</strong> — a mesma dupla da strip theory com velocidade. Resolve-se em notação complexa (sistema 2×2, determinante D).</p>
+
+  <p><strong>3.10 — Sway-yaw-roll acoplado:</strong> sistema 3×3 no plano horizontal + roll. É a matemática por trás do risco apontado na abertura: <span class="hl">com mar de ré e baixa frequência de encontro, embarcações de baixa GM podem atravessar às ondas — o broaching — com risco de emborcamento</span>. O elo entre o seakeeping e a manobrabilidade (estabilidade direcional do Cap. 4).</p>
+
+  <div class="related">
+    📎 Próximo passo natural: o mar real não é regular — a resposta a ele usa <strong>o RAO daqui × o espectro do mar</strong>. É o <strong>Bloco J — Mar Irregular e Espectros (Ondas Cap. 4)</strong>: Pierson-Moskowitz, JONSWAP, momentos espectrais e valores extremos.
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Frequência de encontro, as 4 forças, períodos naturais e os contrastes.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Doze questões com os distratores reais do capítulo.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Movimento em Ondas Regulares (Santos Ondas Cap. 3)</summary>
+  <ul>
+    <li><b>Convenção:</b> índices SNAME 1–6 (surge/sway/heave/roll/pitch/yaw). Mar de VANTE: 90&lt;μ&lt;270 · de RÉ: μ&lt;90 ou &gt;270 · TRAVÉS: 90/270. Teoria linear (pequenas perturbações).</li>
+    <li><b>Frequência de encontro:</b> ω_e = ω·(1 − ωV·cosμ/g). Través → ω_e = ω. Proa → sempre positiva e maior. RÉ → máximo em ω = g/(2V·cosμ) (= velocidade de grupo), zero em g/(V·cosμ), depois NEGATIVA (navio ultrapassa as ondas). 3 ondas podem dar a mesma |ω_e| (exemplo de Lloyd, 20 nós).</li>
+    <li><b>3 tipos de movimento:</b> na frequência da onda (períodos 6–20 s) · deriva média (2ª ordem; zero no vertical, abate no horizontal) · deriva lenta (grupos de ondas, mar irregular).</li>
+    <li><b>Restauração:</b> heave/roll/pitch TÊM; surge/sway/yaw NÃO (por isso derivam). Heave-pitch-roll fortemente acoplados.</li>
+    <li><b>Heave livre:</b> c₃₃ = ρgA_wp (parente do TPC). ↓A_wp → ↑período natural. Massa adicional a₃₃: "não é massa, é força de resistência" (some sem aceleração). Massa virtual = Δ+a₃₃. ω_n = √(ρgA_wp/(Δ+a₃₃)).</li>
+    <li><b>4 forças:</b> Froude-Krylov (onda incidente, navio "fantasma"; Froude 1861 roll, Krylov 1896 heave/pitch) · Difração (navio FIXO, impenetrabilidade; F_e = F_I + F_D) · Radiação (navio oscilando em mar CALMO; F_R = −a·z̈ − b·ż) · Restauração (−c₃₃z). Efeito Smith: e^(−kT) (1883).</li>
+    <li><b>Teorias:</b> Ursell 1949 (faixas, cilindro 2D) → Korvin-Kroukovsky &amp; Jacobs 1957 (1ºs com velocidade/freq. de encontro; heave-pitch) → Tasai/Grim/Porter 1960 (transformação de Lewis). Faixas: ~20 seções, navio esbelto, a₃₃ = ∫a₃₃²ᴰdx; Grim: a₃₃²ᴰ = C·ρπB²/8.</li>
+    <li><b>Amortecimento:</b> b₃₃ = dissipação por ondas irradiadas; NUNCA negativo; →0 em freq. muito baixas E muito altas. Plano horizontal: amortecimento dominante é VISCOSO (potencial só p/ Fr&gt;0,30).</li>
+    <li><b>RAO heave:</b> máximo com mar de TRAVÉS (pode superar a amplitude da onda), mínimo de vante; pico um pouco ANTES de ω_n; RAO→1 em ondas longas, →0 em curtas.</li>
+    <li><b>Pitch:</b> c₅₅ = ΔgGM_L (GM_L ~ L); k_yy ≈ 0,24–0,26L; T_n5 ≈ 10 s (200 m). a₅₅ ~ I_yy (GRANDE — Gerritsma).</li>
+    <li><b>Roll:</b> c₄₄ = ΔgGM_T; k_xx ≈ 0,4B; T_n4 = 10–17 s mercantes / 5–7 s offshore. a₄₄ PEQUENO (10–20%, ≈0,15·I_xx). Amortecimento potencial baixo (não irradia em fase) → ressonância severa; dominam viscosos + QUILHAS DE BALANÇO. Sincronismo: T_encontro ≈ T_n4 → mudar rumo/velocidade.</li>
+    <li><b>Acoplados:</b> heave-pitch (KK&amp;J 1957, sistema 2×2 complexo) · sway-yaw-roll (3×3) → BROACHING: mar de ré + baixa ω_e + baixa GM → atravessar às ondas, risco de emborcar.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · O Movimento do Navio em Ondas Regulares (Santos, Ondas Cap. 3) · Capital Sereno · matéria Comportamento no Mar (Seakeeping) — Bloco I.</div>
+</footer>
+
+<script>
+/* ===== FREQUÊNCIA DE ENCONTRO ===== */
+var encModo='vante';
+function setEnc(m){encModo=m;
+  document.querySelectorAll('.encBtn').forEach(function(b){b.classList.toggle('active',b.dataset.m===m);});
+  drawEnc();}
+function drawEnc(){
+  var cv=document.getElementById('cvEnc'); if(!cv) return; var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=60,y0=H/2+40,pW=W-100;
+  ctx.clearRect(0,0,W,H);
+  // eixos
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(x0,20);ctx.lineTo(x0,H-24);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(W-20,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('ωe (freq. de encontro)',x0+6,32);
+  ctx.fillText('ω (freq. da onda) →',W-160,y0+18);
+  // parâmetros: V·cosμ/g agrupado em k
+  var g=9.81, V=10; // m/s ~20 nós
+  var cosmu = encModo==='vante'? -1 : (encModo==='traves'? 0 : 1);
+  var wmax=1.6, esc=pW/wmax;
+  function py(we){return y0 - we*140;}
+  // curva ωe(ω) = ω(1 − ωV cosμ/g)
+  ctx.strokeStyle = encModo==='vante' ? '#2C5F8A' : (encModo==='traves' ? '#1A7A6E' : '#9E3B2E');
+  ctx.lineWidth=3;ctx.beginPath();
+  for(var w=0;w<=wmax;w+=0.01){
+    var we = w*(1 - w*V*cosmu/g);
+    var X=x0+w*esc, Y=py(we);
+    if(Y<16)Y=16; if(Y>H-16)Y=H-16;
+    if(w===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);
+  }
+  ctx.stroke();
+  // referência ωe=ω (diagonal, tracejada)
+  ctx.strokeStyle='#cdbf99';ctx.setLineDash([4,4]);ctx.lineWidth=1.2;ctx.beginPath();
+  for(var w=0;w<=wmax;w+=0.02){var X=x0+w*esc,Y=py(w);if(Y<16)break;if(w===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}
+  ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a89a72';ctx.font='11px Trebuchet MS';ctx.fillText('ωe = ω (referência)',x0+0.62*esc,py(0.74));
+  var read='';
+  if(encModo==='vante'){
+    read='<b>Mar de VANTE (cos μ &lt; 0):</b> ω<sub>e</sub> = ω(1 + ωV/g) — sempre POSITIVA e sempre MAIOR que ω. O navio encontra mais cristas por unidade de tempo (Doppler ao se aproximar). Solução única para cada ω<sub>e</sub>.';
+  } else if(encModo==='traves'){
+    read='<b>TRAVÉS (μ = 90°, cos μ = 0):</b> ω<sub>e</sub> = ω — o navio sente exatamente a frequência da onda, qualquer que seja sua velocidade. O corolário mais direto da fórmula.';
+  } else {
+    // marcar máximo e zero
+    var wMaxPt=g/(2*V), wZero=g/V;
+    var weMax=wMaxPt*(1-wMaxPt*V/g);
+    ctx.fillStyle='#0D3D36';
+    ctx.beginPath();ctx.arc(x0+wMaxPt*esc,py(weMax),5,0,7);ctx.fill();
+    ctx.font='bold 11px Trebuchet MS';ctx.fillText('máximo (ω = g/2V = veloc. de grupo)',x0+wMaxPt*esc+8,py(weMax)-6);
+    ctx.beginPath();ctx.arc(x0+wZero*esc,py(0),5,0,7);ctx.fill();
+    ctx.fillText('zero (ω = g/V): semiestático',x0+wZero*esc+8,py(0)-8);
+    ctx.fillStyle='#9E3B2E';ctx.font='11px Trebuchet MS';
+    ctx.fillText('ωe < 0: navio ultrapassa as ondas',x0+1.18*esc,py(-0.42));
+    read='<b>Mar de RÉ (cos μ &gt; 0):</b> a curva sobe, tem MÁXIMO em ω=g/(2V·cosμ) (= velocidade de grupo), cruza o ZERO em ω=g/(V·cosμ) e fica NEGATIVA. Trace uma horizontal: <b>3 ondas diferentes dão a mesma |ω<sub>e</sub>|</b> (exemplo de Lloyd). ω<sub>e</sub>&lt;0 = o navio ultrapassa as ondas (a bordo, parecem de proa).';
+  }
+  document.getElementById('encRead').innerHTML=read;
+}
+drawEnc();
+window.addEventListener('resize',drawEnc);
+
+/* ===== RAO HEAVE ===== */
+function drawRAO(){
+  var cv=document.getElementById('cvRAO'); if(!cv) return; var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=60,y0=H-40,pW=W-100,pH=H-70;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(x0,16);ctx.lineTo(x0,y0);ctx.lineTo(W-20,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('RAO = z\u0302/a (resposta ÷ onda)',x0+6,28);
+  ctx.fillText('ωe / ωn →',W-90,y0+20);
+  var zeta=+document.getElementById('zeta').value/100; // 0.08..0.7
+  var rmax=3.4;
+  function py(r){return y0-(r/rmax)*pH;}
+  function px(u){return x0+(u/2.2)*pW;}
+  // linha RAO=1
+  ctx.strokeStyle='#e0d6b8';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(x0,py(1));ctx.lineTo(W-20,py(1));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#a89a72';ctx.font='11px Trebuchet MS';ctx.fillText('RAO = 1 (acompanha a onda)',x0+8,py(1)-6);
+  // frequência natural
+  ctx.strokeStyle='#C8A84B';ctx.setLineDash([5,3]);ctx.beginPath();ctx.moveTo(px(1),16);ctx.lineTo(px(1),y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9a7d1f';ctx.font='bold 11px Trebuchet MS';ctx.fillText('ωn (natural)',px(1)+5,30);
+  // curva RAO (oscilador amortecido)
+  ctx.strokeStyle='#6B4E8E';ctx.lineWidth=3;ctx.beginPath();
+  var picoU=0,picoR=0;
+  for(var u=0.02;u<=2.2;u+=0.01){
+    var r=1/Math.sqrt(Math.pow(1-u*u,2)+Math.pow(2*zeta*u,2));
+    if(r>picoR){picoR=r;picoU=u;}
+    var rr=Math.min(r,rmax);
+    var X=px(u),Y=py(rr);
+    if(u<=0.03)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);
+  }
+  ctx.stroke();
+  // pico
+  if(picoR<rmax){
+    ctx.fillStyle='#6B4E8E';ctx.beginPath();ctx.arc(px(picoU),py(picoR),5,0,7);ctx.fill();
+    ctx.font='bold 11px Trebuchet MS';ctx.fillText('pico (antes de ωn)',px(picoU)-40,py(picoR)-10);
+  }
+  document.getElementById('raoRead').innerHTML='Amortecimento ζ = <b>'+zeta.toFixed(2)+'</b> · pico do RAO = <b>'+picoR.toFixed(2)+'</b> em ω/ωn = <b>'+picoU.toFixed(2)+'</b> (sempre um pouco ANTES da natural). Ondas longas (ω→0): RAO→1. Ondas curtas (ω alto): RAO→0.';
+}
+drawRAO();
+window.addEventListener('resize',drawRAO);
+
+/* ===== ROLL ===== */
+var rollQuilha=false;
+function setRoll(q){rollQuilha=q;
+  document.getElementById('rSem').classList.toggle('active',!q);
+  document.getElementById('rCom').classList.toggle('active',q);
+  drawRoll();}
+function drawRoll(){
+  var cv=document.getElementById('cvRoll'); if(!cv) return; var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=60,y0=H-40,pW=W-100,pH=H-70;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(x0,16);ctx.lineTo(x0,y0);ctx.lineTo(W-20,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('amplitude de roll',x0+6,28);
+  ctx.fillText('T de encontro →',W-110,y0+20);
+  var rmax=8;
+  function py(r){return y0-(r/rmax)*pH;}
+  function px(u){return x0+(u/2.2)*pW;}
+  // Tn marcado
+  ctx.strokeStyle='#C8A84B';ctx.setLineDash([5,3]);ctx.beginPath();ctx.moveTo(px(1),16);ctx.lineTo(px(1),y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9a7d1f';ctx.font='bold 11px Trebuchet MS';ctx.fillText('Tn de roll (10–17 s)',px(1)+5,30);
+  // sem quilha (referência, sempre desenhada esmaecida)
+  function curva(zeta,cor,lw,dash){
+    ctx.strokeStyle=cor;ctx.lineWidth=lw;if(dash)ctx.setLineDash(dash);
+    ctx.beginPath();var pk=0,pu=0;
+    for(var u=0.02;u<=2.2;u+=0.01){
+      var r=1/Math.sqrt(Math.pow(1-u*u,2)+Math.pow(2*zeta*u,2));
+      if(r>pk){pk=r;pu=u;}
+      var rr=Math.min(r,rmax);
+      var X=px(u),Y=py(rr);
+      if(u<=0.03)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);
+    }
+    ctx.stroke();ctx.setLineDash([]);
+    return [pk,pu];
+  }
+  var pSem=curva(0.05,'#9E3B2E',rollQuilha?1.6:3.2,rollQuilha?[4,4]:null);
+  var pCom=null;
+  if(rollQuilha) pCom=curva(0.22,'#1A7A6E',3.2,null);
+  ctx.font='bold 11px Trebuchet MS';
+  ctx.fillStyle='#9E3B2E';ctx.fillText('sem quilha (ζ≈0,05)',px(1.28),py(2.6));
+  if(rollQuilha){ctx.fillStyle='#1A7A6E';ctx.fillText('com quilhas de balanço (ζ maior)',px(1.18),py(1.35));}
+  document.getElementById('rollRead').innerHTML = rollQuilha
+    ? '<b>Com quilhas de balanço:</b> o amortecimento viscoso adicional corta o pico ressonante drasticamente. É o papel dos apêndices — e por que a teoria potencial sozinha falha no roll.'
+    : '<b>Sem quilha:</b> o roll quase não irradia ondas (ζ≈0,05) → na ressonância (T_encontro ≈ T_n) a amplitude DISPARA. É o sincronismo: mudar rumo/velocidade muda ω_e e tira o navio do pico.';
+}
+drawRoll();
+window.addEventListener('resize',drawRoll);
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Frequência de encontro",b:"ω_e = ω(1 − ωV·cosμ/g). O Doppler do navio: depende da velocidade e do aproamento relativo."},
+  {f:"Mar de través (μ=90°)",b:"ω_e = ω — o navio sente a frequência da própria onda, qualquer que seja a velocidade."},
+  {f:"Mar de vante",b:"cos μ negativo → ω_e sempre POSITIVA e maior que ω. Solução única."},
+  {f:"Mar de ré — máximo",b:"ω_e máxima em ω = g/(2V·cosμ) — coincide com a velocidade de GRUPO."},
+  {f:"Mar de ré — zero e negativo",b:"Zero em ω = g/(V·cosμ) (semiestático). Depois, ω_e NEGATIVA: o navio ultrapassa as ondas."},
+  {f:"Exemplo de Lloyd",b:"20 nós, mar pela popa, |ω_e|=0,2: TRÊS ondas diferentes (0,75 km rápida; curta lenta; muito curta ultrapassada) dão a mesma |ω_e|."},
+  {f:"3 tipos de movimento",b:"Na frequência da onda (6–20 s) · deriva média (2ª ordem) · deriva lenta (grupos de ondas)."},
+  {f:"Quem tem restauração",b:"Heave, roll e pitch TÊM. Surge, sway e yaw NÃO — por isso derivam (abatimento)."},
+  {f:"c₃₃ (restauração heave)",b:"c₃₃ = ρgA_wp. Parente do TPC. Menor A_wp → MAIOR período natural."},
+  {f:"Massa adicional",b:"'Não é massa, é força de resistência' proporcional à aceleração. Sem aceleração, some. Massa virtual = Δ+a₃₃."},
+  {f:"Froude-Krylov",b:"Pressão da onda incidente NÃO perturbada — navio 'transparente/fantasma'. Froude 1861 (roll), Krylov 1896 (heave/pitch)."},
+  {f:"Difração",b:"Navio FIXO; impenetrabilidade gera ondas difratadas. F_excitação = F_FK + F_difração."},
+  {f:"Radiação",b:"Navio oscilando em MAR CALMO cria ondas próprias. F_R = −a·z̈ − b·ż (massa adicional + amortecimento)."},
+  {f:"Efeito Smith",b:"e^(−kT): a pressão da onda decai com o calado. W. E. Smith, 1883."},
+  {f:"Teoria das faixas (Ursell 1949)",b:"~20 seções 2D; navio esbelto; ondas irradiadas ⊥ ao eixo x. a₃₃ = ∫a₃₃²ᴰdx."},
+  {f:"Korvin-Kroukovsky & Jacobs (1957)",b:"Primeiros a incluir velocidade/freq. de encontro. Primeira descrição adequada de heave-pitch com seguimento."},
+  {f:"b₃₃ (amortecimento heave)",b:"Dissipação por ondas irradiadas. NUNCA negativo. →0 em frequências muito baixas E muito altas."},
+  {f:"RAO de heave",b:"Máximo com mar de TRAVÉS (pode superar a onda); pico um pouco ANTES de ωn; RAO→1 em ondas longas."},
+  {f:"Pitch — inércia adicional",b:"a₅₅ ~ I_yy (mesma ordem! — Gerritsma). k_yy ≈ 0,24–0,26L. T_n5 ≈ 10 s (navio de 200 m)."},
+  {f:"Roll — os contrastes",b:"a₄₄ PEQUENO (10–20%). Amortecimento potencial baixo → ressonância severa. T_n4 = 10–17 s mercantes."},
+  {f:"Quilhas de balanço",b:"Amortecimento viscoso adicional que corta o pico ressonante de roll — onde a teoria potencial falha."},
+  {f:"Broaching",b:"Mar de ré + baixa ω_e + baixa GM → o navio atravessa às ondas com risco de emborcar. Acoplamento sway-yaw-roll (3.10)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"A frequência de encontro de um navio com velocidade V, em ondas de frequência ω e aproamento relativo μ, em águas profundas, é dada por:",
+   o:["ω_e = ω + V","ω_e = ω(1 − ωV·cosμ/g)","ω_e = ω·V/g","ω_e = ω·cosμ"],a:1,
+   e:"ω_e = ω(1 − ωV·cosμ/g) — o efeito Doppler do navio. Corolários: través → ω_e=ω; proa → sempre positiva e maior; ré → máximo, zero e região negativa."},
+  {q:"Com mar exatamente pelo través (μ = 90°), a frequência de encontro vale:",
+   o:["Zero","Igual à frequência da onda (ω_e = ω)","O dobro da frequência da onda","Depende da velocidade"],a:1,
+   e:"cos 90° = 0 → ω_e = ω, independentemente da velocidade do navio. É o corolário mais direto da fórmula."},
+  {q:"Em mar vindo de ré, o valor máximo da frequência de encontro ocorre quando a frequência da onda vale ω = g/(2V·cosμ), valor que coincide com o conceito de:",
+   o:["Velocidade de fase","Velocidade de grupo","Celeridade crítica","Frequência natural"],a:1,
+   e:"O máximo de ω_e coincide com a velocidade de grupo. O zero ocorre em ω = g/(V·cosμ); depois dele, ω_e é negativa (o navio ultrapassa as ondas)."},
+  {q:"No exemplo clássico de Lloyd (navio a 20 nós, mar pela popa, |ω_e| = 0,2 rad/s), quantas ondas fisicamente possíveis produzem essa mesma frequência de encontro?",
+   o:["Uma","Duas","Três","Nenhuma"],a:2,
+   e:"Três: uma longa e rápida que ultrapassa o navio (~47 nós relativos), uma curta e lenta que o ultrapassa (~8,5 nós), e uma muito curta ultrapassada pelo navio (ω_e negativa). Em mar de ré não há solução única."},
+  {q:"Quais movimentos do navio NÃO possuem forças de restauração?",
+   o:["Heave, roll e pitch","Surge, sway e yaw","Apenas heave","Apenas roll"],a:1,
+   e:"Surge, sway e yaw não têm restauração — por isso são dominados pelas derivas (média e lenta). Heave, roll e pitch têm restauração hidrostática."},
+  {q:"O coeficiente de restauração em heave, c₃₃, é dado por:",
+   o:["ρgV (volume deslocado)","ρg·A_wp (área do plano de flutuação)","Δ·GM_T","ρg·B·T"],a:1,
+   e:"c₃₃ = ρgA_wp — diretamente proporcional à área do plano de linha d'água (parente do TPC). Menor A_wp → maior período natural de heave."},
+  {q:"Sobre o conceito de massa adicional, Santos enfatiza que:",
+   o:["É uma massa de água que fica presa ao casco","Não é massa: é uma força de resistência proporcional à aceleração","Só existe em águas rasas","É sempre desprezível"],a:1,
+   e:"'Não é uma massa que é adicionada e sim uma força de resistência que é acrescida' — quando a aceleração é zero, a massa adicional é zero. O par Δ+a₃₃ é a massa virtual."},
+  {q:"A força de Froude-Krylov é calculada assumindo que:",
+   o:["O navio difrata completamente a onda","O navio é 'transparente' e não perturba a onda incidente","O navio está oscilando em mar calmo","A onda é totalmente refletida"],a:1,
+   e:"Hipótese do navio 'fantasma': integra-se a pressão da onda incidente NÃO perturbada na área molhada. A perturbação pelo casco fixo é a força de DIFRAÇÃO; o navio oscilando em mar calmo gera a de RADIAÇÃO."},
+  {q:"A força de radiação de ondas é classicamente dividida em dois termos, proporcionais:",
+   o:["À posição e ao tempo","À aceleração (massa adicional) e à velocidade (amortecimento)","À amplitude da onda e ao calado","Ao comprimento e à boca"],a:1,
+   e:"F_R = −a·z̈ − b·ż: o termo em aceleração é a massa adicional; o termo em velocidade é o amortecimento potencial (dissipação pelas ondas irradiadas)."},
+  {q:"Sobre o coeficiente de amortecimento em heave (b₃₃), é correto afirmar:",
+   o:["Cresce indefinidamente com a frequência","Tende a zero em frequências muito baixas E muito altas, e nunca é negativo","É sempre negativo","Independe da frequência"],a:1,
+   e:"Corpo oscilando devagar quase não irradia; muito rápido, irradia ondas desprezíveis → b₃₃→0 nos dois extremos, com máximo intermediário. Pela conservação de energia, nunca é negativo."},
+  {q:"Comparando as inércias adicionais de pitch e de roll:",
+   o:["Ambas são desprezíveis","a₅₅ (pitch) é da ordem do próprio I_yy; a₄₄ (roll) é pequena (10–20% de I_xx)","a₄₄ é enorme e a₅₅ desprezível","São sempre iguais"],a:1,
+   e:"Contraste clássico: em pitch a inércia adicional é da mesma ordem da natural (Gerritsma, anos 1950); em roll é pequena (a₄₄ ≈ 0,15·I_xx) e sua determinação exata quase não muda o resultado."},
+  {q:"O movimento de roll apresenta grandes amplitudes próximo à ressonância principalmente porque:",
+   o:["Tem restauração muito forte","Quase não irradia ondas (baixo amortecimento potencial); o amortecimento dominante é viscoso e de apêndices","A frequência natural é muito alta","A onda pelo través é sempre maior"],a:1,
+   e:"O casco não irradia ondas em fase com a velocidade angular → pouca dissipação → pico ressonante severo. A teoria potencial falha aí; entram os efeitos viscosos e as quilhas de balanço. Saída operacional: mudar rumo/velocidade (muda ω_e)."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

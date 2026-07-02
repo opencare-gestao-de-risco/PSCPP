@@ -124,6 +124,27 @@
    ====================================================================== */
 const CADERNOS = [
   {
+    materia:"seakeeping", badge:"Bloco I · Ondas Cap. 3",
+    titulo:"O Movimento do Navio em Ondas Regulares (Santos Ondas Cap. 3)",
+    arquivo:"santos_ondas_cap3_ondas_regulares.html",
+    desc:"Abre a matéria Seakeeping (Blocos I–J), completo (seções 3.1 a 3.10, abordagem linear). O mar regular e a convenção SNAME (índices 1–6; mar de vante 90<μ<270). A FREQUÊNCIA DE ENCONTRO ωe=ω(1−ωV·cosμ/g) com gráfico interativo — corolários (través: ωe=ω; proa: sempre positiva) e o enigma do MAR DE RÉ (máximo na velocidade de grupo, zero, região negativa, 3 ondas com a mesma |ωe| — exemplo de Lloyd). Os 3 tipos de movimento (freq. da onda 6–20s · deriva média 2ª ordem · deriva lenta). O plano massa-mola-amortecedor em 4 passos. HEAVE: c33=ρgAwp, massa adicional ('não é massa, é força'), massa virtual, ωn. As 4 FORÇAS de excitação: Froude-Krylov (navio 'fantasma'; Froude 1861/Krylov 1896), difração (navio fixo), radiação (−a·z̈−b·ż), restauração + efeito Smith (e^−kT). Teorias: Ursell 1949 (faixas ~20 seções), Korvin-Kroukovsky & Jacobs 1957 (1ºs com velocidade), Tasai/Grim/Porter (Lewis). Amortecimento b33 (→0 nos 2 extremos; nunca negativo; horizontal=viscoso). RAO DE HEAVE com curva de ressonância interativa (máx no través, pico antes de ωn). PITCH (a55~Iyy, Gerritsma; Tn≈10s p/ 200m). ROLL: a44 pequeno, amortecimento potencial baixo → ressonância severa, gráfico interativo com/sem QUILHAS DE BALANÇO, sincronismo. Acoplados: heave-pitch (KK&J 1957) e sway-yaw-roll → BROACHING. Flashcards (22) e quiz de 12 questões.",
+    tags:["BANCA","Seakeeping","Ondas regulares","Frequência de encontro","RAO","Heave","Pitch","Roll","Sincronismo","Froude-Krylov","Difração","Radiação","Massa adicional","Teoria das faixas","Quilha de balanço","Broaching","Bloco I"]
+  },
+  {
+    materia:"manobra-ambiente", badge:"Santos Cap. 8 · Forças Ambientais",
+    titulo:"A Ação das Forças Externas Ambientais (Santos Cap. 8)",
+    arquivo:"santos_cap8_forcas_ambientais.html",
+    desc:"Fecha a matéria Efeitos Externos e de Contorno (seções 8.1 a 8.4). As 3 forças (vento na obra morta · corrente na obra viva · onda) e as técnicas do prático: caranguejar/crabbing e bollard pull. VENTO: verdadeiro × relativo/aparente com SVG interativo do triângulo de vento, gradiente 1/7 (OCIMF) e Beaufort (0,836·Bft^3/2), coeficientes Cxw/Cyw/Cnw — OCIMF (LASTRO: coeficientes E área maiores) e Blendermann (Hamburgo, anos 1990), orçar×arribar por posição do vento, exemplo de caranguejar (δ=K²·B), lei V² com gráfico interativo (triplicar vento=9×; rajadas>10×), giro sob vento (diâmetro tático aumenta). CORRENTE: velocidade relativa + coeficientes do Cap. 3, incidência <25° com navio em velocidade (≠ vento pelo través — distrator), gradiente com o fundo. ONDA: 1ª ordem oscilatória × deriva de 2ª ordem, ressonância (período natural 10–17s; <6s insignificante p/ >100m), frequência de encontro, e os 3 efeitos PIANC em águas rasas (resposta MENOR). Ponte para a matéria Seakeeping. Flashcards e quiz de 10 questões.",
+    tags:["BANCA","Vento","Corrente","Onda","Vento aparente","OCIMF","Blendermann","Orçar","Arribar","Crabbing","Bollard pull","Wave drift","Ressonância","Frequência de encontro","Efeitos de contorno"]
+  },
+  {
+    materia:"manobra-ambiente", badge:"Santos Cap. 10 · Águas Restritas",
+    titulo:"Águas Restritas, Efeito de Banco e Interações (Santos Cap. 10)",
+    arquivo:"santos_cap10_aguas_restritas_interacoes.html",
+    desc:"Completo (seções 10.1 a 10.9). Os 3 efeitos da ITTC 2002 (banco · cushion effect · memória hidrodinâmica) e restrições fixas×móveis. Parâmetros da interação navio-banco (distância, ∝V², h/T, ação do propulsor — atração adicional popa-banco independente da rotação, geometria vertical/talude/submerso). O EFEITO DE BANCO clássico com SVG interativo (atração lateral por Bernoulli + momento de proa para fora; correção: leme PARA o banco), com os detalhes finos (picos transientes de Yasukawa, repulsão só em rebocados h/T 1,1–1,25). Pesquisadores: Norrbin 1974–85, Yasukawa 1991, Kijima&Quing, Dand, Eda. Efeitos de canal (equilíbrio INSTÁVEL no centro, curvas contorno-limite de Eda), canais curvos, FATOR DE BLOQUEIO (S=B·T/Ac; S=0,10≈rio). Squat em canais (Huuska/Guliev, Römisch, Barrass 3 = Cb·S^0,81·Vk^2,08/20, Yoshimura). INTERAÇÃO na ultrapassagem com SVG fase a fase (repulsão→atração no través→repulsão, yaw troca 2×) e o cruzamento (picos maiores). Flashcards e quiz de 10 questões.",
+    tags:["BANCA","Efeito de banco","Bank effect","Cushion effect","Interação entre navios","Ultrapassagem","Cruzamento","Fator de bloqueio","Canal","Squat em canais","Barrass","ITTC","Norrbin","Efeitos de contorno"]
+  },
+  {
     materia:"manobra-ambiente", badge:"Santos Cap. 9 · Águas Rasas",
     titulo:"Efeitos de Águas Rasas e o Squat (Santos Cap. 9)",
     arquivo:"santos_cap9_aguas_rasas_squat.html",
@@ -448,10 +469,11 @@ const MATERIAS = {
   "manobra-leme":{ titulo:"Manobrabilidade — Lemes", sub:"Módulo I · Bloco C · Lemes e Superfícies de Controle", cor:"#9E3B2E" },
   "manobrabilidade":{ titulo:"Manobrabilidade", sub:"Módulo I · Blocos D–H", cor:"#1A7A6E" },
   "manobra-ambiente":{ titulo:"Efeitos Externos e de Contorno", sub:"Módulo I · Vento · Corrente · Onda · Águas Rasas · Restritas (Santos Cap. 8·9·10)", cor:"#3a7bb5" },
+  "seakeeping":{ titulo:"Comportamento no Mar (Seakeeping)", sub:"Módulo I · Blocos I–J · Ondas Regulares · Mar Irregular e Espectros (Santos Ondas Cap. 3·4)", cor:"#6B4E8E" },
   "shiphandling":{ titulo:"Arte Naval — Shiphandling/MacElrevey", sub:"Módulo II · Blocos D·E·F·G · MacElrevey 4ª ed.", cor:"#0D3D36" },
   "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" }
 };
-const ORDEM = ["manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","shiphandling","arte-naval"];
+const ORDEM = ["manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }
