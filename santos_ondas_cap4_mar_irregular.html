@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>O Mar Irregular e os Espectros — Santos Ondas Cap. 4 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(107,78,142,.30),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--roxo)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#c9b3e8;font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:31px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;text-decoration:none;color:var(--roxo);
+    border:1.5px solid var(--roxo);border-radius:20px;padding:5px 11px;transition:.15s}
+  nav.toc a:hover{background:var(--roxo);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--roxo);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-hist{background:#fbe6c9;color:#7a4d12}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.hist{border-left:6px solid var(--mute);background:#faf6ef}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:120px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--roxo)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--roxo);background:#fff;color:var(--roxo);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--roxo);color:#fff;border-color:var(--roxo)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f4f0fa;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--roxo)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--roxo);background:#f4f0fa}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--roxo);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--roxo);color:#f3edfc;font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:#d9c8f0;font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#f1ecf8;border:1px solid #d9c8f0;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:22px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Comportamento no Mar (Seakeeping) · Bloco J</p>
+    <h1>O <em>Mar Irregular</em> e Confuso — os Espectros e a Resposta do Navio</h1>
+    <p class="sub">"A lei básica do mar é a aparente falta de qualquer lei" (Rayleigh). Como a análise espectral domou o caos: a energia do mar por frequência, a distribuição de Rayleigh, a <strong>altura significativa</strong>, os espectros <strong>Pierson-Moskowitz e JONSWAP</strong>, os momentos espectrais e o passo final — <strong>espectro de resposta = RAO² × espectro do mar</strong>.</p>
+    <div class="src"><b>Fonte:</b> Santos, livro de <em>Ondas</em>, Cap. 4 — "O mar irregular e confuso e o movimento do navio" (seções 4.1 a 4.10). Fecha a matéria Seakeeping (Blocos I–J), usando os RAOs do Cap. 3.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#historia">4.1 História</a>
+    <a href="#sinal">4.2 O sinal</a>
+    <a href="#marreal">4.3 Mar real ▶</a>
+    <a href="#alturas">4.4 Rayleigh · H⅓</a>
+    <a href="#espectro">4.5 O espectro</a>
+    <a href="#pmjonswap">P-M × JONSWAP ▶</a>
+    <a href="#momentos">4.6 Momentos</a>
+    <a href="#resposta">4.7 Resposta ▶</a>
+    <a href="#extremos">4.10 Extremos</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Fecha a matéria <strong>Comportamento no Mar (Seakeeping)</strong>. O RAO que este capítulo eleva ao quadrado vem de <a href="santos_ondas_cap3_ondas_regulares.html">Ondas Regulares (Bloco I)</a>. A onda como força ambiental: <a href="santos_cap8_forcas_ambientais.html">Forças Ambientais (Cap. 8)</a>.
+</div>
+
+<!-- ===== 4.1 HISTÓRIA ===== -->
+<section class="bloco" id="historia">
+  <h2 class="sec"><span class="n">4.1</span> Do prisma de Newton ao espectro do mar</h2>
+  <p class="lede">Até meados do século XX, as ondas do vento eram "desordenadas demais para a matemática". A solução veio da análise espectral — uma linhagem que começa na óptica.</p>
+
+  <div class="box hist">
+    <h4>A linha do tempo da análise espectral <span class="tag t-hist">HISTÓRIA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Ano / autor</th><th>Contribuição</th></tr>
+      <tr><td><strong>1664 — Newton</strong></td><td>Decompõe a luz em frequências com o prisma — o primeiro "espectro"</td></tr>
+      <tr><td><strong>1800 — Herschel</strong></td><td>Mede a energia média por faixa de frequência (termômetros no espectro)</td></tr>
+      <tr><td><strong>~1850 — Gouy · 1871 — Rayleigh</strong></td><td>Luz branca por séries de Fourier; Rayleigh substitui a série pela <strong>integral</strong> de Fourier</td></tr>
+      <tr><td><strong>1872 — Lord Kelvin</strong></td><td>Analisador harmônico mecânico (polias) para prever <strong>marés</strong></td></tr>
+      <tr><td><strong>1898 — Michelson &amp; Stratton · Schuster</strong></td><td>Analisador de molas → espectro de potência; "periodicidades ocultas"</td></tr>
+      <tr><td><strong>Anos 1930 — Wiener, Kolmogorov, Tukey...</strong></td><td>Fundamentos modernos das séries temporais</td></tr>
+      <tr><td><strong>1947 — Sverdrup &amp; Munk</strong></td><td>Estudo pioneiro das ondas de vento: nasce a <span class="hl">altura significativa</span> e o balanço de energia</td></tr>
+      <tr><td><strong>1952 — Longuet-Higgins</strong></td><td>Alturas do mar estatisticamente independentes; máximos seguem a <span class="hl">distribuição de Rayleigh</span></td></tr>
+      <tr><td><strong>1953 — St. Denis &amp; Pierson</strong></td><td><span class="hl">Princípio da superposição</span>: a resposta do navio ao mar irregular = soma das respostas às ondas regulares — nasce o seakeeping moderno</td></tr>
+      <tr><td><strong>1956–57 — Ursell · Miles &amp; Phillips</strong></td><td>Revisão crítica ("conhecimento profundamente insatisfatório") → teorias da geração de ondas pelo vento</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 4.2 SINAL ===== -->
+<section class="bloco" id="sinal">
+  <h2 class="sec"><span class="n">4.2</span> A análise do sinal — o que os histogramas não contam</h2>
+  <p class="lede">Registre a elevação do mar no tempo, monte o histograma das alturas e o dos períodos — e descubra que eles não conversam entre si.</p>
+
+  <p>Do registro η(t) extraem-se dois histogramas: o das <strong>alturas</strong> e o dos <strong>períodos (ou frequências)</strong>. Mas <span class="hl">analisando só os histogramas não há relação entre altura e período</span>: para o mesmo período existem várias alturas, e vice-versa. É por isso que o mar não pode ser caracterizado pela forma — precisa ser caracterizado pela <strong>energia</strong>. A ponte é o espectro.</p>
+</section>
+
+<!-- ===== 4.3 MAR REAL ===== -->
+<section class="bloco" id="marreal">
+  <h2 class="sec"><span class="n">4.3</span> A representação do mar real — soma de senoides</h2>
+  <p class="lede">Mar irregular = infinitas ondas regulares somadas, cada uma com sua frequência, altura infinitesimal e fase aleatória. E a energia total é a soma das energias.</p>
+
+  <table>
+    <tr><th>Conceito</th><th>Definição</th></tr>
+    <tr><td><strong>Mar irregular (bidimensional)</strong></td><td>Gerado por vento sobre grande área; <span class="hl">cristas contínuas</span>, acompanhando a direção do vento</td></tr>
+    <tr><td><strong>Mar confuso (tridimensional)</strong></td><td>Cruzamento de ondas de <span class="hl">tempestades diferentes</span>, de direções distintas — o mais prevalecente na natureza</td></tr>
+  </table>
+
+  <div class="ichart">
+    <h4>Sintetizando o mar irregular — soma de 4 ondas regulares (interativo)</h4>
+    <p class="hint">Deslize as fases. As mesmas 4 senoides produzem um perfil sempre diferente: o mar irregular nunca repete seu padrão — por isso só a energia o define.</p>
+    <canvas id="cvSoma" width="860" height="320"></canvas>
+    <div class="ictrl"><label for="fase">Fases aleatórias →</label><input type="range" id="fase" min="0" max="100" value="30" oninput="drawSoma()"></div>
+    <div class="iread" id="somaRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>A energia total e o espectro <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">ζ(t) = ∫ a(ω)·cos(ωt − kx + θ(ω))·dω<span class="lbl">integral de Fourier — fases θ aleatórias (conceito de Rayleigh para o som)</span></div>
+    <div class="eq">E = (ρg/8)·(h₁² + h₂² + h₃² + ...)<span class="lbl">energia total por m² = constante × soma dos QUADRADOS das alturas das ondas componentes</span></div>
+    <p class="vars">Cada onda componente tem uma frequência única → a energia total pode ser <strong>distribuída pelas frequências</strong>: essa distribuição é o <span class="hl">espectro do mar</span>. A característica mais distintiva do mar irregular: <strong>ele nunca repete seu padrão</strong> — não se define pela forma, define-se pela energia.</p>
+  </div>
+</section>
+
+<!-- ===== 4.4 RAYLEIGH ===== -->
+<section class="bloco" id="alturas">
+  <h2 class="sec"><span class="n">4.4</span> A distribuição de Rayleigh e a altura significativa</h2>
+  <p class="lede">Não se prevê o padrão do mar — mas prevê-se, estatisticamente, com que frequência ocorrem ondas de cada altura. A chave: mar de banda estreita + Rayleigh.</p>
+
+  <div class="box formula">
+    <h4>Rayleigh para as alturas (Longuet-Higgins, 1952) <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">P(h &gt; h₁) = e<sup>−(h₁/h<sub>rms</sub>)²</sup><span class="lbl">probabilidade de uma onda exceder h₁ — válida para mar de BANDA ESTREITA</span></div>
+    <div class="eq">h<sub>rms</sub> = √[ (1/M)·Σh<sub>i</sub>² ]<span class="lbl">altura quadrática média (valor eficaz) das M ondas do registro</span></div>
+    <p class="vars">Assume-se a superfície composta de muitas senoides com frequências <strong>próximas de um valor comum</strong> (banda estreita). Longuet-Higgins demonstrou que as alturas são estatisticamente independentes (M grande) e os máximos seguem Rayleigh — distribuição criada no séc. XIX para <em>intensidade de sons</em>. Dela saem: quantas ondas em M excedem h₁, e a altura excedida por um percentual p.</p>
+  </div>
+
+  <div class="box key">
+    <h4>A altura significativa H<sub>s</sub> = H<sub>1/3</sub> <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p><span class="hl">Altura significativa = a média do terço (1/3) mais alto das ondas</span> do registro — a referência-padrão de altura (Sverdrup &amp; Munk, 1947). Coincidência histórica útil: é próxima da altura que um observador experiente <em>estima visualmente</em>. Relações da banda estreita: <b>h̄<sub>s</sub>² = 2·h<sub>rms</sub>²</b>; e no padrão espectral atual, <span class="hl">E = h<sub>s</sub>²/16</span> — a área do espectro é diretamente proporcional ao quadrado da altura significativa.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>As escalas de ordenada — a armadilha dos fatores <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>O espectro pode ser plotado em 4 escalas: <strong>½a²</strong> (padrão atual — a área = variância estatística σ² do registro), <strong>a²</strong> (a original de St. Denis &amp; Pierson, 1950), <strong>h²</strong> (Bretschneider; área = h²<sub>rms</sub>/2) e <strong>2h²</strong>. Comparar espectros sem conferir a escala é erro clássico: <span class="hl">os fatores multiplicativos mudam</span>, e a relação E = hs²/16 vale para a escala ½a².</p>
+  </div>
+</section>
+
+<!-- ===== 4.5 ESPECTRO ===== -->
+<section class="bloco" id="espectro">
+  <h2 class="sec"><span class="n">4.5</span> O espectro do mar — a família de modelos</h2>
+  <p class="lede">O espectro S(ω) descreve como a energia se distribui por frequência. Da observação nasceram os modelos: Bretschneider, ISSC, ITTC, Pierson-Moskowitz e JONSWAP.</p>
+
+  <table>
+    <tr><th>Espectro</th><th>Ano / origem</th><th class="center">Parâmetros</th><th>Nota-chave</th></tr>
+    <tr><td><strong>Bretschneider</strong></td><td>Precede o P-M clássico</td><td class="center">2 (H<sub>s</sub>, T)</td><td>A forma-mãe de dois parâmetros; ISSC e ITTC são praticamente ele</td></tr>
+    <tr><td><strong>ISSC</strong></td><td>1964, observação visual</td><td class="center">2</td><td>Baseado em altura média e período observados; ≈ Bretschneider</td></tr>
+    <tr><td><strong>ITTC</strong></td><td>1978</td><td class="center">2</td><td>≈ Bretschneider; <span class="hl">é o recomendado quando nenhum espectro foi especificado</span></td></tr>
+    <tr><td><strong>Pierson-Moskowitz</strong></td><td>1964 (sobre Neumann, 1953)</td><td class="center"><span class="hl">1</span> (ω₀ ou T₀)</td><td>Mar <strong>totalmente desenvolvido</strong>: ventos moderados, pistas muito extensas. Constante de Phillips α = 0,0081</td></tr>
+    <tr><td><strong>P-M "modificado"</strong></td><td>—</td><td class="center">2</td><td>É o próprio Bretschneider; o nome é contestado pelos pesquisadores</td></tr>
+    <tr><td><strong>JONSWAP</strong></td><td>1973, Mar do Norte</td><td class="center">multi (γ...)</td><td>Pico acentuado: mares <strong>em geração</strong> (pista curta, vento forte)</td></tr>
+  </table>
+
+  <div class="box hist">
+    <h4>Pierson-Moskowitz e o JONSWAP — as duas histórias <span class="tag t-hist">HISTÓRIA</span></h4>
+    <p><strong>P-M (1964):</strong> Neumann (1953) propôs o primeiro espectro com a velocidade do vento como variável — de grande sucesso, mas <em>dimensionalmente incorreto</em>. Pierson e Moskowitz o refizeram corretamente; o termo αg²ω⁻⁵ (faixa de equilíbrio, limite superior de energia) vem de <strong>Phillips (1958)</strong>, com α = 0,0081 — a <span class="hl">constante de Phillips</span>. É espectro de <strong>um parâmetro só</strong>.<br><br>
+    <strong>JONSWAP (1973):</strong> o Joint North Sea Wave Project (Hasselmann, Barnett e outros) instrumentou <span class="hl">~160 km a oeste da costa alemã</span> e analisou ~2.000 registros. Resultado: espectros de <strong>pico acentuado</strong> são comuns quando as ondas estão sendo geradas — e, surpresa, <span class="hl">havia pouca ou nenhuma tendência de os espectros "se achatarem" para o P-M com o aumento da pista</span> (levantou-se a hipótese de o mar totalmente desenvolvido talvez nunca ocorrer). Valores médios do experimento: <b>γ = 3,3</b> (varia de 1 a 7), σ<sub>a</sub> = 0,07, σ<sub>b</sub> = 0,09, α = 0,0081, e H<sub>s</sub> ≈ 0,005·g·T<sub>p</sub>².</p>
+  </div>
+</section>
+
+<!-- ===== P-M × JONSWAP ===== -->
+<section class="bloco" id="pmjonswap">
+  <h2 class="sec"><span class="n">4.5.3–5</span> Pierson-Moskowitz × JONSWAP — o gráfico</h2>
+  <p class="lede">A diferença entre os dois é o fator de realce do pico γ: com γ = 1, o JONSWAP vira o P-M; com γ = 3,3 (média do Mar do Norte), o pico dispara.</p>
+
+  <div class="ichart">
+    <h4>Os dois espectros — o fator de pico γ (interativo)</h4>
+    <p class="hint">Deslize γ. Em γ=1 as curvas coincidem (P-M). Aumentando γ, o pico se acentua — o mar "em geração" concentra energia perto da frequência de pico.</p>
+    <canvas id="cvSpec" width="860" height="320"></canvas>
+    <div class="ictrl"><label for="gama">γ (fator de pico) →</label><input type="range" id="gama" min="10" max="70" value="33" oninput="drawSpec()"></div>
+    <div class="iread" id="specRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>Quando usar cada um <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>P-M:</strong> mar <span class="hl">totalmente desenvolvido</span> — vento moderado soprando há muito tempo sobre pista muito extensa (oceano aberto). <strong>JONSWAP:</strong> mar <span class="hl">em desenvolvimento</span> — vento forte, pista curta (Mar do Norte, costeiras): pico mais alto e estreito para a mesma altura. A forma-padrão multiparâmetros S = α·C·ω⁻ᵖ·e^(−C·q·ω⁻ᵠ)... reúne todos (Mitsuyasu 1972 com a função gama; frequência do pico por Goda 1979).</p>
+  </div>
+</section>
+
+<!-- ===== 4.6 MOMENTOS ===== -->
+<section class="bloco" id="momentos">
+  <h2 class="sec"><span class="n">4.6</span> Os momentos espectrais</h2>
+  <p class="lede">Toda a estatística do mar sai de integrais simples do espectro: os momentos m₀, m₁, m₂...</p>
+
+  <div class="box formula">
+    <h4>O n-ésimo momento e o que ele entrega <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">m<sub>n</sub> = ∫₀<sup>∞</sup> ω<sup>n</sup>·S(ω)·dω<span class="lbl">momento de ordem n do espectro</span></div>
+    <div class="eq">H<sub>s</sub> = 4·√m₀<span class="lbl">a altura significativa sai DIRETO da área do espectro (m₀ = variância)</span></div>
+    <p class="vars">Outros resultados: frequência média ω̄ = m₁/m₀ (e o período recíproco T₁); <strong>período médio de passagem pelos zeros</strong> T<sub>z</sub> = T₂ = 2π·√(m₀/m₂); período médio entre <strong>cristas</strong> T<sub>c</sub> (usa m₄). Analogia estatística: 1º momento = tendência central, 2º = dispersão, 3º = assimetria, 4º = curtose. Com p=5 e q=4 na forma-padrão, tudo se reduz aos espectros de dois parâmetros.</p>
+  </div>
+</section>
+
+<!-- ===== 4.7 RESPOSTA ===== -->
+<section class="bloco" id="resposta">
+  <h2 class="sec"><span class="n">4.7</span> O espectro de resposta do navio — RAO² × espectro</h2>
+  <p class="lede">O gran finale do seakeeping: a mesma estatística do mar vale para o navio. Basta multiplicar o espectro (na frequência de encontro) pelo QUADRADO do RAO.</p>
+
+  <div class="box key">
+    <h4>O princípio da superposição (St. Denis &amp; Pierson, 1953) <span class="tag t-banca">BANCA</span></h4>
+    <p>Assumindo o movimento <strong>linear</strong>, a resposta do navio ao mar real é a <span class="hl">sobreposição linear das respostas a cada onda regular componente</span>. A resposta pode ser obtida por: teoria hidrodinâmica, testes com modelos em tanque, ou medições em escala real. Grande vantagem: <span class="hl">o mesmo espectro de mar serve para obter os espectros de resposta de navios diferentes</span> — só muda o RAO.</p>
+  </div>
+
+  <h3>O procedimento em 4 passos</h3>
+  <table>
+    <tr><th class="center">#</th><th>Passo</th><th>Detalhe</th></tr>
+    <tr><td class="center">1</td><td>Escolher o espectro do mar</td><td>Se nada foi especificado, <span class="hl">recomenda-se o ITTC</span></td></tr>
+    <tr><td class="center">2</td><td>Transformar para a <strong>frequência de encontro</strong></td><td>S(ω<sub>e</sub>) = S(ω) / |1 − 2ωV·cosμ/g| — <span class="hl">a ÁREA se conserva</span> (a energia não muda porque o navio se move!)</td></tr>
+    <tr><td class="center">3</td><td>Obter o RAO</td><td>Analítico (Cap. 3, teoria das faixas) ou experimental, em função de ω<sub>e</sub></td></tr>
+    <tr><td class="center">4</td><td>Multiplicar ponto a ponto</td><td><b>S<sub>resposta</sub>(ω<sub>e</sub>) = RAO²(ω<sub>e</sub>) × S<sub>ζ</sub>(ω<sub>e</sub>)</b></td></tr>
+  </table>
+
+  <div class="ichart">
+    <h4>O pipeline completo — espectro × RAO² = resposta (interativo)</h4>
+    <p class="hint">Deslize o período natural do navio. Quando o pico do RAO cai sobre a região energética do espectro do mar, a resposta dispara — é a ressonância vista pela estatística.</p>
+    <canvas id="cvResp" width="860" height="320"></canvas>
+    <div class="ictrl"><label for="tn">ω<sub>n</sub> do navio →</label><input type="range" id="tn" min="35" max="110" value="62" oninput="drawResp()"></div>
+    <div class="iread" id="respRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>E a estatística da resposta <span class="tag t-calc">CALCULO</span></h4>
+    <p class="vars">O espectro de resposta segue <strong>as mesmas leis estatísticas</strong> do mar: dele extraem-se os momentos (m₀ da resposta → amplitude significativa do movimento = 4√m₀ etc.) e as probabilidades de Rayleigh — agora para heave, roll, pitch, acelerações ou forças (ex.: massa adicional). É o elo completo: <span class="hl">mar (estatístico) × navio (determinístico, RAO) = movimento (estatístico)</span>.</p>
+  </div>
+</section>
+
+<!-- ===== 4.10 EXTREMOS ===== -->
+<section class="bloco" id="extremos">
+  <h2 class="sec"><span class="n">4.9–10</span> Os valores extremos — o que ameaça o navio</h2>
+  <p class="lede">A segurança não depende da média, mas do extremo: o maior valor esperado em n observações. E cada movimento extremo tem sua consequência operacional.</p>
+
+  <table>
+    <tr><th>Movimento extremo</th><th>Consequência operacional</th></tr>
+    <tr><td>Embarque de água no convés (<em>green water</em>)</td><td>Afeta a estabilidade transversal intacta</td></tr>
+    <tr><td>Roll rápido e de grande amplitude</td><td>Queda de contêineres na água</td></tr>
+    <tr><td>Excesso do ângulo de repouso da carga</td><td>Corrimento de carga sólida a granel</td></tr>
+    <tr><td>Aceleração vertical de <span class="hl">0,10 a 0,20 g</span></td><td>Limite do enjoo (navios de passageiros)</td></tr>
+    <tr><td>Mar de proa severo (<em>slamming</em> / culapada)</td><td>Obriga a reduzir a velocidade</td></tr>
+    <tr><td>Movimento vertical em canal desabrigado</td><td>Dimensiona a <span class="hl">FAQ/UKC</span> de entrada — o elo com águas rasas</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>O método de Ochi <span class="tag t-calc">CALCULO</span></h4>
+    <p class="vars">O <strong>valor extremo</strong> é o maior dos máximos em n observações (ou num intervalo de tempo). Pelo método de <strong>Ochi</strong>, numa distribuição de Rayleigh, calcula-se a amplitude extrema associada a uma probabilidade α de excedência (curvas para α = 0,005 a 0,1 — Bhattacharya), válido para largura de banda ε &lt; 0,9, que normalmente atende à análise de movimentos do navio. A seção 4.9 mostra ainda a reconstrução da <strong>força de ondas no domínio do tempo</strong> a partir do espectro (soma de componentes com fases aleatórias).</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Espectros, Rayleigh, momentos e o pipeline de resposta.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Doze questões com os distratores reais do capítulo.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Mar Irregular e Espectros (Santos Ondas Cap. 4)</summary>
+  <ul>
+    <li><b>Rayleigh:</b> "A lei básica do mar é a aparente falta de qualquer lei." A solução: análise espectral (linhagem: Newton 1664 → Fourier → Kelvin 1872 marés → Michelson 1898 → Wiener/Tukey 1930s).</li>
+    <li><b>Marcos:</b> Sverdrup &amp; Munk 1947 (altura significativa) · Longuet-Higgins 1952 (alturas ~ Rayleigh) · St. Denis &amp; Pierson 1953 (SUPERPOSIÇÃO: resposta ao mar irregular = soma das respostas regulares) · Miles &amp; Phillips 1957 (geração pelo vento).</li>
+    <li><b>Mar irregular (2D):</b> cristas contínuas, uma tempestade × <b>mar confuso (3D):</b> cruzamento de tempestades. O mar NUNCA repete o padrão → define-se pela ENERGIA.</li>
+    <li><b>Energia:</b> E = (ρg/8)·Σh². Distribuída por frequência = ESPECTRO. Área do espectro (escala ½a²) = variância σ²; E = hs²/16.</li>
+    <li><b>Rayleigh (banda estreita):</b> P(h&gt;h₁) = e^(−h₁²/h_rms²). h_rms = valor eficaz. hs² = 2h_rms².</li>
+    <li><b>Altura significativa H⅓:</b> média do TERÇO mais alto (≈ estimativa visual do observador). Hs = 4√m₀.</li>
+    <li><b>Escalas de ordenada:</b> ½a² (padrão atual) · a² (St. Denis &amp; Pierson 1950) · h² (Bretschneider) · 2h² — conferir antes de comparar!</li>
+    <li><b>Espectros:</b> Bretschneider (2 par., forma-mãe) · ISSC 1964 ≈ ITTC 1978 ≈ Bretschneider · ITTC = recomendado se nada especificado · P-M 1964 (1 PARÂMETRO; mar TOTALMENTE DESENVOLVIDO; constante de Phillips α=0,0081; corrigiu Neumann 1953) · JONSWAP 1973 (Mar do Norte, 160 km, ~2000 registros; pico acentuado; γ=3,3 médio, 1–7; σa=0,07, σb=0,09; Hs≈0,005gTp²; mar EM GERAÇÃO — pista curta/vento forte; espectros não se achatavam p/ P-M).</li>
+    <li><b>Momentos:</b> m_n = ∫ωⁿS dω. Hs = 4√m₀ · ω̄ = m₁/m₀ · Tz = T₂ = 2π√(m₀/m₂) (zeros) · Tc usa m₄.</li>
+    <li><b>Espectro de resposta (4 passos):</b> (1) escolher espectro (ITTC default) → (2) transformar p/ frequência de ENCONTRO conservando a ÁREA (energia constante) → (3) RAO (Cap. 3) → (4) S_resp = RAO² × S_ζ(ωe). Mesmo espectro de mar serve p/ navios diferentes.</li>
+    <li><b>Estatística da resposta:</b> mesmas leis do mar (momentos + Rayleigh) — amplitude significativa do movimento = 4√m₀ da resposta.</li>
+    <li><b>Extremos:</b> green water (estabilidade) · roll → contêineres · corrimento de granel · aceleração vertical 0,10–0,20g = limite de enjoo · slamming → reduzir V · movimento vertical dimensiona UKC. Método de Ochi (Rayleigh, ε&lt;0,9).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · O Mar Irregular e os Espectros (Santos, Ondas Cap. 4) · Capital Sereno · matéria Comportamento no Mar (Seakeeping) — completa.</div>
+</footer>
+
+<script>
+/* ===== SOMA DE SENOIDES ===== */
+function drawSoma(){
+  var cv=document.getElementById('cvSoma'); if(!cv) return; var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);
+  var f=+document.getElementById('fase').value/100*6.28;
+  var comps=[
+    {a:14,w:0.35,ph:f*0.7,c:'#c9d8e8'},
+    {a:22,w:0.55,ph:f*1.3,c:'#b8d0c6'},
+    {a:10,w:0.95,ph:f*2.1,c:'#e3d3b0'},
+    {a:7, w:1.55,ph:f*3.4,c:'#dcc6e0'}
+  ];
+  // componentes (linhas finas em cima)
+  var y0=78;
+  comps.forEach(function(c,i){
+    ctx.strokeStyle=c.c;ctx.lineWidth=1.6;ctx.beginPath();
+    for(var x=0;x<=W;x+=2){
+      var y=y0+i*0+ (i*0) + c.a*0.5*Math.sin(c.w*x*0.05+c.ph) + i*0;
+      var yy=34+i*26 + c.a*0.4*Math.sin(c.w*x*0.05+c.ph);
+      if(x===0)ctx.moveTo(x,yy);else ctx.lineTo(x,yy);
+    }
+    ctx.stroke();
+  });
+  ctx.fillStyle='#7a6f55';ctx.font='11px Trebuchet MS';
+  ctx.fillText('4 ondas regulares (frequências e fases diferentes)',12,20);
+  // soma (linha grossa embaixo)
+  var yb=225;
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1;ctx.setLineDash([3,4]);
+  ctx.beginPath();ctx.moveTo(0,yb);ctx.lineTo(W,yb);ctx.stroke();ctx.setLineDash([]);
+  ctx.strokeStyle='#6B4E8E';ctx.lineWidth=2.8;ctx.beginPath();
+  for(var x=0;x<=W;x+=2){
+    var s=0;comps.forEach(function(c){s+=c.a*Math.sin(c.w*x*0.05+c.ph);});
+    var y=yb+s*1.15;
+    if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+  ctx.fillStyle='#6B4E8E';ctx.font='bold 12px Trebuchet MS';
+  ctx.fillText('SOMA = mar irregular (perfil imprevisível; energia = Σ das energias)',12,H-14);
+  document.getElementById('somaRead').innerHTML='As mesmas 4 componentes, outras fases → outro perfil. A forma muda sempre; a <b>energia total (Σh²)</b> não. Por isso o espectro — energia por frequência — é a única descrição estável do mar.';
+}
+drawSoma();
+window.addEventListener('resize',drawSoma);
+
+/* ===== P-M × JONSWAP ===== */
+function drawSpec(){
+  var cv=document.getElementById('cvSpec'); if(!cv) return; var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=60,y0=H-40,pW=W-100,pH=H-70;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(x0,16);ctx.lineTo(x0,y0);ctx.lineTo(W-20,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('S(ω) — densidade espectral',x0+6,28);
+  ctx.fillText('ω (rad/s) →',W-95,y0+20);
+  var gama=+document.getElementById('gama').value/10;
+  var w0=0.62; // freq de pico
+  function pm(w){ if(w<0.05)return 0; return Math.pow(w,-5)*Math.exp(-1.25*Math.pow(w0/w,-4)*Math.pow(w/w0,-8)*0+ -1.25*Math.pow(w0/w,4)); }
+  // normalizar
+  var maxpm=0; for(var w=0.1;w<=2;w+=0.005){var v=pm(w); if(v>maxpm)maxpm=v;}
+  function jon(w){
+    var sig = w<=w0?0.07:0.09;
+    var r=Math.exp(-Math.pow(w-w0,2)/(2*sig*sig*w0*w0));
+    return pm(w)*Math.pow(gama,r);
+  }
+  var maxj=0; for(var w=0.1;w<=2;w+=0.005){var v=jon(w); if(v>maxj)maxj=v;}
+  var scale=pH*0.92/maxj;
+  function px(w){return x0+(w/2)*pW;}
+  // P-M
+  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=2.4;ctx.setLineDash([6,4]);ctx.beginPath();
+  for(var w=0.1;w<=2;w+=0.005){var X=px(w),Y=y0-pm(w)*scale;if(w<=0.105)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}
+  ctx.stroke();ctx.setLineDash([]);
+  // JONSWAP
+  ctx.strokeStyle='#6B4E8E';ctx.lineWidth=3;ctx.beginPath();
+  for(var w=0.1;w<=2;w+=0.005){var X=px(w),Y=y0-jon(w)*scale;if(w<=0.105)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}
+  ctx.stroke();
+  // pico
+  ctx.strokeStyle='#C8A84B';ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(px(w0),16);ctx.lineTo(px(w0),y0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9a7d1f';ctx.font='bold 11px Trebuchet MS';ctx.fillText('ω do pico',px(w0)+5,30);
+  ctx.fillStyle='#2C5F8A';ctx.font='bold 12px Trebuchet MS';ctx.fillText('Pierson-Moskowitz (γ=1)',px(0.9),y0-pm(0.75)*scale-14);
+  ctx.fillStyle='#6B4E8E';ctx.fillText('JONSWAP (γ='+gama.toFixed(1)+')',px(w0)+14,y0-maxj*scale+16);
+  document.getElementById('specRead').innerHTML='γ = <b>'+gama.toFixed(1)+'</b>'+(gama<1.15?' → o JONSWAP colapsa no P-M (mar totalmente desenvolvido).':' → pico '+(jon(w0)/pm(w0)).toFixed(1)+'× o do P-M: energia concentrada — mar EM GERAÇÃO (pista curta, vento forte). Média do Mar do Norte: γ=3,3.');
+}
+drawSpec();
+window.addEventListener('resize',drawSpec);
+
+/* ===== RESPOSTA = RAO² × S ===== */
+function drawResp(){
+  var cv=document.getElementById('cvResp'); if(!cv) return; var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height,x0=60,y0=H-40,pW=W-100,pH=H-70;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(x0,16);ctx.lineTo(x0,y0);ctx.lineTo(W-20,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('densidade espectral',x0+6,28);
+  ctx.fillText('ωe →',W-55,y0+20);
+  var wn=+document.getElementById('tn').value/50; // 0.7..2.2
+  var w0=0.62, zeta=0.18;
+  function px(w){return x0+(w/2.2)*pW;}
+  function S(w){ if(w<0.06)return 0; var sig=w<=w0?0.07:0.09; var r=Math.exp(-Math.pow(w-w0,2)/(2*sig*sig*w0*w0)); return Math.pow(w,-5)*Math.exp(-1.25*Math.pow(w0/w,4))*Math.pow(2.2,r); }
+  var maxS=0; for(var w=0.1;w<=2.2;w+=0.005){var v=S(w);if(v>maxS)maxS=v;}
+  function RAO(w){var u=w/wn;return 1/Math.sqrt(Math.pow(1-u*u,2)+Math.pow(2*zeta*u,2));}
+  var maxR=0; for(var w=0.1;w<=2.2;w+=0.005){var v=RAO(w);if(v>maxR)maxR=v;}
+  function RESP(w){return S(w)/maxS * Math.pow(RAO(w)/maxR,2);}
+  var maxRe=0; for(var w=0.1;w<=2.2;w+=0.005){var v=RESP(w);if(v>maxRe)maxRe=v;}
+  var sc=pH*0.9;
+  // espectro do mar (azul)
+  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=2.2;ctx.beginPath();
+  for(var w=0.1;w<=2.2;w+=0.005){var X=px(w),Y=y0-(S(w)/maxS)*sc*0.8;if(w<=0.105)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}
+  ctx.stroke();
+  ctx.fillStyle='#2C5F8A';ctx.font='bold 11px Trebuchet MS';ctx.fillText('espectro do mar S(ωe)',px(0.28),y0-(S(0.62)/maxS)*sc*0.8-8);
+  // RAO² (dourado tracejado)
+  ctx.strokeStyle='#C8A84B';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();
+  for(var w=0.1;w<=2.2;w+=0.005){var X=px(w),Y=y0-Math.pow(RAO(w)/maxR,2)*sc*0.8;if(w<=0.105)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}
+  ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9a7d1f';ctx.fillText('RAO² do navio',px(wn)+8,y0-sc*0.8+14);
+  // resposta (roxo, preenchido)
+  ctx.strokeStyle='#6B4E8E';ctx.lineWidth=3;ctx.beginPath();
+  var first=true;
+  for(var w=0.1;w<=2.2;w+=0.005){var X=px(w),Y=y0-(RESP(w)/Math.max(maxRe,0.001))*sc*(maxRe>0.5?0.9:maxRe*1.6);
+    if(first){ctx.moveTo(X,Y);first=false;}else ctx.lineTo(X,Y);}
+  ctx.stroke();
+  ctx.fillStyle='#6B4E8E';ctx.font='bold 12px Trebuchet MS';ctx.fillText('RESPOSTA = RAO² × S',px(1.28),56);
+  var casado = Math.abs(wn-w0)<0.25;
+  document.getElementById('respRead').innerHTML='ω<sub>n</sub> do navio = <b>'+wn.toFixed(2)+'</b> rad/s · pico do mar em ~0,62. '+(casado?'<b style="color:#9E3B2E">Pico do RAO sobre a região energética → resposta MÁXIMA (ressonância estatística).</b>':'RAO afastado da energia do mar → resposta modesta. Mudar rumo/velocidade desloca o espectro de encontro — a saída do prático.');
+}
+drawResp();
+window.addEventListener('resize',drawResp);
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Frase de Rayleigh",b:"'A lei básica do mar é a aparente falta de qualquer lei.' A solução veio da análise espectral."},
+  {f:"Sverdrup & Munk (1947)",b:"Estudo pioneiro das ondas de vento: nasce a ALTURA SIGNIFICATIVA e o balanço de energia."},
+  {f:"Longuet-Higgins (1952)",b:"Alturas do mar estatisticamente independentes; máximos seguem a distribuição de RAYLEIGH."},
+  {f:"St. Denis & Pierson (1953)",b:"PRINCÍPIO DA SUPERPOSIÇÃO: resposta ao mar irregular = soma das respostas às ondas regulares."},
+  {f:"Mar irregular × confuso",b:"Irregular (2D): cristas contínuas, uma tempestade. Confuso (3D): cruzamento de tempestades de direções diferentes."},
+  {f:"Energia total do mar",b:"E = (ρg/8)·Σh². Distribuída por frequência = ESPECTRO. O mar define-se pela energia, não pela forma."},
+  {f:"Rayleigh — probabilidade",b:"P(h>h₁) = e^(−h₁²/h_rms²), válida para banda estreita. h_rms = valor eficaz das alturas."},
+  {f:"Altura significativa H⅓",b:"Média do TERÇO mais alto das ondas (≈ estimativa visual). Hs = 4√m₀. E = hs²/16 (escala ½a²)."},
+  {f:"Escalas de ordenada",b:"½a² (padrão atual = variância σ²) · a² (St. Denis & Pierson) · h² (Bretschneider) · 2h². Conferir antes de comparar!"},
+  {f:"Espectro ITTC (1978)",b:"≈ Bretschneider (2 parâmetros). É o RECOMENDADO quando nenhum espectro foi especificado."},
+  {f:"Pierson-Moskowitz (1964)",b:"UM parâmetro. Mar TOTALMENTE DESENVOLVIDO (vento moderado, pista extensa). Constante de Phillips α=0,0081. Corrigiu Neumann 1953."},
+  {f:"JONSWAP (1973)",b:"Mar do Norte, 160 km, ~2000 registros. Pico ACENTUADO: mar em geração (pista curta, vento forte). γ=3,3 (1–7); σa=0,07; σb=0,09."},
+  {f:"Surpresa do JONSWAP",b:"Os espectros NÃO se achatavam para o P-M com a pista → talvez o mar totalmente desenvolvido nunca ocorra."},
+  {f:"Momentos espectrais",b:"m_n = ∫ωⁿS(ω)dω. Hs = 4√m₀ · ω̄ = m₁/m₀ · Tz = 2π√(m₀/m₂) (zeros) · Tc usa m₄."},
+  {f:"Espectro de resposta",b:"S_resp(ωe) = RAO²(ωe) × S_ζ(ωe). Mesmo espectro de mar serve para navios diferentes (muda só o RAO)."},
+  {f:"Transformação p/ encontro",b:"S(ωe) = S(ω)/|1−2ωV·cosμ/g|. A ÁREA se conserva: a energia do mar não muda porque o navio se move."},
+  {f:"Estatística da resposta",b:"Mesmas leis do mar: amplitude significativa do movimento = 4√m₀ do espectro de resposta + Rayleigh."},
+  {f:"Aceleração vertical limite",b:"0,10 a 0,20 g: faixa-limite do enjoo em navios de passageiros."},
+  {f:"Extremos — exemplos",b:"Green water (estabilidade) · roll → contêineres ao mar · corrimento de granel · slamming → reduzir V · UKC em canal."},
+  {f:"Método de Ochi",b:"Valor extremo em n observações via Rayleigh, com probabilidade α de excedência; válido p/ largura de banda ε<0,9."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"O princípio que permitiu resolver o movimento do navio em mar irregular, aplicado por St. Denis e Pierson em 1953, foi:",
+   o:["A conservação da quantidade de movimento","A superposição linear: a resposta ao mar irregular é a soma das respostas às ondas regulares","O teorema de Bernoulli","A semelhança de Froude"],a:1,
+   e:"St. Denis & Pierson (1953): assumindo movimento linear, a resposta do navio ao mar real é a sobreposição das respostas a cada componente regular — o nascimento do seakeeping estatístico moderno."},
+  {q:"A altura significativa (H⅓) das ondas do mar é definida como:",
+   o:["A altura máxima registrada","A média do terço (1/3) mais alto das ondas","A média de todas as ondas","O dobro da altura média"],a:1,
+   e:"Média do 1/3 mais alto — conceito de Sverdrup & Munk (1947), próximo da estimativa visual de um observador experiente. Do espectro: Hs = 4√m₀."},
+  {q:"A distribuição estatística que representa as alturas (máximos) das ondas de um mar de banda estreita é a de:",
+   o:["Gauss","Rayleigh","Poisson","Weibull"],a:1,
+   e:"Longuet-Higgins (1952) demonstrou que os máximos seguem Rayleigh: P(h>h₁) = e^(−h₁²/h_rms²) — distribuição criada no séc. XIX para intensidade de sons."},
+  {q:"A energia total por metro quadrado de um mar irregular é proporcional:",
+   o:["À soma das alturas das ondas componentes","À soma dos QUADRADOS das alturas das componentes","Ao produto das alturas","À maior altura registrada"],a:1,
+   e:"E = (ρg/8)·Σh². Como cada componente tem frequência única, a energia distribui-se por frequência — e essa distribuição é o espectro do mar."},
+  {q:"O espectro de Pierson-Moskowitz (1964) caracteriza-se por:",
+   o:["Dois parâmetros e pico acentuado","Um único parâmetro, representando mar totalmente desenvolvido","Cinco parâmetros","Aplicação exclusiva a águas rasas"],a:1,
+   e:"P-M: 1 parâmetro (ω₀ ou T₀), mar totalmente desenvolvido (vento moderado + pista muito extensa). Usa a constante de Phillips α=0,0081; corrigiu dimensionalmente o espectro de Neumann (1953)."},
+  {q:"O espectro JONSWAP (1973) diferencia-se do Pierson-Moskowitz principalmente por:",
+   o:["Ser válido apenas para águas profundas","Apresentar pico acentuado (fator γ), típico de mares em geração com pista curta e vento forte","Não usar a frequência de pico","Ter sido medido no Mar Mediterrâneo"],a:1,
+   e:"JONSWAP (Mar do Norte, ~160 km, ~2000 registros): fator de realce γ (média 3,3; varia 1–7). Com γ=1 recai no P-M. Representa mares em desenvolvimento — pista curta, vento forte."},
+  {q:"Uma surpresa do experimento JONSWAP foi que:",
+   o:["Os espectros sempre se achatavam para o P-M com o aumento da pista","Havia pouca ou nenhuma tendência de os espectros se achatarem para o P-M — o mar totalmente desenvolvido talvez nunca ocorra","O vento não influenciava as ondas","Os espectros não tinham pico"],a:1,
+   e:"Esperava-se a transição para o P-M com pistas maiores, mas ela não apareceu — levantando a hipótese de que a condição de mar totalmente desenvolvido talvez nunca ocorra."},
+  {q:"A altura significativa pode ser obtida diretamente do espectro do mar por:",
+   o:["Hs = m₀","Hs = 4·√m₀","Hs = 2·m₁","Hs = √m₂"],a:1,
+   e:"Hs = 4√m₀, onde m₀ = ∫S(ω)dω é a área do espectro (= variância na escala ½a²). O período de zeros: Tz = 2π√(m₀/m₂)."},
+  {q:"O espectro de resposta do navio a um mar irregular é obtido multiplicando o espectro do mar (na frequência de encontro) por:",
+   o:["O RAO","O QUADRADO do RAO","A metade do RAO","O inverso do RAO"],a:1,
+   e:"S_resp(ωe) = RAO²(ωe) × S_ζ(ωe). O quadrado aparece porque o espectro é energia (amplitude²). O mesmo espectro de mar serve para navios diferentes — muda só o RAO."},
+  {q:"Na transformação do espectro do mar para a frequência de encontro, deve-se garantir que:",
+   o:["O pico permaneça na mesma frequência","A ÁREA sob a curva se conserve (a energia total não muda)","A altura significativa dobre","As ordenadas não mudem"],a:1,
+   e:"S(ω)dω = S(ωe)dωe: a energia do mar não muda porque o navio se move — muda só a forma como ele a 'recebe'. Por isso as ordenadas se ajustam para conservar a área."},
+  {q:"Quando nenhum espectro específico foi definido para a área de operação, Santos recomenda empregar o espectro:",
+   o:["Pierson-Moskowitz","ITTC","JONSWAP","Neumann"],a:1,
+   e:"Passo 1 do procedimento do espectro de resposta: 'caso nenhum espectro tenha sido escolhido recomenda-se o emprego do espectro ITTC' (1978, ≈ Bretschneider de 2 parâmetros)."},
+  {q:"A faixa de aceleração vertical apontada como limite para o enjoo provocado pelo mar em navios de passageiros é de:",
+   o:["0,01 a 0,05 g","0,10 a 0,20 g","0,50 a 0,70 g","1,0 g"],a:1,
+   e:"0,10–0,20 g. Outros extremos operacionais: green water (estabilidade intacta), roll → queda de contêineres, corrimento de granel, slamming (reduzir velocidade) e o movimento vertical que dimensiona a UKC."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>
