@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadeia de Eficiências de Propulsão — PSCPP 2027 | Bloco B</title>
+<style>
+  :root{
+    --verde:#0D3D36; --ouro:#C8A84B; --teal:#1A7A6E; --creme:#F7F3EA;
+    --texto:#20302c; --amarelo:#fff3b0; --ambar:#f6d488;
+    --card:#ffffff; --linha:#d8cfb8;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--creme); color:var(--texto);
+    font-family:Georgia,'Times New Roman',serif; line-height:1.65;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:24px 18px 80px}
+  header.hero{
+    background:var(--verde); color:var(--creme); border-radius:14px;
+    padding:30px 28px; margin-bottom:26px; border-bottom:5px solid var(--ouro);
+  }
+  header.hero .eyebrow{
+    font-family:'Trebuchet MS',sans-serif; letter-spacing:2px; font-size:12px;
+    text-transform:uppercase; color:var(--ouro); margin:0 0 8px;
+  }
+  header.hero h1{margin:0 0 6px; font-size:27px; line-height:1.2}
+  header.hero p{margin:6px 0 0; font-size:14px; color:#d7e5df; font-family:'Trebuchet MS',sans-serif}
+  .backlink{display:inline-block; margin-bottom:16px; color:var(--teal); text-decoration:none; font-family:'Trebuchet MS',sans-serif; font-size:13px}
+  .backlink:hover{text-decoration:underline}
+  h2{
+    color:var(--verde); border-left:5px solid var(--ouro); padding-left:12px;
+    margin:38px 0 14px; font-size:21px;
+  }
+  h3{color:var(--teal); font-size:17px; margin:24px 0 8px}
+  p{margin:10px 0}
+  .tag{
+    font-family:'Trebuchet MS',sans-serif; font-size:11px; font-weight:bold;
+    padding:2px 8px; border-radius:10px; letter-spacing:.5px; display:inline-block; margin-right:4px;
+  }
+  .tag.decorar{background:#e5d5f0; color:#5a2d78}
+  .tag.banca{background:#f6d488; color:#6b4a00}
+  .tag.conflito{background:#f4c2b8; color:#8a2d18}
+  .tag.calculo{background:#c7e5dd; color:#0d4a3c}
+  mark.amarelo{background:var(--amarelo); padding:1px 3px}
+  mark.ambar{background:var(--ambar); padding:1px 3px}
+  .card{background:var(--card); border:1px solid var(--linha); border-radius:12px; padding:18px 20px; margin:16px 0}
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px; font-family:'Trebuchet MS',sans-serif}
+  th,td{border:1px solid var(--linha); padding:8px 10px; text-align:left; vertical-align:top}
+  th{background:var(--verde); color:var(--creme); font-weight:normal}
+  tr:nth-child(even) td{background:#faf7ee}
+  .formula{
+    font-family:'Courier New',monospace; background:#f0ece0; border:1px dashed var(--teal);
+    padding:10px 14px; border-radius:8px; margin:10px 0; font-size:15px; color:var(--verde); font-weight:bold;
+  }
+  /* ---- Gráfico interativo ---- */
+  .sim{background:var(--card); border:1px solid var(--linha); border-radius:12px; padding:20px; margin:18px 0}
+  .sliderrow{display:flex; align-items:center; gap:12px; margin:10px 0; font-family:'Trebuchet MS',sans-serif; font-size:13px; flex-wrap:wrap}
+  .sliderrow label{min-width:210px; font-weight:bold; color:var(--verde)}
+  .sliderrow input[type=range]{flex:1; min-width:140px; accent-color:var(--teal)}
+  .sliderrow output{min-width:56px; text-align:right; font-family:'Courier New',monospace; font-weight:bold; color:var(--teal)}
+  .chainviz{display:flex; align-items:stretch; gap:0; margin:18px 0 6px; flex-wrap:wrap}
+  .chainbox{flex:1; min-width:78px; background:var(--teal); color:#fff; border-radius:8px; padding:10px 6px; text-align:center; margin:2px}
+  .chainbox b{display:block; font-size:16px; font-family:'Courier New',monospace}
+  .chainbox span{font-size:11px; font-family:'Trebuchet MS',sans-serif; opacity:.85}
+  .chainres{background:var(--ouro); color:var(--verde)}
+  .barwrap{margin:14px 0}
+  .bar{height:26px; background:linear-gradient(90deg,var(--teal),var(--ouro)); border-radius:6px; transition:width .3s; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; color:#fff; font-family:'Courier New',monospace; font-weight:bold; font-size:13px; min-width:40px}
+  /* ---- Quiz ---- */
+  .quiz{background:var(--card); border:1px solid var(--linha); border-radius:12px; padding:20px; margin:18px 0}
+  .q{margin:18px 0; padding-bottom:12px; border-bottom:1px dashed var(--linha)}
+  .q:last-child{border-bottom:none}
+  .q .enun{font-weight:bold; color:var(--verde); margin-bottom:8px}
+  .opt{display:block; width:100%; text-align:left; background:#faf7ee; border:1px solid var(--linha); border-radius:8px; padding:9px 12px; margin:5px 0; cursor:pointer; font-family:'Trebuchet MS',sans-serif; font-size:14px; color:var(--texto)}
+  .opt:hover{border-color:var(--teal)}
+  .opt.correta{background:#cdeadf; border-color:var(--teal); font-weight:bold}
+  .opt.errada{background:#f4d0c8; border-color:#c0503a}
+  .fb{display:none; margin-top:8px; padding:10px 12px; border-radius:8px; background:#f0ece0; font-size:13px; font-family:'Trebuchet MS',sans-serif; border-left:4px solid var(--ouro)}
+  .fb.show{display:block}
+  .placar{font-family:'Trebuchet MS',sans-serif; font-weight:bold; color:var(--verde); margin-top:14px; font-size:15px}
+  /* ---- Flashcards ---- */
+  .cardsgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin:18px 0}
+  .flip{background:transparent; perspective:1000px; height:150px; cursor:pointer}
+  .flipinner{position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d}
+  .flip.flipped .flipinner{transform:rotateY(180deg)}
+  .flipface{position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:10px; padding:14px; display:flex; align-items:center; justify-content:center; text-align:center; font-family:'Trebuchet MS',sans-serif}
+  .flipfront{background:var(--verde); color:var(--creme); font-weight:bold; font-size:15px}
+  .flipback{background:var(--card); color:var(--texto); border:2px solid var(--ouro); transform:rotateY(180deg); font-size:13px; line-height:1.4}
+  /* ---- Caixa PSCPP ---- */
+  details.pscpp{background:var(--verde); color:var(--creme); border-radius:12px; margin:22px 0; overflow:hidden}
+  details.pscpp summary{padding:16px 20px; cursor:pointer; font-family:'Trebuchet MS',sans-serif; font-weight:bold; font-size:16px; list-style:none}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:'⚓ '; color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid var(--teal)}
+  details.pscpp .inner{padding:6px 22px 20px}
+  details.pscpp ul{margin:8px 0; padding-left:20px}
+  details.pscpp li{margin:8px 0; font-size:14px}
+  details.pscpp code{background:rgba(255,255,255,.12); padding:1px 5px; border-radius:4px; font-size:13px}
+  /* ---- Supabase ---- */
+  .painel{text-align:center; margin:30px 0 6px}
+  .btnsup{background:var(--ouro); color:var(--verde); border:none; border-radius:10px; padding:14px 28px; font-family:'Trebuchet MS',sans-serif; font-weight:bold; font-size:15px; cursor:pointer}
+  .btnsup:hover{background:#d9bd63}
+  .supstatus{font-family:'Trebuchet MS',sans-serif; font-size:12px; color:var(--teal); margin-top:8px; min-height:16px}
+  footer{text-align:center; font-family:'Trebuchet MS',sans-serif; font-size:12px; color:#8a8168; margin-top:40px}
+  .verificar{font-family:'Trebuchet MS',sans-serif; font-size:12px; color:#8a2d18; font-weight:bold}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+  <header class="hero">
+    <p class="eyebrow">Bloco B · Propulsão e Propulsores</p>
+    <h1>A Cadeia de Eficiências de Propulsão</h1>
+    <p>PNA Vol. II, Cap. VI, Sec. 1, 2 e 4 · Bertram Cap. 3 · Da potência no eixo ao casco</p>
+  </header>
+
+  <p>
+    <span class="tag banca">BANCA</span>
+    <span class="tag decorar">DECORAR</span>
+    <span class="tag calculo">CÁLCULO</span>
+    <span class="tag conflito">CONFLITO</span>
+  </p>
+
+  <p>Existem muitas "eficiências" em propulsão e a confusão nasce de um fato simples: são <mark class="amarelo">duas cadeias de multiplicação aninhadas</mark>. Cada eficiência é a razão entre <b>duas potências vizinhas</b> na sequência que vai do motor até o casco. Domine a sequência e todas as fórmulas decorrem dela.</p>
+
+  <h2>1. A espinha dorsal: a cadeia de potências</h2>
+  <p>Toda a álgebra parte desta sequência (notação PNA Vol. II):</p>
+  <div class="formula">P<sub>S</sub> → P<sub>D</sub> → P<sub>T</sub> → P<sub>E</sub></div>
+  <table>
+    <tr><th>Potência</th><th>Nome (EN)</th><th>Definição</th></tr>
+    <tr><td>P<sub>E</sub></td><td>efetiva (<i>effective power</i>)</td><td>P<sub>E</sub> = R<sub>T</sub> · V — vence a resistência</td></tr>
+    <tr><td>P<sub>T</sub></td><td>de empuxo (<i>thrust power</i>)</td><td>P<sub>T</sub> = T · V<sub>A</sub></td></tr>
+    <tr><td>P<sub>D</sub></td><td>entregue (<i>delivered power</i>)</td><td>potência no eixo à ré das engrenagens</td></tr>
+    <tr><td>P<sub>S</sub></td><td>no eixo (<i>shaft power</i>)</td><td>medida pelo torsímetro</td></tr>
+  </table>
+  <p><b>Variáveis (SI):</b> R<sub>T</sub> = resistência total [kN]; V = velocidade do navio [m/s]; T = empuxo do hélice [kN]; V<sub>A</sub> = velocidade de avanço [m/s]; potências [kW]. <b>Regra de ouro:</b> eficiência = razão de duas potências consecutivas.</p>
+
+  <div class="card">
+    <p style="margin-top:0"><b>Mapa da cadeia</b> — cada eficiência é o elo entre duas potências. Note a ordem física: <b>η<sub>S</sub> → η<sub>B</sub> → η<sub>H</sub></b> (do eixo ao casco). A η<sub>H</sub> é a única cujo numerador é P<sub>E</sub>.</p>
+    <svg width="100%" viewBox="0 0 680 430" role="img" aria-label="Cadeia de eficiências de propulsão" style="max-width:680px;display:block;margin:8px auto">
+      <defs>
+        <marker id="seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1A7A6E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+      </defs>
+      <style>
+        .cel-t{fill:#20302c;font-family:'Trebuchet MS',sans-serif}
+        .cel-b{font-weight:bold}
+        .pot-teal{fill:#1A7A6E}.pot-blue{fill:#185FA5}
+        .lbl-amber{fill:#C8A84B}.lbl-purple{fill:#7F77DD}.lbl-coral{fill:#D85A30}.lbl-green{fill:#0F6E56}
+        text{fill:#20302c}
+        .white{fill:#fff}
+      </style>
+
+      <text x="40" y="28" class="cel-t cel-b" font-size="14">Cadeia de potências — cada η é a razão do elo</text>
+
+      <rect x="40" y="50" width="120" height="52" rx="8" class="pot-teal"/><text x="100" y="72" text-anchor="middle" class="white cel-b" font-size="16" font-family="Georgia">P_S</text><text x="100" y="90" text-anchor="middle" class="white" font-size="11" font-family="'Trebuchet MS',sans-serif" opacity="0.9">no eixo</text>
+      <rect x="220" y="50" width="120" height="52" rx="8" class="pot-teal"/><text x="280" y="72" text-anchor="middle" class="white cel-b" font-size="16" font-family="Georgia">P_D</text><text x="280" y="90" text-anchor="middle" class="white" font-size="11" font-family="'Trebuchet MS',sans-serif" opacity="0.9">entregue</text>
+      <rect x="400" y="50" width="120" height="52" rx="8" class="pot-blue"/><text x="460" y="72" text-anchor="middle" class="white cel-b" font-size="16" font-family="Georgia">P_T</text><text x="460" y="90" text-anchor="middle" class="white" font-size="11" font-family="'Trebuchet MS',sans-serif" opacity="0.9">de empuxo</text>
+      <rect x="560" y="50" width="80" height="52" rx="8" class="pot-blue"/><text x="600" y="72" text-anchor="middle" class="white cel-b" font-size="16" font-family="Georgia">P_E</text><text x="600" y="90" text-anchor="middle" class="white" font-size="11" font-family="'Trebuchet MS',sans-serif" opacity="0.9">efetiva</text>
+
+      <line x1="160" y1="76" x2="216" y2="76" stroke="#1A7A6E" stroke-width="1.5" marker-end="url(#seta)"/>
+      <line x1="340" y1="76" x2="396" y2="76" stroke="#1A7A6E" stroke-width="1.5" marker-end="url(#seta)"/>
+      <line x1="520" y1="76" x2="556" y2="76" stroke="#1A7A6E" stroke-width="1.5" marker-end="url(#seta)"/>
+
+      <text x="188" y="126" text-anchor="middle" class="cel-t" font-size="12">η_S = P_D/P_S</text>
+      <text x="368" y="126" text-anchor="middle" class="cel-t" font-size="12">η_B = P_T/P_D</text>
+      <text x="580" y="126" text-anchor="middle" class="cel-t" font-size="12">η_H = P_E/P_T</text>
+
+      <text x="40" y="178" class="cel-t cel-b" font-size="14">As três eficiências no elo correto</text>
+
+      <rect x="40" y="198" width="185" height="60" rx="8" fill="#FAEEDA" stroke="#C8A84B" stroke-width="0.5"/><text x="132" y="220" text-anchor="middle" class="lbl-amber cel-b" font-size="14" font-family="Georgia">η_S = P_D / P_S</text><text x="132" y="241" text-anchor="middle" fill="#854F0B" font-size="12" font-family="'Trebuchet MS',sans-serif">transmissão do eixo</text>
+      <rect x="245" y="198" width="185" height="60" rx="8" fill="#EEEDFE" stroke="#7F77DD" stroke-width="0.5"/><text x="337" y="220" text-anchor="middle" fill="#534AB7" class="cel-b" font-size="14" font-family="Georgia">η_B = P_T / P_D</text><text x="337" y="241" text-anchor="middle" fill="#3C3489" font-size="12" font-family="'Trebuchet MS',sans-serif">hélice atrás do casco</text>
+      <rect x="450" y="198" width="190" height="60" rx="8" fill="#FAECE7" stroke="#D85A30" stroke-width="0.5"/><text x="545" y="220" text-anchor="middle" fill="#993C1D" class="cel-b" font-size="14" font-family="Georgia">η_H = P_E / P_T</text><text x="545" y="241" text-anchor="middle" fill="#712B13" font-size="12" font-family="'Trebuchet MS',sans-serif">= (1−t)/(1−w)</text>
+
+      <text x="40" y="298" class="cel-t cel-b" font-size="14">Os dois produtos aninhados</text>
+
+      <rect x="40" y="318" width="290" height="62" rx="12" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/><text x="185" y="341" text-anchor="middle" fill="#27500A" class="cel-b" font-size="14" font-family="Georgia">η_D = η_H · η_R · η₀</text><text x="185" y="363" text-anchor="middle" fill="#3B6D11" font-size="12" font-family="'Trebuchet MS',sans-serif">quase-propulsivo (sem eixo)</text>
+      <rect x="350" y="318" width="290" height="62" rx="12" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/><text x="495" y="341" text-anchor="middle" fill="#27500A" class="cel-b" font-size="14" font-family="Georgia">η_P = η_D · η_S</text><text x="495" y="363" text-anchor="middle" fill="#3B6D11" font-size="12" font-family="'Trebuchet MS',sans-serif">propulsiva = 4 fatores</text>
+
+      <line x1="330" y1="349" x2="348" y2="349" stroke="#1A7A6E" stroke-width="1.5" marker-end="url(#seta)"/>
+    </svg>
+    <p style="margin-bottom:0; font-size:14px"><span class="tag conflito">CONFLITO</span> <b>Por que η<sub>B</sub> vira η<sub>R</sub>·η₀?</b> Não há contradição entre a cadeia física e a fórmula-mãe: por definição <mark class="amarelo">η<sub>B</sub> = η<sub>R</sub> · η₀</mark> (pois η<sub>R</sub> = η<sub>B</sub>/η₀). A PNA "abre" o η<sub>B</sub> em dois porque η₀ é o que se mede no diagrama B-série e η<sub>R</sub> é a correção de esteira. Logo: η<sub>P</sub> = η<sub>S</sub>·η<sub>B</sub>·η<sub>H</sub> = η<sub>H</sub>·η<sub>R</sub>·η₀·η<sub>S</sub>.</p>
+  </div>
+
+  <h2>2. Cada eficiência, uma a uma</h2>
+
+  <h3>η₀ — Eficiência em águas livres (<i>open-water</i>)</h3>
+  <p>Hélice operando <b>sozinho</b>, em escoamento uniforme, sem casco à frente. É a que se lê no diagrama B-série (K<sub>T</sub>, K<sub>Q</sub> × J). <mark class="amarelo">É a única que depende só do hélice</mark>, não do casco.</p>
+  <div class="formula">η₀ = (J · K<sub>T</sub>) / (2π · K<sub>Q</sub>)</div>
+
+  <h3>η<sub>B</sub> — Eficiência atrás do casco (<i>behind-hull</i>)</h3>
+  <p>O <b>mesmo</b> hélice, mas na esteira real da popa (não uniforme). Elo intermediário entre η₀ e η<sub>R</sub>.</p>
+
+  <h3>η<sub>R</sub> — Eficiência rotativa relativa (<i>relative rotative</i>)</h3>
+  <p>A razão entre as duas anteriores. Mede o quanto o desempenho <b>muda</b> ao tirar o hélice da água aberta e pô-lo na esteira heterogênea.</p>
+  <div class="formula">η<sub>R</sub> = η<sub>B</sub> / η₀ = Q₀ / Q</div>
+  <p><span class="tag banca">BANCA</span> Valores típicos (PNA Sec. 4): <mark class="ambar">0,95–1,0 para bi-hélice</mark> e <mark class="ambar">1,0–1,1 para mono-hélice</mark>.</p>
+  <div class="card"><span class="tag conflito">CONFLITO</span> <b>Nome traiçoeiro:</b> apesar de "rotativa", η<sub>R</sub> <b>não</b> é a energia rotacional recuperada pelo leme. É só a correção de torque entre água aberta e esteira. Distrator clássico: confundir η<sub>R</sub> com recuperação de <i>swirl</i>.</div>
+
+  <h3>η<sub>H</sub> — Eficiência do casco (<i>hull efficiency</i>)</h3>
+  <p>Razão entre a potência efetiva e a de empuxo, expressa pelos coeficientes de interação (notação Taylor):</p>
+  <div class="formula">η<sub>H</sub> = P<sub>E</sub> / P<sub>T</sub> = (1 − t) / (1 − w)</div>
+  <p><b>Variáveis:</b> t = fração de dedução de empuxo (<i>thrust deduction</i>), adimensional; w = fração de esteira (<i>wake fraction</i>), adimensional.</p>
+  <div class="card"><span class="tag banca">BANCA</span> Ponto contraintuitivo favorito: <mark class="amarelo">η<sub>H</sub> pode ser maior que 1</mark>. Em mono-hélice, w costuma superar t, então (1−t)/(1−w) &gt; 1. Não é erro — é recuperação de energia da esteira. Distrator: "impossível uma eficiência passar de 100%".</div>
+
+  <h3>η<sub>D</sub> — Coeficiente quase-propulsivo (<i>QPC</i>)</h3>
+  <p>O coração da matéria. A fórmula-mãe (PNA Sec. 4, Eq. 39):</p>
+  <div class="formula">⭐ η<sub>D</sub> = P<sub>E</sub> / P<sub>D</sub> = η<sub>H</sub> · η<sub>R</sub> · η₀</div>
+  <p>Chama-se "quase" porque <mark class="amarelo">ainda não inclui as perdas de transmissão mecânica</mark>. Valores típicos: 0,6–0,7 (navios de carga); 0,4–0,6 (rebocadores).</p>
+
+  <h3>η<sub>S</sub> — Eficiência de transmissão do eixo</h3>
+  <p>Perdas por atrito nos mancais e no tubo telescópico.</p>
+  <div class="formula">η<sub>S</sub> = P<sub>D</sub> / P<sub>S</sub></div>
+  <p>PNA: ~2% de perda (máquinas à ré) a ~3% (máquinas a meio-navio) → η<sub>S</sub> ≈ 0,97–0,98.</p>
+
+  <h3>η<sub>P</sub> — Eficiência propulsiva global (<i>propulsive efficiency</i>)</h3>
+  <div class="formula">⭐ η<sub>P</sub> = η<sub>D</sub> · η<sub>S</sub> = η<sub>H</sub> · η<sub>R</sub> · η₀ · η<sub>S</sub></div>
+  <p>A cadeia completa de <b>4 fatores</b>. É exatamente o enunciado da afirmativa I da questão 2011-37.</p>
+
+  <h3>η<sub>ideal</sub> — Eficiência ideal</h3>
+  <p>Vem da teoria da quantidade de movimento (Sec. 2). É o <b>teto teórico</b> de um propulsor ideal (disco atuador sem atrito nem rotação induzida): η<sub>ideal</sub> = 1 / (1 + a/2), onde <i>a</i> é o coeficiente de velocidade axial induzida. Nenhum hélice real a alcança.</p>
+
+  <h2>3. Conflito de notação: PNA × Bertram</h2>
+  <table>
+    <tr><th>Conceito</th><th>PNA Vol. II</th><th>Bertram Cap. 3</th></tr>
+    <tr><td>Do eixo ao casco</td><td>η<sub>P</sub> = η<sub>D</sub> · η<sub>S</sub></td><td>P<sub>B</sub> = P<sub>E</sub> / (η<sub>D</sub> · η<sub>M</sub>)</td></tr>
+    <tr><td>Perda mecânica</td><td>η<sub>S</sub> (2–3%)</td><td>η<sub>M</sub> (~5%)</td></tr>
+    <tr><td>Fórmula-mãe</td><td>η<sub>D</sub> = η<sub>H</sub>·η<sub>R</sub>·η₀</td><td>η<sub>D</sub> = η<sub>H</sub>·η<sub>R</sub>·η₀ ✓ idêntica</td></tr>
+  </table>
+  <p>A <mark class="amarelo">fórmula-mãe é idêntica</mark> nas duas fontes. Diverge só o envelope mecânico (η<sub>S</sub> vs η<sub>M</sub>) e o nome da potência final (P<sub>S</sub> vs P<sub>B</sub>). Se a alternativa citar "PNA 3ª ed.", use a notação da PNA.</p>
+
+  <h2>4. Simulador: monte a cadeia</h2>
+  <p>Ajuste cada fator e veja como η<sub>D</sub> e η<sub>P</sub> se formam. Note como η<sub>H</sub> ultrapassa 1 quando w &gt; t.</p>
+  <div class="sim">
+    <div class="sliderrow"><label>t — dedução de empuxo</label><input type="range" id="s_t" min="0.10" max="0.35" step="0.01" value="0.18"><output id="o_t">0,18</output></div>
+    <div class="sliderrow"><label>w — fração de esteira</label><input type="range" id="s_w" min="0.10" max="0.45" step="0.01" value="0.30"><output id="o_w">0,30</output></div>
+    <div class="sliderrow"><label>η<sub>R</sub> — rotativa relativa</label><input type="range" id="s_r" min="0.95" max="1.10" step="0.01" value="1.02"><output id="o_r">1,02</output></div>
+    <div class="sliderrow"><label>η₀ — águas livres</label><input type="range" id="s_o" min="0.40" max="0.75" step="0.01" value="0.62"><output id="o_o">0,62</output></div>
+    <div class="sliderrow"><label>η<sub>S</sub> — transmissão eixo</label><input type="range" id="s_s" min="0.95" max="0.99" step="0.005" value="0.98"><output id="o_s">0,980</output></div>
+
+    <div class="chainviz">
+      <div class="chainbox"><b id="v_h">–</b><span>η<sub>H</sub> casco</span></div>
+      <div class="chainbox"><b id="v_r">–</b><span>η<sub>R</sub> rotativa</span></div>
+      <div class="chainbox"><b id="v_o">–</b><span>η₀ águas livres</span></div>
+      <div class="chainbox chainres"><b id="v_d">–</b><span>η<sub>D</sub> quase-prop.</span></div>
+      <div class="chainbox"><b id="v_s">–</b><span>η<sub>S</sub> eixo</span></div>
+      <div class="chainbox chainres"><b id="v_p">–</b><span>η<sub>P</sub> propulsiva</span></div>
+    </div>
+    <div class="barwrap"><div style="font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--verde);font-weight:bold">η<sub>D</sub> (quase-propulsivo)</div><div class="bar" id="bar_d" style="width:60%">0,63</div></div>
+    <div class="barwrap"><div style="font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--verde);font-weight:bold">η<sub>P</sub> (propulsiva global)</div><div class="bar" id="bar_p" style="width:58%">0,62</div></div>
+    <p id="alertaH" style="font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--teal);font-weight:bold;margin:6px 0 0"></p>
+  </div>
+
+  <h2>5. Quiz de fixação (8 questões)</h2>
+  <div class="quiz" id="quiz"></div>
+
+  <h2>6. Flashcards</h2>
+  <p style="font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--teal)">Toque para virar.</p>
+  <div class="cardsgrid" id="cards"></div>
+
+  <details class="pscpp">
+    <summary>Pontos PSCPP — memorize antes da prova</summary>
+    <div class="inner">
+      <ul>
+        <li><b>Mnemônico da cadeia:</b> "o <b>H</b>élice <b>R</b>oda em <b>Ó</b>leo no <b>S</b>haft" → <code>η_P = η_H · η_R · η₀ · η_S</code>. Tire o η_S e sobra η_D.</li>
+        <li><b>η_D × η_P:</b> a única diferença é o η_S (perda mecânica do eixo). η_D = "quase"; η_P = "completa".</li>
+        <li><b>η_H &gt; 1 é legítimo</b> — não é erro de conta. Distrator de "impossível passar de 100%".</li>
+        <li><b>η_R ≈ 1 sempre</b> (0,95–1,1). Se a alternativa der 0,7 ou 1,3, é inversão de faixa.</li>
+        <li><b>η₀ é a única do diagrama</b> (B-série / água aberta); as demais dependem do casco.</li>
+        <li><b>Distrator campeão (2011-37):</b> omitir o η_R do produto. A cadeia tem 4 elos, não 3.</li>
+        <li><b>PNA × Bertram:</b> fórmula-mãe idêntica; muda só η_S (PNA, 2–3%) vs η_M (Bertram, ~5%).</li>
+      </ul>
+      <p class="verificar">[VERIFICAR gabarito impresso] — questões 2011/2012.</p>
+    </div>
+  </details>
+
+  <div class="painel">
+    <button class="btnsup" id="btnSupabase">⬆ Enviar ao Painel PSCPP</button>
+    <div class="supstatus" id="supStatus"></div>
+  </div>
+
+  <footer>Capital Sereno · PSCPP 2027 · Projeto P1a — Bloco B · Cadeia de Eficiências</footer>
+
+</div>
+
+<script>
+/* ============ SIMULADOR ============ */
+const S = id => document.getElementById(id);
+const fmt = (x,d=2) => x.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+function calc(){
+  const t=+S('s_t').value, w=+S('s_w').value, r=+S('s_r').value, o=+S('s_o').value, s=+S('s_s').value;
+  S('o_t').textContent=fmt(t); S('o_w').textContent=fmt(w); S('o_r').textContent=fmt(r);
+  S('o_o').textContent=fmt(o); S('o_s').textContent=fmt(s,3);
+  const h=(1-t)/(1-w);
+  const d=h*r*o;
+  const p=d*s;
+  S('v_h').textContent=fmt(h); S('v_r').textContent=fmt(r); S('v_o').textContent=fmt(o);
+  S('v_d').textContent=fmt(d); S('v_s').textContent=fmt(s,2); S('v_p').textContent=fmt(p);
+  S('bar_d').style.width=Math.min(100,d*100)+'%'; S('bar_d').textContent=fmt(d);
+  S('bar_p').style.width=Math.min(100,p*100)+'%'; S('bar_p').textContent=fmt(p);
+  S('alertaH').textContent = h>1
+    ? 'η_H = '+fmt(h)+' > 1 — legítimo! Aqui w > t (esteira recupera energia).'
+    : 'η_H = '+fmt(h)+' ≤ 1 (aqui t ≥ w).';
+}
+['s_t','s_w','s_r','s_o','s_s'].forEach(id=>S(id).addEventListener('input',calc));
+calc();
+
+/* ============ QUIZ ============ */
+const QUESTOES = [
+  {
+    bloco:"Bloco B", tema:"Propulsão", assunto:"Cadeia de eficiências",
+    enun:"A eficiência propulsiva (η_P) segundo a PNA é o produto de quais fatores?",
+    opts:[
+      "η_H · η_R · η₀ · η_S (casco, rotativa relativa, águas livres e transmissão do eixo)",
+      "η_H · η₀ · η_S (casco, águas livres e transmissão do eixo)",
+      "η_D · η_R · η₀ (quase-propulsivo, rotativa e águas livres)",
+      "η_H · η_R · η_S (casco, rotativa e transmissão)"
+    ],
+    correta:0,
+    fb:"Cadeia completa de 4 fatores. A opção B é o distrator campeão da 2011-37: omite a η_R. [BANCA: 2011-37]"
+  },
+  {
+    bloco:"Bloco B", tema:"Propulsão", assunto:"Coeficiente quase-propulsivo",
+    enun:"O que distingue o coeficiente quase-propulsivo (η_D) da eficiência propulsiva (η_P)?",
+    opts:[
+      "η_D não inclui a perda de transmissão mecânica do eixo (η_S); η_P inclui",
+      "η_D inclui a perda do eixo; η_P não",
+      "São sinônimos exatos",
+      "η_D vale só para bi-hélice; η_P só para mono-hélice"
+    ],
+    correta:0,
+    fb:"η_D = η_H·η_R·η₀ (sem eixo). η_P = η_D·η_S (com eixo). Por isso 'quase'-propulsivo."
+  },
+  {
+    bloco:"Bloco B", tema:"Propulsão", assunto:"Eficiência do casco",
+    enun:"A eficiência do casco η_H pode assumir valor maior que 1?",
+    opts:[
+      "Sim — quando w > t, comum em mono-hélice; é recuperação de energia da esteira",
+      "Não — nenhuma eficiência pode passar de 100%",
+      "Sim, mas apenas por erro experimental",
+      "Só em rebocadores com bocal Kort"
+    ],
+    correta:0,
+    fb:"η_H = (1−t)/(1−w). Se w > t, o quociente passa de 1. Não é violação de energia — é recuperação da esteira. Distrator clássico."
+  },
+  {
+    bloco:"Bloco B", tema:"Propulsão", assunto:"Eficiência rotativa relativa",
+    enun:"Qual a faixa típica da eficiência rotativa relativa η_R para navios mono-hélice (PNA Sec. 4)?",
+    opts:[
+      "1,0 a 1,1",
+      "0,60 a 0,75",
+      "0,40 a 0,55",
+      "1,3 a 1,5"
+    ],
+    correta:0,
+    fb:"Mono-hélice: 1,0–1,1. Bi-hélice: 0,95–1,0. Valores fora de ~0,95–1,1 são inversão de faixa."
+  },
+  {
+    bloco:"Bloco B", tema:"Propulsão", assunto:"Eficiência rotativa relativa",
+    enun:"A eficiência rotativa relativa η_R representa fisicamente:",
+    opts:[
+      "A razão entre o torque em águas livres e atrás do casco (η_B/η₀ = Q₀/Q)",
+      "A energia rotacional recuperada pelo leme atrás do hélice",
+      "A perda por atrito nos mancais do eixo",
+      "A razão entre passo real e passo nominal"
+    ],
+    correta:0,
+    fb:"η_R = Q₀/Q — correção de torque entre água aberta e esteira. NÃO é recuperação de swirl pelo leme (distrator de nome traiçoeiro)."
+  },
+  {
+    bloco:"Bloco B", tema:"Propulsão", assunto:"Eficiência em águas livres",
+    enun:"Qual eficiência é obtida diretamente do diagrama B-série (K_T, K_Q × J)?",
+    opts:[
+      "η₀ — eficiência em águas livres (open-water)",
+      "η_H — eficiência do casco",
+      "η_D — coeficiente quase-propulsivo",
+      "η_S — eficiência de transmissão"
+    ],
+    correta:0,
+    fb:"η₀ = (J·K_T)/(2π·K_Q), lida no diagrama de água aberta. É a única que depende só do hélice, não do casco."
+  },
+  {
+    bloco:"Bloco B", tema:"Propulsão", assunto:"Conflito PNA × Bertram",
+    enun:"Sobre a perda mecânica, qual afirmação é correta?",
+    opts:[
+      "A PNA usa η_S (~2–3% de perda); Bertram agrupa em η_M (~5%); a fórmula-mãe η_D = η_H·η_R·η₀ é idêntica",
+      "PNA e Bertram usam fórmulas-mãe diferentes para η_D",
+      "Bertram ignora completamente a perda mecânica",
+      "η_S da PNA é sempre maior que 1"
+    ],
+    correta:0,
+    fb:"Divergência só no envelope mecânico e no nome da potência final (P_S vs P_B). A decomposição de η_D é idêntica."
+  },
+  {
+    bloco:"Bloco B", tema:"Propulsão", assunto:"Eficiência ideal",
+    enun:"A eficiência ideal (teoria da quantidade de movimento) caracteriza-se por:",
+    opts:[
+      "Ser o teto teórico de um propulsor ideal, ignorando atrito de pá e rotação induzida",
+      "Ser sempre igual à η₀ medida em tanque",
+      "Incluir todas as perdas viscosas do hélice real",
+      "Ser menor que a eficiência propulsiva global η_P"
+    ],
+    correta:0,
+    fb:"η_ideal = 1/(1+a/2) é o limite teórico do disco atuador. Nenhum hélice real a alcança, pois ela ignora atrito e perdas rotacionais."
+  }
+];
+
+const quizEl = S('quiz');
+let respondidas = 0, acertos = 0;
+const registro = [];
+QUESTOES.forEach((q,i)=>{
+  const div=document.createElement('div'); div.className='q';
+  div.innerHTML='<div class="enun">'+(i+1)+'. '+q.enun+'</div>';
+  q.opts.forEach((op,j)=>{
+    const b=document.createElement('button'); b.className='opt'; b.textContent=op;
+    b.onclick=()=>{
+      if(div.dataset.done) return;
+      div.dataset.done='1'; respondidas++;
+      const acertou = j===q.correta;
+      if(acertou) acertos++;
+      div.querySelectorAll('.opt').forEach((el,k)=>{
+        if(k===q.correta) el.classList.add('correta');
+        if(k===j && !acertou) el.classList.add('errada');
+        el.style.cursor='default';
+      });
+      const fb=div.querySelector('.fb'); fb.classList.add('show');
+      registro.push({caderno_id:'cadeia_eficiencias_propulsao', tipo:'quiz', bloco:q.bloco, tema:q.tema, assunto:q.assunto, enunciado:q.enun, acertou:acertou});
+      atualizaPlacar();
+    };
+    div.appendChild(b);
+  });
+  const fb=document.createElement('div'); fb.className='fb'; fb.innerHTML='<b>'+(q.opts[q.correta])+'</b><br>'+q.fb;
+  div.appendChild(fb);
+  quizEl.appendChild(div);
+});
+const placar=document.createElement('div'); placar.className='placar'; placar.id='placar'; quizEl.appendChild(placar);
+function atualizaPlacar(){ S('placar').textContent='Placar: '+acertos+' / '+respondidas+' respondidas ('+QUESTOES.length+' no total)'; }
+
+/* ============ FLASHCARDS ============ */
+const FLASH = [
+  ["η₀","Eficiência em águas livres. Hélice sozinho, escoamento uniforme. Lida no diagrama B-série."],
+  ["η_R","Rotativa relativa = Q₀/Q. Correção de torque água aberta × esteira. Faixa 0,95–1,1."],
+  ["η_H","Eficiência do casco = (1−t)/(1−w). Pode ser > 1!"],
+  ["η_D","Coeficiente quase-propulsivo = η_H·η_R·η₀. SEM perda de eixo."],
+  ["η_S","Transmissão do eixo = P_D/P_S. ~0,97–0,98 (perda 2–3%)."],
+  ["η_P","Propulsiva global = η_D·η_S = η_H·η_R·η₀·η_S. Os 4 fatores."],
+  ["Fórmula-mãe","η_D = η_H · η_R · η₀ (idêntica em PNA e Bertram)."],
+  ["Mnemônico","'o Hélice Roda em Óleo no Shaft' → η_H·η_R·η₀·η_S."],
+  ["t","Fração de dedução de empuxo. t = (T−R_T)/T."],
+  ["w","Fração de esteira. w = (Vs−Va)/Vs (Froude)."],
+  ["η_H > 1?","Sim, legítimo. Ocorre quando w > t (mono-hélice). Não viola energia."],
+  ["η_ideal","Teto teórico (disco atuador) = 1/(1+a/2). Ignora atrito e rotação."],
+  ["η_B = η_R·η₀","Eficiência do hélice atrás do casco = rotativa relativa × águas livres. A PNA a 'abre' em dois."],
+  ["Ordem física","η_S → η_B → η_H (do eixo ao casco). η_H é a única com P_E no numerador."]
+];
+const cardsEl=S('cards');
+FLASH.forEach(([f,b])=>{
+  const c=document.createElement('div'); c.className='flip';
+  c.innerHTML='<div class="flipinner"><div class="flipface flipfront">'+f+'</div><div class="flipface flipback">'+b+'</div></div>';
+  c.onclick=()=>c.classList.toggle('flipped');
+  cardsEl.appendChild(c);
+});
+
+/* ============ SUPABASE ============ */
+const SUPA_URL='https://iftourtecxtmvuhptvmo.supabase.co';
+S('btnSupabase').onclick=async ()=>{
+  const st=S('supStatus');
+  if(registro.length===0){ st.textContent='Responda ao quiz antes de enviar.'; return; }
+  st.textContent='Enviando '+registro.length+' respostas...';
+  const payload=registro.map(r=>({...r, sessao_data:new Date().toISOString()}));
+  try{
+    const resp=await fetch(SUPA_URL+'/rest/v1/respostas',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(payload)
+    });
+    st.textContent = resp.ok ? '✓ Enviado ao Painel PSCPP.' : 'Falha no envio (verifique a chave/API no painel).';
+  }catch(e){ st.textContent='Sem conexão com o painel. Respostas registradas localmente nesta sessão.'; }
+};
+</script>
+</body>
+</html>
