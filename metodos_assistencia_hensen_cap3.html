@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Métodos de Assistência — Hensen Cap. 3 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E; --azul:#2C5F8A;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:720px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s;white-space:nowrap}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:30px 0 70px}
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:0 0 22px}
+  .related a{font-weight:bold}
+
+  section.bloco{margin-bottom:38px;scroll-margin-top:64px}
+  h2.sec{font-size:24px;color:var(--verde);margin:0 0 6px;font-weight:normal;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--ouro);letter-spacing:.1em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 18px;border-bottom:2px solid var(--linha);padding-bottom:12px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px;font-weight:normal}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.04em;padding:2px 8px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+  .t-sim{background:#e7f3ec;color:#1c5f3a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:16px 20px;margin:16px 0;box-shadow:var(--sombra)}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.conflito{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.calc{border-left:6px solid var(--azul);background:#eff5fb}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4,.box.conflito h4{color:var(--vermelho)}
+  .box.calc h4{color:var(--azul)}
+  .box ul{margin:8px 0 0;padding-left:20px}
+  .box li{margin:5px 0}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--sombra)}
+  th,td{border:1px solid var(--linha);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  .ok{color:#2E7D52;font-weight:bold}.no{color:var(--vermelho);font-weight:bold}.md{color:#e67e22;font-weight:bold}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  .col-card{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:14px 16px;box-shadow:var(--sombra)}
+  .col-card.pro{border-top:3px solid #2E7D52}
+  .col-card.con{border-top:3px solid var(--vermelho)}
+  .col-card h4{margin:0 0 9px;font-family:'Trebuchet MS',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:bold}
+  .col-card.pro h4{color:#2E7D52}.col-card.con h4{color:var(--vermelho)}
+  .col-card ul{margin:0;padding-left:18px}
+  .col-card li{margin:6px 0;font-size:13.5px}
+
+  figure.diag{margin:22px 0;background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 18px 14px;box-shadow:var(--sombra)}
+  figure.diag svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  figcaption{font-size:12.5px;color:var(--mute);text-align:center;margin-top:10px;font-style:italic}
+  .diag-title{color:var(--verde2);font-size:16px;margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-weight:bold}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:20px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+  details.pscpp .gab{background:rgba(200,168,75,.16);border:1px solid rgba(200,168,75,.4);border-radius:8px;padding:8px 12px;margin:6px 0 14px;font-size:13.5px}
+
+  .secblk{margin:40px 0 0;scroll-margin-top:64px}
+  .secblk > h2{font-size:23px;color:var(--verde);margin:0 0 4px;font-weight:normal;border-bottom:2px solid var(--linha);padding-bottom:8px}
+  .secblk > .lede{color:var(--mute);font-size:15px;margin:12px 0 18px}
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:180px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12.5px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:14.5px;background:#fff;border:1.5px solid var(--linha);border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:13.5px;padding:11px 14px;border-radius:8px;display:none;line-height:1.5}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .backlink{display:inline-block;margin:24px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer.estante{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:36px}
+  footer.estante b{color:var(--ouro)}
+
+  @media(max-width:700px){.hero h1{font-size:25px}.cols{grid-template-columns:1fr}}
+  @media print{nav.toc{display:none}details.pscpp{background:#fff;color:#000;border:1px solid #ccc}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo II · Arte Naval · Bloco H — Rebocadores</p>
+    <h1>Métodos de <em>Assistência</em></h1>
+    <p class="sub">Como o rebocador aplica força ao navio: os dois grandes métodos (reboque com cabo × operação no costado), tração direta e indireta, push-pull, a relação tipo↔método, eclusas e a assistência no gelo. Fidelidade ao Cap. 3 de Hensen, com o conflito Hensen × Fragoso/Cajaty sinalizado.</p>
+    <div class="src"><b>Fonte:</b> Hensen, <i>Tug Use in Port</i>, 4ª ed. (2021), Cap. 3 (Methods of Assistance), §3.1–3.3. <b>Fonte BR:</b> Fragoso &amp; Cajaty, <i>Rebocadores Portuários</i> (CONAPRA), Cap. 2 (Métodos de Utilização). <b>Subtópico:</b> H2. <b>Banca:</b> gabaritos 2006/2008 extraíveis; 2011/2012 a verificar.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#s31">Dois métodos</a>
+    <a href="#s321">Métodos em uso</a>
+    <a href="#direta">Tração direta</a>
+    <a href="#indireta">Tração indireta ▸</a>
+    <a href="#pushpull">Push-pull × cabo</a>
+    <a href="#eclusas">Eclusas</a>
+    <a href="#tipometodo">Tipo ↔ método</a>
+    <a href="#gelo">Gelo</a>
+    <a href="#banca">Banca ⚓</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Caderno do <strong>Bloco H — Rebocadores (Arte Naval)</strong>, subtópico <strong>H2 (Métodos de Assistência)</strong>. Liga-se ao caderno de <em>Tipos</em> (Cap. 2, H1) — cada tipo tem um método natural — e ao de <em>Capacidades</em> (Cap. 4, H3/H4), que explica <em>por que</em> cada método rende mais ou menos por posição.
+</div>
+
+<!-- ===== 3.1 DOIS MÉTODOS ===== -->
+<section class="bloco" id="s31">
+  <h2 class="sec"><span class="n">3.1</span> Os dois grandes métodos de assistência</h2>
+  <p class="lede">Toda a assistência portuária se reduz a duas famílias: rebocar com cabo (à distância) ou operar no costado do navio. Todo o resto — direta, indireta, push-pull — é variação dentro dessas duas.</p>
+
+  <div class="box key">
+    <h4>A dicotomia fundamental <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Dependendo da experiência local e das circunstâncias, empregam-se principalmente dois métodos, ou combinações deles <span class="tag t-banca">2012-Q32</span>:</p>
+    <ul>
+      <li><strong>Rebocando com cabo</strong> (<i>towing on a line</i>): o cabo de reboque (<i>towline</i> — espórtula) é amarrado na <strong>proa ou na popa</strong> do navio assistido. O rebocador opera a uma distância <span class="hl">de, no mínimo, 1,5 × o comprimento do rebocador</span>. Predomina nos <strong>portos europeus</strong> ("cabo longo" / "método europeu", na terminologia de Fragoso/Cajaty).</li>
+      <li><strong>Operando no costado</strong> (<i>alongside</i>): o rebocador é amarrado ao costado com <strong>uma, duas ou três espias</strong>. Predomina nos <strong>EUA e portos do Pacífico Ocidental</strong>. Inclui o <strong>push-pull</strong> (normalmente 1 espia) e a rebocagem de costado / <i>alongside towing</i> (firmemente amarrado, <span class="hl">no mínimo 3 espias</span>, movendo-se junto com o navio).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <p>Independentemente do tipo de rebocador, <span class="hl">ambos os métodos podem ser aplicados por quase todos os tipos</span> — embora para alguns o reboque eficaz com cabo seja problemático (p. ex. o convencional puxando a ré com o navio em velocidade). Em certos portos usam-se <strong>combinações</strong>: onde se trabalha no costado, ocasionalmente reboca-se com cabo (para passar pontes estreitas ou entrar em dique seco); e quando as condições de tempo/mar se deterioram, pode ser mais seguro <span class="hl-amb">rebocar com cabo em vez do costado</span>, para evitar o arrebentamento das espias e a perda de controle. <span class="tag t-sim">BANCA: similaridade</span></p>
+  </div>
+</section>
+
+<!-- ===== 3.2.1 MÉTODOS EM USO ===== -->
+<section class="bloco" id="s321">
+  <h2 class="sec"><span class="n">3.2.1</span> Métodos de assistência em uso</h2>
+  <p class="lede">Uma pesquisa de 1996 sobre os portos do mundo mapeou como os dois métodos são aplicados, assumindo dois rebocadores assistindo um navio. É a base das questões de correlação porto → método → tipo.</p>
+
+  <h3>a) Costado na aproximação, empurrando / push-pull na atracação</h3>
+  <p>Método normal na maioria dos portos dos <strong>EUA, Canadá, Austrália, Malásia, África do Sul</strong> e em grandes terminais de petróleo na <strong>Noruega</strong>. O tipo de rebocador difere, mas o método é semelhante. A forma de amarrar depende do tipo:</p>
+  <ul>
+    <li>Rebocadores <strong>onidirecionais</strong>: amarrados à <strong>amura de vante</strong> e à <strong>ombreira de ré</strong>.</li>
+    <li><strong>ASD / tratores reversos</strong>: geralmente com uma espórtula da <strong>proa do rebocador</strong>.</li>
+    <li><strong>Tratores (VS/azimutal)</strong>: com uma espórtula do <strong>portaló de popa</strong> do rebocador (Fig. 3.3).</li>
+  </ul>
+
+  <h3>b) Reboque com cabo na aproximação e na atracação</h3>
+  <p>Método predominante nos <strong>portos europeus</strong>. O rebocador de vante pode usar <strong>dois cabos cruzados</strong> (<i>cross lines</i> / <i>gate lines</i>) saindo da proa do rebocador para os dois bordos da proa do navio, permitindo governo bidirecional com pouco espaço de manobra <span class="tag t-banca">2008-Q16</span>.</p>
+
+  <h3>c) Métodos combinados (emergentes)</h3>
+  <ul>
+    <li><strong>Cabo na aproximação → push-pull na atracação</strong> (Fig. 3.14): transição conforme a velocidade do navio diminui. Comum em portos europeus e asiáticos.</li>
+    <li><strong>Configuração australiana</strong> (Fig. 3.15) para grandes graneleiros: ASD/tratores reversos no costado + um rebocador com cabo a ré + um convencional na proa. Boa para governo e quando há curta distância de parada. Perto do berço, um dos rebocadores do costado muda de bordo para empurrar.</li>
+  </ul>
+
+  <div class="box">
+    <h4>Controle de velocidade pelo rebocador de popa</h4>
+    <p>Cada vez mais utilizado: o rebocador de popa puxa a ré (Fig. 3.16 — trator azimutal Arion, BP 45 t, no tanque Torm Loke) e <span class="hl">freia o navio sem que este pare as máquinas</span>, mantendo governabilidade — útil na aproximação de eclusas. Contrapartida: <span class="hl-amb">as vibrações a bordo do rebocador podem ser enormes</span>, e os mestres podem não gostar do método por longos períodos (ver §4.3.4). <span class="tag t-sim">BANCA: similaridade</span></p>
+  </div>
+</section>
+
+<!-- ===== TRAÇÃO DIRETA ===== -->
+<section class="bloco" id="direta">
+  <h2 class="sec"><span class="n">·</span> Tração direta (<i>direct towing</i>)</h2>
+  <p class="lede">A forma mais natural e mais utilizada. Base da afirmativa IV da Q32/2012.</p>
+
+  <div class="box key">
+    <p>O rebocador simplesmente <strong>puxa</strong>, prolongando o cabo e levando sua extremidade de trabalho na direção em que se quer a força — para <span class="hl">governar, quebrar o seguimento e criar ou reduzir uma tendência do navio para um dos bordos</span>. A extremidade de trabalho é onde fica o ponto de aplicação da tração (proa ou popa, conforme o tipo); a outra é a extremidade livre.</p>
+    <ul>
+      <li>É o método <strong>mais utilizado com o navio parado ou em baixa velocidade</strong>. <span class="tag t-decorar">DECORAR</span></li>
+      <li>Ao <strong>aumentar a velocidade</strong> do navio, o rebocador <span class="hl">leva mais tempo para se posicionar e atuar em cada bordo</span> quando se quer governar.</li>
+      <li>Usada para puxar a <strong>popa</strong> do navio na direção desejada, assistir o governo ou controlar a velocidade (afirmativa IV, Q32/2012). <span class="tag t-banca">2012-Q32</span> <span class="tag t-verificar">VERIFICAR gabarito impresso</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== TRAÇÃO INDIRETA ===== -->
+<section class="bloco" id="indireta">
+  <h2 class="sec"><span class="n">·</span> Tração indireta (<i>indirect towing</i>)</h2>
+  <p class="lede">O casco do rebocador vira uma "asa" (esqui aquático): a força cresce com a velocidade do navio e pode superar o bollard pull. É o distrator campeão da banca — a afirmativa V da Q32/2012 inverte justamente isto.</p>
+
+  <div class="box key">
+    <p>Ao contrário da direta, a extremidade de trabalho é colocada <strong>na direção em que se quer a força atuando</strong>. Como um esqui aquático, o rebocador vai para o bordo desejado com o <span class="hl">cabo a ~45° com a linha de centro do navio</span> e o <span class="hl">casco a um pequeno ângulo com a água, no máximo ~30°</span>. A força gerada pela pressão da água no casco é <strong>proporcional à velocidade do navio</strong>.</p>
+    <ul>
+      <li><strong>Mais eficiente quanto maior o seguimento do navio.</strong> Em navios parados ou com pouco seguimento, a <strong>direta</strong> é mais eficiente (Fig. 2.16 de Cajaty / gráfico Voith). <span class="tag t-decorar">DECORAR</span></li>
+      <li>Usada sobretudo para assistir o governo de navios em <strong>velocidade</strong> (não em baixa velocidade — cuidado com a inversão da afirmativa V).</li>
+    </ul>
+  </div>
+
+  <div class="box conflito">
+    <h4>Conflito de números — a fronteira e o multiplicador do BP <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>Duas fontes, dois recortes numéricos. A banca pode cobrar qualquer um; saber a origem evita cair no distrator.</p>
+    <ul>
+      <li><strong>Hensen</strong> (§3, §4.3.4, §9): a transição direto→indireto fica em torno de <span class="hl">~5–6 nós</span> (velocidades portuárias normais). No indireto (5–7 nós) mediram-se forças de cabo de <span class="hl">75–125% do bollard pull</span> nos EUA; ex.: rebocador de 52 t de BP gera ~62 t a 5 nós (≈1,2× o BP) e cai a ~75% do BP a 7 nós.</li>
+      <li><strong>Fragoso/Cajaty</strong>: a força na indireta pode chegar a <span class="hl">mais de 2× o bollard pull</span> ao aproximar-se de <strong>~10 nós</strong> (gráfico Voith).</li>
+    </ul>
+    <p style="margin-top:8px"><strong>Leitura conciliada:</strong> não se contradizem — Hensen descreve a faixa portuária/escolta típica (5–7 nós, ~0,75–1,25× BP), e Cajaty projeta o extremo do gráfico Voith (~10 nós, &gt;2× BP). O denominador comum: <span class="hl-amb">a força indireta cresce com a velocidade e pode exceder o BP</span>.</p>
+  </div>
+
+  <div class="box">
+    <h4>Variação de Cajaty: ação indireta forçada (<i>powered indirect</i>) <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>Fragoso/Cajaty descrevem uma terceira modalidade que Hensen não nomeia da mesma forma no Cap. 3 (mas trata como <i>powered indirect manoeuvre</i> no Cap. 9): para <strong>velocidades moderadas</strong>, o rebocador abre um ângulo em relação à popa (como na indireta) e então <strong>dá máquina forçando sobre o cabo</strong>, combinando a força da resistência do casco com a força da própria máquina. Em Hensen (§9), a manobra indireta motorizada é usada entre <strong>3 e 7 nós</strong>, com o rebocador a ~70° do fluxo; conforme o navio desacelera, o ângulo pode aumentar e mais potência de máquina entra na força do cabo.</p>
+  </div>
+
+  <p>Existem várias formas de o rebocador não convencional trabalhar na popa do navio, <span class="hl">podendo, em algumas delas, aplicar força superior ao seu próprio bollard pull</span> — a marca distintiva do modo indireto. <span class="tag t-sim">BANCA: similaridade</span></p>
+</section>
+
+<!-- ===== DIAGRAMA SVG ===== -->
+<figure class="diag" id="diagvet">
+  <div class="diag-title">Direta × Indireta — geometria e vetores de força</div>
+  <svg viewBox="0 0 700 340" role="img" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="av" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+    <!-- DIRETA -->
+    <text x="30" y="26" font-size="14" font-weight="bold" fill="#1A7A6E">Tração direta — navio parado / baixa velocidade</text>
+    <rect x="60" y="46" width="150" height="150" rx="30" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.6"/>
+    <text x="135" y="118" font-size="12" fill="#5F5E5A" text-anchor="middle">Navio (popa)</text>
+    <line x1="135" y1="78" x2="135" y2="52" stroke="#5F5E5A" stroke-width="2" marker-end="url(#av)"/>
+    <text x="135" y="136" font-size="11" fill="#5F5E5A" text-anchor="middle">baixa vel. ↑</text>
+    <!-- rebocador alinhado, puxando para baixo -->
+    <rect x="113" y="236" width="44" height="80" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+    <text x="135" y="332" font-size="12" font-weight="bold" fill="#0F6E56" text-anchor="middle">Rebocador</text>
+    <line x1="135" y1="236" x2="135" y2="198" stroke="#0F6E56" stroke-width="2"/>
+    <text x="150" y="222" font-size="11" fill="#5a5346">cabo alinhado</text>
+    <line x1="135" y1="316" x2="135" y2="352" stroke="#1D9E75" stroke-width="3.4" marker-end="url(#av)"/>
+    <text x="200" y="280" font-size="11" fill="#5a5346">força = tração</text>
+    <text x="200" y="296" font-size="11" fill="#5a5346">da máquina (BP)</text>
+    <!-- INDIRETA -->
+    <text x="400" y="26" font-size="14" font-weight="bold" fill="#1A7A6E">Tração indireta — navio com seguimento (&gt;5–6 nós)</text>
+    <rect x="440" y="46" width="150" height="150" rx="30" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.6"/>
+    <text x="515" y="118" font-size="12" fill="#5F5E5A" text-anchor="middle">Navio (popa)</text>
+    <line x1="515" y1="78" x2="515" y2="52" stroke="#5F5E5A" stroke-width="2" marker-end="url(#av)"/>
+    <text x="515" y="136" font-size="11" fill="#5F5E5A" text-anchor="middle">seguimento ↑</text>
+    <!-- fluxo -->
+    <line x1="405" y1="250" x2="370" y2="250" stroke="#85B7EB" stroke-width="1.2" opacity="0.7" marker-end="url(#av)"/>
+    <text x="332" y="254" font-size="11" fill="#185FA5">fluxo</text>
+    <!-- rebocador a ~30 graus (esqui) -->
+    <g transform="rotate(38 515 275)">
+      <rect x="493" y="238" width="44" height="80" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+    </g>
+    <text x="515" y="332" font-size="12" font-weight="bold" fill="#0F6E56" text-anchor="middle">casco a ≤30°</text>
+    <!-- cabo a 45 -->
+    <line x1="500" y1="232" x2="470" y2="200" stroke="#0F6E56" stroke-width="2"/>
+    <text x="452" y="216" font-size="11" fill="#5a5346" text-anchor="end">cabo ~45°</text>
+    <!-- forca de sustentacao grande -->
+    <line x1="555" y1="286" x2="612" y2="300" stroke="#9E3B2E" stroke-width="4" marker-end="url(#av)"/>
+    <text x="560" y="326" font-size="11" fill="#9E3B2E">sustentação</text>
+    <text x="560" y="341" font-size="11" fill="#9E3B2E">&gt; BP (∝ vel.)</text>
+  </svg>
+  <figcaption>Reconstrução esquemática. Na direta o cabo fica alinhado e a força é a tração da máquina; na indireta o casco a ≤30° e o cabo a ~45° geram sustentação hidrodinâmica que cresce com a velocidade e pode exceder o bollard pull. (Cf. Hensen Figs. do §3/§9; Cajaty Figs. 2.14–2.16.)</figcaption>
+</figure>
+
+<!-- ===== PUSH-PULL x CABO ===== -->
+<section class="bloco" id="pushpull">
+  <h2 class="sec"><span class="n">3.2.2</span> Push-pull <span style="font-size:16px;color:var(--mute)">versus</span> reboque com cabo</h2>
+  <p class="lede">A comparação vantagens × desvantagens dos dois métodos — material clássico de afirmativas V/F. Fidelidade integral ao texto de Hensen.</p>
+
+  <div class="cols">
+    <div class="col-card pro">
+      <h4>Push-pull (costado) — vantagens</h4>
+      <ul>
+        <li>Ação <strong>rápida</strong>, com tempos de resposta curtos — importante na atracação.</li>
+        <li>Neutraliza os riscos de trabalhar perto da proa de um navio com velocidade: <span class="hl">forças de interação e momentos de guinada</span> ficam anulados.</li>
+      </ul>
+    </div>
+    <div class="col-card con">
+      <h4>Push-pull (costado) — desvantagens</h4>
+      <ul>
+        <li>Espórtulas frequentemente <strong>muito curtas</strong> → problema em ondas.</li>
+        <li>Ao puxar com espórtula curta, perda de eficácia pela <span class="hl">esteira do propulsor batendo no casco do navio em ângulo reto</span> (mitiga-se alongando a espórtula com guincho).</li>
+        <li>No <strong>convencional</strong>, eficácia de tração baixa (mau desempenho do propulsor a ré).</li>
+        <li>Largura combinada navio + rebocadores é problema em <strong>eclusas e pontes</strong>.</li>
+        <li>Rebocadores devem ficar no <strong>lado oposto ao de atracação</strong> → sem flexibilidade de bordo depois de amarrados.</li>
+        <li>Ao girar o navio, o <strong>braço de giro é curto</strong> (distância entre os dois rebocadores no costado).</li>
+        <li>Com grande área vélica e rebocadores a sotavento, estes podem ficar <span class="hl-amb">presos entre o navio e o cais/margem</span> se o vento aumentar.</li>
+        <li>Mestres têm <strong>pouca visibilidade</strong> das manobras do prático.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="col-card pro">
+      <h4>Reboque com cabo — vantagens</h4>
+      <ul>
+        <li>Espórtulas <strong>mais longas</strong> → reduz o efeito das ondas e da ondulação.</li>
+        <li>Maior distância do casco → menos perda por esteira do propulsor (conforme comprimento e direção).</li>
+        <li>Alta capacidade de <strong>governo e controle de velocidade</strong> com o navio em seguimento (rebocador de popa em linha, direto ou indireto).</li>
+        <li>O período em que o rebocador de popa pode <strong>puxar</strong> é muito mais longo.</li>
+      </ul>
+    </div>
+    <div class="col-card con">
+      <h4>Reboque com cabo — desvantagens</h4>
+      <ul>
+        <li>Riscos de <strong>interação</strong> relevantes, sobretudo ao passar espórtula perto da <strong>proa</strong>.</li>
+        <li>Tempos de resposta um tanto <strong>mais longos</strong>.</li>
+        <li>Perda de eficácia quando a <span class="hl">esteira do propulsor incide no casco</span> (depende do comprimento da espórtula e da direção do reboque).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ECLUSAS ===== -->
+<section class="bloco" id="eclusas">
+  <h2 class="sec"><span class="n">3.2.3</span> Eclusas e assistência de rebocadores</h2>
+  <div class="box">
+    <p>Navios de grande porte entrando em eclusas são assistidos de várias formas. Na maioria dos casos, <strong>apenas um cabo de reboque</strong> é utilizado (Figs. 3.16 e 3.18). É possível, porém, usar <strong>dois cabos de dois guinchos independentes</strong>, como nas <span class="hl">novas eclusas do Canal do Panamá</span> (Figs. 3.9 e 3.17): a vantagem é ser eficaz na largura limitada da eclusa e reduzir tempos de resposta; a desvantagem é que segurar o rebocador com dois cabos pode ser problemático com tripulações reduzidas a bordo. Tipos modernos (Rotortugs; rebocadores com uma unidade de vante e outra de ré) têm capacidades que permitem assistir <strong>dentro da largura</strong> do navio (§2.11.3, §2.19.3). <span class="tag t-sim">BANCA: similaridade</span></p>
+  </div>
+</section>
+
+<!-- ===== TIPO x METODO ===== -->
+<section class="bloco" id="tipometodo">
+  <h2 class="sec"><span class="n">3.2.4</span> Relação entre tipo de rebocador e método</h2>
+  <p class="lede">A tabela-síntese de qual tipo casa com qual método. É a base das questões de correlação (Q32/2012 afirmativa III). Tabela é exceção justificada à formatação mínima.</p>
+
+  <table>
+    <thead>
+      <tr><th>Tipo</th><th>Cabo à vante</th><th>Cabo à ré (popa)</th><th>Costado / push-pull</th><th>Método indireto</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Convencional</strong></td><td class="md">Tradicional, mas risco de girting</td><td class="ok">Bom (mas dirige só um bordo em velocidade)</td><td class="md">Limitado (propulsor fraco a ré)</td><td class="no">Não opera</td></tr>
+      <tr><td><strong>Trator (VS / azimutal)</strong></td><td class="md">Recua; governo cai com a velocidade</td><td class="ok">Muito bom (governo + controle de velocidade)</td><td class="ok">Sim (portaló de popa)</td><td class="ok">Excelente (o melhor no indireto)</td></tr>
+      <tr><td><strong>Trator reverso</strong></td><td class="ok">Bom (opera de proa, bow-to-bow)</td><td class="ok">Muito bom</td><td class="ok">Sim (proa do rebocador)</td><td class="md">Bom (≤ VS)</td></tr>
+      <tr><td><strong>ASD</strong></td><td class="ok">Como convencional (sit. 1)</td><td class="ok">Muito bom (sit. 1/2)</td><td class="ok">Muda p/ push-pull sem largar cabo (sit. 3/4)</td><td class="md">Bom (≤ VS; melhor no puxar direto)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box key">
+    <h4>A regra de ouro da Q32/2012-III <span class="tag t-banca">2012-Q32</span> <span class="tag t-verificar">VERIFICAR gabarito impresso</span></h4>
+    <p><span class="hl">Os tratores reversos são mais efetivos com o cabo passado na <strong>proa</strong> do navio; os convencionais, com o cabo passado a <strong>ré</strong> do navio ou atuando no costado (push-pull).</span> Inverter proa/ré aqui é o distrator clássico. Cruza com a Tabela-Guia de Fragoso/Cajaty (cobrada em 2011-Q71 e 2012-Q32).</p>
+  </div>
+
+  <p>Nos EUA e na Europa há tendência de usar <strong>tipos mais flexíveis</strong> (ASD, tratores), o que muda os métodos praticados nos dois continentes — a ler com esse contexto em mente. <span class="tag t-sim">BANCA: similaridade</span></p>
+</section>
+
+<!-- ===== GELO ===== -->
+<section class="bloco" id="gelo">
+  <h2 class="sec"><span class="n">3.3</span> Assistência de rebocadores no gelo</h2>
+  <p class="lede">Seção específica de portos frios. Baixa recorrência histórica na banca brasileira, mas presente no capítulo — leitura de reconhecimento.</p>
+  <div class="box">
+    <ul>
+      <li><strong>Tipos de navio para manobrar no gelo</strong> (§3.3.2) e <strong>preparativos</strong> antes de atracar/desatracar (§3.3.3).</li>
+      <li><strong>Rebocadores e assistência no gelo</strong> (§3.3.4): manobra dificultada; o gelo altera forças e visibilidade.</li>
+      <li><strong>Bloqueio de gelo e limpeza das bocinas</strong> (§3.3.5) — o gelo pode obstruir as tomadas/bocinas.</li>
+      <li><strong>Atracação</strong> (§3.3.6) e <strong>desatracação no gelo</strong> (§3.3.7): procedimentos próprios.</li>
+    </ul>
+    <p style="margin-top:6px;color:var(--mute);font-size:13.5px">Prioridade de estudo baixa relativa aos §3.2 — cair aqui é menos provável, mas o tópico existe no edital via Hensen Cap. 3.</p>
+  </div>
+</section>
+
+<!-- ===== BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚓</span> Pontos de banca — questões cobradas</h2>
+  <p class="lede">O que já caiu ligado a métodos de assistência, com o grau de confiança do gabarito conforme a regra 6/7 do projeto.</p>
+
+  <details class="pscpp" open>
+    <summary>2012-Q32 (Prova Rosa, 1,3 pt) — V/F sobre tipos e métodos</summary>
+    <ul>
+      <li><b>I)</b> A eficácia da manobra depende, além do BP requerido, da escolha do tipo mais apropriado e do seu correto posicionamento. → <b>V</b></li>
+      <li><b>II)</b> Os rebocadores de propulsão a vante (<i>tractor tugs</i>) dividem-se em Voith-Schneider e Azimutais. → <b>V</b></li>
+      <li><b>III)</b> Tratores reversos são mais efetivos com o cabo na <b>proa</b>; convencionais, com o cabo a <b>ré</b> ou no costado (push-pull). → <b>V</b></li>
+      <li><b>IV)</b> A tração <b>direta</b> é a mais utilizada para puxar a popa na direção desejada, assistir o governo ou controlar a velocidade. → <b>V</b></li>
+      <li><b>V)</b> A tração <b>indireta</b> seria a mais utilizada para puxar a proa em <b>baixa velocidade</b>. → <b>F</b> (a indireta serve a navios <b>com seguimento</b>, não em baixa velocidade — inversão).</li>
+    </ul>
+    <div class="gab">Gabarito deduzido: <b>(a) V V V F V</b>. <span class="tag t-verificar">VERIFICAR gabarito impresso</span> — 2012 conforme regra 7. A pegadinha mora na afirmativa V (inversão direta/indireta).</div>
+  </details>
+
+  <details class="pscpp">
+    <summary>2008-Q16 (lacuna, inglês) — reboque com cabo em águas estreitas</summary>
+    <ul>
+      <li>"The use of tugs towing on a line… can be used in _____ waters. The forward tug sometimes has two towlines called _____ lines."</li>
+      <li>Resposta: <b>narrow / cross</b> — em águas estreitas, o rebocador de vante usa duas linhas cruzadas (<i>cross/gate lines</i>) para governo bidirecional com pouco espaço (Fig. 3.13).</li>
+    </ul>
+    <div class="gab">Gabarito: <b>narrow / cross</b>. Tema diretamente do §3.2.1. <span class="tag t-banca">2008-Q16</span></div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Correlações Hensen — por similaridade temática</summary>
+    <ul>
+      <li>Distância do rebocador ao navio no reboque com cabo: <b>≥ 1,5 × o comprimento do rebocador</b>.</li>
+      <li>Costado: <b>1 espia</b> (push-pull) × <b>≥ 3 espias</b> (alongside towing).</li>
+      <li>Fronteira direto/indireto: <b>~5–6 nós</b> (Hensen) — cuidado com o número de Cajaty (&gt;2× BP a ~10 nós).</li>
+      <li>Controle de velocidade pela popa: freia o navio com máquinas do navio funcionando, mas <b>vibração alta</b> no rebocador.</li>
+    </ul>
+    <div class="gab"><span class="tag t-sim">BANCA: similaridade temática</span> — Hensen 4ª ed. é posterior às provas 2006–2012.</div>
+  </details>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="secblk" id="flash">
+  <h2>Flashcards — os pares que a banca inverte</h2>
+  <p class="lede">Toque para virar. Foco na dicotomia direta/indireta e nas correlações tipo→método.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="secblk" id="quiz">
+  <h2>Quiz — métodos de assistência</h2>
+  <p class="lede">Dez questões no padrão da banca, com feedback apontando a pegadinha e a seção de Hensen.</p>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav"><span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()">Próxima →</button>
+    </div>
+  </div>
+  <a class="backlink" href="index.html">← Voltar à estante</a>
+</section>
+
+</div>
+</main>
+
+<footer class="estante">
+  <div class="wrap"><b>PSCPP 2027</b> · Bloco H — Rebocadores (Arte Naval) · Hensen Cap. 3 · Capital Sereno</div>
+</footer>
+
+<script>
+var FC=[
+  {f:"Os dois grandes métodos",b:"Reboque com CABO (proa/popa, ≥1,5× o comprimento do rebocador) × operação no COSTADO (1–3 espias)."},
+  {f:"Push-pull — quantas espias?",b:"Normalmente 1 espia (alterna empurrar/puxar). Alongside towing: ≥3 espias, firmemente amarrado."},
+  {f:"Cabo longo / método europeu",b:"Reboque com cabo predomina na Europa. Costado predomina nos EUA e Pacífico Ocidental."},
+  {f:"Tração DIRETA",b:"Rebocador puxa; extremidade de trabalho na direção da força. Melhor com navio PARADO / baixa velocidade."},
+  {f:"Tração INDIRETA",b:"Casco como esqui aquático: cabo ~45°, casco ≤30°. Força ∝ velocidade; pode exceder o BP. Melhor com SEGUIMENTO."},
+  {f:"Fronteira direto/indireto (Hensen)",b:"~5–6 nós. Abaixo, direto; acima, indireto pode gerar mais força de governo."},
+  {f:"Multiplicador do BP (conflito)",b:"Hensen: 75–125% do BP a 5–7 nós. Cajaty: >2× o BP a ~10 nós (gráfico Voith). Ambos: força cresce com a velocidade."},
+  {f:"Ação indireta forçada (Cajaty)",b:"Vel. moderada: abre ângulo como na indireta E dá máquina forçando o cabo. Hensen: powered indirect, 3–7 nós, ~70° do fluxo."},
+  {f:"Q32/2012-III (correlação)",b:"Trator reverso = cabo na PROA. Convencional = cabo a RÉ ou costado (push-pull). Inverter proa/ré é o distrator."},
+  {f:"Cross lines (2008-Q16)",b:"Águas estreitas (narrow): rebocador de vante usa 2 cabos cruzados (cross/gate lines) p/ governo bidirecional."},
+  {f:"Controle de velocidade pela popa",b:"Rebocador de popa freia o navio sem que este pare máquinas; mantém governo. Contrapartida: vibração alta no rebocador."},
+  {f:"Push-pull — vantagem-chave",b:"Resposta rápida e neutraliza interação/momento de guinada perto da proa. Desvantagem: espórtula curta sofre em ondas."},
+  {f:"Reboque com cabo — vantagem-chave",b:"Espórtula longa: menos efeito de ondas; ótimo p/ governo e controle de velocidade em seguimento. Desvantagem: interação na proa."},
+  {f:"ASD — 4 situações",b:"1: cabo de vante (como convencional). 2: rebocador de ré, indireto. 3: muda p/ push-pull sem largar o cabo. 4: empurra pelo costado."},
+  {f:"Eclusas",b:"Em regra 1 cabo. Panamá novo: 2 cabos de 2 guinchos independentes (eficaz na largura limitada, menos tempo de resposta)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+var QUIZ=[
+  {q:"Os dois grandes métodos de assistência de Hensen (§3.1) são:",
+   o:["Direto e indireto","Reboque com cabo e operação no costado","Push e pull","Europeu e americano"],
+   a:1,e:"Reboque com CABO (proa/popa) × operação no COSTADO (1–3 espias). Direto/indireto e push/pull são variações dentro dessas duas famílias."},
+  {q:"No reboque com cabo, a distância típica do rebocador ao navio é de, no mínimo:",
+   o:["0,5 × o comprimento do rebocador","1,0 × o comprimento do rebocador","1,5 × o comprimento do rebocador","3 × o comprimento do rebocador"],
+   a:2,e:"≥ 1,5 × o comprimento do rebocador (§1.4/§3). Não confundir com as ≥3 espias da rebocagem de costado."},
+  {q:"A tração DIRETA é o método mais utilizado quando o navio está:",
+   o:["Em alta velocidade","Parado ou em baixa velocidade","Girando sobre o eixo","Em qualquer velocidade, indiferente"],
+   a:1,e:"Direta: melhor com navio parado/baixa velocidade. Ao aumentar a velocidade, o rebocador leva mais tempo para se posicionar em cada bordo (afirmativa IV da Q32/2012)."},
+  {q:"Na tração INDIRETA, o casco do rebocador fica a um ângulo com a água de, no máximo:",
+   o:["10°","30°","45°","90°"],
+   a:1,e:"Casco a ≤30° com a água; o cabo a ~45° com a linha de centro do navio. A força é proporcional à velocidade do navio (esqui aquático)."},
+  {q:"A afirmativa 'a tração indireta é usada para puxar a proa em baixa velocidade' é:",
+   o:["Verdadeira","Falsa — a indireta serve a navios com seguimento (velocidade), não baixa velocidade","Verdadeira só para VS","Verdadeira só no Panamá"],
+   a:1,e:"FALSA. É a inversão da afirmativa V da Q32/2012: a indireta depende do seguimento do navio; em baixa velocidade a DIRETA é mais eficiente. [VERIFICAR gabarito impresso]"},
+  {q:"Segundo Hensen, a transição do modo direto para o indireto ocorre em torno de:",
+   o:["2 nós","5–6 nós","10 nós","15 nós"],
+   a:1,e:"~5–6 nós (velocidades portuárias normais). Cuidado: Fragoso/Cajaty citam >2× o BP a ~10 nós — número do extremo do gráfico Voith, não a fronteira."},
+  {q:"No modo indireto, a força no cabo de reboque pode:",
+   o:["Nunca exceder o bollard pull","Exceder o bollard pull, pois cresce com a velocidade","Ser sempre o dobro do BP em qualquer velocidade","Ser independente da velocidade"],
+   a:1,e:"Pode EXCEDER o BP porque a sustentação do casco cresce com a velocidade (Hensen: 75–125% a 5–7 nós; Cajaty: >2× a ~10 nós)."},
+  {q:"Pela relação tipo↔método (Q32/2012-III), o trator reverso é mais efetivo com o cabo passado na:",
+   o:["Popa do navio","Proa do navio","Meia-nau","Não usa cabo"],
+   a:1,e:"Trator reverso = cabo na PROA (opera bow-to-bow). O convencional = cabo a RÉ ou costado. Inverter proa/ré é o distrator clássico."},
+  {q:"A técnica de 'cross lines' (2008-Q16), com dois cabos cruzados do rebocador de vante, serve para:",
+   o:["Aumentar o bollard pull","Governo bidirecional em águas estreitas com pouco espaço","Rebocar no gelo","Controlar a velocidade a ré"],
+   a:1,e:"Cross/gate lines: em águas estreitas (narrow), o rebocador de vante governa para os dois bordos com espaço mínimo de manobra (Fig. 3.13)."},
+  {q:"Uma DESVANTAGEM do push-pull no costado, segundo Hensen (§3.2.2), é:",
+   o:["Espórtulas longas demais","Braço de giro curto (distância entre os dois rebocadores) e pouca visibilidade do prático","Não neutraliza interação na proa","Só funciona acima de 10 nós"],
+   a:1,e:"Desvantagens do costado: braço de giro curto, espórtulas curtas (sofrem em ondas), sem flexibilidade de bordo, pouca visibilidade do prático. A resposta rápida e a neutralização da interação são as VANTAGENS."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>
