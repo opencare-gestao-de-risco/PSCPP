@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Fatores de Projeto de Rebocadores — Hensen Cap. 1 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E; --azul:#2C5F8A;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s;white-space:nowrap}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:30px 0 70px}
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:0 0 22px}
+  .related a{font-weight:bold}
+
+  section.bloco{margin-bottom:38px;scroll-margin-top:64px}
+  h2.sec{font-size:24px;color:var(--verde);margin:0 0 6px;font-weight:normal;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--ouro);letter-spacing:.1em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 18px;border-bottom:2px solid var(--linha);padding-bottom:12px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px;font-weight:normal}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.04em;padding:2px 8px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+  .t-sim{background:#e7f3ec;color:#1c5f3a}
+  .t-duvida{background:#fff0cf;color:#7a5c00}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:16px 20px;margin:16px 0;box-shadow:var(--sombra)}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.trap,.box.conflito{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4,.box.conflito h4{color:var(--vermelho)}
+  .box ul{margin:8px 0 0;padding-left:20px}
+  .box li{margin:5px 0}
+
+  /* Cards de fatores */
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0}
+  .fcard{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:14px 16px;border-top:3px solid var(--verde2);box-shadow:var(--sombra)}
+  .fcard h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--verde);font-weight:bold}
+  .fcard .num{display:inline-block;background:var(--ouro);color:var(--verde);border-radius:5px;padding:1px 7px;font-weight:bold;margin-right:6px;font-size:11px}
+  .fcard ul{margin:6px 0 0;padding-left:16px}
+  .fcard li{margin:4px 0;font-size:13px}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--sombra)}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:11.5px;font-weight:bold}
+  tr:nth-child(even) td{background:#faf7ee}
+  .tbl-wrap{overflow-x:auto;border-radius:10px;box-shadow:var(--sombra)}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:20px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+  details.pscpp .gab{background:rgba(200,168,75,.16);border:1px solid rgba(200,168,75,.4);border-radius:8px;padding:8px 12px;margin:6px 0 14px;font-size:13.5px}
+
+  .secblk{margin:40px 0 0;scroll-margin-top:64px}
+  .secblk > h2{font-size:23px;color:var(--verde);margin:0 0 4px;font-weight:normal;border-bottom:2px solid var(--linha);padding-bottom:8px}
+  .secblk > .lede{color:var(--mute);font-size:15px;margin:12px 0 18px}
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:185px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:14.5px;background:#fff;border:1.5px solid var(--linha);border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:13.5px;padding:11px 14px;border-radius:8px;display:none;line-height:1.5}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .backlink{display:inline-block;margin:24px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer.estante{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:36px}
+  footer.estante b{color:var(--ouro)}
+
+  @media(max-width:700px){.hero h1{font-size:25px}.fgrid{grid-template-columns:1fr}}
+  @media print{nav.toc{display:none}details.pscpp{background:#fff;color:#000;border:1px solid #ccc}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo II · Arte Naval · Bloco H — Rebocadores</p>
+    <h1>Fatores de Projeto de <em>Rebocadores</em></h1>
+    <p class="sub">Por que "não há dois portos iguais" — e como isso determina o tipo de rebocador. Os nove fatores da escolha (Fig. 1.11), as quatro categorias de porto, o legado do Exxon Valdez na escolta e os requisitos OCIMF que o prático troca com o mestre. O capítulo-mapa do Bloco H.</p>
+    <div class="src"><b>Fonte:</b> Hensen, <i>Tug Use in Port</i>, 4ª ed. (2021), Cap. 1 (Factors Determining Tug Design), §1.1–1.5 + Fig. 1.11. <b>Subtópico:</b> H1. <b>Banca:</b> 2006-Q8 e 2006-Q9 com gabarito confirmado; 2011-Q10, 2012-Q30 a verificar.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#s11">Diferenças de projeto</a>
+    <a href="#s12">Os 9 fatores</a>
+    <a href="#portos">4 categorias de porto</a>
+    <a href="#s14">Métodos</a>
+    <a href="#escolta">Escolta / Exxon Valdez</a>
+    <a href="#fig111">Fig. 1.11 ▦</a>
+    <a href="#banca">Banca ⚓</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Caderno do <strong>Bloco H — Rebocadores (Arte Naval)</strong>, subtópico <strong>H1 (Tipos / Projeto)</strong>. É o <em>mapa</em> do bloco: define os fatores que levam a cada tipo (Cap. 2), método (Cap. 3), bollard pull (Cap. 5) e escolta (Cap. 9). A pergunta central — "qual tipo e qual método para este porto?" — organiza todos os outros cadernos.
+</div>
+
+<!-- 1.1 -->
+<section class="bloco" id="s11">
+  <h2 class="sec"><span class="n">1.1</span> Diferenças no projeto e nos métodos de assistência</h2>
+  <p class="lede">A tese de abertura do livro: os métodos variam por tradição e condição local, e isso gerou a variedade de tipos de rebocador. Três forças moldam o cenário moderno.</p>
+  <div class="box key">
+    <h4>As três tendências modernas <span class="tag t-decorar">DECORAR</span></h4>
+    <ul>
+      <li><strong>Rápido desenvolvimento técnico:</strong> novos tipos com alta manobrabilidade e potência muito maior; governo moderno, novos equipamentos e <span class="hl">novos materiais de cabo (HMPE)</span>. Isso afeta os métodos e o número de rebocadores.</li>
+      <li><strong>Escolta pós-Exxon Valdez:</strong> a exigência de escoltar petroleiros em certas aproximações gerou os <span class="hl">rebocadores de escolta especialmente construídos</span> e os "com capacidade de escolta".</li>
+      <li><strong>Menos rebocadores por navio:</strong> navios mais manobráveis + rebocadores melhores + pressão econômica ⇒ tende-se ao <span class="hl-amb">número mínimo</span>. Isso torna o rebocador individual mais crucial e exige dele alta segurança e confiabilidade.</li>
+    </ul>
+  </div>
+  <div class="box">
+    <p>A pergunta que o capítulo organiza — <span class="hl">"qual tipo de rebocador e/ou método é o mais adequado para o porto?"</span> — não tem resposta simples. Exige pesquisa extensa, conhecimento profundo das capacidades e limitações de cada tipo (Cap. 4) e boa compreensão da situação local. O resultado pode ser um trator azimutal, um Voith ou até um convencional. A escolta de petroleiros acrescenta requisitos. <span class="tag t-sim">BANCA: similaridade</span></p>
+  </div>
+</section>
+
+<!-- 1.2 FATORES -->
+<section class="bloco" id="s12">
+  <h2 class="sec"><span class="n">1.2</span> Os fatores que influenciam o tipo e a assistência</h2>
+  <p class="lede">O núcleo do capítulo. Os requisitos operacionais nascem de três fatores gerais (§1.1), detalhados em sete subseções (1.2.1–1.2.7). Decore a lista — é matéria de correlação.</p>
+
+  <div class="box key">
+    <h4>Os três fatores gerais (§1.1) <span class="tag t-decorar">DECORAR</span></h4>
+    <ol style="margin:8px 0 0;padding-left:22px">
+      <li>O <strong>tipo de porto</strong> ou ancoradouro e suas aproximações, desenvolvimentos futuros e as condições geográficas/ambientais.</li>
+      <li>O <strong>tipo de navios</strong> que escalam o porto.</li>
+      <li>Os <strong>serviços exigidos</strong> no porto e arredores, inclusive offshore (SPMs, GNL, F(P)SOs, FLNGs, plataformas).</li>
+    </ol>
+  </div>
+
+  <div class="fgrid">
+    <div class="fcard">
+      <h4><span class="num">1.2.1</span> Categorias de porto</h4>
+      <ul><li>Quatro tipos (ver abaixo). Definem se a assistência é dentro/fora do porto, um bordo ou dois.</li></ul>
+    </div>
+    <div class="fcard">
+      <h4><span class="num">1.2.2</span> Condições ambientais</h4>
+      <ul>
+        <li>Mar morto (swell), ondas, vento, corrente, gelo, neblina.</li>
+        <li><span class="hl">Profundidade limitada → exige calado máximo do rebocador.</span></li>
+        <li>Portos antigos em estuários: requisitos <strong>mudam continuamente</strong> da entrada ao berço.</li>
+      </ul>
+    </div>
+    <div class="fcard">
+      <h4><span class="num">1.2.3</span> Os navios envolvidos</h4>
+      <ul>
+        <li>GNL/GLP, FSPOs, FLNGs, graneleiros, petroleiros, porta-contêineres, ro-ro, car-carriers.</li>
+        <li>Cada tipo gera requisitos de potência, equipamento, defensas, manobra e superestrutura.</li>
+      </ul>
+    </div>
+    <div class="fcard">
+      <h4><span class="num">1.2.4</span> Serviços exigidos</h4>
+      <ul>
+        <li>Além de assistir navios: rebocar plataformas/barcaças, comboios empurrados, combate a incêndio e controle de poluição.</li>
+        <li>Offshore (SPM, F(P)SO, GNL) exige tipo e equipamento próprios.</li>
+      </ul>
+    </div>
+    <div class="fcard">
+      <h4><span class="num">1.2.5</span> Método em uso</h4>
+      <ul>
+        <li>Depende de porto, navios, ambiente, complexidade do canal, pontes/eclusas, escolta e <strong>tradição</strong>.</li>
+        <li>Blackout do navio: o rebocador deve conseguir <span class="hl">frear e controlar o aproamento</span>.</li>
+      </ul>
+    </div>
+    <div class="fcard">
+      <h4><span class="num">1.2.6</span> Experiência disponível</h4>
+      <ul>
+        <li>Práticos/mestres já dominam os tipos locais. Mudar de tipo/sistema <span class="hl-amb">leva tempo e exige treinamento</span> — transição bem planejada é indispensável.</li>
+      </ul>
+    </div>
+    <div class="fcard">
+      <h4><span class="num">1.2.7</span> Requisitos de segurança</h4>
+      <ul>
+        <li>Áreas perigosas (GNL) impõem requisitos especiais.</li>
+        <li>Variam por porto — mas o armador deve exigir o <span class="hl">mais alto nível</span> sempre.</li>
+      </ul>
+    </div>
+    <div class="fcard">
+      <h4><span class="num">1.2.8</span> Resumo</h4>
+      <ul>
+        <li><strong>"Não há dois portos iguais."</strong> Os fatores influenciam o tipo <em>e</em> o método — e método tem forte relação com o tipo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4 CATEGORIAS DE PORTO -->
+<section class="bloco" id="portos">
+  <h2 class="sec"><span class="n">1.2.1</span> As quatro categorias de porto</h2>
+  <p class="lede">O detalhamento mais cobrável de §1.2. Cada categoria impõe um perfil de rebocador. Note o contraste do bordo de operação (a–d).</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th style="width:130px">Categoria</th><th>Característica</th><th>Implicação para o rebocador</th></tr></thead>
+    <tbody>
+      <tr><td><strong>(a) Convencionais</strong></td><td>Navios atracam em bacias/docas, berços fluviais; passam eclusas/pontes. Ex.: Rotterdam, Hong Kong (ligação curta ao mar); Antuérpia, Nova Orleans (longa/complexa)</td><td>Aptos dentro <span class="hl">e</span> fora do porto; assistência restrita a <strong>um único bordo</strong> nas bacias</td></tr>
+      <tr><td><strong>(b) Terminais</strong></td><td>Ex.: terminais de contêineres. Espaço suficiente → manobras padronizadas</td><td>Muito adequados ao <strong>push-pull</strong>; rebocadores projetados p/ isso</td></tr>
+      <tr><td><strong>(c) Trapiches/jetties</strong></td><td>Em mar aberto ou águas abrigadas. Atracação em dolphins/cais em T</td><td>Podem operar em <span class="hl">ambos os bordos</span> (diferente das bacias)</td></tr>
+      <tr><td><strong>(d) Offshore remoto</strong></td><td>SPMs, F(P)SOs, FLNGs, GNL. Amarração sob vento e ondas</td><td>Boa estabilidade, defensas resistentes, <span class="hl">guincho render-recovery</span>, alta potência</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="box">
+    <h4>Termos de projeto que a banca cobra <span class="tag t-decorar">DECORAR</span></h4>
+    <ul>
+      <li><strong>Render-recovery winch</strong> (guincho de rendimento-recuperação): libera cabo quando a tensão excede o limite e recupera quando reduz. Essencial em offshore e escolta.</li>
+      <li><strong>Dolphin:</strong> estrutura de atracação isolada no mar, sem cais contínuo. <strong>SPM:</strong> boia de atracação de ponto único. <strong>F(P)SO / FLNG:</strong> unidades flutuantes de produção/armazenamento / de GNL.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 1.4 MÉTODOS -->
+<section class="bloco" id="s14">
+  <h2 class="sec"><span class="n">1.4</span> Métodos de assistência (visão geral)</h2>
+  <p class="lede">O Cap. 1 antecipa os dois grandes métodos que o Cap. 3 detalha. Aqui só o essencial, para fechar o mapa.</p>
+  <div class="box">
+    <ul>
+      <li><strong>Reboque com cabo:</strong> cabo na proa ou popa; rebocador a <span class="hl">≥ 1,5× o seu comprimento</span> de distância.</li>
+      <li><strong>Operando no costado:</strong> 1, 2 ou 3 espias. <strong>Push-pull</strong> = normalmente 1 espia; <strong>rebocagem de costado</strong> = ≥ 3 espias, firmemente amarrado.</li>
+      <li>O tipo de rebocador depende amplamente do método; e o método depende inclusive da disponibilidade de <strong>embarcações de atracação</strong> — sem elas, o rebocador precisa empurrar no costado.</li>
+    </ul>
+    <p style="margin-top:6px;font-size:13px;color:var(--mute)">Detalhamento completo (direta/indireta, vantagens/desvantagens) no caderno do <strong>Cap. 3 (Métodos de Assistência)</strong>.</p>
+  </div>
+</section>
+
+<!-- ESCOLTA -->
+<section class="bloco" id="escolta">
+  <h2 class="sec"><span class="n">▸</span> Escolta e o legado do Exxon Valdez</h2>
+  <p class="lede">O fio histórico que liga o Cap. 1 ao Cap. 9. As datas e os requisitos OCIMF são exatamente o que a 2006-Q9 cobra.</p>
+  <div class="box key">
+    <h4>Linha do tempo da escolta <span class="tag t-decorar">DECORAR</span></h4>
+    <ul>
+      <li><strong>~1975</strong> — começa a atenção específica à escolta de petroleiros nos EUA. A Foss Maritime passa a escoltar quando o estado de <strong>Washington</strong> o torna obrigatório, para reduzir derramamentos no <strong>Puget Sound</strong>. Petroleiros acima de <span class="hl">40.000 TPB</span> deviam ser escoltados.</li>
+      <li><strong>1977</strong> — reboque de tanques carregados torna-se característico no <strong>Prince William Sound</strong>, Alasca.</li>
+      <li><strong>24/03/1989</strong> — o <strong>Exxon Valdez</strong> encalha na saída do braço Valdez (Alasca) → enorme derramamento. Consequência: <span class="hl">renovada exigência de escolta</span> a petroleiros carregados nos EUA e o desenvolvimento de rebocadores de escolta dedicados.</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h4>Requisitos de cabo do rebocador de escolta (cruza Cap. 9) <span class="tag t-sim">BANCA: similaridade</span></h4>
+    <ul>
+      <li>Resistência à ruptura mínima: <span class="hl">2 a 3× as forças máximas</span> de frenagem/governo (fator OCIMF de 2,0 para sintéticos, incl. HMPE).</li>
+      <li>DNV GL: cabo com ruptura ≥ 2× o bollard pull quando BP &gt; 100 t; com BP menor o fator sobe (ex.: BP 80 t → ≥ 2,1×).</li>
+      <li>Cabos de escolta: HMPE (Spectra/Dyneema), poliéster ou PP/PE; comprimento típico <strong>100–150 m</strong> (às vezes 60–80 m, a critério do mestre).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FIG 1.11 -->
+<section class="bloco" id="fig111">
+  <h2 class="sec"><span class="n">Fig. 1.11</span> A tabela-síntese dos nove fatores</h2>
+  <p class="lede">A figura que fecha o capítulo — a síntese matricial de tudo que decide a escolha do rebocador. Vale como mapa mental de revisão.</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Eixo do fator</th><th>Exemplos de valores (colunas do original)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Passagem / Berço</strong></td><td>Mar/aproximação · rio · canal · profundidade · eclusas/pontes · trapiches (mar aberto / abrigados) · bacias · berços fluviais · boias · embarcações de atracação</td></tr>
+      <tr><td>2</td><td><strong>Condições ambientais</strong></td><td>Mar morto · ondas · vento · corrente · gelo · neblina · área perigosa</td></tr>
+      <tr><td>3</td><td><strong>Tipos de navios</strong></td><td>Carga geral · porta-contêineres · car-carriers · ro-ro · porta-aviões · petroleiros GNL/GLP · graneleiros · ferries · cruzeiros · navios de guerra/submarinos</td></tr>
+      <tr><td>4</td><td><strong>Outros serviços</strong></td><td>Offshore · SPMs · FSPO · FLNGs · barcaças · guindastes flutuantes · estaleiros · escolta</td></tr>
+      <tr><td>5</td><td><strong>Métodos de assistência</strong></td><td>Reboque com cabo · push-pull · rebocagem ao costado · escolta</td></tr>
+      <tr><td>6</td><td><strong>Rebocadores existentes</strong></td><td>Convencional (hélice simples/duplo) · trator · trator reverso/VS · ASD · Rotortugs · reversos · uma propulsão a vante + outra a ré</td></tr>
+      <tr><td>7</td><td><strong>Experiência disponível</strong></td><td>Tipo de rebocador · treinamento · experiência com métodos de assistência</td></tr>
+      <tr><td>8</td><td><strong>Segurança dos rebocadores</strong></td><td>Requisitos por porto; nível máximo exigido pelo armador</td></tr>
+      <tr><td>9</td><td><strong>Aspectos financeiros</strong></td><td>Alto investimento em novos rebocadores; pressão pelo número mínimo</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="box">
+    <p><strong>1.5 Conclusão:</strong> "não há dois portos iguais no que se refere aos requisitos de rebocadores". Os arranjos, os navios, o ambiente e as tradições diferem — e, por consequência, os tipos de rebocador e os métodos. <span class="tag t-decorar">DECORAR</span></p>
+  </div>
+</section>
+
+<!-- BANCA -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚓</span> Pontos de banca</h2>
+  <p class="lede">O Cap. 1 tem duas questões de 2006 com gabarito confirmado — retorno garantido — além de transversais de tipos/legislação.</p>
+
+  <details class="pscpp" open>
+    <summary>2006-Q9 (escolta / OCIMF, ~1 pt) — GABARITO CONFIRMADO</summary>
+    <ul>
+      <li>V/F sobre informações que o prático troca com o comandante na escolta (OCIMF, Anexo 4 de <i>Tug Use in Port</i>): máxima força do cabo de escolta; tipo de rebocadores e bollard pull; quais olhais/cabeços usar; método de passagem/largada do cabo; SWL dos acessórios; velocidade máxima planejada e do rebocador; equipamento arriado sempre sob controle.</li>
+    </ul>
+    <div class="gab">Gabarito marcado: <b>(c) — (V)(V)(F)(V)(F)(V)(V)</b>. <span class="tag t-banca">2006-Q9</span></div>
+  </details>
+
+  <details class="pscpp">
+    <summary>2006-Q8 (correlação de tipos, ~1 pt) — GABARITO CONFIRMADO</summary>
+    <ul>
+      <li>Correlacione tipos (Combi, Pusher tug, Multi tug, Tractor, Conventional) com suas características, citando <i>Tug Use in Port</i> / Circular MSC 1101.</li>
+      <li>Liga direto à §1.3 (tipos). Formato de correlação de colunas.</li>
+    </ul>
+    <div class="gab">Gabarito extraível da prova (marcado). <span class="tag t-banca">2006-Q8</span> — reveja os tipos no caderno do Cap. 2.</div>
+  </details>
+
+  <details class="pscpp">
+    <summary>2006-Q6 (inglês, V/F — nozzles e lemes) — GABARITO CONFIRMADO</summary>
+    <ul>
+      <li>I) mono-hélice melhor ao costado p/ submarino — F; II) FPP aberto desenvolve mais empuxo a ré que CPP aberto — V; III) backing nozzle melhor a ré, menos a vante — V; IV) nozzles aumentam eficiência e governo — F; V) becker rudder melhor a ré que leme sem flap — F.</li>
+    </ul>
+    <div class="gab">Gabarito marcado: <b>(d) (V)(V)(V)(F)(F)</b>. <span class="tag t-banca">2006-Q6</span></div>
+  </details>
+
+  <details class="pscpp">
+    <summary>2011-Q10 e 2012-Q30 (legislação / tipos) — A VERIFICAR</summary>
+    <ul>
+      <li><b>2011-Q10</b> (NORMAM-08): identificar a INCORRETA → alt. (b) "estabelecer dispositivo e quantidade de rebocadores é responsabilidade exclusiva do Comandante" — é do <span class="hl">Prático</span>.</li>
+      <li><b>2012-Q30</b> (CONAPRA): a INCORRETA → alt. (b) sobre azimutais a vante terem maior calado e "não serem indicados p/ águas rasas" (a conclusão é o erro).</li>
+    </ul>
+    <div class="gab"><span class="tag t-verificar">VERIFICAR gabarito impresso</span> — 2011/2012 deduzidos, conforme regra 7.</div>
+  </details>
+</section>
+
+<section class="secblk" id="flash">
+  <h2>Flashcards — os fatores e a escolta</h2>
+  <p class="lede">Toque para virar. Foco nos nove fatores, nas quatro categorias de porto e nas datas da escolta.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<section class="secblk" id="quiz">
+  <h2>Quiz — fatores de projeto</h2>
+  <p class="lede">Dez questões no padrão da banca, com feedback apontando a seção do Cap. 1 e a pegadinha.</p>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav"><span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()">Próxima →</button>
+    </div>
+  </div>
+  <a class="backlink" href="index.html">← Voltar à estante</a>
+</section>
+
+</div>
+</main>
+
+<footer class="estante">
+  <div class="wrap"><b>PSCPP 2027</b> · Bloco H — Rebocadores (Arte Naval) · Hensen Cap. 1 · Capital Sereno</div>
+</footer>
+
+<script>
+var FC=[
+  {f:"Os 3 fatores gerais (§1.1)",b:"(1) tipo de porto e aproximações; (2) tipo de navios; (3) serviços exigidos (incl. offshore: SPM, GNL, F(P)SO, FLNG)."},
+  {f:"Frase-síntese do Cap. 1",b:"'Não há dois portos iguais.' Os fatores definem o tipo E o método — e método tem forte relação com o tipo."},
+  {f:"4 categorias de porto",b:"(a) convencionais (bacias/eclusas, 1 bordo); (b) terminais (push-pull); (c) trapiches/jetties (2 bordos); (d) offshore remoto (SPM/GNL)."},
+  {f:"Bordo de operação: bacia × trapiche",b:"Bacias portuárias (a): assistência a UM bordo. Trapiches/dolphins (c): AMBOS os bordos."},
+  {f:"Categoria (d) offshore — exige",b:"Boa estabilidade, defensas resistentes, guincho render-recovery, alta potência. SPM/F(P)SO/FLNG/GNL."},
+  {f:"Render-recovery winch",b:"Guincho que libera cabo quando a tensão excede o limite e recupera quando reduz. Essencial em offshore e escolta."},
+  {f:"Condições ambientais (1.2.2)",b:"Mar morto, ondas, vento, corrente, gelo, neblina. Profundidade limitada → exige calado máximo do rebocador."},
+  {f:"1.2.6 Experiência",b:"Mudar de tipo/sistema leva tempo e exige treinamento; transição bem planejada é indispensável."},
+  {f:"1.2.7 Segurança",b:"Varia por porto (GNL = área perigosa), mas o armador deve exigir o mais alto nível sempre."},
+  {f:"Blackout do navio",b:"O rebocador (tipo e potência) deve conseguir manter o controle: frear a velocidade e/ou controlar o aproamento."},
+  {f:"Escolta — marco histórico",b:"~1975 Washington/Puget Sound (petroleiros >40.000 TPB); 1977 Prince William Sound; 24/03/1989 Exxon Valdez → escolta renovada."},
+  {f:"Exxon Valdez",b:"Encalhou em 24/03/1989 na saída do braço Valdez (Alasca). Consequência: rebocadores de escolta dedicados e 'com capacidade de escolta'."},
+  {f:"Cabo de escolta — resistência",b:"Ruptura ≥ 2–3× as forças máximas de frenagem/governo (OCIMF fator 2,0). DNV GL: ≥2× o BP quando BP>100 t. Comprimento típico 100–150 m."},
+  {f:"Fig. 1.11 — 9 fatores",b:"Passagem/berço · ambiente · tipos de navios · outros serviços · métodos · rebocadores existentes · experiência · segurança · financeiro."},
+  {f:"2006-Q9 (escolta/OCIMF)",b:"V/F sobre o que o prático troca com o comandante. Gabarito (c): (V)(V)(F)(V)(F)(V)(V)."},
+  {f:"Tendências modernas",b:"Mais manobra/potência + escolta pós-Valdez + número MÍNIMO de rebocadores (torna o rebocador individual mais crucial)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+var QUIZ=[
+  {q:"Segundo Hensen (§1.1), os requisitos operacionais dos rebocadores são determinados principalmente por:",
+   o:["Apenas o bollard pull disponível","O tipo de porto, o tipo de navios e os serviços exigidos","A cor e o material do casco","Somente as condições de vento"],
+   a:1,e:"Os três fatores gerais: (1) tipo de porto e aproximações; (2) tipo de navios; (3) serviços exigidos (inclusive offshore). Toda a escolha do rebocador deriva disso."},
+  {q:"A frase que sintetiza o Capítulo 1 é:",
+   o:["Todo porto exige um trator azimutal","Não há dois portos iguais","O convencional é sempre o melhor","O push-pull serve a qualquer porto"],
+   a:1,e:"'Não há dois portos iguais' (§1.2.8 e §1.5). Os fatores locais definem o tipo e o método de assistência."},
+  {q:"Nas bacias portuárias (categoria a), a assistência do rebocador costuma ser feita:",
+   o:["Em ambos os bordos","Em um único bordo","Sempre pela popa","Só com push-pull"],
+   a:1,e:"Nas bacias (a) a assistência é restrita a UM bordo. Já nos trapiches/dolphins (c) o rebocador pode operar em AMBOS os bordos — esse contraste é cobrável."},
+  {q:"A categoria de porto mais adequada ao método push-pull é:",
+   o:["(a) convencionais com eclusas","(b) terminais com espaço para manobra","(c) trapiches em mar aberto","(d) offshore remoto"],
+   a:1,e:"Terminais (b) — ex. de contêineres — têm espaço suficiente e manobras padronizadas, ideais para o push-pull, com rebocadores projetados para isso."},
+  {q:"O 'render-recovery winch' (guincho de rendimento-recuperação):",
+   o:["Aumenta o bollard pull do rebocador","Libera cabo quando a tensão excede o limite e recupera quando reduz","Serve só para reboque oceânico","Substitui o propulsor de proa"],
+   a:1,e:"Libera cabo automaticamente sob tensão excessiva e recupera quando ela cai. É essencial em operações offshore e de escolta (categoria d)."},
+  {q:"A exigência de escolta de petroleiros nos EUA foi fortemente renovada após:",
+   o:["O 11 de setembro","O acidente do Exxon Valdez (1989)","A criação da IMO","A NORMAM-08"],
+   a:1,e:"O Exxon Valdez encalhou em 24/03/1989 (Alasca), causando enorme derramamento. A atenção à escolta de petroleiros carregados foi renovada e surgiram rebocadores de escolta dedicados."},
+  {q:"Nos primórdios (por volta de 1975), a escolta obrigatória em Washington aplicava-se a petroleiros acima de:",
+   o:["10.000 TPB","40.000 TPB","100.000 TPB","250.000 TPB"],
+   a:1,e:"Acima de 40.000 TPB, para reduzir derramamentos no Puget Sound. A Foss Maritime iniciou a escolta quando o estado a tornou obrigatória."},
+  {q:"Pela NORMAM-08 (2011-Q10), a decisão sobre o dispositivo e a quantidade de rebocadores é responsabilidade:",
+   o:["Exclusiva do Comandante","Do Prático","Do armador do rebocador","Da Autoridade Portuária"],
+   a:1,e:"É do Prático. A alternativa que diz ser 'exclusiva do Comandante' é a INCORRETA da questão. [VERIFICAR gabarito impresso]"},
+  {q:"Sobre a tendência moderna do número de rebocadores por navio, é correto dizer que:",
+   o:["Está aumentando por segurança","Está diminuindo, tornando o rebocador individual mais crucial","Permanece fixo por lei","Depende só do vento"],
+   a:1,e:"Navios mais manobráveis + rebocadores melhores + pressão econômica ⇒ número mínimo. Isso torna cada rebocador mais crucial e exige dele alta segurança e confiabilidade."},
+  {q:"O comprimento típico de um cabo de reboque usado na ESCOLTA é de:",
+   o:["10–20 m","30–50 m","100–150 m","300–400 m"],
+   a:2,e:"100–150 m (às vezes 60–80 m, a critério do mestre). Materiais: HMPE (Spectra/Dyneema), poliéster ou PP/PE. Resistência ≥ 2–3× as forças máximas (OCIMF)."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>

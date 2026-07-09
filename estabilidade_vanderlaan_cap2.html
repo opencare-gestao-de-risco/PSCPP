@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Estabilidade dos Rebocadores — Van der Laan Cap. 2 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E; --azul:#2C5F8A;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s;white-space:nowrap}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:30px 0 70px}
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:0 0 22px}
+  .related a{font-weight:bold}
+
+  section.bloco{margin-bottom:38px;scroll-margin-top:64px}
+  h2.sec{font-size:24px;color:var(--verde);margin:0 0 6px;font-weight:normal;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--ouro);letter-spacing:.1em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 18px;border-bottom:2px solid var(--linha);padding-bottom:12px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px;font-weight:normal}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.04em;padding:2px 8px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+  .t-sim{background:#e7f3ec;color:#1c5f3a}
+  .t-cross{background:#e0f0ee;color:#0d5c50}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:16px 20px;margin:16px 0;box-shadow:var(--sombra)}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.trap,.box.conflito{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.calc{border-left:6px solid var(--azul);background:#eff5fb}
+  .box.cross{border-left:6px solid var(--verde2);background:#e9f4f1}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4,.box.conflito h4{color:var(--vermelho)}
+  .box.calc h4{color:var(--azul)}
+  .box.cross h4{color:var(--verde2)}
+  .box ul{margin:8px 0 0;padding-left:20px}
+  .box li{margin:5px 0}
+  .formula{background:#fff;border:1px dashed #9db8d4;border-radius:8px;padding:12px 16px;margin:10px 0;font-family:'Courier New',monospace;font-size:17px;color:#123;text-align:center;font-weight:bold}
+  .formula small{display:block;font-family:'Trebuchet MS',sans-serif;font-weight:normal;font-size:11.5px;color:var(--mute);margin-top:6px}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--sombra)}
+  th,td{border:1px solid var(--linha);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  .mono{font-family:'Courier New',monospace;font-weight:bold;color:#123}
+
+  figure.diag{margin:22px 0;background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 18px 14px;box-shadow:var(--sombra)}
+  figure.diag svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  figcaption{font-size:12.5px;color:var(--mute);text-align:center;margin-top:10px;font-style:italic}
+  .diag-title{color:var(--verde2);font-size:16px;margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-weight:bold}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:20px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+  details.pscpp .gab{background:rgba(200,168,75,.16);border:1px solid rgba(200,168,75,.4);border-radius:8px;padding:8px 12px;margin:6px 0 14px;font-size:13.5px}
+
+  .secblk{margin:40px 0 0;scroll-margin-top:64px}
+  .secblk > h2{font-size:23px;color:var(--verde);margin:0 0 4px;font-weight:normal;border-bottom:2px solid var(--linha);padding-bottom:8px}
+  .secblk > .lede{color:var(--mute);font-size:15px;margin:12px 0 18px}
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:185px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:14.5px;background:#fff;border:1.5px solid var(--linha);border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:13.5px;padding:11px 14px;border-radius:8px;display:none;line-height:1.5}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .backlink{display:inline-block;margin:24px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer.estante{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:36px}
+  footer.estante b{color:var(--ouro)}
+
+  @media(max-width:700px){.hero h1{font-size:25px}}
+  @media print{nav.toc{display:none}details.pscpp{background:#fff;color:#000;border:1px solid #ccc}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo II · Arte Naval · Bloco H — Rebocadores</p>
+    <h1>Estabilidade dos <em>Rebocadores</em></h1>
+    <p class="sub">A curva GZ e por que, no rebocador, o GM inicial NÃO é o critério — é toda a curva, até o ângulo de alagamento. Os ângulos-marco (imersão do convés → 33° → 50° → 75°), a reserva de flutuabilidade, o dilema porto × alto-mar e a estabilidade de rumo (modelos A/B/C). Fonte primária dedicada à estabilidade.</p>
+    <div class="src"><b>Fonte primária:</b> Van der Laan, <i>Estabilidade dos Rebocadores</i> (FGMar 2022), Cap. 2 — Princípios Básicos de Estabilidade, §2.1–2.5. <b>Cruzamento (regra 5):</b> Hensen, <i>Tug Use in Port</i>, Cap. 4 (§4.2.3, Figs. 4.10/4.14) e Cap. 6 (girting). <b>Subtópico:</b> H4.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#s21">Tipos de estabilidade</a>
+    <a href="#s22">GM inicial</a>
+    <a href="#nota1">GM não basta ▸</a>
+    <a href="#s23">Curva GZ</a>
+    <a href="#s24">Nível de estabilidade</a>
+    <a href="#s25">Estabilidade de rumo</a>
+    <a href="#cruz">Cruzamento Hensen</a>
+    <a href="#banca">Banca ⚓</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Caderno do <strong>Bloco H — Rebocadores (Arte Naval)</strong>, subtópico <strong>H4 (Estabilidade / risco de girting)</strong>. É o caderno de <em>referência teórica</em> de estabilidade (Van der Laan primário). Complementa o caderno de figuras <em>Ponto de Reboque, COP e Estabilidade</em> (Fig. 4.8/9.14/4.10) e o de <em>Capacidades</em> (Cap. 4, regras IMO, self/tow-tripping). Pela regra 5, cruza sempre com Hensen Cap. 4 e Cap. 6.
+</div>
+
+<!-- 2.1 -->
+<section class="bloco" id="s21">
+  <h2 class="sec"><span class="n">2.1</span> Os vários tipos de estabilidade</h2>
+  <p class="lede">Antes da curva, a taxonomia. A banca gosta de separar o que Van der Laan separa: transversal × longitudinal, estática × dinâmica, e a estabilidade de rumo (que não é estabilidade transversal).</p>
+
+  <div class="box key">
+    <h4>As formas de estabilidade <span class="tag t-decorar">DECORAR</span></h4>
+    <ul>
+      <li><strong>Longitudinal</strong> — aplicação menos prática no trabalho de rebocador; <span class="hl">não é tratada</span> por Van der Laan.</li>
+      <li><strong>Transversal</strong> — a mais relevante; pode ter efeito dramático nas operações de reboque. Subdivide-se em:
+        <ul>
+          <li><strong>a) Inicial e estática</strong> — o tipo geralmente usado (o foco do capítulo).</li>
+          <li><strong>b) Dinâmica</strong> — vai um passo além: considera a <span class="hl">energia do movimento de balanço</span> do navio.</li>
+        </ul>
+      </li>
+      <li><strong>De rumo</strong> (plano horizontal) — forma distinta; <span class="hl-amb">não está relacionada à estabilidade transversal</span>, mas é importante para rebocadores modernos (§2.5).</li>
+    </ul>
+    <p style="margin-top:8px"><strong>Nota de escopo:</strong> a ênfase é na <strong>estabilidade intacta</strong> (casco íntegro, sem embarque de água). A estabilidade em avaria (casco danificado, com alagamento) é do Cap. 6.</p>
+  </div>
+</section>
+
+<!-- 2.2 GM -->
+<section class="bloco" id="s22">
+  <h2 class="sec"><span class="n">2.2</span> Estabilidade inicial — o GM</h2>
+  <p class="lede">Os pontos K, B, M, G e o braço GZ. Fundamento comum a qualquer embarcação — mas com uma ressalva para rebocadores que vem logo depois.</p>
+
+  <div class="box">
+    <ul>
+      <li><strong>K</strong> — posição da quilha. <strong>B / COB</strong> — centro de flutuação (centro de gravidade do volume submerso). Sem banda, chama-se B; com banda de "a" graus, desloca-se para B₀ (Fig. 2.1/2.2).</li>
+      <li><strong>M₀ (metacentro inicial)</strong> — ponto onde a linha vertical da força de empuxo (reação à banda) cruza a linha central do rebocador (Fig. 2.2).</li>
+      <li><strong>G (centro de gravidade)</strong> — ponto por onde o peso age para baixo. Sua posição varia com combustível, água nos tanques, carga no convés e provisões.</li>
+      <li><strong>W</strong> — empuxo = peso da embarcação (duas forças iguais e opostas). O braço entre elas é o <strong>GZ</strong>, que trabalha para trazer o rebocador de volta à vertical (Fig. 2.3).</li>
+    </ul>
+  </div>
+
+  <div class="box calc">
+    <h4>⚙ Altura metacêntrica</h4>
+    <div class="formula">GM = distância entre M e G<small>GM maior ⇒ mais estabilidade · consegue-se GM maior abaixando G</small></div>
+    <p style="font-size:13.5px;margin:6px 0">G mais alto (tanques de fundo vazios, água no convés, carga alta no convés) <span class="hl">reduz o GM — que pode até ficar negativo</span> → rebocador instável. O mesmo ocorre com <strong>gelo</strong> acumulando em convés, mastros e superestrutura: reduz o GM rapidamente e torna a situação crítica.</p>
+    <p style="font-size:13.5px;margin:6px 0"><strong>Limite:</strong> o GM só se aplica a <span class="hl-amb">pequenos ângulos de inclinação</span>, porque M₀ é considerado fixo apenas para esses ângulos. Para ângulos maiores, vale a curva (§2.3).</p>
+  </div>
+</section>
+
+<!-- NOTA 1 -->
+<section class="bloco" id="nota1">
+  <h2 class="sec"><span class="n">▸</span> A ressalva que a banca adora: no rebocador, o GM não basta</h2>
+  <p class="lede">É a diferença conceitual mais importante do capítulo. Trocar "navio" por "rebocador" nesta afirmação é o distrator perfeito.</p>
+
+  <div class="box conflito">
+    <h4>Nota 1 de Van der Laan <span class="tag t-decorar">DECORAR</span> <span class="tag t-conflito">DISTRATOR</span></h4>
+    <ul>
+      <li>Para um <strong>navio</strong>, o GM inicial costuma ser o <span class="hl">principal critério</span> de estabilidade.</li>
+      <li>Para um <strong>rebocador</strong>, <span class="hl-amb">NÃO é</span>: embora o GM importe, é <strong>toda a curva de estabilidade</strong> — incluindo o <strong>ângulo de alagamento</strong> — que realmente mostra a estabilidade. É a curva inteira que deve atender aos requisitos da classe, da IMO e das autoridades.</li>
+      <li><strong>Por quê a diferença:</strong> no navio, terminado o cálculo (fora consumíveis), a estabilidade não muda na viagem — a carga está peada. No <strong>rebocador</strong>, como o <span class="hl">ângulo e a força do cabo de reboque mudam o tempo todo</span>, a condição de estabilidade se altera constantemente.</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h4>Nota 2 <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Um dado GM e um dado gráfico valem <span class="hl">apenas para aquela condição de carregamento específica</span> (ex.: todos os tanques cheios). Outras condições dão GM e curvas diferentes.</p>
+  </div>
+</section>
+
+<!-- 2.3 CURVA GZ -->
+<section class="bloco" id="s23">
+  <h2 class="sec"><span class="n">2.3</span> Estabilidade estática — a curva GZ</h2>
+  <p class="lede">O gráfico da Fig. 2.5 é o coração do capítulo e o item de altíssima cobrança. Os quatro marcos (a–d) precisam estar decorados com os ângulos exatos.</p>
+
+  <div class="box calc">
+    <div class="formula">GZ = GM × sen(α)<small>α = ângulo de banda (adernamento) · GZ = braço de endireitamento · plotado dá a curva de estabilidade</small></div>
+    <p style="font-size:13.5px;margin:6px 0">A localização de G calcula-se para cada calado/trim/carregamento; M vem da localização de B em cada ângulo. A curva mostra a <strong>faixa de estabilidade</strong> para aquela condição.</p>
+  </div>
+
+  <figure class="diag" id="figgz">
+    <div class="diag-title">Figura 2.5 — Gráfico de estabilidade de um rebocador portuário</div>
+    <svg viewBox="0 0 720 420" role="img" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+      </defs>
+      <!-- eixos -->
+      <line x1="70" y1="360" x2="690" y2="360" stroke="#16302B" stroke-width="1.5"/>
+      <line x1="70" y1="360" x2="70" y2="40" stroke="#16302B" stroke-width="1.5"/>
+      <text x="24" y="200" font-size="12" fill="#5a5346" transform="rotate(-90 24 200)" text-anchor="middle">braço de endireitamento GZ (m)</text>
+      <text x="380" y="398" font-size="12" fill="#5a5346" text-anchor="middle">ângulo de adernamento (graus)</text>
+      <!-- grid ângulos -->
+      <g font-size="11" fill="#7a6f55" text-anchor="middle">
+        <line x1="147" y1="360" x2="147" y2="365" stroke="#16302B"/><text x="147" y="380">10</text>
+        <line x1="225" y1="360" x2="225" y2="365" stroke="#16302B"/><text x="225" y="380">20</text>
+        <line x1="302" y1="360" x2="302" y2="365" stroke="#16302B"/><text x="302" y="380">30</text>
+        <line x1="380" y1="360" x2="380" y2="365" stroke="#16302B"/><text x="380" y="380">40</text>
+        <line x1="457" y1="360" x2="457" y2="365" stroke="#16302B"/><text x="457" y="380">50</text>
+        <line x1="535" y1="360" x2="535" y2="365" stroke="#16302B"/><text x="535" y="380">60</text>
+        <line x1="612" y1="360" x2="612" y2="365" stroke="#16302B"/><text x="612" y="380">70</text>
+        <line x1="668" y1="360" x2="668" y2="365" stroke="#16302B"/><text x="668" y="380">80</text>
+      </g>
+      <!-- curva GZ (vermelha): sobe quase linear, topo ~33 (x=325,y=140), cai, cruza zero ~75 (x=647) -->
+      <path d="M70 360 C150 300 200 235 260 190 C300 160 315 143 325 140 C360 145 400 170 440 215 C500 285 580 350 647 360" fill="none" stroke="#c0392b" stroke-width="3"/>
+      <!-- tangente na origem até 57.3 (GM) -->
+      <line x1="70" y1="360" x2="558" y2="70" stroke="#16302B" stroke-width="1.5" stroke-dasharray="1 0"/>
+      <line x1="558" y1="70" x2="558" y2="360" stroke="#16302B" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="558" y="60" font-size="11" fill="#16302B" text-anchor="middle">57,3° (1 rad)</text>
+      <!-- seta GM no topo -->
+      <line x1="80" y1="70" x2="548" y2="70" stroke="#16302B" stroke-width="1.2" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <text x="120" y="62" font-size="13" font-weight="bold" fill="#16302B">GM</text>
+      <!-- marco a: 30 graus -->
+      <line x1="302" y1="150" x2="302" y2="360" stroke="#1A7A6E" stroke-width="1" stroke-dasharray="4 3"/>
+      <circle cx="302" cy="150" r="4" fill="#1A7A6E"/>
+      <text x="250" y="168" font-size="10.5" fill="#1A7A6E">GZ a 30°</text>
+      <!-- imersão do convés (~22) -->
+      <line x1="245" y1="178" x2="200" y2="178" stroke="#2C5F8A" stroke-width="2" marker-end="url(#ar)"/>
+      <text x="150" y="182" font-size="10.5" fill="#2C5F8A">imersão do convés</text>
+      <!-- topo ~33 -->
+      <circle cx="325" cy="140" r="4" fill="#c0392b"/>
+      <text x="325" y="128" font-size="11" font-weight="bold" fill="#c0392b" text-anchor="middle">~33° topo (GZ máx)</text>
+      <!-- alagamento ~50 -->
+      <line x1="457" y1="238" x2="502" y2="238" stroke="#2C5F8A" stroke-width="2" marker-end="url(#ar)"/>
+      <text x="507" y="242" font-size="10.5" fill="#2C5F8A">~50° ângulo de alagamento</text>
+      <line x1="457" y1="238" x2="457" y2="360" stroke="#2C5F8A" stroke-width="1" stroke-dasharray="4 3"/>
+      <!-- emborcamento ~75 -->
+      <line x1="647" y1="360" x2="647" y2="330" stroke="#c0392b" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="647" y="322" font-size="10.5" fill="#c0392b" text-anchor="middle">~75°</text>
+      <text x="647" y="310" font-size="10.5" fill="#c0392b" text-anchor="middle">emborca</text>
+      <!-- faixa de estabilidade -->
+      <text x="560" y="392" font-size="10.5" fill="#7a6f55">faixa de estabilidade: 0° → ~75°</text>
+    </svg>
+    <figcaption>Reconstrução fiel da Figura 2.5 de Van der Laan. Marcos: (a) GZ lido em cada ângulo — ex. a 30°; (b) crescimento quase linear até a imersão do convés, depois mais lento; (c) topo ~33° (GZ e binário W×GZ máximos); ~50° ângulo de alagamento; ~75° estabilidade negativa → emborca; (d) GM inicial na tangente à origem, lida a 57,3° (1 radiano).</figcaption>
+  </figure>
+
+  <div class="box key">
+    <h4>Os quatro marcos da curva (a–d) <span class="tag t-decorar">DECORAR</span></h4>
+    <table>
+      <thead><tr><th>Marco</th><th>Ângulo</th><th>O que acontece</th></tr></thead>
+      <tbody>
+        <tr><td>Imersão do convés (b)</td><td class="center mono">~20°*</td><td>Fim do crescimento quase linear; depois a curva sobe mais devagar. <span class="hl-amb">*Van der Laan não fixa um ângulo</span> — depende do projeto/borda-livre; leitura aproximada do gráfico</td></tr>
+        <tr><td><strong>Topo da curva (c)</strong></td><td class="center mono">~33°</td><td><span class="hl">GZ e binário de endireitamento W×GZ máximos.</span> Depois, a estabilidade diminui</td></tr>
+        <tr><td><strong>Ângulo de alagamento (c)</strong></td><td class="center mono">~50°</td><td>Água embarca pelas aberturas da praça de máquinas etc. Ponto importante — estabilidade cai mais</td></tr>
+        <tr><td><strong>Emborcamento (c)</strong></td><td class="center mono">~75°</td><td>Estabilidade fica <span class="hl-amb">negativa</span> — o rebocador emborca</td></tr>
+        <tr><td>GM inicial (d)</td><td class="center mono">57,3°</td><td>Lido onde a tangente à origem cruza a vertical de 57,3° (1 radiano)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box">
+    <h4>Fig. 2.6 — Reserva de flutuabilidade <span class="tag t-decorar">DECORAR</span></h4>
+    <p>O convés de proa elevado e a superestrutura acrescentam reserva de flutuabilidade — <span class="hl">mas só se as aberturas estiverem fechadas</span>. No exemplo da Fig. 2.6 (rebocador com castelo de proa elevado): a partir de ~<strong>20°</strong> o castelo passa a ajudar o braço de endireitamento, estendendo a faixa até ~<strong>70°</strong>; contando a superestrutura, até ~<strong>80°</strong>. Pelos padrões normais, a flutuabilidade da superestrutura (área D) <span class="hl-amb">não entra</span> nos gráficos de estabilidade.</p>
+  </div>
+</section>
+
+<!-- 2.4 -->
+<section class="bloco" id="s24">
+  <h2 class="sec"><span class="n">2.4</span> Um nível de estabilidade e suas consequências</h2>
+  <p class="lede">O ponto contraintuitivo: estabilidade "demais" também é problema. GM alto não é sinônimo de bom — depende da missão.</p>
+
+  <div class="box">
+    <h4>O dilema minério × madeira <span class="tag t-decorar">DECORAR</span></h4>
+    <ul>
+      <li><strong>Navio com minério no porão inferior:</strong> estabilidade muito boa, GM alto, grande braço de endireitamento — <span class="hl-amb">mas vida a bordo péssima</span>. Em mar adverso, balanço muito intenso (poucos segundos de bordo a bordo) com ângulos pequenos; os balanços estressam o casco.</li>
+      <li><strong>Navio com madeira no convés:</strong> reduz o GM ao <span class="hl">mínimo seguro</span> → balanço mais lento e agradável. Abaixo desse mínimo, porém, o balanço lento pode incluir grandes ângulos e banda permanente para um bordo.</li>
+    </ul>
+  </div>
+
+  <div class="box key">
+    <h4>Porto × alto-mar — o compromisso de projeto <span class="tag t-sim">BANCA: similaridade</span></h4>
+    <ul>
+      <li>Rebocador de <strong>alto-mar</strong>: prioriza-se uma <span class="hl">redução da estabilidade</span> para períodos de balanço maiores e mais confortáveis em mar agitado. Como o trabalho difere do portuário, a necessidade de estabilidade tão alta é menor.</li>
+      <li>Rebocador <strong>multifuncional</strong> (porto + mar): exige <strong>compromisso</strong> — seguro/eficaz no porto e confortável no mar. Relevante no Brasil pelos <strong>terminais oceânicos</strong> (Bacia de Campos, Bacia de Santos, Nordeste e Norte) — parecem portuários mas operam em mar aberto.</li>
+      <li>Rebocadores para <strong>gelo</strong>: GM alto por necessidade (casco de aço pesado/espesso; gelo acumula na superestrutura). Ex.: <i>Bob Franco</i> (Fig. 2.7). No Mar Báltico, o acúmulo pode ser muito rápido.</li>
+      <li><strong>Nota Brasil:</strong> nossa costa (8.000+ km) não propicia acúmulo de gelo, mas o certificado do comandante brasileiro habilita navegação global — daí a importância de entender que <span class="hl">o gelo é água sólida que se prende ao convés/casco/mastros</span>, sobe o peso acima da linha de flutuação e reduz a estabilidade.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2.5 -->
+<section class="bloco" id="s25">
+  <h2 class="sec"><span class="n">2.5</span> Estabilidade de rumo</h2>
+  <p class="lede">O segundo significado de "estabilidade" — o horizontal. Não confundir com estabilidade direcional. Os três modelos A/B/C são material de correlação.</p>
+
+  <div class="box">
+    <h4>Rumo × direcional — a distinção-chave <span class="tag t-conflito">DISTRATOR</span></h4>
+    <ul>
+      <li><strong>Estável no rumo:</strong> com controles fixos (leme, propulsor), após uma breve perturbação o navio <span class="hl">volta a um rumo reto sem uso do governo</span> — a guinada cessa quando a perturbação cessa (embora o rumo final possa mudar).</li>
+      <li><strong>Estabilidade direcional</strong> (não confundir): a capacidade de <span class="hl-amb">seguir uma direção determinada</span>, p. ex. por piloto automático. Um navio estável no rumo pode ser instável direcionalmente (exige ações frequentes de leme).</li>
+    </ul>
+  </div>
+
+  <figure class="diag" id="figrumo">
+    <div class="diag-title">Figura 2.8 — Estável / Instável no rumo (modelos A · B · C)</div>
+    <svg viewBox="0 0 720 340" role="img" xmlns="http://www.w3.org/2000/svg">
+      <!-- seta-escala estável -> instável -->
+      <line x1="60" y1="40" x2="660" y2="40" stroke="#b8ab86" stroke-width="1.5" marker-end="url(#ar)"/>
+      <text x="60" y="30" font-size="11" fill="#1c5f3a" font-weight="bold">← mais estável no rumo</text>
+      <text x="660" y="30" font-size="11" fill="#7a241a" font-weight="bold" text-anchor="end">mais instável →</text>
+
+      <!-- Coluna A: esbelto -->
+      <rect x="107" y="150" width="26" height="150" rx="6" fill="#C8A84B" stroke="#8a6d1f" stroke-width="1.5"/>
+      <text x="120" y="322" font-size="15" font-weight="bold" fill="#0D3D36" text-anchor="middle">A</text>
+      <text x="120" y="130" font-size="12.5" font-weight="bold" fill="#1c5f3a" text-anchor="middle">ESTÁVEL</text>
+      <text x="120" y="70" font-size="11" fill="#5a5346" text-anchor="middle">esbelto:</text>
+      <text x="120" y="86" font-size="11" fill="#5a5346" text-anchor="middle">segue rumo reto</text>
+      <text x="120" y="102" font-size="11" fill="#5a5346" text-anchor="middle">com facilidade;</text>
+      <text x="120" y="118" font-size="11" fill="#5a5346" text-anchor="middle">mudar é difícil</text>
+
+      <!-- Coluna B: boca larga -->
+      <rect x="325" y="222" width="70" height="60" rx="8" fill="#E08A3C" stroke="#a55e1f" stroke-width="1.5"/>
+      <text x="360" y="322" font-size="15" font-weight="bold" fill="#0D3D36" text-anchor="middle">B</text>
+      <text x="360" y="130" font-size="12.5" font-weight="bold" fill="#a55e1f" text-anchor="middle">INSTÁVEL (moderado)</text>
+      <text x="360" y="70" font-size="11" fill="#5a5346" text-anchor="middle">boca larga (moderno):</text>
+      <text x="360" y="86" font-size="11" fill="#5a5346" text-anchor="middle">como os rebocadores atuais;</text>
+      <text x="360" y="102" font-size="11" fill="#5a5346" text-anchor="middle">menos instável que C.</text>
+      <text x="360" y="118" font-size="11" fill="#5a5346" text-anchor="middle">Boca até 1/3 do comprimento</text>
+
+      <!-- Coluna C: circular -->
+      <circle cx="600" cy="252" r="40" fill="#c0392b" stroke="#7a241a" stroke-width="1.5"/>
+      <text x="600" y="322" font-size="15" font-weight="bold" fill="#0D3D36" text-anchor="middle">C</text>
+      <text x="600" y="130" font-size="12.5" font-weight="bold" fill="#7a241a" text-anchor="middle">MUITO INSTÁVEL</text>
+      <text x="600" y="78" font-size="11" fill="#5a5346" text-anchor="middle">circular:</text>
+      <text x="600" y="94" font-size="11" fill="#5a5346" text-anchor="middle">guina sozinho ao ser</text>
+      <text x="600" y="110" font-size="11" fill="#5a5346" text-anchor="middle">perturbado; difícil</text>
+      <text x="600" y="126" font-size="11" fill="#5a5346" text-anchor="middle">recuperar o rumo</text>
+    </svg>
+    <figcaption>Reconstrução fiel da Figura 2.8. Do mais estável (A, esbelto) ao mais instável (C, circular). Os rebocadores modernos são do tipo B — boca larga, instáveis no rumo, exigindo atenção constante do mestre.</figcaption>
+  </figure>
+
+  <div class="box key">
+    <h4>Os três modelos <span class="tag t-decorar">DECORAR</span></h4>
+    <table>
+      <thead><tr><th>Modelo</th><th>Forma</th><th>Rumo</th><th>Comportamento</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A</strong></td><td>Esbelto</td><td class="center"><span style="color:#1c5f3a;font-weight:bold">Estável</span></td><td>Segue rumo reto com facilidade; mudar de rumo é difícil</td></tr>
+        <tr><td><strong>B</strong></td><td>Boca larga (moderno)</td><td class="center"><span style="color:#a55e1f;font-weight:bold">Instável</span></td><td>Menos instável que C; guina com ângulos pequenos, mas <span class="hl">quebra a guinada com dificuldade</span></td></tr>
+        <tr><td><strong>C</strong></td><td>Circular</td><td class="center"><span style="color:#7a241a;font-weight:bold">Muito instável</span></td><td>Guina sozinho ao ser perturbado; difícil recuperar o rumo</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:8px">Rebocadores de <strong>boca larga</strong> (até 1/3 do comprimento) são geralmente instáveis: exigem <span class="hl">atenção constante do mestre</span> para manter o aproamento. Se começam a guinar, vão a alta razão de guinada e quebrar a guinada exige grandes ângulos de leme/propulsor — <span class="hl-amb">o que gera altas forças no cabo de reboque</span> (elo direto com o risco de girting).</p>
+  </div>
+
+  <div class="box">
+    <h4>Nota final — o azimutal em alta velocidade <span class="tag t-decorar">DECORAR</span> <span class="tag t-cross">liga ao Cap. 4</span></h4>
+    <p>Rebocadores de boca larga e os <strong>azimutais</strong> requerem ação contrária significativa para voltar ao rumo reto. Além disso, em manobras de <strong>alta velocidade</strong>, se o propulsor for <span class="hl">girado rapidamente</span>, a sucção do propulsor é prejudicada e o empuxo cai (ou se perde), levando o hélice à <strong>cavitação</strong> — resultando em comportamento imprevisível e/ou perda de velocidade.</p>
+  </div>
+</section>
+
+<!-- CRUZAMENTO -->
+<section class="bloco" id="cruz">
+  <h2 class="sec"><span class="n">⚖</span> Cruzamento com Hensen (regra 5)</h2>
+  <p class="lede">Onde Van der Laan e Hensen se encontram — e o que cada um acrescenta. A estabilidade sempre se lê nas duas fontes.</p>
+
+  <div class="box cross">
+    <h4>O que Hensen Cap. 4 (§4.2.3) acrescenta à teoria de Van der Laan</h4>
+    <ul>
+      <li><strong>Boca × GM:</strong> tornar o rebocador mais bojudo aumenta GM e momento de endireitamento. Relação L/B caindo (~2,8:1; Broward 2,5; Tiger Sun 2,0; SDM 1,8). Boca maior exige <strong>francobordo maior</strong>, senão a aresta do convés mergulha antes. <strong>Sponsons</strong> criam momento de endireitamento em ângulos menores.</li>
+      <li><strong>Regras IMO — 3 grupos:</strong> reboque portuário · costeiro/alto-mar · escolta. E as duas modalidades de capotamento: <strong>self-tripping</strong> (o rebocador emborca pelo binário do cabo + propulsor) × <strong>tow-tripping</strong> (é arrastado de través por perda de propulsão/governo).</li>
+      <li><strong>Fig. 4.14 (gancho radial/carrossel):</strong> desloca o ponto de reboque para o lado que aderna → reduz a banda de <strong>31°</strong> (cabo no centro) para <strong>18°</strong> (carrossel a ½ boca).</li>
+      <li><strong>Imersão da aresta do convés</strong> é o ângulo máximo de escora para rebocadores sem carrossel — acima de 4–5 nós a água entra no convés com força crescente.</li>
+    </ul>
+  </div>
+  <div class="box cross">
+    <h4>O que Hensen Cap. 6 acrescenta (operacional)</h4>
+    <p><strong>Girting × tripping</strong> em cena real (Fig. 6.13): girting por excesso de velocidade do navio (A) ou por mal-entendido de comunicação (B); tripping do trator que desliza ao través (C). A prevenção: <span class="hl">sistema de liberação rápida</span> confiável e boa comunicação prático-mestre. Este caderno detalha a teoria; o Cap. 6 detalha a operação.</p>
+  </div>
+</section>
+
+<!-- BANCA -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚓</span> Pontos de banca</h2>
+  <p class="lede">Estabilidade é tema recorrente. As questões vêm de Fonseca (Arte Naval) e das NORMAMs, mas o conceito de curva/GM é o mesmo de Van der Laan.</p>
+
+  <details class="pscpp" open>
+    <summary>2011-Q2 (Fonseca, 0,5 pt) — equilíbrio estável</summary>
+    <ul>
+      <li>Para equilíbrio estável, é necessário que o <b>CG esteja abaixo do metacentro (M)</b>.</li>
+      <li>Liga direto ao §2.2: GM = distância M–G positiva (G abaixo de M) ⇒ braço de endireitamento restaurador.</li>
+    </ul>
+    <div class="gab">Gabarito: <b>(b)</b> CG abaixo do metacentro M. <span class="tag t-banca">2011-Q2</span></div>
+  </details>
+
+  <details class="pscpp">
+    <summary>2006-Q48 (NORMAM, V/F) — critérios de estabilidade intacta</summary>
+    <ul>
+      <li>Área sob a curva de estabilidade estática de 0° a 30° <b>não inferior a 0,055 m·rad</b>.</li>
+      <li>Altura metacêntrica inicial <b>não menor que 0,15 m</b>.</li>
+      <li>Conceitos de área sob a curva GZ e GM mínimo — os mesmos elementos da curva de Van der Laan, agora com valores regulatórios brasileiros.</li>
+    </ul>
+    <div class="gab">Gabarito: <b>(d)</b>. <span class="tag t-banca">2006-Q48</span> — cruza o conceito de curva GZ (Van der Laan §2.3) com os critérios NORMAM.</div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Correlações Van der Laan — por similaridade temática</summary>
+    <ul>
+      <li>No rebocador, o critério é <b>toda a curva</b> (até o alagamento), não só o GM inicial (Nota 1).</li>
+      <li>Marcos da curva: topo ~<b>33°</b>, alagamento ~<b>50°</b>, emborcamento ~<b>75°</b>, GM lido a <b>57,3°</b>.</li>
+      <li>Estabilidade de rumo: modelo <b>A</b> estável, <b>B</b> (moderno, boca larga) instável, <b>C</b> muito instável.</li>
+      <li>Alto-mar prioriza <b>reduzir</b> a estabilidade (conforto); gelo exige <b>GM alto</b>.</li>
+    </ul>
+    <div class="gab"><span class="tag t-sim">BANCA: similaridade temática</span> — conceitos de Van der Laan aplicáveis a questões de estabilidade de rebocadores.</div>
+  </details>
+</section>
+
+<section class="secblk" id="flash">
+  <h2>Flashcards — a curva e os ângulos</h2>
+  <p class="lede">Toque para virar. Foco nos marcos da curva GZ e na diferença navio × rebocador.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<section class="secblk" id="quiz">
+  <h2>Quiz — estabilidade dos rebocadores</h2>
+  <p class="lede">Dez questões no padrão da banca, com feedback apontando a seção de Van der Laan e a pegadinha.</p>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav"><span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()">Próxima →</button>
+    </div>
+  </div>
+  <a class="backlink" href="index.html">← Voltar à estante</a>
+</section>
+
+</div>
+</main>
+
+<footer class="estante">
+  <div class="wrap"><b>PSCPP 2027</b> · Bloco H — Rebocadores (Arte Naval) · Van der Laan Cap. 2 · Capital Sereno</div>
+</footer>
+
+<script>
+var FC=[
+  {f:"GZ = ?",b:"GZ = GM × sen(α). Braço de endireitamento em função do ângulo de banda α. Plotado, dá a curva de estabilidade."},
+  {f:"GM = ?",b:"Distância entre o metacentro M e o centro de gravidade G. Maior GM = mais estabilidade. Só vale para pequenos ângulos."},
+  {f:"Navio × rebocador (Nota 1)",b:"Navio: GM inicial é o critério principal. Rebocador: NÃO — é toda a curva, incluindo o ângulo de alagamento. Cond. muda com o cabo."},
+  {f:"Topo da curva GZ",b:"~33°: GZ e binário de endireitamento W×GZ máximos. Depois, a estabilidade diminui."},
+  {f:"Ângulo de alagamento",b:"~50°: água entra pelas aberturas da praça de máquinas. Ponto crítico — estabilidade cai mais."},
+  {f:"Emborcamento",b:"~75°: estabilidade fica negativa; o rebocador emborca. A faixa de estabilidade vai de 0° a ~75°."},
+  {f:"Leitura do GM na curva",b:"Na tangente à origem, onde cruza a vertical de 57,3° (1 radiano). GM = valor nessa interseção."},
+  {f:"Imersão do convés",b:"Fim do trecho quase linear da curva; depois sobe mais devagar. É o ângulo máximo de escora p/ rebocadores sem carrossel (Hensen)."},
+  {f:"Reserva de flutuabilidade (Fig 2.6)",b:"Castelo de proa ajuda a partir de ~20° (faixa até ~70°); com superestrutura, ~80° — SÓ com aberturas fechadas."},
+  {f:"GM negativo — causas",b:"Tanques de fundo vazios, água no convés, carga alta, gelo na superestrutura/mastros. G sobe → GM cai → instável."},
+  {f:"Minério × madeira (§2.4)",b:"Minério: GM alto, balanço violento e desconfortável. Madeira: GM reduzido ao mínimo seguro, balanço agradável."},
+  {f:"Alto-mar × porto",b:"Alto-mar prioriza REDUZIR a estabilidade (conforto, balanço mais lento). Porto exige mais. Multifuncional = compromisso."},
+  {f:"Estabilidade de rumo × direcional",b:"Rumo: volta ao rumo reto sem governo após perturbação. Direcional: seguir uma direção dada (piloto automático). Não confundir."},
+  {f:"Modelos A/B/C de rumo",b:"A esbelto = estável. B boca larga (moderno) = instável. C circular = muito instável. Boca larga até 1/3 do comprimento."},
+  {f:"Boca larga e o cabo",b:"Instável no rumo → guina fácil, quebra a guinada com dificuldade → altas forças no cabo de reboque (elo com girting)."},
+  {f:"Azimutal em alta velocidade",b:"Girar o propulsor rápido prejudica a sucção → empuxo cai/perde → cavitação → manobra imprevisível/perda de velocidade."},
+  {f:"Escopo do Cap. 2",b:"Estabilidade INTACTA (casco íntegro). A estabilidade em avaria (alagamento) é do Cap. 6."},
+  {f:"Gelo e GM",b:"Gelo = água sólida que se prende ao convés/mastros, sobe o peso acima da flutuação e REDUZ a estabilidade. Rebocadores de gelo têm GM alto por projeto."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+var QUIZ=[
+  {q:"A relação entre o braço de endireitamento e a altura metacêntrica é:",
+   o:["GZ = GM / sen(α)","GZ = GM × sen(α)","GZ = GM × cos(α)","GZ = GM + α"],
+   a:1,e:"GZ = GM × sen(α). O braço de endireitamento cresce com o seno do ângulo de banda; plotado, dá a curva de estabilidade (§2.3)."},
+  {q:"Segundo Van der Laan, para um REBOCADOR o critério de estabilidade é:",
+   o:["Apenas o GM inicial","Toda a curva de estabilidade, incluindo o ângulo de alagamento","Apenas a reserva de flutuabilidade","Apenas o ângulo de imersão do convés"],
+   a:1,e:"Diferente do navio (onde o GM inicial costuma bastar), no rebocador é TODA a curva — incluindo o alagamento — porque a força/ângulo do cabo mudam a estabilidade o tempo todo (Nota 1). É o distrator clássico."},
+  {q:"No gráfico de estabilidade (Fig. 2.5), o topo da curva ocorre em torno de:",
+   o:["22°","33°","50°","75°"],
+   a:1,e:"~33°: GZ e o binário de endireitamento W×GZ são máximos. Depois, a estabilidade diminui. (~20° ~ imersão do convés; ~50° alagamento; ~75° emborca.)"},
+  {q:"O ângulo de alagamento de um rebocador portuário situa-se aproximadamente em:",
+   o:["33°","50°","57,3°","75°"],
+   a:1,e:"~50°: a água embarca pelas aberturas da praça de máquinas. A partir daí a estabilidade cai mais rápido, até ~75° (emborcamento)."},
+  {q:"O GM inicial é lido na curva de estabilidade na vertical correspondente a:",
+   o:["30°","45°","57,3° (1 radiano)","90°"],
+   a:2,e:"57,3° = 1 radiano. O GM é o valor onde a tangente à curva na origem cruza essa vertical."},
+  {q:"Um valor de GM pode se tornar NEGATIVO por:",
+   o:["Abaixar o centro de gravidade","Tanques de fundo vazios, água/carga alta no convés ou gelo na superestrutura","Aumentar a boca","Fechar as aberturas"],
+   a:1,e:"Tudo que sobe o G reduz o GM, podendo torná-lo negativo (rebocador instável). O gelo na superestrutura é caso clássico e crítico."},
+  {q:"A reserva de flutuabilidade do castelo de proa e da superestrutura (Fig. 2.6) só contribui se:",
+   o:["O GM for negativo","As aberturas estiverem fechadas","A velocidade for alta","O rebocador estiver em água doce"],
+   a:1,e:"Só com as aberturas fechadas. Aí a faixa de estabilidade estende-se até ~70° (castelo) ou ~80° (com superestrutura)."},
+  {q:"Ao preparar um rebocador para missões de ALTO-MAR, prioriza-se:",
+   o:["Aumentar ao máximo a estabilidade","Reduzir a estabilidade para períodos de balanço maiores e mais confortáveis","Manter o GM idêntico ao portuário","Remover a superestrutura"],
+   a:1,e:"Reduz-se a estabilidade (dentro do seguro) para conforto: GM muito alto dá balanço violento. O trabalho de alto-mar difere do portuário."},
+  {q:"Os rebocadores modernos, de boca larga, pertencem a qual modelo de estabilidade de rumo?",
+   o:["Modelo A (esbelto, estável)","Modelo B (boca larga, instável)","Modelo C (circular, muito instável)","Nenhum — são sempre estáveis"],
+   a:1,e:"Modelo B: instável no rumo (menos que C). Guina com ângulos pequenos mas quebra a guinada com dificuldade — daí as altas forças no cabo."},
+  {q:"Em manobra de alta velocidade, girar rapidamente o propulsor azimutal causa:",
+   o:["Aumento do empuxo","Prejuízo da sucção, queda de empuxo e cavitação","Aumento do GM","Redução do ângulo de banda"],
+   a:1,e:"A sucção do propulsor é prejudicada, o empuxo cai ou se perde e o hélice cavita → comportamento imprevisível e/ou perda de velocidade (nota final do §2.5)."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>

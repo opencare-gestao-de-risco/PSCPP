@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Tração de Ponto Fixo Necessária (Bollard Pull) — Hensen Cap. 5 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E; --azul:#2C5F8A;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s;white-space:nowrap}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:30px 0 70px}
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:0 0 22px}
+  .related a{font-weight:bold}
+
+  section.bloco{margin-bottom:38px;scroll-margin-top:64px}
+  h2.sec{font-size:24px;color:var(--verde);margin:0 0 6px;font-weight:normal;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--ouro);letter-spacing:.1em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 18px;border-bottom:2px solid var(--linha);padding-bottom:12px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px;font-weight:normal}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.04em;padding:2px 8px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+  .t-sim{background:#e7f3ec;color:#1c5f3a}
+  .t-duvida{background:#fff0cf;color:#7a5c00}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:16px 20px;margin:16px 0;box-shadow:var(--sombra)}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.trap,.box.conflito{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4,.box.conflito h4{color:var(--vermelho)}
+  .box ul{margin:8px 0 0;padding-left:20px}
+  .box li{margin:5px 0}
+
+  /* Bloco de cálculo */
+  .calc{background:#eff5fb;border:1px solid #c9ddf0;border-left:6px solid var(--azul);border-radius:12px;padding:16px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .calc h4{margin:0 0 10px;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--azul);display:flex;align-items:center;gap:8px}
+  .formula{background:#fff;border:1px dashed #9db8d4;border-radius:8px;padding:12px 16px;margin:10px 0;font-family:'Courier New',monospace;font-size:16px;color:#123;text-align:center;font-weight:bold;letter-spacing:.3px}
+  .formula small{display:block;font-family:'Trebuchet MS',sans-serif;font-weight:normal;font-size:11.5px;color:var(--mute);margin-top:6px;letter-spacing:0}
+  .calc .ex{background:#fffdf5;border:1px solid var(--ambar);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13.5px}
+  .calc .ex b{color:var(--verde)}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--sombra)}
+  th,td{border:1px solid var(--linha);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  .mono{font-family:'Courier New',monospace;font-weight:bold;color:#123}
+
+  /* Calculadora interativa */
+  .tool{background:var(--verde);color:var(--creme);border-radius:14px;padding:20px 22px;margin:22px 0;box-shadow:var(--sombra2)}
+  .tool h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:16px;color:var(--ouro)}
+  .tool .desc{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#bcd5cf;margin:0 0 14px}
+  .tool .field{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+  .tool label{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:#d4e7e3;display:flex;flex-direction:column;gap:4px;flex:1;min-width:110px}
+  .tool input,.tool select{font-family:'Courier New',monospace;font-size:15px;padding:9px 10px;border-radius:8px;border:1px solid #2c6f64;background:#0a322c;color:#fff;min-height:44px}
+  .tool select{font-family:'Trebuchet MS',sans-serif;font-size:13px}
+  .tool .out{background:rgba(200,168,75,.14);border:1px solid rgba(200,168,75,.45);border-radius:10px;padding:14px 16px;margin-top:6px;font-family:'Trebuchet MS',sans-serif}
+  .tool .out .big{font-size:30px;font-weight:bold;color:var(--ouro);font-family:Georgia,serif}
+  .tool .out .step{font-size:12.5px;color:#cfe3df;margin-top:6px;font-family:'Courier New',monospace}
+
+  figure.diag{margin:22px 0;background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 18px 14px;box-shadow:var(--sombra)}
+  figure.diag svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  figcaption{font-size:12.5px;color:var(--mute);text-align:center;margin-top:10px;font-style:italic}
+  .diag-title{color:var(--verde2);font-size:16px;margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-weight:bold}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:20px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+  details.pscpp .gab{background:rgba(200,168,75,.16);border:1px solid rgba(200,168,75,.4);border-radius:8px;padding:8px 12px;margin:6px 0 14px;font-size:13.5px}
+
+  .secblk{margin:40px 0 0;scroll-margin-top:64px}
+  .secblk > h2{font-size:23px;color:var(--verde);margin:0 0 4px;font-weight:normal;border-bottom:2px solid var(--linha);padding-bottom:8px}
+  .secblk > .lede{color:var(--mute);font-size:15px;margin:12px 0 18px}
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:185px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:14.5px;background:#fff;border:1.5px solid var(--linha);border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:13.5px;padding:11px 14px;border-radius:8px;display:none;line-height:1.5}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .backlink{display:inline-block;margin:24px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer.estante{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:36px}
+  footer.estante b{color:var(--ouro)}
+
+  @media(max-width:700px){.hero h1{font-size:25px}.formula{font-size:13.5px}}
+  @media print{nav.toc,.tool{display:none}details.pscpp{background:#fff;color:#000;border:1px solid #ccc}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo II · Arte Naval · Bloco H — Rebocadores</p>
+    <h1>Tração de Ponto Fixo Necessária <em>(Bollard Pull)</em></h1>
+    <p class="sub">Quanta tração o navio precisa — e por quê. As duas situações (forças externas × massa do navio), as fórmulas práticas de vento, corrente, ondas e deslocamento, o efeito decisivo da folga sob a quilha (K = 40/110/150/185), o efeito Coanda e a parada por rebocadores. O capítulo de cálculo do Bloco H.</p>
+    <div class="src"><b>Fonte:</b> Hensen, <i>Tug Use in Port</i>, 4ª ed. (2021), Cap. 5 (Required Bollard Pull), §5.1–5.3. <b>Fonte BR:</b> Fragoso &amp; Cajaty (CONAPRA). <b>Subtópico:</b> H3. <b>Banca:</b> 2008-Q4, 2011-Q53, 2011-Q71, 2012-Q31 (gabaritos a verificar no impresso).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#s51">Introdução</a>
+    <a href="#duas">Duas situações</a>
+    <a href="#vento">Vento</a>
+    <a href="#corrente">Corrente / UKC</a>
+    <a href="#ondas">Ondas</a>
+    <a href="#massa">Massa / berço</a>
+    <a href="#coanda">Jorra / Coanda</a>
+    <a href="#deslocamento">Deslocamento</a>
+    <a href="#parada">Parada</a>
+    <a href="#calc">Calculadora ▸</a>
+    <a href="#banca">Banca ⚓</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Caderno do <strong>Bloco H — Rebocadores (Arte Naval)</strong>, subtópico <strong>H3 (Bollard Pull e Desempenho)</strong>. Complementa o Cap. 4 (capacidades por posição) e o Cap. 3 (métodos): aqui se calcula <em>quanta</em> tração o navio exige. Todas as fórmulas trazem bloco <span class="tag t-calc">CALCULO</span> com unidades e condição de aplicação.
+</div>
+
+<!-- 5.1 -->
+<section class="bloco" id="s51">
+  <h2 class="sec"><span class="n">5.1</span> Introdução — os cinco fatores</h2>
+  <p class="lede">A tração total necessária não sai de uma fórmula única: nasce do cruzamento de cinco fatores. Decorar essa lista é a base das questões conceituais.</p>
+  <div class="box key">
+    <h4>Cinco fatores que determinam a assistência <span class="tag t-decorar">DECORAR</span></h4>
+    <ul>
+      <li><strong>Particularidades do porto</strong> — canal, entrada, círculo de evolução, espaço de manobra, eclusas, pontes.</li>
+      <li><strong>Construção do berço</strong> — aberto (molhe/píer) ou sólido (cais contínuo).</li>
+      <li><strong>O navio</strong> — tipo, tamanho, calado, folga sob a quilha (UKC), trim, área de exposição ao vento, tipo de hélice, propulsores de costado.</li>
+      <li><strong>Condições ambientais</strong> — vento, corrente, ondas, visibilidade.</li>
+      <li><strong>Método de assistência</strong> — cabo, ao costado, ou combinação.</li>
+    </ul>
+    <p style="margin-top:8px">Os fatores ambientais variáveis que entram no cálculo direto são três: <span class="hl">vento, corrente e ondas</span>. A assistência no gelo foi tratada no Cap. 3; a visibilidade reduzida diz respeito a procedimentos de segurança em nevoeiro. <span class="tag t-sim">BANCA: similaridade</span></p>
+  </div>
+</section>
+
+<!-- DUAS SITUAÇÕES -->
+<section class="bloco" id="duas">
+  <h2 class="sec"><span class="n">5.2.1</span> As duas situações principais</h2>
+  <p class="lede">Todo o capítulo se organiza em torno de uma dicotomia: ou domina a força externa, ou domina a massa do navio. São abordagens completamente diferentes.</p>
+  <table>
+    <thead><tr><th>Situação</th><th>Domina em…</th><th>Como se obtém a tração</th></tr></thead>
+    <tbody>
+      <tr><td><strong>(A) Forças externas</strong><br>vento, corrente, ondas</td><td>Navios de <strong>grande área de exposição ao vento</strong> (porta-contêineres, car-carriers, gaseiros)</td><td>As forças <span class="hl">podem ser calculadas</span> por fórmulas; delas derivam as forças dos rebocadores.</td></tr>
+      <tr><td><strong>(B) Massa do navio</strong><br>F = m·a</td><td>Petroleiros e graneleiros <strong>carregados</strong> (grande deslocamento)</td><td>Baseada principalmente na <span class="hl-amb">experiência</span>, pois o tempo de reação é que importa; usa-se a fórmula empírica do deslocamento.</td></tr>
+    </tbody>
+  </table>
+  <div class="box">
+    <h4>Fator de segurança embutido <span class="tag t-decorar">DECORAR</span> <span class="tag t-duvida">DÚVIDA frequente</span></h4>
+    <p>Os gráficos de vento/corrente/ondas (Figs. 5.2, 5.5, 5.7) já incluem <span class="hl">20% de segurança</span>. Para rebocadores <strong>ao costado em cabos curtos</strong>, some <strong>pelo menos mais 20%</strong> — margem total de ~50% — pela grande perda de eficiência de tração. Não confundir os dois patamares: 20% (com cabo) × +20% adicional (costado curto).</p>
+  </div>
+</section>
+
+<!-- VENTO -->
+<section class="bloco" id="vento">
+  <h2 class="sec"><span class="n">5.2.2</span> Forças do vento</h2>
+  <p class="lede">A força lateral é a maior e a que dita a tração. A fórmula prática Fw é a mais provável de cair em cálculo direto.</p>
+
+  <div class="calc">
+    <h4>⚙ [CALCULO] Força do vento de través</h4>
+    <p style="font-size:13.5px;margin:4px 0">Forma completa (OCIMF, em Newton): <span class="mono">FYw = 0,5·CYw·ρ·V²·A_L</span>. Para través, <span class="hl">CYw ≈ 0,9–1,0</span> (usa-se 1,0). Com ρ<sub>ar</sub> = 1,28 kg/m³ e resultado em kgf:</p>
+    <div class="formula">FYw = 0,065 · V² · A_L  (kgf, sem segurança)</div>
+    <p style="font-size:13.5px;margin:4px 0">Adicionando 25% à fórmula (para embutir a margem de <strong>20%</strong>), chega-se à <strong>fórmula prática</strong>:</p>
+    <div class="formula">Fw = 0,08 · V² · A_L  <small>V em m/s · A_L (área exposta ao vento) em m² · Fw em kgf · inclui 20% de segurança</small></div>
+    <div class="ex"><b>Atenção às unidades:</b> V em <strong>m/s</strong> (não nós!). Para A_L &gt; 10.000 m², extrapolar somando trações das áreas parciais. Usar a velocidade do vento à altura padrão de <strong>10 m</strong>; em navios muito altos e carregados, corrigir para cima.</div>
+  </div>
+
+  <div class="box">
+    <p>Os coeficientes (CYw, CXw, CXYw) dependem da forma do navio, calado, trim, superestrutura e ângulo de ataque; para petroleiros vêm das publicações OCIMF. <span class="hl">A carga no convés (contêineres) deve entrar na área exposta.</span> Um navio deriva quando o vento não é plenamente compensado; a velocidade de deriva <strong>diminui com a folga sob a quilha</strong>, mas isso <span class="hl-amb">não significa menos tração</span> — deter e puxar de volta um navio em deriva exige mais potência em águas rasas (massa adicionada maior). <span class="tag t-sim">BANCA: similaridade</span></p>
+  </div>
+</section>
+
+<!-- CORRENTE / UKC -->
+<section class="bloco" id="corrente">
+  <h2 class="sec"><span class="n">5.2.3</span> Forças da corrente — e o efeito da folga sob a quilha (UKC)</h2>
+  <p class="lede">O coração do capítulo e a mina de ouro da banca. O coeficiente K salta de 40 para 185 conforme a água rasa — é o conjunto de números mais cobrável do Bloco H.</p>
+
+  <div class="calc">
+    <h4>⚙ [CALCULO] Força de corrente por condição de UKC</h4>
+    <p style="font-size:13.5px;margin:4px 0">Forma OCIMF (Newton): <span class="mono">FYc = 0,5·CYc·ρ·V²·Lbp·T</span>. Simplificada e por condição de folga sob a quilha (todas incluem 25% → margem de segurança):</p>
+    <div class="formula">Fc = K · V² · Lbp · T  (kgf)<small>V = velocidade da corrente (m/s) · Lbp = comprimento entre perpendiculares (m) · T = calado (m)</small></div>
+    <table>
+      <thead><tr><th>Condição de folga sob a quilha (UKC)</th><th class="center">K</th><th class="center">Fator vs. águas profundas</th></tr></thead>
+      <tbody>
+        <tr><td>Águas profundas (&gt; 6 × calado)</td><td class="center mono">40</td><td class="center">× 1,0 (base)</td></tr>
+        <tr><td>Folga = 1,5 × calado</td><td class="center mono">110</td><td class="center">× 2,75</td></tr>
+        <tr><td>Folga = 20% do calado</td><td class="center mono">150</td><td class="center">× 3,75</td></tr>
+        <tr><td>Folga = 10% do calado</td><td class="center mono">185</td><td class="center">≈ × 5 (quase 5×)</td></tr>
+      </tbody>
+    </table>
+    <div class="ex"><b>Conclusão crítica [DECORAR]:</b> com folga de <strong>10% do calado</strong>, a tração necessária é <span class="hl">quase cinco vezes</span> a de águas profundas. A pouca folga ainda aumenta o diâmetro de evolução, reduz a eficácia do leme e aumenta a distância de parada. A fórmula-base (K=40) só vale para <strong>águas profundas (&gt; 6 × calado)</strong>.</div>
+  </div>
+
+  <div class="box conflito">
+    <h4>Armadilha — o coeficiente K é o distrator predileto <span class="tag t-conflito">CONFLITO</span></h4>
+    <ul>
+      <li>Trocar <strong>K = 40 (águas profundas)</strong> por um valor de água rasa — ou vice-versa — é a inversão clássica.</li>
+      <li>Confundir a <strong>condição</strong>: 110 ↔ 1,5× calado; 150 ↔ 20% do calado; 185 ↔ 10% do calado. Decore os pares.</li>
+      <li><strong>UKC = 20% do calado → K = 150.</strong> Item-âncora: profundidade 12 m, calado 10 m → folga 2 m = 20% → K = 150.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h4>Inversão do efeito da corrente com pouca folga <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Com folga pequena, quando a corrente entra a <strong>20–30° pela proa</strong>, as forças transversais <span class="hl">diminuem rapidamente</span> e as longitudinais aumentam — em alguns casos o efeito da corrente pode ser na <span class="hl-amb">direção oposta à esperada</span>. Correções MEG4/OCIMF para folgas muito pequenas: LNG sem correção; petroleiro em lastro (prof./calado 1,05) −10%; carregado 1,05 −20%; carregado 1,10 −30%.</p>
+  </div>
+</section>
+
+<!-- ONDAS -->
+<section class="bloco" id="ondas">
+  <h2 class="sec"><span class="n">5.2.4</span> Forças das ondas</h2>
+  <p class="lede">Componente geralmente menor — e é justamente isso que a banca cobra (2011-Q71). Só vale para ondas curtas de período curto.</p>
+  <div class="calc">
+    <h4>⚙ [CALCULO] Força de ondas de período curto</h4>
+    <p style="font-size:13.5px;margin:4px 0">Por metro: <span class="mono">Fonda = 0,5·ρ·g·ζ²</span> [N/m]; total: <span class="mono">Fonda = 0,35·ρ·g·ζ²·L</span> [N], com ζ (amplitude) = 0,5·Hs. Fórmula prática (com 25% → 20% de segurança):</p>
+    <div class="formula">Fonda = 112 · L · Hs²  (kgf)<small>L = Lbp (m) · Hs = altura significativa de onda (m) · relação quadrática: dobrar Hs quadruplica a força</small></div>
+    <div class="ex"><b>Exemplos:</b> Lbp 200 m, Hs 1,0 m → 112·200·1² = <b>22.400 kgf ≈ 22 t</b>. No exemplo completo (Lbp 281 m, Hs 0,5 m) → 112·281·0,25 ≈ <b>8 t</b> (o menor componente). <br><b>Premissas:</b> ondas curtas e íngremes (λ ≪ L do navio), calado suficiente para refletir as ondas, sem movimento do navio. <span class="hl-amb">NÃO se aplica a ondas oceânicas ou ressaca.</span></div>
+  </div>
+</section>
+
+<!-- MASSA / BERÇO -->
+<section class="bloco" id="massa">
+  <h2 class="sec"><span class="n">5.2.5</span> Massa do navio e construção do cais</h2>
+  <p class="lede">Massa adicionada, massa virtual e a diferença entre berço aberto e sólido — que muda a velocidade segura de aproximação.</p>
+  <div class="box">
+    <ul>
+      <li><strong>Massa adicionada</strong> = água que se move com o navio no movimento lateral. <strong>Massa virtual</strong> = deslocamento + massa adicionada. A massa adicionada <span class="hl">aumenta quando a folga sob a quilha diminui</span> (prof. 1,5× calado → massa virtual ≈ 1,5× deslocamento; prof. 1,1× calado → ≈ 1,8×).</li>
+      <li><strong>Berço sólido</strong> (cais contínuo): forma um <span class="hl">colchão de água</span> entre navio e cais que reduz automaticamente a velocidade de aproximação. <strong>Berço aberto</strong> (molhe/píer): a água flui livremente, <span class="hl-amb">não reduz</span> a velocidade.</li>
+    </ul>
+  </div>
+  <div class="calc">
+    <h4>⚙ [CALCULO] Força para deter movimento lateral (atracação, massa virtual ≈ 1,8× desl.)</h4>
+    <div class="formula">Berço ABERTO:  F = (0,09 · D · Vi²) / S   ·   Berço SÓLIDO:  F = (0,07 · D · Vi²) / S<small>D = deslocamento (t) · Vi = velocidade inicial (m/s) · S = distância de parada (m) · F em toneladas</small></div>
+    <div class="ex"><b>Velocidade segura de atracação (VLCC): máx. 6–8 cm/s.</b> Exemplos (Vi = 0,5 nó = 0,25 m/s; S = 30 m): petroleiro 250.000 TPB em lastro (D=124.000 t), berço aberto ≈ 23 t; carregado (D≈300.000 t) ≈ 60 t; porta-contêineres (D=80.000 t), berço sólido ≈ 12 t.</div>
+  </div>
+</section>
+
+<!-- JORRA / COANDA -->
+<section class="bloco" id="coanda">
+  <h2 class="sec"><span class="n">5.2.6</span> Efeitos da jorra dos rebocadores — Coanda &amp; Bernoulli</h2>
+  <p class="lede">Por que a tração efetiva é menor que a nominal. Base direta da questão 2011-Q53.</p>
+  <div class="box">
+    <p>Quando a jorra do hélice do rebocador (cabo curto) atinge o casco, surgem: (1) uma <strong>força de reação R</strong> oposta à tração T; (2) a água acelerada contorna a curvatura da proa/popa criando <strong>baixa pressão</strong> (efeito Bernoulli), gerando uma força <span class="hl">na direção oposta à desejada</span>. Em casos extremos, a eficácia cai a quase zero.</p>
+    <ul>
+      <li>Posições junto à proa/popa (1f/1a): alta perda pela jorra quase perpendicular.</li>
+      <li>Costado / push-pull (4f/4a): perda pode ser <span class="hl-amb">superior a 50%</span>. Ensaios SAFETUG: a ~1 comprimento de rebocador do casco, perda de 43–64%; com ondas, até 90%.</li>
+    </ul>
+    <p><strong>Mitigação:</strong> (1) aumentar o comprimento do cabo — quanto menor a folga e maior a potência, mais comprido o cabo; (2) puxar em ângulos retos ao casco. Rebocadores <strong>VS (Voith)</strong> têm jorra menos pronunciada que convencionais e azimutais com bocais.</p>
+  </div>
+  <div class="box conflito">
+    <h4>Caso real (5.2.6) — o giro para o bordo oposto <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>ASD de 85 t puxando 4 quartas a bombordo com cabo de 50–60 m: o navio <span class="hl">para a guinada e começa a girar para o bordo oposto</span>. Razão: a jorra flui ao longo da popa (Bernoulli), criando baixa pressão que puxa a popa para boreste. Solução: alongar o cabo ou puxar em ângulo reto.</p>
+  </div>
+</section>
+
+<!-- DESLOCAMENTO -->
+<section class="bloco" id="deslocamento">
+  <h2 class="sec"><span class="n">5.3.2</span> Tração para navios de grande deslocamento</h2>
+  <p class="lede">A fórmula empírica dos petroleiros e graneleiros carregados — a mais fácil de cair em conta rápida.</p>
+  <div class="calc">
+    <h4>⚙ [CALCULO] Fórmula empírica do deslocamento</h4>
+    <div class="formula">BP necessário = (Δ / 100.000) · 60 + 40  (t)<small>Δ = deslocamento em toneladas métricas · baseada na experiência, não em primeiros princípios</small></div>
+    <div class="ex"><b>Exemplo VLCC (Δ = 300.000 t):</b> (300.000 / 100.000)·60 + 40 = 3·60 + 40 = <b>220 toneladas</b>. Aplica-se a petroleiros/graneleiros <strong>carregados</strong> (situação B). Para instalações offshore (SPM/FPSO), remeter às publicações OCIMF.</div>
+  </div>
+</section>
+
+<!-- PARADA -->
+<section class="bloco" id="parada">
+  <h2 class="sec"><span class="n">5.3.4–5.3.5</span> Perda de propulsão e parada por rebocadores</h2>
+  <p class="lede">Quando a máquina do navio falha, o rebocador vira freio. A fórmula de distância de parada e o tipo certo de rebocador.</p>
+  <div class="box">
+    <h4>Causas típicas de falha do motor principal (5.3.4) <span class="tag t-decorar">DECORAR</span></h4>
+    <ul>
+      <li>Apagão (blackout); contaminação/má qualidade do óleo combustível;</li>
+      <li>Procedimento incorreto de troca de combustível ao entrar/sair de ECA/SECA;</li>
+      <li><span class="hl">Pressão insuficiente nas garrafas de ar de partida</span> por excesso de partidas/paradas na manobra — monitorar a pressão o tempo todo.</li>
+    </ul>
+  </div>
+  <div class="calc">
+    <h4>⚙ [CALCULO] Distância de parada por rebocadores (5.3.5)</h4>
+    <div class="formula">S = (Δ · V²) / (74,13 · BP)<small>S = distância de parada (m) · Δ = deslocamento (t) · V = velocidade (nós) · BP = tração de ponto fixo (t)</small></div>
+    <div class="ex"><b>⚠ A fórmula NÃO inclui</b> o tempo de retardo entre a ordem e a plena ação do rebocador. Mais precisa para navios <strong>esbeltos</strong> e <strong>velocidades baixas</strong>. Para parada: rebocadores <strong>omnidirecionais</strong> (ASD, ATD, Rotortug, Voith) geram plena frenagem imediata mesmo com o navio a ~6 nós, operando como <span class="hl">rebocador de popa</span>.</div>
+  </div>
+</section>
+
+<!-- EXEMPLO COMPLETO -->
+<section class="bloco" id="exemplo">
+  <h2 class="sec"><span class="n">5.3.1</span> Exemplo completo — somando tudo</h2>
+  <p class="lede">O exemplo-padrão de Hensen: um porta-contêineres sob vento + corrente + ondas. Mostra como os componentes se somam e por que as ondas são o menor deles.</p>
+  <div class="box key">
+    <p><strong>Dados:</strong> porta-contêineres, LOA 294 m, Lbp 281 m, boca 32 m, calado 12,5 m, profundidade 13,8 m (razão 1,1). Área de vento A_L ≈ 6.500 m². Deslocamento 75.000 t. Vento 30 nós de través; corrente transversal 0,5 nó; ondas Hs = 0,5 m.</p>
+    <table>
+      <thead><tr><th>Componente</th><th class="center">Fonte</th><th class="center">Tração</th></tr></thead>
+      <tbody>
+        <tr><td>Vento (30 nós de través)</td><td class="center">Fig. 5.2</td><td class="center mono">117 t</td></tr>
+        <tr><td>Corrente transversal (0,5 nó)</td><td class="center">Fig. 5.5</td><td class="center mono">42 t</td></tr>
+        <tr><td>Ondas (281 m × 30 kg/m)</td><td class="center">Fig. 5.7</td><td class="center mono">8 t</td></tr>
+        <tr><td><strong>TOTAL</strong></td><td class="center">—</td><td class="center mono"><strong>167 t</strong></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:8px"><strong>Solução:</strong> 4 rebocadores de ≥ 40 t cada. A margem de 20% (≈33 t) também controla a velocidade de aproximação. As <span class="hl">ondas contribuem só 8 t contra 117 t do vento</span> — daí a afirmativa da 2011-Q71.</p>
+  </div>
+  <div class="box">
+    <h4>Push-pull e propulsor de proa <span class="tag t-decorar">DECORAR</span></h4>
+    <p>No modo push-pull em cabos curtos, aumentar a tração dos gráficos em <span class="hl">pelo menos 20%</span>. Propulsor de proa: 100 cv ≈ 1,1 t; 100 kW ≈ 1,5 t (navio parado). A <strong>2 nós</strong> a eficácia cai ~50%; a <strong>4 nós</strong> quase nada — <span class="hl-amb">um propulsor de proa não substitui um rebocador de vante</span> nessas velocidades. Ex.: (117 t + 20%) − 28 t (proa 2.500 cv) ≈ 112 t → ~1 rebocador de 40 t à vante + 2 de 35 t à ré.</p>
+  </div>
+</section>
+
+<!-- CALCULADORA -->
+<section class="bloco" id="calc">
+  <h2 class="sec"><span class="n">▸</span> Calculadora de tração necessária</h2>
+  <p class="lede">Ferramenta de treino. Aplica as fórmulas práticas de Hensen com as unidades corretas. Confira sua conta à mão antes de olhar o resultado.</p>
+
+  <div class="tool">
+    <h4>⚙ Corrente por UKC — Fc = K · V² · Lbp · T</h4>
+    <p class="desc">Escolha a condição de folga sob a quilha; V em m/s.</p>
+    <div class="field">
+      <label>Condição (UKC)
+        <select id="ck">
+          <option value="40">Águas profundas (&gt;6× calado) — K=40</option>
+          <option value="110">Folga = 1,5× calado — K=110</option>
+          <option value="150" selected>Folga = 20% do calado — K=150</option>
+          <option value="185">Folga = 10% do calado — K=185</option>
+        </select>
+      </label>
+      <label>V corrente (m/s)<input id="cv" type="number" value="0.5" step="0.1"></label>
+      <label>Lbp (m)<input id="clbp" type="number" value="280" step="1"></label>
+      <label>Calado T (m)<input id="ct" type="number" value="10" step="0.5"></label>
+    </div>
+    <div class="out"><span class="big" id="cout">—</span> <span style="font-family:Georgia">kgf</span>
+      <div class="step" id="cstep"></div>
+    </div>
+  </div>
+
+  <div class="tool">
+    <h4>⚙ Vento de través — Fw = 0,08 · V² · A_L</h4>
+    <p class="desc">V em m/s (1 nó ≈ 0,514 m/s). Inclui 20% de segurança.</p>
+    <div class="field">
+      <label>V vento (m/s)<input id="wv" type="number" value="15" step="0.5"></label>
+      <label>A_L — área exposta (m²)<input id="wal" type="number" value="6500" step="100"></label>
+    </div>
+    <div class="out"><span class="big" id="wout">—</span> <span style="font-family:Georgia">kgf</span>
+      <div class="step" id="wstep"></div>
+    </div>
+  </div>
+
+  <div class="tool">
+    <h4>⚙ Deslocamento — BP = (Δ/100.000)·60 + 40</h4>
+    <p class="desc">Para petroleiros/graneleiros carregados. Δ em toneladas.</p>
+    <div class="field">
+      <label>Deslocamento Δ (t)<input id="dd" type="number" value="300000" step="10000"></label>
+    </div>
+    <div class="out"><span class="big" id="dout">—</span> <span style="font-family:Georgia">t</span>
+      <div class="step" id="dstep"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BANCA -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚓</span> Pontos de banca</h2>
+  <p class="lede">O que já caiu ligado a bollard pull, com o grau de confiança do gabarito conforme as regras 6/7.</p>
+
+  <details class="pscpp" open>
+    <summary>2012-Q31 (Fragoso/Cajaty, 1,3 pt) — cálculo da tração total</summary>
+    <ul>
+      <li>Assertiva <b>INCORRETA</b>: (d) "O total calculado deverá corresponder, no mínimo, à capacidade do rebocador com <b>menor</b> potência."</li>
+      <li>Por quê: o total deve ser coberto pela <b>SOMA</b> de todos os rebocadores, não pelo de menor potência.</li>
+    </ul>
+    <div class="gab">Gabarito deduzido: <b>(d) é a incorreta</b>. <span class="tag t-verificar">VERIFICAR gabarito impresso</span></div>
+  </details>
+
+  <details class="pscpp">
+    <summary>2011-Q71 (Fragoso/Cajaty, 0,6 pt) — peso das ondas</summary>
+    <ul>
+      <li>Afirmativa III: "A influência das ondas no cálculo do bollard pull necessário é de pouca expressão, comparada a outros efeitos." → <b>V</b></li>
+      <li>Confirma-se pelo exemplo 5.3.1: ondas 8 t contra vento 117 t + corrente 42 t.</li>
+    </ul>
+    <div class="gab">Gabarito deduzido: afirmativa III <b>VERDADEIRA</b>. <span class="tag t-verificar">VERIFICAR gabarito impresso</span></div>
+  </details>
+
+  <details class="pscpp">
+    <summary>2011-Q53 (Hensen 2ª ed., 1,2 pt) — efeito Coanda (V/F)</summary>
+    <ul>
+      <li>I — é o efeito Coanda → <b>V</b>. II — "sem correlação com Bernoulli" → <b>F</b> (tem correlação direta).</li>
+      <li>III — força de reação gera tendência de movimento a ré → <b>V</b>. IV — terceira força causa giro para o bordo oposto → <b>V</b>. V — mais água sob a quilha e mais potência ⇒ cabo mais comprido → <b>V</b>.</li>
+    </ul>
+    <div class="gab">Gabarito deduzido: <b>(b) V F V V V</b>. <span class="tag t-verificar">VERIFICAR gabarito impresso</span></div>
+  </details>
+
+  <details class="pscpp">
+    <summary>2008-Q4 (inglês, 0,6 pt) — UKC reduzido</summary>
+    <ul>
+      <li>Questão sobre a obrigação do OOW estar ciente quando o UKC &lt; 10% do calado máximo.</li>
+      <li>Relação direta com a UKC como fator nas forças de corrente (§5.2.3).</li>
+    </ul>
+    <div class="gab">Gabarito marcado: <b>(d)</b>. <span class="tag t-banca">2008-Q4</span></div>
+  </details>
+</section>
+
+<!-- FLASHCARDS -->
+<section class="secblk" id="flash">
+  <h2>Flashcards — fórmulas e números</h2>
+  <p class="lede">Toque para virar. Foco nos coeficientes, unidades e valores que a banca troca.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- QUIZ -->
+<section class="secblk" id="quiz">
+  <h2>Quiz — cálculo de bollard pull</h2>
+  <p class="lede">Dez questões no padrão da banca, com feedback apontando a fórmula, a unidade e a pegadinha.</p>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav"><span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()">Próxima →</button>
+    </div>
+  </div>
+  <a class="backlink" href="index.html">← Voltar à estante</a>
+</section>
+
+</div>
+</main>
+
+<footer class="estante">
+  <div class="wrap"><b>PSCPP 2027</b> · Bloco H — Rebocadores (Arte Naval) · Hensen Cap. 5 · Capital Sereno</div>
+</footer>
+
+<script>
+/* Calculadoras */
+function num(id){return parseFloat(document.getElementById(id).value)||0;}
+function fmt(n){return n.toLocaleString('pt-BR',{maximumFractionDigits:0});}
+function calcC(){var K=num('ck'),V=num('cv'),L=num('clbp'),T=num('ct');var F=K*V*V*L*T;
+  document.getElementById('cout').textContent=fmt(F);
+  document.getElementById('cstep').textContent=K+' × '+V+'² × '+L+' × '+T+' = '+fmt(F)+' kgf  (≈ '+fmt(F/1000)+' t)';}
+function calcW(){var V=num('wv'),A=num('wal');var F=0.08*V*V*A;
+  document.getElementById('wout').textContent=fmt(F);
+  document.getElementById('wstep').textContent='0,08 × '+V+'² × '+A+' = '+fmt(F)+' kgf  (≈ '+fmt(F/1000)+' t)';}
+function calcD(){var D=num('dd');var BP=(D/100000)*60+40;
+  document.getElementById('dout').textContent=fmt(BP);
+  document.getElementById('dstep').textContent='('+fmt(D)+'/100.000) × 60 + 40 = '+BP.toLocaleString('pt-BR',{maximumFractionDigits:1})+' t';}
+['ck','cv','clbp','ct'].forEach(function(id){document.getElementById(id).addEventListener('input',calcC);});
+['wv','wal'].forEach(function(id){document.getElementById(id).addEventListener('input',calcW);});
+document.getElementById('dd').addEventListener('input',calcD);
+calcC();calcW();calcD();
+
+/* Flashcards */
+var FC=[
+  {f:"Fórmula prática do VENTO",b:"Fw = 0,08 · V² · A_L (kgf). V em m/s, A_L em m². Inclui 20% de segurança."},
+  {f:"Coeficiente K — águas profundas",b:"Fc = 40·V²·Lbp·T. Base (>6× calado). Trocar 40 por valor de água rasa é o distrator."},
+  {f:"K — folga 1,5× calado",b:"K = 110 (×2,75 vs. águas profundas)."},
+  {f:"K — folga 20% do calado",b:"K = 150 (×3,75). Item-âncora: prof. 12 m, calado 10 m → folga 20% → K=150."},
+  {f:"K — folga 10% do calado",b:"K = 185 (≈5× as águas profundas). A folga de 10% quase quintuplica a tração."},
+  {f:"Fórmula das ONDAS",b:"Fonda = 112 · L · Hs² (kgf). Dobrar Hs quadruplica a força. Só ondas curtas; não vale p/ ressaca."},
+  {f:"Fórmula do DESLOCAMENTO",b:"BP = (Δ/100.000)·60 + 40 (t). VLCC 300.000 t → 220 t. Petroleiros/graneleiros carregados."},
+  {f:"Fórmula da PARADA",b:"S = (Δ·V²)/(74,13·BP). V em nós. NÃO inclui o retardo de reação. Melhor p/ navios esbeltos e baixa velocidade."},
+  {f:"Fator de segurança",b:"Gráficos vento/corrente/ondas: 20% embutido. Costado em cabo curto: +20% (total ~50%)."},
+  {f:"Duas situações (5.2.1)",b:"(A) Forças externas (bordo alto — calculáveis) × (B) Massa do navio (petroleiros/graneleiros carregados — experiência, F=m·a)."},
+  {f:"Efeito Coanda",b:"Jorra do hélice (cabo curto) no casco: força de reação + baixa pressão (Bernoulli) → navio gira para o bordo OPOSTO. Perda >50% no push-pull."},
+  {f:"Mitigar Coanda",b:"Alongar o cabo OU puxar em ângulo reto ao casco. VS (Voith) tem jorra menos pronunciada."},
+  {f:"Berço aberto × sólido",b:"Sólido = colchão de água reduz a velocidade de aproximação. Aberto = água flui, não reduz. VLCC: máx. 6–8 cm/s."},
+  {f:"Propulsor de proa × velocidade",b:"100 cv ≈ 1,1 t; 100 kW ≈ 1,5 t (parado). A 2 nós −50%; a 4 nós ~nada. Não substitui rebocador de vante."},
+  {f:"Exemplo completo (porta-contêiner)",b:"Vento 117 t + corrente 42 t + ondas 8 t = 167 t → 4 rebocadores de ≥40 t. Ondas = menor componente."},
+  {f:"Massa adicionada / virtual",b:"Virtual = deslocamento + adicionada. Cresce quando a folga cai (prof. 1,1× calado → ~1,8× deslocamento)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* Quiz */
+var QUIZ=[
+  {q:"A fórmula prática da força do vento de través é Fw = 0,08·V²·A_L. A unidade de V é:",
+   o:["Nós","m/s","km/h","m/min"],
+   a:1,e:"V em m/s (não nós!). A_L em m², Fw em kgf, com 20% de segurança embutido. Trocar a unidade de V é a pegadinha número um."},
+  {q:"Um navio tem calado 10 m e está em água de 12 m de profundidade. O coeficiente K da força de corrente é:",
+   o:["40","110","150","185"],
+   a:2,e:"Folga = 2 m = 20% do calado → K = 150 (×3,75). É o item-âncora do capítulo. Prof. 12 m − calado 10 m = 2 m; 2/10 = 20%."},
+  {q:"Comparada a águas profundas, com folga sob a quilha de 10% do calado a tração necessária é aproximadamente:",
+   o:["Igual","O dobro","Quase 5 vezes maior","Metade"],
+   a:2,e:"K passa de 40 para 185 (≈5×). A pouca folga também aumenta o diâmetro de evolução, reduz a eficácia do leme e aumenta a distância de parada."},
+  {q:"Para um VLCC carregado de 300.000 t de deslocamento, a fórmula empírica dá um bollard pull necessário de:",
+   o:["180 t","220 t","300 t","120 t"],
+   a:1,e:"(300.000/100.000)·60 + 40 = 3·60 + 40 = 220 t. Fórmula do deslocamento, válida para petroleiros/graneleiros carregados."},
+  {q:"Na fórmula das ondas Fonda = 112·L·Hs², se a altura significativa Hs dobrar, a força:",
+   o:["Dobra","Quadruplica","Aumenta 50%","Não muda"],
+   a:1,e:"Relação quadrática (Hs²): dobrar Hs quadruplica a força. Vale só para ondas curtas de período curto — não para ressaca/ondas oceânicas."},
+  {q:"No exemplo-padrão de Hensen (porta-contêineres), a MENOR componente da tração total é:",
+   o:["O vento (117 t)","A corrente (42 t)","As ondas (8 t)","O propulsor de proa"],
+   a:2,e:"Ondas 8 t contra vento 117 t e corrente 42 t (total 167 t). É a base da afirmativa VERDADEIRA da 2011-Q71."},
+  {q:"O efeito Coanda faz com que o navio, ao ser puxado com cabo curto:",
+   o:["Acelere para a vante","Gire para o bordo OPOSTO ao desejado","Pare instantaneamente","Aumente o bollard pull"],
+   a:1,e:"A jorra do hélice contorna o casco (Bernoulli) e cria baixa pressão que puxa a extremidade para o bordo oposto. Mitiga-se alongando o cabo ou puxando em ângulo reto (2011-Q53)."},
+  {q:"Na fórmula da distância de parada S = (Δ·V²)/(74,13·BP), a velocidade V é dada em:",
+   o:["m/s","Nós","km/h","Não entra velocidade"],
+   a:1,e:"V em nós. A fórmula NÃO inclui o tempo de retardo entre a ordem e a plena frenagem; é mais precisa para navios esbeltos e velocidades baixas."},
+  {q:"Para rebocadores puxando ao costado em cabos curtos, além dos 20% já embutidos nos gráficos, deve-se somar:",
+   o:["Nada mais","Pelo menos mais 20% (total ~50%)","Mais 5%","Mais 100%"],
+   a:1,e:"Costado em cabo curto perde muita eficiência de tração → somar pelo menos +20%, chegando a ~50% de margem total."},
+  {q:"Segundo Fragoso/Cajaty (2012-Q31), o total de tração calculado deve ser coberto:",
+   o:["Pelo rebocador de menor potência","Pela SOMA de todos os rebocadores","Por um único rebocador","Pelo propulsor de proa"],
+   a:1,e:"Pela SOMA de todos os rebocadores. A alternativa 'no mínimo a capacidade do de menor potência' é justamente a assertiva INCORRETA (d) da questão."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>
