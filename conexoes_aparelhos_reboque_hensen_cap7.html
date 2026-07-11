@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Conexões e Aparelhos de Reboque — Hensen Cap. 7 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E; --azul:#2C5F8A;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:720px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 13px;transition:.15s;white-space:nowrap}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:30px 0 70px}
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:0 0 22px}
+  .related a{font-weight:bold}
+
+  section.bloco{margin-bottom:38px;scroll-margin-top:64px}
+  h2.sec{font-size:24px;color:var(--verde);margin:0 0 6px;font-weight:normal;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--ouro);letter-spacing:.1em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 18px;border-bottom:2px solid var(--linha);padding-bottom:12px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px;font-weight:normal}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.04em;padding:2px 8px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-verificar{background:#efe4ff;color:#52308a}
+  .t-sim{background:#e7f3ec;color:#1c5f3a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:16px 20px;margin:16px 0;box-shadow:var(--sombra)}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.conflito{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.calc{border-left:6px solid var(--azul);background:#eff5fb}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4,.box.conflito h4{color:var(--vermelho)}
+  .box.calc h4{color:var(--azul)}
+  .box ul{margin:8px 0 0;padding-left:20px}
+  .box li{margin:5px 0}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--sombra)}
+  th,td{border:1px solid var(--linha);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  .ok{color:#2E7D52;font-weight:bold}.no{color:var(--vermelho);font-weight:bold}.md{color:#e67e22;font-weight:bold}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  .col-card{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:14px 16px;box-shadow:var(--sombra)}
+  .col-card.pro{border-top:3px solid #2E7D52}
+  .col-card.con{border-top:3px solid var(--vermelho)}
+  .col-card h4{margin:0 0 9px;font-family:'Trebuchet MS',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:bold}
+  .col-card.pro h4{color:#2E7D52}.col-card.con h4{color:var(--vermelho)}
+  .col-card ul{margin:0;padding-left:18px}
+  .col-card li{margin:6px 0;font-size:13.5px}
+
+  figure.diag{margin:22px 0;background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 18px 14px;box-shadow:var(--sombra)}
+  figure.diag svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  figcaption{font-size:12.5px;color:var(--mute);text-align:center;margin-top:10px;font-style:italic}
+  .diag-title{color:var(--verde2);font-size:16px;margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-weight:bold}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:20px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+  details.pscpp .gab{background:rgba(200,168,75,.16);border:1px solid rgba(200,168,75,.4);border-radius:8px;padding:8px 12px;margin:6px 0 14px;font-size:13.5px}
+
+  .secblk{margin:40px 0 0;scroll-margin-top:64px}
+  .secblk > h2{font-size:23px;color:var(--verde);margin:0 0 4px;font-weight:normal;border-bottom:2px solid var(--linha);padding-bottom:8px}
+  .secblk > .lede{color:var(--mute);font-size:15px;margin:12px 0 18px}
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:180px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12.5px;transform:rotateY(180deg);line-height:1.42}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:14.5px;background:#fff;border:1.5px solid var(--linha);border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:#2E7D52;background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:13.5px;padding:11px 14px;border-radius:8px;display:none;line-height:1.5}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid #2E7D52}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+
+  .backlink{display:inline-block;margin:24px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer.estante{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:36px}
+  footer.estante b{color:var(--ouro)}
+
+  @media(max-width:700px){.hero h1{font-size:25px}.cols{grid-template-columns:1fr}}
+  @media print{nav.toc{display:none}details.pscpp{background:#fff;color:#000;border:1px solid #ccc}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo II · Arte Naval · Bloco H — Rebocadores</p>
+    <h1>Conexões e <em>Aparelhos de Reboque</em></h1>
+    <p class="sub">O elo físico entre rebocador e navio: pontos de reboque e gob ropes, cabeços, ganchos e guinchos com liberação rápida, a composição do cabo (mensageiro · esticador · pendente · cabo principal) e — o coração da matéria — as conexões: grommet × cow-hitch/girth hitch, eye-to-eye e Lankonect. Fidelidade ao Cap. 7 de Hensen.</p>
+    <div class="src"><b>Fonte:</b> Hensen, <i>Tug Use in Port</i>, 4ª ed. (2021), Cap. 7 (Towing Equipment), §7.1–7.5. <b>Subtópico:</b> H1 (Equipamentos de reboque). <b>Banca:</b> Cap. 7 é posterior a 2006–2012 → correlações por similaridade temática. Cobrado em simulado 2027 (Q15 — grommet).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#s71">Por que importa</a>
+    <a href="#s72">Pontos &amp; gob rope</a>
+    <a href="#s73">Ganchos &amp; guinchos</a>
+    <a href="#quick">Liberação rápida</a>
+    <a href="#atrito">Atrito &amp; abrasão</a>
+    <a href="#comp">Composição do cabo</a>
+    <a href="#conexoes">Conexões ▸</a>
+    <a href="#emerg">Emergência SOLAS</a>
+    <a href="#banca">Banca ⚓</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Caderno do <strong>Bloco H — Rebocadores (Arte Naval)</strong>, subtópico <strong>H1 (Equipamentos de reboque)</strong>. Complementa o de <em>Tipos</em> (Cap. 2) e o de <em>Métodos de Assistência</em> (Cap. 3): o <em>como amarrar e conectar</em> por trás do <em>como assistir</em>. O ponto de reboque e o risco de <em>girting</em> ligam-se diretamente ao caderno de <em>Estabilidade</em> (Van der Laan Cap. 2).
+</div>
+
+<!-- ===== 7.1 INTRODUÇÃO ===== -->
+<section class="bloco" id="s71">
+  <h2 class="sec"><span class="n">7.1</span> Por que o aparelho de reboque importa</h2>
+  <p class="lede">Hensen abre o capítulo lembrando que segurança e desempenho andam juntos: quanto mais seguro o rebocador opera, menores são suas limitações. E o aparelho de reboque é o que materializa essa relação.</p>
+
+  <div class="box key">
+    <h4>A ideia central <span class="tag t-decorar">DECORAR</span></h4>
+    <p>A <strong>localização do ponto de reboque</strong> é decisiva. Num convencional, <span class="hl">quanto mais alto o ponto de reboque, maior o banda (adernamento) ao rebocar com cabo</span> — por causa das forças transversais — e <span class="hl-amb">maior o risco de girting</span> (capotamento lateral). Um ponto de reboque alto limita o desempenho, sobretudo no convencional, mas também nos demais tipos.</p>
+    <p>Daí duas famílias de soluções que percorrem todo o capítulo:</p>
+    <ul>
+      <li><strong>Tornar o ponto de reboque transferível</strong> (ou ter mais de um ponto fixo) → afeta desempenho <em>e</em> segurança.</li>
+      <li><strong>Instalar um sistema de liberação rápida</strong> (<i>quick release</i>) → sistema de segurança de emergência.</li>
+      <li>Poder <strong>variar o comprimento do cabo</strong> ao assistir (ondas altas, reduzir a esteira do propulsor contra o casco, espaço de manobra restrito).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 7.2 PONTOS ADICIONAIS E GOB ROPE ===== -->
+<section class="bloco" id="s72">
+  <h2 class="sec"><span class="n">7.2</span> Pontos de reboque adicionais e gob ropes</h2>
+  <p class="lede">Formas de deslocar o ponto de reboque ao longo do convés — do simples gob rope aos trilhos radiais e ao carrossel.</p>
+
+  <h3>Cabresto de manobra (<i>gob rope</i>)</h3>
+  <p>O <strong>gob rope</strong> desloca a posição efetiva do ponto de reboque no sentido <strong>longitudinal</strong>. Ao tesá-lo, o cabo de reboque é <span class="hl">recolhido para uma posição mais a ré</span> (perto da popa), reduzindo o braço transversal e o risco de girting. Um <strong>convencional</strong>, em baixa velocidade, pode usar o gob rope para <strong>governar</strong> o navio: mediram-se <span class="hl">70% ou mais do bollard pull</span> nesse arranjo — logo, o gob rope, a manilha e o retorno (<i>swivel fairlead</i>) precisam resistir a essas forças elevadas.</p>
+
+  <div class="box trap">
+    <h4>Segurança do gob rope <span class="tag t-conflito">CUIDADO</span></h4>
+    <p>Parece simples e seguro, mas <span class="hl-amb">se o gob rope ficar conectado e com comprimento não controlado</span> — por esquecimento ou por não estar num ponto seguro — pode criar situação perigosa (ex.: rebocador de popa ainda com o gob rope preso enquanto puxa mais ou menos na direção do navio). Regra prática de Hensen: <span class="hl">quando não for necessário, é melhor desconectar o gob rope</span>. A manilha do gob rope deve ser <strong>grande o bastante para deixar o olhal do cabo de reboque passar</strong> numa emergência.</p>
+  </div>
+
+  <h3>Pinos de reboque, gancho radial, staples e carrossel</h3>
+  <ul>
+    <li><strong>Pinos de reboque hidráulicos</strong> (<i>towing pins</i>): abrem/fecham para prender ou soltar o cabo, guiando o ponto de aplicação.</li>
+    <li><strong>Gancho radial</strong> (<i>radial / disc hook</i>): desloca-se ao longo de um trilho parcialmente circular; também combinável com guincho. Mantém a condução do cabo favorável em ângulos íngremes.</li>
+    <li><strong>Staples</strong> com abertura transversal: deixam o cabo <span class="hl">deslizar para o bordo mais baixo</span>, criando um <strong>momento de adernamento restaurador adicional</strong> — mas provavelmente também abrasão adicional.</li>
+    <li><strong>Trilho circular completo / carrossel</strong>: os arranjos DOT tug e CRT (Carrousel RAVE Tug) — ponto de reboque que gira 360° (tratados no Cap. 2).</li>
+  </ul>
+</section>
+
+<!-- ===== 7.3 GANCHOS E GUINCHOS ===== -->
+<section class="bloco" id="s73">
+  <h2 class="sec"><span class="n">7.3</span> Cabeços, ganchos e guinchos de reboque</h2>
+  <p class="lede">Como o cabo é firmado a bordo e como (e se) seu comprimento pode ser variado — o que depende do equipamento de convés.</p>
+
+  <div class="box">
+    <h4>Variar o comprimento do cabo — o que cada solução permite</h4>
+    <ul>
+      <li><strong>Cabeços / bitas (<i>bitts, bollards</i>)</strong>: o comprimento só muda com tempo, tripulação e o cabo folgado. Numa emergência, é <span class="hl-amb">quase impossível largar</span> um cabo firmado em bita sob tensão.</li>
+      <li><strong>Gancho de reboque (com liberação rápida)</strong>: a largada não deve ser problemática — desde que o sistema seja confiável. Mas o comprimento do cabo firmado no gancho também não varia.</li>
+      <li><strong>Cabos próprios do rebocador</strong>: em geral de <strong>comprimento fixo</strong>, com olhal em cada extremidade (um no cabeço do navio, outro no gancho). Por isso muitos rebocadores levam <strong>dois ou mais cabos de comprimentos fixos diferentes</strong>.</li>
+      <li><strong>Guincho de reboque</strong>: a única solução que permite <span class="hl">ajustar o comprimento a qualquer momento</span>, de forma rápida e, em regra, comandada da casaria — sem tripulação extra.</li>
+    </ul>
+    <p style="margin-top:8px">A lição de segurança: os métodos de firmar variam, mas <span class="hl">só o guincho permite variar o comprimento eficientemente</span>, e a impossibilidade de folgar/largar em emergência é um risco operacional.</p>
+  </div>
+
+  <h3>Guinchos de reboque — características</h3>
+  <p>Instalar um guincho permite ajustar o comprimento e manuseio mais rápido, sobretudo com cabos pesados. Muitos guinchos de porto <strong>não têm dispositivo de enrolamento automático</strong> (<i>spooling gear</i>), porque os cabos de porto são curtos. Acionamento por motor <strong>hidráulico</strong> ou <strong>elétrico</strong> (o elétrico/frequência controlada perde menos potência: ~10–15% contra ~20–40% do hidráulico). Quatro aspectos importam:</p>
+  <div class="box calc">
+    <h4>Parâmetros do guincho <span class="tag t-calc">CALCULO</span></h4>
+    <ul>
+      <li><strong>Capacidade de retenção do freio</strong> (<i>brake holding power</i>) — refere-se à <span class="hl">primeira camada no tambor</span> (mais camadas → menor capacidade). Típico: <span class="hl">2 a 3 × o bollard pull</span> do rebocador (varia por política da empresa; há casos = 1× BP).</li>
+      <li><strong>Capacidade máxima de tração</strong> (<i>maximum pulling capacity</i>).</li>
+      <li><strong>Tração nominal / curva tração-velocidade</strong> (<i>rated pull</i>).</li>
+      <li><strong>Velocidade de recolhimento de folga</strong> (<i>slack line speed</i>).</li>
+    </ul>
+    <p style="margin-top:8px"><strong>Relação freio × MBL do cabo:</strong> com freio de baixa retenção e cabo de alta resistência (alto fator de segurança), <span class="hl-amb">o freio desliza antes de o cabo romper</span> — protege o cabo e prolonga sua vida. Em troca, um freio de retenção baixa pode limitar o desempenho, pois em ângulos íngremes a força no cabo pode ser bem maior que o BP.</p>
+  </div>
+</section>
+
+<!-- ===== LIBERAÇÃO RÁPIDA ===== -->
+<section class="bloco" id="quick">
+  <h2 class="sec"><span class="n">7.3.2</span> Ganchos e liberação rápida (<i>quick release</i>)</h2>
+  <p class="lede">O sistema de segurança de emergência mais crítico do rebocador — e um que, sob condições extremas, pode simplesmente não abrir.</p>
+
+  <div class="box key">
+    <p>As sociedades classificadoras <span class="hl">exigem que os ganchos de reboque tenham sistema de liberação rápida</span>, acionável <strong>localmente</strong> e por <strong>controle remoto da casaria</strong>, com plena visão da operação. Os sistemas vão do simples (arame de aço manual) ao eletro-pneumático/eletro-hidráulico.</p>
+    <ul>
+      <li><strong>Gancho de disco</strong> (<i>disc hook</i>): placa redonda com abertura em gancho. Ao largar um cabo tensionado, a energia armazenada acelera enormemente o disco, mas <span class="hl">evita o grande impacto sobre o gancho e a estrutura do convés</span> — importante com cabos de fibra de grande alongamento.</li>
+      <li>Ganchos podem ter <strong>amortecedores de mola</strong> (reduzem picos dinâmicos) e sistemas de monitoramento de carga.</li>
+    </ul>
+  </div>
+
+  <div class="box trap">
+    <h4>O limite do quick release <span class="tag t-conflito">CUIDADO</span></h4>
+    <p>A experiência ensina que em muitos casos <span class="hl-amb">é quase impossível abrir um gancho de liberação rápida em situações críticas</span> — justamente quando o rebocador está adernado por altíssima tensão no cabo, ou quando o mecanismo está congelado. <strong>Não se pode confiar cegamente no sistema.</strong> Ganchos de liberação rápida devem ser <strong>testados nas condições mais severas</strong> possíveis e bem mantidos. Alternativa de emergência (EUA): a <i>quick release strap</i> — uma tira curta passada no cabeço e no olhal do cabo, largada com pouco risco à tripulação.</p>
+  </div>
+</section>
+
+<!-- ===== ATRITO E ABRASÃO ===== -->
+<section class="bloco" id="atrito">
+  <h2 class="sec"><span class="n">7.5.2</span> Atrito do cabo, abrasão e proteção (<i>chafe gear</i>)</h2>
+  <p class="lede">O atrito é inimigo silencioso: gera calor, desgasta o cabo e ainda engana a leitura de tensão no guincho.</p>
+
+  <div class="cols">
+    <div class="col-card con">
+      <h4>Consequências do atrito do cabo</h4>
+      <ul>
+        <li><strong>Calor</strong> no ponto de deslizamento — o cabo esquenta ao passar em ângulo por um retorno; ao atingir o limite de operação, degrada rápido.</li>
+        <li><strong>Abrasão</strong> — quanto mais rugoso o retorno, maior o atrito e o desgaste.</li>
+        <li><strong>Leitura de tensão errada</strong> no guincho → o sistema <em>render-recovery</em> trabalha impreciso: a força medida difere da real (ex.: no <i>powered indirect</i>, <span class="hl">62 t no cabo navio–rebocador × 49 t no cabo retorno–guincho, ~20% menos</span>).</li>
+        <li>Maior <strong>risco de arrebentamento</strong> e menor longevidade do cabo.</li>
+      </ul>
+    </div>
+    <div class="col-card pro">
+      <h4>Proteção (chafe gear) e acabamentos</h4>
+      <ul>
+        <li><strong>Chafe gear</strong>: protege pendentes e a extremidade do cabo principal contra bocas de lobo, buzinas e cabeços mal mantidos do navio. <span class="hl">Trocar a proteção é muito mais barato que trocar o pendente.</span></li>
+        <li>Cabos <strong>HMPE</strong> (Dyneema/Spectra) são protegidos por <strong>mangas antiatrito</strong> (permitem até inspecionar o cabo).</li>
+        <li><strong>Marine overlay finish</strong> e revestimentos (poliuretano) aumentam resistência à abrasão, aos raios UV e à fadiga.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPOSIÇÃO DO CABO ===== -->
+<section class="bloco" id="comp">
+  <h2 class="sec"><span class="n">7.5.3</span> Composição do cabo de reboque</h2>
+  <p class="lede">Da mão do marinheiro ao gancho: mensageiro → cabo principal, com pendente e esticador conforme o arranjo.</p>
+
+  <div class="box">
+    <h4>As quatro composições típicas (reboque de porto)</h4>
+    <ul>
+      <li>Um único <strong>cabo de aço</strong> + mensageiro.</li>
+      <li>Cabo de aço + <strong>esticador</strong> (<i>stretcher</i>) + <strong>pendente</strong> de aço + mensageiro.</li>
+      <li>Cabo de <strong>fibra</strong> + pendente de aço + mensageiro.</li>
+      <li>Cabo de fibra <strong>com ou sem pendente de fibra</strong> + mensageiro.</li>
+    </ul>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Elemento</th><th>Função</th><th>Detalhes de Hensen (§7.5.3)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Mensageiro</strong><br>(<i>messenger</i>)</td>
+        <td>Retinida: leva o cabo de reboque a bordo do navio.</td>
+        <td>Deve <span class="hl">boiar</span>, ser longo e forte, fácil de manusear. <span class="hl-amb">Nunca de 3 pernas</span> (gira e induz torção no pendente/cabo principal, sobretudo em navios altos). Deve ser <strong>trançado e torque-balanceado</strong>. Diâmetro ~<strong>25 mm</strong>. <strong>Não usar HMPE</strong> (escorrega no cabrestante). Polipropileno é bom (alto atrito, flutua).</td>
+      </tr>
+      <tr>
+        <td><strong>Esticador</strong><br>(<i>stretcher</i>)</td>
+        <td>Adiciona elasticidade (absorve cargas dinâmicas).</td>
+        <td>Náilon, poliéster ou poliéster/polipropileno; ~<strong>10 m</strong>; muitas vezes <span class="hl">dobrado como grommet</span>. Recomenda-se <strong>+25% de resistência</strong> sobre o cabo de aço (náilon: +37%, pela perda quando molhado).</td>
+      </tr>
+      <tr>
+        <td><strong>Pendente</strong><br>(<i>pendant / pennant</i>)</td>
+        <td>Protege o cabo principal da abrasão; é o "fusível".</td>
+        <td>Aço ou fibra (inclusive HMPE). Em força extrema, <span class="hl">o pendente rompe primeiro</span> e só ele é substituído. Geralmente de diâmetro menor que o cabo principal.</td>
+      </tr>
+      <tr>
+        <td><strong>Cabo principal</strong><br>(<i>towline</i> — espórtula)</td>
+        <td>O elo de trabalho entre rebocador e navio.</td>
+        <td>Aço ou fibra (polipropileno, náilon, poliéster, misturas; Dyneema/Spectra em escolta). Fibras de baixa elasticidade (Dyneema) exigem <strong>rabicho/pendente de náilon ou poliéster</strong> para amortecer picos.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== CONEXÕES — SEÇÃO PRINCIPAL ===== -->
+<section class="bloco" id="conexoes">
+  <h2 class="sec"><span class="n">·</span> As conexões — o coração da matéria</h2>
+  <p class="lede">Como unir mensageiro↔olhal e pendente↔cabo principal. Aqui está a resposta da Q15 do simulado: o problema do girth/cow-hitch e a solução do grommet.</p>
+
+  <div class="box trap">
+    <h4>O problema — girth hitch / cow-hitch mordendo o olhal <span class="tag t-conflito">DECORAR</span></h4>
+    <p>A conexão do <strong>mensageiro</strong> ao olhal do pendente ou cabo principal feita pela típica <strong>volta de girth hitch</strong> — que é <span class="hl">essencialmente o mesmo que a conexão cow-hitch</span> — pode causar dano substancial ao olhal. Sob carga, o girth hitch <span class="hl-amb">"morde" o olhal com pressão intensa</span> e, com o uso repetido, essa pressão excessiva provoca <strong>abrasão interna e fusão das fibras</strong> (<i>internal abrasion and fibre fusing</i>). É exatamente o sintoma do enunciado da Q15.</p>
+  </div>
+
+  <div class="box key">
+    <h4>A solução — o grommet <span class="tag t-banca">SIMULADO Q15</span></h4>
+    <p>O <strong>grommet</strong> (alça/anel sem fim de cabo) é o método melhor: <span class="hl">passa-se o grommet através do olhal do cabo de reboque e amarra-se o mensageiro ao grommet</span> por girth hitch (Fig. 7.32). Alternativamente, o grommet pode ser <em>cravado</em> em torno do olhal do pendente/cabo, ou o mensageiro cravado direto no olhal.</p>
+    <p>Vantagens que respondem ao enunciado:</p>
+    <ul>
+      <li><span class="hl">Não gera muita pressão</span> sobre o pendente/cabo principal → muito <strong>menos abrasão</strong>.</li>
+      <li>O grommet pode <span class="hl">deslizar ao longo do olhal do cabo</span> (é a "solução intermediária que desliza" do enunciado).</li>
+      <li>Pode ser <span class="hl-amb">girado/reposicionado periodicamente para distribuir o desgaste</span> (<i>rotated over time to spread wear and tear</i>) → prolonga a vida útil do conjunto.</li>
+    </ul>
+    <p>Se preciso, inclui-se um <strong>swivel (destorcedor)</strong> no mensageiro para evitar torção. Um sistema usado em portos australianos: grommet de Dyneema/Spectra ligado a um cabo principal de poliéster (double-braid) — dá mais elasticidade; o grommet passa pelo olhal <em>antes</em> de ser cravado.</p>
+  </div>
+
+  <figure class="diag" id="diaggro">
+    <div class="diag-title">Girth/cow-hitch × grommet — por que um destrói o olhal e o outro o preserva</div>
+    <svg viewBox="0 0 700 300" role="img" xmlns="http://www.w3.org/2000/svg">
+      <!-- GIRTH HITCH -->
+      <text x="30" y="26" font-size="14" font-weight="bold" fill="#9E3B2E">Girth / cow-hitch — morde o olhal</text>
+      <!-- olhal do cabo -->
+      <ellipse cx="150" cy="140" rx="70" ry="42" fill="none" stroke="#5F5E5A" stroke-width="10"/>
+      <text x="150" y="205" font-size="11" fill="#5F5E5A" text-anchor="middle">olhal do cabo</text>
+      <!-- messenger passando com aperto -->
+      <path d="M150 98 C110 98 110 182 150 182" fill="none" stroke="#9E3B2E" stroke-width="8"/>
+      <path d="M150 98 C190 98 190 182 150 182" fill="none" stroke="#9E3B2E" stroke-width="8"/>
+      <line x1="150" y1="182" x2="150" y2="250" stroke="#9E3B2E" stroke-width="8"/>
+      <text x="165" y="245" font-size="11" fill="#9E3B2E">mensageiro</text>
+      <!-- pressao -->
+      <text x="235" y="120" font-size="18" fill="#9E3B2E">⚠</text>
+      <text x="250" y="124" font-size="11" fill="#9E3B2E">pressão intensa</text>
+      <text x="250" y="140" font-size="11" fill="#9E3B2E">→ abrasão interna</text>
+      <text x="250" y="156" font-size="11" fill="#9E3B2E">→ fusão das fibras</text>
+      <text x="250" y="176" font-size="11" fill="#9E3B2E">→ ponto fixo (não desliza)</text>
+
+      <!-- GROMMET -->
+      <text x="410" y="26" font-size="14" font-weight="bold" fill="#0F6E56">Grommet — desliza e distribui o desgaste</text>
+      <!-- olhal do cabo -->
+      <ellipse cx="500" cy="140" rx="70" ry="42" fill="none" stroke="#5F5E5A" stroke-width="10"/>
+      <text x="500" y="205" font-size="11" fill="#5F5E5A" text-anchor="middle">olhal do cabo</text>
+      <!-- grommet loop through eye -->
+      <ellipse cx="500" cy="140" rx="30" ry="55" fill="none" stroke="#0F6E56" stroke-width="7"/>
+      <text x="540" y="96" font-size="11" fill="#0F6E56">grommet</text>
+      <!-- messenger girth-hitched to grommet -->
+      <path d="M500 188 C475 188 475 232 500 232" fill="none" stroke="#C8A84B" stroke-width="7"/>
+      <path d="M500 188 C525 188 525 232 500 232" fill="none" stroke="#C8A84B" stroke-width="7"/>
+      <line x1="500" y1="232" x2="500" y2="262" stroke="#C8A84B" stroke-width="7"/>
+      <text x="515" y="255" font-size="11" fill="#8a6d20">mensageiro</text>
+      <!-- slide arrows -->
+      <line x1="440" y1="140" x2="420" y2="140" stroke="#0F6E56" stroke-width="2" stroke-dasharray="3 3"/>
+      <line x1="560" y1="140" x2="580" y2="140" stroke="#0F6E56" stroke-width="2" stroke-dasharray="3 3"/>
+      <text x="590" y="144" font-size="11" fill="#0F6E56">desliza ↔</text>
+    </svg>
+    <figcaption>Reconstrução esquemática (cf. Hensen Fig. 7.32). No girth/cow-hitch o mensageiro aperta o próprio olhal, fixo, gerando abrasão e fusão. No grommet, uma alça intermediária atravessa o olhal, distribui a carga, desliza e pode ser girada para espalhar o desgaste.</figcaption>
+  </figure>
+
+  <div class="box calc">
+    <h4>Emendar dois cabos: eficiências de conexão <span class="tag t-calc">CALCULO</span></h4>
+    <p>Para unir pendente↔cabo principal (ou dois cabos), sem manilhas nem ferragens:</p>
+    <ul>
+      <li><strong>Cow-hitch</strong>: une dois cabos de diâmetro similar. Segundo a OCIMF, entre um rabicho de perna única corretamente dimensionado e o cabo, <span class="hl">não afeta significativamente a resistência</span> do conjunto (aplicável a pendente↔cabo, se bem dimensionados).</li>
+      <li><strong>Eye-to-eye</strong> (olhal-a-olhal): também sem ferragens; eficiência de resistência de <span class="hl">90–100%</span>.</li>
+      <li><strong>Grommet</strong> (Fig. 7.32): assume-se a resistência de projeto de <span class="hl">85% por perna</span> do valor nominal.</li>
+      <li><strong>Lankonect</strong>: conexão ajustável — pode ser feita como o <span class="hl-amb">elo mais forte ou como elo fraco</span> (fusível) da configuração; serve a Dyneema, poliéster e outros; rápida de fazer e <strong>fácil de largar</strong>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 7.8 REBOQUE DE EMERGÊNCIA ===== -->
+<section class="bloco" id="emerg">
+  <h2 class="sec"><span class="n">7.8</span> Reboque de emergência (SOLAS II-1/3-4)</h2>
+  <p class="lede">Menos ligado à rebocagem portuária, mas parte do Cap. 7 e cobrado pela banca: o equipamento que permite rebocar um navio-tanque avariado para longe do perigo. É a base da Q25.</p>
+
+  <div class="box key">
+    <h4>O que é e por que existe <span class="tag t-decorar">DECORAR</span></h4>
+    <p>O <strong>equipamento de reboque de emergência</strong> (<i>emergency towing arrangement</i> — ETA) é sobretudo um <span class="hl">requisito de segurança para mar aberto</span>: facilita rebocar o navio-tanque para fora do perigo (prevenindo poluição) em caso de <strong>perda de propulsão e/ou manobrabilidade</strong>. Embora seja de emergência, <span class="hl-amb">pode também servir para conectar o cabo de um rebocador de escolta</span> (é o detalhe que a alternativa B da Q25 inverte).</p>
+    <p>Exigido pela <strong>Regra II-1/3-4 da SOLAS 1974</strong> (texto atual adotado pela Res. MSC.99(73), em vigor 1/7/2002; emendas pela Res. MSC.256(84), 2008).</p>
+  </div>
+
+  <div class="box">
+    <h4>Requisitos centrais</h4>
+    <ul>
+      <li><strong>Onde e em quem:</strong> instalado em <span class="hl">ambas as extremidades</span> (proa <em>e</em> popa) de <span class="hl">todo navio-tanque de porte bruto (dwt) não inferior a 20.000 t</span>. (Não é "todo navio SOLAS", nem "deslocamento", nem "uma das extremidades".)</li>
+      <li><strong>Petroleiros construídos a partir de 1/7/2002:</strong> capaz de <strong>lançamento rápido sem energia principal</strong> no navio a ser rebocado e de <strong>fácil conexão</strong> ao navio rebocador; <span class="hl">pelo menos um dos arranjos deve ser pré-armado</span> (<i>pre-rigged</i>) pronto para lançamento rápido.</li>
+      <li>Resistência adequada em ambas as extremidades, considerando porte e forças esperadas em mau tempo; projeto, construção e teste de protótipo <strong>aprovados pela Administração</strong> conforme diretrizes da IMO.</li>
+      <li>As <i>Guidelines</i> aplicam-se a <strong>navios-tanque</strong>: petroleiros, gaseiros e navios de produtos químicos.</li>
+    </ul>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Pré-armado (<i>pre-rigged</i>)</th><th>Não pré-armado</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Tempo de lançamento</strong> (condições de porto)</td><td class="ok">≤ 15 minutos</td><td class="md">≤ 1 hora</td></tr>
+      <tr><td><strong>Pick-up gear</strong> (pegar o pendente)</td><td>Obrigatório — <span class="hl">operação manual por 1 pessoa, sem energia</span>, sob condições ambientais adversas</td><td>Opcional</td></tr>
+      <tr><td><strong>Pendente de reboque</strong> (<i>towing pennant</i>)</td><td>Obrigatório</td><td>Opcional</td></tr>
+      <tr><td><strong>Ponto forte (strongpoint) + retorno (fairlead)</strong></td><td class="ok">Obrigatórios</td><td class="ok">Obrigatórios</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box calc">
+    <h4>Números que a banca cobra <span class="tag t-calc">CALCULO</span></h4>
+    <ul>
+      <li><strong>Resistência de trabalho</strong> (= ½ da resistência de ruptura): <span class="hl">≥ 1.000 kN</span> para tanques de 20.000 a &lt;50.000 dwt; <span class="hl">≥ 2.000 kN</span> para ≥ 50.000 dwt.</li>
+      <li><strong>Ângulos de projeto</strong> do cabo: até <span class="hl">90° para BB e BE</span> da linha de centro e <span class="hl">30° verticalmente para baixo</span>.</li>
+      <li><strong>Comprimento do pendente</strong> (IMO): pelo menos <span class="hl">2 × o maior bordo-livre de lastro</span> no retorno <span class="hl">+ 50 m</span>.</li>
+      <li><strong>Pré-armado em ambas as extremidades</strong> pode ser aceito.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h4>Componentes e lançamento</h4>
+    <p>Componentes principais (Fig. 7.47): <strong>ponto forte</strong> (pode ser integrado ao retorno) · <strong>retorno/fairlead</strong> · <strong>conexão de reboque do navio</strong> (corrente antiatrito + pendente de Dyneema/Spectra que <em>flutua</em>, com amortecedor de náilon opcional; ou pendente de cabo de aço armazenado em tambor) · <strong>pick-up gear</strong> (mensageiro flutuante + linha de pega com 1–2 boias luminosas, ou apenas mensageiro flutuante com boia de marcação).</p>
+    <p>Lançamento: em geral manual, arriando o pick-up gear, ou por <strong>fuzil de ar</strong> que dispara a linha de pega. O rebocador de salvamento recolhe o mensageiro, iça e desdobra o pendente, e conecta ao seu próprio cabo. Alguns sistemas podem ser <strong>controlados remotamente</strong> mesmo após a tripulação abandonar o navio.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Nota 13 — extensão futura <span class="tag t-conflito">ATENÇÃO</span></h4>
+    <p>A IMO acordou (MSC 103, 2021) estender a exigência — hoje restrita a <strong>navios-tanque ≥ 20.000 dwt</strong> — a <span class="hl-amb">outros tipos de grandes navios novos</span>, pois o tamanho atual não permite reboque de emergência sem equipamento adequado. Eventuais emendas <span class="hl">não entram em vigor antes de janeiro de 2028</span>. Ou seja: até lá, o requisito continua valendo só para navios-tanque.</p>
+  </div>
+</section>
+
+<!-- ===== BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚓</span> Pontos de banca</h2>
+  <p class="lede">Cap. 7 é posterior às provas 2006–2012, então as correlações são por similaridade temática. Mas já foi cobrado em simulado 2027 — abaixo, a questão-âncora.</p>
+
+  <details class="pscpp" open>
+    <summary>Simulado 2027 · Q15 — conexão que desliza e distribui o desgaste</summary>
+    <ul>
+      <li><b>Enunciado (resumo):</b> a ligação direta do mensageiro ao olhal do pendente vinha produzindo elevada compressão sob carga, com abrasão interna e fusão das fibras. Para distribuir o desgaste e deixar a peça deslizar e ser reposicionada, qual solução de conexão usar?</li>
+      <li>A) Grommet · B) Girth hitch · C) Cow-hitch · D) Eye-to-eye · E) Lankonect</li>
+      <li><b>Resposta: A) Grommet.</b> É a única que desliza ao longo do olhal, gera pouca pressão e pode ser <b>girada para espalhar o desgaste</b>. B e C são exatamente o método <em>problemático</em> (mordem o olhal → abrasão/fusão). D é conexão fixa entre dois cabos. E é dispositivo de conexão rápida ajustável, sem a função de deslizar.</li>
+    </ul>
+    <div class="gab">Gabarito: <b>A</b>. Base: Hensen §7.5.3, Fig. 7.32. <span class="tag t-sim">BANCA: similaridade temática</span></div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Simulado 2027 · Q25 — requisitos do reboque de emergência (SOLAS II-1/3-4)</summary>
+    <ul>
+      <li><b>D) CORRETA:</b> o <b>pick-up gear</b> do pendente pré-armado deve permitir <b>operação manual por 1 pessoa</b>, considerando falta de energia e condições ambientais adversas.</li>
+      <li><b>A) Falsa:</b> deve ser instalado em <b>ambas as extremidades</b> (não "uma das"), e em tanques <b>≥ 20.000 dwt</b> (não "todos os navios-tanque").</li>
+      <li><b>B) Falsa:</b> acerta SOLAS/mar aberto, mas Hensen diz que o dispositivo <b>PODE também servir</b> para conectar o cabo de um rebocador escort — a alternativa nega isso.</li>
+      <li><b>C) Falsa:</b> é <b>navio-tanque</b> (não "todo navio SOLAS") e o critério é <b>porte bruto/dwt</b>, não "deslocamento".</li>
+      <li><b>E) Falsa:</b> troca os prazos — o <b>pré-armado</b> é ≤ 15 min; o <b>não pré-armado</b> é ≤ 1 hora.</li>
+    </ul>
+    <div class="gab">Gabarito: <b>D</b>. Base: Hensen §7.8 (SOLAS II-1/3-4, Res. MSC.256(84)). <span class="tag t-sim">BANCA: similaridade temática</span></div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Distratores clássicos deste tema</summary>
+    <ul>
+      <li><b>Confundir o problema com a solução:</b> girth hitch = cow-hitch = o que <em>causa</em> a abrasão/fusão. O grommet é a <b>cura</b>.</li>
+      <li><b>Mensageiro de 3 pernas:</b> proibido — gira e induz torção. Deve ser <b>trançado e torque-balanceado</b>.</li>
+      <li><b>HMPE como mensageiro:</b> não — escorrega no cabrestante. Prefira polipropileno (flutua, alto atrito).</li>
+      <li><b>Quem rompe primeiro:</b> o <b>pendente</b> (fusível), não o cabo principal.</li>
+      <li><b>Eficiências:</b> eye-to-eye 90–100%; grommet 85% por perna; cow-hitch (OCIMF) não reduz significativamente se bem dimensionado.</li>
+    </ul>
+    <div class="gab"><span class="tag t-sim">BANCA: similaridade temática</span> — Hensen 4ª ed. posterior a 2006–2012.</div>
+  </details>
+
+  <details class="pscpp">
+    <summary>Ligações com outros cadernos do Bloco H</summary>
+    <ul>
+      <li><b>Ponto de reboque alto → girting:</b> conecta ao caderno de <b>Estabilidade (Van der Laan Cap. 2)</b>.</li>
+      <li><b>Gob rope e governo em baixa velocidade:</b> conecta ao caderno de <b>Métodos de Assistência (Cap. 3)</b>.</li>
+      <li><b>Atrito no retorno em powered indirect:</b> conecta a <b>Capacidades e Limitações (Cap. 4)</b> e à leitura de bollard pull (Cap. 5).</li>
+    </ul>
+    <div class="gab">Uso combinado dos cadernos aumenta a retenção por repetição espaçada.</div>
+  </details>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="secblk" id="flash">
+  <h2>Flashcards — o que a banca inverte</h2>
+  <p class="lede">Toque para virar. Foco na dupla problema (girth/cow-hitch) × solução (grommet) e nos números das conexões.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="secblk" id="quiz">
+  <h2>Quiz — conexões e aparelhos de reboque</h2>
+  <p class="lede">Dez questões no padrão da banca, com feedback apontando a pegadinha e a seção de Hensen.</p>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav"><span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()">Próxima →</button>
+    </div>
+  </div>
+  <a class="backlink" href="index.html">← Voltar à estante</a>
+</section>
+
+</div>
+</main>
+
+<footer class="estante">
+  <div class="wrap"><b>PSCPP 2027</b> · Bloco H — Rebocadores (Arte Naval) · Hensen Cap. 7 · Capital Sereno</div>
+</footer>
+
+<script>
+var FC=[
+  {f:"Problema: girth / cow-hitch",b:"Sob carga MORDE o olhal → pressão intensa → abrasão interna e FUSÃO das fibras. É o defeito, não a solução."},
+  {f:"Solução: grommet",b:"Alça sem fim através do olhal; mensageiro amarrado a ela. Pouca pressão, DESLIZA no olhal e pode ser GIRADO p/ espalhar o desgaste."},
+  {f:"Grommet — Q15 do simulado",b:"Resposta correta quando o enunciado fala em 'deslizar ao longo do olhal e reposicionar para distribuir o desgaste'. Hensen Fig. 7.32."},
+  {f:"Eye-to-eye — eficiência",b:"90–100% de resistência. Une dois cabos de diâmetro similar sem ferragens. Conexão fixa (não desliza)."},
+  {f:"Grommet — eficiência",b:"Resistência de projeto assumida em 85% POR PERNA do valor nominal."},
+  {f:"Cow-hitch — OCIMF",b:"Entre rabicho de perna única bem dimensionado e cabo, NÃO afeta significativamente a resistência do conjunto."},
+  {f:"Lankonect",b:"Conexão ajustável: pode ser o elo mais FORTE ou um elo FRACO (fusível). Rápida e fácil de largar. Serve Dyneema/poliéster."},
+  {f:"Mensageiro — regras",b:"Deve BOIAR, ser longo e forte. NUNCA 3 pernas (torce). Trançado, torque-balanceado, ~25 mm. NÃO HMPE (escorrega). Polipropileno é bom."},
+  {f:"Esticador (stretcher)",b:"~10 m, náilon/poliéster; absorve carga dinâmica; muitas vezes dobrado como grommet. +25% de resistência (náilon +37%)."},
+  {f:"Pendente (pendant)",b:"Protege o cabo principal da abrasão; é o FUSÍVEL — rompe primeiro e só ele é trocado. Aço ou fibra."},
+  {f:"Ponto de reboque alto",b:"No convencional, aumenta o banda e o RISCO DE GIRTING. Por isso torna-se transferível (gob rope, trilho radial, staple)."},
+  {f:"Gob rope",b:"Desloca o ponto de reboque a ré; convencional governa em baixa vel. (70%+ do BP medido). Desconectar quando não usar."},
+  {f:"Quick release — limite",b:"Exigido por classe (local + remoto). Mas sob adernamento/tensão extrema pode NÃO abrir. Testar em condição severa; não confiar cegamente."},
+  {f:"Freio do guincho",b:"Retenção típica 2–3× o BP (1ª camada). Se baixa + cabo forte: o freio desliza antes do cabo romper (protege o cabo)."},
+  {f:"Atrito no retorno",b:"Gera calor, abrasão e leitura de tensão errada (ex.: 62 t no cabo × 49 t no guincho, ~20% menos no powered indirect)."},
+  {f:"Reboque de emergência — quem/onde",b:"SOLAS II-1/3-4: ambas as extremidades (proa E popa) de todo navio-tanque ≥ 20.000 dwt. Pelo menos um pré-armado."},
+  {f:"ETA — prazos",b:"Pré-armado: lançar em ≤ 15 min (condições de porto). Não pré-armado: ≤ 1 hora. Não trocar os dois."},
+  {f:"ETA — pick-up gear",b:"O dispositivo de pegar o pendente pré-armado: operável MANUALMENTE por 1 PESSOA, sem energia, em condições adversas. (Resposta da Q25.)"},
+  {f:"ETA — resistência e ângulos",b:"Trabalho ≥ 1.000 kN (20–50k dwt) / ≥ 2.000 kN (≥50k dwt) = ½ da ruptura. Ângulos: 90° BB/BE e 30° p/ baixo. Pendente ≥ 2× bordo-livre lastro + 50 m."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+var QUIZ=[
+  {q:"A ligação do mensageiro ao olhal do cabo por girth/cow-hitch, sob carga repetida, causa:",
+   o:["Aumento da resistência do olhal","Pressão intensa com abrasão interna e fusão das fibras","Torção do cabo principal","Deslizamento controlado do olhal"],
+   a:1,e:"Sob carga o girth hitch morde o olhal com pressão intensa → abrasão interna e fusão das fibras. É o problema que o grommet resolve (§7.5.3)."},
+  {q:"A conexão que desliza ao longo do olhal e pode ser girada para distribuir o desgaste é o(a):",
+   o:["Girth hitch","Cow-hitch","Grommet","Eye-to-eye"],
+   a:2,e:"Grommet: alça intermediária que gera pouca pressão, desliza no olhal e é reposicionada para espalhar o wear and tear. É a resposta da Q15 (Fig. 7.32)."},
+  {q:"Segundo Hensen, o mensageiro NÃO deve ser:",
+   o:["Trançado e torque-balanceado","De polipropileno","De 3 pernas (three strand)","Capaz de flutuar"],
+   a:2,e:"Mensageiro de 3 pernas gira e induz torção no pendente e cabo principal. Deve ser trançado, torque-balanceado, flutuar; ~25 mm; não HMPE."},
+  {q:"No arranjo cabo de aço + esticador + pendente + mensageiro, quem tende a romper primeiro em força extrema é:",
+   o:["O cabo principal","O pendente","O mensageiro","O esticador"],
+   a:1,e:"O pendente é o 'fusível': rompe primeiro e só ele é substituído, protegendo o cabo principal da abrasão."},
+  {q:"A eficiência de resistência da conexão eye-to-eye é de aproximadamente:",
+   o:["50–60%","70–80%","85% por perna","90–100%"],
+   a:3,e:"Eye-to-eye: 90–100%. Cuidado: 85% por perna é o valor do GROMMET; não confundir."},
+  {q:"Por que NÃO se usa cabo HMPE (Dyneema) como mensageiro?",
+   o:["É caro demais","Não flutua e afunda o cabo","Escorrega no cabrestante/cabeço do guincho","Enferruja rapidamente"],
+   a:2,e:"Pela baixa fricção, o HMPE escorrega facilmente no cabrestante. O mensageiro precisa de bom atrito — polipropileno é preferível."},
+  {q:"O gob rope, num rebocador convencional em baixa velocidade, serve para:",
+   o:["Aumentar o bollard pull do rebocador","Governar o navio, deslocando o ponto de reboque a ré","Impedir a liberação rápida","Medir a tensão do cabo"],
+   a:1,e:"Deslocando o ponto de reboque para a ré, o convencional governa o navio em baixa velocidade (70%+ do BP medido). Desconectar quando não for necessário."},
+  {q:"Sobre os sistemas de liberação rápida (quick release), é CORRETO afirmar:",
+   o:["Sempre abrem, mesmo sob tensão máxima","São dispensados por classe em rebocadores de porto","Podem ser impossíveis de abrir sob adernamento/tensão extrema; devem ser testados","Só existem em ganchos de disco"],
+   a:2,e:"A experiência mostra que em situações críticas (rebocador adernado, mecanismo congelado) pode ser quase impossível abrir. Exigidos por classe (local+remoto), devem ser testados em condição severa."},
+  {q:"A capacidade de retenção do freio de um guincho de reboque de porto é tipicamente:",
+   o:["Igual a 0,5× o bollard pull","2 a 3× o bollard pull","10× o bollard pull","Independe do bollard pull"],
+   a:1,e:"Típico 2–3× o BP, referido à 1ª camada do tambor. Com freio de baixa retenção e cabo forte, o freio desliza antes do cabo romper, protegendo o cabo."},
+  {q:"A conexão Lankonect distingue-se por:",
+   o:["Só funcionar com cabo de aço","Poder ser feita como elo mais forte OU como elo fraco (fusível), rápida e fácil de largar","Ter eficiência fixa de 85%","Ser a única que morde o olhal"],
+   a:1,e:"O Lankonect é ajustável: elo forte ou elo fraco da configuração; serve a Dyneema/poliéster; conexão e liberação rápidas."},
+  {q:"Pela SOLAS II-1/3-4 (Hensen §7.8), o equipamento de reboque de emergência deve ser instalado:",
+   o:["Em pelo menos uma extremidade de todo navio-tanque","Em ambas as extremidades de todo navio-tanque ≥ 20.000 dwt","Em todo navio SOLAS ≥ 20.000 t de deslocamento","Só na proa dos petroleiros ≥ 50.000 dwt"],
+   a:1,e:"Ambas as extremidades (proa E popa), em todo navio-tanque de porte bruto ≥ 20.000 dwt. Cuidado: é dwt (porte), não deslocamento; e é navio-tanque, não 'todo navio SOLAS'."},
+  {q:"Sobre o dispositivo de pegar (pick-up gear) do pendente de reboque de emergência PRÉ-ARMADO:",
+   o:["Deve ser operado por no mínimo dois tripulantes","Deve permitir operação manual por 1 pessoa, sem energia, em condições adversas","Só funciona com energia elétrica disponível","Deve ser posicionado em não mais de 1 hora"],
+   a:1,e:"Operação manual por 1 PESSOA, considerando falta de energia e condições ambientais adversas (resposta da Q25). O prazo de 1 hora é do NÃO pré-armado; o pré-armado é ≤ 15 min."}
+];
+var qi=0,answered=false;
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);
+  if(qi>=QUIZ.length-1)document.getElementById('qNext').textContent="Fim ✓";}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();
+</script>
+</body>
+</html>
