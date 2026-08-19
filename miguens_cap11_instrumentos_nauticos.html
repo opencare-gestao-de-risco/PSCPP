@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Instrumentos Náuticos — Miguens Cap. 11 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:96px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco A — Instrumentos</p>
+    <h1>Instrumentos Náuticos — do <em>odômetro</em> ao ecobatímetro</h1>
+    <p class="sub">As ferramentas do navegante organizadas por finalidade: medir direções, velocidade e distância navegada (odômetros de superfície, de fundo e Doppler), distâncias a objetos (estadímetro, sextante) e profundidade (prumo e ecobatímetro). Com o efeito da corrente sobre o odômetro e a corrida da milha.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 11 (Instrumentos Náuticos). A banca cita a <b>1ª edição (1996)</b>. Questões reais: PSCPP 2011-Q59 e 2012-Q22/Q25.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#tipos">11.1 Por finalidade</a>
+    <a href="#marcacao">11.2 Marcações</a>
+    <a href="#odometros">11.3 Odômetros ▶</a>
+    <a href="#corrente">Corrente ▶</a>
+    <a href="#distancia">11.4 Distâncias</a>
+    <a href="#ecobat">11.5 Ecobatímetro ▶</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Núcleo do <strong>Bloco A</strong>. As agulhas (direções) estão no <a href="miguens_cap3_agulhas_conversao_rumos.html">Cap. 3</a>; o ecobatímetro liga-se ao critério das profundidades (<a href="miguens_cap7_8_ldp_seguranca.html">Cap. 7</a>) e às marés (Cap. 10); o efeito da corrente vem da estimada (<a href="miguens_cap1_5_navegacao_estimada.html">Cap. 5</a>).
+</div>
+
+<!-- ===== POR FINALIDADE ===== -->
+<section class="bloco" id="tipos">
+  <h2 class="sec"><span class="n">11.1</span> As ferramentas do navegante, por finalidade</h2>
+  <p class="lede">O capítulo organiza os instrumentos pelo que medem. Guarde o mapa — a banca pede exatamente "qual instrumento serve para quê".</p>
+
+  <table>
+    <tr><th>Finalidade</th><th>Instrumentos</th></tr>
+    <tr><td>Medir <strong>direções</strong> (marcações/azimutes)</td><td>Agulhas; taxímetro, alidade de pínulas, círculo azimutal, alidade telescópica/autossíncrona, espelho azimutal, agulha digital de mão.</td></tr>
+    <tr><td>Medir <strong>velocidade e distância navegada</strong></td><td>Odômetros (superfície, fundo, Doppler) e velocímetros.</td></tr>
+    <tr><td>Medir <strong>distâncias a objetos</strong></td><td>Estadímetro, sextante, telêmetro, guarda-posto.</td></tr>
+    <tr><td>Medir <strong>profundidade</strong></td><td>Prumo de mão; ecobatímetro (ecossonda).</td></tr>
+    <tr><td><strong>Plotagem</strong> na carta</td><td>Réguas paralelas, plotadores, compasso, transferidor universal, <strong>estaciógrafo</strong>.</td></tr>
+    <tr><td><strong>Eletrônicos</strong></td><td>ECDIS.</td></tr>
+  </table>
+
+  <div class="box trap">
+    <h4>A confusão que a banca planta <span class="tag t-conflito">CONFLITO</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>O <strong>estaciógrafo</strong> é instrumento de <span class="hl">plotagem</span> (posição por segmentos capazes), <strong>não</strong> de medir distância. Colocá-lo entre os instrumentos de distância (com sextante, telêmetro, guarda-posto) é o erro da <strong>2012-Q22</strong>. O de distância análogo é o <strong>estadímetro</strong>.</p>
+  </div>
+</section>
+
+<!-- ===== MARCAÇÕES ===== -->
+<section class="bloco" id="marcacao">
+  <h2 class="sec"><span class="n">11.2</span> Dispositivos para medir marcações e azimutes</h2>
+  <p class="lede">Além das agulhas (Cap. 3), há acessórios de visada montados sobre a rosa.</p>
+
+  <div class="box key">
+    <h4>Os dispositivos <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>Taxímetro · alidade de pínulas · círculo azimutal · alidade telescópica</strong> (com luneta) · <strong>alidade autossíncrona</strong> (motor síncrono comandado pela giro mestra — mantém a marcação mesmo com o navio jogando) · <strong>espelho azimutal</strong> · <strong>agulha magnética digital de mão</strong> (DataScope/StarScope — dá marcações verdadeiras entrando com a declinação; StarScope tem visão noturna). Todos servem para <span class="hl">marcações e azimutes</span>.</p>
+  </div>
+</section>
+
+<!-- ===== ODÔMETROS ===== -->
+<section class="bloco" id="odometros">
+  <h2 class="sec"><span class="n">11.3.1</span> Odômetros e velocímetros</h2>
+  <p class="lede">Três tipos — e uma distinção que a banca adora: só um deles mede a velocidade em relação ao fundo.</p>
+
+  <div class="box key">
+    <h4>Os três tipos e a grande distinção <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Odômetro</th><th>Mede a velocidade em relação a…</th></tr>
+      <tr><td><strong>De superfície</strong> (hélice/linha/registrador)</td><td>à <span class="hl">água</span> (superfície) — hoje é equipamento de emergência</td></tr>
+      <tr><td><strong>De fundo</strong> (tubo de Pitot: pressão estática × dinâmica)</td><td>à <span class="hl">água</span> (apesar do nome "de fundo" = montado no fundo do casco)</td></tr>
+      <tr><td><strong>Doppler</strong></td><td>ao <span class="hl">fundo do mar</span> — o único que mede velocidade sobre o fundo</td></tr>
+    </table>
+    <p class="vars"><strong>Pegadinha campeã:</strong> o odômetro <em>"de fundo"</em> mede em relação à <strong>água</strong>, não ao fundo do mar. Só o <strong>Doppler</strong> mede sobre o fundo (e indica velocidades muito pequenas — útil na atracação).</p>
+  </div>
+
+  <div class="box">
+    <h4>Odômetro de superfície — inconvenientes</h4>
+    <p>Precisa ser retirado com máquinas atrás (enrosca no hélice); sofre com mar grosso; enrosca em algas/lixo; não fica sempre pronto; indica distância, não velocidade direta; não pode ser lançado em portos movimentados (a linha é cortada). Simples de instalar e trocar peças.</p>
+  </div>
+</section>
+
+<!-- ===== CORRENTE ===== -->
+<section class="bloco" id="corrente">
+  <h2 class="sec"><span class="n">11.3.2</span> O efeito da corrente e a corrida da milha</h2>
+  <p class="lede">O odômetro (exceto o Doppler) mede em relação à água. Com corrente, sua leitura difere da distância no fundo — exatamente o que a 2012-Q25 cobra.</p>
+
+  <div class="ichart">
+    <h4>Odômetro × distância no fundo</h4>
+    <p class="hint">Velocidade na superfície 18 nós, trecho A→B de 80 mn no fundo. Deslize a corrente (contra = negativa; a favor = positiva) e compare a leitura do odômetro (relativa à água) com a distância no fundo.</p>
+    <canvas id="cvCor" width="860" height="270"></canvas>
+    <div class="ictrl"><label for="cor">Corrente →</label><input type="range" id="cor" min="-4" max="4" step="0.5" value="-2" oninput="drawCor()"></div>
+    <div class="iread" id="corRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>2012-Q25 resolvida <span class="tag t-banca">BANCA</span> <span class="tag t-calc">CALCULO</span></h4>
+    <p>NM Itaperi, Salvador → Cabedelo (rumo <strong>Norte</strong>), 18 nós na superfície; A→B = 80 mn; Corrente do Brasil 2 nós (flui para o Sul → <span class="hl">contrária</span>). Velocidade no fundo = 18 − 2 = <strong>16 nós</strong> → tempo = 80/16 = <strong>5 horas</strong>. Odômetro (relativo à água) = 18 × 5 = <span class="hl">90 mn</span>. Gabarito <b>(a)</b>. <em>Regra: contra a corrente o odômetro registra MAIS que a distância no fundo; a favor, MENOS.</em></p>
+  </div>
+
+  <div class="box">
+    <h4>Corrida da milha <span class="tag t-banca">BANCA</span></h4>
+    <p>Processo de <strong>calibragem/aferição</strong> de odômetros e velocímetros: o navio faz percursos de <span class="hl">distância rigorosamente conhecida</span> (marcas conspícuas em terra). Miguens a apresenta por ser <strong>a mais comumente utilizada</strong>. <em>[Cuidado 2012-Q22-c: o livro diz "mais comumente utilizada", não necessariamente "a mais rigorosa" — todos os processos aferem rigorosamente.]</em> Sem odômetro, há o processo prático: cronometrar um objeto flutuante da proa à popa — <strong>vel (nós) = comprimento (m) ÷ (0,514 · t)</strong>.</p>
+  </div>
+</section>
+
+<!-- ===== DISTÂNCIAS ===== -->
+<section class="bloco" id="distancia">
+  <h2 class="sec"><span class="n">11.4</span> Distâncias a objetos</h2>
+  <p class="lede">Por métodos visuais, medindo o ângulo vertical de um objeto de altitude conhecida.</p>
+
+  <div class="box formula">
+    <h4>O estadímetro <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">d = h · cotg α<span class="lbl">d = distância · h = altitude conhecida do objeto · α = ângulo vertical medido</span></div>
+    <p class="vars">Alcance típico 250–10.000 jardas (0,1–5 mn), com <strong>boa precisão só até ~2.000 jardas (1 mn)</strong>; altitude do objeto entre 50 e 200 pés. Muito usado para medir distância a <strong>outros navios em formatura</strong> (entra-se com a altura do mastro) ou a pontos de altitude conhecida. Outros instrumentos de distância: <strong>sextante, telêmetro, guarda-posto</strong>. (O <strong>estaciógrafo</strong> é de plotagem, não de distância.)</p>
+  </div>
+</section>
+
+<!-- ===== ECOBATÍMETRO ===== -->
+<section class="bloco" id="ecobat">
+  <h2 class="sec"><span class="n">11.5.2</span> O ecobatímetro (ecossonda)</h2>
+  <p class="lede">Mede profundidade pelo tempo de ida-e-volta de um pulso acústico refletido no fundo.</p>
+
+  <div class="ichart">
+    <h4>O princípio do eco</h4>
+    <p class="hint">Um pulso desce do transdutor, reflete no fundo e volta. Deslize a profundidade e veja o tempo do eco e a fórmula h = v·t/2 (v ≈ 1500 m/s). Some o calado para a profundidade real do local.</p>
+    <canvas id="cvEco" width="860" height="290"></canvas>
+    <div class="ictrl"><label for="prof">Profundidade →</label><input type="range" id="prof" min="10" max="300" step="5" value="80" oninput="drawEco()"></div>
+    <div class="iread" id="ecoRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>A fórmula e os detalhes <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">h = v · t / 2<span class="lbl">h = profundidade sob o transdutor · v ≈ 1.500 m/s (som na água) · t = tempo ida-e-volta</span></div>
+    <p class="vars">A profundidade é referida ao <strong>fundo do casco</strong> (onde ficam os transdutores) → <span class="hl">soma-se o calado</span> para obter a profundidade do local. Sonoros (&lt; 20 kHz) × ultrassônicos (&gt; 20 kHz). Transdutor por <strong>magnetostrição ou piezeletricidade</strong>. <strong>Fundos duros</strong> refletem melhor (eco mais forte; lama macia = eco fraco). Alarmes de <strong>baixa e alta profundidade</strong> (a baixa avisa o limite de segurança; ambos ajudam a detectar o navio <strong>garrando</strong>). Vantagens sobre o prumo: sondagem contínua, em maiores velocidades e profundidades.</p>
+  </div>
+</section>
+
+<!-- ===== MAPA DA BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
+  <p class="lede">Capítulo bem cobrado: três questões diretas de instrumentos (uma de cálculo).</p>
+
+  <table>
+    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q59</strong></td><td>Velocidade transversal na atracação de navios &gt; 100.000 tpb</td><td class="center"><b>(b)</b> Sonar Doppler, 0,01 nó</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q22</strong></td><td>Instrumentos náuticos — assinale a INCORRETA</td><td class="center"><b>(d)</b> estaciógrafo</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q25</strong> (1,3 pt)</td><td>Odômetro × corrente (leitura vs distância no fundo)</td><td class="center"><b>(a)</b> 5 h / 90 mn</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>2012-Q22 resolvida — a incorreta <span class="tag t-banca">BANCA</span></h4>
+    <p>(b) alidade/círculo azimutal/taxímetro medem marcações e azimutes → V. (c) corrida da milha "mais comum" → V (o "mais rigoroso" é o exagero, mas passa). (e) Doppler é o único que mede velocidade no fundo → V. <strong>(d)</strong> "sextante, telêmetro, guarda-posto e <span class="hl">estaciógrafo</span>" para medir distâncias → <span class="hl">INCORRETA</span>: o estaciógrafo é de <strong>plotagem</strong> (segmentos capazes), não de distância. Gabarito <b>(d)</b>.</p>
+  </div>
+
+  <div class="box key">
+    <h4>2011-Q59 — o Doppler na atracação <span class="tag t-banca">BANCA</span></h4>
+    <p>Navios &gt; 100.000 tpb precisam medir a <strong>velocidade transversal</strong> na atracação com alta precisão. Equipamento: <strong>Sonar Doppler</strong> (acústico), precisão <strong>0,01 nó</strong>. Gabarito <b>(b)</b>. (Distrator: "radar" Doppler — é sonar/acústico.)</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Distratores a vigiar <span class="tag t-conflito">DECORAR</span></h4>
+    <p>• Odômetro <strong>"de fundo" mede na ÁGUA</strong>; só o Doppler no fundo. • <strong>Estaciógrafo = plotagem</strong>, não distância. • Ecobatímetro: profundidade + <strong>calado</strong>. • Contra a corrente, odômetro registra <strong>mais</strong> que a distância no fundo. • Doppler de atracação = <strong>sonar</strong>, 0,01 nó.</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Os instrumentos e suas finalidades.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Doze questões — as três reais (2011-Q59, 2012-Q22, 2012-Q25) incluídas.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Instrumentos Náuticos (Miguens Cap. 11)</summary>
+  <ul>
+    <li><b>Por finalidade:</b> direções (agulhas, taxímetro, alidades, círculo azimutal) · velocidade/distância navegada (odômetros) · distâncias a objetos (estadímetro, sextante, telêmetro, guarda-posto) · profundidade (prumo, ecobatímetro) · plotagem (réguas, compasso, estaciógrafo, TU) · ECDIS.</li>
+    <li><b>Odômetros:</b> superfície, fundo (Pitot) e Doppler. Superfície e fundo medem em relação à ÁGUA; só o DOPPLER mede em relação ao FUNDO (e indica velocidades muito pequenas).</li>
+    <li><b>Odômetro de superfície:</b> equipamento de emergência; retirar com máquinas atrás; sofre mar grosso; enrosca em algas/lixo.</li>
+    <li><b>Efeito da corrente:</b> odômetro (exceto Doppler) mede na água. Contra a corrente → odômetro registra MAIS que a distância no fundo; a favor → MENOS.</li>
+    <li><b>Corrida da milha:</b> calibragem/aferição de odômetros e velocímetros por percursos de distância conhecida (marcas em terra). "Mais comumente utilizada." Processo prático: vel = comprimento ÷ (0,514·t).</li>
+    <li><b>Estadímetro:</b> d = h·cotg α; 250–10.000 jd (bom até ~2.000 jd); altitude 50–200 pés; usado p/ navios em formatura. Estaciógrafo é de PLOTAGEM (segmentos capazes), não de distância.</li>
+    <li><b>Ecobatímetro:</b> h = v·t/2 (v ≈ 1.500 m/s). Referido ao fundo do casco → soma-se o CALADO. Sonoros &lt;20 kHz / ultrassônicos &gt;20 kHz. Transdutor por magnetostrição/piezeletricidade. Fundos duros = eco mais forte. Alarmes de baixa/alta profundidade (garrando).</li>
+    <li><b>Banca:</b> 2011-Q59 (Sonar Doppler, 0,01 nó, atracação de navios &gt;100.000 tpb, gab b) · 2012-Q22 (incorreta: estaciógrafo entre instrumentos de distância, gab d) · 2012-Q25 (odômetro × corrente, 5 h e 90 mn, gab a).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Instrumentos Náuticos (Miguens Vol. I, Cap. 11) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function hhmm(t){return t;}
+
+/* ===== ODÔMETRO × CORRENTE ===== */
+function drawCor(){
+  var cv=document.getElementById('cvCor'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var velN=18, D=80, cor=+document.getElementById('cor').value;
+  var velfd=velN+cor; // favor +, contra -
+  var t=D/velfd, odom=velN*t;
+  // mar
+  ctx.fillStyle='#eef5fb';ctx.fillRect(0,120,W,H-120);
+  // seta de corrente
+  var cx0=90,cy=150;
+  ctx.strokeStyle=cor<0?'#9E3B2E':(cor>0?'#2E7D52':'#9aa9b8');ctx.lineWidth=3;
+  var dir=cor<0?-1:1, len=Math.min(Math.abs(cor)*30,120);
+  if(cor!==0){ctx.beginPath();ctx.moveTo(430-dir*len/2,cy-40);ctx.lineTo(430+dir*len/2,cy-40);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(430+dir*len/2,cy-40);ctx.lineTo(430+dir*len/2-dir*10,cy-45);ctx.lineTo(430+dir*len/2-dir*10,cy-35);ctx.fill();}
+  ctx.fillStyle=cor<0?'#9E3B2E':(cor>0?'#2E7D52':'#7a6f55');ctx.font='bold 13px Trebuchet MS';
+  ctx.fillText('corrente '+Math.abs(cor)+' nós '+(cor<0?'(contra)':(cor>0?'(a favor)':'')),360,cy-52);
+  // navio (proa para a direita = rumo Norte/avante)
+  ctx.fillStyle='#16302B';ctx.beginPath();ctx.moveTo(400,150);ctx.lineTo(470,150);ctx.lineTo(485,163);ctx.lineTo(470,176);ctx.lineTo(400,176);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='11px Trebuchet MS';ctx.fillText('18 nós',415,167);
+  // barras de distância
+  function bar(y,val,max,col,lab){
+    var x0=90,x1=W-90;var w=(x1-x0)*Math.min(val/max,1);
+    ctx.fillStyle='#eee3c6';ctx.fillRect(x0,y,x1-x0,22);
+    ctx.fillStyle=col;ctx.fillRect(x0,y,w,22);
+    ctx.fillStyle='#0D3D36';ctx.font='bold 12px Trebuchet MS';ctx.fillText(lab,x0,y-6);
+    ctx.fillStyle='#16302B';ctx.font='12px Trebuchet MS';ctx.fillText(val.toFixed(1)+' mn',x1-70,y-6);
+  }
+  bar(205, D, 130, '#2C5F8A','distância no FUNDO (A→B)');
+  bar(250, odom, 130, '#1A7A6E','leitura do ODÔMETRO (na água)');
+  var rel = odom>D?'MAIS':(odom<D?'MENOS':'igual');
+  document.getElementById('corRead').innerHTML='Velocidade no fundo = 18 '+(cor<0?'−':'+')+' '+Math.abs(cor)+' = <b>'+velfd.toFixed(1)+' nós</b> → tempo = 80/'+velfd.toFixed(1)+' = <b>'+t.toFixed(2)+' h</b>. Odômetro = 18 × '+t.toFixed(2)+' = <b>'+odom.toFixed(1)+' mn</b> (registra <b>'+rel+'</b> que a distância no fundo).';
+}
+drawCor();
+
+/* ===== ECOBATÍMETRO ===== */
+function drawEco(){
+  var cv=document.getElementById('cvEco'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var prof=+document.getElementById('prof').value; // metros
+  var calado=6;
+  var v=1500; var t=2*prof/v; // s (ida e volta)
+  // superfície
+  var surf=50;
+  ctx.strokeStyle='#8fb8d8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,surf);ctx.lineTo(W,surf);ctx.stroke();
+  ctx.fillStyle='#eef5fb';ctx.fillRect(0,surf,W,H-surf);
+  // navio + transdutor
+  ctx.fillStyle='#16302B';ctx.fillRect(360,surf-16,140,16);
+  ctx.fillStyle='#C8A84B';ctx.beginPath();ctx.arc(430,surf,5,0,7);ctx.fill();
+  ctx.fillStyle='#0D3D36';ctx.font='11px Trebuchet MS';ctx.fillText('transdutor',445,surf-4);
+  // fundo (escala: prof metros -> px)
+  var maxpx=H-90; var scale=(maxpx-surf)/300;
+  var fy=surf+prof*scale;
+  ctx.fillStyle='#c9b58a';ctx.fillRect(0,fy,W,H-fy);
+  ctx.fillStyle='#7a5a2a';ctx.fillText('fundo do mar',20,fy+18);
+  // pulso (cone) e eco
+  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(430,surf);ctx.lineTo(414,fy);ctx.moveTo(430,surf);ctx.lineTo(446,fy);ctx.stroke();
+  ctx.fillStyle='#2C5F8A';ctx.font='bold 12px Trebuchet MS';ctx.fillText('pulso ↓',352,(surf+fy)/2);
+  ctx.fillStyle='#9E3B2E';ctx.fillText('eco ↑',470,(surf+fy)/2);
+  // cota de profundidade
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(120,surf);ctx.lineTo(120,fy);ctx.stroke();
+  ctx.fillStyle='#9E3B2E';ctx.fillText('h = '+prof+' m',60,(surf+fy)/2);
+  document.getElementById('ecoRead').innerHTML='Profundidade sob o transdutor <b>h = '+prof+' m</b> → tempo do eco t = 2h/v = <b>'+t.toFixed(3)+' s</b> (v ≈ 1500 m/s). Profundidade do local = h + calado ('+calado+' m) = <b>'+(prof+calado)+' m</b>.';
+}
+drawEco();
+window.addEventListener('resize',function(){drawCor();drawEco();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Instrumentos por finalidade",b:"Direções · velocidade/distância navegada · distâncias a objetos · profundidade · plotagem · eletrônicos."},
+  {f:"Dispositivos de marcação",b:"Taxímetro, alidade de pínulas, círculo azimutal, alidade telescópica/autossíncrona, espelho azimutal, agulha digital de mão."},
+  {f:"Alidade autossíncrona",b:"Motor síncrono comandado pela giro mestra: mantém a marcação mesmo com o navio jogando."},
+  {f:"3 tipos de odômetro",b:"De superfície · de fundo (Pitot) · Doppler."},
+  {f:"Quem mede no fundo?",b:"Só o DOPPLER mede velocidade em relação ao fundo. Superfície e 'de fundo' medem em relação à ÁGUA."},
+  {f:"Odômetro 'de fundo'",b:"Tubo de Pitot (pressão estática × dinâmica). 'De fundo' = montado no fundo do casco; mede na ÁGUA."},
+  {f:"Odômetro de superfície",b:"Hélice/linha/registrador. Emergência. Retirar com máquinas atrás; sofre mar grosso; enrosca em algas."},
+  {f:"Efeito da corrente",b:"Odômetro (exceto Doppler) mede na água. Contra a corrente → registra MAIS que a distância no fundo; a favor → MENOS."},
+  {f:"Corrida da milha",b:"Calibragem de odômetros/velocímetros por percursos de distância conhecida (marcas em terra). A mais comum."},
+  {f:"Velocidade — processo prático",b:"Objeto flutuante da proa à popa: vel(nós) = comprimento(m) ÷ (0,514·t)."},
+  {f:"Estadímetro",b:"d = h·cotg α. 250–10.000 jd (bom até ~2.000 jd); altitude 50–200 pés. Distância a navios em formatura."},
+  {f:"Estaciógrafo",b:"Instrumento de PLOTAGEM (posição por segmentos capazes). NÃO mede distância."},
+  {f:"Ecobatímetro — princípio",b:"Pulso acústico vertical reflete no fundo; h = v·t/2, v ≈ 1500 m/s."},
+  {f:"Ecobatímetro + calado",b:"A profundidade é referida ao fundo do casco → soma-se o calado para a profundidade do local."},
+  {f:"Sonoro × ultrassônico",b:"Sonoros <20 kHz; ultrassônicos >20 kHz. Transdutor por magnetostrição ou piezeletricidade."},
+  {f:"Fundo duro × macio",b:"Fundos duros refletem melhor (eco mais forte). Lama macia dá eco fraco."},
+  {f:"Alarmes do ecobatímetro",b:"Baixa e alta profundidade. A baixa avisa o limite de segurança; ajudam a detectar o navio garrando."},
+  {f:"Ecobatímetro × prumo",b:"Sondagem contínua, em maiores velocidades e profundidades, com menos dependência do tempo."},
+  {f:"2012-Q22",b:"Incorreta: estaciógrafo entre instrumentos de distância. Gab (d)."},
+  {f:"2011-Q59",b:"Velocidade transversal na atracação (>100.000 tpb): Sonar Doppler, 0,01 nó. Gab (b)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"Os odômetros classificam-se em:",
+   o:["De proa, de popa e de través","De superfície, de fundo e Doppler","Mecânico, óptico e digital","De pressão, de hélice e de satélite"],a:1,
+   e:"Três tipos: de superfície, de fundo (tubo de Pitot) e Doppler."},
+  {q:"Qual odômetro mede a velocidade em relação ao FUNDO do mar?",
+   o:["O de superfície","O de fundo (Pitot)","O Doppler","Todos"],a:2,
+   e:"Só o Doppler mede em relação ao fundo. O de superfície e o 'de fundo' (Pitot) medem em relação à ÁGUA — o nome 'de fundo' refere-se à montagem no fundo do casco."},
+  {q:"Um navio a 18 nós na superfície navega contra uma corrente de 2 nós. A sua velocidade no fundo é:",
+   o:["20 nós","16 nós","18 nós","2 nós"],a:1,
+   e:"Contra a corrente: velfd = velN − corrente = 18 − 2 = 16 nós. A favor seria 20 nós."},
+  {q:"[PSCPP 2012] NM Itaperi: 18 nós na superfície, A→B = 80 mn, Corrente do Brasil 2 nós (contrária, rumo Norte). Duração e leitura do odômetro em B:",
+   o:["5 h e 90 mn","4 h e 80 mn","5 h e 80 mn","4 h e 72 mn"],a:0,
+   e:"velfd = 18 − 2 = 16 nós → tempo = 80/16 = 5 h. Odômetro = 18 × 5 = 90 mn (na água). Gabarito (a). Contra a corrente, o odômetro registra mais que a distância no fundo."},
+  {q:"A 'corrida da milha' destina-se a:",
+   o:["Medir a profundidade","Calibrar/aferir odômetros e velocímetros","Determinar a posição astronômica","Medir o desvio da agulha"],a:1,
+   e:"É o processo de aferição/calibragem de odômetros e velocímetros, por percursos de distância rigorosamente conhecida entre marcas em terra."},
+  {q:"[PSCPP 2012] Assinale a afirmativa INCORRETA sobre instrumentos náuticos:",
+   o:["Alidade, círculo azimutal e taxímetro medem marcações e azimutes","O Doppler é o único que mede velocidade no fundo","Sextante, telêmetro, guarda-posto e estaciógrafo medem distâncias","O odômetro de superfície é hoje um equipamento de emergência"],a:2,
+   e:"Incorreta (gab d na prova): o estaciógrafo é instrumento de PLOTAGEM (posição por segmentos capazes), não de medir distância. O de distância análogo é o estadímetro."},
+  {q:"O estadímetro determina a distância a um objeto pela fórmula:",
+   o:["d = v·t/2","d = h·cotg α","d = h·tg α","d = v·t"],a:1,
+   e:"d = h·cotg α, medindo o ângulo vertical α de um objeto de altitude conhecida h. Bom até ~2.000 jardas; muito usado para navios em formatura."},
+  {q:"No ecobatímetro, a profundidade sob o transdutor é dada por:",
+   o:["h = v·t","h = v·t/2","h = v/t","h = 2·v·t"],a:1,
+   e:"h = v·t/2 (v ≈ 1.500 m/s), pois t é o tempo de ida-e-volta do pulso. Para a profundidade do local, soma-se o calado (o transdutor fica no fundo do casco)."},
+  {q:"Para obter a profundidade real do local a partir da leitura do ecobatímetro, deve-se:",
+   o:["Subtrair o calado","Somar o calado do navio","Somar a altura da maré","Multiplicar por 2"],a:1,
+   e:"A leitura é referida ao fundo do casco (onde ficam os transdutores) → soma-se o calado para obter a profundidade do local."},
+  {q:"Sobre o ecobatímetro, é correto:",
+   o:["Fundos macios refletem melhor que os duros","Fundos duros produzem eco mais forte","O som na água viaja a ~340 m/s","Não possui alarmes"],a:1,
+   e:"Fundos duros são melhores refletores (eco mais forte); lama macia dá eco fraco. O som na água ≈ 1.500 m/s. Possui alarmes de baixa e alta profundidade (úteis também para detectar garramento)."},
+  {q:"[PSCPP 2011] Para medir a velocidade transversal na atracação de navios acima de 100.000 tpb, usa-se:",
+   o:["Radar Doppler, 0,1 nó","Sonar Doppler, 0,01 nó","Acelerômetro de Schuler, 0,01 nó","Radar Doppler, 0,01 nó"],a:1,
+   e:"Sonar Doppler (acústico), com precisão de 0,01 nó. Gabarito (b). O distrator troca por 'radar' Doppler."},
+  {q:"Um inconveniente do odômetro de superfície é:",
+   o:["Medir a velocidade no fundo","Precisar ser retirado quando o navio opera máquinas atrás","Não sofrer com o mar grosso","Dispensar preparação"],a:1,
+   e:"Deve ser retirado com máquinas atrás (a linha pode enroscar no hélice); sofre com mar grosso; enrosca em algas/lixo; não pode ser lançado em portos movimentados."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

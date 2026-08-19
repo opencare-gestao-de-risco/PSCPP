@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Agulhas e Conversão de Rumos — Miguens Cap. 3 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:96px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco A — Agulhas · Alto retorno</p>
+    <h1>Agulhas Náuticas e a <em>Conversão de Rumos</em></h1>
+    <p class="sub">O cálculo que a banca mais cobra do Miguens: os quatro nortes, a declinação magnética (com variação anual), o desvio da agulha, e a sequência <strong>Rag → Rmg → Rv</strong> (Rc = Rv ± Dm ± Dv) — mais a agulha giroscópica. Com calculadora interativa e duas questões reais resolvidas.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 3 (Agulhas Náuticas. Conversão de Rumos e Marcações). A banca cita a <b>1ª edição (1996)</b>. Questões reais: PSCPP 2011-Q30 e 2012-Q19.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#nortes">Os 4 nortes ▶</a>
+    <a href="#declinacao">3.2.3 Declinação</a>
+    <a href="#desvio">3.2.4 Desvio</a>
+    <a href="#conversao">3.2.5 Conversão ▶</a>
+    <a href="#variacao">Variação anual ▶</a>
+    <a href="#marcacoes">Marcações</a>
+    <a href="#giro">3.3 Giroscópica</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Alto retorno do <strong>Bloco A</strong>. Usa os rumos e marcações do <a href="miguens_cap1_5_navegacao_estimada.html">Cap. 1 (Fundamentos)</a> (Rv, Rag, Mv, Mr) e a declinação vem da carta (<a href="miguens_cap2_carta_projecoes.html">Cap. 2</a>). A conversão alimenta a estimada e a determinação da posição.
+</div>
+
+<!-- ===== OS 4 NORTES ===== -->
+<section class="bloco" id="nortes">
+  <h2 class="sec"><span class="n">3.1</span> Os quatro nortes e as duas correções</h2>
+  <p class="lede">Tudo gira em torno de três referências de norte, separadas por dois ângulos: a declinação (Dm) e o desvio (Dv). A giro dá um quarto norte (o da giro).</p>
+
+  <div class="ichart">
+    <h4>Rosa dos nortes — declinação e desvio ao vivo</h4>
+    <p class="hint">Ajuste a declinação (Dm), o desvio (Dv) e o rumo. Veja o Norte Verdadeiro (NV), o Magnético (NM, a Dm do NV) e o da Agulha (NA, a Dv do NM), e leia Rv, Rmg e Rag simultâneos. Use os atalhos com os exemplos reais de banca.</p>
+    <svg id="svgRosa" viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rosa dos nortes"></svg>
+    <div class="ictrl" style="margin-top:10px">
+      <button class="preBtn" onclick="preset(70,-20,5)">Exemplo do livro</button>
+      <button class="preBtn" onclick="preset(152.5,-16.5,2)">2011-Q30</button>
+      <button class="preBtn" onclick="preset(45,-15,2)">2012-Q19</button>
+    </div>
+    <div class="ictrl"><label for="dm">Declinação Dm →</label><input type="range" id="dm" min="-30" max="30" step="0.5" value="-20" oninput="drawRosa()"></div>
+    <div class="ictrl"><label for="dv">Desvio Dv →</label><input type="range" id="dv" min="-10" max="10" step="0.5" value="5" oninput="drawRosa()"></div>
+    <div class="ictrl"><label for="rv">Rumo verdadeiro →</label><input type="range" id="rv" min="0" max="359" step="0.5" value="70" oninput="drawRosa()"></div>
+    <div class="iread" id="rosaRead" style="margin-top:8px"></div>
+  </div>
+</section>
+
+<!-- ===== DECLINAÇÃO ===== -->
+<section class="bloco" id="declinacao">
+  <h2 class="sec"><span class="n">3.2.3</span> Declinação Magnética (Dm / Dec mg)</h2>
+  <p class="lede">É o ângulo entre o Norte Verdadeiro e o Norte Magnético no local. Depende do lugar e do tempo — vem da carta náutica.</p>
+
+  <div class="box key">
+    <h4>Conceito e propriedades <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Designação <strong>Leste (E)</strong> ou <strong>Oeste (W)</strong>, conforme o lado do Meridiano Verdadeiro em que está o Magnético. Varia <span class="hl">de local para local</span> (irregularidades do campo) e <span class="hl">ao longo do tempo</span> (os polos magnéticos migram). As cartas informam o valor e a <strong>variação anual</strong>. Cartas especiais trazem as linhas <strong>isogônicas</strong> (mesma declinação) e <strong>agônicas</strong> (declinação nula).</p>
+  </div>
+</section>
+
+<!-- ===== DESVIO ===== -->
+<section class="bloco" id="desvio">
+  <h2 class="sec"><span class="n">3.2.4</span> Desvio da Agulha (Dv / Dag)</h2>
+  <p class="lede">É o ângulo entre o Norte Magnético e o Norte da Agulha. Nasce do ferro do próprio navio — por isso muda com a proa.</p>
+
+  <div class="box key">
+    <h4>Por que varia com o rumo <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>O desvio depende dos <span class="hl">ferros do navio</span>, dos corretores e da orientação deles no campo terrestre — logo, <strong>varia com a proa</strong> do navio. Obtém-se da <strong>Curva de Desvios</strong> da agulha, entrando-se com o <span class="hl">RUMO</span> (não com a marcação). Um mesmo desvio vale para todas as marcações enquanto o navio mantiver o rumo; mudou o rumo, novo desvio.</p>
+  </div>
+</section>
+
+<!-- ===== CONVERSÃO ===== -->
+<section class="bloco" id="conversao">
+  <h2 class="sec"><span class="n">3.2.5</span> A conversão de rumos</h2>
+  <p class="lede">Do que se lê na agulha ao que se traça na carta. Só se traçam na carta rumos e marcações <strong>verdadeiros</strong>.</p>
+
+  <div class="box formula">
+    <h4>A sequência e a regra dos sinais <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">Rag &nbsp;—(± Dv)→&nbsp; Rmg &nbsp;—(± Dm)→&nbsp; Rv<span class="lbl">da agulha para o verdadeiro; no sentido inverso, do Rv para o Rag, trocam-se os sinais</span></div>
+    <div class="eq">Rv = Rag ± Dm ± Dv<span class="lbl">indo da agulha para o verdadeiro: soma-se o que é LESTE (E), subtrai-se o que é OESTE (W)</span></div>
+    <p class="vars">Regras de ouro: <strong>(1)</strong> só se traçam na carta valores verdadeiros; <strong>(2)</strong> a Dm vem da carta (local + ano); <strong>(3)</strong> o Dv vem da Curva de Desvios, entrando com o <strong>rumo</strong>; <strong>(4)</strong> aproxime tudo a <span class="hl">0,5°</span>. Mnemônico: <em>de agulha para verdadeiro, Este soma / Oeste subtrai</em>.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Exemplo do livro (passo a passo)</h4>
+    <p>Dm = 20° W, Rag = 085°, Dv = 5° E. <strong>Rmg</strong> = Rag ± Dv = 085° + 5° (E) = <strong>090°</strong>. <strong>Rv</strong> = Rmg ± Dm = 090° − 20° (W) = <span class="hl">070°</span>. (Da agulha para o verdadeiro: o Este de 5° somou, o Oeste de 20° subtraiu.)</p>
+  </div>
+
+  <div class="box trap">
+    <h4>A inversão que derruba na prova <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>Trocar a ordem <strong>Dm/Dv</strong> ou o sinal <strong>E/W</strong> é o distrator campeão. Fixe o sentido: <strong>subindo</strong> (agulha→verdadeiro) o Este soma; <strong>descendo</strong> (verdadeiro→agulha) o Este subtrai. E o desvio entra sempre pelo <strong>rumo</strong>, nunca pela marcação.</p>
+  </div>
+</section>
+
+<!-- ===== VARIAÇÃO ANUAL ===== -->
+<section class="bloco" id="variacao">
+  <h2 class="sec"><span class="n">3.2.3b</span> A variação anual da declinação</h2>
+  <p class="lede">A carta dá a Dm de um ano-base e a variação anual. Antes de converter, atualize a Dm para o ano da navegação.</p>
+
+  <div class="ichart">
+    <h4>Atualização da declinação (exemplo 2011-Q30)</h4>
+    <p class="hint">Dm base 16°10′ W (2007), variando 5′ W por ano. Deslize o ano e veja a Dm atualizada — a mesma conta da questão de 2011.</p>
+    <svg id="svgVar" viewBox="0 0 860 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Variação anual"></svg>
+    <div class="ictrl"><label for="ano">Ano →</label><input type="range" id="ano" min="2007" max="2027" step="1" value="2011" oninput="drawVar()"></div>
+    <div class="iread" id="varRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>A fórmula <span class="tag t-calc">CALCULO</span></h4>
+    <div class="eq">Dm(ano) = Dm(base) ± (variação anual × nº de anos)<span class="lbl">mesma designação → soma; designação contrária → subtrai</span></div>
+    <p class="vars">2011-Q30: 16°10′ W (2007) + 5′ W × 4 anos = 16°10′ + 20′ = <span class="hl">16°30′ W = 16,5° W</span>. Só então converte-se o rumo.</p>
+  </div>
+</section>
+
+<!-- ===== MARCAÇÕES ===== -->
+<section class="bloco" id="marcacoes">
+  <h2 class="sec"><span class="n">3.2.5b</span> Conversão de marcações</h2>
+  <p class="lede">Igual à dos rumos, com um cuidado: o desvio depende do <strong>rumo</strong> do navio, não da marcação observada.</p>
+
+  <div class="box key">
+    <h4>Marcação verdadeira <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">Mv = Mag ± Dm ± Dv<span class="lbl">o Dv é o do rumo do navio; vale para todas as marcações naquele rumo</span></div>
+    <p class="vars">Exemplo: no Rag 110° (Dv = 2° E pela curva), Dm = 23° W, marca-se Mag = 327°. <strong>Mmg</strong> = 327° + 2° (E) = 329°; <strong>Mv</strong> = 329° − 23° (W) = <span class="hl">306°</span>. E o próprio Rv = Rag ± Dm ± Dv = 110° − 23° + 2° = 89°.</p>
+  </div>
+</section>
+
+<!-- ===== GIROSCÓPICA ===== -->
+<section class="bloco" id="giro">
+  <h2 class="sec"><span class="n">3.3</span> A agulha giroscópica</h2>
+  <p class="lede">Aponta para o Norte <strong>Verdadeiro</strong> (não o magnético). Independe do magnetismo terrestre — daí sua precisão.</p>
+
+  <table>
+    <tr><th>Vantagens</th><th>Limitações</th></tr>
+    <tr><td>Aponta ao Norte <strong>Verdadeiro</strong> (independe do magnetismo); maior precisão; serve em latitudes mais altas; não é afetada por material magnético; alimenta repetidoras, radar, piloto automático, ECDIS e sistemas de armas.</td><td>Exige energia elétrica constante (sensível a flutuações); equipamento complexo, manutenção especializada; <span class="hl">erros a partir de latitudes &gt; 70°</span> (N ou S).</td></tr>
+  </table>
+
+  <div class="box">
+    <h4>Desvio da giro (Dgi) por "redução do triângulo" <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Marcando 3+ pontos conspícuos de um navio parado: se as LDP cruzam num ponto, o desvio da giro é <strong>zero</strong>; se formam um <strong>triângulo</strong>, há desvio. Somam-se/subtraem-se incrementos de 1° a todas as marcações até "reduzir o triângulo". Se a correção foi <strong>subtraída → desvio Oeste (W)</strong>; se <strong>somada → desvio Leste (E)</strong>.</p>
+  </div>
+</section>
+
+<!-- ===== MAPA DA BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
+  <p class="lede">A conversão de rumos é dos poucos temas de fundamento que a banca cobra <strong>como cálculo direto</strong>. Duas questões, ambas de conversão:</p>
+
+  <table>
+    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q30</strong></td><td>Conversão Rv→Rag com variação anual da declinação</td><td class="center"><b>(c) 167°</b> deduzido</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q19</strong></td><td>Conversão Rv→Rag ("fora de giro", governar pela agulha)</td><td class="center"><b>(c) 058°</b> deduzido</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>2011-Q30 resolvido <span class="tag t-banca">BANCA</span> <span class="tag t-calc">CALCULO</span></h4>
+    <p>Rv = 152,5°; Dm(2007) = 16°10′ W, variação 5′ W; Dag = 2° E; ano 2011. <strong>1)</strong> Dm(2011) = 16°10′ + 5′×4 = <strong>16°30′ W = 16,5° W</strong>. <strong>2)</strong> descendo (Rv→Rag), o Oeste soma e o Este subtrai: Rmg = Rv + Dm(W) = 152,5 + 16,5 = 169°; Rag = Rmg − Dv(E) = 169 − 2 = <span class="hl">167°</span>. Gabarito <b>(c)</b>.</p>
+  </div>
+
+  <div class="box key">
+    <h4>2012-Q19 resolvido <span class="tag t-banca">BANCA</span> <span class="tag t-calc">CALCULO</span></h4>
+    <p>Rv = 045°; Dm = 15° W; Dag = 2° E; a giro saiu, governa-se pela agulha. Erro total = Dm + Dv = (−15) + (+2) = −13°. Rag = Rv − Dm − Dv = 045 − (−15) − (+2) = <span class="hl">058°</span>. Gabarito <b>(c)</b>. A marcação polar 030° BE do enunciado é só contexto.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>O que a banca explora <span class="tag t-conflito">DECORAR</span></h4>
+    <p>• <strong>Atualizar a Dm</strong> pela variação anual ANTES de converter. • Sinal: <strong>subindo</strong> (agulha→verdadeiro) Este soma; <strong>descendo</strong> Este subtrai. • Desvio entra pelo <strong>rumo</strong>. • Só se traça <strong>verdadeiro</strong> na carta. • Giro aponta ao <strong>Norte Verdadeiro</strong>; magnética ao Magnético.</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Agulhas, correções e a conversão.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Doze questões — as duas reais de conversão (2011/2012) e o essencial das agulhas.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Agulhas e Conversão de Rumos (Miguens Cap. 3)</summary>
+  <ul>
+    <li><b>Declinação (Dm/Dec mg):</b> ângulo NV↔NM. Designação E/W. Varia por local (isogônicas/agônicas) e no tempo (variação anual). Vem da carta.</li>
+    <li><b>Desvio (Dv/Dag):</b> ângulo NM↔NA. Depende dos ferros do navio → varia com o RUMO. Vem da Curva de Desvios, entrando com o rumo (não a marcação).</li>
+    <li><b>Regra de ouro:</b> só se traçam na carta rumos/marcações VERDADEIROS. Aproximar tudo a 0,5°.</li>
+    <li><b>Sequência:</b> Rag —(±Dv)→ Rmg —(±Dm)→ Rv. Fórmula: Rv = Rag ± Dm ± Dv.</li>
+    <li><b>Sinais:</b> da agulha para o verdadeiro (subindo), Este SOMA / Oeste SUBTRAI; no sentido inverso, trocam-se os sinais.</li>
+    <li><b>Variação anual:</b> Dm(ano) = Dm(base) ± (variação × nº de anos). Atualize ANTES de converter.</li>
+    <li><b>Marcações:</b> Mv = Mag ± Dm ± Dv, com o Dv do RUMO do navio (vale p/ todas as marcações naquele rumo).</li>
+    <li><b>Giroscópica:</b> aponta ao Norte VERDADEIRO; independe do magnetismo; mais precisa; alimenta repetidoras/radar/piloto/ECDIS. Limitações: energia, manutenção, erros &gt;70° de latitude.</li>
+    <li><b>Desvio da giro (redução do triângulo):</b> LDP num ponto → desvio 0; triângulo → há desvio. Correção subtraída = W; somada = E.</li>
+    <li><b>Banca (cálculo direto):</b> 2011-Q30 (Rv 152,5° → Rag 167°, com variação anual, gab c) · 2012-Q19 (Rv 045° → Rag 058°, giro fora, gab c).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Agulhas e Conversão de Rumos (Miguens Vol. I, Cap. 3) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+function d3(n){n=Math.round(n*2)/2;var s=('00'+Math.floor(n)).slice(-3);var f=n-Math.floor(n);return s+(f?',5':'');}
+function norm(t){t=t%360;if(t<0)t+=360;return t;}
+function vec(t){var r=t*Math.PI/180;return [Math.sin(r),-Math.cos(r)];} // rumo(°)->[x, y(cima=-)]
+
+/* ===== ROSA DOS NORTES ===== */
+function preset(rv,dm,dv){document.getElementById('rv').value=rv;document.getElementById('dm').value=dm;document.getElementById('dv').value=dv;drawRosa();}
+function drawRosa(){
+  var svg=document.getElementById('svgRosa');svg.innerHTML='';
+  var Dm=+document.getElementById('dm').value, Dv=+document.getElementById('dv').value, Rv=+document.getElementById('rv').value;
+  var Rmg=norm(Rv-Dm), Rag=norm(Rv-Dm-Dv);
+  var cx=300,cy=190,R=140;
+  sEl(svg,'circle',{cx:cx,cy:cy,r:R,fill:'#fbfaf5',stroke:'#e5dcc6','stroke-width':1.5});
+  // três nortes: NV(0), NM(+Dm), NA(+Dm+Dv)
+  function nlin(ang,col,lab,rr){var v=vec(ang);sEl(svg,'line',{x1:cx,y1:cy,x2:cx+v[0]*R,y2:cy+v[1]*R,stroke:col,'stroke-width':2});
+    sTx(svg,cx+v[0]*(R+rr),cy+v[1]*(R+rr),lab,{fill:col,fs:12,fw:'bold',ta:'middle'});}
+  nlin(0,'#C8A84B','NV',16);
+  nlin(Dm,'#2C5F8A','NM',30);
+  nlin(Dm+Dv,'#9E3B2E','NA',44);
+  // proa (Rv a partir do NV)
+  var p=vec(Rv);
+  sEl(svg,'line',{x1:cx,y1:cy,x2:cx+p[0]*(R+8),y2:cy+p[1]*(R+8),stroke:'#1A7A6E','stroke-width':3.5});
+  sTx(svg,cx+p[0]*(R+26),cy+p[1]*(R+26),'PROA',{fill:'#1A7A6E',fs:12,fw:'bold',ta:'middle'});
+  sEl(svg,'circle',{cx:cx,cy:cy,r:4,fill:'#0D3D36'});
+  // painel de leitura à direita
+  var bx=520,by=95;
+  var dmDes=Dm>=0?'E':'W', dvDes=Dv>=0?'E':'W';
+  sTx(svg,bx,by,'Dm = '+Math.abs(Dm).toFixed(1)+'° '+dmDes,{fill:'#2C5F8A',fs:15,fw:'bold'});
+  sTx(svg,bx,by+26,'Dv = '+Math.abs(Dv).toFixed(1)+'° '+dvDes,{fill:'#9E3B2E',fs:15,fw:'bold'});
+  sTx(svg,bx,by+60,'Rv  = '+d3(Rv)+'°',{fill:'#0D3D36',fs:17,fw:'bold'});
+  sTx(svg,bx,by+86,'Rmg = '+d3(Rmg)+'°',{fill:'#0D3D36',fs:17,fw:'bold'});
+  sTx(svg,bx,by+112,'Rag = '+d3(Rag)+'°',{fill:'#0D3D36',fs:17,fw:'bold'});
+  sTx(svg,bx,by+146,'Rv = Rag ± Dm ± Dv',{fill:'#7a6f55',fs:12});
+  document.getElementById('rosaRead').innerHTML='Da agulha para o verdadeiro: <b>Rag '+d3(Rag)+'°</b> '+(Dv>=0?'+':'−')+' '+Math.abs(Dv)+'° ('+dvDes+') = <b>Rmg '+d3(Rmg)+'°</b> '+(Dm>=0?'+':'−')+' '+Math.abs(Dm)+'° ('+dmDes+') = <b>Rv '+d3(Rv)+'°</b>. (Este soma, Oeste subtrai.)';
+}
+drawRosa();
+
+/* ===== VARIAÇÃO ANUAL ===== */
+function drawVar(){
+  var svg=document.getElementById('svgVar');svg.innerHTML='';var W=860;
+  var ano=+document.getElementById('ano').value;
+  var base=16+10/60, varAnual=5/60; // graus
+  var anos=ano-2007;
+  var dm=base+varAnual*anos; // W cresce
+  var g=Math.floor(dm), m=Math.round((dm-g)*60);
+  // barra
+  var x0=50,x1=W-50,y=70;
+  sEl(svg,'line',{x1:x0,y1:y,x2:x1,y2:y,stroke:'#cdbf99','stroke-width':2});
+  for(var a=2007;a<=2027;a+=5){var x=x0+(a-2007)/20*(x1-x0);sEl(svg,'line',{x1:x,y1:y-6,x2:x,y2:y+6,stroke:'#7a6f55','stroke-width':1.5});sTx(svg,x,y+22,a+'',{fill:'#7a6f55',fs:11,ta:'middle'});}
+  var px=x0+(ano-2007)/20*(x1-x0);
+  sEl(svg,'circle',{cx:px,cy:y,r:8,fill:'#2C5F8A'});
+  sTx(svg,px,y-16,d3v(dm),{fill:'#2C5F8A',fs:13,fw:'bold',ta:'middle'});
+  document.getElementById('varRead').innerHTML='Em <b>'+ano+'</b> ('+anos+' anos após 2007): Dm = 16°10′ W + 5′ W × '+anos+' = <b>'+g+'°'+('0'+m).slice(-2)+'′ W ≈ '+dm.toFixed(1)+'° W</b>. '+(ano===2011?'(É a Dm da 2011-Q30: 16°30′ W.)':'');
+}
+function d3v(dm){var g=Math.floor(dm),m=Math.round((dm-g)*60);return g+'°'+('0'+m).slice(-2)+'′W';}
+drawVar();
+window.addEventListener('resize',function(){drawRosa();drawVar();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Os 3 (4) nortes",b:"Verdadeiro (NV), Magnético (NM), da Agulha (NA) — e o da Giro. Dm separa NV↔NM; Dv separa NM↔NA."},
+  {f:"Declinação (Dm)",b:"Ângulo NV↔NM. Designação E/W. Varia por local e no tempo. Vem da carta."},
+  {f:"Isogônicas × agônicas",b:"Isogônicas unem pontos de mesma declinação; agônicas, pontos de declinação NULA."},
+  {f:"Desvio (Dv)",b:"Ângulo NM↔NA. Depende dos ferros do navio → varia com o RUMO. Vem da Curva de Desvios."},
+  {f:"Entrada na Curva de Desvios",b:"Entra-se com o RUMO (não a marcação). Um desvio vale p/ todas as marcações no mesmo rumo."},
+  {f:"Regra de ouro",b:"Só se traçam na carta rumos e marcações VERDADEIROS. Aproximar a 0,5°."},
+  {f:"Sequência de conversão",b:"Rag —(±Dv)→ Rmg —(±Dm)→ Rv. E o inverso trocando sinais."},
+  {f:"Fórmula-mãe",b:"Rv = Rag ± Dm ± Dv."},
+  {f:"Regra dos sinais",b:"Da agulha p/ o verdadeiro (subindo): Este SOMA, Oeste SUBTRAI. Descendo: inverte."},
+  {f:"Exemplo do livro",b:"Dm 20W, Rag 085, Dv 5E → Rmg 090 → Rv 070."},
+  {f:"Variação anual",b:"Dm(ano) = Dm(base) ± variação × nº anos. Atualize ANTES de converter."},
+  {f:"Ex. variação (2011-Q30)",b:"16°10′W (2007) + 5′W×4 = 16°30′W = 16,5°W."},
+  {f:"Conversão de marcação",b:"Mv = Mag ± Dm ± Dv, com o Dv do RUMO do navio."},
+  {f:"Giroscópica — aponta a",b:"Norte VERDADEIRO (não o magnético). Independe do magnetismo terrestre."},
+  {f:"Vantagens da giro",b:"Mais precisa; latitudes mais altas; imune a material magnético; alimenta repetidoras/radar/piloto/ECDIS."},
+  {f:"Limitações da giro",b:"Precisa de energia constante; manutenção especializada; erros a partir de 70° de latitude."},
+  {f:"Desvio da giro (Dgi)",b:"Redução do triângulo: LDP num ponto → 0; triângulo → há desvio. Subtraiu = W; somou = E."},
+  {f:"2011-Q30",b:"Rv 152,5° → Rag 167° (Dm 16,5°W atualizada, Dag 2°E). Gab (c)."},
+  {f:"2012-Q19",b:"Rv 045°, giro fora → Rag 058° (Dm 15°W, Dag 2°E). Gab (c)."},
+  {f:"Só verdadeiro na carta",b:"Rumos e marcações traçados na carta são sempre verdadeiros (referidos ao NV)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"A Declinação Magnética é definida como o ângulo entre:",
+   o:["O Norte Magnético e o Norte da Agulha","O Norte Verdadeiro e o Norte Magnético","A proa e o Norte Verdadeiro","O Norte da Giro e o Norte Verdadeiro"],a:1,
+   e:"Declinação (Dm) = ângulo NV↔NM. O ângulo NM↔NA é o Desvio da Agulha (Dv)."},
+  {q:"O Desvio da Agulha varia com o rumo do navio porque:",
+   o:["A declinação muda com a proa","Depende dos ferros do navio e da orientação deles no campo terrestre","Depende da latitude apenas","É constante e não varia"],a:1,
+   e:"O desvio nasce do ferro do próprio navio; conforme a proa, a orientação desse material no campo terrestre muda, alterando o desvio. Obtém-se da Curva de Desvios entrando com o rumo."},
+  {q:"Para obter o desvio na Curva de Desvios, deve-se entrar com:",
+   o:["A marcação observada","O rumo do navio","A declinação","A latitude"],a:1,
+   e:"Entra-se com o RUMO, nunca com a marcação. O desvio obtido vale para todas as marcações enquanto o navio mantiver esse rumo."},
+  {q:"As linhas que unem pontos de mesma declinação magnética chamam-se:",
+   o:["Agônicas","Isóbaras","Isogônicas","Isóbatas"],a:2,
+   e:"Isogônicas = mesma declinação. Agônicas = declinação nula. Isóbatas = mesma profundidade."},
+  {q:"Na conversão da agulha para o verdadeiro (Rv = Rag ± Dm ± Dv), os valores a LESTE (E):",
+   o:["São subtraídos","São somados","São ignorados","Dependem da latitude"],a:1,
+   e:"Subindo (agulha → verdadeiro), o Este SOMA e o Oeste SUBTRAI. No sentido inverso, os sinais se invertem."},
+  {q:"Dm = 20° W, Rag = 085°, Dv = 5° E. O Rumo Verdadeiro é:",
+   o:["070°","110°","090°","060°"],a:0,
+   e:"Rmg = Rag ± Dv = 085 + 5 (E) = 090°. Rv = Rmg ± Dm = 090 − 20 (W) = 070°."},
+  {q:"[PSCPP 2011] Rv = 152,5°; Dm(2007) = 16°10′ W, variação 5′ W/ano; Dag = 2° E. Em 2011, o Rag é:",
+   o:["154°","167°","169°","171°"],a:1,
+   e:"Dm(2011) = 16°10′ + 5′×4 = 16°30′W = 16,5°W. Rmg = Rv + Dm(W) = 152,5 + 16,5 = 169°. Rag = Rmg − Dv(E) = 169 − 2 = 167°. Gabarito (c)."},
+  {q:"[PSCPP 2012] Rv = 045°, Dm = 15° W, Dag = 2° E, agulha giro fora. Governando pela agulha, o rumo é:",
+   o:["032°","058°","060°","075°"],a:1,
+   e:"Erro total = Dm + Dv = (−15) + (+2) = −13°. Rag = Rv − Dm − Dv = 045 + 15 − 2 = 058°. Gabarito (c)."},
+  {q:"Antes de converter um rumo, a declinação da carta deve ser:",
+   o:["Usada sempre no valor do ano-base","Atualizada pela variação anual até o ano da navegação","Ignorada se for menor que 20°","Convertida para o desvio"],a:1,
+   e:"Dm(ano) = Dm(base) ± variação × nº de anos. Só depois de atualizada é que se converte o rumo."},
+  {q:"A agulha giroscópica, comparada à magnética, tem como vantagem:",
+   o:["Dispensar energia elétrica","Apontar ao Norte Verdadeiro, independente do magnetismo","Funcionar melhor acima de 70° de latitude","Não precisar de manutenção"],a:1,
+   e:"Aponta ao Norte Verdadeiro e independe do magnetismo terrestre (mais precisa, alimenta repetidoras/radar/piloto/ECDIS). Mas exige energia e apresenta erros acima de 70° de latitude."},
+  {q:"Na determinação do desvio da giro por 'redução do triângulo', se a correção teve de ser SUBTRAÍDA, o desvio é:",
+   o:["Leste (E)","Oeste (W)","Nulo","Indeterminado"],a:1,
+   e:"Correção subtraída → desvio Oeste (W); correção somada → Leste (E). Se as LDP já cruzam num ponto, o desvio é zero."},
+  {q:"Na conversão de uma marcação da agulha (Mag) para verdadeira (Mv), o desvio a aplicar é o correspondente:",
+   o:["À própria marcação observada","Ao rumo do navio","À declinação local","Ao Norte da Giro"],a:1,
+   e:"Mv = Mag ± Dm ± Dv, sendo o Dv o do RUMO do navio — vale para todas as marcações enquanto o rumo não mudar."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

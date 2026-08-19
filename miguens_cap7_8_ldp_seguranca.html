@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>LDP de Segurança e Dados Táticos — Miguens Cap. 7 e 8 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:330px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco C — Posição e Segurança</p>
+    <h1>LDP de Segurança e os <em>Dados Táticos</em> em Águas Restritas</h1>
+    <p class="sub">Como passar a salvo dos perigos mesmo sem a posição perfeitamente determinada. Iluminar a carta, as cinco linhas de posição de segurança, e o uso dos dados táticos do navio (curva de giro, ponto de guinada e fundeio de precisão) para planejar e executar guinadas em águas apertadas.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 7 (Emprego de Linhas de Posição de Segurança) e Cap. 8 (Uso dos Dados Táticos do Navio na Navegação em Águas Restritas). A banca cita a <b>1ª edição (1996)</b>. Questões reais transcritas de PSCPP 2011 e 2012.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#iluminar">7.1 Iluminar a carta</a>
+    <a href="#ldp">7.2 LDP de segurança ▶</a>
+    <a href="#angulos">Ângulos de perigo</a>
+    <a href="#setor">Luzes de setor · sondagens</a>
+    <a href="#giro">8.2 Curva de giro ▶</a>
+    <a href="#consideracoes">8.3 Considerações</a>
+    <a href="#guinada">8.7 Ponto de guinada ▶</a>
+    <a href="#fundeio">8.9 Fundeio de precisão</a>
+    <a href="#banca">Já cobrado ▶</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Abre o <strong>Bloco C — Posição e Segurança</strong>. Usa a navegação estimada (Cap. 5) e a determinação da posição (Cap. 4 e 6). O critério das profundidades conecta-se a <strong>Marés</strong> (Cap. 10, folga abaixo da quilha) e ao <strong>squat</strong>. Os dados táticos reaparecem em COLREG (canais estreitos, roda a roda) e no fundeio.
+</div>
+
+<!-- ============ 7.1 ILUMINAR A CARTA ============ -->
+<section class="bloco" id="iluminar">
+  <h2 class="sec"><span class="n">7.1</span> "Iluminar" a carta — os dois critérios</h2>
+  <p class="lede">Uma única LDP não define a posição, mas pode dar indicações valiosas de segurança. O primeiro passo é marcar na carta os contornos das áreas perigosas para <em>aquele</em> navio.</p>
+
+  <p><strong>Iluminar a carta</strong> é traçar (tradicionalmente hachurando a lápis, sem ocultar pontos conspícuos) os limites das áreas perigosas à navegação. Essas áreas <span class="hl">variam de navio para navio</span>, dependendo do calado, comprimento, boca e características de manobra — uma área perigosa para um Navio-Aeródromo pode não o ser para um Navio-Patrulha. Há <strong>dois critérios</strong>:</p>
+
+  <table>
+    <tr><th>Critério</th><th>Como se traça a linha de perigo</th></tr>
+    <tr><td><strong>Das profundidades</strong></td><td>Traça-se a isóbata de perigo por uma profundidade = <span class="hl">calado + margem de segurança</span> (ou <span class="hl">15% do calado</span>, quando este for maior que a margem). É a lazeira mínima desejada abaixo da quilha. A margem leva em conta variação de maré, squat, vagas etc.</td></tr>
+    <tr><td><strong>Da distância ao perigo mais próximo</strong></td><td>O Comandante estipula a menor distância que se deseja passar dos perigos; a linha de perigo une pontos situados a essa distância (ex.: 2 milhas ao largo da Ilha de Alcatrazes).</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>A conta do critério das profundidades <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span></h4>
+    <p>Profundidade da linha de perigo = <strong>calado + margem de segurança</strong>, adotando-se <span class="hl">15% do calado</span> quando essa percentagem for maior que a margem estabelecida. Exemplo do livro: calado 14 m + margem 2 m = isóbata de <strong>16 m</strong> como limite.</p>
+    <p style="margin-top:8px"><strong>[BANCA: 2012-Q29]</strong> (Prova Rosa, 1,6 pt) — "Para iluminar uma carta pelo critério das profundidades, deve-se tomar como base uma profundidade igual: <em>(c) ao calado do navio, acrescido de 2 m ou de 15% do calado, o que for maior</em>." ✔ Gabarito <b>(c)</b>. Os distratores trocavam a base por MHWN, nível de redução (NR) ou "uma vez e meia o calado".</p>
+  </div>
+
+  <div class="box">
+    <h4>Ponte com o ECDIS</h4>
+    <p>No ECDIS, o critério das profundidades é automatizado: define-se a isóbata de segurança e o sistema exibe em tempo real as <span class="hl">NON GO AREAS</span> (áreas não navegáveis), chamando a atenção da equipe para o corredor seguro.</p>
+  </div>
+</section>
+
+<!-- ============ 7.2 LDP DE SEGURANÇA ============ -->
+<section class="bloco" id="ldp">
+  <h2 class="sec"><span class="n">7.2</span> As cinco linhas de posição de segurança</h2>
+  <p class="lede">Quando não se pode determinar a posição com precisão, usa-se uma LDP em relação à qual o navio se movimenta. São cinco: alinhamento, marcação de perigo, distância de perigo, ângulo vertical e ângulo horizontal.</p>
+
+  <div class="box key">
+    <h4>Alinhamentos — as mais precisas <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Mantendo a proa (ou, às vezes, a popa) sobre um alinhamento, tem-se certeza de seguir a direção do alinhamento ou sua recíproca. Os alinhamentos, sobretudo os estabelecidos como auxílio à navegação, constituem as <span class="hl">LDP de segurança mais precisas</span> que existem.</p>
+  </div>
+
+  <h3>Marcação de segurança (ou marcação de perigo)</h3>
+  <p>Traça-se, do ponto de referência, uma tangente ao limite da área perigosa. A regra de ouro:</p>
+
+  <div class="box trap">
+    <h4>A regra que a banca adora <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>A marcação de segurança é <span class="hl">sempre tomada do navio para o ponto de referência</span> (do largo para terra) — <strong>nunca a recíproca</strong>. Confundir o sentido é o distrator clássico.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Marcação de segurança — perigo por um bordo (Fig. 7.4)</h4>
+    <p class="hint">Derrota A→B no rumo 000°; marcação de segurança ao farol Ponta Alta = 010°. Mova o navio e observe: marcação <b>&gt; 010°</b> = águas seguras; <b>&lt; 010°</b> = entrando no perigo.</p>
+    <svg id="svgMarc" viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Marcação de segurança"></svg>
+    <div class="ictrl">
+      <button class="mBtn" data-b="5" onclick="setMarc(5)">Marcando 005°</button>
+      <button class="mBtn active" data-b="10" onclick="setMarc(10)">010° (limite)</button>
+      <button class="mBtn" data-b="15" onclick="setMarc(15)">015°</button>
+      <button class="mBtn" data-b="20" onclick="setMarc(20)">020°</button>
+    </div>
+    <div class="iread" id="marcRead" style="margin-top:10px"></div>
+  </div>
+
+  <div class="box">
+    <h4>Perigo pelos dois bordos (Fig. 7.5)</h4>
+    <p>Na aproximação a um píer (rumo 097°), traçam-se <strong>duas</strong> marcações ao mesmo ponto de referência (o tanque Sul): M<sub>1</sub> = 095° (tangente ao Molhe Sul) e M<sub>2</sub> = 078° (tangente à isóbata de 20 m). Navegando com a marcação do tanque <span class="hl">entre 078° e 095°</span>, está-se seguro. Aproximou de 095° → corrige o rumo para <strong>BE</strong>; aproximou de 078° → corrige para <strong>BB</strong>.</p>
+  </div>
+
+  <h3>Distância de perigo (Fig. 7.7)</h3>
+  <p>Para passar entre os perigos A e B junto ao Farol C, traçam-se duas distâncias de perigo (d<sub>A</sub> e d<sub>B</sub>). Mantém-se a distância ao farol <span class="hl">entre d<sub>A</sub> e d<sub>B</sub></span>, verificando-a seguidamente (radar) até ultrapassar os perigos.</p>
+</section>
+
+<!-- ============ ÂNGULOS DE PERIGO ============ -->
+<section class="bloco" id="angulos">
+  <h2 class="sec"><span class="n">7.2.4/5</span> Ângulos vertical e horizontal de segurança</h2>
+  <p class="lede">Quando há um objeto de altitude conhecida (ou dois pontos notáveis), o sextante fornece LDP de segurança por ângulo — sem depender de agulha.</p>
+
+  <div class="box formula">
+    <h4>Ângulo vertical de segurança <span class="tag t-calc">CALCULO</span></h4>
+    <p>Um ângulo vertical medido para um objeto de altitude conhecida define uma <strong>circunferência de distância</strong> com centro na base do objeto:</p>
+    <div class="eq">d = h · cotg α&nbsp;&nbsp;&nbsp;⇔&nbsp;&nbsp;&nbsp;tg α = h / d<span class="lbl">d = distância à base · h = altitude do objeto · α = ângulo vertical (medido com sextante)</span></div>
+    <p class="vars">Passando entre os perigos A e B (Fig. 7.9), calculam-se α<sub>A</sub> e α<sub>B</sub> pelas distâncias d<sub>A</sub> e d<sub>B</sub> ao Farol C. <strong>Ângulo maior = mais perto do objeto.</strong> Se o ângulo <span class="hl">aumenta</span> (aproxima-se de α<sub>B</sub>) → corrige para <strong>BB</strong>; se <span class="hl">diminui</span> (aproxima-se de α<sub>A</sub>) → corrige para <strong>BE</strong>.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Ângulo horizontal de segurança (Fig. 7.10)</h4>
+    <p class="hint">Passando entre A e B, controla-se o ângulo horizontal entre dois pontos notáveis (Farol C e Torre D), medido a sextante ou por diferença de marcações simultâneas. Mova o navio e veja o ângulo e a correção de rumo.</p>
+    <svg id="svgAngH" viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ângulo horizontal de segurança"></svg>
+    <div class="ictrl"><label for="posH">Posição →</label><input type="range" id="posH" min="0" max="100" value="50" oninput="drawAngH()"></div>
+    <div class="iread" id="angHRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>A lógica das correções <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Ângulo horizontal <span class="hl">diminui</span>, aproximando-se de α → risco do perigo A → corrige para <strong>BE</strong>. Ângulo <span class="hl">aumenta</span>, aproximando-se de β → risco do perigo B → corrige para <strong>BB</strong>. (Ângulo entre dois pontos cresce quando o navio se aproxima da linha que os une.)</p>
+  </div>
+</section>
+
+<!-- ============ LUZES DE SETOR / SONDAGENS ============ -->
+<section class="bloco" id="setor">
+  <h2 class="sec"><span class="n">7.2/7.3</span> Luzes de setor e o uso de sondagens</h2>
+  <p class="lede">Dois recursos adicionais de segurança: as luzes de setor delimitam o canal; as sondagens são o último recurso na baixa visibilidade.</p>
+
+  <div class="box">
+    <h4>Luzes de setor — advertência "sim-não"</h4>
+    <p>O canal é coberto por um setor <span class="hl">branco</span> estreito; os limites por setores coloridos. Aproximando-se da luz, mantém-se o <strong>setor verde a bombordo e o encarnado a boreste</strong>. Ao entrar num setor colorido, deve-se voltar imediatamente ao branco (não se sabe quanto se avançou no colorido). Comparadas ao alinhamento: a luz de setor é <span class="hl">menos precisa</span>, mas requer <strong>uma única estrutura</strong> (o alinhamento requer duas) e pode indicar limites navegáveis — o que o alinhamento convencional não faz.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Sondagens como limite de segurança <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Em baixa visibilidade, a comparação entre as profundidades da carta e as do <strong>ecobatímetro</strong> pode ser o único recurso para demandar águas seguras. O <span class="hl">alarme de baixa profundidade</span> (com a profundidade mínima segura introduzida) torna as sondagens um limite de segurança muito conveniente.</p>
+  </div>
+
+  <div class="box">
+    <h4>Do apêndice do Cap. 7 (exercícios-tipo)</h4>
+    <p>Traçar a marcação de perigo tangente ao limite, sempre do navio para a referência: Ex. 1 → <strong>M = 060°</strong> (pedras submersas perigosas). Ex. 2 → <strong>M = 084°</strong> (casco soçobrado + pedra submersa). São exatamente o formato que a banca pede em figura.</p>
+  </div>
+</section>
+
+<!-- ============ 8.2 CURVA DE GIRO ============ -->
+<section class="bloco" id="giro">
+  <h2 class="sec"><span class="n">8.1/8.2</span> Dados táticos e os elementos da curva de giro</h2>
+  <p class="lede">Na realidade o navio não guina num ponto: leva tempo e distância. Os <strong>dados táticos</strong> (características de manobra, nos mercantes) são determinados nas provas de mar e ficam à disposição no passadiço e no CIC/COC.</p>
+
+  <p>Os dados táticos compreendem os <strong>elementos das curvas de giro</strong> e os dados de máquinas (tabelas de aceleração/desaceleração, parada de emergência, telégrafo × RPM × velocidade). Os elementos da curva de giro:</p>
+
+  <div class="ichart">
+    <h4>A curva de giro e seus elementos (Fig. 8.1 e 8.3)</h4>
+    <p class="hint">Deslize o ângulo de leme (15° → 35°). Veja avanço, afastamento e diâmetro tático <b>diminuírem</b>, o ângulo de deriva <b>aumentar</b> e o abatimento inicial para o bordo contrário.</p>
+    <canvas id="cvGiro" width="860" height="330"></canvas>
+    <div class="ictrl"><label for="leme">Ângulo de leme →</label><input type="range" id="leme" min="15" max="35" value="15" step="1" oninput="drawGiro()"></div>
+    <div class="iread" id="giroRead" style="margin-top:6px"></div>
+  </div>
+
+  <table>
+    <tr><th>Elemento</th><th>Definição (Miguens)</th></tr>
+    <tr><td><strong>Avanço</strong></td><td>Distância na direção do rumo inicial, do ponto em que o leme foi carregado até a proa guinar 90°. <span class="hl">É máximo na guinada de 90°.</span></td></tr>
+    <tr><td><strong>Afastamento</strong></td><td>Distância perpendicular ao rumo inicial, do carregar do leme até a proa atingir o novo rumo.</td></tr>
+    <tr><td><strong>Abatimento</strong></td><td>Caimento do navio para o <span class="hl">bordo CONTRÁRIO ao da guinada</span>, no início da evolução, medido na direção normal ao rumo inicial.</td></tr>
+    <tr><td><strong>Diâmetro tático</strong></td><td>Distância perpendicular ao rumo inicial numa guinada de <strong>180°</strong>. Corresponde ao afastamento máximo.</td></tr>
+    <tr><td><strong>Diâmetro final</strong></td><td>Diâmetro do arco descrito na parte final (giro de 360° com leme constante). <span class="hl">É sempre menor que o diâmetro tático.</span></td></tr>
+    <tr><td><strong>Ângulo de deriva</strong></td><td>Ângulo entre a tangente à curva e o eixo longitudinal do navio (constante na parte circular).</td></tr>
+  </table>
+
+  <div class="box trap">
+    <h4>O distrator do abatimento <span class="tag t-banca">BANCA</span> <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>O <strong>abatimento</strong> é o caimento para o bordo <span class="hl">CONTRÁRIO</span> ao da guinada (a popa é empurrada para fora). A banca escreve "para o bordo <em>da</em> guinada" para criar a alternativa incorreta.</p>
+    <p style="margin-top:8px"><strong>[BANCA: 2011-Q35]</strong> (Prova Amarela, 1 pt) — "Assinale o conceito INCORRETO": a alternativa errada é <em>(a) "denomina-se abatimento o caimento do navio para o bordo <b>da</b> guinada..."</em> ✔ Gabarito <b>(a)</b>. As demais (dados táticos vêm das provas de mar; afastamento; avanço/DT/afastamento diminuem com o leme; diâmetro final &lt; tático) estavam corretas.</p>
+  </div>
+
+  <div class="box">
+    <h4>O centro de giro</h4>
+    <p>O navio gira em torno do seu <strong>centro de giro</strong>, normalmente a <span class="hl">1/3 do comprimento a partir de vante</span>, sobre o eixo longitudinal. A situação ideal é o centro de giro estar no passadiço — o observador "vê o navio girar em torno de si".</p>
+  </div>
+</section>
+
+<!-- ============ 8.3 CONSIDERAÇÕES ============ -->
+<section class="bloco" id="consideracoes">
+  <h2 class="sec"><span class="n">8.3/8.4</span> Considerações práticas · vento e corrente</h2>
+  <p class="lede">Da prática de manobra surgem conclusões que a banca cobra diretamente — e que valem na prevenção de colisão.</p>
+
+  <div class="box key">
+    <h4>Conclusões sobre a curva de giro <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <ul style="margin:6px 0 0;padding-left:20px">
+      <li>Ao carregar o leme, a proa guina para o bordo do leme e a popa é empurrada para o bordo contrário (abatimento); o navio só ganha caminho para o bordo da guinada após avançar <span class="hl">2 a 3× o comprimento</span>.</li>
+      <li>Não se evita obstáculo à proa só com leme se ele estiver a <span class="hl">menos de 2× o comprimento</span>. Dois navios "roda a roda" não evitam a colisão a menos de <span class="hl">2 a 3× a soma dos comprimentos</span>.</li>
+      <li>Avanço, diâmetro tático, afastamento e tempo de evolução <strong>diminuem</strong> com o aumento do ângulo de leme.</li>
+      <li>O ângulo de deriva <strong>aumenta</strong> com o ângulo de leme.</li>
+      <li>O tempo de evolução <strong>diminui</strong> com o aumento da velocidade.</li>
+      <li>Avanço, DT e afastamento variam com a velocidade segundo uma <strong>parábola</strong>: diminuem até a <span class="hl">"velocidade ótima de evolução"</span> e aumentam a partir dela.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h4>Aplicação da banca — o Prático Manoel (capesize) <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>[BANCA: 2006-Q17, capesize DOCEBAY]</strong> — Diâmetro tático da curva fixada no passadiço = <strong>3 L<sub>pp</sub></strong>. Em HALF-AHEAD (10 nós) e SLOW-AHEAD (6 nós), com quais diâmetros táticos o prático poderá manobrar? Resposta: <span class="hl">3 L<sub>pp</sub> e 3 L<sub>pp</sub></span> — o diâmetro tático adimensional é praticamente <strong>insensível à velocidade</strong> para o mesmo ângulo de leme (índices de estabilidade independem da velocidade em Froude moderado). ✔ Gabarito <b>(c)</b>.</p>
+  </div>
+
+  <div class="box">
+    <h4>Vento e corrente deformam a curva</h4>
+    <p><strong>Vento:</strong> a maioria dos navios tende a <em>arribar</em> (proa para sotavento); o vento deforma a curva conforme força e direção. <strong>Corrente:</strong> alonga a curva na direção em que a água se desloca. Solução prática: entrar/sair do canal próximo ao <span class="hl">estofo da maré</span>, quando a corrente é mínima.</p>
+  </div>
+
+  <div class="related">
+    📎 <strong>Correlação MacElrevey (Bloco de Manobra):</strong> <em>[BANCA: 2012-Q4]</em> confirma que o diâmetro tático <span class="hl">aumenta quando as rotações são aumentadas durante a guinada</span> e que o diâmetro da curva <span class="hl">aumenta em águas rasas</span> — coerente com os dados táticos daqui.
+  </div>
+</section>
+
+<!-- ============ 8.7 PONTO DE GUINADA ============ -->
+<section class="bloco" id="guinada">
+  <h2 class="sec"><span class="n">8.7</span> Determinação do ponto de guinada</h2>
+  <p class="lede">O coração operacional do capítulo: onde carregar o leme para que a mudança de rumo saia exatamente sobre a derrota prevista. Usa-se o avanço e o afastamento da tabela de dados táticos.</p>
+
+  <div class="ichart">
+    <h4>Construção do ponto de guinada (Fig. 8.11)</h4>
+    <p class="hint">Rumo inicial 000°, guinada para o novo rumo. Deslize o ângulo de guinada (45°–60°): o avanço e o afastamento saem por <b>interpolação linear</b> da Tabela de Dados Táticos (12 nós, 15° de leme). Observe o ponto de guinada recuar antes da inflexão e a marcação de guinada à Torre.</p>
+    <svg id="svgGuin" viewBox="0 0 860 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ponto de guinada"></svg>
+    <div class="ictrl"><label for="gng">Guinada →</label><input type="range" id="gng" min="45" max="60" value="50" step="1" oninput="drawGuin()"></div>
+    <div class="iread" id="guinRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>O procedimento (3 passos) <span class="tag t-calc">CALCULO</span></h4>
+    <p>Da Tabela de Dados Táticos, para 45° → avanço 270 jd / afast. 60 jd; para 60° → 310 jd / 110 jd. Interpolando para <strong>50°</strong>: avanço <span class="hl">283 jd</span>, afastamento <span class="hl">77 jd</span>. Então:</p>
+    <p style="margin:6px 0 0">1) aplica-se o <strong>afastamento</strong> (paralela ao rumo inicial) → ponto B; 2) do ponto B aplica-se o <strong>avanço</strong> → ponto C; 3) do ponto C, perpendicular ao rumo inicial → <strong>ponto de guinada D</strong> (onde carregar o leme). Estuda-se a carta e escolhe-se um ponto notável (Torre) para a <strong>marcação de guinada</strong>: ao preencher a marcação, inicia-se a guinada.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Escolha da referência de guinada — os dois casos <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Referência</th><th>Vantagem</th><th>Desvantagem</th></tr>
+      <tr><td><strong>Próxima do través</strong> no ponto de guinada</td><td><span class="hl">Máxima sensibilidade</span> (razão de variação da marcação é máxima) → maior chance de iniciar na hora certa</td><td>Se o navio estava fora da derrota, continua fora na nova pernada</td></tr>
+      <tr><td><strong>Marcação paralela ao novo rumo</strong> (marca de proa)</td><td>Termina sobre a nova pernada <span class="hl">não importa onde estava</span></td><td>Menos sensível (varia devagar) → risco de não iniciar na hora</td></tr>
+    </table>
+    <p class="vars">Como raramente se acha o objeto perfeitamente paralelo, escolhe-se o mais próximo disso como <strong>marca de proa</strong>. Guinando rápido demais, alivia-se o leme; devagar demais, carrega-se mais.</p>
+  </div>
+</section>
+
+<!-- ============ 8.9 FUNDEIO DE PRECISÃO ============ -->
+<section class="bloco" id="fundeio">
+  <h2 class="sec"><span class="n">8.9</span> Fundeio de precisão</h2>
+  <p class="lede">Fundear num ponto pré-selecionado com o mínimo de erro. Quatro fases sob o ponto de vista do passadiço: seleção do ponto, plotagem, aproximação/execução e providências pós-fundeio.</p>
+
+  <div class="box">
+    <h4>1. Área segura para o fundeio</h4>
+    <p>Traça-se a <strong>linha de perigo</strong>: isóbata de profundidade = <span class="hl">calado + 6 pés (≈ 1,8 m)</span>, a lazeira mínima na baixa-mar (BM). A partir dela, arcos de raio = <span class="hl">comprimento do navio + filame</span>. A área <strong>externa</strong> a esses arcos é segura. O filame usual é de <span class="hl">5 a 7× a profundidade</span> (um quartel de amarra = 15 braças = 27,4 m).</p>
+  </div>
+
+  <div class="box">
+    <h4>2 e 3. Plotagem e aproximação</h4>
+    <p>Derrota de aproximação ≥ <span class="hl">600 a 1.000 jardas</span>, de preferência com ponto notável pela proa/popa no rumo final. Traçam-se <strong>círculos de distância</strong> (de 100 em 100 jd) centrados no ponto de fundeio, com o zero afastado da distância <strong>escovém–passadiço</strong> (10 jd num navio pequeno até ~300 jd num superpetroleiro/NAe), pois larga-se o ferro quando o <em>escovém</em> — e não o passadiço — está sobre o ponto. Aproximação: a 1.000 jd reduzir para 5–7 nós; a ~300 jd parar máquinas; reverter para quebrar o seguimento e dar um pouco de ré ao largar. Bom fundeio: ferro dentro de um círculo de 50 jd de raio.</p>
+  </div>
+
+  <div class="box key">
+    <h4>4. Círculos de giro pós-fundeio <span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Círculo</th><th>Raio</th><th>Representa</th></tr>
+      <tr><td><strong>CGN</strong> (Círculo de Giro do Navio)</td><td class="center">comprimento + filame</td><td>a figura descrita pela <strong>popa</strong> ao girar com vento/maré</td></tr>
+      <tr><td><strong>CGP</strong> (Círculo de Giro do Passadiço)</td><td class="center">escovém–passadiço + filame</td><td>a figura descrita pelo <strong>passadiço</strong></td></tr>
+    </table>
+    <p class="vars">Centro comum = ponto de fundeio real. Controla-se a posição a cada 15–30 min: se cair <span class="hl">fora do CGP</span>, o navio está <strong>garrando</strong>. Verifica-se que o CGN esteja todo dentro da área segura.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Conflito de fontes no raio do fundeadouro <span class="tag t-conflito">CONFLITO</span> <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>[BANCA: 2011-Q34]</strong> (Fonseca, <em>Arte Naval</em>) diz que a área livre para fundear é um círculo de raio = <span class="hl">filame + 2× o comprimento</span> do navio. Já <strong>Miguens</strong> (Cap. 8) usa, para o CGN, raio = <span class="hl">comprimento + filame</span> (1× o comprimento). <strong>Atenção à fonte citada no enunciado</strong>: são definições diferentes (área do fundeadouro × giro do navio). Naquela questão, a alternativa incorreta era outra — "ser de pouca profundidade" NÃO é requisito de bom fundeadouro.</p>
+  </div>
+</section>
+
+<!-- ============ MAPA DA BANCA ============ -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
+  <p class="lede">Varredura completa das quatro provas anexadas para os temas dos Cap. 7 e 8. Gabaritos de 2006/2008 saem do OCR (marcados com <code>( X )</code>); 2011/2012 não têm marcação impressa — deduzo pelo conteúdo e sinalizo o que precisa conferir no gabarito oficial.</p>
+
+  <table>
+    <tr><th>Prova</th><th>Questão</th><th>Tema (Cap.)</th><th class="center">Gabarito</th></tr>
+    <tr><td>2006</td><td><strong>Q17</strong> — capesize DOCEBAY</td><td>Diâmetro tático insensível à velocidade → 3 L<sub>pp</sub> / 3 L<sub>pp</sub> (8.3)</td><td class="center"><b>(c)</b> ✔ OCR</td></tr>
+    <tr><td>2008</td><td><strong>Q53</strong></td><td>Sinais luminosos e a luz de setor (7.2 / auxílios)</td><td class="center">conferido OCR</td></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q25</strong> (Fonseca)</td><td>Curvas de giro e efeitos do leme — "assinale a incorreta" (8.3)</td><td class="center">⚠ verificar</td></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q34</strong> (Fonseca)</td><td>Requisitos de bom fundeadouro; raio = filame + 2 L (8.9)</td><td class="center">incorreta: "pouca profundidade"</td></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q35</strong> (Miguens)</td><td>Dados táticos — abatimento é p/ o bordo CONTRÁRIO (8.2)</td><td class="center"><b>(a)</b> ✔</td></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q46</strong> (MacElrevey)</td><td>VLCC perde ~40% da velocidade ao guinar 90° (8.3)</td><td class="center">⚠ verificar (~40%)</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q4</strong> (MacElrevey)</td><td>DT ↑ com rotações; diâmetro ↑ em águas rasas (8.2/8.3)</td><td class="center">conferido</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q29</strong> (Miguens)</td><td>Iluminar carta: calado + 2 m ou 15% do calado (7.1)</td><td class="center"><b>(c)</b> ✔</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q43</strong> (PNA)</td><td>4 medidas da curva de giro; diâmetro constante &lt; tático (8.2)</td><td class="center"><b>(d)</b> ✔ deduzido</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Reforço — o que a banca já pediu destes capítulos <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p><strong>Cap. 7:</strong> iluminar a carta pelo critério das profundidades (2012-Q29). O conceito da luz de setor entrou em 2008-Q53.<br>
+    <strong>Cap. 8:</strong> as definições e as conclusões da curva de giro são o filão — abatimento para o bordo contrário (2011-Q35), avanço/DT/afastamento/tempo diminuem com o leme e o ângulo de deriva aumenta com o leme (2011-Q25, tese de Fonseca), diâmetro de giro constante &lt; diâmetro tático (2012-Q43), diâmetro tático insensível à velocidade (2006-Q17), perda de ~40% da velocidade ao guinar 90° em VLCC (2011-Q46) e o aumento do diâmetro em águas rasas / com rotações (2012-Q4). O fundeadouro cobra o raio (2011-Q34), onde Fonseca (filame + 2 L) diverge do CGN de Miguens (comprimento + filame).</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Pendências de gabarito <span class="tag t-conflito">VERIFICAR</span></h4>
+    <p>Duas questões de 2011 não têm gabarito no OCR: <strong>Q25</strong> (a "incorreta" recai provavelmente sobre a alternativa que diz o ângulo de deriva <em>diminuir com a velocidade</em> — não sustentado por Miguens) e <strong>Q46</strong> (MacElrevey; a faixa citada em 2012-Q4 é "40 a 50%", então a resposta aproximada deve ser <strong>40%</strong>). Confira no gabarito impresso antes de decorar.</p>
+  </div>
+</section>
+
+<!-- ============ FLASHCARDS ============ -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. LDP de segurança (Cap. 7) e dados táticos (Cap. 8).</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Dez questões — várias reais de PSCPP 2011/2012 — com os distratores do capítulo.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PSCPP ============ -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — LDP de Segurança e Dados Táticos (Miguens Cap. 7 e 8)</summary>
+  <ul>
+    <li><b>Iluminar a carta:</b> 2 critérios — profundidades (isóbata = calado + margem, ou 15% do calado, o que for maior) e distância ao perigo mais próximo. Áreas perigosas variam por navio. <b>[BANCA 2012-Q29: calado + 2 m ou 15%, o que for maior]</b>.</li>
+    <li><b>5 LDP de segurança:</b> alinhamento (a mais precisa) · marcação de perigo · distância de perigo · ângulo vertical · ângulo horizontal.</li>
+    <li><b>Marcação de segurança:</b> sempre DO NAVIO PARA O PONTO (do largo para terra), nunca a recíproca. Tangente ao limite do perigo. Dois bordos: entre M₁ e M₂.</li>
+    <li><b>Ângulo vertical:</b> d = h·cotg α (sextante). Ângulo maior = mais perto. Aumenta→corrige BB; diminui→corrige BE.</li>
+    <li><b>Ângulo horizontal:</b> entre 2 pontos notáveis (sextante ou diferença de marcações). Diminui (→α)→corrige BE; aumenta (→β)→corrige BB.</li>
+    <li><b>Luz de setor:</b> branco no canal, verde a BB / encarnado a BE. 1 estrutura só (alinhamento precisa de 2); indica limites navegáveis, mas menos precisa. Sondagens: recurso na baixa visibilidade (alarme do ecobatímetro).</li>
+    <li><b>Elementos da curva de giro:</b> avanço (90°, máx) · afastamento (⊥) · abatimento (bordo CONTRÁRIO ao da guinada) · diâmetro tático (180°, = afast. máx) · diâmetro final (&lt; tático) · ângulo de deriva. Centro de giro ~1/3 de vante. <b>[BANCA 2011-Q35: abatimento é para o bordo contrário]</b>.</li>
+    <li><b>Práticas:</b> ganha caminho para o bordo da guinada após 2–3 L; avanço/DT/afast./tempo diminuem com o leme; deriva aumenta com o leme; tempo diminui com a velocidade; avanço/DT/afast. variam com a velocidade em parábola (mín. na velocidade ótima de evolução). D_T/L insensível à velocidade <b>[capesize DOCEBAY: 3 Lpp / 3 Lpp]</b>.</li>
+    <li><b>Vento/corrente:</b> vento faz arribar e deforma a curva; corrente alonga na direção da água. Entrar no estofo da maré.</li>
+    <li><b>Ponto de guinada:</b> usa avanço e afastamento (interpolação linear). 3 passos: afastamento→B, avanço→C, perpendicular→D. Referência próxima do través = máxima sensibilidade; paralela ao novo rumo = termina sobre a pernada mas menos sensível.</li>
+    <li><b>Fundeio de precisão:</b> linha de perigo = calado + 6 pés (BM); área segura = arcos de raio (comprimento + filame). Filame 5–7× a profundidade (quartel = 15 braças = 27,4 m). Escovém–passadiço no traçado dos círculos de distância. CGN = comprimento + filame (popa); CGP = escovém-passadiço + filame. Fora do CGP = garrando. <b>[CONFLITO Fonseca: raio = filame + 2 L]</b>.</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · LDP de Segurança e Dados Táticos (Miguens Vol. I, Cap. 7 e 8) · Capital Sereno · Bloco C — Posição e Segurança.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+
+/* ===== MARCAÇÃO DE SEGURANÇA (Fig. 7.4) ===== */
+var marcSel=10;
+function setMarc(b){marcSel=b;
+  document.querySelectorAll('.mBtn').forEach(function(x){x.classList.toggle('active',+x.dataset.b===b);});
+  drawMarc();}
+function drawMarc(){
+  var svg=document.getElementById('svgMarc');svg.innerHTML='';
+  // farol Ponta Alta (referência), à esquerda-alta
+  var fx=250, fy=70;
+  // derrota A->B rumo 000 (para cima), à direita do perigo
+  var rotaX=470;
+  sEl(svg,'line',{x1:rotaX,y1:320,x2:rotaX,y2:24,stroke:'#8fb8d8','stroke-width':2,'stroke-dasharray':'7 5'});
+  sTx(svg,rotaX+8,40,'derrota A→B (Rv 000°)',{fill:'#5a86ab',fs:12,fw:'bold'});
+  sTx(svg,rotaX+8,318,'A',{fill:'#5a86ab',fs:13,fw:'bold'});
+  sTx(svg,rotaX+8,30,'B',{fill:'#5a86ab',fs:13,fw:'bold'});
+  // área perigosa (pedras submersas) projetando-se da costa à esquerda
+  sEl(svg,'path',{d:'M 40 120 Q 210 130 300 210 Q 200 250 60 250 Z',fill:'#e7d3a0',stroke:'#9a7d2a','stroke-width':1.5});
+  sTx(svg,90,200,'pedras submersas',{fill:'#7a5a2a',fs:12,fw:'bold'});
+  sTx(svg,90,216,'(área perigosa)',{fill:'#7a5a2a',fs:11});
+  // farol
+  sEl(svg,'circle',{cx:fx,cy:fy,r:6,fill:'#0D3D36'});
+  sEl(svg,'path',{d:'M '+fx+' '+(fy-16)+' l 7 12 l -14 0 z',fill:'#C8A84B'});
+  sTx(svg,fx+12,fy-6,'Farol Ponta Alta',{fill:'#0D3D36',fs:12,fw:'bold'});
+  // posição do navio na derrota conforme a marcação selecionada
+  // marcação = ângulo do navio para o farol, medido do norte no sentido horário.
+  // farol está a NW do navio → marcações pequenas (~005-020). Menor marcação => navio mais ao norte (proa), entrando no perigo.
+  var map={5:90, 10:150, 15:210, 20:255};
+  var ny=map[marcSel];
+  // navio
+  sEl(svg,'circle',{cx:rotaX,cy:ny,r:6,fill:'#16302B'});
+  sEl(svg,'path',{d:'M '+rotaX+' '+(ny-14)+' l 5 12 l -10 0 z',fill:'#16302B'});
+  sTx(svg,rotaX-12,ny+4,'navio',{fill:'#16302B',fs:11,ta:'end',fw:'bold'});
+  // linha de marcação navio->farol
+  var seguro = marcSel>10;
+  var col = marcSel<10?'#9E3B2E':(marcSel===10?'#9a7d1f':'#2E7D52');
+  sEl(svg,'line',{x1:rotaX,y1:ny,x2:fx,y2:fy,stroke:col,'stroke-width':2.5});
+  sTx(svg,(rotaX+fx)/2-4,(ny+fy)/2-8,marcSel.toString().padStart(3,'0')+'°',{fill:col,fs:14,fw:'bold'});
+  // linha limite 010 (tangente) sempre
+  if(marcSel!==10){
+    var ly=map[10];
+    sEl(svg,'line',{x1:rotaX,y1:ly,x2:fx,y2:fy,stroke:'#9a7d1f','stroke-width':1.2,'stroke-dasharray':'4 4'});
+    sTx(svg,fx+90,fy+70,'limite 010°',{fill:'#9a7d1f',fs:11});
+  }
+  var msg;
+  if(marcSel<10) msg='<b style="color:#9E3B2E">Marcação 005° &lt; 010° → PERIGO:</b> o navio pode estar na área perigosa ou dirigindo-se a ela. Corrigir para afastar-se.';
+  else if(marcSel===10) msg='<b style="color:#9a7d1f">Marcação 010° = limite:</b> tangente ao limite do perigo. Qualquer valor maior é seguro; menor, perigoso.';
+  else msg='<b style="color:#2E7D52">Marcação '+marcSel+'° &gt; 010° → ÁGUAS SEGURAS.</b> A marcação é sempre tomada do navio para o farol (do largo para terra), nunca a recíproca.';
+  document.getElementById('marcRead').innerHTML=msg;
+}
+drawMarc();
+
+/* ===== ÂNGULO HORIZONTAL (Fig. 7.10) ===== */
+function drawAngH(){
+  var svg=document.getElementById('svgAngH');svg.innerHTML='';
+  var t=+document.getElementById('posH').value/100; // 0..1 posição entre A e B
+  // pontos notáveis C (Farol) e D (Torre) na parte de baixo
+  var Cx=300,Cy=300, Dx=560,Dy=300;
+  sEl(svg,'circle',{cx:Cx,cy:Cy,r:6,fill:'#0D3D36'});sTx(svg,Cx-6,Cy+22,'Farol C',{fill:'#0D3D36',fs:12,fw:'bold',ta:'middle'});
+  sEl(svg,'circle',{cx:Dx,cy:Dy,r:6,fill:'#0D3D36'});sTx(svg,Dx+6,Dy+22,'Torre D',{fill:'#0D3D36',fs:12,fw:'bold',ta:'middle'});
+  // perigos A (esq) e B (dir)
+  sEl(svg,'circle',{cx:360,cy:150,r:16,fill:'#e7d3a0',stroke:'#9a7d2a'});sTx(svg,360,155,'A',{fill:'#7a5a2a',fs:13,fw:'bold',ta:'middle'});
+  sEl(svg,'circle',{cx:520,cy:120,r:16,fill:'#e7d3a0',stroke:'#9a7d2a'});sTx(svg,520,125,'B',{fill:'#7a5a2a',fs:13,fw:'bold',ta:'middle'});
+  // corredor seguro (de 1 embaixo-esq para 2 acima-dir)
+  var x1=330,y1=250,x2=545,y2=70;
+  var nx=x1+(x2-x1)*t, ny=y1+(y2-y1)*t;
+  sEl(svg,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:'#cdbf99','stroke-width':1.4,'stroke-dasharray':'6 5'});
+  sTx(svg,x1-6,y1+6,'1',{fill:'#7a6f55',fs:13,fw:'bold',ta:'end'});
+  sTx(svg,x2+8,y2,'2',{fill:'#7a6f55',fs:13,fw:'bold'});
+  // navio
+  sEl(svg,'circle',{cx:nx,cy:ny,r:6,fill:'#16302B'});sTx(svg,nx-10,ny-8,'navio',{fill:'#16302B',fs:11,ta:'end',fw:'bold'});
+  // linhas para C e D
+  sEl(svg,'line',{x1:nx,y1:ny,x2:Cx,y2:Cy,stroke:'#2C5F8A','stroke-width':2});
+  sEl(svg,'line',{x1:nx,y1:ny,x2:Dx,y2:Dy,stroke:'#2C5F8A','stroke-width':2});
+  // ângulo
+  var aC=Math.atan2(Cy-ny,Cx-nx), aD=Math.atan2(Dy-ny,Dx-nx);
+  var ang=Math.abs(aC-aD)*180/Math.PI; if(ang>180)ang=360-ang;
+  sTx(svg,nx+6,ny+18,'ângulo ≈ '+ang.toFixed(0)+'°',{fill:'#2C5F8A',fs:13,fw:'bold'});
+  // leitura: perto de A (t baixo) ângulo menor? Definimos alfa (limite A) e beta (limite B)
+  var corr, cor;
+  if(t<0.35){corr='ângulo pequeno → aproximando de α → risco do perigo A → corrigir para BE';cor='#9E3B2E';}
+  else if(t>0.65){corr='ângulo grande → aproximando de β → risco do perigo B → corrigir para BB';cor='#9E3B2E';}
+  else {corr='ângulo entre α e β → dentro do corredor seguro';cor='#2E7D52';}
+  document.getElementById('angHRead').innerHTML='<span style="color:'+cor+'"><b>'+corr+'.</b></span> O ângulo horizontal cresce quando o navio se aproxima da linha que une C e D.';
+}
+drawAngH();
+window.addEventListener('resize',function(){drawAngH();drawGiro();drawGuin();});
+
+/* ===== CURVA DE GIRO (Fig. 8.1/8.3) ===== */
+function drawGiro(){
+  var cv=document.getElementById('cvGiro'),ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var leme=+document.getElementById('leme').value; // 15..35
+  // raio diminui com o leme
+  var R=150-(leme-15)*3.2; // 150 -> ~86
+  var exX=250, exY=H-40;   // execute (leme carregado), parte de baixo
+  var cx=exX+R, cy=exY;    // centro do círculo à direita (guinada para BE/direita)
+  // rumo inicial (vertical, para cima)
+  ctx.strokeStyle='#cdbf99';ctx.setLineDash([6,5]);ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(exX,exY);ctx.lineTo(exX,20);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('rumo inicial',exX-72,40);
+  // círculo de giro (parte)
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=3;
+  ctx.beginPath();ctx.arc(cx,cy,R,Math.PI,Math.PI*2.02,false);ctx.stroke();
+  // execute
+  ctx.fillStyle='#0D3D36';ctx.beginPath();ctx.arc(exX,exY,5,0,7);ctx.fill();
+  ctx.fillText('«execute» do leme',exX-40,exY+22);
+  // abatimento (kick para bordo contrário = esquerda) no início
+  var ab=8+(leme-15)*0.5;
+  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(exX,exY);ctx.quadraticCurveTo(exX-ab,exY-20,exX-ab*0.4,exY-40);ctx.stroke();
+  ctx.fillStyle='#9E3B2E';ctx.font='bold 11px Trebuchet MS';ctx.fillText('abatimento',exX-ab-78,exY-30);
+  // ponto a 90 (topo do círculo): posição = (cx, cy-R)
+  var p90x=cx, p90y=cy-R;
+  // ponto a 180 (direita): (cx+R, cy)
+  var p180x=cx+R, p180y=cy;
+  // AVANÇO: distância longitudinal (vertical) do execute até 90°
+  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(exX-90,exY);ctx.lineTo(exX-90,p90y);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#2C5F8A';ctx.save();ctx.translate(exX-96,(exY+p90y)/2);ctx.rotate(-Math.PI/2);ctx.fillText('avanço (90°)',-30,0);ctx.restore();
+  // AFASTAMENTO/transfer: distância transversal do execute até 90
+  ctx.strokeStyle='#6B4E8E';ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(exX,p90y-0);ctx.lineTo(p90x,p90y);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#6B4E8E';ctx.fillText('afastamento (90°)',(exX+p90x)/2-40,p90y-8);
+  // DIÂMETRO TÁTICO: transversal a 180
+  ctx.strokeStyle='#9a7d1f';ctx.setLineDash([5,3]);
+  ctx.beginPath();ctx.moveTo(exX,p180y+0);ctx.lineTo(p180x,p180y);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9a7d1f';ctx.font='bold 12px Trebuchet MS';ctx.fillText('diâmetro tático (180°)',(exX+p180x)/2-56,p180y+18);
+  // marcadores 90 e 180
+  ctx.fillStyle='#1A7A6E';ctx.beginPath();ctx.arc(p90x,p90y,4,0,7);ctx.fill();ctx.fillText('90°',p90x+6,p90y-4);
+  ctx.beginPath();ctx.arc(p180x,p180y,4,0,7);ctx.fill();ctx.fillText('180°',p180x+6,p180y+4);
+  var deriva=(leme-15)*0.6+6;
+  document.getElementById('giroRead').innerHTML='Ângulo de leme <b>'+leme+'°</b> → avanço, afastamento e diâmetro tático <b>menores</b> (giro mais fechado); ângulo de deriva <b>maior</b> (~'+deriva.toFixed(0)+'°). O avanço é máximo na guinada de 90°; o abatimento é para o bordo CONTRÁRIO ao da guinada.';
+}
+drawGiro();
+
+/* ===== PONTO DE GUINADA (Fig. 8.11) ===== */
+function drawGuin(){
+  var svg=document.getElementById('svgGuin');svg.innerHTML='';
+  var g=+document.getElementById('gng').value;            // 45..60
+  var rad=g*Math.PI/180;
+  // interpolação linear avanço/afastamento (jardas): 45->270/60 ; 60->310/110
+  var av=270+(g-45)/15*(310-270);
+  var af=60 +(g-45)/15*(110-60);
+  var sc=0.5;                                             // jardas -> px
+  var avpx=av*sc, afpx=af*sc;
+  // geometria consistente: rumo inicial vertical (para cima). Ao guinar, o navio avança 'av'
+  // ao longo do rumo inicial e afasta-se 'af' na perpendicular, caindo no ponto S da nova pernada.
+  var x0=340, Dy=300, botY=346;
+  var avTopY=Dy-avpx;                 // nível após aplicar o avanço
+  var Sx=x0+afpx, Sy=avTopY;          // ponto onde entra na nova pernada
+  var Py=Dy-avpx+afpx/Math.tan(rad);  // vértice (inflexão) sobre o rumo inicial
+  // direção da nova pernada (de P para S), estendida para o topo
+  var dx=Sx-x0, dy=Sy-Py, tTop=2.6;
+  var topX=x0+dx*tTop, topY=Py+dy*tTop;
+
+  // ---- pernada inicial: sólida até D (real), tracejada de D ao vértice (se guinasse tarde) ----
+  sEl(svg,'line',{x1:x0,y1:botY,x2:x0,y2:Dy,stroke:'#3a7bb5','stroke-width':2.5});
+  sEl(svg,'line',{x1:x0,y1:Dy,x2:x0,y2:Py,stroke:'#a9c3da','stroke-width':1.6,'stroke-dasharray':'6 5'});
+  sTx(svg,x0+9,338,'rumo inicial 000°',{fill:'#2C5F8A',fs:12,fw:'bold'});
+  // ---- nova pernada ----
+  sEl(svg,'line',{x1:x0,y1:Py,x2:topX,y2:topY,stroke:'#3a7bb5','stroke-width':2.5});
+  sTx(svg,topX+8,topY+16,'novo rumo 0'+g+'0°',{fill:'#2C5F8A',fs:12,fw:'bold'});
+  // ---- vértice (inflexão prevista) com chamada à esquerda ----
+  sEl(svg,'circle',{cx:x0,cy:Py,r:4.5,fill:'#2C5F8A'});
+  sEl(svg,'line',{x1:x0,y1:Py,x2:x0-40,y2:Py-16,stroke:'#9aa9b8','stroke-width':1});
+  sTx(svg,x0-44,Py-18,'inflexão prevista',{fill:'#5a6f80',fs:11.5,ta:'end'});
+
+  // ---- trajetória real do giro: de D até S ----
+  var ctrlX=(x0+Sx)/2+34, ctrlY=(Dy+Sy)/2+8;
+  sEl(svg,'path',{d:'M '+x0+' '+Dy+' Q '+ctrlX+' '+ctrlY+' '+Sx+' '+Sy,fill:'none',stroke:'#1A7A6E','stroke-width':3.5});
+
+  // ---- cota do AVANÇO (dimensão à esquerda, fora da figura) ----
+  var avX=292;
+  sEl(svg,'line',{x1:avX,y1:Dy,x2:avX,y2:avTopY,stroke:'#2C5F8A','stroke-width':1.5});
+  sEl(svg,'line',{x1:avX-5,y1:Dy,x2:avX+5,y2:Dy,stroke:'#2C5F8A','stroke-width':1.5});
+  sEl(svg,'line',{x1:avX-5,y1:avTopY,x2:avX+5,y2:avTopY,stroke:'#2C5F8A','stroke-width':1.5});
+  sTx(svg,avX-9,(Dy+avTopY)/2-4,'avanço',{fill:'#2C5F8A',fs:12,fw:'bold',ta:'end'});
+  sTx(svg,avX-9,(Dy+avTopY)/2+12,av.toFixed(0)+' jd',{fill:'#2C5F8A',fs:11.5,ta:'end'});
+
+  // ---- cota do AFASTAMENTO (dimensão horizontal no topo do avanço) ----
+  sEl(svg,'line',{x1:x0,y1:avTopY,x2:Sx,y2:avTopY,stroke:'#6B4E8E','stroke-width':1.5,'stroke-dasharray':'5 3'});
+  sEl(svg,'line',{x1:x0,y1:avTopY-5,x2:x0,y2:avTopY+5,stroke:'#6B4E8E','stroke-width':1.5});
+  sEl(svg,'line',{x1:Sx,y1:avTopY-5,x2:Sx,y2:avTopY+5,stroke:'#6B4E8E','stroke-width':1.5});
+  sTx(svg,(x0+Sx)/2,avTopY-9,'afast. '+af.toFixed(0)+' jd',{fill:'#6B4E8E',fs:11.5,fw:'bold',ta:'middle'});
+
+  // ---- ponto S (entra na nova pernada) ----
+  sEl(svg,'circle',{cx:Sx,cy:Sy,r:5,fill:'#1A7A6E'});
+  sTx(svg,Sx+9,Sy+2,'entra na nova pernada',{fill:'#1A7A6E',fs:11});
+
+  // ---- ponto de guinada D ----
+  sEl(svg,'circle',{cx:x0,cy:Dy,r:6.5,fill:'#9E3B2E'});
+  sTx(svg,x0-12,Dy+20,'ponto de guinada D',{fill:'#9E3B2E',fs:12.5,fw:'bold',ta:'end'});
+  sTx(svg,x0-12,Dy+35,'(carregar o leme aqui)',{fill:'#9E3B2E',fs:10.5,ta:'end'});
+
+  // ---- Torre de referência, no través, + marcação de guinada ----
+  var Tx=610, Ty=Dy;
+  sEl(svg,'line',{x1:x0,y1:Dy,x2:Tx,y2:Ty,stroke:'#C8A84B','stroke-width':2,'stroke-dasharray':'7 5'});
+  sTx(svg,(x0+Tx)/2,Dy-9,'marcação de guinada (≈ 090°, través)',{fill:'#9a7d1f',fs:11.5,fw:'bold',ta:'middle'});
+  sEl(svg,'circle',{cx:Tx,cy:Ty,r:6,fill:'#0D3D36'});
+  sEl(svg,'path',{d:'M '+Tx+' '+(Ty-16)+' l 7 12 l -14 0 z',fill:'#C8A84B'});
+  sTx(svg,Tx+12,Ty+2,'Torre (marca de través)',{fill:'#0D3D36',fs:12,fw:'bold'});
+
+  document.getElementById('guinRead').innerHTML='Guinada <b>'+g+'°</b> → avanço <b>'+av.toFixed(0)+' jd</b>, afastamento <b>'+af.toFixed(0)+' jd</b> (interpolados na Tabela de Dados Táticos, 12 nós / 15° de leme). Carrega-se o leme no <b>ponto D</b>, <b>antes</b> da inflexão prevista; a curva real (verde) faz o navio cair exatamente sobre a nova pernada em S. O gatilho é a <b>marcação de guinada</b> à Torre. (Para 50°: 283 jd / 77 jd.)';
+}
+drawGuin();
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Iluminar a carta",b:"Traçar os limites das áreas perigosas (variam por navio). 2 critérios: profundidades e distância ao perigo mais próximo."},
+  {f:"Critério das profundidades",b:"Isóbata de perigo = calado + margem, ou 15% do calado (o que for maior). Ex.: calado 14 + 2 = 16 m."},
+  {f:"5 LDP de segurança",b:"Alinhamento (a mais precisa) · marcação de perigo · distância de perigo · ângulo vertical · ângulo horizontal."},
+  {f:"Marcação de segurança — sentido",b:"SEMPRE do navio para o ponto (do largo para terra), nunca a recíproca. Tangente ao limite do perigo."},
+  {f:"Marcação por um bordo (Fig. 7.4)",b:"Farol Ponta Alta, M=010°. Marcação >010° = seguro; <010° = perigo."},
+  {f:"Marcação pelos dois bordos",b:"Duas marcações ao mesmo ponto (M₁=095°, M₂=078°). Manter entre elas; aproximou de M₁→BE, de M₂→BB."},
+  {f:"Ângulo vertical de segurança",b:"d = h·cotg α (sextante). Ângulo maior = mais perto. Aumenta→BB; diminui→BE."},
+  {f:"Ângulo horizontal de segurança",b:"Entre 2 pontos notáveis. Diminui (→α)→BE (perigo A); aumenta (→β)→BB (perigo B)."},
+  {f:"Luz de setor",b:"Branco no canal, verde a BB / encarnado a BE. 1 estrutura (alinhamento=2); menos precisa, mas indica limites navegáveis."},
+  {f:"Sondagens de segurança",b:"Comparar carta × ecobatímetro; alarme de baixa profundidade. Recurso na baixa visibilidade."},
+  {f:"Avanço",b:"Distância no rumo inicial até guinar 90°. É MÁXIMO na guinada de 90°."},
+  {f:"Abatimento",b:"Caimento para o bordo CONTRÁRIO ao da guinada, no início da evolução."},
+  {f:"Diâmetro tático × final",b:"DT: transversal a 180° (= afast. máx). Diâmetro final: giro de 360°, SEMPRE menor que o tático."},
+  {f:"Leme × elementos",b:"↑ângulo de leme → avanço, DT, afastamento e tempo DIMINUEM; ângulo de deriva AUMENTA."},
+  {f:"Velocidade × elementos",b:"Tempo diminui com a velocidade. Avanço/DT/afast. variam em parábola (mín. na velocidade ótima de evolução)."},
+  {f:"D_T insensível à velocidade",b:"Capesize DOCEBAY: DT=3Lpp; em HALF e SLOW segue 3Lpp e 3Lpp. Índices independem da velocidade."},
+  {f:"Roda a roda",b:"Dois navios não evitam a colisão a menos de 2–3× a soma dos comprimentos."},
+  {f:"Ponto de guinada",b:"Usa avanço e afastamento (interpolação). 3 passos: afastamento→B, avanço→C, perpendicular→D."},
+  {f:"Referência de guinada",b:"Próxima do través = máxima sensibilidade. Paralela ao novo rumo = termina sobre a pernada, mas menos sensível."},
+  {f:"Fundeio — área segura",b:"Linha de perigo = calado + 6 pés (BM). Arcos de raio = comprimento + filame. Filame 5–7× a profundidade."},
+  {f:"CGN e CGP",b:"CGN (popa) = comprimento + filame. CGP (passadiço) = escovém-passadiço + filame. Fora do CGP = garrando."},
+  {f:"Escovém–passadiço",b:"Larga-se o ferro quando o escovém (não o passadiço) está sobre o ponto. Zero dos círculos de distância recua essa distância."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"[PSCPP 2012] Para iluminar uma carta pelo critério das profundidades, toma-se como base uma profundidade igual:",
+   o:["Ao calado + o valor da MHWN da área","Ao calado + o nível de redução (NR) da carta","Ao calado + 2 m ou 15% do calado, o que for maior","A uma vez e meia o calado"],a:2,
+   e:"Gabarito real (c). A profundidade da linha de perigo = calado + margem de segurança, adotando-se 15% do calado quando maior. Os demais trocam a base por MHWN, NR ou 1,5× calado."},
+  {q:"A marcação de segurança (ou marcação de perigo) é sempre determinada:",
+   o:["Do ponto de referência para o navio","Do navio para o ponto de referência (do largo para terra)","Pela recíproca da marcação do farol","Sempre igual a 090°"],a:1,
+   e:"Do navio para o ponto (do largo para terra), NUNCA a recíproca. Traça-se tangente ao limite da área perigosa."},
+  {q:"[PSCPP 2011] Assinale a definição INCORRETA sobre dados táticos e curva de giro:",
+   o:["Abatimento é o caimento para o bordo DA guinada, no início da evolução","As características de manobra são determinadas nas provas de mar","Afastamento é a distância transversal ao rumo inicial até a proa atingir o novo rumo","O diâmetro final é sempre menor que o diâmetro tático"],a:0,
+   e:"Gabarito real (a): o abatimento é para o bordo CONTRÁRIO ao da guinada (a popa é empurrada para fora). As demais estão corretas."},
+  {q:"Na Figura 7.4, a marcação de segurança ao farol vale 010°. O navio marca o farol em 006°. Isto indica:",
+   o:["Águas seguras","Que pode estar na área perigosa ou dirigindo-se a ela","Que já ultrapassou o perigo","Erro de agulha"],a:1,
+   e:"Marcação menor que a de segurança (006° < 010°) indica que o navio pode estar no perigo ou indo para ele. Maior que 010° seria seguro."},
+  {q:"No ângulo vertical de segurança, a distância à base do objeto é dada por:",
+   o:["d = h · tg α","d = h · cotg α","d = h / sen α","d = h · sen α"],a:1,
+   e:"d = h·cotg α (equivalente a tg α = h/d), com h a altitude do objeto e α o ângulo vertical medido a sextante. Ângulo maior = mais perto."},
+  {q:"Com o aumento do ângulo de leme, o avanço, o diâmetro tático e o afastamento:",
+   o:["Aumentam","Diminuem","Não se alteram","Aumentam só o diâmetro tático"],a:1,
+   e:"Diminuem (giro mais fechado). Já o ângulo de deriva aumenta com o ângulo de leme."},
+  {q:"[PSCPP] O capesize DOCEBAY tem diâmetro tático de 3 Lpp. Em HALF-AHEAD e SLOW-AHEAD, os diâmetros táticos serão, respectivamente:",
+   o:["1,5 Lpp e 1,5 Lpp","1,5 Lpp e 3 Lpp","3 Lpp e 3 Lpp","6 Lpp e 6 Lpp"],a:2,
+   e:"Gabarito (c): 3 Lpp e 3 Lpp. O diâmetro tático adimensional é praticamente insensível à velocidade para o mesmo ângulo de leme (os índices de estabilidade independem da velocidade)."},
+  {q:"Na determinação do ponto de guinada, quais dados táticos são utilizados?",
+   o:["Diâmetro final e ângulo de deriva","Avanço e afastamento","Diâmetro tático e abatimento","Somente a velocidade"],a:1,
+   e:"Avanço e afastamento (por interpolação linear na tabela). Constrói-se: afastamento→B, avanço→C, perpendicular→ponto de guinada D."},
+  {q:"Selecionar como referência de guinada um objeto próximo do través no ponto de guinada tem como principal vantagem:",
+   o:["Marcação menos sensível","Máxima sensibilidade da marcação (razão de variação máxima)","Independer da posição do navio","Dispensar a carta"],a:1,
+   e:"Objeto próximo do través → razão de variação da marcação é máxima → maior chance de iniciar a guinada no instante certo. A desvantagem: se o navio estava fora da derrota, continua fora."},
+  {q:"Após um fundeio de precisão, se uma posição de controle cai fora do Círculo de Giro do Passadiço (CGP), isto indica que o navio:",
+   o:["Está bem fundeado","Está garrando","Está no estofo da maré","Reduziu o filame"],a:1,
+   e:"Fora do CGP = o navio está garrando (arrastando o ferro). O CGP tem raio = escovém-passadiço + filame; o CGN (popa) = comprimento + filame."},
+  {q:"[PSCPP 2012] Sobre as quatro medidas da curva de giro (avanço, transferência, diâmetro tático e diâmetro de giro constante), é correto afirmar:",
+   o:["Transferência é medida no eixo longitudinal (x) até 90°","Avanço é medido no eixo transversal (y) até 180°","O diâmetro de giro constante é alcançado após o equilíbrio final de forças e é menor que o diâmetro tático","Nenhuma das anteriores é verdadeira"],a:2,
+   e:"Gabarito (d) na prova. O diâmetro de giro constante (estacionário) surge quando as forças se equilibram (regime permanente) e é sempre MENOR que o diâmetro tático — coerente com 'diâmetro final < diâmetro tático'. Os distratores trocam os eixos: avanço é longitudinal (até 90°) e transferência é transversal (até 90°)."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

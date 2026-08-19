@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Cálculo de Marés — Miguens Cap. 10 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:330px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco F — Marés e Correntes</p>
+    <h1>Cálculo de <em>Marés</em> — a altura em um dado instante</h1>
+    <p class="sub">Do fenômeno aos números que a banca cobra: conceitos e elementos, planos de referência (o NR = MLWS), a Tábua das Marés e o método oficial das <strong>Tabelas I e II</strong> — a interpolação da curva senoidal — mais a regra dos doze avos como atalho mental. Com calculadora interativa e o problema real de 2,0 pontos de 2012 resolvido.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 10 (Marés e Correntes de Maré), item 10.1. A banca cita a <b>1ª edição (1996)</b>. Questões reais transcritas de PSCPP 2008, 2011 e 2012 (a de 2,0 pontos).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#conceitos">Elementos ▶</a>
+    <a href="#sizigia">Sizígia · tipos</a>
+    <a href="#planos">Planos de referência</a>
+    <a href="#tabua">Tábua das Marés</a>
+    <a href="#tabelas">Tabelas I e II ▶</a>
+    <a href="#dozeavos">Doze avos ▶</a>
+    <a href="#banca">Já cobrado ▶</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Núcleo do <strong>Bloco F</strong>. A altura da maré fecha o critério das profundidades do <a href="miguens_cap7_8_ldp_seguranca.html">Caderno de LDP de Segurança (Cap. 7 e 8)</a> — profundidade real = sondagem + altura da maré. As <strong>correntes de maré</strong> (10.2) e as <strong>correntes oceânicas</strong> (10.3) ficam no caderno seguinte.
+</div>
+
+<!-- ===== ELEMENTOS ===== -->
+<section class="bloco" id="conceitos">
+  <h2 class="sec"><span class="n">10.1.5</span> Os elementos da maré</h2>
+  <p class="lede">A maré é uma função periódica do tempo: altura (h) no eixo vertical, instante (t) no horizontal. Domine primeiro o vocabulário — a banca cobra definição pura.</p>
+
+  <div class="ichart">
+    <h4>A curva de maré — enchente, vazante, estofos</h4>
+    <p class="hint">Deslize o tempo ao longo de um dia (dados reais da prova de 2012). Veja a maré <b>encher</b> (subir) até a PM, <b>vazar</b> (descer) até a BM, e os <b>estofos</b> nos extremos. A linha tracejada é o Nível Médio.</p>
+    <canvas id="cvCurva" width="860" height="330"></canvas>
+    <div class="ictrl"><label for="tempo">Hora →</label><input type="range" id="tempo" min="218" max="954" value="583" oninput="drawCurva()"></div>
+    <div class="iread" id="curvaRead" style="margin-top:6px"></div>
+  </div>
+
+  <table>
+    <tr><th>Elemento</th><th>Definição (Miguens 10.1.5)</th></tr>
+    <tr><td><strong>Preamar (PM)</strong></td><td>Maior altura que as águas alcançam numa oscilação.</td></tr>
+    <tr><td><strong>Baixa-mar (BM)</strong></td><td>Menor altura que as águas alcançam numa oscilação.</td></tr>
+    <tr><td><strong>Amplitude</strong></td><td>Distância vertical entre uma PM e uma BM <span class="hl">consecutivas</span> = h<sub>PM</sub> − h<sub>BM</sub>.</td></tr>
+    <tr><td><strong>Nível Médio (NM)</strong></td><td>Valor médio em torno do qual a maré oscila; numa oscilação, (h<sub>PM</sub> + h<sub>BM</sub>)/2.</td></tr>
+    <tr><td><strong>Enchente</strong></td><td>Intervalo em que o nível <span class="hl">sobe</span>.</td></tr>
+    <tr><td><strong>Vazante</strong></td><td>Intervalo em que o nível <span class="hl">baixa</span>.</td></tr>
+    <tr><td><strong>Estofo</strong></td><td>Período em que o nível fica praticamente estacionário — de enchente (junto à PM) ou de vazante (junto à BM).</td></tr>
+    <tr><td><strong>Altura da maré</strong></td><td>Distância vertical entre o nível do mar num instante e o <strong>NR</strong>.</td></tr>
+  </table>
+</section>
+
+<!-- ===== SIZÍGIA / TIPOS ===== -->
+<section class="bloco" id="sizigia">
+  <h2 class="sec"><span class="n">10.1.3/4</span> Sizígia × quadratura · Idade da Lua · tipos</h2>
+  <p class="lede">A geometria Sol–Terra–Lua governa a amplitude; a geografia governa o padrão diário.</p>
+
+  <table>
+    <tr><th></th><th>Sizígia (águas vivas)</th><th>Quadratura (águas mortas)</th></tr>
+    <tr><td><strong>Fase da Lua</strong></td><td>Nova e Cheia (Sol, Terra e Lua alinhados)</td><td>Quarto Crescente e Quarto Minguante</td></tr>
+    <tr><td><strong>Forças Sol+Lua</strong></td><td><span class="hl">Somam-se</span> → maré resultante maior</td><td>Opõem-se (defasagem de 90°) → maré menor</td></tr>
+    <tr><td><strong>Amplitude</strong></td><td><span class="hl">Máxima</span> (PM altas, BM baixas)</td><td>Mínima (PM baixas, BM altas)</td></tr>
+    <tr><td><strong>Idade da Lua</strong></td><td>0 (Nova) · 14 (Cheia) · 28–29</td><td>7 (Cresc.) · 21 (Ming.)</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Idade da Lua e os planos <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>A altura de uma PM fica entre a <strong>MHWS</strong> e a <strong>MHWN</strong>: ≈ MHWS quando a Idade da Lua é <span class="hl">0 ou 14</span> (sizígia); ≈ MHWN quando é <span class="hl">7 ou 21</span> (quadratura). Cuidado: <strong>Lua Cheia → Idade 14</strong> (não 7); a oposição das forças ocorre <strong>duas vezes</strong> por lunação (nas duas quadraturas), não uma.</p>
+  </div>
+
+  <div class="box">
+    <h4>Tipos de maré (10.1.4)</h4>
+    <p><strong>Semidiurna:</strong> 2 PM e 2 BM por dia lunar (24h50m), alturas sucessivas pouco diferentes — no Brasil, <span class="hl">de Vitória (ES) para o Norte</span>. <strong>Diurna:</strong> 1 PM e 1 BM por dia lunar. <strong>Mista:</strong> componentes diurna e semidiurna importantes, com grandes desigualdades. A costa <strong>Sul do Brasil</strong> tem semidiurna com <span class="hl">desigualdades diurnas</span>. O dia lunar (24h50m) explica por que a maré atrasa ~50 min/dia.</p>
+  </div>
+</section>
+
+<!-- ===== PLANOS DE REFERÊNCIA ===== -->
+<section class="bloco" id="planos">
+  <h2 class="sec"><span class="n">10.1.7</span> Planos de referência</h2>
+  <p class="lede">A pergunta-chave: qual é o zero das cartas? A DHN adota o <strong>MLWS</strong> como Nível de Redução — o distrator favorito troca por MLWN, MHWS ou NM.</p>
+
+  <table>
+    <tr><th>Sigla</th><th>Significado</th></tr>
+    <tr><td class="sym">NR</td><td><strong>Nível de Redução</strong> — zero das alturas e sondagens da carta. Nas cartas brasileiras corresponde ao <span class="hl">MLWS</span> (nível abaixo do qual o mar raramente desce).</td></tr>
+    <tr><td class="sym">NM / MSL</td><td>Nível Médio do mar (média de todos os estágios, &gt;18,6 anos). Referência para <strong>altitudes</strong>.</td></tr>
+    <tr><td class="sym">MHWS</td><td>Média das PM de sizígia.</td></tr>
+    <tr><td class="sym">MHWN</td><td>Média das PM de quadratura.</td></tr>
+    <tr><td class="sym">MLWN</td><td>Média das BM de quadratura.</td></tr>
+    <tr><td class="sym">MLWS</td><td>Média das BM de sizígia — <span class="hl">adotado pela DHN como NR</span>.</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>As três relações verticais <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">Profundidade real = Sondagem + Altura da maré<span class="lbl">a sondagem (profundidade cartografada) é medida do NR ao fundo; a altura da maré também parte do NR</span></div>
+    <div class="eq">Profundidade (C) = Sondagem (D) + Altura da maré (E) = Calado (A) + Folga sob a quilha (B)<span class="lbl">as duas formas de medir a mesma profundidade — a base do critério de segurança</span></div>
+    <p class="vars">Como o NR = MLWS, em geral há <strong>mais</strong> água que a carta indica; só nas <strong>BM de sizígia</strong> podem-se encontrar profundidades menores que as cartografadas. Uma altura de maré <strong>negativa</strong> (abaixo do NR) é possível e vem indicada na tábua.</p>
+  </div>
+
+  <div class="box">
+    <h4>Estabelecimento do Porto (HWF&amp;C)</h4>
+    <p>O <strong>Estabelecimento Vulgar do Porto</strong> (<em>High Water Full and Change</em>) é a média dos intervalos entre a passagem da Lua Cheia/Nova pelo meridiano superior e a PM em dias de sizígia. É característica do local (topografia, latitude, correntes) e base do <strong>Método Expedito de Previsão</strong>, usado com o quadro "Informações sobre a Maré" da carta onde não há tábua tabulada.</p>
+  </div>
+</section>
+
+<!-- ===== TÁBUA DAS MARÉS ===== -->
+<section class="bloco" id="tabua">
+  <h2 class="sec"><span class="n">10.1.9</span> A Tábua das Marés</h2>
+  <p class="lede">Publicação anual da DHN (DG6) com a previsão para 54 estações brasileiras (do Norte para o Sul) + Estação Antártica. Contém as Tabelas I e II (permanentes), portos secundários e fases da Lua.</p>
+
+  <div class="box">
+    <h4>Como ler a previsão diária</h4>
+    <p>Para cada dia, horas (4 algarismos: HHMM, fuso local) e alturas (metros e decímetros, cota <strong>acima do NR</strong>) das PM e BM. Exemplo (Salinópolis, 13/MAR/2021, Lua Nova → sizígia): BM 0156 0,3 m · PM 0753 5,0 m · BM 1408 0,4 m · PM 2000 5,0 m. Amplitudes ~4,6–4,7 m. Em 21/MAR (quarto crescente → quadratura) as amplitudes caem para ~2,0–2,3 m.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Portos secundários <span class="tag t-decorar">DECORAR</span></h4>
+    <p>A tábua traz correções (aditivas/subtrativas) de <strong>hora</strong> e <strong>altura</strong> a aplicar à PM e à BM de um <strong>porto de referência</strong> para obter dois portos secundários (Camocim/CE e Barra do Rio São Francisco), tendo <strong>Recife</strong> como referência. Some/subtraia hora e altura separadamente.</p>
+  </div>
+</section>
+
+<!-- ===== TABELAS I e II ===== -->
+<section class="bloco" id="tabelas">
+  <h2 class="sec"><span class="n">10.1.9b</span> O método oficial — Tabelas I e II</h2>
+  <p class="lede">Para a altura num instante <em>entre</em> a PM e a BM, usam-se as Tabelas I e II da Tábua. Elas interpolam uma curva <strong>senoidal</strong> — é o método que a banca cobra.</p>
+
+  <div class="box formula">
+    <h4>O fluxo em duas tabelas <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>Tabela I</strong> — entra com a <em>duração</em> da maré (enchente ou vazante) e o <em>intervalo de tempo</em> entre o instante e a PM/BM mais próxima → sai a <strong>fração da amplitude</strong>.<br>
+    <strong>Tabela II</strong> — entra com essa fração e a <em>amplitude</em> do ciclo → sai a <strong>correção</strong>, que se aplica à altura da PM (subtraindo) ou da BM (somando).</p>
+    <div class="eq">altura = h<sub>PM</sub> − correção&nbsp;&nbsp;(ou)&nbsp;&nbsp;altura = h<sub>BM</sub> + correção<span class="lbl">a correção é a distância vertical entre o instante e a PM/BM de referência</span></div>
+  </div>
+
+  <div class="box trap">
+    <h4>Os dois cuidados <span class="tag t-conflito">CONFLITO</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>As Tabelas I e II só valem para curvas <span class="hl">sinusoidais</span>. Por isso: <strong>(a)</strong> onde a curva não é senoidal, o resultado é aproximado — dê margem de segurança de <span class="hl">10% da amplitude</span>; <strong>(b)</strong> na costa do Brasil, use-as só de <strong>Vitória (ES) para o Norte</strong> (maré predominantemente semidiurna). Ao Sul (desigualdades diurnas) não dão bons resultados. <em>[Exatamente o enunciado de 2008-Q63.]</em></p>
+  </div>
+
+  <div class="ichart">
+    <h4>Calculadora — altura num instante (curva senoidal das Tabelas I e II)</h4>
+    <p class="hint">Modelo senoidal que embasa as Tabelas I e II (exemplo Salinópolis 13/03/2021: PM 0753 = 5,0 m; BM 1408 = 0,4 m; vazante). Deslize a hora e leia a altura e a "fração da amplitude" (saída da Tabela I).</p>
+    <canvas id="cvCalc" width="860" height="300"></canvas>
+    <div class="ictrl"><label for="tcalc">Hora →</label><input type="range" id="tcalc" min="473" max="848" value="600" oninput="drawCalc()"></div>
+    <div class="iread" id="calcRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box">
+    <h4>Exemplo resolvido do livro (Salinópolis, 1000)</h4>
+    <p>Vazante; duração ≈ 06h20; intervalo PM→1000 ≈ 02h10 → <strong>Tabela I = 26</strong> (fração). Amplitude 4,6 ≈ 5 m → <strong>Tabela II = 1,3 m</strong> (correção). Altura = 5,0 − 1,3 = <span class="hl">3,7 m</span>. Com sondagem 8,5 m, a profundidade seria 8,5 + 3,7 = 12,2 m. <em>(O modelo senoidal exato dá ~3,8 m; a tábua arredonda por passos.)</em></p>
+  </div>
+</section>
+
+<!-- ===== DOZE AVOS ===== -->
+<section class="bloco" id="dozeavos">
+  <h2 class="sec"><span class="n">+</span> Atalho mental — a regra dos doze avos</h2>
+  <p class="lede">Método clássico de marinharia para estimar a altura sem tábua. <strong>Não é de Miguens</strong> (que usa as Tabelas I e II), mas é rápido e cai como conceito — a maré varia por avos da amplitude a cada hora, ao longo de ~6 h.</p>
+
+  <div class="ichart">
+    <h4>Os doze avos ao longo de 6 horas</h4>
+    <p class="hint">Da BM à PM (ou vice-versa) em ~6 h, a amplitude se distribui em <b>1 · 2 · 3 · 3 · 2 · 1</b> avos por hora. Deslize as horas e veja quanto da amplitude já subiu.</p>
+    <svg id="svgDoze" viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Regra dos doze avos"></svg>
+    <div class="ictrl"><label for="hdoze">Horas após a BM →</label><input type="range" id="hdoze" min="0" max="6" value="3" step="1" oninput="drawDoze()"></div>
+    <div class="iread" id="dozeRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>Regra rápida <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Frações <strong>acumuladas</strong> da amplitude ao fim de cada hora: <span class="hl">1/12 · 3/12 · 6/12 · 9/12 · 11/12 · 12/12</span>. A meia-maré (3ª hora) já é <strong>metade</strong> da amplitude — coincide com o Nível Médio e é onde a maré varia mais rápido. Coincide (aproximadamente) com a curva senoidal das Tabelas I e II.</p>
+  </div>
+</section>
+
+<!-- ===== MAPA DA BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
+  <p class="lede">Varredura das quatro provas anexadas para os temas de marés. Gabaritos de 2008 saem do OCR; 2011/2012 sem marcação são deduzidos pelo conteúdo e sinalizados.</p>
+
+  <table>
+    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
+    <tr><td>2008</td><td><strong>Q26</strong> (Lobo &amp; Soares)</td><td>Tábuas/Cartas de Correntes — afirmativas (fonte não anexada)</td><td class="center"><b>(e)</b> ✔ OCR</td></tr>
+    <tr><td>2008</td><td><strong>Q63</strong> (Miguens/DHN)</td><td>Tabelas I e II: curva <em>sinusoidal</em> · semidiurna · Vitória para o Norte</td><td class="center"><b>(c)</b> ✔ OCR</td></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q39</strong></td><td>Porto fictício ZULU — tipo, sizígia/quadratura, enchente, estofo</td><td class="center"><b>(c)</b> deduzido</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q20</strong></td><td>V/F do fenômeno — MLWN×MLWS, Idade da Lua, quadratura</td><td class="center"><b>(b)</b> deduzido</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q21</strong> (2,0 pts)</td><td>Cálculo da altura (Tabelas I e II) — janela de manobra</td><td class="center"><b>(a)</b> ⚠ verificar</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>2012-Q21 resolvido — o cálculo de 2,0 pontos <span class="tag t-banca">BANCA</span> <span class="tag t-calc">CALCULO</span></h4>
+    <p>Bacia com profundidade cartografada <strong>6 m</strong>; graneleiro calado <strong>8 m</strong>; folga mínima <strong>1,6 m</strong>; faina 30 min; agente a partir de <strong>07:15</strong>. Maré: BM 0338 = 1,0 · PM 0943 = 5,7 · BM 1554 = 1,1.</p>
+    <p style="margin-top:6px"><strong>1)</strong> Profundidade necessária = calado 8 + folga 1,6 = <strong>9,6 m</strong>. <strong>2)</strong> Altura de maré necessária = 9,6 − 6 = <span class="hl">3,6 m</span> acima do NR. <strong>3)</strong> Pela curva senoidal (Tabelas I e II), a altura ≥ 3,6 m ocorre das <strong>~06:53</strong> (enchente) às <strong>~12:38</strong> (vazante). <strong>4)</strong> Com o agente só a partir de 07:15 e 30 min de faina até sair da bacia, o início vai de <strong>07:15</strong> até 12:38 − 0:30 = <strong>~12:08</strong> → gabarito <span class="hl">(a) 07h15 – 12h00</span>.</p>
+  </div>
+
+  <div class="box">
+    <h4>2011-Q39 resolvido — porto ZULU <span class="tag t-banca">BANCA</span></h4>
+    <p>Dia 14/SET: amplitudes ~1,8 m (PM 2,6 / BM 0,8). Dia 21/SET (<strong>Lua Nova</strong>): amplitudes ~4,5 m (PM 4,7 / BM 0,1). Pede a afirmação <strong>sem respaldo</strong>: <span class="hl">(c) "no dia 21 ocorreram marés de águas mortas"</span> — falso, pois Lua Nova é <strong>sizígia (águas vivas)</strong>, confirmada pela amplitude grande. As demais conferem: semidiurnas (a); dia 14 de quadratura (b); às 10:00 do dia 14 enchente entre BM 06:37 e PM 12:48 (d); estofo de vazante junto à BM 13:49 (e).</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Distratores recorrentes <span class="tag t-conflito">DECORAR</span></h4>
+    <p>• <strong>NR = MLWS</strong>, não MLWN (2012-Q20-IV). • <strong>Lua Cheia = Idade 14</strong>, não 7 (2012-Q20-II). • As forças Sol/Lua se opõem <strong>duas vezes</strong> por lunação (2012-Q20-V). • Tabelas I e II: <strong>sinusoidal</strong>, só de <strong>Vitória para o Norte</strong> (2008-Q63). • <strong>Sizígia = águas vivas</strong> (amplitude máxima); quadratura = águas mortas (2011-Q39-c).</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Conceitos, planos de referência e o método de cálculo.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Onze questões — várias reais de PSCPP 2008/2011/2012 — com os distratores do capítulo.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Cálculo de Marés (Miguens Cap. 10, item 10.1)</summary>
+  <ul>
+    <li><b>Elementos:</b> PM · BM · amplitude = h_PM − h_BM (consecutivas) · NM = (h_PM+h_BM)/2 · enchente (sobe) · vazante (baixa) · estofo (estacionário) · altura da maré medida do NR.</li>
+    <li><b>Sizígia (águas vivas):</b> Lua Nova/Cheia, forças somam, amplitude MÁXIMA. Idade 0/14/28. <b>Quadratura (águas mortas):</b> quartos, forças opõem, amplitude MÍNIMA. Idade 7/21.</li>
+    <li><b>Idade da Lua:</b> Cheia = 14 (não 7). Oposição das forças 2×/lunação. PM ≈ MHWS (idade 0/14) ou ≈ MHWN (idade 7/21).</li>
+    <li><b>Tipos:</b> semidiurna (2 PM+2 BM, Vitória p/ Norte) · diurna (1+1) · mista/desigualdades diurnas (Sul do Brasil). Dia lunar 24h50m → atraso ~50 min/dia.</li>
+    <li><b>Planos:</b> <b>NR = MLWS</b> (zero das cartas brasileiras) · NM/MSL (altitudes) · MHWS/MHWN/MLWN. Distrator: NR = MLWN (falso).</li>
+    <li><b>Relações:</b> Profundidade real = Sondagem + Altura da maré = Calado + Folga. NR=MLWS → em geral há mais água; nas BM de sizígia pode faltar. Altura negativa é possível.</li>
+    <li><b>Tábua das Marés (DHN/DG6):</b> 54 estações, N→S. HHMM (fuso local) e altura em m/dm acima do NR. Portos secundários: correções de hora e altura sobre Recife.</li>
+    <li><b>Tabelas I e II:</b> Tab. I (duração + intervalo → fração) → Tab. II (fração + amplitude → correção) → altura = h_PM − correção (ou h_BM + correção). Curva SINUSOIDAL; margem de 10% da amplitude; só de <b>Vitória p/ Norte</b>.</li>
+    <li><b>Regra dos doze avos</b> (atalho, não-Miguens): 1·2·3·3·2·1 avos/hora; acumulado 1/12, 3/12, 6/12, 9/12, 11/12, 12/12. Meia-maré na 3ª hora (=NM, variação máxima).</li>
+    <li><b>Estabelecimento do Porto (HWF&amp;C):</b> intervalo médio Lua Cheia/Nova no meridiano → PM em sizígia; base do Método Expedito com o quadro da carta.</li>
+    <li><b>Banca:</b> 2008-Q63 (sinusoidal/Vitória→N, gab c) · 2012-Q20 (MLWS×MLWN, gab b) · 2011-Q39 (ZULU: sizígia≠águas mortas, gab c) · 2012-Q21 (cálculo 2,0 pts, gab a: 07h15–12h00).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Cálculo de Marés (Miguens Vol. I, Cap. 10) · Capital Sereno · Bloco F — Marés e Correntes.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+function hhmm(t){t=Math.round(t);return ('0'+Math.floor(t/60)).slice(-2)+':'+('0'+(t%60)).slice(-2);}
+
+/* ===== CURVA DE MARÉ (dados 2012-Q21: BM 0338 1.0 · PM 0943 5.7 · BM 1554 1.1) ===== */
+var PTS=[{t:218,h:1.0,k:'BM'},{t:583,h:5.7,k:'PM'},{t:954,h:1.1,k:'BM'}];
+function hAt(t){ // altura por cosseno entre os pontos
+  for(var i=0;i<PTS.length-1;i++){var a=PTS[i],b=PTS[i+1];
+    if(t>=a.t&&t<=b.t){var ph=(t-a.t)/(b.t-a.t);var A=b.h-a.h;return a.h+A*(1-Math.cos(Math.PI*ph))/2;}}
+  return PTS[0].h;
+}
+function drawCurva(){
+  var cv=document.getElementById('cvCurva'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var t=+document.getElementById('tempo').value;
+  var mL=54,mR=20,mT=20,mB=40,x0=mL,x1=W-mR,y0=H-mB,y1=mT;
+  var tmin=218,tmax=954,hmin=0,hmax=6;
+  function X(tt){return x0+(tt-tmin)/(tmax-tmin)*(x1-x0);}
+  function Y(hh){return y0-(hh-hmin)/(hmax-hmin)*(y0-y1);}
+  // eixos
+  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0,y1);ctx.lineTo(x0,y0);ctx.lineTo(x1,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='11px Trebuchet MS';
+  for(var h=0;h<=6;h++){var y=Y(h);ctx.strokeStyle='#eee3c6';ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();ctx.fillText(h+'m',6,y+3);}
+  // NM (~3.4)
+  var nm=(5.7+1.0)/2;ctx.strokeStyle='#3a7bb5';ctx.setLineDash([6,4]);ctx.beginPath();ctx.moveTo(x0,Y(nm));ctx.lineTo(x1,Y(nm));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#3a7bb5';ctx.fillText('Nível Médio',x1-78,Y(nm)-5);
+  // curva
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=3;ctx.beginPath();
+  for(var tt=tmin;tt<=tmax;tt+=3){var x=X(tt),y=Y(hAt(tt));if(tt===tmin)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.stroke();
+  // marca PM/BM
+  PTS.forEach(function(p){var x=X(p.t),y=Y(p.h);ctx.fillStyle=p.k==='PM'?'#9E3B2E':'#2C5F8A';ctx.beginPath();ctx.arc(x,y,4,0,7);ctx.fill();
+    ctx.fillText(p.k+' '+hhmm(p.t)+' ('+p.h.toFixed(1)+')',x-30,p.k==='PM'?y-8:y+16);});
+  // fase (enchente/vazante)
+  ctx.fillStyle='#7a6f55';ctx.fillText('enchente',X(400)-20,y0-6);ctx.fillText('vazante',X(770)-20,y0-6);
+  // ponto atual
+  var h=hAt(t),x=X(t),y=Y(h);
+  ctx.strokeStyle='#C8A84B';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y);ctx.lineTo(x0,y);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#0D3D36';ctx.beginPath();ctx.arc(x,y,6,0,7);ctx.fill();
+  var fase = (t<583)?'enchendo':'vazando'; var estofo = (Math.abs(t-218)<25||Math.abs(t-583)<25||Math.abs(t-954)<25)?' (próximo ao ESTOFO)':'';
+  document.getElementById('curvaRead').innerHTML='Às <b>'+hhmm(t)+'</b> a maré está <b>'+fase+'</b>'+estofo+'; altura ≈ <b>'+h.toFixed(2)+' m</b> acima do NR. Amplitude do ciclo ≈ 4,6 m; o Nível Médio (~3,4 m) é cruzado na meia-maré, onde a variação é mais rápida.';
+}
+drawCurva();window.addEventListener('resize',function(){drawCurva();drawCalc();drawDoze();});
+
+/* ===== CALCULADORA (Salinópolis vazante PM 0753=5.0 -> BM 1408=0.4) ===== */
+var cPM={t:473,h:5.0}, cBM={t:848,h:0.4}, cA=cPM.h-cBM.h, cDur=cBM.t-cPM.t;
+function drawCalc(){
+  var cv=document.getElementById('cvCalc'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var t=+document.getElementById('tcalc').value;
+  var mL=54,mR=20,mT=18,mB=38,x0=mL,x1=W-mR,y0=H-mB,y1=mT;
+  function X(tt){return x0+(tt-cPM.t)/(cBM.t-cPM.t)*(x1-x0);}
+  function Y(hh){return y0-(hh-0)/(6-0)*(y0-y1);}
+  function hv(tt){var ph=(tt-cPM.t)/cDur;return cPM.h-cA*(1-Math.cos(Math.PI*ph))/2;}
+  ctx.strokeStyle='#cdbf99';ctx.beginPath();ctx.moveTo(x0,y1);ctx.lineTo(x0,y0);ctx.lineTo(x1,y0);ctx.stroke();
+  ctx.fillStyle='#7a6f55';ctx.font='11px Trebuchet MS';
+  for(var h=0;h<=6;h++){var y=Y(h);ctx.strokeStyle='#eee3c6';ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();ctx.fillText(h+'m',6,y+3);}
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=3;ctx.beginPath();
+  for(var tt=cPM.t;tt<=cBM.t;tt+=2){var x=X(tt),y=Y(hv(tt));if(tt===cPM.t)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.stroke();
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(X(cPM.t),Y(cPM.h),4,0,7);ctx.fill();ctx.fillText('PM 07:53 (5,0)',X(cPM.t)+4,Y(cPM.h)-6);
+  ctx.fillStyle='#2C5F8A';ctx.beginPath();ctx.arc(X(cBM.t),Y(cBM.h),4,0,7);ctx.fill();ctx.fillText('BM 14:08 (0,4)',X(cBM.t)-84,Y(cBM.h)+14);
+  var h=hv(t),x=X(t),y=Y(h);
+  ctx.strokeStyle='#C8A84B';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y);ctx.lineTo(x0,y);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#0D3D36';ctx.beginPath();ctx.arc(x,y,6,0,7);ctx.fill();
+  var ph=(t-cPM.t)/cDur; var frac=(1-Math.cos(Math.PI*ph))/2; var corr=cA*frac;
+  document.getElementById('calcRead').innerHTML='Às <b>'+hhmm(t)+'</b>: intervalo desde a PM = '+hhmm((t-cPM.t))+' de '+hhmm(cDur)+' de vazante → fração da amplitude ≈ <b>'+(frac*100).toFixed(0)+'%</b> → correção ≈ <b>'+corr.toFixed(2)+' m</b> → altura = 5,0 − '+corr.toFixed(2)+' = <b>'+h.toFixed(2)+' m</b>. (Às 10:00 → ~3,8 m; a tábua, com passos arredondados, dá 3,7 m.)';
+}
+drawCalc();
+
+/* ===== REGRA DOS DOZE AVOS ===== */
+var AVOS=[1,2,3,3,2,1], ACUM=[1,3,6,9,11,12];
+function drawDoze(){
+  var svg=document.getElementById('svgDoze');svg.innerHTML='';var W=860,H=300;
+  var mL=50,mB=50,x0=mL,x1=W-20,y0=H-mB,yTop=24;
+  var bw=(x1-x0)/6;
+  // eixo
+  sEl(svg,'line',{x1:x0,y1:y0,x2:x1,y2:y0,stroke:'#cdbf99','stroke-width':1});
+  sTx(svg,x0-8,yTop-6,'avos/hora',{fill:'#7a6f55',fs:11,ta:'end'});
+  var hsel=+document.getElementById('hdoze').value;
+  for(var i=0;i<6;i++){
+    var bh=AVOS[i]/3*(y0-yTop); // escala (máx 3 avos)
+    var bx=x0+i*bw+6, by=y0-bh, w=bw-12;
+    var on = (i<hsel);
+    sEl(svg,'rect',{x:bx,y:by,width:w,height:bh,rx:5,fill:on?'#1A7A6E':'#dfeee9',stroke:'#1A7A6E','stroke-width':1.3});
+    sTx(svg,bx+w/2,by-7,AVOS[i]+'/12',{fill:on?'#0D3D36':'#9aa9a4',fs:13,fw:'bold',ta:'middle'});
+    sTx(svg,bx+w/2,y0+18,(i+1)+'ª h',{fill:'#7a6f55',fs:12,ta:'middle'});
+    sTx(svg,bx+w/2,y0+34,'Σ '+ACUM[i]+'/12',{fill:'#5a6f80',fs:10.5,ta:'middle'});
+  }
+  var acumSel = hsel===0?0:ACUM[hsel-1];
+  document.getElementById('dozeRead').innerHTML='Após <b>'+hsel+' h</b> desde a BM, subiu <b>'+acumSel+'/12</b> da amplitude ('+(acumSel/12*100).toFixed(0)+'%). Sequência por hora: 1·2·3·3·2·1. A meia-maré (3ª hora) = 6/12 = metade da amplitude, onde a variação é máxima.';
+}
+drawDoze();
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Amplitude da maré",b:"Distância vertical entre uma PM e uma BM CONSECUTIVAS = h_PM − h_BM."},
+  {f:"Nível Médio (NM)",b:"Valor em torno do qual a maré oscila; numa oscilação (h_PM+h_BM)/2. Referência de altitudes (MSL)."},
+  {f:"Enchente × vazante",b:"Enchente = nível sobe; vazante = nível baixa. Estofo = estacionário (junto à PM ou BM)."},
+  {f:"Sizígia (águas vivas)",b:"Lua Nova/Cheia; forças Sol+Lua SOMAM; amplitude MÁXIMA. Idade 0/14/28."},
+  {f:"Quadratura (águas mortas)",b:"Quartos crescente/minguante; forças OPÕEM; amplitude MÍNIMA. Idade 7/21."},
+  {f:"Idade da Lua",b:"Cheia = 14 (não 7). Oposição das forças 2×/lunação. PM ≈ MHWS (0/14) ou MHWN (7/21)."},
+  {f:"Tipos de maré",b:"Semidiurna (2+2, Vitória p/ Norte) · diurna (1+1) · mista/desigualdades diurnas (Sul do Brasil)."},
+  {f:"Dia lunar",b:"24h50m → a maré atrasa ~50 min por dia."},
+  {f:"NR (Nível de Redução)",b:"Zero das cartas. No Brasil = MLWS (média das BM de sizígia). NÃO é o MLWN."},
+  {f:"Profundidade real",b:"= Sondagem + Altura da maré = Calado + Folga sob a quilha."},
+  {f:"NR=MLWS: consequência",b:"Em geral há mais água que a carta; só nas BM de sizígia pode faltar. Altura negativa é possível."},
+  {f:"Estabelecimento do Porto",b:"HWF&C: intervalo médio Lua Cheia/Nova no meridiano → PM em sizígia. Base do Método Expedito."},
+  {f:"Tábua das Marés (DG6)",b:"Anual, DHN, 54 estações N→S. HHMM (fuso local) e altura em m/dm acima do NR."},
+  {f:"Portos secundários",b:"Correções de HORA e ALTURA aplicadas à PM/BM de Recife (referência)."},
+  {f:"Tabela I",b:"Entra: duração da maré + intervalo de tempo. Sai: fração da amplitude."},
+  {f:"Tabela II",b:"Entra: fração + amplitude. Sai: correção → altura = h_PM − corr (ou h_BM + corr)."},
+  {f:"Cuidados das Tabelas I/II",b:"Curva SINUSOIDAL. Margem de 10% da amplitude; só de Vitória p/ Norte (semidiurna)."},
+  {f:"Regra dos doze avos",b:"Por hora: 1·2·3·3·2·1. Acumulado: 1/12,3/12,6/12,9/12,11/12,12/12. Meia-maré na 3ª h."},
+  {f:"Exemplo Salinópolis 1000",b:"Vazante; Tab.I=26; amplitude 5m → Tab.II=1,3 → altura 5,0−1,3=3,7 m."},
+  {f:"Porto ZULU (2011)",b:"Lua Nova (dia 21) = sizígia = águas VIVAS. 'Águas mortas no dia 21' é falso."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"A amplitude da maré é definida como:",
+   o:["A altura da PM acima do NR","A distância vertical entre uma PM e uma BM consecutivas","A média entre PM e BM","A altura do Nível Médio"],a:1,
+   e:"Amplitude = h_PM − h_BM (consecutivas). A média entre PM e BM é o Nível Médio; a altura acima do NR é a altura da maré."},
+  {q:"[PSCPP 2012] Qual plano é adotado pela DHN como Nível de Redução (NR) nas cartas náuticas brasileiras?",
+   o:["MHWS","Nível Médio (NM)","MLWN","MLWS"],a:3,
+   e:"NR = MLWS (média das BM de sizígia). O distrator clássico é o MLWN (média das BM de quadratura) — foi a afirmativa falsa da 2012-Q20."},
+  {q:"As marés de sizígia (águas vivas) ocorrem quando:",
+   o:["A Lua está em quarto crescente ou minguante","Sol, Terra e Lua se alinham (Lua Nova ou Cheia) e as forças se somam","A amplitude é mínima","A Idade da Lua é 7"],a:1,
+   e:"Sizígia = Lua Nova/Cheia, forças de Sol e Lua se somam → amplitude MÁXIMA. Idade 0/14/28. Quadratura (quartos, idade 7/21) dá amplitude mínima."},
+  {q:"[PSCPP 2012] Sobre a Idade da Lua e as forças de maré, é FALSO afirmar que:",
+   o:["Na Lua Cheia a Idade da Lua é 7","Marés de sizígia ocorrem quando Sol e Lua se somam","Em quarto crescente ocorrem águas mortas","O NR brasileiro é o MLWS"],a:0,
+   e:"Falso: na Lua Cheia a Idade é 14 (a Idade 7 é o quarto crescente). As demais são verdadeiras. Na 2012-Q20 o gabarito é (b): V F V F F."},
+  {q:"[PSCPP 2011] No porto ZULU, o dia 21/SET é Lua Nova, com amplitudes ~4,5 m. A afirmação SEM respaldo nos dados é:",
+   o:["As marés são semidiurnas","No dia 21 ocorreram marés de águas mortas","No dia 14 as marés foram de quadratura","Às 10:00 do dia 14 a maré era de enchente"],a:1,
+   e:"Lua Nova = sizígia = águas VIVAS (amplitude grande confirma). Dizer 'águas mortas no dia 21' contraria os dados. Gabarito (c)."},
+  {q:"[PSCPP 2008] As Tabelas I e II da Tábua das Marés interpolam uma curva de maré de caráter ___ e devem ser usadas, no Brasil, de ___ para o Norte:",
+   o:["harmônico / Salvador","sinusoidal / Vitória","previsível / Vitória","sinusoidal / Salvador"],a:1,
+   e:"Curva SINUSOIDAL; a maré que mais se aproxima é a semidiurna → válidas de Vitória (ES) para o Norte. Ao Sul (desigualdades diurnas) não dão bons resultados. Gabarito (c) da prova."},
+  {q:"A profundidade real da água num dado instante é obtida por:",
+   o:["Sondagem − altura da maré","Sondagem + altura da maré","Altura da maré − calado","Sondagem + NR"],a:1,
+   e:"Profundidade real = Sondagem (do NR ao fundo) + Altura da maré (acima do NR). Também igual a Calado + Folga sob a quilha."},
+  {q:"No método das Tabelas I e II, a saída da Tabela I é a 'fração da amplitude'. Ela entra na Tabela II junto com:",
+   o:["A sondagem","A amplitude da maré","O calado","O Nível Médio"],a:1,
+   e:"Tabela II: entra a fração (Tab. I) + a amplitude do ciclo → sai a correção, aplicada à altura da PM (subtraindo) ou da BM (somando)."},
+  {q:"Pela regra dos doze avos, ao fim da 3ª hora (meia-maré), a maré subiu, em relação à amplitude:",
+   o:["3/12","6/12 (metade)","9/12","11/12"],a:1,
+   e:"Acumulado: 1/12, 3/12, 6/12, 9/12, 11/12, 12/12. Na 3ª hora = 6/12 = metade da amplitude (coincide com o Nível Médio), onde a variação é máxima."},
+  {q:"Um cuidado obrigatório ao usar as Tabelas I e II em portos cuja curva não é perfeitamente senoidal é:",
+   o:["Ignorar a amplitude","Dar uma margem de segurança de 10% da amplitude","Usar sempre a BM","Multiplicar a altura por 2"],a:1,
+   e:"Onde a curva não é sinusoidal, o resultado é apenas aproximado → margem de segurança de 10% da amplitude. Na costa brasileira, limitar o uso de Vitória para o Norte."},
+  {q:"[PSCPP 2012, 2,0 pts] Bacia com profundidade cartografada 6 m, calado 8 m, folga mínima 1,6 m. Qual a altura de maré mínima necessária para a manobra?",
+   o:["1,6 m","2,0 m","3,6 m","6,0 m"],a:2,
+   e:"Profundidade necessária = 8 + 1,6 = 9,6 m; altura de maré = 9,6 − 6 = 3,6 m acima do NR. Achando os instantes em que a altura ≥ 3,6 m (Tabelas I/II) e descontando o agente (07:15) e a faina (30 min), a janela é 07h15–12h00 (gabarito a)."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

@@ -124,6 +124,62 @@
    ====================================================================== */
 const CADERNOS = [
   {
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 1 e 5",
+    titulo:"O Problema Geral da Navegação e a Estimada",
+    arquivo:"miguens_cap1_5_navegacao_estimada.html",
+    desc:"Alicerce do Módulo III. Definição (ciência e arte) e as 4 fases do planejamento; tipos (águas restritas <3mn, costeira 3–50mn, oceânica >50mn) × métodos (visual/astro/eletrônica/estimada); milha náutica (1′ de latitude = 1852 m), ortodromia × loxodromia; rumos e marcações (Rv/Rmg/Rgiro/Rag, Mv=Mr+R, marcação polar) com rosa interativa; nó e SOA (base do ETA). Navegação estimada (DR): regras dos 3 e 6 minutos com calculadora, as 6 regras de plotagem, consistência de 10% e o triângulo de corrente interativo (superfície+corrente=fundo, abatimento, avanço/atraso). Mapa da banca (baixa incidência direta) com a 2012-Q19 (conversão Rv→Rag=058°). 21 flashcards e quiz de 12 questões.",
+    tags:["BANCA","DECORAR","CALCULO","Estimada","Dead reckoning","Milha náutica","Ortodromia","Loxodromia","Rumos","Marcações","SOA","Triângulo de corrente","Abatimento","Regra 3/6 min","Miguens Vol. I"]
+  },
+  {
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 2",
+    titulo:"A Carta Náutica e as Projeções Cartográficas",
+    arquivo:"miguens_cap2_carta_projecoes.html",
+    desc:"Núcleo do Bloco B. Mapa × carta e as 6 propriedades da carta ideal; classificação das projeções. Projeção de Mercator (cilíndrica equatorial conforme): vantagens, limitações e as latitudes crescidas — distâncias só na escala das latitudes — com interativo do fator sec φ. Gnomônica (ponto de vista no centro, afilática, círculos máximos retos → cartas ortodrômicas) e o toggle interativo Mercator × Gnomônica. Escala (maior denominador = menor escala; escala natural; classificação OHI S-4) com régua interativa. Elementos do título (datum MLWS/WGS-84, IALA Região B, projeção Mercator, costa Norte/Leste/Sul). Cartas digitais ENC/RNC (S-57, propósitos 1–6) e o Plano Cartográfico Brasileiro. Mapa da banca com a 2011-Q26 (escala ALFA 1:75.000, gab d). 21 flashcards e quiz de 12 questões.",
+    tags:["BANCA","DECORAR","CALCULO","Carta náutica","Mercator","Gnomônica","Latitudes crescidas","Ortodromia","Loxodromia","Escala","ENC","RNC","WGS-84","MLWS","Miguens Vol. I"]
+  },
+  {
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 3",
+    titulo:"Agulhas Náuticas e a Conversão de Rumos",
+    arquivo:"miguens_cap3_agulhas_conversao_rumos.html",
+    desc:"Alto retorno do Bloco A — o cálculo que a banca mais cobra. Os quatro nortes; declinação magnética (Dm, E/W, isogônicas/agônicas, variação anual); desvio da agulha (Dv, depende dos ferros do navio, varia com o RUMO, Curva de Desvios). A sequência Rag→Rmg→Rv e a fórmula Rv=Rag±Dm±Dv (Este soma, Oeste subtrai), com rosa dos nortes interativa e calculadora de variação anual. Conversão de marcações (Mv=Mag±Dm±Dv) e a agulha giroscópica (aponta ao Norte Verdadeiro; vantagens/limitações; desvio por redução do triângulo). Mapa da banca com as duas questões de cálculo direto: 2011-Q30 (Rv 152,5°→Rag 167°) e 2012-Q19 (Rv 045°→Rag 058°). 20 flashcards e quiz de 12 questões.",
+    tags:["BANCA","DECORAR","CALCULO","Conversão de rumos","Declinação magnética","Desvio da agulha","Variação anual","Agulha giroscópica","Isogônicas","Curva de desvios","Rc=Rv±Dm±Dv","Miguens Vol. I"]
+  },
+  {
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 4 e 6",
+    titulo:"A Determinação da Posição — LDP e a Série de Traub",
+    arquivo:"miguens_cap4_6_determinacao_posicao.html",
+    desc:"Núcleo do Bloco C. Conceito de LDP e seus tipos (alinhamento é a mais precisa). Métodos por LDP simultâneas (marcação+distância cortam a 90°) e o bom cruzamento. Triângulo de incerteza (causas e as 3 condutas: pequeno→centro, perto de perigo→vértice, grande→abandona) com SVG interativo. Sequência de observação (hora da LDP que varia mais rápido; Folha N-2). Marcações sucessivas: transporte de LDP; dobrar a marcação (α→2α, isósceles, AB=BC) e a distância pelo través (par 45°/90°) com SVG; e a Série de Traub completa (marcações polares 14·16·18·22·27·34·45·63·90, distâncias iguais e través = 2d, inválida com corrente). Mapa da banca com a 2012-Q18 (Traub) resolvida: (a) F·V·F·V·V. 20 flashcards e quiz de 12 questões.",
+    tags:["BANCA","DECORAR","CALCULO","LDP","Alinhamento","Triângulo de incerteza","Marcações sucessivas","Dobrar a marcação","Distância pelo través","Série de Traub","Segmento capaz","Miguens Vol. I"]
+  },
+  {
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 7 e 8",
+    titulo:"LDP de Segurança e Dados Táticos em Águas Restritas",
+    arquivo:"miguens_cap7_8_ldp_seguranca.html",
+    desc:"Iluminar a carta, as 5 LDP de segurança (alinhamento, marcação de perigo, distância, ângulo vertical e horizontal), luzes de setor e sondagens; dados táticos (curva de giro e elementos, ponto de guinada, fundeio de precisão). SVGs interativos (marcação de segurança, ângulo horizontal, curva de giro, ponto de guinada), mapa da banca (2006/2008/2011/2012 — 9 questões) e quiz.",
+    tags:["BANCA","DECORAR","CALCULO","LDP de segurança","Marcação de perigo","Curva de giro","Diâmetro tático","Ponto de guinada","Fundeio de precisão","Miguens Vol. I"]
+  },
+  {
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 10",
+    titulo:"Cálculo de Marés — a altura em um dado instante",
+    arquivo:"miguens_cap10_calculo_mares.html",
+    desc:"Núcleo do Bloco F. Elementos (PM, BM, amplitude, NM, enchente/vazante/estofo), sizígia × quadratura e Idade da Lua, tipos (semidiurna Vitória→Norte), planos de referência (NR = MLWS, não MLWN) e as relações verticais (profundidade real = sondagem + altura). Tábua das Marés (DG6) e o método oficial das Tabelas I e II — interpolação da curva senoidal, margem de 10%, Vitória para o Norte — com calculadora interativa e curva de maré, mais a regra dos doze avos (1·2·3·3·2·1). Mapa da banca com 2008-Q63 (sinusoidal/Vitória, gab c), 2012-Q20 (MLWS×MLWN, gab b), 2011-Q39/ZULU (gab c) e a questão de 2,0 pontos 2012-Q21 resolvida (altura 3,6 m → janela 07h15–12h00). 20 flashcards e quiz de 11 questões.",
+    tags:["BANCA","DECORAR","CALCULO","Marés","Sizígia","Quadratura","Amplitude","Nível de redução","MLWS","Tábua das Marés","Tabelas I e II","Doze avos","Idade da Lua","Profundidade real","Miguens Vol. I"]
+  },
+  {
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 11",
+    titulo:"Instrumentos Náuticos — odômetros e ecobatímetro",
+    arquivo:"miguens_cap11_instrumentos_nauticos.html",
+    desc:"Bloco A. Instrumentos por finalidade; dispositivos de marcação (taxímetro, alidades, círculo azimutal). Odômetros: superfície, de fundo (tubo de Pitot) e Doppler — superfície e 'de fundo' medem em relação à ÁGUA; só o Doppler mede sobre o FUNDO (pegadinha campeã). Efeito da corrente sobre o odômetro (contra a corrente, registra mais que a distância no fundo) com interativo e a 2012-Q25 resolvida; corrida da milha. Estadímetro (d=h·cotg α) e a distinção do estaciógrafo (plotagem, não distância). Ecobatímetro (h=v·t/2, v≈1500 m/s, soma-se o calado; alarmes) com interativo do eco. Mapa da banca com 2011-Q59 (Sonar Doppler, 0,01 nó, gab b), 2012-Q22 (estaciógrafo, gab d) e 2012-Q25 (5h/90mn, gab a). 20 flashcards e quiz de 12 questões.",
+    tags:["BANCA","DECORAR","CALCULO","Odômetro","Doppler","Ecobatímetro","Estadímetro","Estaciógrafo","Corrida da milha","Tubo de Pitot","Efeito da corrente","Miguens Vol. I"]
+  },
+  {
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 12",
+    titulo:"Publicações Náuticas e os Avisos aos Navegantes",
+    arquivo:"miguens_cap12_publicacoes_nauticas.html",
+    desc:"Bloco B — a correlação publicação→conteúdo que a banca adora. Carta 12.000/INT 1 (grupos A–U), Roteiro (DH1), Lista de Faróis (DH2, sinais luminosos; boias cegas na Lista de Sinais Cegos DH18), Tábuas das Marés (DG6), Cartas-Piloto (12 cartas mensais; azul=ventos, verde=correntes, roxa=isogônicas), Almanaque Náutico (DN5, astronômica). Avisos aos Navegantes: Temporário (T, lápis), Preliminar (P, lápis), Permanente (caneta/bacalhau, campo Pequenas Correções), APE (não altera a carta) — com seletores interativos e o decodificador da numeração (E 4027/08). Mapa da banca com 2008-Q66 (b), 2012 (b: I·IV·V) e 2011-Q67 (b: II·III·V). 20 flashcards e quiz de 12 questões.",
+    tags:["BANCA","DECORAR","Publicações náuticas","Carta 12.000","Roteiro","Lista de Faróis","Cartas-Piloto","Avisos aos Navegantes","APE","Almanaque","Miguens Vol. I"]
+  },
+  {
     materia:"manobra-prop", badge:"Bloco B · Propulsão",
     titulo:"A Cadeia de Eficiências de Propulsão (η_H · η_R · η₀ · η_S)",
     arquivo:"cadeia_eficiencias_propulsao.html",
@@ -474,13 +530,6 @@ const CADERNOS = [
     tags:["BANCA","Rebocadores","Bollard pull","Tração de ponto fixo","UKC","Folga sob a quilha","Vento","Corrente","Ondas","Efeito Coanda","Distância de parada","Deslocamento","Hensen","Bloco H"]
   },
   {
-    materia:"arte-naval", badge:"Bloco H · Rebocadores",
-    titulo:"Conexões e Aparelhos de Reboque (Hensen Cap. 7)",
-    arquivo:"conexoes_aparelhos_reboque_hensen_cap7.html",
-    desc:"O aparelho de reboque completo, o elo físico entre rebocador e navio. Ponto de reboque alto → girting; gob rope (governo do convencional, desconectar quando não usar), pinos, gancho radial, staples, carrossel. Cabeços × gancho × guincho (só o guincho varia o comprimento) e liberação rápida (quick release exigido por classe, mas pode NÃO abrir sob adernamento — testar). Atrito e chafe gear (leitura de tensão errada: 62 t × 49 t no powered indirect). Composição do cabo: MENSAGEIRO (boia, ~25 mm, nunca 3 pernas, não HMPE), ESTICADOR (~10 m, +25%/+37%), PENDENTE (fusível, rompe primeiro), cabo principal. CONEXÕES — o coração: girth/cow-hitch MORDE o olhal → abrasão interna e fusão das fibras × GROMMET (desliza no olhal, gira p/ espalhar o desgaste — resposta da Q15); eye-to-eye 90–100%, grommet 85%/perna, cow-hitch (OCIMF), Lankonect (elo forte ou fraco). SVG girth×grommet. ✚ §7.8 REBOQUE DE EMERGÊNCIA (SOLAS II-1/3-4): ambas as extremidades de navio-tanque ≥ 20.000 dwt, pré-armado (≤15 min) × não pré-armado (≤1 h), pick-up gear por 1 pessoa sem energia, ≥1.000/2.000 kN, ângulos 90°/30°, pendente ≥ 2× bordo-livre + 50 m, Nota 13 (extensão a outros navios ~2028). Flashcards e quiz de 12 questões. JÁ COBRADO (simulado 2027): Q15 (grommet), Q25 (ETA). Subtópico H1.",
-    tags:["BANCA","Rebocadores","Aparelho de reboque","Conexões","Grommet","Cow-hitch","Girth hitch","Eye-to-eye","Lankonect","Mensageiro","Esticador","Pendente","Quick release","Gob rope","Reboque de emergência","SOLAS II-1/3-4","Hensen","Bloco H"]
-  },
-  {
     materia:"shiphandling", badge:"Nayak — Marine Pilotage",
     titulo:"Nayak Cap. 18 — Opções de Manobra de Emergência + Williamson Turn",
     arquivo:"nayak_cap18_emergencias_pscpp.html",
@@ -527,6 +576,7 @@ const CADERNOS = [
 
 /* ---- Matérias (ordem + rótulos + cor). Crie novas aqui se precisar. ---- */
 const MATERIAS = {
+  "navegacao":{ titulo:"Navegação — Miguens", sub:"Bloco III · Miguens Vol. I e III · núcleo de referência", cor:"#1F6F8B" },
   "manobra-resist":{ titulo:"Manobrabilidade — Resistência", sub:"Módulo I · Bloco A · Resistência ao Avanço", cor:"#2C5F8A" },
   "manobra-prop":{ titulo:"Manobrabilidade — Propulsão", sub:"Módulo I · Bloco B · Propulsão e Propulsores", cor:"#1A7A6E" },
   "manobra-leme":{ titulo:"Manobrabilidade — Lemes", sub:"Módulo I · Bloco C · Lemes e Superfícies de Controle", cor:"#9E3B2E" },
@@ -536,7 +586,7 @@ const MATERIAS = {
   "shiphandling":{ titulo:"Arte Naval — Shiphandling/MacElrevey", sub:"Módulo II · Blocos D·E·F·G · MacElrevey 4ª ed.", cor:"#0D3D36" },
   "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" }
 };
-const ORDEM = ["manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval"];
+const ORDEM = ["navegacao","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }

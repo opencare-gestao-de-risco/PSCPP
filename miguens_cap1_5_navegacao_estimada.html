@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Problema Geral da Navegação e Estimada — Miguens Cap. 1 e 5 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:340px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco A — Fundamentos</p>
+    <h1>O Problema Geral da Navegação e a <em>Estimada</em></h1>
+    <p class="sub">O alicerce de todo o módulo: o que é navegar, os tipos e métodos, a milha náutica, ortodromia × loxodromia, rumos e marcações, a velocidade — e a navegação estimada com o triângulo de corrente, o coração gráfico do capítulo.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 1 (O Problema Geral da Navegação) e Cap. 5 (Navegação Estimada). A banca cita a <b>1ª edição (1996)</b>.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#definicao">1.1 Definição e plano</a>
+    <a href="#tipos">1.3 Tipos e métodos</a>
+    <a href="#distancias">Milha · orto/loxo</a>
+    <a href="#rumos">1.8 Rumos e marcações ▶</a>
+    <a href="#velocidade">Velocidade · SOA</a>
+    <a href="#estimada">5.1 Estimada · 3/6 min ▶</a>
+    <a href="#triangulo">5.6 Triângulo de corrente ▶</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Abre o <strong>núcleo Miguens</strong>. Os rumos e marcações daqui são a base da <strong>Conversão de Rumos</strong> (Cap. 3, `Rc=Rv±Dm±Dv`); a estimada alimenta a <strong>Determinação da Posição</strong> (Cap. 4 e 6) e as <strong>Correntes</strong> (Cap. 10).
+</div>
+
+<!-- ===== 1.1/1.2 DEFINIÇÃO E PLANO ===== -->
+<section class="bloco" id="definicao">
+  <h2 class="sec"><span class="n">1.1/1.2</span> O que é navegar — e planejar a viagem</h2>
+  <p class="lede">A definição-âncora e as quatro fases do planejamento, que reaparecem no passage planning e no BTM.</p>
+
+  <div class="box key">
+    <h4>Definição <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Navegação é a <span class="hl">ciência e a arte de conduzir um veículo com segurança</span>, dirigindo e controlando seus movimentos, do ponto de partida ao destino. <strong>Ciência</strong> (instrumentos, métodos, cálculos) e <strong>arte</strong> (interpretação do navegante: "esta é a posição do navio"). Formas: marítima (superfície/submarina), aérea, espacial, terrestre; fluvial, polar.</p>
+  </div>
+
+  <div class="box">
+    <h4>As quatro fases do planejamento da viagem</h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Fase</th><th>O que é</th></tr>
+      <tr><td><strong>1. Avaliação</strong></td><td>Coleta de todas as informações relevantes (navio, carga, cartas, publicações, marés, meteo, tráfego, praticagem).</td></tr>
+      <tr><td><strong>2. Plano de viagem</strong></td><td>Derrota porto a porto: velocidade de segurança, pontos de guinada (curva de giro), FAQ, método/frequência de posicionamento, planos de contingência. Aprovado pelo Comandante.</td></tr>
+      <tr><td><strong>3. Execução</strong></td><td>Realizar conforme o plano (ETD/ETA), atento a marés, meteo, luminosidade, tráfego.</td></tr>
+      <tr><td><strong>4. Monitoramento</strong></td><td>Acompanhar posição e horários de guinada; usar contingências se preciso. Plano sempre disponível no passadiço.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 1.3 TIPOS E MÉTODOS ===== -->
+<section class="bloco" id="tipos">
+  <h2 class="sec"><span class="n">1.3</span> Tipos e métodos de navegação</h2>
+  <p class="lede">Cuidado para não confundir <strong>tipo</strong> (onde se navega) com <strong>método</strong> (como se determina a posição).</p>
+
+  <div class="box key">
+    <h4>Os 3 TIPOS (por distância à costa/perigo, NORMAM 28) <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <table style="margin:6px 0 0">
+      <tr><th>Tipo</th><th>Distância / profundidade</th></tr>
+      <tr><td><strong>Águas restritas</strong></td><td>Portos, barras, canais, rios; ou <span class="hl">&lt; 3 milhas</span> da costa/perigo. Exige a <strong>maior precisão</strong>.</td></tr>
+      <tr><td><strong>Costeira</strong></td><td>Entre <span class="hl">3 e 50 milhas</span> da costa, ou até 200 m de profundidade (o que ocorrer primeiro).</td></tr>
+      <tr><td><strong>Oceânica</strong></td><td>Além de <span class="hl">50 milhas</span> ou de 200 m de profundidade (o que ocorrer primeiro).</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h4>Os 4 MÉTODOS (como se obtém a posição)</h4>
+    <p><strong>Visual</strong> (pontos em terra/auxílios) · <strong>Astronômica</strong> (astros) · <strong>Eletrônica</strong> (radar, satélite/GNSS) · <strong>Estimada</strong> (previsão a partir de uma posição conhecida, com rumo, velocidade, tempo e corrente). A estimada é o único método que <span class="hl">não depende de meios externos ao navio</span> — funciona sem céu limpo, sem satélite.</p>
+  </div>
+</section>
+
+<!-- ===== DISTÂNCIAS ===== -->
+<section class="bloco" id="distancias">
+  <h2 class="sec"><span class="n">1.6/1.7</span> Posição, milha náutica, ortodromia × loxodromia</h2>
+  <p class="lede">Coordenadas, a unidade de distância e as duas curvas fundamentais na esfera terrestre.</p>
+
+  <div class="box formula">
+    <h4>A milha náutica <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">1 milha náutica = arco de 1′ de latitude = <span class="hl">1.852 m</span> (Acordo Internacional de 1929)<span class="lbl">valor fixo, independente da latitude — nas cartas de Mercator, medir sempre na escala das latitudes</span></div>
+    <p class="vars"><strong>Latitude (φ):</strong> 0°–90° N/S do Equador. <strong>Longitude (λ):</strong> 0°–180° E/W de Greenwich (1º meridiano). Nas cartas de Mercator (latitudes crescidas), <span class="hl">1′ de latitude = 1 milha</span> — nunca meça distância na escala das longitudes.</p>
+  </div>
+
+  <table>
+    <tr><th>Curva</th><th>Definição</th></tr>
+    <tr><td><strong>Ortodromia</strong></td><td>Arco de <span class="hl">círculo máximo</span> — a <strong>menor distância</strong> entre dois pontos na Terra.</td></tr>
+    <tr><td><strong>Loxodromia</strong> (linha de rumo)</td><td>Linha que corta todos os meridianos sob um <span class="hl">ângulo constante</span>. Não é a menor distância, mas é a mais cômoda de navegar (rumo fixo).</td></tr>
+  </table>
+
+  <div class="box">
+    <h4>Outras unidades <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Nó = 1 milha náutica por hora. 1 amarra (cable) = 100 braças = 200 jardas = 183 m. 1 braça = 1,83 m. 1 pé = 0,3048 m. Ponto (point) = 1/32 do círculo = <span class="hl">11,25°</span>. Milha ≈ 2.000 jardas (aprox.).</p>
+  </div>
+</section>
+
+<!-- ===== 1.8 RUMOS E MARCAÇÕES ===== -->
+<section class="bloco" id="rumos">
+  <h2 class="sec"><span class="n">1.8</span> Direção no mar — rumos e marcações</h2>
+  <p class="lede">Rumo = para onde aponta a proa. Marcação = direção de um objeto observado. Ambos de 000° a 360°, horário, com 3 algarismos e precisão de 0,5°.</p>
+
+  <div class="ichart">
+    <h4>Marcação polar → relativa → verdadeira</h4>
+    <p class="hint">Navio no rumo verdadeiro (Rv) fixo em 045°. Mova o objeto: veja a marcação polar (Mp, a partir da proa p/ BE ou BB), a relativa (Mr, horário da proa) e a verdadeira (Mv = Mr + Rv).</p>
+    <svg id="svgMarc" viewBox="0 0 860 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rumos e marcações"></svg>
+    <div class="ictrl"><label for="obj">Objeto →</label><input type="range" id="obj" min="0" max="359" value="90" oninput="drawMarc()"></div>
+    <div class="iread" id="marcRead" style="margin-top:6px"></div>
+  </div>
+
+  <table>
+    <tr><th>Referência</th><th>Rumo</th><th>Marcação</th></tr>
+    <tr><td>Norte Verdadeiro/Geográfico</td><td>Rv (ou R)</td><td>Mv</td></tr>
+    <tr><td>Norte Magnético</td><td>Rmg</td><td>Mmg</td></tr>
+    <tr><td>Norte da Giro</td><td>Rgiro</td><td>Mgiro</td></tr>
+    <tr><td>Norte da Agulha</td><td>Rag</td><td>Mag</td></tr>
+    <tr><td>Proa do navio</td><td>—</td><td>Mr (relativa) e Mp (polar, BE/BB)</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>A relação-chave <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">Mv = Mr + R<span class="lbl">marcação verdadeira = marcação relativa + rumo (verdadeiro)</span></div>
+    <p class="vars">A <strong>marcação polar</strong> (Mp) é medida da proa para BE ou BB (000°–180°); converte-se em relativa (Mr, horário 000°–360°): se BE, Mr = Mp; se BB, Mr = 360° − Mp. <strong>Exemplo do livro:</strong> Rv 045°, farol no través de BB → Mp 090° BB → Mr 270° → Mv = 270° + 045° = <span class="hl">315°</span>. Ainda: <strong>Rumos práticos (Rp)</strong> — governar por referências de terra em canais; <strong>Rumo no fundo (Rfd)</strong> = rumo na superfície + efeito da corrente.</p>
+  </div>
+</section>
+
+<!-- ===== VELOCIDADE ===== -->
+<section class="bloco" id="velocidade">
+  <h2 class="sec"><span class="n">1.9</span> A velocidade no mar</h2>
+  <p class="lede">Três velocidades e a base do ETA.</p>
+
+  <table>
+    <tr><th>Termo</th><th>Significado</th></tr>
+    <tr><td><strong>Nó</strong></td><td>Unidade de velocidade = <span class="hl">1 milha náutica por hora</span>.</td></tr>
+    <tr><td><strong>Velocidade no fundo</strong> (vel fd)</td><td>Ao longo da derrota realmente seguida, em relação ao fundo.</td></tr>
+    <tr><td><strong>Velocidade de avanço (SOA)</strong></td><td><em>Speed of Advance</em> — velocidade com que se pretende progredir na derrota planejada. Base do cálculo de <strong>ETA</strong> (chegada) e <strong>ETD</strong> (partida).</td></tr>
+  </table>
+</section>
+
+<!-- ===== 5.1 ESTIMADA ===== -->
+<section class="bloco" id="estimada">
+  <h2 class="sec"><span class="n">5.1/5.3</span> Navegação estimada (Dead Reckoning)</h2>
+  <p class="lede">Determinar a posição provável só pelas características do movimento (rumo + velocidade + tempo) a partir de uma posição conhecida. Em inglês, <em>Dead Reckoning</em> (DR).</p>
+
+  <p>A estimada <strong>convencional</strong> usa o rumo verdadeiro e a distância percorrida (agulha + odômetro) e <span class="hl">não considera a corrente</span> — dá o ponto estimado (aproximado). Considerando a corrente, obtém-se a <strong>estimada corrigida</strong>. Vantagem única: <span class="hl">independe de meios externos</span> ao navio (não precisa de céu limpo nem satélite), servindo de crítica permanente contra erros grosseiros.</p>
+
+  <div class="box formula">
+    <h4>As regras dos 3 e dos 6 minutos <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="eq">3 min → distância (jardas) = velocidade (nós) × 100<span class="lbl">ex.: 15 nós → 1500 jardas em 3 minutos</span></div>
+    <div class="eq">6 min → distância (milhas) = velocidade (nós) ÷ 10<span class="lbl">ex.: 15 nós → 1,5 milha em 6 minutos</span></div>
+  </div>
+
+  <div class="ichart">
+    <h4>Calculadora das regras 3/6 min</h4>
+    <p class="hint">Deslize a velocidade e leia a distância em 3 min (jardas) e em 6 min (milhas). Base: v = e/t.</p>
+    <canvas id="cv36" width="860" height="210"></canvas>
+    <div class="ictrl"><label for="vel36">Velocidade →</label><input type="range" id="vel36" min="1" max="30" value="15" oninput="draw36()"></div>
+    <div class="iread" id="read36" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>As 6 regras da navegação estimada <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Plotar uma posição estimada: <strong>(1)</strong> nas horas inteiras (e meias); <strong>(2)</strong> a cada mudança de rumo; <strong>(3)</strong> a cada mudança de velocidade; <strong>(4)</strong> ao obter uma posição determinada; <strong>(5)</strong> ao obter uma única LDP; <strong>(6)</strong> nova linha de rumo e nova estima de cada posição determinada plotada.</p>
+    <p style="margin-top:8px"><strong>Notas:</strong> não se ajusta a estima com uma única LDP; uma LDP cruzando uma linha de rumo <span class="hl">não</span> é posição determinada (linha de rumo não é LDP).</p>
+  </div>
+
+  <div class="box">
+    <h4>Consistência do ponto estimado <span class="tag t-decorar">DECORAR</span></h4>
+    <p>O ponto estimado é só a posição mais provável; em perigo, substitui-se por uma <strong>zona de probabilidade</strong> (circunferência). Seu raio, a <strong>consistência</strong>, admite-se empiricamente em <span class="hl">0,1 (10%) da distância percorrida</span> desde a última posição observada.</p>
+  </div>
+</section>
+
+<!-- ===== 5.6 TRIÂNGULO DE CORRENTE ===== -->
+<section class="bloco" id="triangulo">
+  <h2 class="sec"><span class="n">5.4/5.6</span> O triângulo de corrente</h2>
+  <p class="lede">Na prática, "corrente" = a resultante de tudo que desvia o navio: correntes marítimas e de maré, vento, estado do mar, mau governo, banda/trim, desvio não detectado. Três vetores, seis elementos.</p>
+
+  <div class="ichart">
+    <h4>Triângulo de corrente — superfície + corrente = fundo</h4>
+    <p class="hint">Navio no rumo 090°, 10 nós (vetor superfície). Ajuste o rumo e a velocidade da corrente e veja o vetor fundo resultante, o abatimento e se há avanço ou atraso.</p>
+    <svg id="svgTri" viewBox="0 0 860 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triângulo de corrente"></svg>
+    <div class="ictrl">
+      <label for="rcor">Rumo corrente →</label><input type="range" id="rcor" min="0" max="359" value="150" oninput="drawTri()">
+    </div>
+    <div class="ictrl">
+      <label for="vcor">Vel. corrente →</label><input type="range" id="vcor" min="0" max="40" value="15" oninput="drawTri()">
+    </div>
+    <div class="iread" id="triRead" style="margin-top:6px"></div>
+  </div>
+
+  <table>
+    <tr><th>Vetor</th><th>Direção / grandeza</th></tr>
+    <tr><td><strong>Superfície</strong></td><td>Rumo verdadeiro (RN) e velocidade na superfície (velN).</td></tr>
+    <tr><td><strong>Corrente</strong></td><td>Direção para onde flui (Rcor) e velocidade (velcor).</td></tr>
+    <tr><td><strong>Fundo</strong></td><td>Rumo no fundo (Rfd) e velocidade no fundo (velfd) = resultante.</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Termos correlatos <span class="tag t-decorar">DECORAR</span> <span class="tag t-conflito">CONFLITO</span></h4>
+    <p><strong>Abatimento (abt):</strong> ângulo entre o rumo na superfície (RN) e o rumo no fundo (Rfd), contado para BE ou BB. <em>Atenção:</em> este abatimento (deriva) <span class="hl">não é o mesmo</span> "abatimento" da curva de giro (Cap. 8). <strong>Avanço</strong> quando velfd &gt; velN; <strong>atraso</strong> quando velfd &lt; velN. <strong>Caimento</strong> = componente transversal. <strong>Posição carteada</strong> = posição futura prevista (traço cortando o rumo com a hora).</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Os 5 problemas do triângulo <span class="tag t-calc">CALCULO</span></h4>
+    <p>São 6 elementos (2 por vetor); conhecidos 4, determinam-se 2. Casos usuais: <strong>(a)</strong> achar a corrente por duas posições observadas; <strong>(b)</strong> prever Rfd/velfd (base do ETA) dada a corrente; <strong>(c)</strong> achar RN/velN para um Rfd/velfd desejado (chegar num ponto na hora certa); <strong>(d)</strong> achar RN e velfd dada a corrente, a velN e o Rfd desejado; <strong>(e)</strong> obter a posição estimada corrigida aplicando o vetor corrente à estimada.</p>
+  </div>
+</section>
+
+<!-- ===== MAPA DA BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
+  <p class="lede">Varredura das quatro provas anexadas. Estes fundamentos (Cap. 1 e 5) têm <strong>baixa incidência direta</strong> em 2006–2012 — aparecem embutidos em questões de outros temas. O que se encontra:</p>
+
+  <table>
+    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q19</strong></td><td>Marcação polar + conversão Rv→Rag ("fora de giro")</td><td class="center"><b>(c) 058°</b> deduzido</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q18</strong></td><td>LDP sucessivas / Série de Traub (cai no Caderno de Posição, Cap. 4/6)</td><td class="center">— (Cap. 6)</td></tr>
+    <tr><td>2008</td><td>—</td><td>Milha náutica no radar; marcação verdadeira (em questões de radar)</td><td class="center">embutido</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>2012-Q19 resolvido — conversão com marcação polar <span class="tag t-banca">BANCA</span> <span class="tag t-calc">CALCULO</span></h4>
+    <p>NM Beluga no <strong>Rv 045°</strong>; declinação magnética <strong>Dm 15° W</strong>; desvio da agulha <strong>Dag 2° E</strong>. Com a giro "fora", deve-se governar pela agulha magnética. Erro total = Dm + Dag = (−15) + (+2) = <strong>−13°</strong> (13° W). Rumo da agulha = Rv − erro total = 045 − (−13) = <span class="hl">058°</span> → gabarito <b>(c)</b>. A marcação polar 030° BE é contexto (o cálculo completo `Rc=Rv±Dm±Dv` está no Caderno de <strong>Conversão de Rumos, Cap. 3</strong>).</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Distratores a vigiar <span class="tag t-conflito">DECORAR</span></h4>
+    <p>• <strong>Tipo ≠ método</strong>: águas restritas/costeira/oceânica são tipos; visual/astro/eletrônica/estimada são métodos. • <strong>Ortodromia</strong> = menor distância (círculo máximo); <strong>loxodromia</strong> = ângulo constante. • Milha = 1′ de <strong>latitude</strong> (não de longitude). • <strong>Abatimento</strong> da estima (deriva RN↔Rfd) ≠ abatimento da curva de giro. • Estimada <strong>independe</strong> de meios externos.</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Fundamentos (Cap. 1) e estimada (Cap. 5).</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Doze questões sobre os fundamentos e a estimada.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Problema Geral da Navegação e Estimada (Miguens Cap. 1 e 5)</summary>
+  <ul>
+    <li><b>Definição:</b> ciência e arte de conduzir um veículo com segurança do partida ao destino. Ciência (instrumentos/cálculos) + arte (interpretação).</li>
+    <li><b>Planejamento (4 fases):</b> Avaliação · Plano de viagem (aprovado pelo Comandante) · Execução · Monitoramento.</li>
+    <li><b>Tipos (NORMAM 28):</b> Águas restritas (&lt;3 mn, maior precisão) · Costeira (3–50 mn ou &lt;200 m) · Oceânica (&gt;50 mn ou &gt;200 m).</li>
+    <li><b>Métodos:</b> Visual · Astronômica · Eletrônica (radar/GNSS) · Estimada (independe de meios externos).</li>
+    <li><b>Milha náutica:</b> arco de 1′ de latitude = 1.852 m (1929). Medir na escala das latitudes.</li>
+    <li><b>Ortodromia</b> = círculo máximo = menor distância. <b>Loxodromia</b> = linha de rumo = ângulo constante.</li>
+    <li><b>Rumos:</b> Rv, Rmg, Rgiro, Rag; 000–360°, horário, 3 algarismos, 0,5°. <b>Marcações:</b> Mv, Mmg, Mgiro, Mag, Mr (relativa), Mp (polar BE/BB). <b>Mv = Mr + R.</b> Ex.: Mp 090°BB, Rv 045° → Mv 315°.</li>
+    <li><b>Velocidade:</b> nó = 1 mn/h. SOA (velocidade de avanço) = base do ETA/ETD.</li>
+    <li><b>Estimada (DR):</b> posição provável por rumo+velocidade+tempo. Convencional (sem corrente) → estimada corrigida (com corrente).</li>
+    <li><b>Regra 3 min:</b> dist(jardas)=vel(nós)×100. <b>Regra 6 min:</b> dist(milhas)=vel÷10.</li>
+    <li><b>6 regras da estima:</b> plotar nas horas/meias, a cada mudança de rumo, a cada mudança de velocidade, ao obter posição determinada, ao obter uma única LDP, e nova estima de cada posição determinada. Não ajustar com uma única LDP.</li>
+    <li><b>Consistência</b> do ponto estimado = 10% da distância percorrida desde a última posição observada.</li>
+    <li><b>Triângulo de corrente:</b> superfície (RN,velN) + corrente (Rcor,velcor) = fundo (Rfd,velfd). Abatimento = ângulo RN↔Rfd. Avanço se velfd&gt;velN. 6 elementos, 5 problemas típicos.</li>
+    <li><b>Banca:</b> baixa incidência direta em 2006–2012. Relacionada: 2012-Q19 (conversão Rv→Rag = 058°, gab c).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Problema Geral da Navegação e Estimada (Miguens Vol. I, Cap. 1 e 5) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+function dir(t){var r=t*Math.PI/180;return [Math.sin(r),-Math.cos(r)];} // rumo -> vetor (x dir, y para cima=negativo)
+function norm(t){t=t%360;if(t<0)t+=360;return t;}
+
+/* ===== MARCAÇÕES (Rv 045 fixo) ===== */
+function drawMarc(){
+  var svg=document.getElementById('svgMarc');svg.innerHTML='';
+  var cx=430,cy=185,R=130,Rv=45;
+  // rosa
+  sEl(svg,'circle',{cx:cx,cy:cy,r:R,fill:'#fbfaf5',stroke:'#e5dcc6','stroke-width':1.5});
+  // Norte
+  var n=dir(0);sEl(svg,'line',{x1:cx,y1:cy,x2:cx+n[0]*R,y2:cy+n[1]*R,stroke:'#9aa9b8','stroke-width':1});
+  sTx(svg,cx,cy-R-6,'N (verdadeiro)',{fill:'#5a6f80',fs:12,fw:'bold',ta:'middle'});
+  // proa (Rv)
+  var p=dir(Rv);
+  sEl(svg,'line',{x1:cx,y1:cy,x2:cx+p[0]*(R+20),y2:cy+p[1]*(R+20),stroke:'#1A7A6E','stroke-width':3});
+  sTx(svg,cx+p[0]*(R+34),cy+p[1]*(R+34),'PROA Rv 045°',{fill:'#1A7A6E',fs:12,fw:'bold',ta:'middle'});
+  // objeto
+  var mv=+document.getElementById('obj').value;
+  var o=dir(mv);
+  sEl(svg,'line',{x1:cx,y1:cy,x2:cx+o[0]*R,y2:cy+o[1]*R,stroke:'#9E3B2E','stroke-width':2.5});
+  sEl(svg,'circle',{cx:cx+o[0]*R,cy:cy+o[1]*R,r:7,fill:'#C8A84B',stroke:'#9E3B2E','stroke-width':1.5});
+  sTx(svg,cx+o[0]*(R+22),cy+o[1]*(R+22),'objeto',{fill:'#9E3B2E',fs:12,fw:'bold',ta:'middle'});
+  // cálculos
+  var mr=norm(mv-Rv);
+  var mp,lado;
+  if(mr<=180){mp=mr;lado='BE';}else{mp=360-mr;lado='BB';}
+  document.getElementById('marcRead').innerHTML='Marcação verdadeira <b>Mv = '+('00'+Math.round(mv)).slice(-3)+'°</b> · relativa <b>Mr = '+('00'+Math.round(mr)).slice(-3)+'°</b> · polar <b>Mp = '+('00'+Math.round(mp)).slice(-3)+'° '+lado+'</b>. Confira: Mv = Mr + Rv = '+('00'+Math.round(mr)).slice(-3)+'° + 045° = '+('00'+Math.round(norm(mr+Rv))).slice(-3)+'°.';
+}
+drawMarc();
+
+/* ===== REGRA 3/6 MIN ===== */
+function draw36(){
+  var cv=document.getElementById('cv36'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var v=+document.getElementById('vel36').value;
+  var d3=v*100, d6=v/10;
+  // duas barras
+  function bar(y,frac,col,lab,val){
+    ctx.fillStyle='#eee3c6';ctx.fillRect(60,y,W-120,26);
+    ctx.fillStyle=col;ctx.fillRect(60,y,(W-120)*frac,26);
+    ctx.fillStyle='#0D3D36';ctx.font='bold 13px Trebuchet MS';ctx.fillText(lab,60,y-8);
+    ctx.fillStyle='#16302B';ctx.font='13px Trebuchet MS';ctx.fillText(val,W-60-ctx.measureText(val).width,y-8);
+  }
+  bar(60, Math.min(d3/3000,1),'#1A7A6E','3 minutos → jardas', d3.toFixed(0)+' jd');
+  bar(140, Math.min(d6/3,1),'#2C5F8A','6 minutos → milhas', d6.toFixed(2)+' M');
+  document.getElementById('read36').innerHTML='A <b>'+v+' nós</b>: em 3 min percorre <b>'+d3.toFixed(0)+' jardas</b> (v×100); em 6 min, <b>'+d6.toFixed(2)+' milhas</b> (v÷10). Base: distância = velocidade × tempo.';
+}
+draw36();
+
+/* ===== TRIÂNGULO DE CORRENTE ===== */
+function drawTri(){
+  var svg=document.getElementById('svgTri');svg.innerHTML='';
+  var RN=90, velN=10;
+  var Rcor=+document.getElementById('rcor').value;
+  var velcor=+document.getElementById('vcor').value/10; // 0..4 nós
+  var sc=13; // px por nó
+  var Ox=170, Oy=250; // origem
+  var s=dir(RN), c=dir(Rcor);
+  var Sx=Ox+s[0]*velN*sc, Sy=Oy+s[1]*velN*sc;         // ponta do vetor superfície
+  var Fx=Sx+c[0]*velcor*sc, Fy=Sy+c[1]*velcor*sc;     // ponta do vetor fundo (= superfície+corrente)
+  // vetor fundo
+  var vx=Fx-Ox, vy=Fy-Oy; var velfd=Math.hypot(vx,vy)/sc;
+  var Rfd=norm(Math.atan2(vx,-vy)*180/Math.PI);
+  var abt=Rfd-RN; if(abt>180)abt-=360; if(abt<-180)abt+=360;
+  var lado=abt>=0?'BE':'BB';
+  function arrow(x1,y1,x2,y2,col,w){
+    sEl(svg,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':w});
+    var a=Math.atan2(y2-y1,x2-x1);
+    sEl(svg,'path',{d:'M '+x2+' '+y2+' L '+(x2-12*Math.cos(a-0.4))+' '+(y2-12*Math.sin(a-0.4))+' L '+(x2-12*Math.cos(a+0.4))+' '+(y2-12*Math.sin(a+0.4))+' Z',fill:col});
+  }
+  // norte de referência na origem
+  sEl(svg,'line',{x1:Ox,y1:Oy,x2:Ox,y2:Oy-40,stroke:'#9aa9b8','stroke-width':1,'stroke-dasharray':'4 3'});
+  sTx(svg,Ox,Oy-46,'N',{fill:'#5a6f80',fs:11,fw:'bold',ta:'middle'});
+  // vetores
+  arrow(Ox,Oy,Sx,Sy,'#1A7A6E',3.5);      // superfície
+  sTx(svg,(Ox+Sx)/2-6,(Oy+Sy)/2-8,'superfície (RN 090° · 10 nós)',{fill:'#1A7A6E',fs:11.5,fw:'bold'});
+  if(velcor>0.05){arrow(Sx,Sy,Fx,Fy,'#9E3B2E',3);   // corrente
+    sTx(svg,(Sx+Fx)/2+6,(Sy+Fy)/2,'corrente',{fill:'#9E3B2E',fs:11.5,fw:'bold'});}
+  arrow(Ox,Oy,Fx,Fy,'#2C5F8A',3.5);      // fundo
+  sTx(svg,(Ox+Fx)/2,(Oy+Fy)/2+18,'FUNDO (resultante)',{fill:'#2C5F8A',fs:12,fw:'bold',ta:'middle'});
+  sEl(svg,'circle',{cx:Ox,cy:Oy,r:4,fill:'#0D3D36'});
+  var ava = velfd>velN?'AVANÇO':(velfd<velN?'ATRASO':'sem avanço');
+  document.getElementById('triRead').innerHTML='Corrente '+('00'+Math.round(Rcor)).slice(-3)+'° / '+velcor.toFixed(1)+' nós → <b>Rfd '+('00'+Math.round(Rfd)).slice(-3)+'°</b>, <b>velfd '+velfd.toFixed(1)+' nós</b>. Abatimento <b>'+Math.abs(abt).toFixed(0)+'° '+lado+'</b>. '+ava+' (velfd '+(velfd>velN?'>':(velfd<velN?'<':'='))+' velN).';
+}
+drawTri();
+window.addEventListener('resize',function(){drawMarc();draw36();drawTri();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Definição de navegação",b:"Ciência e arte de conduzir um veículo com segurança do partida ao destino. Ciência (cálculos) + arte (interpretação)."},
+  {f:"4 fases do planejamento",b:"Avaliação · Plano de viagem (aprovado pelo Comandante) · Execução · Monitoramento."},
+  {f:"Tipo × Método",b:"Tipo = onde (restritas/costeira/oceânica). Método = como (visual/astro/eletrônica/estimada)."},
+  {f:"Águas restritas",b:"<3 milhas da costa/perigo (ou portos, barras, canais). Exige a MAIOR precisão."},
+  {f:"Costeira / Oceânica",b:"Costeira 3–50 mn (ou <200 m). Oceânica >50 mn (ou >200 m). O que ocorrer primeiro."},
+  {f:"Milha náutica",b:"Arco de 1′ de latitude = 1.852 m (Acordo de 1929). Medir na escala das latitudes."},
+  {f:"Ortodromia",b:"Arco de círculo máximo = MENOR distância entre dois pontos."},
+  {f:"Loxodromia",b:"Linha de rumo: corta os meridianos sob ângulo constante. Mais cômoda de navegar."},
+  {f:"Nó",b:"1 milha náutica por hora."},
+  {f:"SOA",b:"Velocidade de avanço (Speed of Advance) — base do cálculo de ETA e ETD."},
+  {f:"Mv = Mr + R",b:"Marcação verdadeira = relativa + rumo. Mp 090°BB, Rv 045° → Mr 270° → Mv 315°."},
+  {f:"Marcação polar",b:"Da proa p/ BE ou BB, 000°–180°, com designação de bordo. BE → Mr=Mp; BB → Mr=360−Mp."},
+  {f:"Estimada (DR)",b:"Posição provável por rumo+velocidade+tempo, a partir de posição conhecida. Independe de meios externos."},
+  {f:"Estimada corrigida",b:"Estimada + efeito da corrente (mais precisa, ainda aproximada)."},
+  {f:"Regra dos 3 minutos",b:"Distância (jardas) em 3 min = velocidade (nós) × 100."},
+  {f:"Regra dos 6 minutos",b:"Distância (milhas) em 6 min = velocidade (nós) ÷ 10."},
+  {f:"6 regras da estima",b:"Plotar: horas/meias · mudança de rumo · mudança de velocidade · posição determinada · uma única LDP · nova estima de cada posição determinada."},
+  {f:"Consistência do estimado",b:"Raio da zona de probabilidade = 10% da distância percorrida desde a última posição observada."},
+  {f:"Triângulo de corrente",b:"Superfície (RN,velN) + corrente (Rcor,velcor) = fundo (Rfd,velfd). 6 elementos; conhecidos 4, achar 2."},
+  {f:"Abatimento (estima)",b:"Ângulo entre RN e Rfd (BE/BB). ≠ abatimento da curva de giro (Cap. 8)."},
+  {f:"Avanço × atraso",b:"Avanço se velfd > velN; atraso se velfd < velN."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"Segundo Miguens, navegação é definida como:",
+   o:["A ciência de calcular rotas por satélite","A ciência e a arte de conduzir um veículo com segurança, do partida ao destino","O ato de traçar a derrota na carta","A arte de manobrar em águas restritas"],a:1,
+   e:"É ciência e arte de conduzir um veículo com segurança, dirigindo e controlando seus movimentos, do ponto de partida ao destino."},
+  {q:"A navegação em águas restritas caracteriza-se por:",
+   o:["Distância superior a 50 milhas da costa","Distância menor que 3 milhas da costa/perigo, exigindo a maior precisão","Profundidades acima de 200 m","Uso exclusivo de satélite"],a:1,
+   e:"Águas restritas: portos, barras, canais ou <3 milhas da costa/perigo — é o tipo que exige a maior precisão. Costeira: 3–50 mn; oceânica: >50 mn."},
+  {q:"Qual é um MÉTODO de navegação (e não um tipo)?",
+   o:["Navegação costeira","Navegação oceânica","Navegação estimada","Navegação em águas restritas"],a:2,
+   e:"Estimada é um método (como se obtém a posição), junto com visual, astronômica e eletrônica. Costeira/oceânica/restrita são TIPOS (onde se navega)."},
+  {q:"A milha náutica corresponde a:",
+   o:["1° de longitude","O arco de 1′ de latitude = 1.852 m","1 km","2.000 m exatos"],a:1,
+   e:"É o arco de 1 minuto de latitude, fixado em 1.852 m (Acordo de 1929). Nas cartas de Mercator, mede-se na escala das latitudes."},
+  {q:"A menor distância entre dois pontos na superfície da Terra é dada por uma:",
+   o:["Loxodromia","Ortodromia (arco de círculo máximo)","Linha de rumo","Paralela"],a:1,
+   e:"Ortodromia = arco de círculo máximo = menor distância. A loxodromia (linha de rumo) corta os meridianos sob ângulo constante e é mais cômoda de navegar."},
+  {q:"Um navio no Rv 045° marca um farol na marcação polar 090° BB. A marcação verdadeira do farol é:",
+   o:["135°","225°","315°","090°"],a:2,
+   e:"Mp 090°BB → Mr = 360−90 = 270°. Mv = Mr + R = 270° + 045° = 315°."},
+  {q:"A velocidade de avanço (SOA) serve principalmente para:",
+   o:["Medir a corrente","Calcular o ETA e o ETD na derrota planejada","Definir o calado","Medir o abatimento"],a:1,
+   e:"SOA (Speed of Advance) é a velocidade com que se pretende progredir na derrota — base do cálculo das horas estimadas de chegada (ETA) e partida (ETD)."},
+  {q:"A navegação estimada (Dead Reckoning) tem como vantagem única:",
+   o:["Máxima precisão absoluta","Não depender de meios externos ao navio","Dispensar o rumo","Considerar sempre a corrente"],a:1,
+   e:"A estimada independe de meios externos (satélite, céu limpo). A convencional não considera a corrente; considerando-a, obtém-se a estimada corrigida."},
+  {q:"Pela regra dos 6 minutos, um navio a 18 nós percorre, em 6 minutos:",
+   o:["1,8 milha","18 milhas","180 jardas","0,6 milha"],a:0,
+   e:"Regra dos 6 min: distância (milhas) = velocidade ÷ 10 = 18/10 = 1,8 milha. (Pela dos 3 min seriam 18×100 = 1.800 jardas em 3 min.)"},
+  {q:"No triângulo de corrente, o abatimento é:",
+   o:["A diferença entre velfd e velN","O ângulo entre o rumo na superfície (RN) e o rumo no fundo (Rfd)","O mesmo que o caimento da curva de giro","A velocidade da corrente"],a:1,
+   e:"Abatimento (deriva) = ângulo entre RN e Rfd, contado para BE ou BB. Não confundir com o abatimento inicial da curva de giro (Cap. 8)."},
+  {q:"Admite-se empiricamente que a consistência do ponto estimado seja de:",
+   o:["1% da distância percorrida","10% da distância percorrida desde a última posição observada","50% da amplitude","10 milhas fixas"],a:1,
+   e:"A consistência (raio da zona de probabilidade) é ~0,1 (10%) da distância percorrida desde a última posição observada."},
+  {q:"[PSCPP 2012] NM Beluga no Rv 045°, declinação 15°W, desvio da agulha 2°E. Com a giro fora, deve governar pela agulha no rumo:",
+   o:["030°","032°","058°","075°"],a:2,
+   e:"Erro total = Dm + Dag = (−15) + (+2) = −13°. Rag = Rv − erro total = 045 − (−13) = 058°. Gabarito (c). O cálculo completo Rc=Rv±Dm±Dv está no Caderno de Conversão de Rumos (Cap. 3)."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

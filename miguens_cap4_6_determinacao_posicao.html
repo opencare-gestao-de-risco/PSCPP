@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Determinação da Posição — Miguens Cap. 4 e 6 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:96px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;min-width:240px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:175px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco C — Posição</p>
+    <h1>A Determinação da Posição — LDP e a <em>Série de Traub</em></h1>
+    <p class="sub">Como se fixa a posição do navio: o conceito de linha de posição (LDP), os métodos por LDP simultâneas, o triângulo de incerteza e a sequência de observação — e, quando só há um ponto, as marcações sucessivas: dobrar a marcação, a distância pelo través e a Série de Traub com sua tabela.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 4 (A Posição no Mar. Navegação Costeira) e Cap. 6 (Determinação da Posição por Marcações Sucessivas). A banca cita a <b>1ª edição (1996)</b>. Questão real: PSCPP 2012-Q18.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#ldp">4.2 LDP</a>
+    <a href="#metodos">4.3 Métodos</a>
+    <a href="#triangulo">4.5.4 Triângulo ▶</a>
+    <a href="#sequencia">4.5.5 Sequência</a>
+    <a href="#sucessivas">6 Sucessivas</a>
+    <a href="#duplas">Dobrar a marcação ▶</a>
+    <a href="#traub">Série de Traub ▶</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Núcleo do <strong>Bloco C</strong>. Usa os rumos e marcações do <a href="miguens_cap1_5_navegacao_estimada.html">Cap. 1</a> e a estimada do Cap. 5 (transporte de LDP). O emprego de LDP como limite de segurança está no <a href="miguens_cap7_8_ldp_seguranca.html">Caderno de LDP de Segurança (Cap. 7 e 8)</a>.
+</div>
+
+<!-- ===== LDP ===== -->
+<section class="bloco" id="ldp">
+  <h2 class="sec"><span class="n">4.2</span> O conceito de Linha de Posição</h2>
+  <p class="lede">LDP = o lugar geométrico de todas as posições que o navio pode ocupar após uma observação, num dado instante. Uma só LDP não dá a posição — só o lugar geométrico.</p>
+
+  <table>
+    <tr><th>Tipo de LDP</th><th>Origem da observação</th></tr>
+    <tr><td><strong>Reta de marcação</strong></td><td>Marcação de um ponto notável.</td></tr>
+    <tr><td><strong>Reta de alinhamento</strong></td><td>Dois pontos alinhados (a LDP mais precisa).</td></tr>
+    <tr><td><strong>Reta de altura</strong></td><td>Observação astronômica.</td></tr>
+    <tr><td><strong>Circunferência de igual distância</strong></td><td>Distância a um objeto (radar).</td></tr>
+    <tr><td><strong>Circunferência de segmento capaz</strong></td><td>Ângulo horizontal entre dois pontos (sextante).</td></tr>
+    <tr><td><strong>Isóbata</strong></td><td>Linha de igual profundidade (sondagem).</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>O alinhamento — a LDP mais precisa <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>É a de <span class="hl">maior precisão</span> e <strong>não precisa de instrumento</strong> (observação a olho nu). Condições: os dois pontos bem definidos, identificados e representados na carta; a <span class="hl">altitude do ponto posterior maior que a do anterior</span>. Rotulagem da LDP: hora (4 dígitos) acima, marcação/distância abaixo.</p>
+  </div>
+</section>
+
+<!-- ===== MÉTODOS ===== -->
+<section class="bloco" id="metodos">
+  <h2 class="sec"><span class="n">4.3</span> Métodos por LDP simultâneas</h2>
+  <p class="lede">Duas LDP simultâneas cruzando-se dão a posição. "Simultâneas" = intervalo mínimo entre as observações. O símbolo da posição é uma <strong>pequena circunferência</strong> na interseção.</p>
+
+  <table>
+    <tr><th>Método</th><th>Observação</th></tr>
+    <tr><td><strong>Duas marcações visuais</strong></td><td>Duas retas de marcação de objetos diferentes. Melhor quando se cruzam perto de 90°.</td></tr>
+    <tr><td><strong>Alinhamento + marcação</strong></td><td>Boa precisão; o alinhamento dispensa instrumento.</td></tr>
+    <tr><td><strong>Marcação + distância do mesmo objeto</strong></td><td>As LDP cortam-se a <span class="hl">90°</span> (condição favorável) — ideal com marcação <em>visual</em> + distância <em>radar</em> do mesmo ponto.</td></tr>
+  </table>
+
+  <div class="box">
+    <h4>A condição de bom cruzamento</h4>
+    <p>Duas LDP dão melhor posição quando se cruzam próximo de <strong>90°</strong>. Ângulos muito agudos ampliam a incerteza. Por isso a combinação marcação + distância do mesmo objeto (que se cruzam sempre a 90°) é tão valorizada.</p>
+  </div>
+</section>
+
+<!-- ===== TRIÂNGULO DE INCERTEZA ===== -->
+<section class="bloco" id="triangulo">
+  <h2 class="sec"><span class="n">4.5.4</span> O triângulo de incerteza</h2>
+  <p class="lede">Com três retas de marcação, elas raramente cruzam num ponto único — formam um triângulo. O tamanho dele decide a conduta.</p>
+
+  <div class="ichart">
+    <h4>Triângulo de incerteza — as três condutas</h4>
+    <p class="hint">Aumente o "erro" (não simultaneidade, desvio não detectado, má identificação…) e veja o triângulo crescer. A conduta muda conforme o tamanho e a proximidade de um perigo.</p>
+    <svg id="svgTri" viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triângulo de incerteza"></svg>
+    <div class="ictrl"><label for="erro">Erro →</label><input type="range" id="erro" min="0" max="100" value="25" oninput="drawTri()"></div>
+    <div class="iread" id="triRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>Causas e condutas <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>Causas:</strong> não simultaneidade das marcações · erros de observação · desvio da giro/agulha não detectado ou errado · erro de identificação dos objetos · erros de plotagem · erro na carta.</p>
+    <p style="margin-top:8px"><strong>Condutas:</strong> triângulo <span class="hl">pequeno</span> → adota-se o <strong>centro</strong>; <span class="hl">próximo de um perigo</span> → adota-se o <strong>vértice mais próximo do perigo</strong> e obtém-se nova posição para confirmar; <span class="hl">grande</span> → <strong>abandona-se</strong> e determina-se outra. (Com 4 LDP → quadrilátero de incerteza, mesma conduta.)</p>
+  </div>
+</section>
+
+<!-- ===== SEQUÊNCIA ===== -->
+<section class="bloco" id="sequencia">
+  <h2 class="sec"><span class="n">4.5.5</span> A sequência de observação</h2>
+  <p class="lede">Para que as LDP sejam "simultâneas", o intervalo entre elas deve ser mínimo — e a ordem importa.</p>
+
+  <div class="box key">
+    <h4>A regra geral <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>A hora e o odômetro da posição devem corresponder à <span class="hl">LDP que varia mais rapidamente</span>. Nas <strong>marcações</strong>, as do <strong>través</strong> variam mais rápido (as da proa/popa, mais devagar); nas <strong>distâncias</strong>, é o oposto — as da <strong>proa/popa</strong> variam mais rápido. Observa-se por último (ou primeiro, adotando a hora dela) a LDP mais veloz. Registro na <strong>Folha N-2</strong> (DHN-0622-4), documento legal do navio.</p>
+  </div>
+</section>
+
+<!-- ===== SUCESSIVAS ===== -->
+<section class="bloco" id="sucessivas">
+  <h2 class="sec"><span class="n">6.1/6.3</span> Marcações sucessivas — o transporte de LDP</h2>
+  <p class="lede">Quando só se identifica um ponto notável de cada vez, usam-se duas LDP obtidas em instantes diferentes, transportando a primeira pela estimada (rumo, velocidade e tempo) até o instante da segunda.</p>
+
+  <p>A técnica de <strong>LDP sucessivas</strong> aplica os conceitos da navegação estimada (Cap. 5): conhecendo o intervalo de tempo, a velocidade e o rumo verdadeiro entre as observações, transporta-se a 1ª LDP e cruza-se com a 2ª, obtendo a posição. É um processo <span class="hl">aproximado</span> — quanto menor o intervalo e mais estável a navegação, melhor.</p>
+</section>
+
+<!-- ===== DOBRAR A MARCAÇÃO ===== -->
+<section class="bloco" id="duplas">
+  <h2 class="sec"><span class="n">6.3.4</span> Marcações duplas — dobrar a marcação e a distância pelo través</h2>
+  <p class="lede">Um caso especial elegante: marcar o mesmo objeto quando a marcação polar dobra de valor. O triângulo fica isósceles.</p>
+
+  <div class="ichart">
+    <h4>Dobrar a marcação na proa</h4>
+    <p class="hint">O navio marca o objeto na marcação polar α; navega; ao dobrar para 2α, a distância ao objeto é IGUAL à distância navegada entre as marcações. Deslize α — em 45°→90° o objeto fica pelo través e a distância navegada = distância pelo través.</p>
+    <svg id="svgDobra" viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dobrar a marcação"></svg>
+    <div class="ictrl"><label for="alfa">1ª marcação α →</label><input type="range" id="alfa" min="20" max="60" step="1" value="30" oninput="drawDobra()"></div>
+    <div class="iread" id="dobraRead" style="margin-top:6px"></div>
+  </div>
+
+  <div class="box key">
+    <h4>A propriedade e os pares usados <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Sendo α e 2α as marcações polares, o triângulo ABC é <strong>isósceles</strong> → <span class="hl">AB = BC</span>: a distância ao objeto na 2ª marcação é igual à distância navegada entre as marcações (diferença de odômetro, ou vel × tempo). Pares mais usados: <strong>22,5° e 45°</strong> · <strong>30° e 60°</strong> · <strong>45° e 90°</strong>. O par <strong>45°/90°</strong> é especial: a distância navegada é igual à <span class="hl">distância pelo través</span> (o objeto pelo través), muito prático visualmente.</p>
+  </div>
+</section>
+
+<!-- ===== SÉRIE DE TRAUB ===== -->
+<section class="bloco" id="traub">
+  <h2 class="sec"><span class="n">6.3.5</span> A Série de Traub</h2>
+  <p class="lede">Uma sequência de marcações polares pré-fixadas, tomadas em intervalos iguais ao longo da derrota, que permite obter a posição ao marcar 090° — à distância igual a 2× a distância entre marcações.</p>
+
+  <div class="ichart">
+    <h4>As marcações da Série de Traub ao longo da derrota</h4>
+    <p class="hint">Marcações polares pré-fixadas de um mesmo objeto, espaçadas de uma distância <b>d</b> igual entre si. Ao marcar 090° (través), a distância ao objeto é <b>2d</b>.</p>
+    <svg id="svgTraub" viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Série de Traub"></svg>
+  </div>
+
+  <div class="box key">
+    <h4>A tabela e as propriedades <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>Marcações polares pré-fixadas (arredondadas): <span class="hl">14° · 16° · 18° · 22° · 27° · 34° · 45° · 63° · 90°</span>. Pares que dão a distância pelo través:</p>
+    <table style="margin:6px 0 0">
+      <tr><th class="center">14°/18°</th><th class="center">16°/22°</th><th class="center">18°/27°</th><th class="center">22°/34°</th><th class="center">27°/45°</th><th class="center">34°/63°</th><th class="center">45°/90°</th></tr>
+    </table>
+    <p style="margin-top:10px"><strong>Propriedades:</strong> (a) as distâncias navegadas entre marcações polares consecutivas são <span class="hl">iguais</span> (= d); (b) a distância pelo través é o <span class="hl">dobro</span> da distância navegada entre duas marcações consecutivas (= 2d). Ao marcar 090°, a distância ao objeto é 2d.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>O limite da Série de Traub <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>Havendo <strong>corrente</strong>, a Série de Traub <span class="hl">não pode ser usada para determinar distâncias e posições</span> (as distâncias navegadas deixam de ser iguais). Pode, porém, servir para o navegante obter <strong>indicações</strong> sobre a presença de corrente.</p>
+  </div>
+</section>
+
+<!-- ===== MAPA DA BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
+  <p class="lede">A Série de Traub caiu em 2012 — uma V/F que explora justamente suas propriedades.</p>
+
+  <table>
+    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q18</strong> (1,6 pt)</td><td>Série de Traub — V/F sobre suas propriedades</td><td class="center"><b>(a) F·V·F·V·V</b></td></tr>
+    <tr><td>2011 · Amarela</td><td>—</td><td>Alinhamento (LDP sem instrumento) — fonte Swift/Bailey (BTM)</td><td class="center">outro projeto</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>2012-Q18 resolvida <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>I</strong> (marcações <em>relativas</em> pré-fixadas) → <span class="hl">F</span>: são marcações <strong>polares</strong>. <strong>II</strong> (pouco usada por veleiros pela imprecisão das agulhas) → V. <strong>III</strong> (intervalos aumentando = corrente para a costa) → <span class="hl">F</span>. <strong>IV</strong> (distância pelo través = dobro da distância navegada) → <span class="hl">V</span> (propriedade b). <strong>V</strong> (distâncias navegadas iguais) → <span class="hl">V</span> (propriedade a). Sequência <strong>F·V·F·V·V</strong> → gabarito <b>(a)</b>. Atalho: IV e V são as propriedades verdadeiras da série, e só a opção (a) traz as duas como V.</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. LDP, triângulo de incerteza e marcações sucessivas.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Doze questões — com a 2012-Q18 (Série de Traub) real.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Determinação da Posição (Miguens Cap. 4 e 6)</summary>
+  <ul>
+    <li><b>LDP:</b> lugar geométrico das posições após uma observação; uma só não dá a posição. Tipos: marcação, alinhamento, altura, igual distância, segmento capaz, isóbata.</li>
+    <li><b>Alinhamento:</b> a LDP mais precisa; sem instrumento; ponto posterior mais alto que o anterior.</li>
+    <li><b>Métodos simultâneos:</b> 2 marcações visuais · alinhamento + marcação · marcação + distância do mesmo objeto (cortam a 90°, favorável). Símbolo da posição = pequena circunferência na interseção. Bom cruzamento ≈ 90°.</li>
+    <li><b>Triângulo de incerteza:</b> causas (não simultaneidade, erro de observação, desvio não detectado, má identificação, erro de plotagem, erro na carta). Condutas: pequeno → centro; perto de perigo → vértice mais próximo do perigo + nova posição; grande → abandona. 4 LDP → quadrilátero.</li>
+    <li><b>Sequência:</b> hora/odômetro da posição = LDP que varia mais rápido. Marcações: través varia rápido; distâncias: proa/popa varia rápido. Registro: Folha N-2 (DHN-0622-4).</li>
+    <li><b>Marcações sucessivas:</b> transporte da 1ª LDP pela estimada (rumo, velocidade, tempo) até a 2ª. Processo aproximado.</li>
+    <li><b>Dobrar a marcação:</b> α e 2α → triângulo isósceles → distância ao objeto na 2ª = distância navegada. Pares 22,5/45, 30/60, 45/90. O 45/90 → distância navegada = distância pelo través.</li>
+    <li><b>Série de Traub:</b> marcações polares pré-fixadas 14·16·18·22·27·34·45·63·90. Distâncias iguais entre marcações (d); distância pelo través = 2d (marcação 090°). Com corrente, NÃO serve para distâncias/posições (só indicações).</li>
+    <li><b>Banca:</b> 2012-Q18 (Traub, V/F) → (a) F·V·F·V·V. As propriedades IV (2× no través) e V (distâncias iguais) são as verdadeiras; I é falsa (são polares, não relativas).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Determinação da Posição (Miguens Vol. I, Cap. 4 e 6) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+
+/* ===== TRIÂNGULO DE INCERTEZA ===== */
+function drawTri(){
+  var svg=document.getElementById('svgTri');svg.innerHTML='';
+  var e=+document.getElementById('erro').value/100;
+  var cx=330,cy=175,base=40+e*120;
+  // três vértices de um triângulo que cresce com o erro
+  var A=[cx-base*0.5,cy+base*0.4],B=[cx+base*0.55,cy+base*0.5],C=[cx+base*0.05,cy-base*0.6];
+  // três LDP (retas longas passando pelos lados)
+  function ldp(p,q,col){var dx=q[0]-p[0],dy=q[1]-p[1];var L=260;var ux=dx/Math.hypot(dx,dy),uy=dy/Math.hypot(dx,dy);
+    sEl(svg,'line',{x1:p[0]-ux*L,y1:p[1]-uy*L,x2:q[0]+ux*L,y2:q[1]+uy*L,stroke:col,'stroke-width':2});}
+  ldp(A,B,'#2C5F8A');ldp(B,C,'#1A7A6E');ldp(C,A,'#9E3B2E');
+  // triângulo
+  sEl(svg,'path',{d:'M '+A[0]+' '+A[1]+' L '+B[0]+' '+B[1]+' L '+C[0]+' '+C[1]+' Z',fill:'rgba(200,168,75,.20)',stroke:'#C8A84B','stroke-width':1.5});
+  var gx=(A[0]+B[0]+C[0])/3,gy=(A[1]+B[1]+C[1])/3;
+  // perigo (pedras) à direita
+  sEl(svg,'path',{d:'M 690 120 q 60 10 70 70 q -50 20 -90 5 z',fill:'#e7d3a0',stroke:'#9a7d2a'});
+  sTx(svg,712,160,'perigo',{fill:'#7a5a2a',fs:11,fw:'bold'});
+  var conduta,cor,px,py,plab;
+  if(base<70){conduta='Triângulo PEQUENO → adota-se o CENTRO como posição.';cor='#2E7D52';px=gx;py=gy;plab='centro';}
+  else if(base<130){conduta='Próximo de um perigo → adota-se o VÉRTICE mais próximo do perigo e confirma-se com nova posição.';cor='#9a7d1f';px=B[0];py=B[1];plab='vértice (p/ perigo)';}
+  else{conduta='Triângulo GRANDE → ABANDONA-SE e determina-se outra posição imediatamente.';cor='#9E3B2E';px=gx;py=gy;plab='descartar';}
+  sEl(svg,'circle',{cx:px,cy:py,r:6,fill:cor});
+  sTx(svg,px+10,py+4,plab,{fill:cor,fs:12,fw:'bold'});
+  document.getElementById('triRead').innerHTML='<span style="color:'+cor+'"><b>'+conduta+'</b></span> Causas do triângulo: não simultaneidade, erro de observação, desvio não detectado, má identificação, erro de plotagem ou erro na carta.';
+}
+drawTri();
+
+/* ===== DOBRAR A MARCAÇÃO ===== */
+function drawDobra(){
+  var svg=document.getElementById('svgDobra');svg.innerHTML='';
+  var alfa=+document.getElementById('alfa').value;
+  var trackY=235, Ax=170, run=180;
+  var Bx=Ax+run;
+  var a=alfa*Math.PI/180, a2=2*alfa*Math.PI/180;
+  // O = A + run*(1+cos2α, -sin2α)
+  var Ox=Ax+run*(1+Math.cos(a2)), Oy=trackY-run*Math.sin(a2);
+  // derrota
+  sEl(svg,'line',{x1:60,y1:trackY,x2:820,y2:trackY,stroke:'#8fb8d8','stroke-width':2});
+  sTx(svg,70,trackY+20,'derrota (proa →)',{fill:'#5a86ab',fs:12,fw:'bold'});
+  // A, B
+  sEl(svg,'circle',{cx:Ax,cy:trackY,r:5,fill:'#0D3D36'});sTx(svg,Ax,trackY+20,'A',{fill:'#0D3D36',fs:13,fw:'bold',ta:'middle'});
+  sEl(svg,'circle',{cx:Bx,cy:trackY,r:5,fill:'#0D3D36'});sTx(svg,Bx,trackY+20,'B',{fill:'#0D3D36',fs:13,fw:'bold',ta:'middle'});
+  // objeto O
+  sEl(svg,'circle',{cx:Ox,cy:Oy,r:7,fill:'#C8A84B',stroke:'#9a7d2a','stroke-width':1.5});sTx(svg,Ox+10,Oy,'objeto',{fill:'#9a7d1f',fs:12,fw:'bold'});
+  // linhas A->O e B->O
+  sEl(svg,'line',{x1:Ax,y1:trackY,x2:Ox,y2:Oy,stroke:'#2C5F8A','stroke-width':2});
+  sEl(svg,'line',{x1:Bx,y1:trackY,x2:Ox,y2:Oy,stroke:'#9E3B2E','stroke-width':2.5});
+  // AB (distância navegada)
+  sEl(svg,'line',{x1:Ax,y1:trackY-0,x2:Bx,y2:trackY-0,stroke:'#1A7A6E','stroke-width':4});
+  sTx(svg,(Ax+Bx)/2,trackY-8,'AB = distância navegada',{fill:'#1A7A6E',fs:11.5,fw:'bold',ta:'middle'});
+  // ângulos
+  sTx(svg,Ax+22,trackY-6,'α='+alfa+'°',{fill:'#2C5F8A',fs:12});
+  sTx(svg,Bx-6,trackY-6,'2α='+(2*alfa)+'°',{fill:'#9E3B2E',fs:12,ta:'end'});
+  // BO comprimento
+  var BO=Math.hypot(Ox-Bx,Oy-trackY);
+  var especial=(alfa===45);
+  document.getElementById('dobraRead').innerHTML='Marcação 1ª = <b>'+alfa+'°</b>, 2ª = <b>'+(2*alfa)+'°</b>. Triângulo isósceles → <b>distância ao objeto na 2ª marcação = AB</b> (a distância navegada). '+(especial?'<b style="color:#9a7d1f"> Caso 45°/90°: o objeto está pelo TRAVÉS e a distância navegada = distância pelo través.</b>':'Em 45°/90° o objeto ficará pelo través.');
+}
+drawDobra();
+
+/* ===== SÉRIE DE TRAUB ===== */
+function drawTraub(){
+  var svg=document.getElementById('svgTraub');svg.innerHTML='';
+  var trackY=235, x0=120, obX=470, obY=60;
+  var vals=[14,16,18,22,27,34,45,63,90];
+  // derrota
+  sEl(svg,'line',{x1:60,y1:trackY,x2:820,y2:trackY,stroke:'#8fb8d8','stroke-width':2});
+  sTx(svg,70,trackY+20,'derrota (proa →) — marcações espaçadas de d (iguais)',{fill:'#5a86ab',fs:12,fw:'bold'});
+  // objeto
+  sEl(svg,'circle',{cx:obX,cy:obY,r:8,fill:'#C8A84B',stroke:'#9a7d2a','stroke-width':1.5});sTx(svg,obX+12,obY,'objeto',{fill:'#9a7d1f',fs:12,fw:'bold'});
+  // pontos igualmente espaçados; ao marcar 090° a distância é 2d
+  var n=vals.length, step=64;
+  for(var i=0;i<n;i++){
+    var px=x0+i*step;
+    sEl(svg,'circle',{cx:px,cy:trackY,r:3.5,fill:'#0D3D36'});
+    sEl(svg,'line',{x1:px,y1:trackY,x2:obX,y2:obY,stroke:(vals[i]===90?'#9E3B2E':'#cdbf99'),'stroke-width':(vals[i]===90?2.5:1)});
+    sTx(svg,px,trackY+18,vals[i]+'°',{fill:(vals[i]===90?'#9E3B2E':'#7a6f55'),fs:11,fw:(vals[i]===90?'bold':'normal'),ta:'middle'});
+  }
+  // marca do através (90) = 2d
+  var p90=x0+(n-1)*step;
+  sTx(svg,(obX),trackY-10,'ao marcar 090°: distância = 2d',{fill:'#9E3B2E',fs:12,fw:'bold',ta:'middle'});
+}
+drawTraub();
+window.addEventListener('resize',function(){drawTri();drawDobra();drawTraub();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"LDP — definição",b:"Lugar geométrico de todas as posições que o navio pode ocupar após uma observação. Uma só não dá a posição."},
+  {f:"Tipos de LDP",b:"Marcação · alinhamento · altura (astro) · igual distância · segmento capaz · isóbata."},
+  {f:"Alinhamento",b:"A LDP mais precisa; sem instrumento (a olho nu); ponto posterior mais alto que o anterior."},
+  {f:"Símbolo da posição",b:"Pequena circunferência na interseção das LDP."},
+  {f:"Marcação + distância do mesmo objeto",b:"As LDP cortam-se a 90° (favorável). Ideal: marcação visual + distância radar."},
+  {f:"Bom cruzamento",b:"Duas LDP dão melhor posição quando se cruzam perto de 90°."},
+  {f:"Triângulo de incerteza — causas",b:"Não simultaneidade, erro de observação, desvio não detectado, má identificação, erro de plotagem, erro na carta."},
+  {f:"Triângulo pequeno",b:"Adota-se o CENTRO como posição."},
+  {f:"Triângulo perto de perigo",b:"Adota-se o VÉRTICE mais próximo do perigo e confirma-se com nova posição."},
+  {f:"Triângulo grande",b:"Abandona-se e determina-se outra posição imediatamente."},
+  {f:"Sequência de observação",b:"Hora/odômetro da posição = LDP que varia mais rápido. Marcações: través rápido. Distâncias: proa/popa rápido."},
+  {f:"Folha N-2",b:"Registro de Ocorrências da Navegação (DHN-0622-4). Documento legal do navio."},
+  {f:"Marcações sucessivas",b:"Transporte da 1ª LDP pela estimada (rumo, velocidade, tempo) até a 2ª. Processo aproximado."},
+  {f:"Dobrar a marcação",b:"α e 2α → triângulo isósceles → distância ao objeto na 2ª = distância navegada (AB=BC)."},
+  {f:"Pares de marcações duplas",b:"22,5°/45° · 30°/60° · 45°/90°."},
+  {f:"45°/90° (bow & beam)",b:"A distância navegada = distância pelo través (objeto pelo través)."},
+  {f:"Série de Traub — valores",b:"Marcações polares pré-fixadas: 14·16·18·22·27·34·45·63·90."},
+  {f:"Traub — propriedades",b:"Distâncias navegadas entre marcações iguais (d); distância pelo través = 2d (marcação 090°)."},
+  {f:"Traub com corrente",b:"Não serve para distâncias/posições (distâncias deixam de ser iguais); só dá indicações de corrente."},
+  {f:"2012-Q18",b:"Série de Traub V/F → (a) F·V·F·V·V. I é falsa: são polares, não relativas."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"Uma Linha de Posição (LDP) é:",
+   o:["A posição exata do navio","O lugar geométrico de todas as posições que o navio pode ocupar após uma observação","O rumo verdadeiro","A derrota planejada"],a:1,
+   e:"Uma LDP dá o lugar geométrico das posições possíveis após uma observação — sozinha não define a posição; precisa cruzar com outra."},
+  {q:"A LDP de maior precisão, que dispensa instrumento, é a:",
+   o:["Reta de marcação","Circunferência de igual distância","Reta de alinhamento","Isóbata"],a:2,
+   e:"O alinhamento é a LDP mais precisa e não precisa de instrumento (observação a olho nu). Exige o ponto posterior mais alto que o anterior."},
+  {q:"A combinação marcação + distância de um mesmo objeto é valorizada porque as LDP:",
+   o:["Cruzam-se num ângulo agudo","Cruzam-se sempre a 90° (condição favorável)","São ambas circunferências","Dispensam a carta"],a:1,
+   e:"A reta de marcação e a circunferência de distância do mesmo objeto cortam-se a 90° — cruzamento ótimo. Ideal com marcação visual + distância radar."},
+  {q:"Se o triângulo de incerteza é pequeno, adota-se para a posição:",
+   o:["O vértice mais próximo do perigo","O centro do triângulo","O maior vértice","Abandona-se a posição"],a:1,
+   e:"Triângulo pequeno → centro. Perto de perigo → vértice mais próximo do perigo (e confirma). Grande → abandona e refaz."},
+  {q:"NÃO é causa de um triângulo de incerteza:",
+   o:["Não simultaneidade das marcações","Desvio da giro não detectado","Erro na identificação dos objetos","Velocidade do navio constante"],a:3,
+   e:"As causas são erros: não simultaneidade, observação, desvio não detectado, má identificação, plotagem, erro na carta. Velocidade constante não gera triângulo."},
+  {q:"Na sequência de observação, a hora e o odômetro da posição correspondem à LDP que:",
+   o:["Varia mais lentamente","Varia mais rapidamente","Está pela proa","Tem maior distância"],a:1,
+   e:"Regra geral: adota-se a hora/odômetro da LDP que varia mais rápido. Nas marcações, as do través variam mais rápido; nas distâncias, as da proa/popa."},
+  {q:"Ao marcar um objeto na marcação polar α e depois em 2α, a distância ao objeto na segunda marcação é igual:",
+   o:["Ao dobro da distância navegada","À distância navegada entre as duas marcações","À metade da distância navegada","À distância pelo través"],a:1,
+   e:"O triângulo é isósceles (AB=BC): a distância ao objeto na 2ª marcação = distância navegada entre as marcações (diferença de odômetro ou vel×tempo)."},
+  {q:"O par de marcações polares 45°/90° é especial porque a distância navegada entre elas é igual:",
+   o:["Ao raio de giro","À distância pelo través do objeto","À amplitude da maré","Ao avanço"],a:1,
+   e:"No par 45°/90°, ao chegar a 90° o objeto está pelo través e a distância navegada é igual à distância pelo través (bow and beam)."},
+  {q:"As marcações polares pré-fixadas da Série de Traub incluem:",
+   o:["10°, 20°, 30°, 40°","14°, 16°, 18°, 22°, 27°, 34°, 45°, 63°, 90°","30°, 45°, 60°, 90°","0°, 45°, 90°, 135°"],a:1,
+   e:"A série é 14·16·18·22·27·34·45·63·90 (valores arredondados)."},
+  {q:"Na Série de Traub, a distância pelo través é:",
+   o:["Igual à distância navegada entre marcações","O dobro da distância navegada entre marcações consecutivas","A metade da distância navegada","Independente da distância navegada"],a:1,
+   e:"Propriedade: as distâncias entre marcações são iguais (d) e a distância pelo través é 2d. Ao marcar 090°, a distância ao objeto é 2d."},
+  {q:"Havendo corrente, a Série de Traub:",
+   o:["Fica mais precisa","Não pode ser usada para determinar distâncias e posições (só dá indicações)","Dobra a distância pelo través","Passa a usar marcações verdadeiras"],a:1,
+   e:"Com corrente, as distâncias navegadas deixam de ser iguais → a série não serve para distâncias/posições, apenas para indicar a presença de corrente."},
+  {q:"[PSCPP 2012] Sobre a Série de Traub, a sequência V/F correta (I a V) é:",
+   o:["V·V·F·V·F","F·V·F·V·V","F·F·V·F·V","V·F·V·F·V"],a:1,
+   e:"Gabarito (a) da prova: F·V·F·V·V. I é falsa (são marcações polares, não relativas); III falsa; IV e V são as propriedades verdadeiras (2d no través; distâncias iguais)."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>
