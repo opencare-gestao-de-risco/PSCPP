@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Navegação com Mau Tempo — Miguens Vol. III Cap. 42 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#0b1f1c;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:120px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;margin-top:12px;min-height:52px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:180px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco H — Mau Tempo</p>
+    <h1>Navegação com <em>Mau Tempo</em> — ondas, manobra e ciclones</h1>
+    <p class="sub">Do fenômeno das ondas (vagas e marulho, escarpamento e celeridade) aos seus efeitos sobre o navio (balanço, arfagem e caturro, sincronismo, slamming); da decisão de capear ou correr com o tempo à estrutura dos ciclones tropicais — os semicírculos perigoso e manobrável, os sinais precursores, a Lei de Buys Ballot e a manobra para escapar do centro.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. III — <b>Cap. 42 (Navegação com Mau Tempo)</b>. A banca cita também <em>Arte Naval</em> e o <em>PNA</em> para a manobra. Questões reais: PSCPP 2006, 2008 e 2011.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#ondas">42.1 Ondas ▶</a>
+    <a href="#anormais">42.1.3 Anormais · tsunami</a>
+    <a href="#efeitos">42.2 Efeitos no navio</a>
+    <a href="#manobra">42.4 Capear × correr ▶</a>
+    <a href="#ciclones">42.5 Ciclones · semicírculos ▶</a>
+    <a href="#sinais">42.6/7 Buys Ballot · manobra</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 <strong>Bloco H.</strong> A ação das ondas soma-se ao vento e à corrente no triângulo da <a href="miguens_cap1_5_navegacao_estimada.html">Navegação Estimada (Cap. 5)</a> (abatimento/caimento). O radar acompanha o olho do ciclone — ver <a href="miguens_cap14_navegacao_radar.html">Radar (Cap. 14)</a>. Os avisos de mau tempo chegam pelos Avisos-Rádio Náuticos do <a href="miguens_cap12_publicacoes_nauticas.html">Cap. 12</a>. A manobra em si é assunto de <em>Arte Naval</em> e do PNA (outros projetos).
+</div>
+
+<!-- ===== ONDAS ===== -->
+<section class="bloco" id="ondas">
+  <h2 class="sec"><span class="n">42.1</span> As ondas: formação, elementos e propagação</h2>
+  <p class="lede">O vento arrasta as partículas de água, que se empilham nas <strong>cristas</strong>. Mas o movimento da partícula é <span class="hl">orbital</span> — ela sobe e desce quase no lugar, avançando muito pouco. Por isso um objeto boiando é levantado e abaixado, mas quase não anda com a onda.</p>
+
+  <div class="box key">
+    <h4>Elementos e vocabulário <span class="tag t-decorar">DECORAR</span></h4>
+    <p><strong>Crista</strong> (parte alta) e <strong>cavado</strong> (parte baixa). <strong>Altura (H)</strong> = distância vertical crista–cavado; <strong>comprimento (L)</strong> = distância horizontal entre cristas; <strong>período (T)</strong> = tempo entre duas cristas num ponto fixo. O raio da órbita das partículas decresce com a profundidade e some a cerca de <span class="hl">meio comprimento de onda</span>. As ondas <em>não</em> sofrem desvio apreciável de Coriolis — vão na direção para onde sopra o vento.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Vagas × marulho — a distinção que a banca cobra</h4>
+    <p><strong>Vagas</strong> = ondas formadas pela ação <span class="hl">local</span> do vento que sopra: cristas íngremes, alturas irregulares, comprimentos curtos, aspecto confuso. <strong>Marulho (ou ondulação)</strong> = as ondas que continuam depois que o vento parou ou mudou, propagando-se para longe: cristas mais compridas, direção mais constante, alturas menores e períodos/comprimentos <span class="hl">regulares</span>.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Fatores e fórmulas <span class="tag t-calc">CÁLCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>A altura, o comprimento e o período dependem de três fatores: <strong>velocidade do vento</strong> (fator decisivo), <strong>duração</strong> e <strong>pista/fetch</strong> (distância em linha reta na direção do vento). Pista e duração só limitam no início; quando ambas deixam de limitar, tem-se o <span class="hl">mar completamente desenvolvido</span>.</p>
+    <div class="eq">C = 3,03 · T<span class="lbl">celeridade (velocidade de propagação) do marulho, em nós, com T em segundos — em águas profundas</span></div>
+    <div class="eq">escarpamento = H / L&nbsp;&nbsp;→&nbsp;&nbsp;a onda <b>arrebenta</b> quando H/L atinge 1/7<span class="lbl">ondas longas: 1/40 a 1/50 · ondas normais (~60 m): ~1/20 · quebra: 1/7</span></div>
+    <p class="vars">No Atlântico, ondas normais: L ≈ 60–110 m, T ≈ 6–8 s, C ≈ 18–27 nós. Ondas de tempestade: L ≈ 160–200 m, T ≈ 10–14 s.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Escarpamento e celeridade — a onda vai quebrar?</h4>
+    <p class="hint">Ajuste a altura e o comprimento. O escarpamento é H/L; ao atingir 1/7 a onda perde estabilidade e arrebenta. O período e a celeridade (C = 3,03·T) saem do comprimento em águas profundas.</p>
+    <canvas id="cvOnda" width="860" height="300" style="background:#fff"></canvas>
+    <div class="ictrl"><label for="alt">Altura H (m) →</label><input type="range" id="alt" min="0.5" max="24" step="0.5" value="4" oninput="drawOnda()"></div>
+    <div class="ictrl"><label for="comp">Comprimento L (m) →</label><input type="range" id="comp" min="20" max="240" step="5" value="80" oninput="drawOnda()"></div>
+    <div class="iread" id="ondaRead"></div>
+  </div>
+</section>
+
+<!-- ===== ANORMAIS ===== -->
+<section class="bloco" id="anormais">
+  <h2 class="sec"><span class="n">42.1.2/3</span> Correntes, águas rasas, ondas anormais e tsunami</h2>
+  <p class="lede">As ondas mudam de caráter ao encontrar correntes, gelo ou fundo — e, por vezes, somam-se em ondas excepcionais.</p>
+
+  <p>Uma corrente <strong>contrária</strong> encurta e encrespa as ondas (mais perigosas); a favor, alonga-as. É por isso que a <strong>Corrente das Agulhas</strong>, contra o vento, gera ondas gigantes na costa sul-africana. Em <strong>águas rasas</strong>, as órbitas se achatam e a onda desacelera; o <em>marulho de fundo</em> (ground swell) pode causar forte balanço mesmo sem quebrar.</p>
+
+  <div class="box key">
+    <h4>Ondas anormais e tsunami</h4>
+    <p>As ondas vêm em <strong>séries</strong>: a maior costuma ser <span class="hl">entre a terceira e a oitava</span> onda. A superposição de trens diferentes pode gerar uma onda excepcional (freak wave). O <strong>tsunami</strong>, gerado por sismos, tem em alto-mar altura mínima (~0,8 m) e comprimento enorme — passa despercebido sob o navio —, mas ao chegar em águas rasas cresce enormemente: o perigo é na costa, não no oceano aberto.</p>
+  </div>
+</section>
+
+<!-- ===== EFEITOS NO NAVIO ===== -->
+<section class="bloco" id="efeitos">
+  <h2 class="sec"><span class="n">42.2/3</span> Efeitos das ondas sobre o navio</h2>
+  <p class="lede">Três movimentos importam: <strong>balanço</strong> (rolar de bordo a bordo), <strong>arfagem</strong> (subir e descer) e <strong>caturro</strong> (mergulhar proa e popa). O perigo cresce quando entram em <em>sincronismo</em>.</p>
+
+  <table>
+    <tr><th>Fenômeno</th><th>O que é / por que é perigoso</th></tr>
+    <tr><td><strong>Sincronismo de balanço</strong></td><td>Se as vagas chegam ao bordo em fase com os balanços sucessivos, o balanço cresce muito, mesmo com ondas pequenas — como <span class="hl">embalar uma criança no balanço</span>. Pode levar a bandas perigosas.</td></tr>
+    <tr><td><strong>Caturro / arfagem</strong></td><td>Aplicado à proa/popa em sincronia, causa forte caturro. Do ponto de vista de avaria, o caturro é <span class="hl">tão importante quanto o balanço</span>.</td></tr>
+    <tr><td><strong>Slamming (pancada)</strong></td><td>Impacto forte quando a proa sai de uma onda e colide com a seguinte — vibração que percorre o navio; indica a intensidade das ondas. Some-se a vibração longitudinal pelo peso da água embarcada.</td></tr>
+    <tr><td><strong>Mar desencontrado</strong></td><td>Marulho pesado encontrando vagas de outra direção → mar confuso. O mar <em>curto e confuso</em> é pior para navios pequenos; o de <em>ondas longas e pesadas</em>, pior para os grandes.</td></tr>
+  </table>
+</section>
+
+<!-- ===== MANOBRA ===== -->
+<section class="bloco" id="manobra">
+  <h2 class="sec"><span class="n">42.4</span> Manobra: capear ou correr com o tempo</h2>
+  <p class="lede">A decisão-chave no mau tempo. A <strong>proa é mais reforçada</strong> que a popa e foi projetada para partir as ondas — o que pesa a favor de capear.</p>
+
+  <table>
+    <tr><th>Manobra</th><th>Como / efeito</th></tr>
+    <tr><td><strong>Capear</strong> (pôr à capa)</td><td>Manter a <span class="hl">proa chegada ao vento e ao mar</span>, com pouco seguimento, abatendo e formando uma esteira de calma. <span class="hl">Reduz o balanço</span>, mas maximiza o caturro. Em geral dá comportamento mais estável — às vezes basta <strong>reduzir 2 nós</strong> para trocar choques fortes por caturro aceitável.</td></tr>
+    <tr><td><strong>Correr com o tempo</strong></td><td>Fugir com o mar de popa. Alívio no caturro, mas risco de <span class="hl">surfar e atravessar ao mar</span> (broaching) — o pior a evitar. Perigoso perto de costas a sotavento.</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Detalhes que a banca gosta</h4>
+    <p>• <strong>Trim de popa</strong> é preferível — mantém hélices e lemes bem imersos; trim de proa faz a proa enterrar.<br>
+    • Reduzir velocidade nem sempre reduz o caturro (navios pesados podem embarcar mais água).<br>
+    • O <strong>óleo</strong> (vegetal ou animal) espalhado acalma as vagas que quebram, mas <span class="hl">não reduz o marulho</span>. Com mar de proa, deita-se pelos embornais e descargas.</p>
+  </div>
+</section>
+
+<!-- ===== CICLONES ===== -->
+<section class="bloco" id="ciclones">
+  <h2 class="sec"><span class="n">42.5</span> Ciclones tropicais e os semicírculos</h2>
+  <p class="lede">Formam-se sobre águas quentes, entre 5° e 20° de latitude, com <strong>núcleo quente</strong> e ventos organizados ao redor de um <strong>olho</strong>. Seu poder de destruição excede o de qualquer outra tempestade — a melhor manobra é, se possível, <span class="hl">evitá-lo</span>.</p>
+
+  <table>
+    <tr><th>Estágio</th><th>Vento máximo (Beaufort)</th></tr>
+    <tr><td>Perturbação tropical</td><td>Sem ventos fortes, sem isóbaras fechadas.</td></tr>
+    <tr><td>Depressão tropical</td><td>Até <strong>33 nós</strong> (força 7); já tem isóbara fechada.</td></tr>
+    <tr><td>Tempestade tropical</td><td><strong>34 a 63 nós</strong> (forças 8–11).</td></tr>
+    <tr><td>Furacão / tufão</td><td><strong>64 nós ou mais</strong> (força 12).</td></tr>
+  </table>
+  <p>Ocorrem em 6 regiões (4 no Hemisfério Norte, 2 no Sul); o nome (furacão, tufão, ciclone) varia com a região.</p>
+
+  <div class="ichart">
+    <h4>Semicírculo perigoso × manobrável</h4>
+    <p class="hint">Alterne o hemisfério. O sistema desloca-se para cima (sua trajetória). No semicírculo perigoso, a velocidade do vento SOMA-se à do sistema; no manobrável (navegável), OPÕE-se. Veja de que lado fica cada um.</p>
+    <canvas id="cvCiclone" width="860" height="300" style="background:#fff"></canvas>
+    <div class="ictrl" style="margin-top:8px">
+      <button class="hemBtn" data-h="N" onclick="setHem('N')">Hemisfério Norte</button>
+      <button class="hemBtn active" data-h="S" onclick="setHem('S')">Hemisfério Sul</button>
+    </div>
+    <div class="iread" id="cicloRead"></div>
+  </div>
+
+  <div class="box key">
+    <h4>A regra dos semicírculos <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>Semicírculo perigoso</strong> — o vento se soma ao movimento do sistema: é o semicírculo <span class="hl">direito no Hemisfério Norte</span> e o <span class="hl">esquerdo no Hemisfério Sul</span>. <strong>Semicírculo manobrável (navegável)</strong> — o vento se opõe ao movimento: <span class="hl">esquerdo no HN</span>, <span class="hl">direito no HS</span>.</p>
+  </div>
+</section>
+
+<!-- ===== SINAIS / MANOBRA CICLONE ===== -->
+<section class="bloco" id="sinais">
+  <h2 class="sec"><span class="n">42.6/7</span> Sinais precursores, Buys Ballot e a manobra</h2>
+  <p class="lede">Reconhecer o ciclone cedo é tudo. Os avisos e a leitura atenta dos instrumentos permitem manobrar a tempo.</p>
+
+  <div class="box formula">
+    <h4>Sinais precursores <span class="tag t-banca">BANCA</span></h4>
+    <p>• <strong>Barômetro</strong>: leitura correta e <span class="hl">horária</span> (exige conhecer a variação diurna normal). • <strong>Marulho longo</strong>: vagalhões longos e baixos, de período ~15 s (contra os ~7–8 s normais) — a direção aponta o centro e o aviso costuma vir <span class="hl">antes da queda do barômetro</span>. • Nuvens <strong>cirrus</strong> convergindo, depois chuva fina e queda do barômetro.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Lei de Buys Ballot <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Um observador <strong>de frente para o vento verdadeiro</strong> tem o centro da tormenta: <span class="hl">à sua direita</span>, cerca de 110° para trás do través, no <strong>Hemisfério Norte</strong>; <span class="hl">à sua esquerda</span>, também ~110° atrás do través, no <strong>Hemisfério Sul</strong>. A distância ao centro estima-se pela violência do vento e pela razão de queda do barômetro.</p>
+  </div>
+
+  <p><strong>Se ainda longe do sistema:</strong> determinada a posição do centro, <span class="hl">afastar-se o mais rápido possível</span>, adotando um rumo que dê boa distância lateral à derrota provável do ciclone, corrigido pelo acompanhamento contínuo (boletins, radar). Usa-se a <strong>Rosa de Manobra</strong> para achar o rumo de máximo afastamento e o ponto de maior aproximação (PMA) — o mesmo raciocínio de movimento relativo do radar. O radar dá a distância ao olho; o acompanhamento do olho por ≥ 1 hora dá rumo e velocidade do sistema.</p>
+
+  <h3>Já dentro da área da tormenta — as manobras de evasão</h3>
+  <p>A primeira coisa é saber <strong>em que semicírculo o navio está</strong>. O guia mais confiável é o <span class="hl">vento</span>: se ele <em>ronda</em> (muda de direção) num sentido ou noutro. A regra vale para navio parado ou lento; <strong>em dúvida, parar o navio</strong> para decidir. Se o vento fica constante mas aumenta com a queda do barômetro, o navio está sobre a rota do centro.</p>
+
+  <table>
+    <tr><th>Hemisfério</th><th>Vento ronda…</th><th>Semicírculo</th><th>Manobra (velocidade máxima possível)</th></tr>
+    <tr><td rowspan="2"><strong>Norte</strong><br>(circulação anti-horária)</td><td>para a <strong>direita</strong> (horário)</td><td>PERIGOSO (direito)</td><td>Vento na <span class="hl">bochecha de BE</span> (≈45° rel.). Se necessário, capear.</td></tr>
+    <tr><td>para a <strong>esquerda</strong> (anti-horário)</td><td>MANOBRÁVEL (esquerdo)</td><td>Vento na <span class="hl">alheta de BE</span> (≈135° rel.).</td></tr>
+    <tr><td rowspan="2"><strong>Sul</strong><br>(circulação horária)</td><td>para a <strong>esquerda</strong> (anti-horário)</td><td>PERIGOSO (esquerdo)</td><td>Vento na <span class="hl">bochecha de BB</span>. Se necessário, capear.</td></tr>
+    <tr><td>para a <strong>direita</strong> (horário)</td><td>MANOBRÁVEL (direito)</td><td>Vento na <span class="hl">alheta de BB</span>. Se necessário, correr com o tempo.</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Na rota do centro e a regra do quadrante <span class="tag t-banca">BANCA</span></h4>
+    <p>Se o navio está <strong>na trajetória</strong> da tormenta, receber o vento pela <span class="hl">alheta profunda do bordo do semicírculo navegável</span> (≈160° rel.) e correr à máxima velocidade até entrar francamente no semicírculo manobrável — daí, seguir a regra desse semicírculo. O quadrante <strong>dianteiro do semicírculo perigoso</strong> é o pior; o mais favorável é o <strong>quadrante de ré do semicírculo navegável</strong>. Em furacão com mar confuso, alguns navios grandes aguentam melhor com <em>máquinas paradas</em> — manobra ousada, só em último caso.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Cuidado com a leitura do vento</h4>
+    <p>O vento pode <strong>não rondar</strong> se o olho estiver pela <em>proa</em> (pressão caindo) ou pela <em>popa</em> (pressão subindo) do navio — nesses casos, o <span class="hl">barômetro é o guia fundamental</span>. E lembre: a ronda do vento só identifica o semicírculo com o navio parado ou lento; com o navio rápido, é preciso descontar o movimento próprio.</p>
+  </div>
+</section>
+
+<!-- ===== JÁ COBRADO ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">★</span> Já cobrado pela banca</h2>
+  <p class="lede">Varredura das provas 2006, 2008, 2011 e 2012. A manobra (capear/correr) e os sinais precursores são os alvos.</p>
+
+  <table>
+    <tr><th>Prova · Questão</th><th>Tema</th><th>Gabarito</th></tr>
+    <tr><td><strong>2011 · Q21</strong></td><td>Manobra de manter a proa chegada ao vento para aguentar o mau tempo, com pouco seguimento, abatendo e formando esteira de calma = pôr o navio à capa (capear). <em>Fonte citada: Arte Naval.</em></td><td class="center"><strong>(e)</strong></td></tr>
+    <tr><td><strong>2006 · Q3</strong></td><td>Com ondas de comprimento longo (L<sub>w</sub>/L ≥ 1,5), a situação mais provável de dificuldade em manter o rumo é com <strong>mar de popa</strong> (risco de atravessar ao mar). <em>Fonte citada: PNA.</em></td><td class="center"><strong>(e)</strong></td></tr>
+    <tr><td><strong>2008 · Q (círrus)</strong></td><td>Nuvens cirrus de cristais de gelo surgindo no horizonte, com vento e ondas → previsão de mau tempo (pancadas de chuva, rajadas e trovoadas).</td><td class="center"><strong>(e)</strong></td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--mute)">Os gabaritos de 2006 e 2008 estão marcados nos cadernos de provas. Note que a banca costuma citar <em>Arte Naval</em> e o <em>PNA</em> para a manobra — o conteúdo corresponde ao Cap. 42 do Miguens.</p>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">✦</span> Flashcards</h2>
+  <p class="lede">Toque para virar. Vinte e oito cartões com o essencial da navegação com mau tempo.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">✱</span> Quiz</h2>
+  <p class="lede">Dezenove questões — as reais (2006/2008/2011), os semicírculos e as manobras de evasão.</p>
+  <div class="score">Acertos: <b id="scHit">0</b> / <span id="scTot">0</span> &nbsp;·&nbsp; Aproveitamento: <b id="scPct">—</b></div>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Navegação com Mau Tempo (Miguens Vol. III Cap. 42)</summary>
+  <ul>
+    <li><b>Movimento orbital:</b> a partícula sobe e desce quase no lugar; o raio some a ~½ comprimento de onda de profundidade. Um objeto boiando quase não anda com a onda.</li>
+    <li><b>Elementos:</b> crista, cavado, altura (H), comprimento (L) e período (T).</li>
+    <li><b>Vagas × marulho:</b> vagas = vento local (cristas íngremes, curtas, irregulares); marulho = ondas que seguem sem o vento (longas, regulares, direção constante).</li>
+    <li><b>Fatores:</b> velocidade do vento (decisivo), duração e pista/fetch (limitam no início). Mar completamente desenvolvido = pista e duração deixam de limitar.</li>
+    <li><b>Fórmulas:</b> celeridade C = 3,03·T (nós). Escarpamento = H/L; a onda arrebenta a 1/7. Normais (~60 m) ≈ 1/20; longas 1/40–1/50.</li>
+    <li><b>Coriolis:</b> as ondas NÃO sofrem desvio apreciável — vão na direção do vento gerador.</li>
+    <li><b>Ondas anormais:</b> a maior de uma série costuma ser entre a 3ª e a 8ª. Corrente contrária (Agulhas) encrespa e agiganta.</li>
+    <li><b>Tsunami:</b> em alto-mar ~0,8 m (passa despercebido); o perigo é na costa, onde cresce muito.</li>
+    <li><b>Efeitos no navio:</b> balanço, arfagem e caturro. Sincronismo amplia o balanço; caturro é tão perigoso quanto; slamming = pancada da proa.</li>
+    <li><b>Mar desencontrado:</b> curto/confuso pior p/ navios pequenos; longo e pesado pior p/ grandes.</li>
+    <li><b>Capear:</b> proa ao vento, pouco seguimento, esteira de calma. Reduz balanço, maximiza caturro. Proa é mais reforçada.</li>
+    <li><b>Correr com o tempo:</b> mar de popa; risco de surfar e atravessar ao mar (broaching). Trim de popa é preferível. Óleo acalma as vagas, não o marulho.</li>
+    <li><b>Ciclone tropical:</b> águas quentes, 5–20°, núcleo quente + olho. Depressão ≤33 nós (F7); tempestade 34–63 (F8–11); furacão/tufão ≥64 (F12).</li>
+    <li><b>Semicírculos:</b> PERIGOSO (vento soma) = direito no HN / esquerdo no HS. MANOBRÁVEL (vento opõe) = esquerdo no HN / direito no HS.</li>
+    <li><b>Buys Ballot:</b> de frente para o vento, centro à DIREITA no HN, à ESQUERDA no HS (~110° atrás do través).</li>
+    <li><b>Manobra (longe):</b> afastar-se do centro; Rosa de Manobra p/ o rumo de máximo afastamento e o PMA; radar dá a distância ao olho.</li>
+    <li><b>Evasão (na tormenta):</b> HN perigoso = vento na bochecha de BE (~45° rel., capear se preciso); HN navegável = alheta de BE (~135°). HS = idem, a BOMBORDO. Na rota: alheta profunda (~160°) do bordo navegável. Identifica-se o semicírculo pela ronda do vento (parado/lento); se o olho está pela proa/popa, guiar-se pelo barômetro.</li>
+    <li><b>Banca:</b> 2011-Q21 (capear, e) · 2006-Q3 (mar de popa dificulta o rumo, e) · 2008 (cirrus → mau tempo, e).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Navegação com Mau Tempo (Miguens Vol. III, Cap. 42) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+function arrow(ctx,x1,y1,x2,y2,color,w){
+  ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=w||3;
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  var a=Math.atan2(y2-y1,x2-x1),h=9+(w||3);
+  ctx.beginPath();ctx.moveTo(x2,y2);
+  ctx.lineTo(x2-h*Math.cos(a-0.4),y2-h*Math.sin(a-0.4));
+  ctx.lineTo(x2-h*Math.cos(a+0.4),y2-h*Math.sin(a+0.4));
+  ctx.closePath();ctx.fill();
+}
+
+/* ===== ESCARPAMENTO / CELERIDADE ===== */
+function drawOnda(){
+  var cv=document.getElementById('cvOnda'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var Hm=+document.getElementById('alt').value;
+  var Lm=+document.getElementById('comp').value;
+  var T=Math.sqrt(Lm/1.56);                        // águas profundas: L = 1,56 T²
+  var C=3.03*T;
+  var esc=Hm/Lm;                                   // escarpamento
+  var quebra=esc>=1/7;
+  // escala horizontal FIXA (px por metro) — assim L altera a forma da onda
+  var pxm=(W-80)/240;                               // L=240 m preenche a largura com 1 onda
+  var midY=170, ampPx=Math.min(74, (Hm/2)*pxm);     // amplitude na MESMA escala do comprimento
+  var lpxWave=Lm*pxm;                               // 1 comprimento de onda, em px
+  ctx.fillStyle='#eaf4fb';ctx.fillRect(0,0,W,H);
+  // perfil: quanto menor L (p/ um mesmo H), mais íngreme; ao quebrar, crista adianta-se
+  ctx.strokeStyle=quebra?'#9E3B2E':'#2C5F8A';ctx.lineWidth=3;ctx.beginPath();
+  for(var x=40;x<=W-40;x+=2){
+    var ph=(x-40)/lpxWave*2*Math.PI;
+    var y=midY - ampPx*Math.cos(ph) + (quebra?ampPx*0.25*Math.cos(2*ph):0);
+    ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+  // H (vertical, junto à esquerda)
+  ctx.strokeStyle='#0D3D36';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(70,midY-ampPx);ctx.lineTo(70,midY+ampPx);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(65,midY-ampPx);ctx.lineTo(75,midY-ampPx);ctx.moveTo(65,midY+ampPx);ctx.lineTo(75,midY+ampPx);ctx.stroke();
+  ctx.fillStyle='#0D3D36';ctx.font='bold 12px Trebuchet MS';ctx.fillText('H = '+Hm.toFixed(1).replace('.',',')+' m',78,midY);
+  // L (horizontal = um comprimento de onda real, na escala fixa; medido de crista a crista)
+  var lStart=40, lEnd=Math.min(40+lpxWave, W-40);
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(lStart,44);ctx.lineTo(lEnd,44);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(lStart,39);ctx.lineTo(lStart,49);ctx.moveTo(lEnd,39);ctx.lineTo(lEnd,49);ctx.stroke();
+  ctx.fillStyle='#1A7A6E';ctx.fillText('L = '+Lm+' m',(lStart+lEnd)/2-24,34);
+  // rótulos crista/cavado
+  ctx.fillStyle='#7a6f55';ctx.font='11px Trebuchet MS';
+  ctx.fillText('crista',44,midY-ampPx-6);ctx.fillText('cavado',44,midY+ampPx+16);
+  if(quebra){ctx.fillStyle='#9E3B2E';ctx.font='bold 15px Trebuchet MS';ctx.fillText('ARREBENTA (H/L ≥ 1/7)',W-260,30);}
+  document.getElementById('ondaRead').innerHTML='Escarpamento H/L = '+Hm.toFixed(1).replace('.',',')+'/'+Lm+' = <b>1/'+(Lm/Hm).toFixed(1).replace('.',',')+'</b> '+(quebra?'→ <b style="color:#9E3B2E">a onda perde estabilidade e arrebenta (limite 1/7)</b>.':'→ onda íntegra (quebra só a partir de 1/7).')+' Período T = √(L/1,56) ≈ <b>'+T.toFixed(1).replace('.',',')+' s</b>; celeridade C = 3,03·T ≈ <b>'+C.toFixed(1).replace('.',',')+' nós</b>.';
+}
+
+/* ===== CICLONE / SEMICÍRCULOS ===== */
+var hem='S';
+function setHem(h){hem=h;document.querySelectorAll('.hemBtn').forEach(function(b){b.classList.toggle('active',b.dataset.h===h);});drawCiclone();}
+function drawCiclone(){
+  var cv=document.getElementById('cvCiclone'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var cx=W/2, cy=H/2+6, R=118;
+  var dangerRight=(hem==='N');                     // perigoso: direito no HN, esquerdo no HS
+  // semicírculos coloridos
+  ctx.fillStyle='rgba(158,59,46,.14)';
+  ctx.beginPath();ctx.moveTo(cx,cy-R);ctx.arc(cx,cy,R,-Math.PI/2,Math.PI/2,!dangerRight);ctx.closePath();ctx.fill();
+  ctx.fillStyle='rgba(46,125,82,.14)';
+  ctx.beginPath();ctx.moveTo(cx,cy-R);ctx.arc(cx,cy,R,-Math.PI/2,Math.PI/2,dangerRight);ctx.closePath();ctx.fill();
+  // círculo e olho
+  ctx.strokeStyle='#1A7A6E';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
+  ctx.fillStyle='#16302B';ctx.beginPath();ctx.arc(cx,cy,10,0,7);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 10px Trebuchet MS';ctx.textAlign='center';ctx.fillText('olho',cx,cy+3);ctx.textAlign='left';
+  // espirais (sentido de rotação: HN anti-horário / HS horário)
+  var ccw=(hem==='N');
+  ctx.strokeStyle='#3a7bb5';ctx.lineWidth=2;
+  for(var s=0;s<3;s++){
+    ctx.beginPath();
+    for(var t=0;t<3.4;t+=0.1){
+      var ang=(ccw?-1:1)*t + s*2.094;
+      var r=14+t*30;
+      var x=cx+Math.cos(ang)*r, y=cy+Math.sin(ang)*r;
+      if(t===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  // seta de deslocamento do sistema (para cima = trajetória)
+  arrow(ctx,cx,cy+R+30,cx,cy-R-24,'#0D3D36',3);
+  ctx.fillStyle='#0D3D36';ctx.font='bold 12px Trebuchet MS';ctx.fillText('deslocamento do sistema',cx+10,cy-R-16);
+  // rótulos dos semicírculos
+  ctx.font='bold 13px Trebuchet MS';ctx.textAlign='center';
+  var perigoX=dangerRight?cx+R*0.6:cx-R*0.6, manobX=dangerRight?cx-R*0.6:cx+R*0.6;
+  ctx.fillStyle='#9E3B2E';ctx.fillText('PERIGOSO',perigoX,cy-R+2);
+  ctx.fillStyle='#2E7D52';ctx.fillText('manobrável',manobX,cy-R+2);
+  ctx.textAlign='left';
+  document.getElementById('cicloRead').innerHTML='Hemisfério <b>'+(hem==='N'?'Norte':'Sul')+'</b>: rotação '+(ccw?'anti-horária':'horária')+'. O semicírculo <b style="color:#9E3B2E">perigoso</b> (o vento SOMA-se ao deslocamento) é o <b>'+(dangerRight?'direito':'esquerdo')+'</b>; o <b style="color:#2E7D52">manobrável</b> (o vento OPÕE-se) é o '+(dangerRight?'esquerdo':'direito')+'.';
+}
+
+/* init + resize */
+drawOnda();drawCiclone();
+window.addEventListener('resize',function(){drawOnda();drawCiclone();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Movimento orbital",b:"A partícula descreve órbita quase circular e avança muito pouco; o raio some a ~½ comprimento de onda de profundidade. Um objeto boiando sobe e desce quase no lugar."},
+  {f:"Elementos da onda",b:"Crista (alta), cavado (baixo), altura H (crista–cavado), comprimento L (entre cristas), período T (tempo entre cristas)."},
+  {f:"Vagas",b:"Ondas do vento LOCAL: cristas íngremes, curtas, alturas irregulares, aspecto confuso."},
+  {f:"Marulho (ondulação)",b:"Ondas que seguem sem o vento gerador: cristas longas, direção constante, alturas menores, períodos/comprimentos regulares."},
+  {f:"Fatores das ondas",b:"Velocidade do vento (decisivo), duração e pista/fetch (limitam no início). Mar completamente desenvolvido = pista e duração deixam de limitar."},
+  {f:"Celeridade",b:"C = 3,03·T (nós, T em segundos), em águas profundas. Ondas normais do Atlântico: 18–27 nós."},
+  {f:"Escarpamento",b:"H/L. Ondas longas 1/40–1/50; normais (~60 m) ~1/20. A onda ARREBENTA quando H/L atinge 1/7."},
+  {f:"Coriolis e ondas",b:"As ondas NÃO sofrem desvio apreciável de Coriolis — vão na direção para onde sopra o vento gerador."},
+  {f:"Corrente × onda",b:"Corrente contrária encurta e encrespa (perigosa) — ex.: Agulhas gera ondas gigantes. A favor, alonga."},
+  {f:"Onda anormal",b:"Numa série, a maior costuma ser entre a 3ª e a 8ª onda. Superposição de trens pode gerar freak wave."},
+  {f:"Tsunami",b:"Em alto-mar ~0,8 m (passa despercebido, comprimento enorme); cresce muito na costa — o perigo é em águas rasas."},
+  {f:"Balanço, arfagem, caturro",b:"Balanço = rolar de bordo a bordo; arfagem = subir/descer; caturro = mergulhar proa e popa."},
+  {f:"Sincronismo",b:"Vagas em fase com os balanços ampliam muito o balanço (como embalar uma criança). Caturro é tão perigoso quanto."},
+  {f:"Slamming",b:"Pancada forte quando a proa sai de uma onda e colide com a seguinte; vibração pelo navio, indica a força das ondas."},
+  {f:"Mar desencontrado",b:"Marulho + vagas de outra direção = mar confuso. Curto/confuso pior p/ navios pequenos; longo/pesado pior p/ grandes."},
+  {f:"Capear",b:"Proa chegada ao vento, pouco seguimento, esteira de calma. Reduz o balanço, maximiza o caturro. Proa é mais reforçada."},
+  {f:"Correr com o tempo",b:"Fugir com mar de popa; risco de surfar e atravessar ao mar (broaching). Trim de popa é preferível."},
+  {f:"Óleo no mar",b:"Acalma as vagas que quebram, mas NÃO reduz o marulho. Com mar de proa, deita-se pelos embornais/descargas."},
+  {f:"Classificação do ciclone",b:"Depressão ≤33 nós (F7); tempestade 34–63 (F8–11); furacão/tufão ≥64 nós (F12). Águas quentes, 5–20°, olho central."},
+  {f:"Semicírculo perigoso",b:"O vento SOMA-se ao movimento do sistema: direito no HN, esquerdo no HS."},
+  {f:"Semicírculo manobrável",b:"O vento OPÕE-se ao movimento: esquerdo no HN, direito no HS."},
+  {f:"Buys Ballot",b:"De frente para o vento: centro à DIREITA no HN, à ESQUERDA no HS (~110° atrás do través). Marulho longo (~15 s) avisa antes da queda do barômetro."},
+  {f:"Identificar o semicírculo",b:"Pela ronda do vento (navio parado/lento). HN: vento roda p/ direita = perigoso; p/ esquerda = navegável. HS: o oposto. Em dúvida, parar o navio."},
+  {f:"Evasão HN — perigoso",b:"Colocar o vento na bochecha de BE (~45° rel.) e navegar na máxima velocidade; se necessário, capear."},
+  {f:"Evasão HN — navegável",b:"Colocar o vento na alheta de BE (~135° rel.) e navegar na máxima velocidade."},
+  {f:"Evasão HS",b:"As mesmas regras, mas a BOMBORDO: perigoso = vento na bochecha de BB (capear se preciso); navegável = vento na alheta de BB (correr com o tempo se preciso)."},
+  {f:"Na rota do centro",b:"Receber o vento pela alheta profunda do bordo navegável (~160° rel.), máxima velocidade, até entrar no semicírculo manobrável. Pior quadrante: dianteiro do perigoso."},
+  {f:"Vento não ronda?",b:"Se o olho está pela proa (pressão caindo) ou popa (subindo), o vento pode não rondar — aí o barômetro é o guia fundamental."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"As ondas formadas pela ação local do vento que sopra são as:",
+   o:["Marulho","Vagas","Ondas de fundo","Ondulações"],a:1,
+   e:"Vagas = ondas do vento local (cristas íngremes, curtas, irregulares). Quando o vento cessa ou muda, as ondas que continuam são o marulho (ou ondulação), mais longo e regular."},
+  {q:"No movimento das ondas, a partícula de água:",
+   o:["Viaja junto com a onda a grande velocidade","Descreve órbita quase circular e avança muito pouco","Afunda permanentemente","Desloca-se só na horizontal"],a:1,
+   e:"O movimento é orbital: a partícula sobe e desce quase no lugar, avançando muito pouco. Por isso um objeto boiando é levantado e abaixado, mas quase não anda com a onda."},
+  {q:"O fator DECISIVO para o estado do mar é:",
+   o:["A pista (fetch)","A duração","A velocidade do vento","A latitude"],a:2,
+   e:"A intensidade (velocidade) do vento é sempre o fator decisivo. A pista e a duração só limitam no início; quando ambas deixam de limitar, tem-se o mar completamente desenvolvido."},
+  {q:"A celeridade (velocidade de propagação) de um marulho, em águas profundas, é dada por:",
+   o:["C = 1,34·√L","C = 3,03·T (nós, T em s)","C = H/L","C = 2,21·√H"],a:1,
+   e:"Para o marulho em águas profundas, C = 3,03·T (nós, T em segundos). A velocidade depende só do período."},
+  {q:"Uma onda perde estabilidade e arrebenta quando o escarpamento (H/L) atinge:",
+   o:["1/40","1/20","1/7","1/2"],a:2,
+   e:"O escarpamento é H/L. Ondas longas ~1/40–1/50, normais ~1/20; quando H/L chega a 1/7 a onda arrebenta."},
+  {q:"Um tsunami, em alto-mar (águas profundas):",
+   o:["Tem dezenas de metros de altura","Tem altura mínima (~0,8 m) e passa quase despercebido","É sempre visível a milhas","Não se propaga"],a:1,
+   e:"Em alto-mar o tsunami tem altura pequena (~0,8 m) e comprimento enorme — passa quase despercebido sob o navio. O perigo surge ao chegar em águas rasas, onde cresce muito."},
+  {q:"O fenômeno em que vagas em fase com os balanços sucessivos ampliam muito o balanço é o:",
+   o:["Slamming","Sincronismo","Squat","Broaching"],a:1,
+   e:"É o sincronismo — como embalar uma criança no balanço: pequenas ondas em fase produzem balanço muito forte."},
+  {q:"[PSCPP 2011] Manter a proa chegada ao vento para aguentar o mau tempo, com pouco seguimento, abatendo e formando esteira de calma, é:",
+   o:["Correr com o tempo","Abater","Rocegar","Pôr o navio à capa (capear)"],a:3,
+   e:"É pôr o navio à capa (capear). Reduz o balanço mas maximiza o caturro; a proa, mais reforçada, é feita para partir as ondas. Gabarito (e)."},
+  {q:"[PSCPP 2006] Com ondas de comprimento longo, a maior dificuldade em manter o rumo (risco de atravessar ao mar) ocorre com:",
+   o:["Mar de proa","Mar de través","Mar pela bochecha","Mar de popa"],a:3,
+   e:"Com mar de popa (correndo com o tempo) e ondas longas, o navio tende a surfar e atravessar ao mar (broaching) — a maior dificuldade em manter o rumo. Gabarito (e)."},
+  {q:"Ao correr com o tempo (mar de popa), o principal perigo a evitar é:",
+   o:["O caturro excessivo","Surfar e atravessar ao mar (broaching)","O sincronismo de arfagem","A perda de sinal GPS"],a:1,
+   e:"Correndo com o tempo, o navio pode surfar na onda e atravessar ao mar (broaching), ficando de través — situação muito perigosa, sobretudo perto de costas a sotavento."},
+  {q:"O óleo espalhado no mar, na manobra com mau tempo:",
+   o:["Acalma as vagas que quebram, mas NÃO reduz o marulho","Elimina o marulho","Aumenta o balanço","Só serve em água doce"],a:0,
+   e:"O óleo acalma as vagas que quebram (forma película), mas não reduz o marulho. Com mar de proa, deita-se pelos embornais, dalas e descargas."},
+  {q:"Um furacão ou tufão apresenta ventos máximos de:",
+   o:["Até 33 nós (força 7)","34 a 63 nós (forças 8–11)","64 nós ou mais (força 12)","Sempre acima de 100 nós"],a:2,
+   e:"Furacão/tufão = 64 nós ou mais (força 12). Depressão tropical ≤33 nós (F7); tempestade tropical 34–63 nós (F8–11)."},
+  {q:"No Hemisfério SUL, o semicírculo PERIGOSO de um ciclone tropical (onde o vento soma ao movimento) é o:",
+   o:["Direito","Esquerdo","Dianteiro","Traseiro"],a:1,
+   e:"No semicírculo perigoso a velocidade do vento soma-se à do sistema: é o direito no Hemisfério Norte e o ESQUERDO no Hemisfério Sul. O manobrável é o oposto."},
+  {q:"Pela Lei de Buys Ballot, no Hemisfério Norte, um observador de frente para o vento verdadeiro tem o centro da tormenta:",
+   o:["À sua esquerda","À sua direita (≈110° atrás do través)","À sua frente","Atrás, na proa"],a:1,
+   e:"No HN, de frente para o vento, o centro fica à direita, cerca de 110° para trás do través. No HS, à esquerda. A distância estima-se pela força do vento e pela queda do barômetro."},
+  {q:"Um sinal precursor de ciclone que costuma anteceder até a queda do barômetro é:",
+   o:["A calmaria total","O marulho longo (vagalhões de ~15 s)","A subida súbita da temperatura","A mudança de maré"],a:1,
+   e:"O marulho longo (vagalhões longos e baixos, ~15 s contra os ~7–8 s normais) é um aviso precoce, geralmente anterior à queda do barômetro, e sua direção indica o centro do ciclone."},
+  {q:"No Hemisfério Norte, se o vento ronda no sentido horário (para a direita), o navio está no semicírculo:",
+   o:["Navegável (esquerdo)","Perigoso (direito)","Sobre o olho","Fora da tormenta"],a:1,
+   e:"No HN, vento rondando para a direita (horário) indica o semicírculo perigoso (direito); rondando para a esquerda, o navegável. No HS é o oposto. Regra válida para navio parado ou lento."},
+  {q:"No Hemisfério Norte, no semicírculo PERIGOSO, a manobra de evasão é:",
+   o:["Colocar o vento na alheta de BE e correr","Colocar o vento na bochecha de BE e navegar na máxima velocidade (capear se preciso)","Parar as máquinas","Rumar direto ao olho"],a:1,
+   e:"HN, semicírculo perigoso: pôr o vento na bochecha de BE (~45° rel.) e navegar na máxima velocidade possível; se necessário, capear. No semicírculo navegável, vento na alheta de BE (~135° rel.)."},
+  {q:"No Hemisfério SUL, as regras de evasão são as mesmas, porém referidas a:",
+   o:["Boreste","Bombordo","Popa","Proa"],a:1,
+   e:"No HS aplicam-se as mesmas regras com respeito a BOMBORDO: perigoso = vento na bochecha de BB (capear se preciso); navegável = vento na alheta de BB (correr com o tempo se preciso)."},
+  {q:"O vento pode NÃO rondar (dificultando identificar o semicírculo) quando:",
+   o:["O navio está parado","O olho está pela proa ou pela popa do navio — aí o barômetro é o guia","Há marulho longo","A visibilidade é boa"],a:1,
+   e:"Se o olho está pela proa (pressão caindo) ou pela popa (pressão subindo), o vento pode manter direção constante. Nesses casos, a leitura do barômetro torna-se fundamental."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

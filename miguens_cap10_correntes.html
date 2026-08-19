@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Correntes de Maré e Correntes Oceânicas — Miguens Cap. 10 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#0b1f1c;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:120px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;margin-top:12px;min-height:52px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:180px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco F — Marés e Correntes</p>
+    <h1>Correntes de <em>Maré</em> e Correntes <em>Oceânicas</em></h1>
+    <p class="sub">A segunda metade do Cap. 10: como nasce a corrente de maré (axial alternativa nos portos, rotatória no oceano), como se lê a Carta de Correntes de Maré (sempre referida à preamar), e a grande circulação dos oceanos — termohalina e pelo vento, o efeito de Coriolis, os giros, as principais correntes e a ressurgência.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 10, itens <b>10.2 (Correntes de Maré)</b> e <b>10.3 (Correntes Oceânicas)</b>. As marés (10.1) estão no caderno de Cálculo de Marés. Questões reais: PSCPP 2006, 2008, 2011 e 2012.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#genese">10.2.1 Gênese ▶</a>
+    <a href="#cartas">10.2.2 Cartas ▶</a>
+    <a href="#modelagem">10.2.4 SISCORAR</a>
+    <a href="#circulacao">10.3.1 Circulação ▶</a>
+    <a href="#giros">10.3.5 Giros e correntes</a>
+    <a href="#ressurgencia">10.3.6 Ressurgência ▶</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 <strong>Bloco F.</strong> As marés (fenômeno, planos de referência, regra das doze avos, Tabelas I/II) estão no caderno de <a href="miguens_cap10_calculo_mares.html">Cálculo de Marés (Cap. 10.1)</a>. Os elementos da corrente (R<sub>cor</sub> e vel<sub>cor</sub>) entram no triângulo da <a href="miguens_cap1_5_navegacao_estimada.html">Navegação Estimada (Cap. 5)</a>. As Cartas de Correntes de Maré e as Tábuas das Marés são publicações da DHN — ver <a href="miguens_cap12_publicacoes_nauticas.html">Publicações Náuticas (Cap. 12)</a>.
+</div>
+
+<!-- ===== GÊNESE ===== -->
+<section class="bloco" id="genese">
+  <h2 class="sec"><span class="n">10.2.1</span> Gênese das correntes de maré</h2>
+  <p class="lede">A mesma força astronômica que levanta a maré (movimento vertical) provoca antes o <strong>movimento horizontal da massa líquida</strong> — a corrente de maré. Maré e corrente de maré são <em>efeitos de uma mesma causa</em> e coexistem.</p>
+
+  <div class="box key">
+    <h4>Duas naturezas <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>Corrente axial alternativa</strong> — nas entradas de portos, onde a ação astronômica direta é desprezível, a corrente resulta da <span class="hl">diferença de nível entre o oceano e o interior do porto</span>. O fluxo e o refluxo se dão segundo o eixo do canal: velocidade máxima <em>para dentro</em> na preamar, máxima <em>para fora</em> na baixa-mar e <span class="hl">nula quando a maré passa pelo nível médio</span>. (Em Santana/AP, no braço Norte do Amazonas, soma-se uma forte corrente permanente para fora, pela descarga do rio.)</p>
+    <p><strong>Corrente rotatória</strong> — no oceano aberto, a interação das forças astronômicas com a rotação da Terra dá caráter <span class="hl">giratório</span> à corrente. O <strong>efeito de Coriolis</strong> (ou efeito giroscópico) desvia a corrente para a <span class="hl">direita no Hemisfério Norte</span> e para a <span class="hl">esquerda no Hemisfério Sul</span>, podendo reforçar ou reduzir o efeito das forças astronômicas.</p>
+  </div>
+
+  <p>Dada a afinidade entre a maré e a corrente de maré em um porto, é possível relacionar a velocidade e a direção da corrente às horas da preamar (PM) e da baixa-mar (BM). Esse é o princípio das Cartas de Correntes de Maré. Conhecer a corrente antecipadamente é vital para planejar a derrota em águas restritas, escolher horários de manobra, bordo de atracação e a velocidade de evolução.</p>
+
+  <div class="box trap">
+    <h4>Pegadinha</h4>
+    <p>Não confunda: nos <strong>portos/canais</strong> a corrente de maré é <strong>axial alternativa</strong> (vai-e-vem no eixo do canal); no <strong>oceano aberto</strong> é <strong>rotatória</strong> (por Coriolis). E a corrente é o efeito <em>horizontal</em>; a maré é o efeito <em>vertical</em> — a corrente vem primeiro.</p>
+  </div>
+</section>
+
+<!-- ===== CARTAS DE CORRENTES ===== -->
+<section class="bloco" id="cartas">
+  <h2 class="sec"><span class="n">10.2.2/3</span> Cartas de Correntes de Maré</h2>
+  <p class="lede">Apesar do nome, são <strong>publicações</strong> preparadas para portos específicos: uma página de instruções, um exemplo e uma coletânea de cartinhas do porto, com <span class="hl">setas</span> (direção) e <span class="hl">números</span> (velocidade), todas <strong>referidas à hora da preamar (PM)</strong>.</p>
+
+  <div class="ichart">
+    <h4>Selecione a carta certa — sempre pela preamar</h4>
+    <p class="hint">Ajuste o instante considerado em relação à preamar. A carta escolhida é a do número inteiro de horas mais próximo (antes/depois da PM). Alterne sizígia/quadratura para ver a correção de velocidade (a direção nunca se corrige).</p>
+    <canvas id="cvCarta" width="860" height="300" style="background:#fff"></canvas>
+    <div class="ictrl" style="margin-top:8px">
+      <button class="sizBtn active" data-s="siz" onclick="setSiz('siz')">Sizígia (cartas = padrão)</button>
+      <button class="sizBtn" data-s="quad" onclick="setSiz('quad')">Quadratura (aplicar fator)</button>
+    </div>
+    <div class="ictrl"><label for="dt">Instante vs. PM (h) →</label><input type="range" id="dt" min="-6" max="6" step="0.25" value="-2.9" oninput="drawCarta()"></div>
+    <div class="iread" id="cartaRead"></div>
+  </div>
+
+  <h3>Como se usa (exemplo do Miguens — barra da Baía de Guanabara)</h3>
+  <p>Determinar o rumo e a velocidade da corrente na barra, dia 09/JUL/2021 às 1200P, com PM prevista para 1454. A seleção é feita pela diferença em horas entre o instante e a <strong>preamar prevista mais próxima</strong>: 1454 − 1200 = 2h54 ≈ <strong>3 h</strong>. Seleciona-se a carta <strong>3 HORAS ANTES DA PREAMAR</strong>, que fornece: rumo <strong>345° (NNW), enchendo</strong>, velocidade <strong>1,0 nó</strong>.</p>
+
+  <div class="box formula">
+    <h4>Regras de leitura <span class="tag t-banca">BANCA</span></h4>
+    <p>1. <strong>Seleção:</strong> pela hora inteira mais próxima em relação à <span class="hl">preamar</span> (arredonda-se a diferença). 2. <strong>Velocidades:</strong> as impressas valem para a época de <span class="hl">sizígia</span>. Em outras situações, multiplica-se por um <strong>fator de correção</strong> de um ábaco, cuja entrada é o <em>intervalo de tempo entre PM e BM</em> (ou vice-versa) e a <em>amplitude da maré prevista</em>. 3. <strong>Direções:</strong> <span class="hl">não</span> recebem qualquer correção.</p>
+  </div>
+
+  <p>Existem Cartas de Correntes de Maré publicadas para: Rio Amazonas (Barra Norte–Santana), Rio Pará (Salinópolis–Belém), Baía de São Marcos / São Luís e Itaqui, Itapessoca e Luís Correia, Natal, Salvador, Madre de Deus, Vitória, Baía de Guanabara, Santos e Paranaguá. São vendidas pela EMGEPRON (BHMN, Niterói) e disponíveis em meio digital no sítio do CHM.</p>
+</section>
+
+<!-- ===== MODELAGEM / NOTAS ===== -->
+<section class="bloco" id="modelagem">
+  <h2 class="sec"><span class="n">10.2.4/6</span> Modelagem numérica (SISCORAR) e notas finais</h2>
+  <p class="lede">As cartas em papel nasceram de dados de correntômetros. A modelagem numérica hidrodinâmica moderniza a previsão, combinando dados <em>in situ</em> com análise harmônica em cada nó de uma malha.</p>
+
+  <p>Com essa metodologia, a REMO (termo de cooperação CHM + Petrobras) desenvolveu o <strong>SISCORAR</strong> — Sistema de Previsão de Correntes de Maré em Águas Rasas, lançado em 2018; a versão 2.0 (2020) cobre a Baía de Guanabara e a Baía de Sepetiba, com aplicativo móvel <em>offline</em> e previsão horária para qualquer data. No exemplo de Guanabara, o SISCORAR previu 348° e 1,080 nó — muito próximo dos 345°/1,0 nó da Carta de Correntes.</p>
+
+  <div class="box trap">
+    <h4>Limites e cautelas <span class="tag t-banca">BANCA</span></h4>
+    <p>• A modelagem considera <strong>apenas a maré astronômica</strong>; <span class="hl">ignora o vento, as marés meteorológicas e a circulação por diferença de densidade</span>.<br>
+    • <strong>Ventos fortes e persistentes</strong> podem modificar substancialmente as informações das cartas.<br>
+    • As horas de PM e BM tabuladas <span class="hl">nem sempre coincidem</span> com os instantes em que a corrente de maré inverte a direção.<br>
+    • Algumas cartas náuticas trazem notas de correntes de maré (ex.: Carta 316, de Mosqueiro a Belém), que devem ser verificadas na navegação (objetos boiando, boias, embarcações fundeadas).</p>
+  </div>
+</section>
+
+<!-- ===== CIRCULAÇÃO OCEÂNICA ===== -->
+<section class="bloco" id="circulacao">
+  <h2 class="sec"><span class="n">10.3.1/3</span> Circulação geral dos oceanos</h2>
+  <p class="lede">As correntes oceânicas nascem do aquecimento desigual da Terra pela radiação solar e dos ventos daí resultantes. Para estudo, a circulação divide-se em <strong>termohalina</strong> (por densidade) e <strong>gerada pelo vento</strong> (superficial).</p>
+
+  <table>
+    <tr><th>Tipo</th><th>Causa</th><th>Padrão</th><th>Onde domina</th></tr>
+    <tr><td><strong>Termohalina</strong></td><td>Variações de <span class="hl">densidade</span> (temperatura + salinidade). Origem: aumento da densidade superficial por resfriamento (Atlântico Norte) ou por congelação — água residual mais salina (Oceano Austral).</td><td>Vertical (a água densa afunda) + horizontal por grandes distâncias — "Global Conveyor Belt".</td><td>Águas <strong>profundas</strong>.</td></tr>
+    <tr><td><strong>Pelo vento</strong></td><td>Ventos (aquecimento desigual da atmosfera) arrastam a água por atrito.</td><td>Eminentemente <span class="hl">horizontal</span>, só as primeiras centenas de metros.</td><td>Camada <strong>superficial</strong> — a de maior interesse à navegação.</td></tr>
+  </table>
+
+  <h3>Os grandes sistemas de vento</h3>
+  <p>O ar equatorial aquecido sobe e cria a baixa da <strong>ITCZ</strong> (Zona de Convergência Intertropical), para onde sopram os <strong>Alísios</strong> — de NE no Hemisfério Norte e de SE no Sul (desviados por Coriolis). Aos 30°N/30°S o ar desce, formando os <strong>Cinturões de Alta Subtropical</strong>; deles saem os Alísios e os <strong>Oestes Prevalecentes</strong> (para latitudes altas). Dos polos (Altas Polares) sopram os <strong>Estes Polares</strong> até a Frente Polar (~60°).</p>
+
+  <div class="ichart">
+    <h4>Coriolis e o transporte de Ekman — a água vai 90° para o lado</h4>
+    <p class="hint">Escolha o hemisfério e a direção para onde o vento sopra. A água superficial arrastada é desviada 90° — à direita no HN, à esquerda no HS. É esse desvio que gera ressurgência ou subsidência junto às costas.</p>
+    <canvas id="cvEkman" width="860" height="300" style="background:#fff"></canvas>
+    <div class="ictrl" style="margin-top:8px">
+      <button class="hemBtn" data-h="N" onclick="setHem('N')">Hemisfério Norte</button>
+      <button class="hemBtn active" data-h="S" onclick="setHem('S')">Hemisfério Sul</button>
+    </div>
+    <div class="ictrl"><label for="wind">Vento sopra para (°) →</label><input type="range" id="wind" min="0" max="360" step="5" value="180" oninput="drawEkman()"></div>
+    <div class="iread" id="ekmanRead"></div>
+  </div>
+
+  <div class="box key">
+    <h4>Regra de Coriolis <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Desvio para a <strong>direita no HN</strong>, para a <strong>esquerda no HS</strong>; <span class="hl">nulo no Equador, máximo nos polos</span>. A corrente gerada pelo vento move-se à direita (HN) / esquerda (HS) do vento; o <strong>transporte líquido da água superficial</strong> é <span class="hl">90°</span> à direita (HN) / à esquerda (HS) da direção para onde o vento sopra.</p>
+  </div>
+</section>
+
+<!-- ===== GIROS E CORRENTES ===== -->
+<section class="bloco" id="giros">
+  <h2 class="sec"><span class="n">10.3.4/5</span> Giros e principais correntes</h2>
+  <p class="lede">O efeito combinado do vento e da densidade, modificado pela rotação da Terra, forma sistemas quase fechados chamados <strong>Giros</strong>, centrados por volta de 30°N e 30°S.</p>
+
+  <p>A circulação superficial é <strong>dextrogira</strong> (horária) no Atlântico Norte e no Pacífico Norte, e <strong>sinistrogira</strong> (anti-horária) no Atlântico Sul, Pacífico Sul e Índico Sul. Um traço notável é a <span class="hl">intensificação das correntes a oeste</span>: no lado ocidental os fluxos são mais estreitos e rápidos (Corrente do Golfo e Kuro Shio, 25 a 60 mn/dia), enquanto as correntes limítrofes orientais (Califórnia, Canárias) são fracas (2 a 4 mn/dia).</p>
+
+  <table>
+    <tr><th>Corrente</th><th>Onde</th><th>Característica</th></tr>
+    <tr><td><strong>Corrente do Golfo</strong> (Flórida → Atlântico Norte)</td><td>Oeste do Atlântico Norte</td><td>"Um rio dentro do mar": estreita e definida, 2,3–2,7 nós (Flórida &gt; 3 nós). Fecha o giro; aquece a Europa (Corrente da Noruega).</td></tr>
+    <tr><td><strong>Corrente do Brasil</strong></td><td>Oeste do Atlântico Sul</td><td><span class="hl">Quente e salina</span> (origem equatorial/tropical). Flui para o Sul; ao Sul inflete para Leste.</td></tr>
+    <tr><td><strong>Corrente de Benguela</strong></td><td>Leste do Atlântico Sul (África)</td><td><span class="hl">Fria e menos salina</span> (águas subantárticas). Flui para o Norte.</td></tr>
+    <tr><td><strong>Corrente das Guianas / Norte-Brasileira</strong></td><td>Cruza o Equador para o Caribe</td><td>Ramo da Sul-Equatorial que passa ao HN.</td></tr>
+    <tr><td><strong>Kuro Shio</strong></td><td>Pacífico Norte (Japão)</td><td>Análoga à da Flórida; ~1,6 nós.</td></tr>
+    <tr><td><strong>Corrente das Agulhas</strong></td><td>Índico (costa E da África)</td><td>Forte; corre entre a África e Madagascar. Índico tem circulação sazonal por <em>monções</em>.</td></tr>
+    <tr><td><strong>Corrente do Peru (Humboldt)</strong></td><td>Pacífico Sul (costa O da América)</td><td><span class="hl">Fria</span>, lenta, larga; associada a notável ressurgência. Confronta o <strong>El Niño</strong>.</td></tr>
+    <tr><td><strong>Circumpolar Antártica</strong> (Deriva do Vento Oeste)</td><td>Ao redor da Antártida, geral para Leste</td><td>Giro subpolar que liga os três oceanos; poucas barreiras terrestres.</td></tr>
+  </table>
+
+  <p><strong>El Niño:</strong> em certas ocasiões, águas quentes da Contracorrente Equatorial avançam para o Sul além do comum, ao largo do Equador/Peru, chegando a ~12°S, com precipitações até 100 vezes o normal e grande mortandade de peixes. <strong>Convergências</strong> do Oceano Austral: <em>Antártica</em> (~60°–50°S) e <em>Subtropical</em> (~40°S) — zonas onde as águas convergem, afundam e seguem para o Norte, formando a estratificação do Atlântico.</p>
+</section>
+
+<!-- ===== RESSURGÊNCIA / TRIÂNGULO ===== -->
+<section class="bloco" id="ressurgencia">
+  <h2 class="sec"><span class="n">10.3.6/7</span> Ressurgência, subsidência e o triângulo da corrente</h2>
+  <p class="lede">Além do movimento horizontal, o vento paralelo à costa gera movimentos <strong>verticais</strong> de água. E, para o navegante, a corrente entra no cálculo da estimada como um vetor.</p>
+
+  <p>No Hemisfério Sul, o transporte de Ekman é 90° à <strong>esquerda</strong> da direção para onde sopra o vento. Se o resultado leva a água superficial <em>para o mar</em>, a água subsuperficial (de 100–200 m, rica em nutrientes) sobe: é a <strong>ressurgência</strong> — comum nas costas ocidentais dos continentes e típica de <span class="hl">Cabo Frio</span> (vento NE no verão), fertilizando a região. Se a água é levada <em>para a costa</em>, ela afunda: <strong>subsidência</strong>.</p>
+
+  <div class="ichart">
+    <h4>Triângulo da corrente — rumo e velocidade no fundo</h4>
+    <p class="hint">O navio governa um rumo na água, mas a corrente o desloca. O rumo/velocidade no fundo é a soma vetorial. Ajuste a velocidade do navio, o rumo e a velocidade da corrente e veja o abatimento resultante.</p>
+    <canvas id="cvTri" width="860" height="300" style="background:#fff"></canvas>
+    <div class="ictrl"><label for="vb">Vel. do navio (nós) →</label><input type="range" id="vb" min="4" max="20" step="0.5" value="12" oninput="drawTri()"></div>
+    <div class="ictrl"><label for="rcor">Rumo da corrente (°) →</label><input type="range" id="rcor" min="0" max="360" step="5" value="90" oninput="drawTri()"></div>
+    <div class="ictrl"><label for="vcor">Vel. da corrente (nós) →</label><input type="range" id="vcor" min="0" max="6" step="0.25" value="2" oninput="drawTri()"></div>
+    <div class="iread" id="triRead"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>O que a corrente faz ao navio <span class="tag t-calc">CÁLCULO</span></h4>
+    <div class="eq">R<sub>fundo</sub> , V<sub>fundo</sub> = (R<sub>água</sub> , V<sub>navio</sub>) &nbsp;⊕&nbsp; (R<sub>cor</sub> , vel<sub>cor</sub>)<span class="lbl">soma vetorial — o vento/corrente produzem abatimento e caimento; o navio pode estar em avanço ou atraso (ver Cap. 5)</span></div>
+    <p class="vars">O navio que mantém rumo de agulha e rotações constantes <strong>não</strong> se desloca sobre o rumo e a velocidade ordenados: a corrente se soma ao movimento. Conhecer <b>R<sub>cor</sub></b> e <b>vel<sub>cor</sub></b> antecipadamente é essencial no planejamento e na execução da derrota.</p>
+  </div>
+</section>
+
+<!-- ===== JÁ COBRADO ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">★</span> Já cobrado pela banca</h2>
+  <p class="lede">Varredura das provas 2006, 2008, 2011 e 2012. Correntes de maré e oceânicas aparecem tanto sob Miguens quanto sob Lobo &amp; Soares (a banca costuma citar este último para oceanografia) — o conteúdo corresponde ao Cap. 10 do Miguens.</p>
+
+  <table>
+    <tr><th>Prova · Questão</th><th>Tema</th><th>Gabarito</th></tr>
+    <tr><td><strong>2006 · Q26</strong></td><td>Tábuas das Marés e Cartas de Correntes de Marés — uso e interpretação (intensidades distintas de enchente/vazante por características geográficas). <em>Fonte citada: Lobo &amp; Soares.</em></td><td class="center"><strong>(e)</strong> II, III, V</td></tr>
+    <tr><td><strong>2008 · Q39</strong></td><td>Efeito de Coriolis nas correntes oceânicas na costa NE/E do Brasil: a corrente quente tem a trajetória desviada para E, afastando o navio da costa. <em>Fonte citada: Lobo &amp; Soares</em> (Cap. 10.3 do Miguens).</td><td class="center"><strong>(c)</strong></td></tr>
+    <tr><td><strong>2011 · Q32</strong></td><td>Atlas de Cartas-Piloto, Cartas de Correntes de Marés e Tábuas: corrente de ressaca (METÁREA V), sazonalidade nas correntes de densidade, correntes de retorno por ondas.</td><td class="center"><strong>(e)</strong> I, III, IV <span class="tag t-conflito">VERIFICAR gabarito impresso</span></td></tr>
+    <tr><td><strong>2012 · Q40</strong></td><td>Baía de São Marcos (Itaqui): seleção da carta de correntes de maré pela proximidade da <strong>preamar</strong>; vazante N–NE / enchente S–SE; atracação às 10h com PM às 06:15.</td><td class="center"><strong>(b)</strong> preamar / de 4 horas depois / preamar <span class="tag t-conflito">VERIFICAR gabarito impresso</span></td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--mute)">Os gabaritos de 2011 e 2012 não vêm marcados no caderno de provas; os indicados acima são deduzidos pela regra do Miguens (seleção sempre referida à preamar mais próxima) e devem ser conferidos no gabarito impresso.</p>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">✦</span> Flashcards</h2>
+  <p class="lede">Toque para virar. Vinte cartões com o essencial de correntes de maré e oceânicas.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">✱</span> Quiz</h2>
+  <p class="lede">Catorze questões — as reais (2008/2012) e a mecânica da seleção de cartas e do triângulo da corrente.</p>
+  <div class="score">Acertos: <b id="scHit">0</b> / <span id="scTot">0</span> &nbsp;·&nbsp; Aproveitamento: <b id="scPct">—</b></div>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Correntes de Maré e Oceânicas (Miguens Cap. 10.2/10.3)</summary>
+  <ul>
+    <li><b>Gênese:</b> a corrente de maré é o movimento HORIZONTAL (vem primeiro); a maré é o vertical. Efeitos da mesma causa.</li>
+    <li><b>Nos portos/canais:</b> corrente AXIAL alternativa (diferença de nível oceano↔porto). Máx. p/ dentro na PM, máx. p/ fora na BM, nula no nível médio.</li>
+    <li><b>No oceano aberto:</b> corrente ROTATÓRIA (Coriolis + astronômica). Coriolis desvia à direita no HN, à esquerda no HS.</li>
+    <li><b>Cartas de Correntes de Maré:</b> publicações por porto; setas = direção, números = velocidade; tudo REFERIDO À PREAMAR. Selecionar pela hora inteira mais próxima da PM.</li>
+    <li><b>Correções:</b> velocidades valem para SIZÍGIA; corrigir por fator de ábaco (entrada: intervalo PM–BM + amplitude prevista). Direções NÃO se corrigem.</li>
+    <li><b>SISCORAR:</b> modelagem (REMO/CHM+Petrobras). Considera só a maré astronômica; ignora vento, maré meteorológica e densidade.</li>
+    <li><b>Notas finais:</b> vento forte/persistente altera as cartas; PM/BM tabuladas nem sempre coincidem com a inversão da corrente.</li>
+    <li><b>Circulação:</b> termohalina = densidade (temperatura+salinidade), vertical+horizontal, profunda. Pelo vento = horizontal, superficial (interessa à navegação).</li>
+    <li><b>Ventos:</b> ITCZ (baixa equatorial), Alísios NE/SE, Alta Subtropical (30°), Oestes Prevalecentes, Estes Polares.</li>
+    <li><b>Coriolis/Ekman:</b> transporte da água superficial 90° à direita (HN) / esquerda (HS) da direção do vento; nulo no Equador.</li>
+    <li><b>Giros:</b> dextrogiros no N, sinistrogiros no S; intensificação a OESTE (Golfo, Kuro Shio rápidas; Califórnia, Canárias fracas).</li>
+    <li><b>Correntes-chave:</b> Golfo ("rio no mar", 2,3–2,7 nós); Brasil (quente/salina); Benguela (fria/menos salina); Humboldt (fria + ressurgência); Circumpolar Antártica.</li>
+    <li><b>Ressurgência:</b> vento paralelo à costa leva água p/ o mar → sobe água fria rica em nutrientes (Cabo Frio, vento NE no verão). Contrário = subsidência.</li>
+    <li><b>Triângulo da corrente:</b> R_cor e vel_cor somam-se ao movimento do navio (abatimento/caimento; avanço/atraso — Cap. 5).</li>
+    <li><b>Banca:</b> 2008-Q39 (Coriolis, corrente quente p/ E, c) · 2012-Q40 (seleção pela PM, São Marcos, b) · 2006-Q26 (Cartas de Correntes, e) · 2011-Q32 (densidade/ressaca, e — verificar).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Correntes de Maré e Oceânicas (Miguens Vol. I, Cap. 10.2/10.3) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+/* util seta */
+function arrow(ctx,x1,y1,x2,y2,color,w){
+  ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=w||3;
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  var a=Math.atan2(y2-y1,x2-x1),h=10+(w||3);
+  ctx.beginPath();ctx.moveTo(x2,y2);
+  ctx.lineTo(x2-h*Math.cos(a-0.4),y2-h*Math.sin(a-0.4));
+  ctx.lineTo(x2-h*Math.cos(a+0.4),y2-h*Math.sin(a+0.4));
+  ctx.closePath();ctx.fill();
+}
+function compass(deg,len){ // 0=N(up), horário; retorna [dx,dy]
+  var r=deg*Math.PI/180;return [Math.sin(r)*len,-Math.cos(r)*len];
+}
+function rosaBg(ctx,cx,cy,R){
+  ctx.strokeStyle='#cfe0ef';ctx.lineWidth=1;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,R*0.6,0,7);ctx.stroke();
+  ctx.fillStyle='#9aa7b0';ctx.font='11px Trebuchet MS';ctx.textAlign='center';
+  ctx.fillText('N',cx,cy-R-4);ctx.fillText('S',cx,cy+R+12);
+  ctx.fillText('E',cx+R+8,cy+4);ctx.fillText('W',cx-R-8,cy+4);ctx.textAlign='left';
+}
+
+/* ===== CARTA SELECTOR ===== */
+var siz='siz';
+function setSiz(s){siz=s;document.querySelectorAll('.sizBtn').forEach(function(b){b.classList.toggle('active',b.dataset.s===s);});drawCarta();}
+function drawCarta(){
+  var cv=document.getElementById('cvCarta'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var off=+document.getElementById('dt').value;                 // horas vs PM
+  var n=Math.round(off);                                        // carta inteira mais próxima
+  // ---- linha do tempo da maré (senoide) ----
+  var midY=70, amp=34, x0=40, x1=W-40, hrs=12;                  // -6..+6 h
+  ctx.strokeStyle='#8fb8d8';ctx.lineWidth=2;ctx.beginPath();
+  for(var x=x0;x<=x1;x+=4){var t=(x-x0)/(x1-x0)*hrs-6;var y=midY-amp*Math.cos(t/6*Math.PI);ctx.lineTo(x,y);}
+  ctx.stroke();
+  // PM em t=0 (topo)
+  function tx(t){return x0+(t+6)/hrs*(x1-x0);}
+  ctx.fillStyle='#1F6F8B';ctx.font='bold 11px Trebuchet MS';ctx.textAlign='center';
+  ctx.fillText('PM',tx(0),midY-amp-8);ctx.fillText('BM',tx(-6),midY+amp+16);ctx.fillText('BM',tx(6),midY+amp+16);
+  // marcadores de horas inteiras
+  for(var k=-6;k<=6;k++){var xx=tx(k);ctx.strokeStyle='#e5dcc6';ctx.beginPath();ctx.moveTo(xx,midY-amp-2);ctx.lineTo(xx,midY+amp+2);ctx.stroke();}
+  // instante considerado
+  var xi=tx(off), yi=midY-amp*Math.cos(off/6*Math.PI);
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(xi,20);ctx.lineTo(xi,midY+amp+4);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(xi,yi,5,0,7);ctx.fill();
+  ctx.fillText('instante',xi,16);
+  // carta selecionada (hora inteira n)
+  var xn=tx(n);
+  ctx.fillStyle='#2E7D52';ctx.beginPath();ctx.arc(xn,midY-amp*Math.cos(n/6*Math.PI),6,0,7);ctx.fill();
+  ctx.textAlign='left';
+  // ---- rosa com seta da corrente ----
+  var cx=W-140,cy=210,R=68; rosaBg(ctx,cx,cy,R);
+  var fator=(siz==='siz')?1.0:0.6;
+  var vel=1.0*fator;                                            // nó (base do exemplo)
+  var bearing=(345+n*18);bearing=((bearing%360)+360)%360;       // ilustrativo (rotatória)
+  var d=compass(bearing,R*0.9);
+  arrow(ctx,cx,cy,cx+d[0],cy+d[1],'#1A7A6E',3+vel*2);
+  ctx.fillStyle='#0D3D36';ctx.font='bold 12px Trebuchet MS';ctx.textAlign='center';
+  ctx.fillText(bearing.toFixed(0)+'°  ·  '+vel.toFixed(2)+' nó',cx,cy+R+22);ctx.textAlign='left';
+  // legenda esquerda
+  var lbl=(n===0)?'NA PREAMAR':(Math.abs(n)+' HORA'+(Math.abs(n)>1?'S':'')+((n<0)?' ANTES':' DEPOIS')+' DA PREAMAR');
+  ctx.fillStyle='#1F6F8B';ctx.font='bold 15px Trebuchet MS';ctx.fillText('Carta: '+lbl,40,150);
+  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';
+  ctx.fillText('instante a '+off.toFixed(2).replace('.',',')+' h da PM → arredonda p/ '+n+' h',40,172);
+  document.getElementById('cartaRead').innerHTML='Diferença para a PM = <b>'+off.toFixed(2).replace('.',',')+' h</b> → seleciona-se a carta de <b>'+lbl.toLowerCase()+'</b>. Velocidade lida (sizígia) × fator = 1,00 × '+fator.toFixed(2).replace('.',',')+' = <b>'+vel.toFixed(2).replace('.',',')+' nó</b>'+(siz==='siz'?' (sem correção — é sizígia).':' (quadratura: aplique o fator do ábaco).')+' A <b>direção não se corrige</b>.';
+}
+
+/* ===== EKMAN / CORIOLIS ===== */
+var hem='S';
+function setHem(h){hem=h;document.querySelectorAll('.hemBtn').forEach(function(b){b.classList.toggle('active',b.dataset.h===h);});drawEkman();}
+function drawEkman(){
+  var cv=document.getElementById('cvEkman'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var wind=+document.getElementById('wind').value;              // para onde sopra
+  var cx=W/2,cy=H/2+6,R=110; rosaBg(ctx,cx,cy,R);
+  // vento
+  var w=compass(wind,R*0.92);
+  arrow(ctx,cx,cy,cx+w[0],cy+w[1],'#2C5F8A',4);
+  ctx.fillStyle='#2C5F8A';ctx.font='bold 12px Trebuchet MS';ctx.textAlign='center';
+  ctx.fillText('vento p/ '+wind+'°',cx+w[0]*1.12,cy+w[1]*1.12);
+  // transporte 90° (direita HN / esquerda HS)
+  var dev=(hem==='N')?90:-90;
+  var tdir=((wind+dev)%360+360)%360;
+  var t=compass(tdir,R*0.82);
+  arrow(ctx,cx,cy,cx+t[0],cy+t[1],'#9E3B2E',4);
+  ctx.fillStyle='#9E3B2E';ctx.fillText('transporte '+tdir.toFixed(0)+'°',cx+t[0]*1.16,cy+t[1]*1.16);
+  ctx.textAlign='left';
+  document.getElementById('ekmanRead').innerHTML='Hemisfério <b>'+(hem==='N'?'Norte':'Sul')+'</b>: a água superficial é transportada <b>90° para a '+(hem==='N'?'direita':'esquerda')+'</b> da direção do vento → '+tdir.toFixed(0)+'°. Se esse transporte for para o mar aberto, há <b>ressurgência</b> (água fria e rica em nutrientes sobe); se for para a costa, há <b>subsidência</b>.';
+}
+
+/* ===== TRIÂNGULO DA CORRENTE ===== */
+function drawTri(){
+  var cv=document.getElementById('cvTri'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var Vb=+document.getElementById('vb').value;                  // navio (rumo água = N/000)
+  var Rc=+document.getElementById('rcor').value;                // rumo corrente
+  var Vc=+document.getElementById('vcor').value;                // vel corrente
+  var sc=12;                                                    // px por nó
+  var ox=210, oy=H-40;                                          // origem
+  // vetor navio (para cima = N)
+  var ax=ox, ay=oy-Vb*sc;
+  arrow(ctx,ox,oy,ax,ay,'#2C5F8A',3);
+  ctx.fillStyle='#2C5F8A';ctx.font='bold 12px Trebuchet MS';ctx.fillText('navio '+Vb.toFixed(1)+' nó (000°)',ox+8,oy-Vb*sc/2);
+  // vetor corrente a partir da ponta
+  var d=compass(Rc,Vc*sc);var bx=ax+d[0],by=ay+d[1];
+  arrow(ctx,ax,ay,bx,by,'#9E3B2E',3);
+  ctx.fillStyle='#9E3B2E';ctx.fillText('corrente '+Vc.toFixed(1)+' nó ('+Rc+'°)',ax+d[0]/2+8,ay+d[1]/2);
+  // resultante
+  arrow(ctx,ox,oy,bx,by,'#0D3D36',3.5);
+  var dx=bx-ox,dy=by-oy;
+  var Vf=Math.sqrt(dx*dx+dy*dy)/sc;
+  var Rf=((Math.atan2(dx,-dy)*180/Math.PI)%360+360)%360;
+  var drift=(((Rf-0)+540)%360)-180;                            // desvio vs 000
+  ctx.fillStyle='#0D3D36';ctx.font='bold 13px Trebuchet MS';ctx.fillText('fundo: '+Rf.toFixed(0)+'° · '+Vf.toFixed(1)+' nó',bx+10,by);
+  document.getElementById('triRead').innerHTML='Governando 000° a <b>'+Vb.toFixed(1)+' nó</b> com corrente de <b>'+Vc.toFixed(1)+' nó</b> em '+Rc+'°: sobre o fundo o navio segue <b>'+Rf.toFixed(0)+'°</b> a <b>'+Vf.toFixed(1)+' nó</b>. Abatimento ≈ <b>'+Math.abs(drift).toFixed(0)+'° para '+(drift>=0?'estibordo':'bombordo')+'</b>. É por isso que se corrige o rumo pela R_cor e vel_cor.';
+}
+
+/* init + resize */
+drawCarta();drawEkman();drawTri();
+window.addEventListener('resize',function(){drawCarta();drawEkman();drawTri();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Corrente de maré — natureza",b:"É o movimento HORIZONTAL da massa líquida (vem antes); do qual resulta a maré (vertical). Efeitos da mesma causa."},
+  {f:"Corrente axial alternativa",b:"Nos portos/canais: diferença de nível oceano↔porto. Máx. p/ dentro na PM, máx. p/ fora na BM, nula no nível médio."},
+  {f:"Corrente rotatória",b:"No oceano aberto: forças astronômicas + rotação da Terra. Coriolis desvia à direita (HN) / esquerda (HS)."},
+  {f:"Cartas de Correntes de Maré",b:"Publicações por porto. Setas = direção, números = velocidade, tudo REFERIDO À PREAMAR."},
+  {f:"Seleção da carta",b:"Pela hora inteira mais próxima em relação à PREAMAR (arredonda-se a diferença)."},
+  {f:"Correção de velocidade",b:"As velocidades valem para SIZÍGIA. Corrigir por fator de ábaco (entrada: intervalo PM–BM + amplitude). Direção NÃO se corrige."},
+  {f:"SISCORAR",b:"Modelagem numérica (REMO/CHM+Petrobras). Considera só maré astronômica; ignora vento, maré meteorológica e densidade."},
+  {f:"Nota final das cartas",b:"Vento forte/persistente altera; PM/BM tabuladas nem sempre coincidem com a inversão da corrente."},
+  {f:"Circulação termohalina",b:"Por densidade (temperatura+salinidade). Água densa afunda (resfriamento/congelação). Vertical+horizontal; domina nas águas profundas."},
+  {f:"Circulação pelo vento",b:"Arrasto do vento; eminentemente horizontal, só as primeiras centenas de metros. Domina a camada superficial (a de interesse náutico)."},
+  {f:"Sistemas de vento",b:"ITCZ (baixa equatorial) · Alísios NE/SE · Alta Subtropical (30°) · Oestes Prevalecentes · Estes Polares."},
+  {f:"Coriolis",b:"Desvio à direita no HN, à esquerda no HS. Nulo no Equador, máximo nos polos."},
+  {f:"Transporte de Ekman",b:"A água superficial é levada 90° à direita (HN) / esquerda (HS) da direção para onde sopra o vento."},
+  {f:"Giros",b:"Dextrogiros no Atlântico/Pacífico Norte; sinistrogiros no Atlântico/Pacífico/Índico Sul. Centrados ~30°."},
+  {f:"Intensificação a oeste",b:"Correntes ocidentais rápidas e estreitas (Golfo, Kuro Shio: 25–60 mn/dia). Orientais fracas (Califórnia, Canárias: 2–4 mn/dia)."},
+  {f:"Corrente do Golfo",b:"'Um rio dentro do mar', 2,3–2,7 nós (Flórida >3 nós). Aquece a Europa via Corrente da Noruega."},
+  {f:"Corrente do Brasil × Benguela",b:"Brasil: quente e salina (equatorial/tropical). Benguela: fria e menos salina (subantártica)."},
+  {f:"Humboldt (Peru) e El Niño",b:"Humboldt: fria, com ressurgência. El Niño: águas quentes descem ao S, muita chuva e mortandade de peixes."},
+  {f:"Ressurgência",b:"Vento paralelo à costa leva a água superficial p/ o mar → sobe água fria (100–200 m) rica em nutrientes. Cabo Frio, vento NE no verão."},
+  {f:"Triângulo da corrente",b:"R_cor e vel_cor somam-se ao movimento do navio → abatimento/caimento, avanço/atraso (Cap. 5)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"A corrente de maré, em relação à maré, é:",
+   o:["O movimento vertical, que ocorre depois","O movimento horizontal da massa líquida, do qual resulta a maré","Um fenômeno sem relação com a maré","Causada apenas pelo vento"],a:1,
+   e:"As forças geradoras acarretam primeiro o movimento HORIZONTAL (corrente de maré), do qual resulta o movimento vertical (maré). São efeitos da mesma causa."},
+  {q:"Na entrada de um porto, a corrente de maré é axial alternativa e tem velocidade máxima para dentro:",
+   o:["Na baixa-mar","Na preamar","No nível médio","Nunca — é sempre para fora"],a:1,
+   e:"Corrente axial alternativa (diferença de nível oceano↔porto): máxima para dentro na PM, máxima para fora na BM e nula quando a maré passa pelo nível médio."},
+  {q:"No oceano aberto, a corrente de maré tem caráter rotatório porque:",
+   o:["O fundo é irregular","Há interação das forças astronômicas com a rotação da Terra (Coriolis)","A salinidade varia","O vento sopra em círculos"],a:1,
+   e:"A interação entre as forças astronômicas e a rotação terrestre (efeito de Coriolis) dá caráter rotatório à corrente — desvio à direita no HN e à esquerda no HS."},
+  {q:"Nas Cartas de Correntes de Maré, as direções e velocidades são referidas à hora da:",
+   o:["Baixa-mar","Preamar","Passagem meridiana da Lua","Estofa"],a:1,
+   e:"Tudo nas Cartas de Correntes de Maré é referido à PREAMAR. A carta a usar é a da hora inteira mais próxima em relação à PM prevista."},
+  {q:"[PSCPP 2012] Atracação às 10h; a Tábua indica preamar em Itaqui às 06:15. Que carta de correntes selecionar?",
+   o:["Baixa-mar / de 3 h depois / baixa-mar","Preamar / de 4 horas depois / preamar","Preamar / do instante / baixa-mar","Baixa-mar / de 3 h antes / preamar"],a:1,
+   e:"10h − 06:15 = 3h45 ≈ 4 h. Como a PM ocorreu às 06:15, seleciona-se a carta de '4 horas DEPOIS da preamar'. Gabarito (b). [VERIFICAR gabarito impresso]"},
+  {q:"As velocidades impressas nas Cartas de Correntes de Maré correspondem à época de sizígia. Para a quadratura, o navegante:",
+   o:["Multiplica a velocidade por um fator de correção de um ábaco; a direção não se corrige","Corrige a direção, mas não a velocidade","Não faz correção alguma","Divide a velocidade pela amplitude"],a:0,
+   e:"Multiplica-se a velocidade por um fator de ábaco (entrada: intervalo PM–BM e amplitude prevista). As DIREÇÕES não recebem correção."},
+  {q:"O sistema de modelagem SISCORAR, ao prever as correntes de maré, considera:",
+   o:["Vento, densidade e maré astronômica","Apenas a maré astronômica (ignora vento, maré meteorológica e densidade)","Apenas o vento","Somente marés de sizígia"],a:1,
+   e:"A metodologia considera APENAS a maré astronômica, desconsiderando o efeito do vento, das marés meteorológicas e da circulação por diferença de densidade."},
+  {q:"Sobre as horas de preamar/baixa-mar tabuladas e a inversão da corrente de maré:",
+   o:["Coincidem sempre","Nem sempre coincidem — a corrente pode inverter em outro instante","A corrente inverte sempre 3 h após a PM","A corrente nunca inverte"],a:1,
+   e:"A DG6 alerta: as horas de PM e BM tabuladas nem sempre coincidem com os instantes em que a corrente de maré inverte a direção."},
+  {q:"A circulação termohalina é gerada por:",
+   o:["Variações de densidade (temperatura e salinidade) da água do mar","Apenas pelos ventos alísios","Pela atração lunar","Pela rotação das hélices dos navios"],a:0,
+   e:"É o deslocamento das massas oceânicas causado pelas variações de densidade (função da temperatura e da salinidade). Predomina nas águas profundas."},
+  {q:"[PSCPP 2008] Pela ação de Coriolis, na costa NE/E do Brasil, a corrente quente tem sua trajetória:",
+   o:["Desviada no sentido horário, aproximando da costa","Desviada para a esquerda, aproximando da costa","Desviada para E, afastando o navio da costa","Desviada para W, encalhando o navio"],a:2,
+   e:"No HS o desvio de Coriolis leva a corrente quente para E, afastando o navio da costa. Gabarito (c)."},
+  {q:"O transporte da água superficial induzido pelo vento (Ekman) ocorre a:",
+   o:["0° (na direção do vento)","45° à direita, em ambos os hemisférios","90° à direita no HN e 90° à esquerda no HS","Sempre para o Equador"],a:2,
+   e:"O transporte líquido da água superficial é 90° para a direita no Hemisfério Norte e 90° para a esquerda no Hemisfério Sul, em relação à direção para onde sopra o vento."},
+  {q:"A 'intensificação das correntes a oeste' significa que:",
+   o:["As correntes orientais (Califórnia, Canárias) são as mais rápidas","As correntes ocidentais (Golfo, Kuro Shio) são mais estreitas e rápidas","Todas as correntes têm a mesma velocidade","As correntes só existem a oeste"],a:1,
+   e:"No lado oeste dos oceanos as correntes são estreitas e rápidas (Golfo, Kuro Shio: 25–60 mn/dia); as limítrofes orientais (Califórnia, Canárias) são fracas (2–4 mn/dia)."},
+  {q:"A ressurgência (upwelling), típica de Cabo Frio no verão, ocorre quando:",
+   o:["O vento paralelo à costa leva a água superficial para o mar e sobe água fria rica em nutrientes","A água quente afunda junto à costa","A maré enche rapidamente","Cessa totalmente o vento"],a:0,
+   e:"Vento paralelo à costa (NE no verão em Cabo Frio) → transporte de Ekman leva a água superficial para o mar → ascende água subsuperficial (100–200 m), fria e rica em nutrientes. Se a água vai para a costa, é subsidência."},
+  {q:"Governando 000° a 12 nós com corrente de 6 nós vindo por través (rumo 090°), sobre o fundo o navio:",
+   o:["Segue exatamente 000° a 12 nós","Sofre abatimento para estibordo e ganha velocidade sobre o fundo","Perde toda a velocidade","Inverte o rumo"],a:1,
+   e:"A corrente por 090° soma-se vetorialmente: o rumo no fundo desvia para estibordo (~27°) e a velocidade no fundo cresce (√(12²+6²) ≈ 13,4 nós). Por isso se corrige o rumo pela R_cor e vel_cor (triângulo da corrente)."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

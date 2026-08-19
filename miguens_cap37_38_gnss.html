@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Navegação por Satélites (GNSS) — Miguens Vol. III Cap. 37-38 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#0b1f1c;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:120px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;margin-top:12px;min-height:52px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:180px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco I — Navegação Eletrônica</p>
+    <h1>Navegação por <em>Satélites</em> — GNSS, GPS e DGNSS</h1>
+    <p class="sub">Como o navio determina posição, velocidade e tempo (PNT) por satélite: os três segmentos do GPS, as pseudodistâncias, o PDOP e a geometria, os quatro GNSS globais (GPS, GLONASS, Galileo, BeiDou), os sistemas de aumento (SBAS) e o diferencial (DGPS/DGNSS) — mais os sistemas autônomos do Cap. 38 (inercial e sonar doppler).</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. III — <b>Cap. 37 (Navegação por Satélites)</b> e <b>Cap. 38 (Outros Sistemas)</b>. A banca cita também <em>Bridge Team Management</em> para o uso do GPS. Questões reais: PSCPP 2006 e 2011.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#panorama">37.1 GNSS · IMO ▶</a>
+    <a href="#gps">37.3 GPS · segmentos ▶</a>
+    <a href="#posicao">37.3.3 Pseudodistâncias ▶</a>
+    <a href="#acuracia">37.3.4 Erros · PDOP ▶</a>
+    <a href="#outros">37.4-7 Outros GNSS</a>
+    <a href="#augment">37.8/9 SBAS · DGNSS</a>
+    <a href="#cap38">38 Inercial · Doppler</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 <strong>Bloco I.</strong> O GPS é uma das "ferramentas modernas" já vistas em <a href="miguens_cap11_instrumentos_nauticos.html">Instrumentos Náuticos (Cap. 11)</a>. As correções DGNSS viajam pela portadora dos <strong>radiofaróis</strong> — auxílios-rádio do <a href="miguens_cap13_auxilios_balizamento.html">Cap. 13</a>. A posição por satélite deve ser sempre confrontada com um meio independente (estimada, radar, visual) — ver <a href="miguens_cap4_6_determinacao_posicao.html">Determinação da Posição (Cap. 4 e 6)</a>.
+</div>
+
+<!-- ===== PANORAMA ===== -->
+<section class="bloco" id="panorama">
+  <h2 class="sec"><span class="n">37.1/2</span> Panorama GNSS e a IMO</h2>
+  <p class="lede">GNSS = <em>Global Navigation Satellite System</em>. É o termo geral para os sistemas que dão posição, velocidade e tempo (<strong>PNT</strong>) em tempo real, em qualquer lugar da Terra, por satélite.</p>
+
+  <table>
+    <tr><th>Sistema</th><th>País/Bloco</th><th>Tipo</th></tr>
+    <tr><td><strong>GPS</strong> (NAVSTAR)</td><td>EUA</td><td>Global — 1º totalmente operacional (1995)</td></tr>
+    <tr><td><strong>GLONASS</strong></td><td>Rússia</td><td>Global (usa FDMA)</td></tr>
+    <tr><td><strong>Galileo</strong></td><td>União Europeia</td><td>Global — civil, com alerta de integridade e SAR</td></tr>
+    <tr><td><strong>BeiDou</strong> (BDS)</td><td>China</td><td>Global</td></tr>
+    <tr><td>NavIC (IRNSS) · QZSS</td><td>Índia · Japão</td><td>Regionais</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>IMO, WWRNS e SOLAS <span class="tag t-banca">BANCA</span></h4>
+    <p>A IMO reconhece os GNSS que atendem a seus requisitos como parte do <strong>WWRNS</strong> (World-Wide Radio Navigation System). Desde a revisão do Cap. V da <strong>SOLAS</strong> (em vigor em 2002), os navios devem ter a bordo um <span class="hl">receptor GNSS</span>. Em aproximações de portos e águas restritas, o padrão de acurácia é mais rigoroso (erro ≤ 10 m). Integrar vários sistemas <span class="hl">melhora a geometria</span> das constelações e a disponibilidade do sinal.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Acurácia × precisão</h4>
+    <p><strong>Acurácia</strong> abrange erros <em>sistemáticos</em> + <em>aleatórios</em>. <strong>Precisão</strong> está ligada só aos erros <em>aleatórios</em>. Um conjunto de medidas sem erro sistemático tem acurácia e precisão coincidentes.</p>
+  </div>
+</section>
+
+<!-- ===== GPS SEGMENTOS ===== -->
+<section class="bloco" id="gps">
+  <h2 class="sec"><span class="n">37.3</span> O sistema NAVSTAR GPS — três segmentos</h2>
+  <p class="lede">NAVSTAR = <em>Navigation System by Time And Ranging</em>. Projetado pelo U.S. DoD para dar posição (2D/3D), rumo, velocidade e hora com alta acurácia, a qualquer momento e sob qualquer tempo.</p>
+
+  <table>
+    <tr><th>Segmento</th><th>O que é</th><th>Ponto-chave</th></tr>
+    <tr><td><strong>Espacial</strong></td><td>Constelação de satélites</td><td>Ao menos <span class="hl">24 satélites operacionais 95% do tempo</span>, em 6 planos orbitais a ~<strong>20.200 km</strong> (órbitas altas, não geossíncronas — para serem rastreados).</td></tr>
+    <tr><td><strong>Controle</strong> (terrestre)</td><td>Rede global de estações que rastreiam, monitoram e atualizam os satélites</td><td>Calcula posição/relógio dos satélites e injeta os dados de efemérides.</td></tr>
+    <tr><td><strong>Usuário</strong></td><td>Receptores GPS e equipamentos associados</td><td>Medem a distância a vários satélites e resolvem a posição.</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>Sinais, códigos e serviços <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>Duas portadoras em UHF: <strong>L1 = 1575,42 MHz</strong> e <strong>L2 = 1227,60 MHz</strong>. Sobre elas, dois códigos: o <strong>C/A</strong> (Coarse/Acquisition), que sustenta o <span class="hl">SPS — Standard Positioning Service</span> (civil, mundial), e o <strong>P(Y)</strong> (Precise), que sustenta o <span class="hl">PPS — Precise Positioning Service</span> (militar, criptografado). A L1 leva os dois códigos; a L2 (originalmente) só o P. Usuários militares usam L1+L2 (correção ionosférica); civis, historicamente, só a L1.</p>
+    <p>A <strong>SA</strong> (Selective Availability / "Degradação Intencional") piorava o SPS, mas foi <span class="hl">descontinuada em 2000</span>. A modernização do GPS adicionou sinais civis (L2C, L5) — a correção ionosférica de dupla frequência aproxima o civil do militar.</p>
+  </div>
+</section>
+
+<!-- ===== POSIÇÃO / PSEUDODISTÂNCIAS ===== -->
+<section class="bloco" id="posicao">
+  <h2 class="sec"><span class="n">37.3.3</span> Determinação da posição — pseudodistâncias</h2>
+  <p class="lede">O receptor mede o <strong>tempo de propagação</strong> do sinal de cada satélite e o multiplica por c (velocidade da luz) para obter a distância. Como o relógio do receptor não é perfeito, essas distâncias são "aparentes": as <strong>pseudodistâncias</strong>.</p>
+
+  <div class="ichart">
+    <h4>Trilateração e o quarto satélite (o relógio)</h4>
+    <p class="hint">Com 3 pseudodistâncias sem erro de relógio, os três círculos se cruzam num ponto. Adicione um erro de relógio: os círculos deixam de se cruzar — um triângulo de incerteza aparece. É por isso que um satélite a mais resolve o relógio.</p>
+    <canvas id="cvTrilat" width="860" height="300" style="background:#fff"></canvas>
+    <div class="ictrl"><label for="bias">Erro de relógio →</label><input type="range" id="bias" min="0" max="34" step="1" value="0" oninput="drawTrilat()"></div>
+    <div class="iread" id="trilatRead"></div>
+  </div>
+
+  <div class="box key">
+    <h4>Quantos satélites? <span class="tag t-decorar">DECORAR</span></h4>
+    <p>São <strong>quatro incógnitas</strong>: latitude, longitude, altitude e o <span class="hl">erro do relógio do receptor</span> → precisa-se de <strong>4 satélites</strong>. Se a altitude é conhecida com acurácia (o caso do <span class="hl">navio</span>, no nível do mar), sobram três incógnitas → <strong>3 satélites bastam</strong>. As posições dos satélites vêm das <em>efemérides</em>; o <em>almanaque</em> dá as órbitas aproximadas de toda a constelação.</p>
+  </div>
+</section>
+
+<!-- ===== ACURÁCIA / PDOP ===== -->
+<section class="bloco" id="acuracia">
+  <h2 class="sec"><span class="n">37.3.4</span> Erros e a geometria (PDOP)</h2>
+  <p class="lede">O sinal transmitido tem certa acurácia, mas o que o usuário obtém depende de fatores adicionais: geometria dos satélites, bloqueio do sinal, atmosfera e qualidade do receptor.</p>
+
+  <table>
+    <tr><th>Fonte de erro</th><th>Efeito / mitigação</th></tr>
+    <tr><td><strong>Ionosfera</strong></td><td>Atrasa o sinal (partículas carregadas). Receptores de <span class="hl">dupla frequência</span> eliminam a maior parte.</td></tr>
+    <tr><td><strong>Troposfera</strong></td><td>Vapor d'água atrasa o sinal; difícil de corrigir, mas efeito <em>menor</em> que o da ionosfera.</td></tr>
+    <tr><td><strong>Multicaminho (multipath)</strong></td><td>Sinais refletidos em edifícios/anteparos. Pior perto de estruturas.</td></tr>
+    <tr><td><strong>Bloqueio do sinal</strong></td><td>Edifícios, pontes, árvores, uso interno/subterrâneo.</td></tr>
+    <tr><td><strong>Geometria dos satélites</strong></td><td>Traduzida no <strong>PDOP/GDOP</strong> — ver abaixo.</td></tr>
+  </table>
+
+  <div class="ichart">
+    <h4>PDOP — a geometria dilui (ou não) a precisão</h4>
+    <p class="hint">Satélites bem espalhados pelo céu → bons ângulos de corte entre as LDP → PDOP baixo → posição precisa. Satélites agrupados → ângulos rasos → PDOP alto → posição ruim. Ajuste a dispersão e veja a região de incerteza.</p>
+    <canvas id="cvPdop" width="860" height="300" style="background:#fff"></canvas>
+    <div class="ictrl"><label for="spread">Dispersão dos satélites →</label><input type="range" id="spread" min="12" max="80" step="1" value="60" oninput="drawPdop()"></div>
+    <div class="iread" id="pdopRead"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>Regra do PDOP <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>PDOP</strong> (Positional Dilution of Precision) é um número relativo: <span class="hl">quanto MENOR o PDOP, MELHOR a acurácia</span> da posição; quanto maior, pior. O receptor escolhe automaticamente a configuração de satélites de melhor geometria. O <strong>URE</strong> (User Range Error) do SPS é ≤ 2,0 m (95%) no sinal no espaço — mas o URE <em>não</em> é a acurácia do usuário, que depende também da geometria (PDOP) e do receptor. Na prática, um smartphone dá ~4,9 m sob céu aberto.</p>
+  </div>
+</section>
+
+<!-- ===== OUTROS GNSS ===== -->
+<section class="bloco" id="outros">
+  <h2 class="sec"><span class="n">37.4-7</span> GLONASS, Galileo, BeiDou e regionais</h2>
+  <p class="lede">Integrar mais de um GNSS melhora geometria, disponibilidade e integridade. Os quatro globais compõem hoje o WWRNS reconhecido pela IMO.</p>
+
+  <table>
+    <tr><th>Sistema</th><th>Traço distintivo</th></tr>
+    <tr><td><strong>GLONASS</strong> (Rússia)</td><td>Constelação de 24 satélites (~19.100 km). Único a usar <span class="hl">FDMA</span> (satélites transmitem em frequências diferentes) — os demais usam CDMA/PRN. Operacional desde 1993/95; modernizado (GLONASS-K).</td></tr>
+    <tr><td><strong>Galileo</strong> (UE)</td><td>Civil, gerido pela União Europeia. Fornece <span class="hl">alerta de integridade</span> ao usuário (o GPS/GLONASS não avisam falha do próprio sinal) e um serviço global de <strong>Busca e Salvamento (SAR)</strong>. Interoperável com GPS e GLONASS.</td></tr>
+    <tr><td><strong>BeiDou</strong> — BDS (China)</td><td>Constelação mista (GEO + IGSO + MEO). Reconhecido pela IMO como parte do WWRNS.</td></tr>
+    <tr><td>NavIC (IRNSS) · QZSS</td><td>Regionais (Índia · Japão). O QZSS reforça a cobertura sobre o Japão e ainda transmite serviço SBAS.</td></tr>
+  </table>
+</section>
+
+<!-- ===== SBAS / DGNSS ===== -->
+<section class="bloco" id="augment">
+  <h2 class="sec"><span class="n">37.8/9</span> Sistemas de aumento — SBAS e DGPS/DGNSS</h2>
+  <p class="lede">"Augmentation" = melhorar acurácia, integridade e disponibilidade do GNSS. Divide-se em <strong>SBAS</strong> (baseado em satélites) e <strong>GBAS</strong> (baseado em estações terrestres, do qual o DGPS/DGNSS é o exemplo marítimo).</p>
+
+  <h3>SBAS — baseado em satélites</h3>
+  <p>Satélites geoestacionários difundem correções e integridade sobre grandes áreas: <strong>WAAS</strong> (EUA), <strong>EGNOS</strong> (Europa), <strong>GAGAN</strong> (Índia) e <strong>MSAS</strong> (Japão) — voltados sobretudo à aviação.</p>
+
+  <h3>DGPS / DGNSS — técnica diferencial (GBAS)</h3>
+  <p>Uma <strong>Estação de Referência</strong> instalada em ponto de coordenadas <span class="hl">conhecidas com precisão</span> (normalmente um radiofarol) compara a distância <em>calculada</em> a cada satélite com a <em>medida</em> e gera correções de pseudodistância. Essas correções são transmitidas ao navio, que as aplica: como os erros sistemáticos (órbita, relógio, ionosfera, troposfera) incidem igualmente nas duas estações próximas, eles se cancelam.</p>
+
+  <div class="box key">
+    <h4>Números do DGNSS <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>• Acurácia de posição <span class="hl">melhor que 10 m</span> e velocidade a <strong>0,1 nó</strong>.<br>
+    • Correções transmitidas pela portadora dos <strong>radiofaróis marítimos</strong>, na faixa <strong>283,5–325 kHz</strong> (onda terrestre), com alcance de <span class="hl">~200 milhas</span> da estação.<br>
+    • Recomendação IALA: as transmissões DGNSS <strong>não</strong> são codificadas (acesso livre).<br>
+    • <strong>DGPS</strong> = só GPS; <strong>DGNSS</strong> = quando usa também Galileo/GLONASS/BeiDou.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>O sistema diferencial brasileiro (DHN)</h4>
+    <p>O Brasil opera a técnica diferencial desde <strong>1993</strong> — a 1ª ER-DGPS foi instalada no <span class="hl">radiofarol de São Marcos (MA)</span>, para o difícil acesso à Ponta da Madeira e ao porto de Itaqui. Há nove ER-DGPS (São Marcos, Calcanhar, Sergipe, Abrolhos, São Tomé, Moela, Santa Marta, Rio Grande e Santana) e estações já modernizadas para <strong>ER-DGNSS</strong> (GPS + GLONASS: Ilha Rasa, São Tomé, Moela, Paranaguá). Cobertura de ~200 mn em torno de cada radiofarol; dados na <em>Lista de Auxílios-Rádio</em> (DHN).</p>
+  </div>
+</section>
+
+<!-- ===== CAP 38 ===== -->
+<section class="bloco" id="cap38">
+  <h2 class="sec"><span class="n">38</span> Outros sistemas — inercial, sonar doppler, batimétrica</h2>
+  <p class="lede">O Cap. 38 trata dos sistemas que <em>não</em> dependem de um sinal externo — o mais importante é o inercial.</p>
+
+  <div class="box key">
+    <h4>Navegação inercial (SINS) <span class="tag t-banca">BANCA</span></h4>
+    <p>Sistema <strong>autônomo e passivo</strong>: não emite nem recebe sinal, é <span class="hl">imune a interferências</span> e independente de estações externas — ideal para <strong>submarinos</strong> em patrulha submersa (o USS Nautilus cruzou o Polo Norte submerso em 1958). Mede as acelerações por <strong>acelerômetros</strong> e mantém a orientação por <strong>giroscópios</strong>; integra as acelerações <span class="hl">duas vezes</span> para obter velocidade e posição a partir de um ponto inicial conhecido. Excelente meio <em>independente</em> para checar o GPS.</p>
+  </div>
+
+  <p><strong>Sonar Doppler:</strong> mede a velocidade do navio <span class="hl">em relação ao fundo</span> pelo efeito Doppler de pulsos acústicos — inclusive a <strong>velocidade transversal</strong>, essencial na atracação de grandes navios (≥ 100.000 t). <strong>Navegação batimétrica:</strong> compara a profundidade medida pelo ecobatímetro com a cartografada, servindo de checagem de posição independente próximo à costa.</p>
+</section>
+
+<!-- ===== JÁ COBRADO ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">★</span> Já cobrado pela banca</h2>
+  <p class="lede">Varredura das provas 2006, 2008, 2011 e 2012. A ideia recorrente: o GPS não é infalível — confirme sempre por um meio <strong>independente</strong>.</p>
+
+  <table>
+    <tr><th>Prova · Questão</th><th>Tema</th><th>Gabarito</th></tr>
+    <tr><td><strong>2006 · Q55</strong></td><td>Uso do GPS (texto em inglês). Assinalar a opção INCORRETA: "confirmar o GPS conferindo dois ou mais receptores de satélite independentes" — errado, pois ambos dependem do mesmo sistema; deve-se checar por meio independente (até a estimada/DR). <em>Fonte citada: Bridge Team Management.</em></td><td class="center"><strong>(d)</strong></td></tr>
+    <tr><td><strong>2011 · Q18</strong></td><td>Melhor forma de verificar o GPS navegando próximo à costa: comparar com outro meio independente (navegação inercial / doppler / batimétrica / segmentos capazes / paralela indexada). <em>Fonte: Bridge Team Management.</em></td><td class="center"><strong>(c)</strong> batimétrica <span class="tag t-conflito">VERIFICAR gabarito impresso</span></td></tr>
+    <tr><td><strong>2011 · Q59</strong></td><td>Equipamento para medir a velocidade transversal na atracação de navios ≥ 100.000 t e o grau de precisão exigido (Miguens, Cap. 38 — sonar doppler).</td><td class="center"><strong>(b)</strong> Sonar doppler e 0,01 nó <span class="tag t-conflito">VERIFICAR gabarito impresso</span></td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--mute)">Os gabaritos de 2011 não vêm marcados no caderno de provas; os indicados são deduzidos e devem ser conferidos no gabarito impresso. O tema central das três questões é o mesmo: o GPS exige checagem por um meio independente, e cada sistema autônomo (inercial, doppler, batimétrica) serve a esse papel.</p>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">✦</span> Flashcards</h2>
+  <p class="lede">Toque para virar. Vinte cartões com o essencial de GNSS, GPS e DGNSS.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">✱</span> Quiz</h2>
+  <p class="lede">Catorze questões — as reais (2006/2011) e os pontos de prova do capítulo.</p>
+  <div class="score">Acertos: <b id="scHit">0</b> / <span id="scTot">0</span> &nbsp;·&nbsp; Aproveitamento: <b id="scPct">—</b></div>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — GNSS / GPS / DGNSS (Miguens Vol. III Cap. 37-38)</summary>
+  <ul>
+    <li><b>GNSS globais:</b> GPS (EUA), GLONASS (Rússia), Galileo (UE), BeiDou (China). Regionais: NavIC (Índia), QZSS (Japão).</li>
+    <li><b>IMO/WWRNS/SOLAS:</b> desde 2002 o navio deve ter receptor GNSS a bordo. Em portos/águas restritas, erro ≤ 10 m.</li>
+    <li><b>Acurácia × precisão:</b> acurácia = sistemáticos + aleatórios; precisão = só aleatórios.</li>
+    <li><b>GPS — 3 segmentos:</b> Espacial (≥24 sat, ~20.200 km, 6 planos), Controle (terrestre) e Usuário (receptores).</li>
+    <li><b>Sinais:</b> L1 = 1575,42 MHz e L2 = 1227,60 MHz. Código C/A → SPS (civil, mundial); código P(Y) → PPS (militar). SA descontinuada em 2000.</li>
+    <li><b>Pseudodistâncias:</b> distância = tempo × c. 4 incógnitas (lat, long, alt, relógio) → 4 satélites; se a altitude é conhecida (navio), 3 satélites bastam.</li>
+    <li><b>Efemérides/almanaque:</b> efemérides = posição precisa do satélite; almanaque = órbitas aproximadas de toda a constelação.</li>
+    <li><b>Erros:</b> ionosfera (dupla frequência corrige), troposfera (menor), multicaminho, bloqueio, geometria.</li>
+    <li><b>PDOP:</b> menor PDOP = melhor acurácia. Satélites espalhados = boa geometria.</li>
+    <li><b>GLONASS:</b> único com FDMA. Galileo: civil, com alerta de integridade e SAR.</li>
+    <li><b>SBAS:</b> WAAS, EGNOS, GAGAN, MSAS (aviação).</li>
+    <li><b>DGPS/DGNSS:</b> estação de referência em ponto conhecido → correções via radiofarol (283,5–325 kHz), alcance ~200 mn, acurácia < 10 m, velocidade 0,1 nó, não codificadas (IALA).</li>
+    <li><b>Brasil:</b> diferencial desde 1993; 1ª ER-DGPS no radiofarol de São Marcos (MA); rede na Lista de Auxílios-Rádio (DHN).</li>
+    <li><b>Cap. 38 — inercial:</b> autônomo, passivo, imune a interferência (submarinos); acelerômetros + giroscópios, dupla integração. Ótimo meio independente p/ checar o GPS.</li>
+    <li><b>Sonar doppler:</b> velocidade no fundo, inclusive transversal (atracação de grandes navios).</li>
+    <li><b>Banca:</b> 2006-Q55 (checar GPS por meio independente, d) · 2011-Q18 (checagem próximo à costa) · 2011-Q59 (sonar doppler na atracação).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Navegação por Satélites — GNSS (Miguens Vol. III, Cap. 37-38) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+function sat(ctx,x,y,label){
+  ctx.fillStyle='#2C5F8A';ctx.beginPath();ctx.arc(x,y,7,0,7);ctx.fill();
+  ctx.fillStyle='#16302B';ctx.fillRect(x-13,y-3,7,6);ctx.fillRect(x+6,y-3,7,6);
+  ctx.fillStyle='#0D3D36';ctx.font='bold 12px Trebuchet MS';ctx.fillText(label,x-4,y-11);
+}
+
+/* ===== TRILATERAÇÃO ===== */
+function drawTrilat(){
+  var cv=document.getElementById('cvTrilat'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var bias=+document.getElementById('bias').value;              // px (erro comum de relógio)
+  var rx=430, ry=232;                                           // posição verdadeira do receptor
+  var sats=[[150,60,'S1'],[430,44,'S2'],[720,72,'S3']];
+  // receptor
+  ctx.fillStyle='#C8A84B';ctx.beginPath();ctx.arc(rx,ry,6,0,7);ctx.fill();
+  ctx.fillStyle='#0D3D36';ctx.font='bold 12px Trebuchet MS';ctx.fillText('receptor',rx+10,ry+4);
+  sats.forEach(function(s){
+    sat(ctx,s[0],s[1],s[2]);
+    var r=Math.hypot(rx-s[0],ry-s[1])+bias;
+    ctx.strokeStyle='rgba(26,122,110,.9)';ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(s[0],s[1],r,0,7);ctx.stroke();
+    // linha de vista
+    ctx.strokeStyle='rgba(44,95,138,.35)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(s[0],s[1]);ctx.lineTo(rx,ry);ctx.stroke();ctx.setLineDash([]);
+  });
+  if(bias>0){
+    ctx.fillStyle='rgba(158,59,46,.15)';ctx.strokeStyle='#9E3B2E';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.arc(rx,ry,bias+6,0,7);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#9E3B2E';ctx.font='bold 12px Trebuchet MS';ctx.fillText('incerteza',rx-58,ry-12);
+  }
+  document.getElementById('trilatRead').innerHTML = (bias===0)
+    ? 'Sem erro de relógio: as <b>três</b> pseudodistâncias se cruzam num ponto — posição definida (com a altitude conhecida do navio, 3 satélites bastam).'
+    : 'Com erro de relógio, os três círculos <b>não</b> se cruzam num ponto — surge um triângulo de incerteza. Um <b>quarto satélite</b> fornece a equação extra que resolve o relógio do receptor.';
+}
+
+/* ===== PDOP ===== */
+function drawPdop(){
+  var cv=document.getElementById('cvPdop'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var sp=+document.getElementById('spread').value;              // graus de meio-espalhamento (12..80)
+  var rx=W/2, ry=250;
+  // horizonte / céu
+  ctx.fillStyle='#eef5fb';ctx.fillRect(0,0,W,ry);
+  ctx.strokeStyle='#8fb8d8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,ry);ctx.lineTo(W,ry);ctx.stroke();
+  // receptor
+  ctx.fillStyle='#C8A84B';ctx.beginPath();ctx.arc(rx,ry,6,0,7);ctx.fill();
+  ctx.fillStyle='#0D3D36';ctx.font='bold 12px Trebuchet MS';ctx.fillText('receptor',rx+10,ry+16);
+  // 4 satélites distribuídos entre -sp e +sp em torno do zênite (para cima)
+  var Rr=180, ang=[-sp,-sp/3,sp/3,sp].map(function(a){return a;});
+  ang.forEach(function(a,i){
+    var r=a*Math.PI/180;
+    var x=rx+Math.sin(r)*Rr, y=ry-Math.cos(r)*Rr;
+    ctx.strokeStyle='rgba(44,95,138,.5)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(rx,ry);ctx.lineTo(x,y);ctx.stroke();
+    sat(ctx,x,y,'S'+(i+1));
+  });
+  // PDOP ilustrativo: cresce quando espalhamento cai
+  var pdop=Math.max(1.0, 90/sp);
+  var q=(pdop<2)?'excelente':(pdop<4)?'boa':(pdop<6)?'regular':'ruim';
+  var col=(pdop<2)?'#2E7D52':(pdop<4)?'#1A7A6E':(pdop<6)?'#C8A84B':'#9E3B2E';
+  // elipse de incerteza (cresce com PDOP)
+  var er=6+pdop*6;
+  ctx.fillStyle='rgba(158,59,46,.12)';ctx.strokeStyle=col;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.ellipse(rx,ry,er,er*0.6,0,0,7);ctx.fill();ctx.stroke();
+  ctx.fillStyle=col;ctx.font='bold 14px Trebuchet MS';ctx.textAlign='right';
+  ctx.fillText('PDOP ≈ '+pdop.toFixed(1)+' ('+q+')',W-20,40);ctx.textAlign='left';
+  document.getElementById('pdopRead').innerHTML = 'Dispersão de <b>'+sp+'°</b> → PDOP ≈ <b>'+pdop.toFixed(1)+'</b> ('+q+'). '+(pdop<2?'Satélites bem espalhados: ângulos de corte largos, região de incerteza pequena.':'Satélites mais agrupados: ângulos rasos, a incerteza cresce. Lembre: <b>menor PDOP = melhor</b>.');
+}
+
+/* init + resize */
+drawTrilat();drawPdop();
+window.addEventListener('resize',function(){drawTrilat();drawPdop();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"GNSS",b:"Global Navigation Satellite System — dá posição, velocidade e tempo (PNT) por satélite. Globais: GPS, GLONASS, Galileo, BeiDou."},
+  {f:"NAVSTAR GPS",b:"Navigation System by Time And Ranging. Sistema dos EUA, 1º totalmente operacional (1995)."},
+  {f:"Três segmentos do GPS",b:"Espacial (satélites), Controle (estações terrestres) e Usuário (receptores)."},
+  {f:"Segmento espacial",b:"≥ 24 satélites operacionais 95% do tempo, 6 planos, órbitas altas ~20.200 km (não geossíncronas)."},
+  {f:"Portadoras L1 e L2",b:"L1 = 1575,42 MHz e L2 = 1227,60 MHz (UHF)."},
+  {f:"Códigos C/A e P(Y)",b:"C/A → SPS (civil, mundial). P(Y) → PPS (militar, criptografado). L1 leva os dois; L2 (original) só o P."},
+  {f:"SPS × PPS",b:"SPS = Standard Positioning Service (civil). PPS = Precise Positioning Service (militar, L1+L2, correção ionosférica)."},
+  {f:"SA (Selective Availability)",b:"Degradação intencional do SPS. Descontinuada em 2000."},
+  {f:"Pseudodistância",b:"Distância aparente = tempo de propagação × c. 'Aparente' porque o relógio do receptor tem erro."},
+  {f:"Quantos satélites?",b:"4 incógnitas (lat, long, alt, relógio) → 4 satélites. Altitude conhecida (navio) → 3 satélites bastam."},
+  {f:"Efemérides × almanaque",b:"Efemérides = posição precisa do satélite. Almanaque = órbitas aproximadas de toda a constelação."},
+  {f:"Ionosfera × troposfera",b:"Ionosfera atrasa o sinal (dupla frequência corrige). Troposfera afeta menos e é difícil de corrigir."},
+  {f:"Multicaminho (multipath)",b:"Sinais refletidos em estruturas degradam a posição; pior perto de edifícios/pontes."},
+  {f:"PDOP",b:"Positional Dilution of Precision. MENOR PDOP = MELHOR acurácia. Satélites espalhados = boa geometria."},
+  {f:"URE",b:"User Range Error do SPS ≤ 2 m (95%) no espaço. NÃO é a acurácia do usuário (que depende de PDOP e receptor)."},
+  {f:"GLONASS",b:"GNSS russo; único a usar FDMA (frequências distintas por satélite). Operacional desde 1993/95."},
+  {f:"Galileo",b:"GNSS europeu, civil. Fornece alerta de INTEGRIDADE ao usuário e serviço de Busca e Salvamento (SAR)."},
+  {f:"SBAS",b:"Augmentation por satélite: WAAS (EUA), EGNOS (Europa), GAGAN (Índia), MSAS (Japão) — sobretudo aviação."},
+  {f:"DGPS / DGNSS",b:"Estação de referência em ponto conhecido gera correções (via radiofarol, 283,5–325 kHz). Acurácia < 10 m, velocidade 0,1 nó, alcance ~200 mn."},
+  {f:"Navegação inercial",b:"Autônoma e passiva; imune a interferência (submarinos). Acelerômetros + giroscópios, dupla integração. Bom meio independente p/ checar o GPS."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"São os quatro sistemas GNSS globais:",
+   o:["GPS, LORAN-C, Decca e Omega","GPS, GLONASS, Galileo e BeiDou","GPS, WAAS, EGNOS e MSAS","GPS, NavIC, QZSS e DGPS"],a:1,
+   e:"Os quatro GNSS globais são GPS (EUA), GLONASS (Rússia), Galileo (UE) e BeiDou (China). NavIC e QZSS são regionais; WAAS/EGNOS/MSAS são SBAS."},
+  {q:"A diferença entre acurácia e precisão é:",
+   o:["São sinônimos","Acurácia abrange erros sistemáticos + aleatórios; precisão só os aleatórios","Precisão inclui os sistemáticos; acurácia não","Ambas medem apenas o erro de relógio"],a:1,
+   e:"Acurácia envolve tanto erros sistemáticos quanto aleatórios; a precisão está vinculada apenas aos erros aleatórios."},
+  {q:"O segmento espacial do GPS mantém, no mínimo:",
+   o:["12 satélites a 36.000 km (geossíncronos)","24 satélites operacionais (95% do tempo), a ~20.200 km","3 satélites por hemisfério","100 satélites em órbita baixa"],a:1,
+   e:"Ao menos 24 satélites operacionais 95% do tempo, em 6 planos, a ~20.200 km. Órbitas altas, mas não geossíncronas, para permitir o rastreio pelas estações."},
+  {q:"As portadoras do GPS L1 e L2 têm frequências:",
+   o:["1575,42 MHz e 1227,60 MHz","283,5 kHz e 325 kHz","9 GHz e 3 GHz","1,023 MHz e 10,23 MHz"],a:0,
+   e:"L1 = 1575,42 MHz e L2 = 1227,60 MHz (UHF). A faixa 283,5–325 kHz é a dos radiofaróis que transmitem correções DGNSS; 9/3 GHz são as bandas do radar."},
+  {q:"O código C/A sustenta o SPS, que é:",
+   o:["O serviço militar criptografado","O Serviço de Posicionamento Padrão, civil e disponível no mundo todo","Um sinal exclusivo do Galileo","O sistema diferencial brasileiro"],a:1,
+   e:"O código C/A (Coarse/Acquisition) sustenta o SPS (Standard Positioning Service), civil e mundial. O código P(Y) sustenta o PPS (militar)."},
+  {q:"A 'pseudodistância' recebe esse nome porque:",
+   o:["É medida por radar","Inclui o erro do relógio do receptor (é uma distância aparente)","É sempre menor que a real","Só vale para satélites geoestacionários"],a:1,
+   e:"O receptor obtém a distância pelo tempo de propagação × c, mas o relógio do receptor não é perfeito — a distância medida é 'aparente' (pseudodistância)."},
+  {q:"Para um navio (altitude conhecida, ao nível do mar), o número mínimo de satélites para a posição é:",
+   o:["1","2","3","6"],a:2,
+   e:"São 4 incógnitas (lat, long, alt, relógio). Conhecendo-se a altitude, sobram 3 incógnitas → 3 satélites bastam. Em 3D (sem altitude) seriam 4 satélites."},
+  {q:"Sobre o fator PDOP (geometria dos satélites):",
+   o:["Quanto maior o PDOP, melhor a posição","Quanto menor o PDOP, melhor a acurácia da posição","O PDOP não influi na precisão","PDOP mede a carga da bateria do receptor"],a:1,
+   e:"PDOP é um número relativo: quanto MENOR, melhor a acurácia. Satélites bem espalhados (bons ângulos de corte) dão PDOP baixo."},
+  {q:"O erro ionosférico no sinal GPS é bastante reduzido por:",
+   o:["Aumentar o ganho da antena","Receptores de dupla frequência","Desligar a SA","Usar apenas a L2"],a:1,
+   e:"A ionosfera atrasa o sinal; receptores capazes de receber duas ou mais frequências eliminam a maior parte desse erro. A troposfera afeta menos e é difícil de corrigir."},
+  {q:"O sistema GLONASS distingue-se dos demais GNSS por:",
+   o:["Ser o único civil","Usar FDMA (satélites em frequências diferentes)","Não ter segmento de controle","Operar em VHF"],a:1,
+   e:"Ao contrário dos outros GNSS (que usam CDMA/PRN), o GLONASS usa FDMA: cada satélite transmite em uma frequência distinta."},
+  {q:"Um recurso do Galileo que o GPS e o GLONASS não oferecem ao usuário é:",
+   o:["Cobertura global","O alerta de integridade (aviso de falha do próprio sinal)","Posição em 3D","Sinal gratuito"],a:1,
+   e:"O Galileo fornece indicação de integridade ao usuário — avisa quando a unidade não está recebendo sinais adequados. GPS/GLONASS não davam essa notificação."},
+  {q:"No DGNSS, a estação de referência gera correções porque está:",
+   o:["Em um ponto de coordenadas conhecidas com precisão","No satélite","A bordo do navio","No polo magnético"],a:0,
+   e:"A ER-DGNSS, em ponto de coordenadas conhecidas (em geral um radiofarol), compara a distância calculada aos satélites com a medida e transmite as correções (< 10 m; velocidade 0,1 nó; alcance ~200 mn)."},
+  {q:"[PSCPP 2006] Sobre o uso do GPS, a afirmação INCORRETA é:",
+   o:["Deve-se monitorar a possibilidade de falha no satélite e no equipamento de bordo","Confirmar o GPS conferindo dois ou mais receptores de satélite independentes","O navegante cuidadoso confere a leitura por outro meio, mesmo a simples estimada (DR)","Deve-se atentar à referência geográfica (datum) comparada à carta"],a:1,
+   e:"Conferir 'dois receptores de satélite' não é meio independente — ambos dependem do mesmo sistema e não pegam o erro sistemático. Deve-se checar por meio realmente independente (estimada, radar, visual, inercial). Gabarito (d)."},
+  {q:"[PSCPP 2011] O sonar doppler, na atracação de navios ≥ 100.000 t, mede a velocidade:",
+   o:["No fundo, inclusive a transversal, com precisão fina (0,01 nó)","Só à ré","Apenas na água","Apenas longitudinal, a 1 nó"],a:0,
+   e:"O sonar doppler mede a velocidade em relação ao fundo, inclusive a transversal, essencial na atracação de grandes navios. Gabarito (b) — Sonar doppler e 0,01 nó. [VERIFICAR gabarito impresso]"}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

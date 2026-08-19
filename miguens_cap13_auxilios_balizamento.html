@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Auxílios à Navegação e Balizamento IALA — Miguens Cap. 13 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:120px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;margin-top:12px;min-height:52px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:180px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco B/H — Auxílios</p>
+    <h1>Auxílios à Navegação e o <em>Balizamento IALA</em></h1>
+    <p class="sub">Faróis e sinais, as características das luzes, os três alcances (luminoso, nominal e geográfico) e o Sistema de Balizamento Marítimo da IALA — Região A × B (o Brasil é B!), com as marcas laterais, cardinais, de perigo isolado, águas seguras, especiais e novos perigos.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 13 (Auxílios à Navegação). Balizamento conforme NORMAM-17/DHN. A banca cita a <b>1ª edição (1996)</b>. Questões reais: PSCPP 2006, 2008, 2011 e 2012.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#auxilios">13.2 Auxílios e luzes</a>
+    <a href="#alcances">13.2.6 Alcances ▶</a>
+    <a href="#ialaAB">IALA A × B ▶</a>
+    <a href="#cardinais">Cardinais ▶</a>
+    <a href="#outras">Perigo isolado · especiais</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Fecha o <strong>Bloco B</strong>. A Lista de Faróis (DH2) vem do <a href="miguens_cap12_publicacoes_nauticas.html">Cap. 12 (Publicações)</a>; os símbolos das marcas estão na Carta 12.000 (<a href="miguens_cap2_carta_projecoes.html">Cap. 2</a>). O balizamento fluvial liga-se à Navegação Fluvial (Vol. III Cap. 40).
+</div>
+
+<!-- ===== AUXÍLIOS E LUZES ===== -->
+<section class="bloco" id="auxilios">
+  <h2 class="sec"><span class="n">13.2</span> Auxílios visuais e as características das luzes</h2>
+  <p class="lede">Auxílio à navegação = dispositivo, sistema ou serviço externo ao navio. Os visuais vão dos faróis às boias — e a "personalidade" de cada luz é sua <strong>característica</strong>.</p>
+
+  <div class="box key">
+    <h4>Tipos de luz e o vocabulário <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>Tipos:</strong> onidirecional (mesma característica em todo o entorno) · direcional (setor estreito, uma cor, indica direção) · de setor (setores do horizonte com cores diferentes) · de alinhamento (dois sinais fixos de mesma cor definindo uma direção/eixo de canal).</p>
+    <p style="margin-top:8px"><strong>Característica</strong> = <span class="hl">ritmo + cor</span>. <strong>Período</strong> = tempo entre dois ciclos idênticos. <strong>Lampejo</strong> (luz &lt; obscuridade) · <strong>Ocultação</strong> (obscuridade &lt; luz) · <strong>Isofase</strong> (luz = obscuridade) · <strong>Eclipse</strong> (obscuridade entre lampejos).</p>
+  </div>
+
+  <div class="box">
+    <h4>Limites de setores — sempre do largo <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Os limites de setores de luz e de visibilidade são dados por <strong>marcações verdadeiras</strong> (000°–360°), tomadas <span class="hl">do largo (do mar para o sinal)</span>, no sentido horário — as marcações com que <strong>o navegante avista o farol</strong> (não o contrário). Setores coloridos podem indicar um perigo ou a passagem livre entre perigos.</p>
+  </div>
+</section>
+
+<!-- ===== ALCANCES ===== -->
+<section class="bloco" id="alcances">
+  <h2 class="sec"><span class="n">13.2.6</span> Os três alcances</h2>
+  <p class="lede">Distingua-os: um depende da <em>luz</em>, outro do <em>padrão de 10 milhas</em>, o terceiro da <em>curvatura da Terra</em>.</p>
+
+  <table>
+    <tr><th>Alcance</th><th>Depende de…</th></tr>
+    <tr><td><strong>Luminoso</strong></td><td>Intensidade luminosa (candelas) + visibilidade meteorológica. Obtido no Diagrama de Alcance Luminoso.</td></tr>
+    <tr><td><strong>Nominal</strong></td><td>Alcance com visibilidade meteorológica <span class="hl">padrão de 10 milhas</span> (observador de vista normal).</td></tr>
+    <tr><td><strong>Geográfico</strong></td><td>Só a <span class="hl">curvatura da Terra</span>: elevação (altitude) da luz e altura do olho do observador.</td></tr>
+  </table>
+
+  <div class="ichart">
+    <h4>Alcance geográfico — a curvatura da Terra</h4>
+    <p class="hint">D = 1,93 (√H + √h). Ajuste a altura do observador (H) e a altitude do farol (h) e veja até onde a luz aparece no horizonte. Nas cartas, a DHN usa o observador a 5 m.</p>
+    <canvas id="cvAlc" width="860" height="280"></canvas>
+    <div class="ictrl"><label for="hobs">Observador H (m) →</label><input type="range" id="hobs" min="2" max="30" step="1" value="7" oninput="drawAlc()"></div>
+    <div class="ictrl"><label for="hfar">Farol h (m) →</label><input type="range" id="hfar" min="5" max="120" step="1" value="60" oninput="drawAlc()"></div>
+    <div class="iread" id="alcRead"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>A fórmula e as regras de ouro <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">D = 1,93 (√H + √h)<span class="lbl">D = alcance geográfico (mn) · H = altura do observador (m) · h = altitude do farol (m)</span></div>
+    <p class="vars">Ex.: obs 7 m + farol 60 m → 1,93(√7+√60) ≈ <strong>20,0 mn</strong>. Nas cartas, a DHN considera o olho do observador a <span class="hl">5 metros</span> e registra apenas o <span class="hl">MENOR</span> entre o alcance luminoso e o geográfico (é a 1ª distância em que o sinal aparece). Faróis de aterragem: alcance luminoso ≥ geográfico.</p>
+  </div>
+</section>
+
+<!-- ===== IALA A x B ===== -->
+<section class="bloco" id="ialaAB">
+  <h2 class="sec"><span class="n">13.3</span> O Sistema IALA — Região A × B</h2>
+  <p class="lede">Só os sinais <strong>laterais</strong> mudam entre as duas regiões. A "direção convencional do balizamento" no Brasil é sempre <strong>vindo do mar</strong> (e, no rio, subindo).</p>
+
+  <div class="ichart">
+    <h4>Sinais laterais — alterne a região</h4>
+    <p class="hint">Região A: Europa/África/Ásia/Oceania. Região B (Brasil): Américas, Japão, Coreia do Sul, Taiwan, Filipinas. Veja as cores/formatos de bombordo e boreste em cada região.</p>
+    <div class="ictrl" style="margin-bottom:10px">
+      <button class="regBtn" data-r="A" onclick="setReg('A')">Região A</button>
+      <button class="regBtn active" data-r="B" onclick="setReg('B')">Região B (Brasil)</button>
+    </div>
+    <svg id="svgReg" viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sinais laterais IALA"></svg>
+    <div class="iread" id="regRead"></div>
+  </div>
+
+  <div class="box key">
+    <h4>O que decorar do Brasil (Região B) <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>Bombordo:</strong> <span class="hl">verde</span>, cilíndrico (marca de tope cilindro verde). <strong>Boreste:</strong> <span class="hl">encarnado</span>, cônico (cone encarnado, vértice p/ cima). É o inverso da Região A. Ritmo: qualquer, <em>exceto</em> Grupos de Lampejos Compostos (2+1). <strong>Canal preferencial</strong> = cor do lado + faixa larga horizontal da cor oposta + ritmo <span class="hl">Gp Lampejos Compostos (2+1)</span>. Se numerados, a sequência segue a direção convencional.</p>
+  </div>
+</section>
+
+<!-- ===== CARDINAIS ===== -->
+<section class="bloco" id="cardinais">
+  <h2 class="sec"><span class="n">13.3.2c</span> Sinais cardinais</h2>
+  <p class="lede">Ligados à agulha: o nome do sinal indica o <strong>quadrante por onde passar</strong> — as águas navegáveis (mais profundas) ficam do lado do nome do sinal.</p>
+
+  <div class="ichart">
+    <h4>As quatro cardinais em torno de um perigo</h4>
+    <p class="hint">Clique num quadrante. A marca de tope são 2 cones pretos (o indicador diurno obrigatório), cuja disposição "aponta" para a cor: N (vértices ↑), S (vértices ↓), E (base a base ◇), W (ponta a ponta ⋈).</p>
+    <svg id="svgCard" viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sinais cardinais"></svg>
+    <div class="iread" id="cardRead">Toque num quadrante (N, L, S ou O).</div>
+  </div>
+
+  <table>
+    <tr><th>Cardinal</th><th>Cor</th><th>2 cones (tope)</th><th>Luz branca</th></tr>
+    <tr><td><strong>Norte</strong></td><td>Preto sobre amarelo</td><td>Vértices p/ cima ↑↑</td><td>VQ ou Q (contínua, rápida/muito rápida)</td></tr>
+    <tr><td><strong>Leste</strong></td><td>Preto c/ faixa amarela</td><td>Base a base (◇)</td><td>VQ(3)/5s ou Q(3)/10s</td></tr>
+    <tr><td><strong>Sul</strong></td><td>Amarelo sobre preto</td><td>Vértices p/ baixo ↓↓</td><td>VQ(6)+longo/10s ou Q(6)+longo/15s</td></tr>
+    <tr><td><strong>Oeste</strong></td><td>Amarelo c/ faixa preta</td><td>Ponta a ponta (⋈)</td><td>VQ(9)/10s ou Q(9)/15s</td></tr>
+  </table>
+</section>
+
+<!-- ===== OUTRAS MARCAS ===== -->
+<section class="bloco" id="outras">
+  <h2 class="sec"><span class="n">13.3.2 d-g</span> Perigo isolado · águas seguras · especiais · novos perigos</h2>
+  <p class="lede">As quatro marcas restantes — decore cor, marca de tope e ritmo.</p>
+
+  <table>
+    <tr><th>Marca</th><th>Cor</th><th>Marca de tope</th><th>Luz</th></tr>
+    <tr><td><strong>Perigo Isolado</strong> (sobre o perigo)</td><td>Preta c/ faixas <span class="hl">encarnadas</span></td><td><span class="hl">2 esferas pretas</span> (obrigatória)</td><td>Branca, <strong>Gp Lampejos (2)</strong></td></tr>
+    <tr><td><strong>Águas Seguras</strong> (meio de canal, aterragem)</td><td>Listras <span class="hl">verticais</span> encarnadas e brancas</td><td>1 esfera encarnada</td><td>Branca — Isofásica, ocultação, lampejo longo/10s ou <strong>Morse "A" (·−)</strong></td></tr>
+    <tr><td><strong>Especiais</strong> (ODAS, dutos, áreas)</td><td><span class="hl">Amarela</span></td><td><span class="hl">X amarelo</span></td><td>Amarela (ODAS = Lp(5) 20s)</td></tr>
+    <tr><td><strong>Novos Perigos</strong></td><td>Listras <span class="hl">azul e amarela</span> alternadas</td><td>Cruz amarela</td><td>Azul + amarela alternadas</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Detalhes que a banca explora <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p><strong>Perigo isolado:</strong> tem <span class="hl">águas navegáveis em toda a volta</span> (é a definição). <strong>Novos perigos:</strong> pelo menos um sinal deve ser <span class="hl">duplicado</span> (idêntico ao par); a luz tem característica de cardinal ou lateral, rápida/muito rápida; pode-se usar um <strong>Racon transmitindo "D" (−··)</strong>, mostrando 1 milha náutica na tela do radar; comunica-se ao <strong>CHM</strong> e ao Agente da Autoridade Marítima.</p>
+  </div>
+</section>
+
+<!-- ===== MAPA DA BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
+  <p class="lede">Capítulo muito cobrado: alcance geográfico e balizamento IALA em todas as provas.</p>
+
+  <table>
+    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
+    <tr><td>2006</td><td><strong>Q58</strong></td><td>Elevação do observador adotada nas cartas DHN (alcance geográfico)</td><td class="center"><b>(b)</b> 5 m ✔ OCR</td></tr>
+    <tr><td>2008</td><td><strong>Q32</strong></td><td>Sinalização de novo perigo (naufrágio)</td><td class="center"><b>(e)</b> duplicar ✔ OCR</td></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q19</strong></td><td>Cenário IALA (Região B) — laterais, perigo isolado, cardinal Oeste</td><td class="center"><b>(d)</b> deduzido</td></tr>
+    <tr><td>2012 · Rosa</td><td>—</td><td>Fatores do alcance geográfico de um farol</td><td class="center"><b>(c)</b> deduzido</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>2011-Q19 resolvida — o cenário IALA <span class="tag t-banca">BANCA</span></h4>
+    <p>Verde cilíndrico (17h43) = lateral de <strong>bombordo</strong> (Região B). Encarnado c/ faixa verde (17h57) = preferencial a <strong>bombordo</strong> (não a boreste → (a) falso). 2 esferas pretas (18h07) = <strong>perigo isolado</strong>, que TEM águas navegáveis ao redor (→ (b) falso; (e) falso: sua luz é branca Fl(2), não encarnada). Luz branca Gp(9) rápidos/15s (18h12) = <strong>cardinal Oeste</strong> → de dia é <span class="hl">amarelo com faixa larga preta no meio</span>. Gabarito <b>(d)</b>.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Distratores clássicos <span class="tag t-conflito">DECORAR</span></h4>
+    <p>• <strong>Brasil = Região B</strong>: boreste encarnado, bombordo verde. • <strong>Alcance geográfico</strong> = curvatura (altura do farol + do observador), não intensidade. • <strong>DHN registra o MENOR</strong> dos dois alcances; observador a <strong>5 m</strong>. • <strong>Perigo isolado tem águas navegáveis ao redor</strong>. • Novo perigo: Racon <strong>"D"</strong>, sinal <strong>duplicado</strong>. • Cardinal: nome = por onde passar.</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Luzes, alcances e as marcas IALA.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Doze questões — as quatro reais (2006/2008/2011/2012) incluídas.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Auxílios à Navegação e Balizamento IALA (Miguens Cap. 13)</summary>
+  <ul>
+    <li><b>Luzes:</b> onidirecional · direcional · de setor · de alinhamento. Característica = ritmo + cor. Ocultação (obscuridade &lt; luz) · Isofase (iguais) · Lampejo (luz &lt; obscuridade).</li>
+    <li><b>Setores:</b> limites por marcações verdadeiras do LARGO (mar→sinal), horário — com que o navegante avista o farol.</li>
+    <li><b>Alcances:</b> Luminoso (candelas + visibilidade) · Nominal (visibilidade padrão 10 mn) · Geográfico (curvatura: altura do farol + do observador). D = 1,93(√H + √h). DHN: observador 5 m; registra o MENOR dos dois.</li>
+    <li><b>IALA — só laterais mudam.</b> Região A (Europa/África/Ásia/Oceania) × Região B (Américas, Japão, Coreia do Sul, Taiwan, Filipinas). <b>Brasil = B.</b> Direção convencional: vindo do mar (rio: subindo).</li>
+    <li><b>Região B:</b> Bombordo = VERDE (cilindro); Boreste = ENCARNADO (cone). Preferencial: faixa horizontal da cor oposta + Gp Lampejos Compostos (2+1).</li>
+    <li><b>Cardinais:</b> nome = quadrante por onde passar. 2 cones (tope, obrigatório): N ↑↑, S ↓↓, E base-a-base, W ponta-a-ponta. Cor branca; Oeste = amarelo c/ faixa preta, Q(9)/15s.</li>
+    <li><b>Perigo Isolado:</b> preto c/ faixas encarnadas; 2 esferas pretas; luz branca Fl(2); TEM águas navegáveis ao redor.</li>
+    <li><b>Águas Seguras:</b> listras VERTICAIS encarnadas/brancas; 1 esfera encarnada; Morse "A" (·−). <b>Especiais:</b> amarela; X amarelo; ODAS Lp(5)20s.</li>
+    <li><b>Novos Perigos:</b> listras azul/amarela; cruz amarela; ao menos 1 sinal duplicado; Racon "D" (−··) = 1 mn no radar; avisar CHM + Agente da Autoridade Marítima.</li>
+    <li><b>Banca:</b> 2006-Q58 (observador 5 m, gab b) · 2008-Q32 (novo perigo duplicado, gab e) · 2011-Q19 (cenário IALA / cardinal Oeste, gab d) · 2012 (alcance geográfico = altura do farol + do observador, gab c).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Auxílios à Navegação e Balizamento IALA (Miguens Vol. I, Cap. 13) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+
+/* ===== ALCANCE GEOGRÁFICO ===== */
+function drawAlc(){
+  var cv=document.getElementById('cvAlc'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var Hobs=+document.getElementById('hobs').value, hfar=+document.getElementById('hfar').value;
+  var D=1.93*(Math.sqrt(Hobs)+Math.sqrt(hfar));
+  // mar com leve curvatura
+  var sea=170;
+  ctx.fillStyle='#eef5fb';ctx.fillRect(0,sea,W,H-sea);
+  ctx.strokeStyle='#8fb8d8';ctx.lineWidth=2;ctx.beginPath();
+  for(var x=0;x<=W;x+=8){var y=sea+18*Math.sin((x/W)*Math.PI);ctx.lineTo(x,y);}ctx.stroke();
+  // navio (esq) com mastro proporcional a Hobs
+  var nx=120; var mastH=10+Hobs*2.2;
+  ctx.fillStyle='#16302B';ctx.fillRect(nx-26,sea-8,52,10);
+  ctx.strokeStyle='#16302B';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(nx,sea-8);ctx.lineTo(nx,sea-8-mastH);ctx.stroke();
+  ctx.fillStyle='#2C5F8A';ctx.font='11px Trebuchet MS';ctx.fillText('obs '+Hobs+' m',nx-24,sea-12-mastH);
+  // farol (dir) proporcional a hfar
+  var fx=W-130; var torH=20+hfar*1.5;
+  ctx.fillStyle='#9E3B2E';ctx.fillRect(fx-9,sea-torH,18,torH);
+  ctx.fillStyle='#C8A84B';ctx.beginPath();ctx.arc(fx,sea-torH-6,7,0,7);ctx.fill();
+  ctx.fillStyle='#9E3B2E';ctx.fillText('farol '+hfar+' m',fx-20,sea-torH-14);
+  // linha de visada (tangente) tracejada
+  ctx.strokeStyle='#C8A84B';ctx.setLineDash([6,4]);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(nx,sea-8-mastH);ctx.lineTo(fx,sea-torH-6);ctx.stroke();ctx.setLineDash([]);
+  document.getElementById('alcRead').innerHTML='Alcance geográfico D = 1,93 (√'+Hobs+' + √'+hfar+') = <b>'+D.toFixed(1)+' milhas náuticas</b>. É a maior distância em que a luz aparece no horizonte, só pela curvatura da Terra. (Nas cartas, a DHN fixa o observador em 5 m e publica o menor entre este e o alcance luminoso.)';
+}
+drawAlc();
+
+/* ===== IALA A x B ===== */
+var reg='B';
+function setReg(r){reg=r;document.querySelectorAll('.regBtn').forEach(function(b){b.classList.toggle('active',b.dataset.r===r);});drawReg();}
+function drawReg(){
+  var svg=document.getElementById('svgReg');svg.innerHTML='';
+  var bbCor, beCor;
+  if(reg==='A'){bbCor='#9E3B2E';beCor='#2E7D52';} else {bbCor='#2E7D52';beCor='#9E3B2E';}
+  sTx(svg,430,26,'REGIÃO '+reg+(reg==='B'?' (Brasil)':'')+' — sinais laterais',{fill:'#5a6f80',fs:13,fw:'bold',ta:'middle'});
+  // BOMBORDO (cilindro) à esquerda
+  sEl(svg,'rect',{x:190,y:90,width:70,height:110,rx:6,fill:bbCor,stroke:'#333','stroke-width':1.5});
+  sEl(svg,'rect',{x:206,y:66,width:38,height:22,rx:3,fill:bbCor,stroke:'#333'}); // tope cilindro
+  sTx(svg,225,230,'BOMBORDO',{fill:'#16302B',fs:13,fw:'bold',ta:'middle'});
+  sTx(svg,225,248,reg==='A'?'Encarnado · cilíndrico':'Verde · cilíndrico',{fill:'#7a6f55',fs:12,ta:'middle'});
+  // BORESTE (cone) à direita
+  sEl(svg,'path',{d:'M 635 200 L 600 200 L 670 200 Z',fill:'none'});
+  sEl(svg,'path',{d:'M 600 200 L 635 96 L 670 200 Z',fill:beCor,stroke:'#333','stroke-width':1.5});
+  sEl(svg,'path',{d:'M 620 88 L 635 62 L 650 88 Z',fill:beCor,stroke:'#333'}); // tope cone
+  sTx(svg,635,230,'BORESTE',{fill:'#16302B',fs:13,fw:'bold',ta:'middle'});
+  sTx(svg,635,248,reg==='A'?'Verde · cônico':'Encarnado · cônico',{fill:'#7a6f55',fs:12,ta:'middle'});
+  document.getElementById('regRead').innerHTML = reg==='B'
+    ? '<b>Região B (Brasil):</b> bombordo VERDE (cilindro), boreste ENCARNADO (cone). "Encarnado a boreste, voltando do mar."'
+    : '<b>Região A:</b> bombordo ENCARNADO (cilindro), boreste VERDE (cone) — o inverso do Brasil.';
+}
+drawReg();
+
+/* ===== CARDINAIS ===== */
+var CARD={
+  N:{lab:'NORTE',cor1:'#111',cor2:'#e5b73a',cones:'up',luz:'VQ ou Q (contínua)',passa:'Passe pelo NORTE do perigo (águas navegáveis ao N).'},
+  E:{lab:'LESTE',cor1:'#111',cor2:'#e5b73a',cones:'base',luz:'VQ(3)/5s ou Q(3)/10s',passa:'Passe pelo LESTE do perigo.'},
+  S:{lab:'SUL',cor1:'#e5b73a',cor2:'#111',cones:'down',luz:'VQ(6)+longo/10s ou Q(6)+longo/15s',passa:'Passe pelo SUL do perigo.'},
+  W:{lab:'OESTE',cor1:'#e5b73a',cor2:'#111',cones:'point',luz:'VQ(9)/10s ou Q(9)/15s',passa:'Passe pelo OESTE do perigo. De dia: amarelo com faixa preta.'}
+};
+var cardSel='N';
+function coneMark(svg,cx,cy,tipo){
+  function cone(x,y,up){var d=up?('M '+(x-9)+' '+(y+9)+' L '+x+' '+(y-9)+' L '+(x+9)+' '+(y+9)+' Z'):('M '+(x-9)+' '+(y-9)+' L '+x+' '+(y+9)+' L '+(x+9)+' '+(y-9)+' Z');sEl(svg,'path',{d:d,fill:'#111'});}
+  if(tipo==='up'){cone(cx,cy-11,true);cone(cx,cy+11,true);}
+  else if(tipo==='down'){cone(cx,cy-11,false);cone(cx,cy+11,false);}
+  else if(tipo==='base'){cone(cx,cy-11,false);cone(cx,cy+11,true);}   // base a base (pontas p/ fora)
+  else {cone(cx,cy-11,true);cone(cx,cy+11,false);}                     // ponta a ponta (pontas p/ dentro)
+}
+function drawCard(){
+  var svg=document.getElementById('svgCard');svg.innerHTML='';
+  var cx=430,cy=165;
+  // perigo central
+  sEl(svg,'circle',{cx:cx,cy:cy,r:20,fill:'#e7d3a0',stroke:'#9a7d2a','stroke-width':1.5});
+  sTx(svg,cx,cy+4,'perigo',{fill:'#7a5a2a',fs:11,fw:'bold',ta:'middle'});
+  var pos={N:[cx,60],E:[700,cy],S:[cx,275],W:[160,cy]};
+  ['N','E','S','W'].forEach(function(k){
+    var p=pos[k],c=CARD[k];
+    var sel=(k===cardSel);
+    // corpo (barril bicolor)
+    sEl(svg,'rect',{x:p[0]-15,y:p[1]-30,width:30,height:60,rx:5,fill:c.cor1,stroke:sel?'#1A7A6E':'#333','stroke-width':sel?3:1.2});
+    sEl(svg,'rect',{x:p[0]-15,y:p[1],width:30,height:30,rx:0,fill:c.cor2});
+    coneMark(svg,p[0],p[1]-46,c.cones);
+    sTx(svg,p[0],p[1]+46,c.lab,{fill:sel?'#1A7A6E':'#16302B',fs:12,fw:'bold',ta:'middle'});
+    // área clicável
+    var r=sEl(svg,'rect',{x:p[0]-40,y:p[1]-56,width:80,height:110,fill:'transparent',style:'cursor:pointer'});
+    r.addEventListener('click',function(){cardSel=k;drawCard();});
+  });
+  var c=CARD[cardSel];
+  document.getElementById('cardRead').innerHTML='<b>Cardinal '+c.lab+'</b> — '+c.passa+' Luz branca: '+c.luz+'.';
+}
+drawCard();
+window.addEventListener('resize',function(){drawAlc();drawReg();drawCard();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Característica de uma luz",b:"Combinação de RITMO + COR. É o que identifica o sinal."},
+  {f:"Ocultação × Isofase × Lampejo",b:"Ocultação: obscuridade < luz. Isofase: luz = obscuridade. Lampejo: luz < obscuridade."},
+  {f:"Limites de setores",b:"Marcações verdadeiras do LARGO (mar→sinal), horário — com que o navegante avista o farol."},
+  {f:"Alcance luminoso",b:"Maior distância pela intensidade (candelas) + visibilidade meteorológica."},
+  {f:"Alcance nominal",b:"Alcance com visibilidade meteorológica padrão de 10 milhas."},
+  {f:"Alcance geográfico",b:"Só a curvatura da Terra: altura do farol + altura do observador. D = 1,93(√H+√h)."},
+  {f:"DHN e os alcances",b:"Observador fixado em 5 m; nas cartas registra-se o MENOR entre luminoso e geográfico."},
+  {f:"Faróis de aterragem",b:"Alcance luminoso ≥ geográfico (para serem vistos o mais longe possível)."},
+  {f:"IALA — o que muda",b:"Só os sinais LATERAIS diferem entre as Regiões A e B."},
+  {f:"Região A × B",b:"A: Europa/África/Ásia/Oceania. B: Américas, Japão, Coreia do Sul, Taiwan, Filipinas. Brasil = B."},
+  {f:"Laterais na Região B",b:"Bombordo VERDE (cilindro), Boreste ENCARNADO (cone). Inverso da Região A."},
+  {f:"Direção convencional (Brasil)",b:"Sempre vindo do mar; na navegação fluvial, subindo o rio."},
+  {f:"Canal preferencial",b:"Cor do lado + faixa horizontal da cor oposta + ritmo Gp Lampejos Compostos (2+1)."},
+  {f:"Sinais cardinais",b:"Nome = quadrante por onde passar (águas navegáveis do lado do nome). Ligados à agulha."},
+  {f:"Marca de tope cardinal",b:"2 cones pretos (obrigatória): N ↑↑, S ↓↓, E base-a-base, W ponta-a-ponta."},
+  {f:"Cardinal Oeste",b:"Amarelo com faixa preta; luz branca Q(9)/15s ou VQ(9)/10s."},
+  {f:"Perigo Isolado",b:"Preto c/ faixas encarnadas; 2 esferas pretas (obrigatória); luz branca Fl(2). TEM águas navegáveis ao redor."},
+  {f:"Águas Seguras",b:"Listras VERTICAIS encarnadas/brancas; 1 esfera encarnada; luz branca Morse 'A' (·−)."},
+  {f:"Sinais Especiais",b:"Amarela; marca de tope X amarelo; luz amarela. ODAS = Lp(5) 20s."},
+  {f:"Novos Perigos",b:"Listras azul/amarela; cruz amarela; ≥1 sinal duplicado; Racon 'D' (−··) = 1 mn no radar; avisar CHM."},
+  {f:"Balizamento fluvial (Brasil)",b:"Direção convencional = de jusante para montante (subindo o rio)."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"A característica de uma luz de auxílio à navegação é dada pela combinação de:",
+   o:["Intensidade e alcance","Ritmo e cor","Altura e setor","Período e cor apenas"],a:1,
+   e:"Característica = ritmo + cor. É o que identifica o sinal ao navegante."},
+  {q:"O alcance geográfico de um farol depende de:",
+   o:["Intensidade da luz e visibilidade","Altura do farol e altura do observador (curvatura da Terra)","Intensidade e cor da luz","Visibilidade meteorológica apenas"],a:1,
+   e:"O geográfico depende só da curvatura da Terra: a elevação (altitude) da luz e a altura do olho do observador. D = 1,93(√H+√h). (2012, gab c.)"},
+  {q:"[PSCPP 2006] Para qual elevação do olho do observador a DHN determina os alcances geográficos das suas publicações?",
+   o:["3 metros","5 metros","10 metros","15 metros"],a:1,
+   e:"5 metros. Gabarito (b) da prova. É a altura de olho padrão adotada pela DHN."},
+  {q:"Nas cartas náuticas da DHN, o alcance registrado para um farol é:",
+   o:["Sempre o luminoso","Sempre o geográfico","O MENOR entre o luminoso e o geográfico","A média dos dois"],a:2,
+   e:"A DHN registra o MENOR dos dois (é a primeira distância em que o navegante avista o sinal)."},
+  {q:"No Brasil (Região B da IALA), os sinais laterais de BORESTE são:",
+   o:["Verdes, cilíndricos","Encarnados, cônicos","Amarelos com faixa preta","Pretos com faixa encarnada"],a:1,
+   e:"Região B: boreste ENCARNADO e cônico; bombordo VERDE e cilíndrico. É o inverso da Região A."},
+  {q:"As duas Regiões de balizamento da IALA (A e B) diferem quanto aos sinais:",
+   o:["Cardinais","Laterais","De perigo isolado","De águas seguras"],a:1,
+   e:"Só os sinais LATERAIS mudam entre as Regiões A e B. Cardinais, perigo isolado, águas seguras, especiais e novos perigos são iguais nas duas."},
+  {q:"O nome de um sinal cardinal (Norte, Sul, Leste, Oeste) indica:",
+   o:["A cor da luz","O quadrante por onde o navegante deve passar","O tipo de perigo","A profundidade local"],a:1,
+   e:"O nome = quadrante por onde passar; as águas navegáveis/mais profundas ficam do lado do nome do sinal. Ligado à agulha."},
+  {q:"[PSCPP 2011] Um sinal com luz branca em grupo de 9 lampejos rápidos a cada 15 s é um cardinal Oeste. De dia ele se apresenta como:",
+   o:["Preto sobre amarelo","Amarelo com uma faixa larga horizontal preta no meio","Listras verticais encarnadas e brancas","Preto com faixas encarnadas"],a:1,
+   e:"Cardinal Oeste = amarelo com faixa preta; marca de tope 2 cones ponta a ponta; luz Q(9)/15s. Gabarito (d) da 2011-Q19."},
+  {q:"O sinal de PERIGO ISOLADO caracteriza-se por:",
+   o:["Ter águas navegáveis em toda a sua volta, marca de tope de 2 esferas pretas e luz branca Fl(2)","Listras verticais encarnadas e brancas","Cor amarela e marca em X","Não ter águas navegáveis ao redor"],a:0,
+   e:"Perigo isolado: preto com faixas encarnadas, 2 esferas pretas (obrigatória), luz branca grupo de 2 lampejos — e por definição TEM águas navegáveis em toda a volta."},
+  {q:"O sinal de ÁGUAS SEGURAS (meio de canal, aterragem) apresenta:",
+   o:["Cor amarela e X amarelo","Listras verticais encarnadas e brancas; luz branca Morse 'A'","Preto sobre amarelo","Faixas azul e amarela"],a:1,
+   e:"Águas seguras: listras VERTICAIS encarnadas e brancas, marca de tope 1 esfera encarnada, luz branca isofásica/ocultação/lampejo longo 10s ou Morse 'A' (·−)."},
+  {q:"[PSCPP 2008] Sobre a sinalização de um NOVO PERIGO (navio recém-naufragado), é correto:",
+   o:["A luz deve ter característica de perigo isolado","Pode-se usar Racon transmitindo 'P'","Pode-se usar Racon transmitindo 'H'","Pelo menos um dos sinais deve ser duplicado, idêntico ao par"],a:3,
+   e:"Gabarito (e): ao menos um sinal duplicado (idêntico ao par). A luz é de cardinal/lateral (rápida/muito rápida); o Racon transmite 'D' (−··); avisa-se o CHM e o Agente da Autoridade Marítima."},
+  {q:"Uma OCULTAÇÃO é definida como:",
+   o:["Luz e obscuridade de igual duração","Intervalo de obscuridade relativamente mais curto que o de luz","Intervalo de luz mais curto que o de obscuridade","Ausência total de luz"],a:1,
+   e:"Ocultação: obscuridade < luz (a luz predomina). Isofase: luz = obscuridade. Lampejo: luz < obscuridade."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

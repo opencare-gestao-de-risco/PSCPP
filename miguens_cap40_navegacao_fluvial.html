@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Navegação Fluvial — Miguens Vol. III Cap. 40 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#0b1f1c;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:120px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;margin-top:12px;min-height:52px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:180px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco H — Águas Interiores</p>
+    <h1>Navegação <em>Fluvial</em> — rios, balizamento e a lei do rio</h1>
+    <p class="sub">A navegação nas vias interiores é sempre navegação em águas restritas. Este caderno cobre a classificação dos rios, os fatores de navegabilidade, os documentos cartográficos (com o ábaco de correção de sondagens), o balizamento fluvial da NORMAM-601, a divulgação do nível e as técnicas próprias — o perfil de velocidade, a "lei do rio" e a Regra 9 do RIPEAM.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. III — <b>Cap. 40 (Navegação Fluvial)</b>. A banca cita também a <em>Lista de Sinais Cegos</em> e a <em>NORMAM-601/DHN</em> para o balizamento. Questões reais: PSCPP 2006, 2008 e 2012.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#classificacao">40.2 Classificação ▶</a>
+    <a href="#navegabilidade">40.3 Fatores · Rio-Mar</a>
+    <a href="#cartas">40.4 Cartas · ábaco ▶</a>
+    <a href="#balizamento">40.5 Balizamento ▶</a>
+    <a href="#nivel">40.6 Nível do rio</a>
+    <a href="#tecnicas">40.7/8 Lei do rio ▶</a>
+    <a href="#ler">Ler a água · regimes ▶</a>
+    <a href="#normas">40.9 Normas</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 <strong>Bloco H.</strong> A navegação fluvial é sempre <strong>águas restritas</strong> — valem os cuidados do Vol. I. O balizamento fluvial complementa o sistema <a href="miguens_cap13_auxilios_balizamento.html">IALA (Cap. 13)</a>; a carta fluvial segue os princípios da <a href="miguens_cap2_carta_projecoes.html">Carta Náutica (Cap. 2)</a>; o Roteiro Fluvial e a Lista de Sinais Cegos são publicações do <a href="miguens_cap12_publicacoes_nauticas.html">Cap. 12</a>. A Regra 9 e as regras especiais cruzam com o COLREG/RIPEAM.
+</div>
+
+<!-- ===== CLASSIFICAÇÃO ===== -->
+<section class="bloco" id="classificacao">
+  <h2 class="sec"><span class="n">40.2</span> Classificação dos rios</h2>
+  <p class="lede">Três tipos, do mais difícil ao mais fácil de navegar: <strong>alto curso</strong>, <strong>médio curso (planalto)</strong> e <strong>baixo curso (planície)</strong>.</p>
+
+  <table>
+    <tr><th>Tipo</th><th>Características</th><th>Navegação</th></tr>
+    <tr><td><strong>Alto curso</strong></td><td>Regiões altas/acidentadas, quedas e corredeiras, gradiente elevado, alta velocidade, margens altas; raramente largo e profundo.</td><td>Precária — só embarcações menores, transportes modestos.</td></tr>
+    <tr><td><strong>Médio curso</strong> (planalto)</td><td>Sucessão de estirões navegáveis interrompidos por rápidos/corredeiras/quedas; canais estreitos, mas relativamente estáveis. Nas cheias os trechos críticos melhoram. Ex.: Paraná, São Francisco, Tocantins a montante de Tucuruí.</td><td>Possível entre os obstáculos; exige muita <span class="hl">prática local</span>.</td></tr>
+    <tr><td><strong>Baixo curso</strong> (planície)</td><td>Declividade suave e regular, largos, pequeno gradiente; bancos nas bocas de tributários e nas partes convexas das curvas; bifurcações (paranás, igarapés) e ilhas fluviais; margens baixas alagáveis; inclui deltas e estuários. Ex.: Solimões-Amazonas, Paraguai.</td><td>A mais fácil — a maior parte da Amazônia.</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Tipo de fundo e o "canal de verão" <span class="tag t-decorar">DECORAR</span></h4>
+    <p>A navegabilidade também depende do leito: <strong>pedregoso</strong> → canal estreito, mas estável; <strong>lama/barro/argila</strong> → leito instável, canal sinuoso mas fundo; <strong>areia</strong> → canal muito variável. Ao baixarem as águas, a corrente cava no leito arenoso um <span class="hl">"canal de verão"</span> — o mais fundo no início do inverno, até a cheia nivelar o rio de margem a margem e um novo ciclo recomeçar.</p>
+    <p style="margin-top:8px"><strong>Outras categorias:</strong> rios <em>costeiros</em> (descem do planalto ao Atlântico, perfil irregular, pouco navegáveis); e, no semiárido, rios <em>efêmeros</em> (só em torrentes), <em>intermitentes</em> (secam parte do ano) e <em>perenes</em> (o ano todo — ex.: São Francisco).</p>
+  </div>
+</section>
+
+<!-- ===== NAVEGABILIDADE ===== -->
+<section class="bloco" id="navegabilidade">
+  <h2 class="sec"><span class="n">40.3</span> Fatores de navegabilidade e o Rio-Mar</h2>
+  <p class="lede">A navegação fluvial deve ser <strong>sempre</strong> tratada como navegação em águas restritas. Sua segurança depende de sete fatores.</p>
+
+  <div class="box formula">
+    <h4>Os sete fatores da segurança fluvial <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>a)</strong> documentos cartográficos adequados (cartas ou croquis) + publicações de segurança atualizadas; <strong>b)</strong> um sistema de <span class="hl">balizamento</span> eficiente; <strong>c)</strong> um sistema de <span class="hl">divulgação do nível do rio</span> (estações fluviométricas); <strong>d)</strong> <span class="hl">familiarização</span> dos navegantes com o trajeto; <strong>e)</strong> emprego de <span class="hl">métodos e técnicas próprios</span>; <strong>f)</strong> normas e regulamentos especiais; <strong>g)</strong> embarcações adequadas.</p>
+  </div>
+
+  <p><strong>Rio-Mar:</strong> o Amazonas (incluindo o rio Pará) tem dupla natureza — pelas amplas dimensões permite o acesso de navios marítimos até <span class="hl">Iquitos (Peru), a ~2.000 milhas da foz</span> (quase uma via marítima), e, ao mesmo tempo, pela tranquilidade de furos, igarapés e paranás, serve de via interior. Por isso é chamado de <strong>Rio-Mar</strong>.</p>
+</section>
+
+<!-- ===== CARTAS / ÁBACO ===== -->
+<section class="bloco" id="cartas">
+  <h2 class="sec"><span class="n">40.4</span> Documentos cartográficos e o ábaco de sondagens</h2>
+  <p class="lede">Dois documentos: <strong>cartas sistemáticas fluviais</strong> (papel ou digital — ENC/IENC) e <strong>croquis de navegação</strong>. Mesmo os práticos experientes não dispensam seus croquis.</p>
+
+  <div class="box key">
+    <h4>O ábaco de correção das sondagens <span class="tag t-calc">CÁLCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>As profundidades da carta estão referidas a um <strong>nível de redução (NR)</strong> — a média das mínimas excepcionais em longo período. Como o rio quase sempre está acima do NR, a correção é normalmente <span class="hl">positiva</span>. Entrando no ábaco com o <em>nível do rio</em> nas Estações Fluviométricas de Referência (para uma data) e a <em>latitude</em> do local, obtém-se a correção em metros a somar à sondagem lida na carta.</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Ábaco de sondagens — dá para passar no ponto crítico?</h4>
+    <p class="hint">Mova o <b>nível do rio</b> (a superfície sobe/desce sobre o NR), a <b>sondagem da carta</b> (o fundo desce) e o <b>calado</b>. A profundidade esperada = sondagem + correção do ábaco; a folga sob a quilha diz se o navio passa. O casco fica verde (passa) ou vermelho (encalha). Baseado no exemplo do Rio Paraguai (Ladário/Coimbra, lat. 19°30'S).</p>
+    <canvas id="cvAbaco" width="860" height="300" style="background:#fff"></canvas>
+    <div class="ictrl"><label for="nivel">Nível do rio (m) →</label><input type="range" id="nivel" min="0" max="6" step="0.1" value="3.1" oninput="drawAbaco()"></div>
+    <div class="ictrl"><label for="sond">Sondagem na carta (m) →</label><input type="range" id="sond" min="0.5" max="4" step="0.1" value="1.0" oninput="drawAbaco()"></div>
+    <div class="ictrl"><label for="calado">Calado do navio (m) →</label><input type="range" id="calado" min="0.5" max="5" step="0.1" value="2.0" oninput="drawAbaco()"></div>
+    <div class="iread" id="abacoRead"></div>
+  </div>
+</section>
+
+<!-- ===== BALIZAMENTO ===== -->
+<section class="bloco" id="balizamento">
+  <h2 class="sec"><span class="n">40.5</span> Balizamento fluvial (NORMAM-601)</h2>
+  <p class="lede">O balizamento deve indicar continuamente a ação a empreender para manter-se no canal. Prefere-se <strong>sinais fixos</strong> (boias flutuantes são caras de manter) e <strong>sinais cegos</strong> com símbolos em material refletor (identificáveis à noite por holofote); onde isso não basta, faroletes luminosos.</p>
+
+  <div class="box trap">
+    <h4>Margens e direção convencional — a pegadinha clássica</h4>
+    <p><strong>Margem esquerda</strong> = a do lado esquerdo de <span class="hl">quem desce o rio</span> (navegando de montante para jusante); a <strong>margem direita</strong>, portanto, é a do lado direito de quem desce. Quando as características se assemelham ao mar, usam-se os sinais marítimos, com a "direção convencional do balizamento" no sentido <span class="hl">jusante → montante</span> (subindo o rio) — <em>não</em> o contrário.</p>
+  </div>
+
+  <h3>Sinais complementares (fixos, nas margens)</h3>
+  <p>Um sinal complementar instalado numa margem vale no trecho entre ele e o próximo sinal de margem. O painel usa a cor de fundo que dê melhor contraste com o símbolo: laranja/encarnado → símbolo preto (só diurno, contra vegetação); branco → símbolo verde ou encarnado (serve à noite e identifica a margem); preto → símbolo amarelo/branco.</p>
+  <table>
+    <tr><th>Sinal</th><th>Símbolo no painel quadrangular</th></tr>
+    <tr><td>Navegar <strong>junto à margem</strong></td><td>Duas faixas (margens) + seta reta junto à faixa da margem de interesse.</td></tr>
+    <tr><td><strong>Mudar de margem</strong></td><td>Duas faixas + seta curva indicando a margem para onde ir.</td></tr>
+    <tr><td>Navegar <strong>no meio do rio</strong></td><td>Duas faixas + seta entre elas.</td></tr>
+    <tr><td>Indicador de <strong>tráfego entre as margens</strong></td><td><span class="hl">Cruz com o braço horizontal visivelmente mais fino.</span></td></tr>
+    <tr><td><strong>Alinhamento</strong></td><td>Instalado em pares, numa mesma margem.</td></tr>
+  </table>
+</section>
+
+<!-- ===== NÍVEL ===== -->
+<section class="bloco" id="nivel">
+  <h2 class="sec"><span class="n">40.6</span> Divulgação do nível do rio</h2>
+  <p class="lede">Sem conhecer o nível do rio nas estações fluviométricas, o navegante não consegue usar o ábaco de correção das sondagens.</p>
+  <p>O nível é divulgado por estações de rádio e TV comerciais da região, pelas Capitanias/Delegacias/Agências e, hoje, pelo <strong>PortalHidroWeb</strong> — parte do Sistema Nacional de Informações sobre Recursos Hídricos (SNIRH), alimentado pela Rede Hidrometeorológica Nacional (RHN). Dados em tempo real ficam no Portal Telemetria. Com esses valores, entra-se no ábaco e determina-se a correção a somar (ou, raramente, subtrair) às profundidades da carta.</p>
+</section>
+
+<!-- ===== TÉCNICAS / LEI DO RIO ===== -->
+<section class="bloco" id="tecnicas">
+  <h2 class="sec"><span class="n">40.7/8</span> Familiarização, perfil de velocidade e a lei do rio</h2>
+  <p class="lede">Mesmo com cartas, balizamento e divulgação de nível perfeitos, a navegação fluvial exige a presença do <strong>prático</strong> — o elemento familiarizado com o trajeto (como no Mississipi ou no Reno). E exige técnicas próprias.</p>
+
+  <div class="ichart">
+    <h4>Perfil de velocidade e a lei do rio</h4>
+    <p class="hint">A velocidade da corrente é máxima no meio do canal e um pouco abaixo da superfície (isotáquicas). Alterne subindo/descendo e veja onde a embarcação deve navegar — e por que quem desce tem mais dificuldade.</p>
+    <canvas id="cvRio" width="860" height="300" style="background:#fff"></canvas>
+    <div class="ictrl" style="margin-top:8px">
+      <button class="dirBtn active" data-d="desce" onclick="setDir('desce')">Descendo (a favor)</button>
+      <button class="dirBtn" data-d="sobe" onclick="setDir('sobe')">Subindo (contra)</button>
+    </div>
+    <div class="iread" id="rioRead"></div>
+  </div>
+
+  <div class="box key">
+    <h4>A "lei do rio" <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>"Quem navega <strong>a favor</strong> da correnteza segue a <span class="hl">meio caudal</span> (calha profunda); quem <strong>sobe</strong> o rio segue próximo à margem; <span class="hl">quem desce o rio tem a preferência</span>." Quem desce tem maior velocidade absoluta, muito mais energia cinética (∝ v²) e pior governo — um encalhe descendo é bem mais grave.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Mas o que prevalece em risco de abalroamento?</h4>
+    <p>A lei do rio é um costume — em <strong>risco de abalroamento</strong>, vale a <span class="hl">Regra 9 do RIPEAM</span>: manter-se tão próximo quanto possível e seguro da margem do canal que estiver a <strong>boreste</strong>. "Passo" = ponto estreito de um canal (trecho crítico). <strong>Sacados</strong> são braços mortos de antigas curvas; as <em>voltas rápidas</em> (curvas muito fechadas) são as manobras mais complexas.</p>
+  </div>
+</section>
+
+<!-- ===== LER A ÁGUA / REGIMES ===== -->
+<section class="bloco" id="ler">
+  <h2 class="sec"><span class="n">40.7</span> Ler a água: regras práticas e regimes das hidrovias</h2>
+  <p class="lede">Parte do "conhecimento do trajeto" é saber interpretar a própria água — onde está mais fundo, o que os detritos anunciam, o que a cor do rio revela — e conhecer os ciclos de cheia e vazante de cada bacia.</p>
+
+  <div class="box key">
+    <h4>Ler a superfície <span class="tag t-decorar">DECORAR</span></h4>
+    <p>• <strong>Folhagens flutuando</strong> ("o lixo") marcam a <span class="hl">calha mais profunda</span> — quem navega pelo canal mais fundo "segue sobre o lixo", pois a corrente concentra os detritos onde a água corre mais.<br>
+    • <strong>Cuidado</strong>: um arbusto boiando pode ser o galho de uma árvore semi-submersa — um <em>aríete à deriva</em> pronto a abrir água no casco (comum na Amazônia).<br>
+    • Conhecer a velocidade da corrente nos vários níveis e a ocorrência de <strong>remansos, rebojos e redemoinhos</strong> perigosos.</p>
+  </div>
+
+  <div class="box formula">
+    <h4>Água barrenta × água preta <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>Rios de água barrenta</strong> → leito <span class="hl">instável</span>, erosão marginal, contorno das margens muda muito entre cheia e vazante, formação de ilhas e várzeas por sedimentação.<br>
+    <strong>Rios de água preta</strong> → leito <span class="hl">estável</span>, pouca erosão, fundo duro e pedregoso ("lajal"), encostas íngremes, poucas ilhas; nas cheias formam apenas <em>igapós</em> (matas alagadas), sem várzeas.</p>
+  </div>
+
+  <h3>Cheia e vazante — os regimes</h3>
+  <p><strong>Balseiros</strong> (aglomerações de terra, capim, paus, folhas e troncos descendo no fio da corrente) anunciam um <strong>repiquete</strong> — a subida <em>rápida</em> das águas após o início da vazante (por degelo retardatário ou aguaceiros), que sobe em horas e logo volta ao nível anterior.</p>
+
+  <table>
+    <tr><th>Hidrovia</th><th>Enchente / máximo</th><th>Vazante / mínimo</th></tr>
+    <tr><td><strong>Rio Amazonas</strong> (Solimões-Amazonas)</td><td>Enchente <span class="hl">novembro a junho</span>; nível máximo em <span class="hl">junho e julho</span>.</td><td>Vazante julho a outubro; nível mínimo em <span class="hl">outubro e novembro</span>.</td></tr>
+    <tr><td><strong>Alto Paraguai</strong> (Corumbá/Ladário)</td><td>Chuvas set/out–mar (≈80% do total). A cheia é muito <span class="hl">defasada</span>: pico em Corumbá/Ladário por volta de maio/junho (a chuva de Cáceres/Cuiabá é fev/mar) — escoamento lento (declive ~2 cm/km).</td><td>Começa a baixar em agosto; cota mínima out–dez; volta a subir na 2ª quinzena de dezembro.</td></tr>
+  </table>
+
+  <div class="box trap">
+    <h4>Pororoca — foz do Amazonas</h4>
+    <p>Onda de arrebentação (1,5–2,5 m, forte estrondo) que, na <strong>maré de enchente</strong>, irrompe rio acima em sentido contrário ao das águas, seguida de ondas menores (<em>banzeiros</em>). Ocorre em águas <span class="hl">rasas e estreitas</span>, nas marés de <strong>sizígia</strong> e com a enchente a meio. Na foz do Amazonas (entre as ilhas de Maracá e Janaucu): velocidade de 10 a 15 nós, mais perigosa de <strong>janeiro a junho</strong> com vento NE; pressente-se pelo ruído a 3–6 milhas; <span class="hl">não ocorre onde há mais de 7 m de profundidade</span> — por isso não ameaça navios em canais profundos.</p>
+  </div>
+</section>
+
+<!-- ===== NORMAS ===== -->
+<section class="bloco" id="normas">
+  <h2 class="sec"><span class="n">40.9</span> Normas e regulamentos especiais</h2>
+  <p class="lede">O tráfego interior segue o <strong>RIPEAM</strong> e as <strong>Regras Especiais para a Navegação Interior</strong> da <strong>NORMAM-202/DPC</strong> (Cap. 11), permitidas pela própria Regra 1 do RIPEAM ("regras especiais baixadas pela autoridade competente").</p>
+  <table>
+    <tr><th>Situação</th><th>Regra</th></tr>
+    <tr><td>Estirões e travessias (canal muda de margem)</td><td>Quem <strong>sobe</strong> deixa quem <strong>desce</strong> por <span class="hl">BB</span>; quem <strong>ultrapassa</strong> deixa o outro por <span class="hl">BE</span>.</td></tr>
+    <tr><td>Canal junto a uma margem</td><td>Quem sobe navega <strong>junto à margem mais profunda</strong>; quem desce navega mais <strong>a meio do rio</strong>; a ultrapassagem se dá pelo bordo da margem mais profunda.</td></tr>
+  </table>
+</section>
+
+<!-- ===== JÁ COBRADO ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">★</span> Já cobrado pela banca</h2>
+  <p class="lede">Varredura das provas 2006, 2008, 2011 e 2012. O balizamento fluvial e a manobra em correnteza são os alvos preferidos.</p>
+
+  <table>
+    <tr><th>Prova · Questão</th><th>Tema</th><th>Gabarito</th></tr>
+    <tr><td><strong>2008 · Q4</strong></td><td>Sinal na margem direita: cruz preta em painel laranja quadrangular, com o braço horizontal mais fino (Lista de Sinais Cegos / Miguens 40.5) = indicador de tráfego entre as margens.</td><td class="center"><strong>(e)</strong></td></tr>
+    <tr><td><strong>2012 · Q28</strong></td><td>Princípios do balizamento fluvial/lacustre (Miguens 1996): preferência por sinais fixos (não boias); direção convencional jusante→montante; margem esquerda = lado esquerdo de quem desce; sinais complementares fixos nas margens.</td><td class="center"><strong>(b)</strong> III e IV <span class="tag t-conflito">VERIFICAR gabarito impresso</span></td></tr>
+    <tr><td><strong>2006 · Q5</strong></td><td>Manobra de guinada em rio de forte correnteza, curva à direita no sentido jusante→montante: só a afirmativa III é verdadeira (contra a corrente, guinada tarde → margem direita). <em>Fonte citada: Naval Shiphandling (Crenshaw).</em></td><td class="center"><strong>(d)</strong></td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--mute)">O gabarito de 2012 não vem marcado no caderno de provas; o indicado é deduzido pela regra do Miguens (afirmativas I, II e V falsas — boias não são preferidas, a direção é jusante→montante e os sinais complementares são fixos nas margens) e deve ser conferido no gabarito impresso.</p>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">✦</span> Flashcards</h2>
+  <p class="lede">Toque para virar. Vinte e seis cartões com o essencial da navegação fluvial.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">✱</span> Quiz</h2>
+  <p class="lede">Dezoito questões — as reais (2006/2008/2012), as regras de leitura da água e os regimes das hidrovias.</p>
+  <div class="score">Acertos: <b id="scHit">0</b> / <span id="scTot">0</span> &nbsp;·&nbsp; Aproveitamento: <b id="scPct">—</b></div>
+  <div class="quiz">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Navegação Fluvial (Miguens Vol. III Cap. 40)</summary>
+  <ul>
+    <li><b>Classificação:</b> alto curso (precário), médio curso/planalto (estirões + obstáculos, exige prática local), baixo curso/planície (o mais fácil — Amazônia).</li>
+    <li><b>Fundo:</b> pedregoso = estreito e estável; lama = sinuoso e fundo; areia = "canal de verão" variável.</li>
+    <li><b>Outras categorias:</b> costeiros; e no semiárido: efêmeros, intermitentes e perenes (São Francisco = perene).</li>
+    <li><b>Águas restritas:</b> a navegação fluvial é SEMPRE tratada como águas restritas.</li>
+    <li><b>7 fatores de segurança:</b> cartas/publicações, balizamento, divulgação do nível, familiarização, técnicas próprias, normas especiais e embarcações adequadas.</li>
+    <li><b>Rio-Mar:</b> o Amazonas — navios marítimos até Iquitos (~2.000 mn da foz) + via interior por furos/igarapés/paranás.</li>
+    <li><b>Ábaco de sondagens:</b> entra-se com o nível do rio (estações fluviométricas) + latitude → correção (normalmente positiva) a somar à sondagem da carta. NR = média das mínimas excepcionais.</li>
+    <li><b>Balizamento:</b> preferir sinais FIXOS e cegos (refletor); NORMAM-601. Boias só quando necessário.</li>
+    <li><b>Margens:</b> margem esquerda = lado esquerdo de QUEM DESCE. Direção convencional = jusante → montante (subindo).</li>
+    <li><b>Sinais complementares:</b> junto à margem, mudar de margem, meio do rio, tráfego entre margens (cruz de braço horizontal fino), alinhamento (em pares).</li>
+    <li><b>Nível do rio:</b> divulgado por rádio/TV, Capitanias e PortalHidroWeb (SNIRH/RHN).</li>
+    <li><b>Perfil de velocidade:</b> máximo no meio do canal e um pouco abaixo da superfície (isotáquicas).</li>
+    <li><b>Lei do rio:</b> quem desce segue a meio caudal e TEM PREFERÊNCIA; quem sobe segue junto à margem. Quem desce tem mais energia cinética e pior governo.</li>
+    <li><b>Ler a água:</b> folhagens flutuando ("o lixo") = calha mais profunda. Água barrenta = leito instável/ilhas; água preta = leito estável/pedregoso. Balseiros anunciam repiquete.</li>
+    <li><b>Regimes:</b> Amazonas — enchente nov–jun (máx jun/jul), vazante jul–out (mín out/nov). Alto Paraguai — cheia defasada (pico Corumbá/Ladário maio/jun). Pororoca (foz): sizígia, enchente a meio, não ocorre com >7 m.</li>
+    <li><b>Risco de abalroamento:</b> prevalece a Regra 9 do RIPEAM (manter-se junto à margem de boreste). "Passo" = ponto estreito. Sacados = braços mortos; voltas rápidas = curvas fechadas.</li>
+    <li><b>Normas:</b> RIPEAM + NORMAM-202/DPC (Cap. 11). Quem sobe deixa quem desce por BB; ultrapassagem por BE.</li>
+    <li><b>Banca:</b> 2008-Q4 (tráfego entre margens, e) · 2012-Q28 (princípios do balizamento, b) · 2006-Q5 (guinada em correnteza, d).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Navegação Fluvial (Miguens Vol. III, Cap. 40) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+/* ===== ÁBACO DE SONDAGENS ===== */
+function cota(ctx,x,y1,y2,color,txt){                            // barra de cota vertical com traços
+  ctx.strokeStyle=color;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(x,y1);ctx.lineTo(x,y2);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x-5,y1);ctx.lineTo(x+5,y1);ctx.moveTo(x-5,y2);ctx.lineTo(x+5,y2);ctx.stroke();
+  ctx.fillStyle=color;ctx.font='bold 12px Trebuchet MS';ctx.fillText(txt,x+8,(y1+y2)/2+4);
+}
+function drawAbaco(){
+  var cv=document.getElementById('cvAbaco'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var nivel=+document.getElementById('nivel').value;
+  var sond=+document.getElementById('sond').value;
+  var calado=+document.getElementById('calado').value;
+  var corr=Math.round(nivel*0.52*10)/10;                        // correção do ábaco (nível local acima do NR)
+  var esperada=Math.round((sond+corr)*10)/10;                   // profundidade esperada
+  var folga=Math.round((esperada-calado)*10)/10;                // folga sob a quilha (UKC)
+  var pxm=22, x0=60, x1=W-60, nrY=150;                          // NR fixo na tela
+  var ySurf=nrY-corr*pxm;                                       // superfície sobe com a correção
+  var yBot=nrY+sond*pxm;                                        // fundo desce com a sondagem
+  var yKeel=ySurf+calado*pxm;                                   // quilha do navio
+  // água (superfície -> fundo)
+  ctx.fillStyle='#dbeafe';ctx.fillRect(x0,ySurf,x1-x0,yBot-ySurf);
+  // leito (abaixo do fundo)
+  ctx.fillStyle='#c9b48a';ctx.fillRect(x0,yBot,x1-x0,H-yBot);
+  ctx.strokeStyle='#a3895c';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,yBot);ctx.lineTo(x1,yBot);ctx.stroke();
+  ctx.fillStyle='#7a5f2e';ctx.font='11px Trebuchet MS';ctx.fillText('leito do rio',x1-72,yBot+18);
+  // NR (nível de redução)
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([6,4]);ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(x0,nrY);ctx.lineTo(x1,nrY);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#9E3B2E';ctx.font='bold 11px Trebuchet MS';ctx.fillText('NÍVEL DE REDUÇÃO (NR) — zero da carta',x0+6,nrY-5);
+  // superfície do rio
+  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x0,ySurf);ctx.lineTo(x1,ySurf);ctx.stroke();
+  ctx.fillStyle='#2C5F8A';ctx.fillText('superfície do rio',x0+6,ySurf-6);
+  // navio (casco) na superfície
+  var bx=x0+140, bw=120;
+  ctx.fillStyle=(folga>=0)?'#2E7D52':'#9E3B2E';
+  ctx.beginPath();
+  ctx.moveTo(bx-bw/2,ySurf);ctx.lineTo(bx+bw/2,ySurf);
+  ctx.lineTo(bx+bw/2-14,yKeel);ctx.lineTo(bx-bw/2+14,yKeel);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 11px Trebuchet MS';ctx.textAlign='center';
+  ctx.fillText('calado '+calado.toFixed(1).replace('.',',')+' m',bx,(ySurf+yKeel)/2+4);ctx.textAlign='left';
+  // linha da quilha até o fundo (folga)
+  ctx.strokeStyle=(folga>=0)?'#2E7D52':'#9E3B2E';ctx.setLineDash([3,3]);ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(bx,yKeel);ctx.lineTo(bx,yBot);ctx.stroke();ctx.setLineDash([]);
+  // cotas à direita
+  var cxA=x1-150;
+  cota(ctx,cxA,ySurf,nrY,'#0D3D36','correção +'+corr.toFixed(1).replace('.',',')+' m');
+  cota(ctx,cxA+120,nrY,yBot,'#1A7A6E','sondagem '+sond.toFixed(1).replace('.',',')+' m');
+  document.getElementById('abacoRead').innerHTML='Nível do rio <b>'+nivel.toFixed(1).replace('.',',')+' m</b> → correção do ábaco ≈ <b>+'+corr.toFixed(1).replace('.',',')+' m</b>. Profundidade esperada = sondagem '+sond.toFixed(1).replace('.',',')+' + correção '+corr.toFixed(1).replace('.',',')+' = <b>'+esperada.toFixed(1).replace('.',',')+' m</b>. Com calado '+calado.toFixed(1).replace('.',',')+' m, a folga sob a quilha é <b style="color:'+(folga>=0?'#2E7D52':'#9E3B2E')+'">'+folga.toFixed(1).replace('.',',')+' m</b> — '+(folga>=0?'passa com segurança.':'<b>NÃO passa: encalha!</b> Esperar o rio subir ou aliviar carga.');
+}
+
+/* ===== PERFIL DE VELOCIDADE / LEI DO RIO ===== */
+var dir='desce';
+function setDir(d){dir=d;document.querySelectorAll('.dirBtn').forEach(function(b){b.classList.toggle('active',b.dataset.d===d);});drawRio();}
+function drawRio(){
+  var cv=document.getElementById('cvRio'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var x0=50,x1=W-50,wl=48;
+  // água
+  ctx.fillStyle='#dbeafe';ctx.fillRect(x0,wl,x1-x0,210);
+  // fundo em U
+  ctx.fillStyle='#c9b48a';ctx.beginPath();ctx.moveTo(x0,wl+70);
+  for(var x=x0;x<=x1;x+=6){var t=(x-(x0+x1)/2)/((x1-x0)/2);var y=wl+70+130*(1-t*t);ctx.lineTo(x,y);}
+  ctx.lineTo(x1,H);ctx.lineTo(x0,H);ctx.closePath();ctx.fill();
+  // isotáquicas (velocidade máx no meio e pouco abaixo da superfície)
+  var cx=(x0+x1)/2, cy=wl+70;
+  for(var k=1;k<=4;k++){
+    ctx.strokeStyle='rgba(26,122,110,'+(0.65-0.1*k)+')';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.ellipse(cx,cy,(x1-x0)/2*0.22*k,26*k,0,Math.PI,2*Math.PI);ctx.stroke();
+    ctx.beginPath();ctx.ellipse(cx,cy,(x1-x0)/2*0.22*k,26*k*0.7,0,0,Math.PI);ctx.stroke();
+  }
+  ctx.fillStyle='#0D3D36';ctx.font='bold 11px Trebuchet MS';ctx.textAlign='center';
+  ctx.fillText('vel. máxima (meio do canal, pouco abaixo da superfície)',cx,cy-4);ctx.textAlign='left';
+  // barco
+  var bx=(dir==='desce')?cx:(x0+70);
+  ctx.fillStyle=(dir==='desce')?'#2E7D52':'#9E3B2E';
+  ctx.beginPath();ctx.moveTo(bx-16,wl+14);ctx.lineTo(bx+16,wl+14);ctx.lineTo(bx+10,wl+30);ctx.lineTo(bx-10,wl+30);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#0D3D36';ctx.font='bold 12px Trebuchet MS';ctx.textAlign='center';
+  ctx.fillText(dir==='desce'?'DESCE — a meio caudal (tem preferência)':'SOBE — junto à margem',bx,wl+46);ctx.textAlign='left';
+  // seta da corrente
+  ctx.fillStyle='#2C5F8A';ctx.font='11px Trebuchet MS';ctx.fillText('→ corrente',x1-96,wl+200);
+  document.getElementById('rioRead').innerHTML = (dir==='desce')
+    ? 'Descendo (a favor): navega-se na <b>calha profunda, a meio caudal</b>. Maior velocidade absoluta, muito mais energia cinética (∝ v²) e pior governo — um encalhe é mais grave. <b>Quem desce tem preferência</b> (lei do rio).'
+    : 'Subindo (contra): navega-se <b>próximo à margem</b>, onde a corrente é menor. Menor velocidade absoluta, melhor governo — encalhe menos grave (pode até safar-se com a própria corrente). Em risco de abalroamento, vale a <b>Regra 9 do RIPEAM</b> (margem de boreste).';
+}
+
+/* init + resize */
+drawAbaco();drawRio();
+window.addEventListener('resize',function(){drawAbaco();drawRio();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Rio de alto curso",b:"Regiões altas, quedas e corredeiras, gradiente elevado, margens altas. Navegação precária (só embarcações menores)."},
+  {f:"Rio de médio curso (planalto)",b:"Estirões navegáveis + rápidos/corredeiras/quedas. Canais estreitos, mas estáveis; exige prática local. Ex.: Paraná, São Francisco."},
+  {f:"Rio de baixo curso (planície)",b:"Declividade suave, largo, bancos nas curvas convexas, bifurcações e ilhas. O mais fácil — a maior parte da Amazônia."},
+  {f:"Tipos de fundo",b:"Pedregoso = estreito e estável; lama = sinuoso e fundo; areia = 'canal de verão' variável."},
+  {f:"Canal de verão",b:"Ao baixarem as águas, a corrente cava no leito arenoso um canal mais fundo — o principal no início do inverno, até a cheia nivelar o rio."},
+  {f:"Rios do semiárido",b:"Efêmeros (só em torrentes), intermitentes (secam parte do ano) e perenes (o ano todo — São Francisco)."},
+  {f:"Navegação fluvial",b:"Deve ser SEMPRE tratada como navegação em águas restritas."},
+  {f:"7 fatores de segurança",b:"Cartas/publicações, balizamento, divulgação do nível, familiarização, técnicas próprias, normas especiais e embarcações adequadas."},
+  {f:"Rio-Mar",b:"O Amazonas: navios marítimos até Iquitos (~2.000 mn da foz) + via interior por furos, igarapés e paranás."},
+  {f:"Documentos cartográficos",b:"Cartas sistemáticas fluviais (papel/IENC) e croquis de navegação. Nem o prático dispensa seus croquis."},
+  {f:"Ábaco de sondagens",b:"Entra-se com o nível do rio (estações) + latitude → correção (normalmente positiva) a somar à sondagem da carta."},
+  {f:"Nível de redução (NR)",b:"Média das mínimas excepcionais num longo período. Como o rio quase sempre está acima, a correção é positiva."},
+  {f:"Balizamento fluvial",b:"Preferir sinais FIXOS e cegos (refletor, holofote); faroletes onde preciso. NORMAM-601. Boias só se necessário."},
+  {f:"Margem esquerda/direita",b:"Definidas do ponto de vista de QUEM DESCE o rio (montante → jusante). Esquerda = lado esquerdo de quem desce."},
+  {f:"Direção convencional",b:"Sentido jusante → montante (subindo o rio), quando se usam os sinais do balizamento marítimo."},
+  {f:"Sinal de tráfego entre margens",b:"Cruz com o braço horizontal visivelmente mais fino, em painel quadrangular."},
+  {f:"Divulgação do nível",b:"Rádio/TV da região, Capitanias/Delegacias e PortalHidroWeb (SNIRH / Rede Hidrometeorológica Nacional)."},
+  {f:"Perfil de velocidade",b:"A corrente é máxima no MEIO do canal e um pouco ABAIXO da superfície (isotáquicas)."},
+  {f:"Lei do rio",b:"Quem desce segue a meio caudal e TEM PREFERÊNCIA; quem sobe segue junto à margem. Quem desce tem mais energia cinética e pior governo."},
+  {f:"Regra 9 do RIPEAM",b:"Em risco de abalroamento prevalece sobre a lei do rio: manter-se junto à margem do canal a boreste. 'Passo' = ponto estreito; sacado = braço morto."},
+  {f:"Ler a água — folhagens",b:"Folhagens flutuando ('o lixo') marcam a calha mais profunda: quem vai pelo canal mais fundo 'segue sobre o lixo'. Um arbusto pode ser galho de árvore semi-submersa (aríete)."},
+  {f:"Água barrenta × água preta",b:"Barrenta = leito instável, erosão, ilhas e várzeas. Preta = leito estável, fundo duro/pedregoso, poucas ilhas, só igapós nas cheias."},
+  {f:"Balseiro e repiquete",b:"Balseiros (terra, capim, troncos descendo) anunciam repiquete: subida rápida das águas após o início da vazante, que logo volta ao nível."},
+  {f:"Regime do Amazonas",b:"Enchente nov–jun (máximo jun/jul); vazante jul–out (mínimo out/nov)."},
+  {f:"Regime do Alto Paraguai",b:"Chuvas set–mar; cheia muito defasada (pico em Corumbá/Ladário maio/jun); baixa em agosto, mínimo out–dez, sobe na 2ª quinzena de dez."},
+  {f:"Pororoca",b:"Onda de maré de enchente que sobe o rio na sizígia (enchente a meio), em águas rasas/estreitas. Foz do Amazonas: 1,5–2,5 m, 10–15 nós; não ocorre com >7 m."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"Os rios mais favoráveis à navegação, com declividade suave e regular, são os de:",
+   o:["Alto curso","Médio curso (planalto)","Baixo curso (planície)","Curso costeiro"],a:2,
+   e:"Os rios de baixo curso (planície) — largos, de pequeno gradiente — são os mais favoráveis. A maior parte da Amazônia (Solimões-Amazonas) é de baixo curso."},
+  {q:"O 'canal de verão' forma-se em rios de fundo de:",
+   o:["Pedra","Lama","Areia","Rocha cristalina"],a:2,
+   e:"Em leito arenoso, ao baixarem as águas a corrente cava um canal mais fundo (canal de verão), que muda a cada ciclo. Fundo pedregoso dá canal estreito e estável; lama, canal sinuoso e fundo."},
+  {q:"A navegação fluvial, quanto aos cuidados, deve ser considerada:",
+   o:["Navegação oceânica","Sempre navegação em águas restritas","Navegação costeira comum","Dispensada de balizamento"],a:1,
+   e:"A navegação praticada nas vias interiores deve ser sempre considerada navegação em águas restritas, com todos os cuidados inerentes (Vol. I)."},
+  {q:"O Amazonas é chamado de 'Rio-Mar' porque:",
+   o:["Deságua em vários mares","Permite navios marítimos até Iquitos (~2.000 mn) e serve de via interior","Tem água salgada","É o rio mais longo do mundo"],a:1,
+   e:"Pelas amplas dimensões permite o acesso de navios marítimos até Iquitos (Peru, ~2.000 mn da foz) e, ao mesmo tempo, serve de via interior pelos furos/igarapés/paranás — daí Rio-Mar."},
+  {q:"No ábaco de correção das sondagens, a correção obtida é normalmente:",
+   o:["Negativa (subtrair da carta)","Positiva (somar à sondagem da carta)","Sempre zero","Igual ao calado"],a:1,
+   e:"As sondagens da carta referem-se ao nível de redução (média das mínimas excepcionais). Como o rio quase sempre está acima do NR, a correção do ábaco é positiva — soma-se à sondagem da carta."},
+  {q:"No balizamento fluvial, dá-se preferência a:",
+   o:["Boias flutuantes, por serem baratas de manter","Sinais fixos (e cegos, com material refletor)","Somente sinais luminosos","Sinais sonoros"],a:1,
+   e:"Prefere-se sinais FIXOS (as boias flutuantes têm manutenção difícil e cara) e cegos, com símbolos refletores identificáveis à noite por holofote. NORMAM-601."},
+  {q:"Na sinalização fluvial, a 'margem esquerda' é a que fica:",
+   o:["À esquerda de quem sobe o rio","À esquerda de quem desce o rio (montante → jusante)","Sempre a oeste","À esquerda de quem olha para o norte"],a:1,
+   e:"Margem esquerda = lado esquerdo de quem DESCE o rio (navegando de montante para jusante). Cuidado: é o ponto de vista de quem desce, não de quem sobe."},
+  {q:"Quando se usam sinais marítimos numa via interior, a 'direção convencional do balizamento' é:",
+   o:["De montante para jusante (descendo)","De jusante para montante (subindo o rio)","Norte para Sul","Sempre a favor da corrente"],a:1,
+   e:"A direção convencional adotada é jusante → montante, ou seja, subindo o rio."},
+  {q:"[PSCPP 2008] Um painel quadrangular laranja com uma cruz preta de braço horizontal mais fino é o sinal de:",
+   o:["Navegar junto à margem","Navegar no meio do rio","Mudar de margem","Indicador de tráfego entre as margens"],a:3,
+   e:"A cruz com o braço horizontal visivelmente mais fino é o Sinal indicador de tráfego entre as margens. Gabarito (e)."},
+  {q:"Segundo o perfil de velocidade (isotáquicas), a corrente do rio é máxima:",
+   o:["Junto ao fundo","Junto às margens","No meio do canal e um pouco abaixo da superfície","Na superfície, junto à margem"],a:2,
+   e:"A velocidade máxima ocorre no meio do canal e um pouco abaixo da superfície. Por isso quem desce segue a calha profunda e quem sobe busca a margem, onde a corrente é menor."},
+  {q:"Pela 'lei do rio', quem tem a preferência de passagem é:",
+   o:["Quem sobe o rio","Quem desce o rio","O maior navio","Quem estiver a boreste"],a:1,
+   e:"'Quem navega a favor da correnteza segue a meio caudal; quem sobe segue junto à margem; quem desce o rio tem a preferência.' Quem desce tem mais energia cinética e pior governo."},
+  {q:"Havendo risco de abalroamento em um canal estreito fluvial, prevalece:",
+   o:["A lei do rio (quem desce tem preferência)","A Regra 9 do RIPEAM (manter-se junto à margem de boreste)","A vontade do maior navio","A ordem de chegada"],a:1,
+   e:"A lei do rio é um costume; em risco de abalroamento vale a Regra 9 do RIPEAM: manter-se tão próximo quanto possível e seguro da margem do canal a boreste."},
+  {q:"[PSCPP 2012] Sobre os princípios do balizamento fluvial (Miguens), é FALSO afirmar que:",
+   o:["Prefere-se sinais fixos por causa do custo de manter boias","Usa-se a direção convencional jusante→montante quando semelhante ao mar","Deve-se preferir boias flutuantes por serem mais econômicas","Margem esquerda é a de quem desce o rio"],a:2,
+   e:"É falso: prefere-se sinais FIXOS — as boias flutuantes têm manutenção difícil e cara. As demais afirmativas são verdadeiras. (2012-Q28: verdadeiras III e IV, gabarito (b) — verificar impresso.)"},
+  {q:"[PSCPP 2006] Navio subindo um rio de forte correnteza (jusante→montante), curva à direita: ao fazer a curva CONTRA a corrente, se guinar tarde demais, a corrente o leva de encontro à:",
+   o:["Margem esquerda","Margem direita","Meio do rio","Popa do rio"],a:1,
+   e:"Contra a corrente, se a guinada iniciar muito tarde, a corrente carrega o navio de encontro à margem direita (afirmativa III verdadeira). Gabarito (d) — só a III."},
+  {q:"Para localizar a calha mais profunda observando a superfície, o prático sabe que:",
+   o:["A água é mais escura no fundo","As folhagens flutuando ('o lixo') marcam o canal mais fundo","O canal fundo fica sempre junto à margem","A espuma indica baixio"],a:1,
+   e:"A corrente concentra os detritos onde a água corre mais — quem navega pelo canal mais fundo 'segue sobre o lixo'. Atenção: um arbusto boiando pode ser galho de árvore semi-submersa (aríete à deriva)."},
+  {q:"O regime do rio Amazonas (Solimões-Amazonas) tem seu nível MÁXIMO em:",
+   o:["Outubro e novembro","Junho e julho","Janeiro e fevereiro","Março e abril"],a:1,
+   e:"Enchente de novembro a junho, com nível máximo em junho e julho; vazante de julho a outubro, com mínimo em outubro e novembro."},
+  {q:"A pororoca, na foz do Amazonas, é mais perigosa e:",
+   o:["Ocorre em qualquer profundidade","Não ocorre onde há mais de 7 m de profundidade (poupa canais profundos)","Só ocorre na vazante","É inofensiva a embarcações menores"],a:1,
+   e:"A pororoca é uma onda da maré de enchente na sizígia (enchente a meio), em águas rasas e estreitas. Atinge 10–15 nós entre Maracá e Janaucu, mas NÃO ocorre em profundidades maiores que 7 m — não ameaça navios em canais profundos."},
+  {q:"Rios de água barrenta, em comparação com os de água preta, indicam:",
+   o:["Leito estável e fundo pedregoso","Leito instável, erosão marginal e formação de ilhas/várzeas","Ausência de sedimentos","Águas mais profundas e claras"],a:1,
+   e:"Água barrenta = leito instável, erosão fluvial, muita mudança no contorno das margens e formação de ilhas e várzeas. Água preta = leito estável, fundo duro/pedregoso, poucas ilhas (só igapós nas cheias)."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>

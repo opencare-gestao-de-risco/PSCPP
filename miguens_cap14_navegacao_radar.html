@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Navegação Radar — Miguens Cap. 14 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
+  .ichart svg{width:100%;height:auto;display:block;background:#0b1f1c;border:1px solid var(--linha);border-radius:8px}
+  .ictrl{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:120px}
+  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;margin-top:12px;min-height:52px}
+  .iread b{color:var(--verde2)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .fc{perspective:1100px;height:180px;cursor:pointer}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
+  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Bloco D — Radar</p>
+    <h1>Navegação <em>Radar</em> — imagem, controles e prevenção de colisão</h1>
+    <p class="sub">O capítulo mais denso do Vol. I: o princípio e as bandas X/S, o horizonte radar e a refração, os controles (ganho, STC, FTC), a interpretação da imagem, o RACON, a precisão — e o movimento relativo com o PMA (CPA) e o ARPA.</p>
+    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 14 (Navegação Radar). A banca cita a <b>1ª edição (1996)</b>. Questões reais: PSCPP 2006, 2008, 2011 e 2012.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#principios">14.1 Princípio · bandas ▶</a>
+    <a href="#projeto">Relações de projeto ▶</a>
+    <a href="#controles">14.1.5 Controles ▶</a>
+    <a href="#imagem">14.2 Imagem · RACON</a>
+    <a href="#precisao">14.3 Precisão</a>
+    <a href="#colisao">14.4 Colisão · PMA ▶</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 <strong>Bloco D.</strong> A distância-radar é uma LDP (círculo de igual distância) — ver <a href="miguens_cap4_6_determinacao_posicao.html">Determinação da Posição (Cap. 4 e 6)</a> e o critério de segurança do <a href="miguens_cap7_8_ldp_seguranca.html">Cap. 7</a>. O RACON e o refletor-radar são auxílios do <a href="miguens_cap13_auxilios_balizamento.html">Cap. 13</a>. A prevenção de colisão cruza com o COLREG.
+</div>
+
+<!-- ===== PRINCÍPIO / BANDAS ===== -->
+<section class="bloco" id="principios">
+  <h2 class="sec"><span class="n">14.1</span> Princípio, bandas e o horizonte radar</h2>
+  <p class="lede">RADAR = <em>Radio Detection And Ranging</em>. Mede distância pelo tempo de ida-e-volta do pulso e marcação pela direção da antena. A imagem no PPI é <strong>relativa</strong> (navio no centro).</p>
+
+  <div class="box key">
+    <h4>As duas bandas <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p>Radares de navegação operam em duas faixas: <strong>Banda X = 3 cm</strong> (~9 GHz, mais detalhe/resolução, sofre mais com chuva) e <strong>Banda S = 10 cm</strong> (~3 GHz, penetra melhor a chuva, maior alcance em mau tempo). O RACON responde às duas (dual band).</p>
+  </div>
+
+  <div class="ichart">
+    <h4>Horizonte radar e a refração</h4>
+    <p class="hint">O horizonte radar excede o geográfico em ~14% (as ondas encurvam mais para baixo). No <b>Normal</b> veja os dois horizontes (geográfico × radar). Em <b>Super</b>/<b>Sub</b> aparece a estratificação do ar (camada de inversão) que encurva a onda: super = ar quente/seco sobre ar frio/úmido → duto → alcance muito maior; sub = o inverso → alcance menor.</p>
+    <canvas id="cvRef" width="860" height="330" style="background:#fff"></canvas>
+    <div class="ictrl" style="margin-top:8px">
+      <button class="refBtn active" data-r="n" onclick="setRef('n')">Normal</button>
+      <button class="refBtn" data-r="sup" onclick="setRef('sup')">Super-refração</button>
+      <button class="refBtn" data-r="sub" onclick="setRef('sub')">Sub-refração</button>
+    </div>
+    <div class="ictrl"><label for="hant">Antena H (m) →</label><input type="range" id="hant" min="5" max="60" step="1" value="20" oninput="drawRef()"></div>
+    <div class="iread" id="refRead"></div>
+  </div>
+
+  <div class="box formula">
+    <h4>As fórmulas e a refração anormal <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">Horizonte radar: D<sub>r</sub> = 2,21 √H&nbsp;&nbsp;&nbsp;(≈ +14% sobre o geográfico 1,93√H)<span class="lbl">D_r em milhas · H = altura da antena em metros</span></div>
+    <p class="vars"><strong>Super-refração</strong> (ar quente/seco sobre água/ar frio; tempo calmo; trópicos): encurva mais p/ baixo → <span class="hl">aumenta</span> o alcance (caso extremo: propagação em dutos, alvos a &gt;1.000 mn). <strong>Sub-refração</strong> (ar frio/úmido sobre quente/seco; regiões polares): encurva p/ cima → <span class="hl">diminui</span> o alcance. Detecção de um alvo = alcance geográfico do alvo (com a antena) + 14%.</p>
+  </div>
+</section>
+
+<!-- ===== RELAÇÕES DE PROJETO ===== -->
+<section class="bloco" id="projeto">
+  <h2 class="sec"><span class="n">14.1.2</span> Relações de projeto — antena, feixe, pulso e FRI</h2>
+  <p class="lede">As trocas (trade-offs) do radar que a banca adora. Regra-mestra: <strong>antena maior → feixe mais estreito → melhor discriminação em marcação</strong>. A frequência define o tamanho da antena e o alcance; a largura de pulso troca alcance por discriminação; a FRI limita o alcance máximo.</p>
+
+  <div class="ichart">
+    <h4>Antena, banda e pulso — veja o feixe e as discriminações</h4>
+    <p class="hint">Aumente a antena (feixe estreita), alterne a banda (X estreita mais que S) e mude a largura de pulso. Acompanhe a largura do feixe, a discriminação em marcação (a 10 mn) e a em distância.</p>
+    <canvas id="cvProj" width="860" height="290" style="background:#fff"></canvas>
+    <div class="ictrl" style="margin-top:8px">
+      <button class="bandaBtn" data-b="X" onclick="setBanda('X')">Banda X (3 cm)</button>
+      <button class="bandaBtn active" data-b="S" onclick="setBanda('S')">Banda S (10 cm)</button>
+    </div>
+    <div class="ictrl"><label for="ant">Antena (largura, m) →</label><input type="range" id="ant" min="1" max="6" step="0.5" value="2" oninput="drawProj()"></div>
+    <div class="ictrl"><label for="pw">Largura de pulso (µs) →</label><input type="range" id="pw" min="0.1" max="1" step="0.05" value="1" oninput="drawProj()"></div>
+    <div class="iread" id="projRead"></div>
+  </div>
+
+  <table>
+    <tr><th>Se aumenta…</th><th>Efeito</th></tr>
+    <tr><td><strong>Tamanho da antena</strong> (abertura)</td><td>Feixe mais <span class="hl">estreito</span> → melhor discriminação em MARCAÇÃO (para um dado comprimento de onda).</td></tr>
+    <tr><td><strong>Frequência</strong> (↓ comprimento de onda λ = c/f)</td><td>Feixe mais estreito e antena <span class="hl">menor</span>; porém alcance MENOR e mais sensível à chuva (banda X). Frequência menor → maior alcance, antena maior (banda S).</td></tr>
+    <tr><td><strong>Largura de pulso</strong></td><td>Mais energia → maior <span class="hl">alcance máximo</span>; porém PIOR discriminação em distância e MAIOR alcance mínimo. Pulso curto = o inverso.</td></tr>
+    <tr><td><strong>FRI</strong> (pulsos por segundo)</td><td>Intervalo menor entre pulsos → <span class="hl">MENOR alcance máximo</span> (mas mais pulsos no alvo). FRI menor → maior alcance máximo.</td></tr>
+    <tr><td><strong>Velocidade de rotação da antena</strong></td><td>Menos pulsos atingem o alvo por varredura → <span class="hl">pior detecção</span>. Girar mais devagar = mais pulsos, melhor detecção (típico &lt; 60 RPM).</td></tr>
+  </table>
+
+  <div class="box formula">
+    <h4>As fórmulas <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
+    <div class="eq">Discriminação em DISTÂNCIA = ½ do comprimento de pulso&nbsp;&nbsp;(= alcance mínimo)<span class="lbl">comprimento de pulso (jd) = 324 · largura de pulso (µs). Ex.: 1 µs → 324 jd → discriminação/alcance mín. = 162 jd</span></div>
+    <div class="eq">Discriminação em MARCAÇÃO: d<sub>t</sub> = 35,3427 · a · L<span class="lbl">d_t (jardas) · a = largura horizontal do feixe (graus) · L = distância aos alvos (mn) — ex.: a=1,5°, L=10 mn → 530 jd</span></div>
+    <div class="eq">Alcance máximo (FRI): A = (intervalo entre pulsos, µs) · 0,161829 ÷ 2<span class="lbl">ex.: FRI 1000 PPS, pulso 1 µs → intervalo 999 µs → A ≈ 80,8 mn</span></div>
+    <p class="vars">A largura do feixe é medida entre os pontos de <strong>meia potência</strong> (71% do campo, −3 dB). Horizontal ≈ 1°–2° (define a discriminação em marcação); vertical ≈ 15°–30°. A discriminação em marcação PIORA com a distância (d<sub>t</sub> ∝ L): a 10 mn é o dobro da de 5 mn.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Aumenta ou diminui? — o resumo <span class="tag t-decorar">DECORAR</span></h4>
+    <p>• <strong>Antena ↑</strong> → feixe ↓ (mais estreito) → discriminação em marcação melhora. • <strong>Frequência ↑</strong> (banda X) → λ ↓ → feixe ↓, antena ↓, alcance ↓, chuva atrapalha mais. • <strong>Pulso ↑</strong> → alcance máx ↑, alcance mín ↑, discriminação em distância piora. • <strong>FRI ↑</strong> → alcance máx ↓. • Discriminação em <strong>distância</strong> = feixe? Não — depende do <strong>pulso</strong>. Discriminação em <strong>marcação</strong> = largura do <strong>feixe</strong>.</p>
+  </div>
+</section>
+
+<!-- ===== CONTROLES ===== -->
+<section class="bloco" id="controles">
+  <h2 class="sec"><span class="n">14.1.5</span> Os controles operacionais</h2>
+  <p class="lede">Dois controles caem sempre: STC (contra o retorno do MAR) e FTC (contra a CHUVA). Não os confunda.</p>
+
+  <div class="ichart">
+    <h4>STC × FTC na tela (PPI)</h4>
+    <p class="hint">O retorno do mar entope o centro; uma borrasca de chuva esconde um navio. Ligue o STC (limpa o mar, até 4–5 mn) e o FTC (limpa a chuva) e veja o navio aparecer.</p>
+    <svg id="svgPPI" viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PPI radar"></svg>
+    <div class="ictrl" style="margin-top:8px">
+      <button class="ctlBtn" data-c="stc" onclick="toggleCtl('stc')">STC (anti-mar)</button>
+      <button class="ctlBtn" data-c="ftc" onclick="toggleCtl('ftc')">FTC (anti-chuva)</button>
+    </div>
+    <div class="iread" id="ppiRead"></div>
+  </div>
+
+  <table>
+    <tr><th>Controle</th><th>Função</th></tr>
+    <tr><td><strong>Brilho</strong></td><td>Brilho geral da tela; excessivo borra a imagem.</td></tr>
+    <tr><td><strong>Ganho</strong></td><td>Sensibilidade. Ajuste ideal: tela levemente salpicada. Pouco → ecos fracos somem; excessivo → contraste ruim. Reduzir melhora a discriminação em distância.</td></tr>
+    <tr><td><strong>STC</strong> (Anti-Clutter Sea)</td><td>Suprime o <span class="hl">retorno do MAR</span> perto do navio (efetivo até 4–5 mn, ineficaz &gt;8 mn). Nunca fixo nem apagar tudo.</td></tr>
+    <tr><td><strong>FTC</strong> (Anti-Clutter Rain)</td><td>Reduz ecos de <span class="hl">CHUVA/neve/granizo</span> (encurta os ecos); melhora discriminação e alcance mínimo; elimina interferência de RACON próximo.</td></tr>
+    <tr><td><strong>Largura de pulso</strong></td><td>Pulso <strong>longo</strong> = longas distâncias; pulso <strong>curto</strong> = melhor discriminação/detalhe e melhor alcance mínimo (águas restritas).</td></tr>
+    <tr><td><strong>Sintonia</strong></td><td>AFC mantém sintonizado; ajustar ~30 min após ligar. <strong>Linha-de-fé</strong> (heading marker) = indica a proa.</td></tr>
+  </table>
+</section>
+
+<!-- ===== IMAGEM / RACON ===== -->
+<section class="bloco" id="imagem">
+  <h2 class="sec"><span class="n">14.2</span> Interpretação · RACON e refletor-radar</h2>
+  <p class="lede">Nem tudo na tela é um alvo real: há falsos ecos, sombras e clutter. E há auxílios feitos para o radar.</p>
+
+  <table>
+    <tr><th>Auxílio radar</th><th>O que é</th></tr>
+    <tr><td><strong>Refletor-radar</strong> (passivo)</td><td>Só reflete a energia incidente (triedro trirretângulo). Aumenta a resposta de boias, embarcações de madeira/fibra. IMO recomenda para embarcações &lt; 100 AB.</td></tr>
+    <tr><td><strong>RACON</strong> (ativo)</td><td>Radar Beacon: excitado pelo radar, retorna um <span class="hl">sinal codificado (Morse)</span> na <strong>mesma marcação</strong>, estendendo-se para <strong>fora</strong> (maior distância) a partir do sinal. Dual band (X + S). Dá identificação positiva.</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>Como o RACON aparece na tela <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Um traço/sinal em código Morse, <span class="hl">na mesma marcação do sinal, a uma distância maior</span> que a do próprio auxílio (radialmente para fora do centro). Um novo perigo pode ser sinalizado por Racon transmitindo <strong>"D"</strong> (−··).</p>
+  </div>
+</section>
+
+<!-- ===== PRECISÃO ===== -->
+<section class="bloco" id="precisao">
+  <h2 class="sec"><span class="n">14.3.1</span> Precisão das distâncias e marcações</h2>
+  <p class="lede">Distâncias radar são bem mais precisas que marcações — use-as.</p>
+
+  <div class="box key">
+    <h4>Os números que a banca cobra <span class="tag t-decorar">DECORAR</span></h4>
+    <p><strong>Distâncias:</strong> precisão de ~<span class="hl">100 jardas</span> até o horizonte radar. Calibragem satisfatória se a diferença &lt; <strong>1,5% da escala</strong>. Sempre a <strong>escala mais curta</strong> (maior resolução); estrobo tangencia a borda <em>interna</em> do eco. <strong>Marcações:</strong> precisão de apenas <span class="hl">2° a 3°</span> — erro pela largura do feixe (≈ metade da abertura); reduzir o ganho diminui a distorção. Combinação favorita: <strong>marcação visual + distância radar</strong> (cortam a 90°).</p>
+  </div>
+</section>
+
+<!-- ===== COLISÃO / PMA ===== -->
+<section class="bloco" id="colisao">
+  <h2 class="sec"><span class="n">14.4</span> Evitar colisão — movimento relativo e o PMA</h2>
+  <p class="lede">Na visibilidade restrita, o radar é o olho do navegante. A imagem é <strong>relativa</strong>: o próprio navio fica fixo no centro (R) e o alvo (M) deixa um rastro relativo.</p>
+
+  <div class="ichart">
+    <h4>Movimento relativo e o Ponto de Maior Aproximação (PMA / CPA)</h4>
+    <p class="hint">R = seu navio (centro). O alvo M avança na direção do movimento relativo (DMR). O <b>PMA</b> é o pé da perpendicular de R à linha do movimento relativo. Deslize a distância de passagem: se a linha aponta para o centro (marcação constante), é <b>rumo de colisão</b>.</p>
+    <svg id="svgPMA" viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PMA radar"></svg>
+    <div class="ictrl"><label for="miss">Distância de passagem →</label><input type="range" id="miss" min="-60" max="60" step="2" value="24" oninput="drawPMA()"></div>
+    <div class="iread" id="pmaRead"></div>
+  </div>
+
+  <div class="box key">
+    <h4>O vocabulário do movimento relativo <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>DMR</strong> (Direção do Movimento Relativo) = rumo do rastro relativo (cuidado com a recíproca). <strong>VMR</strong> (Velocidade do Movimento Relativo) = distância relativa ÷ tempo. <strong>PMA</strong> (Ponto de Maior Aproximação, o CPA): pé da perpendicular de R à DMR — dá a <em>menor distância</em>, a <em>marcação</em> e a <em>hora</em> em que os navios estarão mais próximos. Regra de ouro do RIPEAM: <span class="hl">marcação que não muda + distância diminuindo = rumo de colisão</span>.</p>
+  </div>
+
+  <div class="box">
+    <h4>ARPA — Automatic Radar Plotting Aids</h4>
+    <p>Adquire e processa ecos automaticamente (examina ~200, mostra ~40 com vetores), calcula em ~2 min <strong>rumo verdadeiro, velocidade e o PMA (distância + hora)</strong>, com <strong>alarme de risco de colisão</strong> (pela distância de PMA selecionada, independente da escala). Reduz o erro humano — mas <span class="hl">não dispensa a vigilância visual permanente</span> nem a avaliação constante (pode falhar e dar indicações falsas).</p>
+  </div>
+</section>
+
+<!-- ===== MAPA DA BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
+  <p class="lede">Um dos capítulos mais cobrados: controles, refração, RACON e movimento relativo.</p>
+
+  <table>
+    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
+    <tr><td>2006</td><td><strong>Q41</strong></td><td>Como o RACON aparece no radar (inglês)</td><td class="center"><b>(d)</b> ✔ OCR</td></tr>
+    <tr><td>2008</td><td><strong>Q39</strong></td><td>Controle que suprime o retorno do mar</td><td class="center"><b>(a)</b> STC ✔ OCR</td></tr>
+    <tr><td>2008</td><td><strong>Q68</strong></td><td>Ar quente/seco sobre água fria → alcance alterado</td><td class="center"><b>(e)</b> super-refração ✔ OCR</td></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q54</strong></td><td>Águas restritas: pulso, alcance mínimo, discriminação</td><td class="center"><b>(d)</b> deduzido</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q27</strong> (2,0 pts)</td><td>Após acionar o anti-chuva, tela vira "proa para cima"</td><td class="center"><b>(d)</b> deduzido</td></tr>
+  </table>
+
+  <div class="box key">
+    <h4>2012-Q27 — a pegadinha do "proa para cima" <span class="tag t-banca">BANCA</span></h4>
+    <p>Chuva torrencial → aciona o <strong>FTC</strong> (anti-chuva). 15 min depois a tela muda para <span class="hl">"proa para cima" na 000°</span> — isto é uma apresentação <strong>não-estabilizada</strong> (relativa). A imagem perde a estabilização quando falha a <strong>agulha giroscópica</strong>. Causa: <b>(d) avaria na agulha giroscópica</b> (o FTC é distrator). Marcações passam a ser relativas → aplicar o rumo verdadeiro.</p>
+  </div>
+
+  <div class="box trap">
+    <h4>Distratores clássicos <span class="tag t-conflito">DECORAR</span></h4>
+    <p>• <strong>STC = mar</strong>, <strong>FTC = chuva</strong> (não troque). • <strong>Banda X = 3 cm</strong>, <strong>S = 10 cm</strong>. • <strong>Super-refração</strong> (quente/seco sobre frio) aumenta o alcance; <strong>sub-refração</strong> diminui. • <strong>RACON</strong> = sinal Morse na mesma marcação, distância maior. • Distâncias (100 jd) mais precisas que marcações (2–3°). • Tela "proa para cima" = giro fora.</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
+  <p class="lede">Toque para virar. Bandas, controles, RACON e movimento relativo.</p>
+  <div class="fcgrid" id="fcGrid"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede">Quinze questões — as cinco reais (2006/2008/2011/2012) e as relações de projeto.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Navegação Radar (Miguens Cap. 14)</summary>
+  <ul>
+    <li><b>Bandas:</b> X = 3 cm (mais detalhe, sofre com chuva) · S = 10 cm (penetra a chuva, mau tempo). RACON dual band.</li>
+    <li><b>Horizonte radar:</b> D_r = 2,21√H (≈ +14% sobre o geográfico). Detecção de alvo = alcance geográfico do alvo + 14%.</li>
+    <li><b>Refração:</b> super-refração (quente/seco sobre frio, calmo) → aumenta alcance (dutos, >1000 mn); sub-refração (frio/úmido sobre quente) → diminui.</li>
+    <li><b>Ganho:</b> tela levemente salpicada = sensibilidade ideal. Reduzir melhora discriminação em distância.</li>
+    <li><b>STC (Anti-Clutter Sea):</b> retorno do MAR perto do navio (até 4–5 mn). <b>FTC (Anti-Clutter Rain):</b> CHUVA/neve/granizo; melhora alcance mínimo; corta interferência de RACON próximo.</li>
+    <li><b>Pulso:</b> longo = longas distâncias; curto = discriminação/detalhe + melhor alcance mínimo (águas restritas). Sintonia: AFC, ~30 min. Linha-de-fé = proa.</li>
+    <li><b>Auxílios:</b> Refletor-radar (passivo, triedro, IMO <100 AB). RACON (ativo): sinal Morse na mesma marcação, distância maior (radial p/ fora). Novo perigo: Racon "D".</li>
+    <li><b>Precisão:</b> distâncias ~100 jd (calibragem < 1,5% da escala; escala mais curta; estrobo na borda interna). Marcações 2°–3° (erro pela largura do feixe; reduzir ganho ajuda).</li>
+    <li><b>Movimento relativo:</b> PPI = navio fixo no centro. DMR + VMR. PMA (CPA) = perpendicular de R à DMR → menor distância, marcação e hora. Marcação constante + distância caindo = colisão.</li>
+    <li><b>ARPA:</b> aquisição/processamento automático; rumo verdadeiro, velocidade, PMA (dist+hora), alarme de colisão. NÃO dispensa vigilância visual.</li>
+    <li><b>Banca:</b> 2006-Q41 (RACON, d) · 2008-Q39 (STC, a) · 2008-Q68 (super-refração, e) · 2011-Q54 (pulso curto/próximos/aumentar, d) · 2012-Q27 (tela "proa p/ cima" = giro fora, d).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Navegação Radar (Miguens Vol. I, Cap. 14) · Capital Sereno · Navegação — Miguens.</div>
+</footer>
+
+<script>
+var NS="http://www.w3.org/2000/svg";
+function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#cfe3df');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
+
+/* ===== HORIZONTE / REFRAÇÃO ===== */
+var refMode='n';
+function setRef(r){refMode=r;document.querySelectorAll('.refBtn').forEach(function(b){b.classList.toggle('active',b.dataset.r===r);});drawRef();}
+function refTick(ctx,x,sea,color,label,up){
+  ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,sea-9);ctx.lineTo(x,sea+9);ctx.stroke();
+  ctx.fillStyle=color;ctx.font='bold 11px Trebuchet MS';ctx.textAlign='center';
+  ctx.fillText(label,x,up?sea-14:sea+22);ctx.textAlign='left';
+}
+function drawRef(){
+  var cv=document.getElementById('cvRef'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var Hant=+document.getElementById('hant').value;
+  var Dr=2.21*Math.sqrt(Hant), Dg=1.93*Math.sqrt(Hant);
+  var sea=250, bnd=130, ppm=24;                 // px por milha náutica
+  // ---- atmosfera / camadas de ar ----
+  if(refMode==='sup'||refMode==='sub'){
+    var warmTop=(refMode==='sup');              // super: quente em cima
+    ctx.fillStyle=warmTop?'#f9e2c0':'#dcecfb';ctx.fillRect(0,0,W,bnd);
+    ctx.fillStyle=warmTop?'#dcecfb':'#f9e2c0';ctx.fillRect(0,bnd,W,sea-bnd);
+    ctx.strokeStyle='#b0692a';ctx.lineWidth=1.5;ctx.setLineDash([8,5]);
+    ctx.beginPath();ctx.moveTo(0,bnd);ctx.lineTo(W,bnd);ctx.stroke();ctx.setLineDash([]);
+    ctx.font='bold 12px Trebuchet MS';
+    ctx.fillStyle=warmTop?'#9a5a1e':'#2C5F8A';ctx.fillText(warmTop?'ar QUENTE e SECO':'ar FRIO e ÚMIDO',14,24);
+    ctx.fillStyle=warmTop?'#2C5F8A':'#9a5a1e';ctx.fillText(warmTop?'ar FRIO e ÚMIDO  (junto ao mar)':'ar QUENTE e SECO',14,bnd+22);
+    ctx.fillStyle='#b0692a';ctx.font='italic 11px Trebuchet MS';ctx.textAlign='right';ctx.fillText('camada de inversão →',W-12,bnd-7);ctx.textAlign='left';
+  } else {
+    ctx.fillStyle='#eef5fb';ctx.fillRect(0,0,W,sea);
+  }
+  // ---- mar ----
+  ctx.fillStyle='#cfe0ef';ctx.fillRect(0,sea,W,H-sea);
+  ctx.strokeStyle='#8fb8d8';ctx.lineWidth=2;ctx.beginPath();for(var x=0;x<=W;x+=6){ctx.lineTo(x,sea+6*Math.sin(x/24));}ctx.stroke();
+  // ---- antena ----
+  var ax=64, mast=18+Hant*1.15, tip=sea-mast;
+  ctx.strokeStyle='#16302B';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(ax,sea);ctx.lineTo(ax,tip);ctx.stroke();
+  ctx.fillStyle='#9E3B2E';ctx.beginPath();ctx.arc(ax,tip,5,0,7);ctx.fill();
+  ctx.fillStyle='#16302B';ctx.font='11px Trebuchet MS';ctx.fillText('antena '+Hant+' m',ax-14,tip-9);
+  // ---- alvo distante (navio baixo) ----
+  var tx=W-38;
+  ctx.fillStyle='#39424a';ctx.fillRect(tx-11,sea-12,22,9);ctx.fillRect(tx-3,sea-20,6,8);
+  // ---- trajetória da onda ----
+  var col=(refMode==='sup')?'#1F7A46':(refMode==='sub')?'#B23A2E':'#C8A84B';
+  ctx.strokeStyle=col;ctx.lineWidth=3;
+  if(refMode==='sub'){
+    var Xs=Dr*ppm*0.70, c=-mast/(Xs*Xs);
+    ctx.beginPath();ctx.moveTo(ax,tip);
+    for(var dx=0;dx<W;dx+=4){var y=tip+c*dx*dx;if(y<12)break;ctx.lineTo(ax+dx,y);}
+    ctx.stroke();
+    refTick(ctx,ax+Xs,sea,'#B23A2E','alcance ↓',false);
+    ctx.fillStyle='#B23A2E';ctx.font='bold 11px Trebuchet MS';ctx.textAlign='right';ctx.fillText('alvo perdido (feixe subiu)',tx-16,sea-26);ctx.textAlign='left';
+  } else if(refMode==='sup'){
+    var Xh=Dr*ppm*0.5, c=mast/(Xh*Xh), hit=null;
+    ctx.beginPath();ctx.moveTo(ax,tip);
+    for(var dx=0;dx<W-ax;dx+=3){var y=tip+c*dx*dx;if(y>=sea-3){hit=ax+dx;break;}ctx.lineTo(ax+dx,y);}
+    if(hit===null)hit=ax+Xh;ctx.lineTo(hit,sea-3);ctx.lineTo(W-24,sea-3);ctx.stroke();
+    // seta do duto
+    ctx.beginPath();ctx.moveTo(W-24,sea-3);ctx.lineTo(W-34,sea-8);ctx.lineTo(W-34,sea+2);ctx.closePath();ctx.fillStyle='#1F7A46';ctx.fill();
+    ctx.fillStyle='#1F7A46';ctx.font='bold 11px Trebuchet MS';ctx.fillText('duto → alcance muito maior',hit+8,sea-9);
+    ctx.textAlign='right';ctx.fillText('alvo detectado',tx-16,sea-26);ctx.textAlign='left';
+  } else {
+    var Xr=Dr*ppm, c=mast/(Xr*Xr), hit2=null;
+    ctx.beginPath();ctx.moveTo(ax,tip);
+    for(var dx=0;dx<W-ax;dx+=3){var y=tip+c*dx*dx;if(y>=sea-3){hit2=ax+dx;break;}ctx.lineTo(ax+dx,y);}
+    if(hit2===null)hit2=ax+Xr;ctx.lineTo(hit2,sea-3);ctx.stroke();
+    refTick(ctx,ax+Dg*ppm,sea,'#7d8790','geográfico',true);
+    refTick(ctx,ax+Dr*ppm,sea,'#a5851f','radar (+14%)',false);
+  }
+  var txt=(refMode==='sup')?'super-refração → alcance MUITO maior (dutos, pode ultrapassar 1000 mn)':(refMode==='sub')?('sub-refração → alcance reduzido (~'+(Dr*0.7).toFixed(1)+' mn)'):('~14% além do horizonte geográfico (1,93·√H = '+Dg.toFixed(1)+' mn)');
+  document.getElementById('refRead').innerHTML='Horizonte radar D<sub>r</sub> = 2,21·√'+Hant+' = <b>'+Dr.toFixed(1)+' mn</b>. '+txt+'.';
+}
+drawRef();
+
+/* ===== RELAÇÕES DE PROJETO ===== */
+var banda='S';
+function setBanda(b){banda=b;document.querySelectorAll('.bandaBtn').forEach(function(x){x.classList.toggle('active',x.dataset.b===b);});drawProj();}
+function drawProj(){
+  var cv=document.getElementById('cvProj'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var D=+document.getElementById('ant').value;     // largura da antena (m)
+  var pw=+document.getElementById('pw').value;      // largura de pulso (µs)
+  var lambda=(banda==='X')?0.03:0.10;               // m
+  var theta=70*lambda/D;                            // graus (aprox. meia potência)
+  // feixe (wedge) a partir da antena à esquerda
+  var ax=90, ay=H/2, len=W-260;
+  var half=theta*Math.PI/180/2;
+  ctx.fillStyle='rgba(200,168,75,.28)';ctx.strokeStyle='#C8A84B';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(ax+len,ay-Math.tan(half)*len);ctx.lineTo(ax+len,ay+Math.tan(half)*len);ctx.closePath();ctx.fill();ctx.stroke();
+  // eixo
+  ctx.strokeStyle='#9E3B2E';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(ax+len,ay);ctx.stroke();ctx.setLineDash([]);
+  // antena
+  ctx.fillStyle='#16302B';ctx.fillRect(ax-6,ay-D*7,12,D*14);
+  ctx.fillStyle='#2C5F8A';ctx.font='11px Trebuchet MS';ctx.fillText('antena '+D+' m',ax-8,ay-D*7-8);
+  ctx.fillStyle='#9a7d1f';ctx.font='bold 13px Trebuchet MS';ctx.fillText('feixe '+theta.toFixed(2)+'°',ax+len/2-24,ay-Math.tan(half)*len/2-6);
+  // discriminações
+  var compPulso=324*pw;                 // jardas
+  var discDist=compPulso/2;             // jardas
+  var dt10=35.3427*theta*10;            // jardas (a 10 mn)
+  document.getElementById('projRead').innerHTML='Banda <b>'+banda+'</b> (λ='+(lambda*100)+' cm), antena <b>'+D+' m</b> → feixe ≈ <b>'+theta.toFixed(2)+'°</b>. Discriminação em MARCAÇÃO a 10 mn = 35,3427·'+theta.toFixed(2)+'·10 ≈ <b>'+dt10.toFixed(0)+' jd</b>. Pulso <b>'+pw+' µs</b> → comprimento '+compPulso.toFixed(0)+' jd → discriminação em DISTÂNCIA e alcance mínimo ≈ <b>'+discDist.toFixed(0)+' jd</b>. (Antena maior ou banda X → feixe mais estreito; pulso menor → melhor discriminação em distância.)';
+}
+drawProj();
+
+/* ===== PPI STC/FTC ===== */
+var ctl={stc:false,ftc:false};
+function toggleCtl(c){ctl[c]=!ctl[c];document.querySelectorAll('.ctlBtn').forEach(function(b){b.classList.toggle('active',ctl[b.dataset.c]);});drawPPI();}
+function drawPPI(){
+  var svg=document.getElementById('svgPPI');svg.innerHTML='';
+  var cx=430,cy=150,R=130;
+  sEl(svg,'circle',{cx:cx,cy:cy,r:R,fill:'#0d2b26',stroke:'#1A7A6E','stroke-width':2});
+  for(var k=1;k<=3;k++)sEl(svg,'circle',{cx:cx,cy:cy,r:R*k/3,fill:'none',stroke:'#164a42','stroke-width':1});
+  sEl(svg,'line',{x1:cx,y1:cy,x2:cx,y2:cy-R,stroke:'#2E7D52','stroke-width':1.5}); // linha de fé
+  // clutter do mar (centro) — some com STC
+  if(!ctl.stc){for(var i=0;i<70;i++){var a=Math.random()*7,rr=Math.random()*42;sEl(svg,'circle',{cx:cx+Math.cos(a)*rr,cy:cy+Math.sin(a)*rr,r:1.6,fill:'#4a8f82'});}}
+  // borrasca de chuva (blob) — some com FTC
+  if(!ctl.ftc){sEl(svg,'ellipse',{cx:cx+55,cy:cy-45,rx:42,ry:30,fill:'rgba(120,180,160,.55)'});}
+  // navio escondido na chuva
+  var nx=cx+62,ny=cy-48;
+  if(ctl.ftc||true){sEl(svg,'circle',{cx:nx,cy:ny,r:5,fill:'#C8A84B',stroke:'#fff','stroke-width':(ctl.ftc?1.5:0)});}
+  if(ctl.ftc)sTx(svg,nx+8,ny,'navio!',{fill:'#C8A84B',fs:12,fw:'bold'});
+  // pequeno alvo próximo (some no clutter do mar)
+  sEl(svg,'circle',{cx:cx-24,cy:cy+20,r:4,fill:(ctl.stc?'#C8A84B':'#3a6b60'),stroke:(ctl.stc?'#fff':'none'),'stroke-width':1});
+  if(ctl.stc)sTx(svg,cx-52,cy+38,'alvo próximo',{fill:'#C8A84B',fs:11,fw:'bold'});
+  sTx(svg,cx,cy-R-8,'PPI',{fill:'#8fb8a8',fs:12,ta:'middle'});
+  // legenda direita
+  sTx(svg,610,70,'STC '+(ctl.stc?'ON':'off')+' → limpa o MAR (centro)',{fill:ctl.stc?'#7fe0c8':'#6a8f86',fs:13,fw:'bold'});
+  sTx(svg,610,96,'FTC '+(ctl.ftc?'ON':'off')+' → limpa a CHUVA',{fill:ctl.ftc?'#7fe0c8':'#6a8f86',fs:13,fw:'bold'});
+  document.getElementById('ppiRead').innerHTML=(!ctl.stc&&!ctl.ftc)?'Sem os controles: o retorno do mar entope o centro e a borrasca de chuva esconde um navio.':((ctl.stc?'STC limpou o retorno do mar (revela alvos próximos). ':'')+(ctl.ftc?'FTC dispersou a chuva (revela o navio dentro da borrasca).':''));
+}
+drawPPI();
+
+/* ===== MOVIMENTO RELATIVO / PMA ===== */
+function drawPMA(){
+  var svg=document.getElementById('svgPMA');svg.innerHTML='';
+  var cx=430,cy=170,R=140;
+  sEl(svg,'circle',{cx:cx,cy:cy,r:R,fill:'#0d2b26',stroke:'#1A7A6E','stroke-width':2});
+  for(var k=1;k<=3;k++)sEl(svg,'circle',{cx:cx,cy:cy,r:R*k/3,fill:'none',stroke:'#164a42','stroke-width':1});
+  // R (próprio navio) no centro
+  sEl(svg,'circle',{cx:cx,cy:cy,r:6,fill:'#C8A84B'});
+  sTx(svg,cx-10,cy+18,'R (seu navio)',{fill:'#C8A84B',fs:12,fw:'bold',ta:'end'});
+  var miss=+document.getElementById('miss').value; // deslocamento lateral (px)
+  // linha do movimento relativo: horizontal (DMR ~ para a esquerda), deslocada de 'miss' em y
+  var y=cy+miss;
+  // rastro M1->M3 (da direita para a esquerda)
+  var x1=cx+120,x2=cx-120;
+  sEl(svg,'line',{x1:x1,y1:y,x2:x2,y2:y,stroke:'#9E3B2E','stroke-width':2.5});
+  // pontos M1,M2,M3
+  [[x1,'M1'],[cx,'M2'],[x2,'M3']].forEach(function(p){sEl(svg,'circle',{cx:p[0],cy:y,r:4,fill:'#e2795f'});sTx(svg,p[0],y-8,p[1],{fill:'#e2795f',fs:11,ta:'middle'});});
+  sTx(svg,x2+4,y+16,'DMR →',{fill:'#e2795f',fs:11});
+  // PMA = pé da perpendicular de R à linha (vertical até y)
+  var pmaDist=Math.abs(miss);
+  sEl(svg,'line',{x1:cx,y1:cy,x2:cx,y2:y,stroke:'#C8A84B','stroke-width':1.5,'stroke-dasharray':'4 3'});
+  sEl(svg,'circle',{cx:cx,cy:y,r:5,fill:'#7fe0c8'});
+  sTx(svg,cx+8,y+(miss>=0?16:-6),'PMA',{fill:'#7fe0c8',fs:12,fw:'bold'});
+  var mn=(pmaDist/ (R/3)).toFixed(1); // escala: cada anel = 1 mn (3 anéis = R)
+  var colisao=pmaDist<10;
+  sTx(svg,cx,cy-R-8,colisao?'RUMO DE COLISÃO':'passa a '+mn+' mn',{fill:colisao?'#ff7a6b':'#8fb8a8',fs:13,fw:'bold',ta:'middle'});
+  document.getElementById('pmaRead').innerHTML = colisao
+    ? '<b style="color:#9E3B2E">Marcação praticamente constante e distância diminuindo → RUMO DE COLISÃO.</b> O PMA ≈ 0: os navios se encontram. Manobrar cedo, conforme o RIPEAM.'
+    : 'O alvo passa a um PMA de <b>'+mn+' milhas</b> (pé da perpendicular de R à linha do movimento relativo). Quanto mais a linha aponta para o centro, menor o PMA.';
+}
+drawPMA();
+window.addEventListener('resize',function(){drawRef();drawProj();drawPPI();drawPMA();});
+
+/* ===== FLASHCARDS ===== */
+var FC=[
+  {f:"Bandas do radar",b:"X = 3 cm (mais detalhe, sofre com chuva). S = 10 cm (penetra a chuva, mau tempo). RACON responde às duas."},
+  {f:"Horizonte radar",b:"D_r = 2,21√H — cerca de 14% além do horizonte geográfico (as ondas encurvam mais p/ baixo)."},
+  {f:"Super-refração",b:"Ar quente/seco sobre frio, tempo calmo, trópicos → aumenta o alcance (extremo: dutos, >1000 mn)."},
+  {f:"Sub-refração",b:"Ar frio/úmido sobre quente/seco, polar → diminui o alcance (pode não detectar alvos baixos)."},
+  {f:"Controle de ganho",b:"Ideal: tela levemente salpicada (sensibilidade máxima). Reduzir melhora a discriminação em distância."},
+  {f:"STC (Anti-Clutter Sea)",b:"Suprime o retorno do MAR perto do navio. Efetivo até 4–5 mn; ineficaz >8 mn. Nunca fixo nem apagar tudo."},
+  {f:"FTC (Anti-Clutter Rain)",b:"Reduz ecos de CHUVA/neve/granizo (encurta os ecos). Melhora alcance mínimo; corta RACON próximo."},
+  {f:"Largura de pulso",b:"Longo = longas distâncias. Curto = discriminação/detalhe + melhor alcance mínimo (águas restritas)."},
+  {f:"Sintonia / linha-de-fé",b:"AFC mantém sintonizado; ajustar ~30 min após ligar. Heading marker = indica a proa."},
+  {f:"Refletor-radar",b:"Auxílio PASSIVO (triedro trirretângulo). IMO recomenda p/ embarcações < 100 AB."},
+  {f:"RACON",b:"Auxílio ATIVO. Retorna sinal Morse na MESMA marcação, a distância MAIOR (radial p/ fora). Dual band X+S."},
+  {f:"RACON de novo perigo",b:"Transmite a letra 'D' (−··), mostrando 1 milha náutica na tela."},
+  {f:"Distâncias radar",b:"Precisão ~100 jardas até o horizonte. Calibragem < 1,5% da escala. Usar escala mais curta; estrobo na borda interna."},
+  {f:"Marcações radar",b:"Menos precisas (2°–3°). Erro pela largura do feixe (≈ metade da abertura). Reduzir ganho diminui a distorção."},
+  {f:"Melhor combinação",b:"Marcação visual + distância radar (cortam a 90°) — boa precisão nas duas LDP."},
+  {f:"Movimento relativo",b:"PPI = navio fixo no centro (R); alvo (M) deixa rastro relativo. DMR + VMR."},
+  {f:"PMA (CPA)",b:"Ponto de Maior Aproximação: pé da perpendicular de R à DMR. Dá menor distância, marcação e hora."},
+  {f:"Rumo de colisão",b:"Marcação que não muda + distância diminuindo = rumo de colisão (RIPEAM)."},
+  {f:"ARPA",b:"Aquisição/processamento automático; rumo verdadeiro, velocidade, PMA (dist+hora); alarme de colisão. NÃO dispensa vigilância visual."},
+  {f:"Tela 'proa para cima'",b:"Apresentação não-estabilizada (relativa) = falha da agulha giroscópica. Marcações viram relativas."},
+  {f:"Discriminação em distância",b:"Dois alvos na mesma marcação: com ganho excessivo viram 1 pip; reduzir ganho os separa."},
+  {f:"Antena × feixe",b:"Antena MAIOR (abertura) → feixe mais ESTREITO → melhor discriminação em marcação (para um dado λ)."},
+  {f:"Frequência × antena × alcance",b:"λ = c/f. Freq. maior → λ menor → antena menor e feixe mais estreito, mas alcance menor (banda X). Freq. menor → antena maior, mais alcance (banda S)."},
+  {f:"Discriminação em MARCAÇÃO",b:"= largura horizontal do feixe. d_t = 35,3427·a·L (jd; a em graus, L em mn). Piora com a distância."},
+  {f:"Discriminação em DISTÂNCIA",b:"= metade do comprimento de pulso (= alcance mínimo). Comprimento = 324·pulso(µs) jardas."},
+  {f:"Pulso × alcance",b:"Pulso LONGO → mais energia → maior alcance máximo, mas pior discriminação e maior alcance mínimo. Pulso curto = o inverso."},
+  {f:"FRI × alcance máximo",b:"FRI (pulsos/s) maior → intervalo menor → MENOR alcance máximo. A = intervalo(µs)·0,161829/2 (ex.: 999 µs → 80,8 mn)."},
+  {f:"Rotação da antena",b:"Girar mais devagar → mais pulsos no alvo → melhor detecção. Radares náuticos: < 60 RPM."},
+  {f:"Feixe — meia potência",b:"A largura do feixe é medida entre os pontos de meia potência (71% do campo, −3 dB). Horizontal 1–2°; vertical 15–30°."}
+];
+var grid=document.getElementById('fcGrid');
+FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
+  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"Os radares de navegação operam nas bandas:",
+   o:["L (30 cm) e C (5 cm)","X (3 cm) e S (10 cm)","K (1 cm) e X (3 cm)","VHF e UHF"],a:1,
+   e:"Banda X = 3 cm (mais detalhe/resolução, sofre com chuva) e Banda S = 10 cm (penetra a chuva, maior alcance em mau tempo). O RACON é dual band."},
+  {q:"O horizonte radar, comparado ao horizonte geográfico, é:",
+   o:["Igual","Cerca de 14% MAIOR (D_r = 2,21√H)","Cerca de 14% menor","O dobro"],a:1,
+   e:"D_r = 2,21√H, cerca de 14% além do geográfico (1,93√H), pois as ondas radar encurvam mais para baixo, acompanhando a curvatura da Terra."},
+  {q:"[PSCPP 2008] Vento fraco, quente e seco; água do mar fria (mais fria que o ar); tempo calmo. O alcance do radar será alterado por:",
+   o:["Difração","Sub-refração","Reflexão na superfície","Super-refração"],a:3,
+   e:"Ar quente e seco sobre água fria, tempo calmo = super-refração: a onda encurva mais para baixo e o alcance AUMENTA. Gabarito (e). No caso extremo, forma-se um duto."},
+  {q:"[PSCPP 2008] Para suprimir os ecos do retorno do mar nas proximidades do navio, o operador usa o controle:",
+   o:["STC (Anti-Clutter Sea)","FTC (Anti-Clutter Rain)","Chave de largura de pulso","Sintonia"],a:0,
+   e:"STC (Sensitivity Time Control / Anti-Clutter Sea) suprime o retorno do MAR perto do navio (até 4–5 mn). Gabarito (a). O FTC é para a chuva."},
+  {q:"O controle FTC (Anti-Clutter Rain) destina-se a:",
+   o:["Suprimir o retorno do mar","Reduzir os ecos de chuva, neve e granizo","Aumentar o brilho","Sintonizar o receptor"],a:1,
+   e:"O FTC reduz os ecos de chuva/neve/granizo (encurtando-os), melhora a discriminação e o alcance mínimo, e corta a interferência de um RACON próximo."},
+  {q:"[PSCPP 2011] Em águas restritas, o operador deve selecionar ___, para detectar objetos ___ do navio e ___ a discriminação em distância:",
+   o:["Pulso longo, mais afastados, reduzir","Pulso curto, mais próximos, aumentar","Pulso longo, mais próximos, aumentar","Pulso curto, mais afastados, reduzir"],a:1,
+   e:"Pulso CURTO → melhor alcance mínimo (objetos próximos) e AUMENTA a discriminação em distância. Ideal em águas restritas. Gabarito (d)."},
+  {q:"[PSCPP 2006] Um farol equipado com RACON é identificado no radar por:",
+   o:["Uma linha tracejada do centro da tela até a luz","Um sinal sonoro quando a varredura cruza a luz","Um sinal codificado na mesma marcação, a uma distância MAIOR que a da luz","Um círculo em torno da luz"],a:2,
+   e:"O RACON retorna um sinal codificado (Morse) na MESMA marcação do sinal, estendendo-se radialmente para fora (distância maior). Gabarito (d)."},
+  {q:"Quanto à precisão do radar, é correto:",
+   o:["Marcações são mais precisas que distâncias","Distâncias ~100 jardas; marcações apenas 2°–3°","Ambas têm a mesma precisão","Distâncias têm erro de 2°–3°"],a:1,
+   e:"Distâncias radar são bem mais precisas (~100 jardas até o horizonte) que as marcações (2°–3°, por causa da largura do feixe). Por isso valoriza-se marcação visual + distância radar."},
+  {q:"No movimento relativo, o Ponto de Maior Aproximação (PMA/CPA) é obtido:",
+   o:["Prolongando o rastro relativo até a borda","Traçando de R uma perpendicular à direção do movimento relativo","Medindo a velocidade verdadeira do alvo","Pela marcação inicial do alvo"],a:1,
+   e:"O PMA é o pé da perpendicular baixada do navio de referência (R) à linha do movimento relativo (DMR). Dá a menor distância, a marcação e a hora do encontro mais próximo."},
+  {q:"Uma situação de RUMO DE COLISÃO no radar caracteriza-se por:",
+   o:["Marcação variando e distância aumentando","Marcação constante e distância diminuindo","Marcação constante e distância aumentando","Alvo parado no centro"],a:1,
+   e:"Marcação que não muda apreciavelmente + distância diminuindo = rumo de colisão (PMA ≈ 0). Regra do RIPEAM — manobrar cedo."},
+  {q:"[PSCPP 2012] Após acionar o controle anti-chuva, 15 min depois a tela do radar passa a mostrar a proa para cima (000°). A causa é:",
+   o:["Avaria na antena que parou de girar","Avaria nos circuitos do STC","Avaria nos circuitos do FTC","Avaria na agulha giroscópica"],a:3,
+   e:"A apresentação 'proa para cima' é não-estabilizada (relativa). A imagem perde a estabilização quando falha a agulha giroscópica. Gabarito (d) — o FTC é apenas o distrator."},
+  {q:"Sobre o ARPA (Automatic Radar Plotting Aids), é correto:",
+   o:["Dispensa a vigilância visual","Fornece rumo verdadeiro, velocidade e PMA, mas não substitui a vigilância visual","Só funciona na maior escala","Não emite alarme de colisão"],a:1,
+   e:"O ARPA adquire/processa ecos, calcula rumo verdadeiro, velocidade e PMA (distância+hora) e tem alarme de colisão — mas pode falhar e NÃO dispensa a avaliação e a vigilância visual permanentes."},
+  {q:"Aumentando o tamanho (abertura) da antena, para um mesmo comprimento de onda, o feixe fica:",
+   o:["Mais largo (pior discriminação em marcação)","Mais estreito (melhor discriminação em marcação)","Inalterado","Vertical"],a:1,
+   e:"Antena maior → feixe mais ESTREITO no plano horizontal → melhor discriminação em marcação. Para um mesmo λ, feixes mais estreitos exigem antenas maiores; para uma mesma antena, λ menor (freq. maior) estreita o feixe."},
+  {q:"O poder de discriminação em DISTÂNCIA de um radar é igual a:",
+   o:["A largura do feixe","A metade do comprimento de pulso","A FRI","O dobro do alcance mínimo"],a:1,
+   e:"Discriminação em distância = metade do comprimento de pulso (igual ao alcance mínimo). Já a discriminação em MARCAÇÃO é igual à largura horizontal do feixe (d_t = 35,3427·a·L)."},
+  {q:"Para AUMENTAR o alcance máximo teórico de um radar, deve-se:",
+   o:["Aumentar a FRI","Reduzir a FRI (maior intervalo entre pulsos)","Encurtar a largura de pulso","Aumentar a rotação da antena"],a:1,
+   e:"O alcance máximo depende do intervalo entre pulsos: reduzir a FRI aumenta esse intervalo e o alcance máximo (A = intervalo·0,161829/2). Pulso mais longo também ajuda (mais energia), mas piora a discriminação."}
+];
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>
