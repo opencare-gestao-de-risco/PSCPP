@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atracação &amp; Desatracação — Fonseca × MacElrevey × Nayak | PSCPP 2027</title>
+<style>
+:root{
+  --vd:#0D3D36;--vm:#1A7A6E;--do:#C8A84B;--cr:#F7F3EA;
+  --am:#E8A020;--rb:#6B1A1A;--tx:#1a1a1a;--gl:#eef2f0;
+  --az:#1565C0;--la:#7B1FA2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--cr);color:var(--tx);font-size:1rem;line-height:1.75}
+.hero{background:var(--vd);color:#fff;padding:2.5rem 2rem 2rem}
+.hero .kicker{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--do);margin-bottom:.5rem}
+.hero h1{font-size:1.9rem;line-height:1.25;margin-bottom:.6rem}
+.hero .sub{font-size:.85rem;color:#b0c8c4;font-style:italic}
+main{max-width:920px;margin:0 auto;padding:2rem 1.25rem 4rem}
+h2.sec{font-size:1.25rem;color:var(--vd);border-bottom:2px solid var(--do);padding-bottom:.3rem;margin:2.6rem 0 .9rem}
+h2.sec .en{font-size:.82rem;font-weight:normal;color:#666;margin-left:.5rem;font-style:italic}
+h3.subsec{font-size:1.05rem;color:var(--vm);margin:1.5rem 0 .45rem;border-left:3px solid var(--do);padding-left:.6rem}
+h4.sub4{font-size:.95rem;color:var(--vd);margin:1rem 0 .3rem;font-style:italic}
+p{margin-bottom:.85rem}
+.hl{background:#fff59d;padding:0 2px;border-radius:2px}
+.hl-am{background:#ffe082;padding:0 2px;border-radius:2px}
+.hl-rb{background:#ffcdd2;padding:0 2px;border-radius:2px}
+.num{background:var(--vd);color:var(--do);display:inline-block;font-size:.78rem;font-family:Arial,sans-serif;font-weight:bold;padding:.12rem .5rem;border-radius:3px;margin-right:.3rem;vertical-align:middle}
+.tab-wrap{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{background:var(--vd);color:var(--do);padding:.5rem .7rem;text-align:center}
+td{padding:.45rem .7rem;border-bottom:1px solid #ccc;text-align:center;vertical-align:top}
+tr:nth-child(even) td{background:#f0ece2}
+td.L{text-align:left}
+td.bold{font-weight:bold}
+.a-fon{color:#0D3D36;font-weight:bold}
+.a-mac{color:#A8420F;font-weight:bold}
+.a-nay{color:#5B1A8A;font-weight:bold}
+/* cabecalhos de autor: fundo solido + texto branco (legivel no cabecalho verde-escuro) */
+th.th-fon{background:#147A6E;color:#fff}
+th.th-mac{background:#C0561F;color:#fff}
+th.th-nay{background:#6A1B9A;color:#fff}
+/* chips de legenda de autor */
+.chip-a{display:inline-block;color:#fff;font-family:Arial,sans-serif;font-size:.75rem;font-weight:bold;padding:.12rem .55rem;border-radius:12px;margin:0 .15rem}
+.chip-a.fon{background:#147A6E}.chip-a.mac{background:#C0561F}.chip-a.nay{background:#6A1B9A}
+.quadro{border-left:4px solid var(--do);background:#faf6ec;padding:.8rem 1rem;margin:1rem 0;font-style:italic;font-size:.9rem;color:#444}
+details.pscpp{margin:1.2rem 0;border-radius:5px;overflow:hidden}
+details.pscpp summary{cursor:pointer;padding:.65rem 1rem;font-family:Arial,sans-serif;font-size:.88rem;font-weight:bold;list-style:none;display:flex;align-items:center;gap:.4rem}
+details.pscpp summary::-webkit-details-marker{display:none}
+details.pscpp .body{padding:.8rem 1rem 1rem;font-size:.9rem}
+details.pscpp.decorar{border:2px solid var(--vm)}
+details.pscpp.decorar summary{background:#e8f5f2;color:var(--vd)}
+details.pscpp.decorar .body{background:#f2fbf8}
+details.pscpp.banca{border:2px solid var(--rb)}
+details.pscpp.banca summary{background:#fbeaea;color:var(--rb)}
+details.pscpp.banca .body{background:#fff5f5}
+details.pscpp.conflito{border:2px solid var(--am)}
+details.pscpp.conflito summary{background:#fff3d9;color:#8a5a00}
+details.pscpp.conflito .body{background:#fffaf0}
+.cob{display:inline-block;background:var(--am);color:#fff;font-family:Arial,sans-serif;font-size:.72rem;font-weight:bold;padding:.1rem .45rem;border-radius:3px;margin-left:.4rem;vertical-align:middle}
+.tag{display:inline-block;font-family:Arial,sans-serif;font-size:.7rem;font-weight:bold;padding:.1rem .45rem;border-radius:3px;margin:0 .2rem .2rem 0;vertical-align:middle;color:#fff}
+.tag.banca{background:var(--rb)}.tag.decorar{background:var(--vm)}.tag.conflito{background:var(--am)}.tag.calculo{background:var(--az)}
+ol.steps{padding-left:1.6rem;margin:.6rem 0}
+ol.steps li{margin-bottom:.5rem}
+ul.itens{padding-left:1.6rem;margin:.6rem 0}
+ul.itens li{margin-bottom:.4rem}
+.autor-block{border-radius:6px;padding:.8rem 1rem;margin:.7rem 0;font-size:.92rem}
+.autor-block .an{font-family:Arial,sans-serif;font-size:.78rem;font-weight:bold;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.35rem}
+.autor-block.fon{background:#eaf3f0;border-left:5px solid #147A6E}
+.autor-block.fon .an{color:#0D3D36}
+.autor-block.mac{background:#fbf0e7;border-left:5px solid #C0561F}
+.autor-block.mac .an{color:#A8420F}
+.autor-block.nay{background:#f5eefb;border-left:5px solid #6A1B9A}
+.autor-block.nay .an{color:#5B1A8A}
+.alerta{background:#fff8e1;border:2px solid var(--am);border-radius:5px;padding:.7rem 1rem;margin:.9rem 0;font-size:.9rem}
+.chip{display:inline-block;background:var(--vm);color:#fff;font-family:Arial,sans-serif;font-size:.75rem;font-weight:bold;padding:.12rem .5rem;border-radius:12px;margin:.15rem .2rem}
+.toc{background:var(--gl);border-radius:6px;padding:1rem 1.2rem;margin:1.5rem 0}
+.toc h4{font-family:Arial,sans-serif;font-size:.85rem;color:var(--vd);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em}
+.toc a{color:var(--vm);text-decoration:none;font-size:.88rem}
+.toc a:hover{text-decoration:underline}
+.toc ol{padding-left:1.3rem}
+.toc li{margin-bottom:.25rem}
+.termo-section{background:var(--gl);border-radius:6px;padding:1.2rem 1.3rem;margin-top:2.5rem}
+.termo-section h4{font-size:1rem;color:var(--vd);margin-bottom:.6rem}
+.termo-section dl dt{font-weight:bold;font-family:Arial,sans-serif;font-size:.83rem;color:var(--vm)}
+.termo-section dl dd{font-size:.87rem;margin-bottom:.5rem}
+.painel-btn{display:block;margin:2rem auto 0;padding:.75rem 1.6rem;background:var(--do);color:var(--vd);font-family:Arial,sans-serif;font-weight:bold;font-size:.95rem;border:none;border-radius:5px;cursor:pointer;text-align:center;max-width:320px}
+.painel-btn:hover{background:#b8921a}
+footer{text-align:center;font-family:Arial,sans-serif;font-size:.75rem;color:#888;padding:1.5rem 1rem;border-top:1px solid #ccc;margin-top:3rem}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="kicker">PSCPP 2027 · Módulo II — Arte Naval · Bloco F · Caderno-Ponte (3 fontes)</div>
+  <h1>Atracação &amp; Desatracação — as três visões<br><em style="font-size:1.3rem;font-weight:normal">Fonseca × MacElrevey × Nayak</em></h1>
+  <div class="sub">FONSECA, M. — <em>Arte Naval</em>, Cap. 12 · McELREVEY, C. — <em>Shiphandling for the Mariner</em>, 4ª ed., Caps. 4–6 · NAYAK, S. — <em>Theory and Practice of Marine Pilotage</em>, 2020, Caps. 14–17<br>
+  Navio de referência: <strong>um hélice, passo direito (RH)</strong>, salvo indicação. Convenção: <strong>BB = bombordo = port = esquerda</strong> · <strong>BE = boreste = starboard = direita</strong>.</div>
+</div>
+
+<main>
+
+<div class="toc">
+  <h4>⚓ Como navegar este caderno</h4>
+  <p style="font-size:.88rem;margin-bottom:.5rem">Cada cenário traz um <strong>quadro comparativo</strong> das três fontes seguido de <strong>blocos por autor</strong> com o que cada um <em>de fato</em> acrescenta (o que não cabe na tabela). As caixas coloridas marcam <span class="tag decorar">DECORAR</span> <span class="tag banca">BANCA</span> <span class="tag conflito">CONFLITO</span>. Feche pela <strong>síntese das inversões</strong> — é lá que a banca arma os distratores.</p>
+  <p style="font-size:.85rem;margin-top:.3rem"><strong>Cores dos autores:</strong> <span class="chip-a fon">Fonseca</span> <span class="chip-a mac">MacElrevey</span> <span class="chip-a nay">Nayak</span> — as mesmas cores marcam a coluna de cada autor nos quadros.</p>
+  <ol>
+    <li><a href="#fisica">O princípio físico comum (efeito lateral do hélice)</a></li>
+    <li><a href="#atr">PARTE I — ATRACAÇÃO</a>: por BB · por BE · corrente de proa · corrente de popa · través (dentro/fora)</li>
+    <li><a href="#des">PARTE II — DESATRACAÇÃO</a>: por BB · por BE · corrente de proa · corrente de popa · través (fora/dentro)</li>
+    <li><a href="#sintese">SÍNTESE — os grandes quadros das inversões</a></li>
+    <li><a href="#perfis">O que cada autor acrescenta (perfis)</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</div>
+
+<!-- ═══════════════════ 1. FÍSICA COMUM ═══════════════════ -->
+<h2 class="sec" id="fisica">1. O princípio físico comum <span class="en">Efeito lateral do hélice / transverse thrust</span></h2>
+
+<p>Tudo neste caderno decorre de um único efeito, que os três autores descrevem com nomes diferentes: <span class="hl">o hélice de passo direito (RH), dando <strong>a ré</strong>, joga a popa para <strong>bombordo</strong></span> (rabeia/walks to port); dando <strong>a vante</strong>, o efeito lateral é fraco e joga a popa levemente para boreste. Fonseca fala em <em>rabear</em> e em <em>corrente de descarga</em>; MacElrevey isola a <em>quickwater</em> (a água branca que a popa lança para vante ao dar a ré); Nayak e o PNA falam em <em>empuxo transversal (transverse thrust / pá d'água)</em>.</p>
+
+<p>Desse único fato saem as duas <strong>inversões</strong> que estruturam a matéria — e que a banca adora explorar:</p>
+<ul class="itens">
+  <li><strong>Inversão de bordo:</strong> a ré joga a popa para BB, então o bordo <em>fácil de atracar</em> é o <em>difícil de desatracar</em>, e vice-versa.</li>
+  <li><strong>Inversão de faina:</strong> a mesma corrente/vento que <em>atrapalha</em> a atracar frequentemente <em>ajuda</em> a desatracar (e o contrário).</li>
+</ul>
+
+<div class="quadro">Regra-mestra de leitura: antes de analisar qualquer cenário, identifique <strong>(1)</strong> o tipo de propulsão (aqui, hélice único RH — passo fixo), <strong>(2)</strong> a faina (atracar/desatracar) e <strong>(3)</strong> o sentido da força externa. Trocar qualquer um dos três inverte a resposta.</div>
+
+<div class="quadro"><strong>Dois hélices — a exceção que confirma a regra (Fonseca §12.36):</strong> o navio de dois hélices "atraca tão bem por um bordo como pelo outro" (ângulo de 10 a 20°, leme para fora + atrás no hélice do <em>mesmo bordo</em> do cais, primeira espia a de proa). Toda a assimetria BB × BE deste caderno é fenômeno do <strong>hélice único</strong>. Com dois eixos, CPP ou azimutal, reavalie o efeito P <em>antes</em> de aplicar qualquer quadro — a regra da banca é sempre identificar a propulsão primeiro.</div>
+
+<!-- ═══════════════════ PARTE I — ATRACAÇÃO ═══════════════════ -->
+<h2 class="sec" id="atr">PARTE I — ATRACAÇÃO</h2>
+
+<!-- 2. ATRACAÇÃO POR BB -->
+<h3 class="subsec">2.1 Atracação por Bombordo (BB) — o bordo favorável</h3>
+<p>Por BB o efeito P trabalha a seu favor: ao dar a ré para matar seguimento, a popa rabeia para BB, <em>para dentro</em> do berço. Os três concordam que é o bordo natural do hélice RH; a divergência é fina e mora na <strong>ordem do leme</strong> e no <strong>ângulo</strong>.</p>
+<div class="tab-wrap">
+<table>
+ <tr><th>Ponto</th><th class="th-fon">Fonseca §12.27</th><th class="th-mac">MacElrevey C.4–5</th><th class="th-nay">Nayak C.14–15</th></tr>
+ <tr><td class="L bold">Ângulo de aproximação</td><td class="L">Pequeno ângulo</td><td class="L">Maior — 10 a 15°</td><td class="L">Agudo (S/Z) + regra ½B</td></tr>
+ <tr><td class="L bold">Intenção do leme/máquina</td><td class="L"><strong>Trazer</strong> a popa: leme a BE + atrás toda força</td><td class="L"><strong>Conter</strong> o giro: leme a BB (esq.) + <em>kick</em> avante</td><td class="L">Controlar a TDG até ½B</td></tr>
+ <tr><td class="L bold">Empuxo transversal</td><td class="L">A ré encosta a popa (favorável)</td><td class="L">A ré fecha o ângulo (favorável)</td><td class="L">Popa p/ BB — favorável</td></tr>
+ <tr><td class="L bold">Rebocador de popa</td><td class="L">Dispensável</td><td class="L">Dispensável (explícito)</td><td class="L">Conforme porte/porto</td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>O navio de um hélice "atraca <strong>mais facilmente por BB</strong> do que por BE, porque a popa rabeia para BB quando se dá atrás". Chega com pequeno ângulo e mínimo seguimento; perto do cais, <strong>leme a BE + atrás toda força</strong> encosta a popa. Distância a menor possível para lançar as retinidas — mas não tão pequena que o navio bata se a máquina não der atrás prontamente.</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>Aproxima com <strong>ângulo maior (10–15°)</strong>, proa mirando o que será a meia-nau. A ré reduz o ângulo naturalmente até o paralelo; então <strong>leme à esquerda + kick avante para <span class="hl">frear</span></strong> a guinada para BB, de modo que o navio "não fique paralelo cedo demais" — e para no lugar <strong>sem rebocador de popa</strong>.</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span>Enquadra na <strong>aproximação em ângulo agudo</strong> (método clássico até ~30.000 GT, trajetória em S/Z conforme o bordo) e impõe os cortes quantitativos: <strong>paralelo a meia-boca (½B)</strong> do cais e velocidade de encosto <strong>fof ≤ 0,2 nó</strong> (≤ 0,1 para grandes navios), lidos por pares de referências fixas em terra.</div>
+<details class="pscpp conflito"><summary>⚠ CONFLITO — a armadilha do leme por BB</summary><div class="body">Fonseca manda <strong>leme a BE</strong>; MacElrevey manda <strong>leme a BB (esquerda)</strong> — parece contradição, mas miram fases distintas. Fonseca, com ângulo pequeno, precisa <strong>causar</strong> o giro da popa para dentro (leme a BE com seguimento residual + empuxo a ré). MacElrevey, com ângulo maior, tem o giro garantido pela ré e precisa é <strong>freá-lo</strong> (leme a BB + kick avante empurra a popa para BE) para não passar do paralelo. Mesma física, objetivos opostos — coerentes com o ângulo que cada um escolheu.</div></details>
+
+<!-- 3. ATRACAÇÃO POR BE -->
+<h3 class="subsec">2.2 Atracação por Boreste (BE) — o bordo desfavorável</h3>
+<p>Por BE o efeito P joga contra: ao dar a ré, a popa rabeia para BB, <em>para longe</em> do cais. É o bordo difícil — e onde Fonseca e MacElrevey divergem de fato na técnica.</p>
+<div class="tab-wrap">
+<table>
+ <tr><th>Ponto</th><th class="th-fon">Fonseca §12.27/30</th><th class="th-mac">MacElrevey C.4–5</th><th class="th-nay">Nayak C.15</th></tr>
+ <tr><td class="L bold">Ângulo de aproximação</td><td class="L"><strong>Paralelo</strong> ao cais</td><td class="L"><strong>Pequeno ângulo</strong></td><td class="L">Agudo (c/ reboc.) ou obtuso (s/ reboc.)</td></tr>
+ <tr><td class="L bold">Técnica-chave</td><td class="L">Chegar colado e paralelo; dar atrás toda (leme a BB)</td><td class="L"><em>Setting up to back</em>: leme a BB + kick avante pré-gira a popa p/ BE; depois atrás</td><td class="L">Cabos de proa + avante/leme p/ trazer a popa</td></tr>
+ <tr><td class="L bold">Rebocador de popa</td><td class="L">Último recurso (ferro de BB, espia pela alheta)</td><td class="L"><strong>Norma</strong> p/ navio carregado</td><td class="L">Depende do porte/porto</td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>Resolve <strong>eliminando o ângulo</strong>: aproxima <strong>paralelo</strong>, a pouca distância e com pequeno seguimento; na posição, leme a BB + atrás toda — "o navio deve parar no mesmo lugar". Sem espaço para o paralelo: espia pela alheta com palhetadas avante (leme a BE, a corrente de descarga trabalha o leme) ou, o mais seguro, <strong>largar o ferro de BB</strong> bem a vante — a popa encosta naturalmente. Em §12.30 reforça: por BE "a manobra é mais difícil: terá que lançar o ferro de bombordo".</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>Não aproxima paralelo — usa <strong>pequeno ângulo</strong> + o conceito de <em>setting up to back</em>: "leme a bombordo e <strong>kick avante</strong> até a popa desenvolver leve giro <strong>para boreste</strong> [em direção ao cais]; então dar atrás". Transforma a torção em aliada. E adverte: navio profundamente carregado "<strong>normalmente exigirá um rebocador a ré</strong>" para manter a popa encostada.</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span>Distingue <strong>ângulo agudo</strong> (clássico de MacElrevey, com rebocador) de <strong>ângulo obtuso</strong> (navios pequenos/leves ou portos sem rebocador: ângulo maior, cabos de proa firmes primeiro, depois leme carregado + avante para encostar a popa). A técnica no-tug de Nayak é a mesma ideia do <em>kick ahead</em>.</div>
+<details class="pscpp conflito"><summary>⚠ CONFLITO — ângulo por BE</summary><div class="body">Fonseca manda aproximar <strong>paralelo</strong>; MacElrevey manda <strong>pequeno ângulo</strong>. E ambos concordam que por <strong>BB</strong> o ângulo é <strong>maior</strong> (MacElrevey: 10–15°) — porque ali o rabeio da popa a ré <em>fecha</em> o ângulo a favor. É o distrator que a banca inverte citando a edição exata.</div></details>
+<details class="pscpp banca"><summary>🎯 BANCA — 2006-Q26 <span class="cob">JÁ COBRADO</span></summary><div class="body">Cobrou o trecho de MacElrevey (single screw RH, <em>berthing</em>): a alternativa <strong>incorreta</strong> dizia que o ângulo inicial é <em>menor</em> para atracação por bombordo (é <strong>maior</strong>); a correta reproduzia "<em>put the rudder to port and kick the engine ahead until the stern develops a slight swing to starboard</em>". O empuxo transversal isolado caiu em 2008-Q6 e 2008-Q43 (Crenshaw/PNA).</div></details>
+
+<!-- 4. ATRACAÇÃO CORRENTE PELA PROA -->
+<h3 class="subsec">2.3 Atracação com Corrente pela Proa <span style="font-size:.82rem;color:#666;font-style:italic">(stemming the current)</span></h3>
+<p>Consenso de fundo: <span class="hl">corrente pela proa é <strong>favorável</strong></span> — mata o seguimento e permite manter rotações mais altas (mais governo de leme) sem ganhar velocidade sobre o fundo. Cada autor, porém, puxa um alerta diferente — e entre Fonseca e MacElrevey há uma divergência que vira pegadinha.</p>
+<div class="tab-wrap">
+<table>
+ <tr><th>Ponto</th><th class="th-fon">Fonseca §12.28/23.1</th><th class="th-mac">MacElrevey C.4–5</th><th class="th-nay">Nayak C.13–15</th></tr>
+ <tr><td class="L bold">Corrente de proa é…</td><td class="L">Favorável — facilita a atracação</td><td class="L">Favorável — "serviço direto"</td><td class="L">Favorável — default de controle</td></tr>
+ <tr><td class="L bold">Efeito lateral junto ao cais</td><td class="L"><strong>Tende a encostar</strong> o navio ao cais</td><td class="L"><strong>Abate para fora</strong> (eddy + colchão hidráulico)</td><td class="L">Controlado por rebocador (fof)</td></tr>
+ <tr><td class="L bold">Alerta principal</td><td class="L">Não aproximar com <strong>muito ângulo</strong> (bate no cais)</td><td class="L"><strong>Planeje o afastamento</strong>: breast lines/ferro/reboc.</td><td class="L">½B paralelo; fof ≤ 0,2 nó</td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>Procedimento (fig. 12-15): aproa à corrente, para <strong>um pouco a vante</strong> do lugar; dá <strong>lançante de proa</strong>, leme para o bordo do cais para encostar a popa, e <strong>cai com a corrente aguentado pela espia</strong> (máquina se preciso). Muita correnteza: <strong>ferro de fora bem a vante</strong> + espringue de proa. Ponto fino (§12.23.1): "a corrente de proa <strong>tende a encostá-lo ao cais</strong>; a aproximação não deve ser feita com muito ângulo, pois o navio pode ser levado de encontro ao cais com violência ao se tornar paralelo"; e "com uma espia na proa, o <strong>centro de giro se transfere do navio para o cais</strong>". Verifica o abatimento <em>enfiando um ou dois objetos de bordo com um ponto fixo em terra</em> — a mesma ideia das referências fixas de Nayak.</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>O alerta <strong>contraintuitivo</strong>: junto ao cais "há geralmente <strong>algum abatimento para fora</strong>", causado por <strong>corrente de revesa (eddy)</strong> + <strong>colchão hidráulico</strong> entre casco e área rasa (forte com face sólida). Logo: <em>não espere que o navio fique encostado sozinho</em> — segure com <strong>rebocadores, máquina contra um ferro, ou boas breast lines</strong>. E o princípio do <em>All Secure</em>: mantenha a <strong>extremidade de montante firme</strong> para a corrente não entrar por dentro e empurrá-lo para fora.</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span>Assume o <em>stemming</em> como default e <strong>quantifica</strong>: regra ½B, fof ≤ 0,2 nó (≤ 0,1 grandes), leitura de velocidade por objetos fixos, velocidade lateral pelos rebocadores. Versão porto-moderno da mesma física.</div>
+<details class="pscpp conflito"><summary>⚠ CONFLITO — "encosta" (Fonseca) × "abate para fora" (MacElrevey)</summary><div class="body">Não é erro de nenhum. Na <strong>aproximação em ângulo</strong>, a corrente na bochecha empurra o navio <em>em peso para dentro</em> (Fonseca). Já <strong>rente à face do cais, quase paralelo</strong>, o par eddy + colchão hidráulico empurra <em>para fora</em> (MacElrevey). Fases/geometrias diferentes — mas uma afirmativa isolada de um pode ser marcada "falsa" por quem decorou o outro.</div></details>
+<details class="pscpp banca"><summary>🎯 BANCA — 2012-Q7 <span class="cob">JÁ COBRADO (ANULADA)</span></summary><div class="body">Prova Rosa 2012 cobrou MacElrevey, navio RH "se aproximando <strong>de proa</strong> para atracar" (V/F); foi <strong>anulada</strong> por erro de digitação na afirmativa IV ("pode" no lugar de "popa"). As recomendações de corrente de proa de Fonseca §12.23 são de alto potencial — <strong>[VERIFICAR gabarito impresso]</strong>.</div></details>
+
+<!-- 5. ATRACAÇÃO CORRENTE PELA POPA -->
+<h3 class="subsec">2.4 Atracação com Corrente pela Popa <span style="font-size:.82rem;color:#666;font-style:italic">(following current)</span></h3>
+<p>É <strong>a maior divergência de superfície</strong> de toda a matéria. Física comum: parado sobre o fundo, o navio faz <strong>seguimento a ré através da água</strong> → o leme fica <span class="hl-rb">ineficaz</span> e a corrente "assume o comando". Entrar de proa com corrente a favor e pouco seguimento é perigoso.</p>
+<div class="tab-wrap">
+<table>
+ <tr><th>Ponto</th><th class="th-fon">Fonseca §12.29/31</th><th class="th-mac">MacElrevey C.4</th><th class="th-nay">Nayak C.14–17</th></tr>
+ <tr><td class="L bold">Veredito</td><td class="L"><strong>Evitar</strong> — "sempre perigosa"</td><td class="L"><strong>"Não é um problema"</strong> (com o modelo certo)</td><td class="L">Evitar se possível; senão, controlar c/ rebocador</td></tr>
+ <tr><td class="L bold">Modelo mental</td><td class="L">Aproximação de proa que perde governo</td><td class="L"><strong>Recuar de popa</strong> para a posição (stern-first)</td><td class="L">Operação de popa controlada por rebocador</td></tr>
+ <tr><td class="L bold">1ª escolha</td><td class="L"><strong>Inverter o rumo</strong> e aproar à corrente</td><td class="L">Chegar c/ 2 rebocadores; deixar a corrente abater</td><td class="L">Stem se possível; senão stern-first + fof/½B</td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>"Deve ser <strong>evitada</strong>, porque é <strong>sempre perigosa</strong> — o navio perde o governo com seguimento pequeno e corrente a favor." Havendo espaço, <strong>inverter o rumo</strong> (ferro/ala e larga) e atracar aproado; sem espaço, "é melhor atracar com rebocador". Último caso, corrente fraca: aproximação com pouco seguimento, colado e paralelo; na posição, guina um pouco para fora, <strong>lançante pela alheta</strong> e atrás. §12.31: "com vento/corrente forte de popa, a atracação só deve ser tentada com rebocador".</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>"<strong>Não é um problema</strong>, desde que se tenha em mente que o navio está <strong>dando a ré de popa para a posição</strong>." Chega pelo través com <strong>dois rebocadores</strong>, tira o seguimento avante, continua atrás com a <strong>popa levemente angulada para o cais</strong>; ao ganhar sternway (parado sobre o fundo), a corrente no bordo de mar abate o navio para o cais. O erro clássico: <em>empurrar com rebocador</em> em vez de deixar a corrente abater. Ajusta o ângulo (popa p/ cais = encosta; popa paralela = contém).</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span>Mesma lógica na chave tug-managed: operação de popa controlada por rebocadores, com fof/½B; em portos mal equipados, <strong>aproximação lateral com âncora de mar</strong> (C.17). Enfatiza a perda de governo em baixa velocidade (hooking, C.14).</div>
+<details class="pscpp conflito"><summary>⚠ CONFLITO — "perigosa/evitar" × "não é um problema"</summary><div class="body">Contexto + modelo mental. Fonseca descreve a tentativa <strong>de proa, sem rebocador</strong> (perde o governo); MacElrevey reenquadra como <strong>recuo de popa com 2 rebocadores</strong> (a corrente vira aliada). Repare: o "último caso" de Fonseca já usa <strong>popa + máquina a ré</strong> — converge para o stern-first, só sem chamá-lo de padrão. <span class="tag decorar">DECORAR</span></div></details>
+
+<!-- 6. ATRACAÇÃO TRAVÉS -->
+<h3 class="subsec">2.5 Atracação com Vento/Corrente de Través — para dentro e para fora</h3>
+<div class="alerta"><strong>Vento ≠ corrente.</strong> A <strong>corrente</strong> age na obra viva (empuxo em peso, uniforme, pior em navio carregado). O <strong>vento</strong> age na obra morta/área vélica (pior em navio leve, alto bordo livre; <strong>cresce quanto menor a velocidade</strong>) e forma um <strong>conjugado</strong> se a proa entra na sombra de um obstáculo enquanto a popa segue exposta (Fonseca). Nayak dá o corte numérico: acima de <strong>20 nós</strong> de vento a bacia de evolução cresce exponencialmente.</p></div>
+<div class="tab-wrap">
+<table>
+ <tr><th>Autor</th><th>Abatimento SOBRE o cais (onto)</th><th>Abatimento PARA FORA (off)</th></tr>
+ <tr><td class="L bold a-fon">Fonseca §12.30/31</td><td class="L">Perigoso; <strong>ferro de fora</strong>/reboc.; pequena inclinação afastada; <strong>boa velocidade + rápido</strong>; proa p/ fora + atrás; 2 hélices = máquina de dentro (redemoinho)</td><td class="L">Cais safo: paralelo, boa velocidade, <strong>espias de proa e popa imediatas</strong>; um hélice por BE = ferro de BB</td></tr>
+ <tr><td class="L bold a-mac">MacElrevey C.4–5</td><td class="L">Vento <strong>facilita</strong>; encoste cedo e <strong>deslize pelo stringpiece</strong>; <em>back the tugs</em>/âncora p/ suavizar</td><td class="L"><strong>Ângulo maior</strong> + movimento lateral; kick + leme p/ popa; rebocadores seguram; <strong>âncora</strong> amplifica o lateral</td></tr>
+ <tr><td class="L bold a-nay">Nayak C.15/14</td><td class="L">Rebocador de ré em <strong>tração (pull)</strong> contém a popa; fof ≤ 0,2 nó</td><td class="L">Rebocadores (proa + alheta) <strong>empurram</strong> p/ vencer o vento; corte de 20 nós</td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>Trata os dois juntos (§12.30, "vento <em>ou</em> corrente"). Ponto contraintuitivo e cobrável: no abatimento <strong>para dentro</strong>, "o abatimento relativo será <strong>menor se chegar com boa velocidade</strong> e a atracação for rápida — menos tempo exposto". Amortecedor com dois hélices: atrás na <strong>máquina de dentro</strong> (endireita a proa + redemoinho entre casco e cais). Regra de espias (§12.31): <strong>vento vindo do cais</strong> (empurra para fora) → entra primeiro a <strong>espia de vante</strong> (proa mais alterosa); <strong>sem vento do cais</strong> → primeiro a espia de popa.</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>Filosofia: <strong>não lute — use as forças</strong>. Vento <strong>para fora</strong>: ângulo maior + movimento lateral deliberado (kick + leme p/ popa), rebocadores seguram; vento forte → âncora para <em>check up</em> da proa e amplificar o lateral ("a âncora segura contra o vento, o vento freia o lateral"). Vento <strong>sobre o berço</strong>: encoste cedo e <strong>deslize pela borda do cais</strong> — "não pode ser jogado pesadamente se já estiver no costado". Corrente cruzada na ponta do berço (fig. 4-4) pode <em>ajudar</em> a girar para dentro do esteiro, pivotando em estacas/camel. Ferro como governo em vento forte (C.8).</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span>Resolve por rebocador + números (fig. 15.1). Vento <strong>para fora</strong> (15.1a): rebocadores na proa e alheta <strong>empurram</strong>. Vento <strong>sobre o berço</strong> (15.1b): rebocador de ré em <strong>tração</strong> contém a popa. Cálculo de força de vento (ex.: 29 t na proa → 41 t ao través) e o limiar de 20 nós.</div>
+<details class="pscpp conflito"><summary>⚠ CONFLITO — armadilha de nomenclatura (a mais perigosa)</summary><div class="body">Os autores usam a mesma família de termos com sentidos opostos: Fonseca <strong>"vento de fora"</strong> = vindo do mar, empurra <em>sobre</em> o cais (onto); Nayak <strong>"vento ao largo"</strong> = para o mar, empurra <em>para fora</em> (off); e a legenda traduzida da fig. 15.1(b) rotula como "vento de terra" o caso <em>onto</em>. <span class="hl">Não decore pelo rótulo — classifique pelo efeito (dentro vs. fora).</span></div></details>
+<details class="pscpp conflito"><summary>⚠ CONFLITO — "boa velocidade" no través (Fonseca)</summary><div class="body">Fonseca recomenda <strong>boa velocidade / atracação rápida</strong> no través forte (menos tempo exposto ao abatimento) — exceção deliberada à regra geral de "menor seguimento possível". Não é contradição; é regra específica do través.</div></details>
+<details class="pscpp banca"><summary>🎯 BANCA — ferro em vento de través <span class="cob">JÁ COBRADO</span></summary><div class="body">Uso do ferro como auxílio de governo/atracação em vento de través (MacElrevey C.8): correlação em <strong>2012-Q45</strong> e <strong>2011-Q66</strong>. Efeito do vento crescer em baixa velocidade e a sequência de espias (§12.31): alto potencial — <strong>[VERIFICAR gabarito impresso]</strong>.</div></details>
+
+<!-- ═══════════════════ PARTE II — DESATRACAÇÃO ═══════════════════ -->
+<h2 class="sec" id="des">PARTE II — DESATRACAÇÃO</h2>
+<p>A desatracação <strong>inverte o sinal</strong> do efeito P: como a ré joga a popa para BB, o bordo <em>fácil de atracar</em> por BB fica <em>difícil de desatracar</em>. Regra geral de Fonseca (§12.33): antes de largar, <strong>soleca as espias para ver a tendência</strong> do navio; "<strong>é preferível abrir de popa e não de proa</strong>" (evita o hélice bater no cais e ganha governo com a popa livre) — exceto com corrente pela proa ou obstáculo à popa, quando se abre de proa. MacElrevey adverte: <em>não trate a desatracação como trivial</em> — o navio sai de popa (governa mal), tem menos opções de usar vento/corrente, e muitas vezes fica colado por corrente de fundo quando se esperava ser abatido pelo vento.</p>
+
+<!-- 7. DESATRACAÇÃO POR BB -->
+<h3 class="subsec">2.6 Desatracação por Bombordo (BB) — agora o bordo <em>menos</em> favorável</h3>
+<p>Ao dar a ré para sair, a popa rabeia para BB, <strong>de volta contra o cais</strong>. Por isso, abre-se um bom ângulo de popa <em>antes</em> de recuar.</p>
+<div class="tab-wrap">
+<table>
+ <tr><th>Ponto</th><th class="th-fon">Fonseca §12.33.1</th><th class="th-mac">MacElrevey C.6 (fig. 6-4)</th><th class="th-nay">Nayak C.17 (folga reduzida)</th></tr>
+ <tr><td class="L bold">Extremidade que abre 1º</td><td class="L"><strong>Popa</strong></td><td class="L"><strong>Popa</strong></td><td class="L"><strong>Proa</strong></td></tr>
+ <tr><td class="L bold">Como</td><td class="L">Espringue de proa + máquina adiante devagar + leme a BB; depois atrás, leme a BE</td><td class="L">Trabalha a proa p/ dentro p/ abrir a popa; torque fecha ao recuar</td><td class="L">Máquina a ré + leme a meio: popa nos defensas, proa abre; reboc. puxa a proa</td></tr>
+ <tr><td class="L bold">Empuxo transversal</td><td class="L">Fecha o ângulo ao recuar</td><td class="L">Torque traz de volta ao paralelo</td><td class="L"><strong>Usa a favor</strong>: prende a popa no cais</td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>Método literal para um hélice por BB: "girando sobre o <strong>espringue de proa</strong>, máquina <strong>adiante devagar, leme todo a BB</strong>; estando safa a popa, larga-se o espringue e <strong>dá-se atrás devagar, leme a BE</strong>". Sem seguimento, "o leme é quase inútil (não havendo corrente)".</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>Três tempos (fig. 6-4): (1) trabalha a proa para dentro até bom ângulo; (2) o torque a ré <strong>fecha o ângulo</strong> (popa p/ BB); (3) <strong>rebocador de proa</strong> empurra p/ manter o ângulo. Alerta: a <strong>quickwater tem menos efeito</strong> saindo por BB (mais fraca nesse bordo e o navio já está angulado).</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span><strong>Inverte a filosofia</strong> na folga reduzida com um rebocador: "máquina a ré + leme ao meio → <strong>afasta a proa</strong> enquanto a popa repousa nos defensas". Usa o empuxo transversal adverso <em>a favor</em> (prende a popa) e abre a proa com o rebocador.</div>
+<details class="pscpp conflito"><summary>⚠ CONFLITO — abrir a popa (Fonseca/MacElrevey) × abrir a proa (Nayak)</summary><div class="body">Não é contradição de física — é escolha ditada por espaço e rebocador. Fonseca/MacElrevey abrem a <strong>popa</strong> (para não arriscar o hélice/popa contra o cais); Nayak, em folga reduzida, abre a <strong>proa</strong> deixando a ré prender a popa nos defensas.</div></details>
+
+<!-- 8. DESATRACAÇÃO POR BE -->
+<h3 class="subsec">2.7 Desatracação por Boreste (BE) — agora o bordo <em>fácil</em></h3>
+<p>A ré joga a popa para BB = <strong>para longe</strong> de um cais de BE: a popa abre sozinha. É o espelho favorável do caso anterior.</p>
+<div class="tab-wrap">
+<table>
+ <tr><th>Ponto</th><th class="th-fon">Fonseca §12.33.1</th><th class="th-mac">MacElrevey C.6 (fig. 6-3)</th><th class="th-nay">Nayak C.17</th></tr>
+ <tr><td class="L bold">Precisa criar ângulo?</td><td class="L"><strong>Não</strong></td><td class="L"><strong>Não</strong> ("não precisa de ângulo")</td><td class="L">Não</td></tr>
+ <tr><td class="L bold">Motor da manobra</td><td class="L">Atrás devagar → popa abre sozinha</td><td class="L">Torque + quickwater levam a popa p/ BB</td><td class="L">Ré abre a popa</td></tr>
+ <tr><td class="L bold">O que controlar</td><td class="L">Nada crítico (través folgado de segurança)</td><td class="L"><strong>Guinada da proa p/ BE</strong> (canto do cais)</td><td class="L"><strong>Proa</strong> (rebocador/propulsor)</td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>Minimalista: "largam-se todas as espias, ou deixa-se um <strong>través na bochecha por segurança</strong> — bem folgado; dando atrás devagar, deve <strong>abrir de popa</strong>; safa, larga-se e sai dando atrás".</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>"<strong>Não precisa de ângulo</strong> ao dar a ré — torque + quickwater deslocam a popa para BB." O cuidado é a <strong>guinada da proa para BE</strong> (canto do cais), freada com propulsor/rebocador ou toque avante com leme carregado. Disciplina do <strong>ponto de giro</strong> (fig. 6-3): só guinar depois que o ponto de giro livrar a cabeça do pier.</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span>A ré abre a popa (empuxo a favor); o papel do <strong>rebocador/propulsor de proa</strong> é conter a guinada da proa para o canto do cais, com disciplina de ponto de giro e fof/½B.</div>
+<details class="pscpp banca"><summary>🎯 BANCA — a mais cobrada da série <span class="cob">JÁ COBRADO</span></summary><div class="body">Desatracação por BE de MacElrevey (torque + quickwater abrindo a popa): <strong>2008-Q17</strong> e <strong>2012-Q49</strong>. Ponto de giro (o rebocador gira em torno dele, não levanta o navio em peso): <strong>2006-Q44(II)</strong>. <strong>[VERIFICAR gabarito impresso]</strong> nos itens de 2011/2012.</div></details>
+
+<!-- 9. DESATRACAÇÃO CORRENTE PROA -->
+<h3 class="subsec">2.8 Desatracação com Corrente pela Proa</h3>
+<p>A corrente que atrapalhava a atracar vira <strong>aliada</strong>: ajuda a abrir a proa e você sai aproado a ela.</p>
+<div class="tab-wrap">
+<table>
+ <tr><th>Ponto</th><th class="th-fon">Fonseca §12.33.2</th><th class="th-mac">MacElrevey C.6 (figs. 6-1/6-2)</th><th class="th-nay">Nayak C.17</th></tr>
+ <tr><td class="L bold">Extremidade que abre</td><td class="L"><strong>Proa</strong> (a corrente abre)</td><td class="L">Navio <strong>em peso</strong> (proa/lateral)</td><td class="L"><strong>Proa</strong> primeiro, popa segue</td></tr>
+ <tr><td class="L bold">Papel da máquina</td><td class="L">Adiante devagar, segura a popa</td><td class="L">Balanceada p/ <strong>zero seguimento sobre o fundo</strong></td><td class="L">Mínima; tração do rebocador</td></tr>
+ <tr><td class="L bold">Sentido da saída</td><td class="L"><strong>Avante</strong> (aproado à corrente)</td><td class="L">Lateral, depois avante</td><td class="L">Após afastar em peso</td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>Aplica a <strong>exceção</strong> anunciada em §12.33: "com corrente pela proa, deve-se <strong>abrir de proa</strong>". Método: largam-se as espias <strong>menos um espringue na popa</strong>; a corrente abre a proa; máquina <strong>adiante devagar</strong> mantém a popa afastada; safa a proa, larga-se e <strong>sai avante</strong>.</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>Insight-chave: "<strong>coloque a corrente por dentro do navio</strong> e crie a situação que você vinha evitando". A corrente afasta a proa enquanto máquina/leme deslocam a popa <strong>sem head/sternway sobre o fundo</strong> — o navio anda <strong>lateralmente</strong>. Sensibilidade nas rotações: manter o navio <em>através de um ponto fixo do cais</em>. Espaço apertado/vento vencendo (fig. 6-2): máquina avante + leme carregado + <strong>rebocador de proa dando atrás</strong>, opondo-se para não avançar.</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span>Gestão de espias: <strong>lançantes de vante tesos</strong> segurando contra a corrente; larga o resto, afasta a proa, popa segue. Também o "lançante de vante vivo" com <strong>âncora de mar</strong> como pivô.</div>
+<details class="pscpp conflito"><summary>⚠ CONFLITO — simetria atracar × desatracar (eddy + colchão)</summary><div class="body">Na atracação, a revesa + colchão hidráulico <strong>abatiam o navio para fora</strong> (estorvo, MacElrevey); na desatracação, esse mesmo abatimento para fora é <strong>exatamente o que você quer</strong> — "cria-se a situação que se evitava". Mesma afirmativa, trocando "atracar/desatracar", inverte o gabarito. <span class="tag decorar">DECORAR</span></div></details>
+
+<!-- 10. DESATRACAÇÃO CORRENTE POPA -->
+<h3 class="subsec">2.9 Desatracação com Corrente pela Popa</h3>
+<p>Inversão saborosa: a corrente de popa, <em>perigosa para atracar</em>, Fonseca chama de <strong>"simples"</strong> para desatracar — e é aí que MacElrevey discorda do tom.</p>
+<div class="tab-wrap">
+<table>
+ <tr><th>Ponto</th><th class="th-fon">Fonseca §12.33.3</th><th class="th-mac">MacElrevey C.6</th><th class="th-nay">Nayak C.17</th></tr>
+ <tr><td class="L bold">Espia mantida</td><td class="L">Espringue de <strong>proa</strong></td><td class="L">Trabalha a <strong>proa</strong> p/ o cais</td><td class="L">Lançantes de vante tesos</td></tr>
+ <tr><td class="L bold">Extremidade que abre</td><td class="L"><strong>Popa</strong> (a corrente abre)</td><td class="L">Popa</td><td class="L">Proa afasta, popa segue</td></tr>
+ <tr><td class="L bold">Sentido da saída</td><td class="L"><strong>Atrás</strong> (para dentro da corrente)</td><td class="L"><em>Back into the stream</em> (atrás)</td><td class="L">Após afastar em peso</td></tr>
+ <tr><td class="L bold">Leitura de risco</td><td class="L"><strong>"Simples"</strong></td><td class="L"><strong>Exige planejamento</strong>; governa mal, poucas opções</td><td class="L">Gerido por linha tesa + reboc.</td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>"Esta manobra é <strong>simples</strong>; largam-se todas as espias, menos o <strong>espringue de proa</strong>, para abrir a popa. Safa, o navio pode <strong>sair dando atrás</strong>." Completa a regra simétrica: mantém-se o espringue de <em>jusante</em>, a corrente abre a extremidade de <em>montante</em>, sai-se <strong>aproado à corrente</strong>.</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>"Corrente de ré → desatraca-se <strong>como se atracou</strong> nas mesmas condições: <strong>trabalhe a proa para o cais</strong> e depois <strong>recue para dentro da corrente</strong>, mantendo velocidade através da água igual à deriva." Mas recusa o "simples": <em>com frequência o inexperiente encara a desatracação como operação simples e não a planeja</em> — o navio governa mal saindo de popa; se largar esperando ser abatido pelo vento e ficar colado pela corrente de fundo, <strong>replaneje antes de tocar o telégrafo</strong>.</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span>Corrente de popa empurra o navio para vante ao longo do cais → os <strong>lançantes de vante ficam tesos</strong>; larga o resto mantendo-os, afasta a proa, popa segue.</div>
+<details class="pscpp conflito"><summary>⚠ CONFLITO — "simples" (Fonseca) × "não subestime" (MacElrevey)</summary><div class="body">Numa V/F, "a desatracação com corrente pela popa é manobra simples" pode ser marcada <strong>verdadeira</strong> por Fonseca e <strong>falsa</strong> por MacElrevey. Anote qual autor o enunciado invoca. <span class="tag decorar">DECORAR</span></div></details>
+
+<!-- 11. DESATRACAÇÃO TRAVÉS -->
+<h3 class="subsec">2.10 Desatracação com Vento/Corrente de Través — para fora e para dentro</h3>
+<p>A inversão do través se completa: o través <strong>para fora</strong> (inimigo ao atracar) <strong>liberta</strong> o navio ao largar; o través <strong>para dentro</strong> (amigo ao atracar) <strong>prende</strong> o navio ao cais. Antes de decidir: <strong>soleca as espias</strong> — vento de fora pode ser cancelado por corrente de fundo para dentro.</p>
+<div class="tab-wrap">
+<table>
+ <tr><th>Autor</th><th>Través PARA FORA (off) — favorável</th><th>Través PARA DENTRO (onto) — difícil</th></tr>
+ <tr><td class="L bold a-fon">Fonseca §12.33.4/5</td><td class="L">Dois traveses, soleca e sai — trivial</td><td class="L"><strong>Difícil/perigosa</strong>; reboc. ou esperar; um hélice só sai se fraco/na ponta do cais (atrás toda força); <strong>ferro de fora</strong> ajuda</td></tr>
+ <tr><td class="L bold a-mac">MacElrevey C.6/3</td><td class="L">Simples (sai adiante) — <strong>mas</strong> ao ganhar ré "dá a ré contra o vento" e a popa volta ao cais</td><td class="L">(1) <strong>deslizar pelo stringpiece</strong> (mais seguro s/ reboc.); (2) espringue + recuar (risco de bater a proa); (3) rebocador(es) de través; âncora/rebocador peado (fig. 3-8)</td></tr>
+ <tr><td class="L bold a-nay">Nayak C.17</td><td class="L">Mínimo; controle da proa</td><td class="L"><strong>Âncora de mar como pivô</strong> (avante + leme + ferro) ou rebocadores de través; <strong>manobra a frio ≥ 3 rebocadores</strong></td></tr>
+</table>
+</div>
+<div class="autor-block fon"><span class="an">Fonseca acrescenta</span>Para <strong>fora</strong> (§12.33.4): "deixa-se só um través avante e outro a ré; <strong>solecam-se ambos</strong> até o navio ficar bem afastado, larga-se e sai". Para <strong>dentro</strong> (§12.33.5): "difícil e perigosa; exige rebocadores ou esperar. O navio de um hélice <strong>não se afastará</strong>, a não ser que a corrente seja fraca, ou esteja na <strong>extremidade</strong> do cais (então sai rápido dando atrás a toda força). Se largou o ferro de fora, a manobra é possível".</div>
+<div class="autor-block mac"><span class="an">MacElrevey acrescenta</span>Para <strong>fora</strong>: "manobra simples — sai adiante e guina no canal", <strong>mas</strong> a ressalva: parado, o vento afasta em peso; ao ganhar ré, "<strong>dá a ré contra o vento</strong>" e a popa volta ao berço (sobrepuja o torque por BE / acentua a torção por BB). Para <strong>dentro</strong> (vento mantém encostado): (1) <strong>deslizar pelo stringpiece</strong> até a popa livrar o canto — "a mais segura sem reboc.; perde tinta, mas <em>tinta vem em baldes, aço vem em estaleiros</em>"; (2) espringue + recuar (a <strong>proa pode ser jogada de volta</strong>); (3) afastar de través com 1–2 rebocadores. Detalhe: portas do galpão fechadas geram <strong>revesa</strong> que abate o navio <em>para fora</em>, simplificando a saída.</div>
+<div class="autor-block nay"><span class="an">Nayak acrescenta</span>Para <strong>dentro</strong> (ou set forte contra o cais): <strong>âncora de mar como pivô</strong> (fig. 17.4) — "avante + leme todo a BB + ferro" mantêm a popa afastada enquanto a proa gira para fora. Alternativas: rebocadores de través; <strong>manobra a frio</strong> (mín. 3 rebocadores, o propulsor mais eficaz na popa).</div>
+<details class="pscpp banca"><summary>🎯 BANCA — ponto de giro e desatracação <span class="cob">JÁ COBRADO</span></summary><div class="body">Desatracação (sequência/espias/rebocadores) e ponto de giro: <strong>2008-Q17</strong>, <strong>2006-Q44(II)</strong>. Vento crescer em baixa velocidade e uso do ferro na saída: alto potencial — <strong>[VERIFICAR gabarito impresso]</strong>.</div></details>
+
+<!-- ═══════════════════ SÍNTESE ═══════════════════ -->
+<h2 class="sec" id="sintese">3. Síntese — os grandes quadros das inversões</h2>
+<p>Estes três quadros são a <strong>mina de ouro dos distratores</strong>. A banca troca uma variável (bordo, faina ou sentido) mantendo o resto e a afirmativa vira falsa.</p>
+
+<h4 class="sub4">Quadro 1 — Efeito P por bordo (hélice RH)</h4>
+<div class="tab-wrap">
+<table>
+ <tr><th>Bordo</th><th>ATRACAR (efeito P)</th><th>DESATRACAR (efeito P)</th></tr>
+ <tr><td class="bold">BB (bombordo)</td><td class="L"><span class="hl">Fácil</span> — a ré encosta a popa</td><td class="L"><span class="hl-rb">Difícil</span> — a ré traz a popa de volta ao cais (abrir a popa antes)</td></tr>
+ <tr><td class="bold">BE (boreste)</td><td class="L"><span class="hl-rb">Difícil</span> — a ré afasta a popa do cais</td><td class="L"><span class="hl">Fácil</span> — a ré abre a popa sozinha</td></tr>
+</table>
+</div>
+
+<h4 class="sub4">Quadro 2 — Corrente longitudinal (atracar × desatracar)</h4>
+<div class="tab-wrap">
+<table>
+ <tr><th>Corrente</th><th>ATRACAR</th><th>DESATRACAR</th></tr>
+ <tr><td class="bold">Pela PROA</td><td class="L">Favorável (governo), <em>mas</em> abate p/ fora junto ao cais (eddy+colchão)</td><td class="L">Favorável — abre a <strong>proa</strong>, sai <strong>avante</strong> (§12.33.2)</td></tr>
+ <tr><td class="bold">Pela POPA</td><td class="L"><span class="hl-rb">Perigosa/evitar</span> (Fonseca) · stern-first c/ 2 reboc. (MacElrevey)</td><td class="L"><span class="hl">"Simples"</span> (Fonseca) — abre a <strong>popa</strong>, sai <strong>atrás</strong> (§12.33.3)</td></tr>
+</table>
+</div>
+<div class="quadro"><strong>Regra unificadora (saída):</strong> mantém-se a espia de <strong>jusante</strong>, a corrente abre a extremidade de <strong>montante</strong>, e <strong>sai-se sempre aproado à corrente</strong> — avante se a corrente vem pela proa, atrás se vem pela popa.</div>
+
+<h4 class="sub4">Quadro 3 — Través (atracar × desatracar)</h4>
+<div class="tab-wrap">
+<table>
+ <tr><th>Través</th><th>ATRACAR</th><th>DESATRACAR</th></tr>
+ <tr><td class="bold">Para FORA (off)</td><td class="L"><span class="hl-rb">Difícil</span> — vencer o abatimento p/ entrar (ângulo maior, âncora, espias rápidas)</td><td class="L"><span class="hl">Fácil</span> — empurra p/ fora; soleca os traveses e sai</td></tr>
+ <tr><td class="bold">Para DENTRO (onto)</td><td class="L"><span class="hl">Fácil</span> — ajuda a encostar; só controlar (back the tugs, âncora)</td><td class="L"><span class="hl-rb">Difícil/perigoso</span> — prende ao cais; reboc., ferro ou esperar</td></tr>
+</table>
+</div>
+
+<!-- ═══════════════════ PERFIS ═══════════════════ -->
+<h2 class="sec" id="perfis">4. O que cada autor acrescenta — perfis</h2>
+<div class="autor-block fon"><span class="an">Fonseca — Arte Naval, Cap. 12</span>Marinharia <strong>sem rebocador</strong>, procedural e conservadora. Pontos que só ele dá: a <strong>simetria elegante das saídas</strong> (espia de jusante, corrente abre montante, sai aproado); a <strong>regra de sequência de espias</strong> conforme o vento (§12.31); o <strong>"boa velocidade / atracar rápido"</strong> no través forte; o <strong>redemoinho amortecedor</strong> da máquina de dentro (dois hélices); e o <strong>ferro de fora</strong> como recurso recorrente. Tende a rotular condições como "perigosas" ou "simples" — útil, mas sensível ao contexto.</div>
+<div class="autor-block mac"><span class="an">MacElrevey — Shiphandling for the Mariner, 4ª ed.</span>Filosofia <strong>"não lute contra as forças — use-as"</strong>. Contribuições exclusivas: <em>setting up to back</em>; a <strong>quickwater</strong> como ferramenta ativa; a disciplina do <strong>ponto de giro</strong>; o <strong>eddy + colchão hidráulico</strong> (abatimento para fora no stemming); o <strong>modelo stern-first</strong> para corrente de popa; o <strong>deslizar pelo stringpiece</strong>; e o alerta de que <strong>desatracar não é trivial</strong>. É o mais rico em técnica fina sem rebocador.</div>
+<div class="autor-block nay"><span class="an">Nayak — Theory and Practice of Marine Pilotage, 2020</span>Chave <strong>porto-moderno, tug-assisted e quantitativa</strong>. Contribuições exclusivas: <strong>½B</strong> e <strong>fof ≤ 0,2 nó</strong>; a taxonomia <strong>ângulo agudo/obtuso</strong>; <strong>hooking</strong> de proa/popa; a <strong>âncora de mar como pivô</strong>; a <strong>manobra a frio (≥ 3 rebocadores)</strong>; e os <strong>números do vento</strong> (força ao través, limiar de 20 nós). Onde os outros usam marinharia, ele delega ao rebocador com métrica.</div>
+<div class="alerta"><strong>Estratégia de prova:</strong> quando o enunciado citar a <strong>edição/autor</strong>, responda pela lógica <em>daquele</em> autor. Quando pedir "a manobra correta" sem citar fonte, prefira a leitura que os três compartilham (a física do efeito P e a regra "sair aproado à corrente"); reserve os rótulos "simples/perigosa" para quando a fonte for nomeada.</div>
+
+<!-- ═══════════════════ GLOSSÁRIO ═══════════════════ -->
+<div class="termo-section" id="glossario">
+  <h4>Glossário essencial</h4>
+  <dl>
+    <dt>Efeito P / Empuxo transversal / Transverse thrust / Pá d'água</dt>
+    <dd>Força lateral do hélice. RH a ré → popa para BB; a vante → popa levemente para BE (fraco).</dd>
+    <dt>Quickwater</dt>
+    <dd>Água branca lançada pela popa para vante ao dar a ré; MacElrevey a usa como ferramenta (freia a guinada da proa). Mais forte por BE e com face sólida/assoreamento.</dd>
+    <dt>Setting up to back</dt>
+    <dd>Pré-girar a popa na direção desejada com um <em>kick</em> avante e leme carregado, antes de dar a ré, para compensar o rabeio.</dd>
+    <dt>Stemming the current</dt>
+    <dd>Aproado à corrente (proa contra a corrente) — condição de controle na atracação.</dd>
+    <dt>FOF / Fall on Fenders</dt>
+    <dd>Velocidade de encosto nos defensas. Nayak: ≤ 0,2 nó (convencional), ≤ 0,1 nó (grandes navios).</dd>
+    <dt>Regra ½B</dt>
+    <dd>A meia-boca (B/2) de distância do cais o navio já deve estar paralelo (Nayak).</dd>
+    <dt>Ponto de giro (pivot point)</dt>
+    <dd>Ponto sobre o qual o casco gira; ao guinar na saída, só iniciar a guinada depois que ele livrar a cabeça do pier. Um rebocador gira o casco em torno dele — não levanta o navio em peso.</dd>
+    <dt>Colchão hidráulico / Eddy (revesa)</dt>
+    <dd>Água comprimida entre casco e área rasa sob o cais + contracorrente na margem: abatem o navio <em>para fora</em> no stemming; máximos com casco paralelo e face sólida.</dd>
+    <dt>Ângulo agudo × obtuso (Nayak)</dt>
+    <dd>Agudo = método clássico até ~30.000 GT (com rebocador); obtuso = navios leves ou portos sem rebocador (ângulo maior, cabos de proa primeiro).</dd>
+    <dt>Manobra a frio (cold move)</dt>
+    <dd>Manobra sem máquina própria; mínimo 3 rebocadores (Nayak C.17), o propulsor mais eficaz na popa.</dd>
+    <dt>Stringpiece</dt>
+    <dd>Borda/aresta do cais pela qual o navio "desliza" na desatracação com vento sobre o berço (MacElrevey).</dd>
+    <dt>Espringue · Través · Lançante</dt>
+    <dd>Espringue (spring) controla o movimento longitudinal e serve de pivô; través (breast) tira/aproxima o navio do cais; lançante (head/stern line) segura proa/popa.</dd>
+  </dl>
+</div>
+
+<button class="painel-btn" onclick="enviarPainel()">⬆ Enviar ao Painel PSCPP</button>
+
+<script>
+async function enviarPainel(){
+  const URL='https://iftourtecxtmvuhptvmo.supabase.co';
+  const KEY=window.SUPABASE_ANON_KEY||'';
+  const p={caderno_id:'caderno_ponte_atracacao_desatracacao',tipo:'caderno',bloco:'F',
+    tema:'Governo Portuário',assunto:'Atracação & Desatracação — Fonseca × MacElrevey × Nayak · 10 cenários · efeito P · corrente proa/popa · través dentro/fora · inversões atracar×desatracar',
+    enunciado:'Revisão Caderno-Ponte Atracação & Desatracação (3 fontes)',acertou:true,sessao_data:new Date().toISOString()};
+  try{
+    const r=await fetch(`${URL}/rest/v1/respostas`,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':`Bearer ${KEY}`},body:JSON.stringify(p)});
+    alert(r.ok?'✅ Enviado ao painel PSCPP!':'⚠ Erro: '+r.status);
+  }catch(e){alert('⚠ Erro de conexão: '+e.message);}
+}
+</script>
+
+</main>
+<footer>
+  Capital Sereno × PSCPP 2027 · Caderno-Ponte Atracação &amp; Desatracação (3 fontes) · Setembro 2026<br>
+  Fontes: FONSECA, <em>Arte Naval</em> Cap. 12 · McELREVEY, <em>Shiphandling for the Mariner</em> 4ª ed. Caps. 4–6 · NAYAK, <em>Marine Pilotage</em> 2020 Caps. 14–17
+</footer>
+</body>
+</html>
