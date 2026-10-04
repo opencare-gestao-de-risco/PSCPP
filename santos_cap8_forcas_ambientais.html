@@ -158,7 +158,7 @@
 <div class="wrap">
 
 <div class="related">
-  📎 Fecha a matéria <strong>Efeitos Externos e de Contorno</strong>, junto com <a href="santos_cap9_aguas_rasas_squat.html">Águas Rasas e Squat (Cap. 9)</a> e <a href="santos_cap10_aguas_restritas_interacoes.html">Águas Restritas e Interações (Cap. 10)</a>. Par-PNA: <a href="pna_ix_sec12_vento_corrente_ondas.html">Vento, Corrente e Ondas (§12)</a>. O movimento do navio em ondas terá matéria própria (Seakeeping — Blocos I e J).
+  📎 Fecha a matéria <strong>Efeitos Externos e de Contorno</strong>, junto com <a href="santos_cap9_aguas_rasas_squat.html">Águas Rasas e Squat (Cap. 9)</a> e <a href="santos_cap10_aguas_restritas_interacoes.html">Águas Restritas e Interações (Cap. 10)</a>. Par-PNA: <a href="pna_ix_sec12_efeitos_ambiente.html">Efeitos do Ambiente (§12)</a>. Análise navio a navio das curvas: <a href="santos_cap8_coeficientes_vento_ocimf_sname.html">Coeficientes de Vento OCIMF × SNAME</a> e <a href="santos_cap8_coeficientes_corrente_ocimf.html">Coeficientes de Corrente OCIMF</a>. O movimento do navio em ondas terá matéria própria (Seakeeping — Blocos I e J).
 </div>
 
 <!-- ===== 8.1 GERAL ===== -->
@@ -224,17 +224,22 @@
 <!-- ===== COMPORTAMENTO ===== -->
 <section class="bloco" id="comportamento">
   <h2 class="sec"><span class="n">8.2.2</span> Orçar × arribar — o comportamento típico</h2>
-  <p class="lede">A convenção e as tendências por posição do vento. Cada item é uma afirmativa de prova.</p>
+  <p class="lede">A convenção e as tendências mais comuns por posição do vento. Santos insiste: não existe regra geral, cada navio tem suas curvas.</p>
 
   <table>
     <tr><th>Conceito</th><th>Definição / tendência</th></tr>
     <tr><td><strong>Orçar</strong></td><td>Girar a proa <span class="hl">para o vento</span> (momento anti-horário na convenção usada, com vento por BE)</td></tr>
     <tr><td><strong>Arribar</strong></td><td>Girar a proa <span class="hl">para sotavento</span> (afastando do vento)</td></tr>
-    <tr><td>Vento por <strong>ante a vante do través</strong></td><td>O navio tende a <strong>orçar</strong></td></tr>
-    <tr><td>Vento por <strong>ante a ré do través</strong></td><td>Tendência de <strong>arribar</strong> (girar para fora do vento) e leve movimento a ré com vento pelo través</td></tr>
-    <tr><td>Vento <strong>pelo través</strong></td><td><span class="hl">Força máxima de abatimento lateral</span>; sem tendência dominante de orçar/arribar quando com velocidade (o vento aparente fica ~pelo través)</td></tr>
+    <tr><td>Vento por <strong>ante a vante do través</strong></td><td>Depende do navio. Petroleiro carregado orça; petroleiro/graneleiro <strong>em lastro arriba</strong> com vento pela bochecha (parado); gaseiros orçam com vento pela bochecha</td></tr>
+    <tr><td>Vento por <strong>ante a ré do través</strong></td><td>Depende do navio. Gaseiros arribam com vento pela alheta; petroleiros carregado e em lastro orçam. Com vento pela alheta, vários navios (Ro-Ro, contêineres, multipropósito) têm mais dificuldade para parar ou dar a ré</td></tr>
+    <tr><td>Vento <strong>pelo través</strong></td><td><span class="hl">Força de abatimento lateral perto do máximo</span>. Com velocidade (vento verdadeiro entre bochecha e alheta, aparente ~pelo través): gaseiros e offshore arribam; contêiner meia carga, contêiner sem carga no convés e ferry ficam neutros; os demais orçam</td></tr>
     <tr><td>Navio <strong>parado ou muito lento</strong></td><td>Comportamento dominado pelo vento verdadeiro e pela distribuição de área vélica (proa/popa) — varia por tipo de navio</td></tr>
   </table>
+
+  <div class="box trap">
+    <h4>Não existe regra geral <span class="tag t-banca">BANCA</span></h4>
+    <p>Santos desmente a frase "navio com superestrutura a ré, sem carga no convés, em baixa velocidade, sempre orça": petroleiros e graneleiros <strong>em lastro arribam</strong> com vento pela bochecha. O comportamento de cada navio, curva a curva, está no caderno <a href="santos_cap8_coeficientes_vento_ocimf_sname.html">Coeficientes de Vento OCIMF × SNAME</a>.</p>
+  </div>
 
   <div class="box formula">
     <h4>O exemplo do caranguejar <span class="tag t-calc">CALCULO</span></h4>
@@ -447,7 +452,7 @@ var FC=[
   {f:"Beaufort → m/s",b:"Vw(10) ≈ 0,836·Bft^(3/2) m/s."},
   {f:"OCIMF — lastro × carregado",b:"Em LASTRO: coeficientes maiores E área vélica maior → força lateral do vento muito maior."},
   {f:"Blendermann",b:"Univ. Hamburgo, anos 1990: coeficientes para Ro-Ro, contêineros e outros tipos além de petroleiros/gaseiros."},
-  {f:"Orçar × arribar",b:"Orçar = proa PARA o vento (ante a vante do través). Arribar = proa para sotavento (ante a ré do través)."},
+  {f:"Orçar × arribar",b:"Orçar = proa PARA o vento. Arribar = proa para sotavento. Qual acontece depende do navio: não há regra geral (ver Coeficientes de Vento)."},
   {f:"Vento pelo través",b:"Força de abatimento lateral MÁXIMA; sem tendência dominante de orçar/arribar quando com velocidade."},
   {f:"Lei V² do vento",b:"Triplicar o vento → força 9×. Rajadas (10→30 nós) → força pode passar de 10× a inicial."},
   {f:"Giro sob vento",b:"Curva de giro ACHATADA e diâmetro tático AUMENTA. Curvas fechadas com máxima cautela."},
