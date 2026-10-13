@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Código Internacional de Sinais (CIS) — todos os códigos do recorte PSCPP 2027, mapa do alfabeto, padrões de memorização, flashcards e simulado.">
+<meta name="theme-color" content="#0D3D36">
+<title>CIS — Mapa e Códigos</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+  .hero .stat{margin-top:16px;display:flex;gap:24px;flex-wrap:wrap;font-family:'Trebuchet MS',sans-serif}
+  .hero .stat div{font-size:12.5px;color:#a9c8c1}
+  .hero .stat b{display:block;font-size:26px;color:var(--ouro);line-height:1}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-duvida{background:#e7e7e7;color:#444}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  .tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+  /* ---- códigos ---- */
+  .cod{font-family:'Courier New',monospace;font-weight:bold;font-size:15px;color:var(--verde);white-space:nowrap}
+  td.cod{width:78px}
+  td.fon{font-family:'Trebuchet MS',sans-serif;font-size:11.5px;color:var(--mute);width:150px}
+  tr.p3 td{background:#fbe6bd !important}
+  tr.p2 td{background:#fff7cf !important}
+  tr.sub td{background:var(--verde) !important;color:var(--ouro);font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px}
+  tr.ref td{color:var(--mute);font-style:italic;background:#f6f2e6 !important}
+  tr.nul td{color:#aaa;font-size:12.5px}
+  .gancho{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11.5px;color:var(--verde2);margin-top:3px}
+  .mk{font-family:'Trebuchet MS',sans-serif;font-size:10px;font-weight:bold;border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+  .mk3{background:#c8862b;color:#fff}
+  .mk2{background:#e9d36a;color:#4a3c08}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin:10px 0 4px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .sw{width:16px;height:12px;border-radius:3px;display:inline-block;border:1px solid #d9cfae}
+
+  details.fam{background:var(--card);border:1px solid var(--linha);border-left:6px solid var(--verde2);border-radius:12px;margin:14px 0;box-shadow:var(--sombra);scroll-margin-top:64px}
+  details.fam > summary{cursor:pointer;list-style:none;padding:14px 18px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  details.fam > summary::-webkit-details-marker{display:none}
+  details.fam > summary::before{content:"▸";color:var(--ouro);font-size:15px;transition:transform .15s}
+  details.fam[open] > summary::before{transform:rotate(90deg)}
+  .fam-faixa{font-family:'Courier New',monospace;font-weight:bold;color:var(--ouro);background:var(--verde);border-radius:6px;padding:2px 9px;font-size:13.5px}
+  .fam-tit{font-size:18px;color:var(--verde)}
+  .fam-en{font-style:italic;color:var(--mute);font-size:14px}
+  .fam-n{margin-left:auto;font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute)}
+  .fam-body{padding:0 18px 16px}
+  .fam-body .lede2{font-size:14.5px;color:#4a5f59;margin:0 0 6px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+  .chips a,.chips button{font-family:'Trebuchet MS',sans-serif;font-size:12px;font-weight:bold;text-decoration:none;color:var(--verde2);background:#fff;border:1.5px solid var(--verde2);border-radius:16px;padding:5px 11px;cursor:pointer}
+  .chips button.on{background:var(--verde2);color:#fff}
+
+  .map td.in{background:#e3f2ea !important}
+  .map td.out{color:#9a917a}
+  .map td.st{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;text-align:center;white-space:nowrap}
+
+  /* ---- flashcards ---- */
+  .fcwrap{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;box-shadow:var(--sombra)}
+  .fcbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;font-family:'Trebuchet MS',sans-serif;font-size:13px}
+  .fcbar select{font-family:'Trebuchet MS',sans-serif;font-size:13px;padding:7px 10px;border:1.5px solid #d8cfb4;border-radius:8px;background:#fff;color:var(--tinta);max-width:100%}
+  .fcbar button,.fcnav button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
+  .fcnav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  .fcnav button.ok{border-color:var(--verde-ok);color:var(--verde-ok)}
+  .fcnav button.no{border-color:var(--vermelho);color:var(--vermelho)}
+  .fc{perspective:1100px;height:230px;cursor:pointer;max-width:520px;margin:0 auto}
+  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fc.flip .fc-in{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
+  .fc-front{background:var(--verde);color:var(--creme)}
+  .fc-front .big{font-family:'Courier New',monospace;font-size:44px;font-weight:bold;color:var(--ouro);line-height:1.1}
+  .fc-front .ph{font-family:'Trebuchet MS',sans-serif;font-size:14px;color:#cfe3df;margin-top:8px}
+  .fc-front .fm{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:#a9c8c1;margin-top:10px;letter-spacing:.08em;text-transform:uppercase}
+  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:15px;transform:rotateY(180deg);line-height:1.45}
+  .fc-back .en{font-style:italic;color:var(--verde2);font-size:14px;margin-bottom:6px}
+  .fc-back .gk{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--verde2);margin-top:8px}
+  .fcinfo{text-align:center;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:var(--mute);margin-top:8px}
+
+  /* ---- quiz ---- */
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .blk{font-family:'Trebuchet MS',sans-serif;font-size:11px;font-weight:bold;letter-spacing:.08em;text-transform:uppercase;color:var(--ouro);background:var(--verde);display:inline-block;padding:2px 9px;border-radius:4px;margin-bottom:8px}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px;white-space:pre-line}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute);gap:8px;flex-wrap:wrap}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .quiz button.restart{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:#fff;color:var(--verde2);border:1.5px solid var(--verde2);border-radius:20px;padding:7px 16px;cursor:pointer}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+  #result{display:none}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px} td.fon{display:none} th.fon{display:none} .fc-front .big{font-size:36px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo VI · Bloco C — CIS</p>
+    <h1>Código Internacional de Sinais — <em>todos os códigos</em> do recorte</h1>
+    <p class="sub">O mapa do alfabeto, os padrões que permitem deduzir os complementos, cada grupo cobrável com a prioridade marcada, e o treino: flashcards por família e simulado no formato da banca.</p>
+    <div class="src"><b>Fonte:</b> IMO, <em>International Code of Signals</em>, London: IMO, 2005 — recorte do Anexo 2-B (Caps. I–V, VII, VIII, X, XI, XII; Seção Geral: Abandon, Assistance, Distress, Search and Rescue, Survivors, Collision, Fire–explosion, Towing–tugs, Canal–channel–fairway, Dangers to navigation, Manoeuvres, Pilot; Seção Médica Cap. I; Apêndices 1, 2 e 4). Textos em português conforme a edição DPC (reedição 1986 do código de 1969). Questões reais: PSCPP 2006-Q70, 2008-Q1, 2011-Q12, 2011-Q51, 2012-Q12.</div>
+    <div class="stat">
+      <div><b id="stCod">0</b>grupos no recorte</div>
+      <div><b id="stP3">0</b>já cobrados</div>
+      <div><b id="stP2">0</b>alto potencial</div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#recorte">Recorte</a>
+    <a href="#mapa">Mapa A–Z ▶</a>
+    <a href="#padroes">Padrões ▶</a>
+    <a href="#letras">Letra única ▶</a>
+    <a href="#xii">Cap. XII</a>
+    <a href="#regras">Regras e procedurais</a>
+    <a href="#apendices">Apêndices 1·2·4</a>
+    <a href="#geral">Seção Geral ▶</a>
+    <a href="#medica">Médica</a>
+    <a href="#confusoes">Pares traiçoeiros</a>
+    <a href="#banca">Já cobrado</a>
+    <a href="#flash">Flashcards</a>
+    <a href="#quiz">Simulado</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="related">
+  📎 Bloco C do Módulo VI (item 3 do Anexo 2-A). Os sinais sonoros de manobra da COLREG (Regras 32–37) e luzes e marcas são de <strong>Normas e COLREG</strong>; aqui fica só o CIS. As frases de rádio em linguagem clara são do <strong>SMCP</strong> (Bloco A).
+</div>
+
+<div class="legend">
+  <span><i class="sw" style="background:#fbe6bd"></i><b>Âmbar</b> — já cobrado pela banca (ou é o código de Ap. 4 que caiu)</span>
+  <span><i class="sw" style="background:#fff7cf"></i><b>Amarelo</b> — alto potencial</span>
+  <span><i class="sw" style="background:#fff"></i>Sem destaque — reconhecer pelo padrão</span>
+</div>
+
+<!-- ===== RECORTE ===== -->
+<section class="bloco" id="recorte">
+  <h2 class="sec"><span class="n">ANEXO 2-B</span> O recorte exato — o que entra e o que fica de fora</h2>
+  <p class="lede">O edital lista capítulos, rubricas e apêndices um a um. O que não está na lista está fora.</p>
+
+  <div class="tblwrap"><table>
+    <tr><th>Parte do CIS</th><th>Dentro do recorte</th><th>Fora</th></tr>
+    <tr><td><strong>Capítulos</strong></td><td>I Explicações · II Definições · III Métodos · IV Instruções gerais · V Bandeiras · VII Acústicos · VIII Radiotelefonia · X Morse, tabelas fonéticas e procedurais · XI Letra única · XII Letra única com complementos</td><td>VI Lampejos · IX Morse com braços · XIII Quebra-gelo · XIV Transportes médicos</td></tr>
+    <tr><td><strong>Seção Geral</strong></td><td>Abandono · Assistência · Perigo · Busca e salvamento · Sobreviventes · Colisão · Incêndio–explosão · Reboque · Canal · Perigos à navegação · Manobras (todas) · Prático</td><td>Todas as demais rubricas (ver o mapa)</td></tr>
+    <tr><td><strong>Seção Médica</strong></td><td>Instruções + Cap. 1 — Pedido de assistência médica (MAA–MAF)</td><td>Caps. 2 a 14 (prioridade baixa)</td></tr>
+    <tr><td><strong>Apêndices</strong></td><td>1 Sinais de perigo · 2 Tabela de bandeiras · 4 Procedimentos radiotelefônicos</td><td>3 Tabela de sinais de salvamento</td></tr>
+  </table></div>
+
+  <div class="box trap">
+    <h4>Edição do texto <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>O edital cita a edição <strong>IMO 2005, em inglês</strong>. O arquivo-base deste projeto é a <strong>edição DPC em português</strong> (reedição de 1986 do código de 1969). Os grupos e os significados coincidem; os textos em português abaixo seguem a DPC. Os sinais de <strong>letra única</strong> estão também no original em inglês. Onde a tradução DPC é ambígua, há nota <span class="tag t-duvida">DÚVIDA</span>.</p>
+  </div>
+</section>
+
+<!-- ===== MAPA ===== -->
+<section class="bloco" id="mapa">
+  <h2 class="sec"><span class="n">A → Z</span> O alfabeto é um mapa de assuntos</h2>
+  <p class="lede">A primeira letra do grupo de duas letras diz o assunto. Saber o "bairro" já elimina metade das alternativas. Em verde, o que está no recorte.</p>
+
+  <div class="tblwrap"><table class="map">
+    <tr><th>Faixa</th><th>Rubrica (pt)</th><th>Rubric (en)</th><th class="center">Recorte</th></tr>
+    <tbody id="mapBody"></tbody>
+  </table></div>
+
+  <div class="box key">
+    <h4>O seu exemplo da letra K <span class="tag t-decorar">DECORAR</span></h4>
+    <p>A letra K começa em <strong>água aberta / camisa de colisão</strong> (KA–KE) e muda para <strong>reboque</strong> a partir de <span class="cod">KF</span> (solicito rebocador). Só a segunda metade está no recorte. O mesmo acontece em várias letras: o <strong>H</strong> começa em busca e salvamento (HA–HE), passa por sobreviventes (HF–HU) e termina em colisão (HV–HZ); o <strong>M</strong> começa no canal (MA–MC), passa por rumo (fora) e entra em perigos à navegação (MJ–NJ).</p>
+  </div>
+</section>
+
+<!-- ===== PADRÕES ===== -->
+<section class="bloco" id="padroes">
+  <h2 class="sec"><span class="n">PADRÕES</span> Como deduzir o que não deu para decorar</h2>
+  <p class="lede">A prova é de múltipla escolha: o objetivo é reconhecer e eliminar. Estes padrões cobrem a maioria dos complementos.</p>
+
+  <div class="box key">
+    <h4>1 · O espelho adiante / atrás (+5 letras) <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="tblwrap"><table>
+      <tr><th>Adiante</th><th>Atrás</th><th>Significado</th></tr>
+      <tr><td class="cod">QD</td><td class="cod">QI</td><td>Estou dando adiante / atrás</td></tr>
+      <tr><td class="cod">QE</td><td class="cod">QJ</td><td>Tenho seguimento para vante / para ré</td></tr>
+      <tr><td class="cod">QF</td><td class="cod">QK</td><td>Não posso dar adiante / atrás</td></tr>
+      <tr><td class="cod">QG</td><td class="cod">QL</td><td>Dê adiante / atrás (ordem)</td></tr>
+      <tr><td class="cod">QH</td><td class="cod">QM</td><td>Não continue dando adiante / atrás</td></tr>
+    </table></div>
+    <p>Os complementos também espelham: <span class="cod">QD1–4</span> ↔ <span class="cod">QI1–4</span> e <span class="cod">QG1–4</span> ↔ <span class="cod">QL1–4</span> (1 devagar · 2 toda força · 3 continue · 4 mantenha). Na sequência D–E–F–G–H: <em>estou fazendo → tenho seguimento → não posso → faça → não continue</em>.</p>
+  </div>
+
+  <div class="box key">
+    <h4>2 · Boreste vem antes de bombordo <span class="tag t-decorar">DECORAR</span></h4>
+    <p>É a mesma ordem das letras únicas <strong>E</strong> (guinando para boreste) e <strong>I</strong> (para bombordo). No código: <span class="cod">NI</span>/<span class="cod">NJ</span> banda · <span class="cod">MB1</span>/<span class="cod">MB2</span> manter-se no canal · <span class="cod">MY4</span>/<span class="cod">MY5</span> perigoso guinar · <span class="cod">QN</span>/<span class="cod">QN1</span> atraque a meu bordo · <span class="cod">UJ</span>/<span class="cod">UJ1</span> sombra para a lancha do prático · <span class="cod">LG3</span>/<span class="cod">LG5</span> largar cabo · <span class="cod">MS1</span>/<span class="cod">MS2</span>. Quando aparecem proa e popa, a ordem é <strong>boreste → bombordo → proa → popa</strong> (<span class="cod">MS1–MS4</span>).</p>
+  </div>
+
+  <div class="box key">
+    <h4>3 · A ordem e logo em seguida a confirmação</h4>
+    <p>No reboque, o comando vem e a resposta vem no complemento seguinte: <span class="cod">KQ</span> prepare-se para ser rebocado → <span class="cod">KQ1</span> estou pronto · <span class="cod">KX</span>/<span class="cod">KX1</span> · <span class="cod">KZ</span>/<span class="cod">KZ1</span> · <span class="cod">LB</span>/<span class="cod">LB1</span> · <span class="cod">LG3</span>/<span class="cod">LG4</span> · <span class="cod">RL</span> pare as máquinas → <span class="cod">RM</span> minhas máquinas estão paradas. <strong>Exceção:</strong> <span class="cod">LI</span>/<span class="cod">LJ</span> — "estou aumentando / diminuindo" vem antes da ordem (<span class="cod">LI1</span> aumente, <span class="cod">LJ1</span> reduza).</p>
+  </div>
+
+  <div class="box key">
+    <h4>4 · Onde está a pergunta</h4>
+    <p>Família curta (base + 1): o <strong>complemento 1 tende a ser a pergunta</strong> — <span class="cod">AF1</span>, <span class="cod">EF1</span>, <span class="cod">EL1</span>, <span class="cod">FE1</span>, <span class="cod">FY1</span>, <span class="cod">IY1</span>, <span class="cod">JC1</span>, <span class="cod">KM1</span>, <span class="cod">NH1</span>, <span class="cod">UK1</span>. Família longa: a pergunta fica <strong>no fim</strong> — <span class="cod">HM4</span>, <span class="cod">HY3–6</span>, <span class="cod">IT3</span>, <span class="cod">KR3</span>, <span class="cod">LX3–4</span>, <span class="cod">LZ2–4</span>, <span class="cod">QS5</span>. É tendência, não lei: confira na tabela.</p>
+  </div>
+
+  <div class="box key">
+    <h4>5 · Sequências com lógica própria</h4>
+    <p><strong>Incêndio, do controle ao fim:</strong> <span class="cod">IW</span> sob controle → <span class="cod">IX</span> aumentando → <span class="cod">IY</span> posso controlar → <span class="cod">IZ</span> extinto (Z, a última letra, fecha o incêndio).<br>
+    <strong>Colisão:</strong> <span class="cod">HV</span> você colidiu? → <span class="cod">HW</span> colidi com… (1 navio-farol · 2 submarino · 3 desconhecido · 4 objeto submerso · 5 boia · 6 iceberg · 7 gelo) → <span class="cod">HX</span> sofreu avarias? → matriz 2×2: 1 sérias acima · 2 sérias abaixo · 3 leves acima · 4 leves abaixo (primeiro a gravidade, depois a posição).<br>
+    <strong>Resgatei:</strong> <span class="cod">HA</span> feridos · <span class="cod">HB</span> sobreviventes · <span class="cod">HC</span> corpos (A-B-C).<br>
+    <strong>Prático:</strong> <span class="cod">UA → UK</span> conta a praticagem em ordem: chegará · paire/fundeie até ele chegar · há prático? · onde pego? · siga a lancha · governe na esteira · pode me guiar? · mar agitado, não sai · faça sombra · lancha na marcação.<br>
+    <strong>Pares sim/não lado a lado:</strong> <span class="cod">KM</span>/<span class="cod">KN</span> posso / não posso rebocar · <span class="cod">LX</span>/<span class="cod">LY</span> canal livre / não livre · <span class="cod">JB</span>/<span class="cod">JC</span> há / não há perigo de explosão · <span class="cod">AG</span>/<span class="cod">AH</span> deve / não deve abandonar.</p>
+  </div>
+
+  <div class="box key">
+    <h4>6 · Gêmeos: letra única ↔ grupo de duas letras <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="tblwrap"><table>
+      <tr><th>Letra</th><th>Gêmeo</th><th>Significado comum</th></tr>
+      <tr><td class="cod">O</td><td class="cod">GW</td><td>Homem ao mar</td></tr>
+      <tr><td class="cod">V</td><td class="cod">CB</td><td>Solicito auxílio (CB = imediato)</td></tr>
+      <tr><td class="cod">W</td><td class="cod">MAA</td><td>Solicito assistência médica (MAA = urgente)</td></tr>
+      <tr><td class="cod">Z</td><td class="cod">KF</td><td>Solicito rebocador</td></tr>
+      <tr><td class="cod">L</td><td class="cod">SO</td><td>Pare imediatamente seu navio</td></tr>
+      <tr><td class="cod">M</td><td class="cod">SP1</td><td>Meu navio está parado e sem seguimento</td></tr>
+      <tr><td class="cod">S</td><td class="cod">QI1</td><td>Minhas máquinas estão dando atrás</td></tr>
+      <tr><td class="cod">D</td><td class="cod">RU</td><td>Mantenha-se afastado; manobro com dificuldade</td></tr>
+      <tr><td class="cod">X</td><td class="cod">RT</td><td>Suspenda o que está fazendo e observe meus sinais</td></tr>
+      <tr><td class="cod">Y</td><td class="cod">RB</td><td>Estou arrastando meu ferro</td></tr>
+      <tr><td class="cod">J</td><td class="cod">IT1</td><td>Incêndio a bordo e carga perigosa; mantenha-se afastado</td></tr>
+      <tr><td class="cod">U</td><td class="cod">NF</td><td>Você se dirige para um perigo</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===== LETRA ÚNICA ===== -->
+<section class="bloco" id="letras">
+  <h2 class="sec"><span class="n">CAP. XI</span> Sinais de uma letra <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h2>
+  <p class="lede">O formato mais cobrado, sozinho ou junto com luzes e marcas da COLREG (2011-Q12, 2012-Q12). Podem ser transmitidos por qualquer método. Os marcados com * só podem ser feitos por som conforme as Regras 34 e 35 da COLREG.</p>
+  <div class="tblwrap"><table>
+    <tr><th>Letra</th><th>Original (IMO, en)</th><th>Tradução (DPC)</th><th>Gancho</th></tr>
+    <tbody id="letrasBody"></tbody>
+  </table></div>
+  <div class="box key">
+    <h4>Ganchos sonoros — Morse e COLREG</h4>
+    <p><strong>E</strong> (·) · <strong>I</strong> (··) · <strong>S</strong> (···) têm 1, 2 e 3 pontos em Morse — os mesmos 1, 2 e 3 apitos curtos da COLREG: guinando para boreste, para bombordo, máquinas atrás. Os sinais <strong>K</strong> e <strong>S</strong> também são sinais de desembarque para embarcações miúdas em perigo (SOLAS V). <strong>R</strong> é sinal de procedimento ("recebido").</p>
+  </div>
+  <div class="box trap">
+    <h4>Restrições de uso <span class="tag t-conflito">BANCA</span></h4>
+    <p>Os modificadores <strong>C</strong>, <strong>N/NO</strong> e <strong>RQ</strong> transformam um grupo em afirmativo, negativo ou pergunta (vão <em>depois</em> do sinal principal: <span class="cod">CY N</span>, <span class="cod">CW RQ</span>) — mas <strong>não podem ser usados com sinais de uma só letra</strong>. Por voz ou rádio, o negativo é <strong>NO</strong> (pronuncia-se "nô"), nunca N.</p>
+  </div>
+</section>
+
+<!-- ===== CAP XII ===== -->
+<section class="bloco" id="xii">
+  <h2 class="sec"><span class="n">CAP. XII</span> Letra única com complementos <span class="tag t-decorar">DECORAR</span></h2>
+  <p class="lede">Caiu na montagem de içada de 2011-Q51 (L2233S e G4141W). O acrônimo em inglês fecha a lista.</p>
+  <div class="tblwrap"><table>
+    <tr><th>Letra</th><th>Seguida de</th><th>Indica</th><th>Gancho (en)</th></tr>
+    <tr class="p3"><td class="cod">A</td><td>3 algarismos</td><td>Azimute ou marcação (verdadeira, 000–359)</td><td><b>A</b>zimuth</td></tr>
+    <tr class="p2"><td class="cod">C</td><td>3 algarismos</td><td>Rumo (verdadeiro)</td><td><b>C</b>ourse</td></tr>
+    <tr><td class="cod">D</td><td>2, 4 ou 6 algarismos</td><td>Data (dia · mês · ano)</td><td><b>D</b>ate</td></tr>
+    <tr class="p3"><td class="cod">G</td><td>4 ou 5 algarismos</td><td>Longitude (3 graus + 2 minutos; E/W depois)</td><td><b>G</b>reenwich</td></tr>
+    <tr class="p2"><td class="cod">K</td><td>1 algarismo</td><td>Desejo comunicar-me por… (Tabela I)</td><td><b>K</b>all</td></tr>
+    <tr class="p3"><td class="cod">L</td><td>4 algarismos</td><td>Latitude (2 graus + 2 minutos; N/S depois)</td><td><b>L</b>atitude</td></tr>
+    <tr class="p3"><td class="cod">R</td><td>1 ou mais algarismos</td><td>Distância em milhas náuticas</td><td><b>R</b>ange</td></tr>
+    <tr class="p2"><td class="cod">S</td><td>1 ou mais algarismos</td><td>Velocidade em nós</td><td><b>S</b>peed</td></tr>
+    <tr class="p2"><td class="cod">T</td><td>4 algarismos</td><td>Hora local</td><td><b>T</b>ime</td></tr>
+    <tr class="p2"><td class="cod">V</td><td>1 ou mais algarismos</td><td>Velocidade em km/h</td><td><b>V</b>elocity</td></tr>
+    <tr class="p2"><td class="cod">Z</td><td>4 algarismos</td><td>Hora UTC</td><td><b>Z</b>ulu</td></tr>
+  </table></div>
+  <div class="box key">
+    <h4>Tabela I — complemento de K, YO–YT, ZF, ZI–ZK</h4>
+    <p><strong>1</strong> Morse por bandeirolas ou braços · <strong>2</strong> alto-falante (megafone) · <strong>3</strong> Morse por lâmpada · <strong>4</strong> sinais sonoros. Ex.: <span class="cod">K4</span> = desejo comunicar-me por sinais sonoros.</p>
+    <h4>Tabela II — complemento de CC, CD (o que solicito)</h4>
+    <p><strong>0</strong> água · <strong>1</strong> provisões · <strong>2</strong> combustível · <strong>3</strong> bombas · <strong>4</strong> combate a incêndio · <strong>5</strong> assistência médica · <strong>6</strong> reboque · <strong>7</strong> embarcação de sobrevivência · <strong>8</strong> navio para ficar à espera · <strong>9</strong> quebra-gelo. Ex.: <span class="cod">CD4</span> = solicito aparelhagem de combate a incêndio.</p>
+    <h4>Tabela III — direções (MJ, MT, NB e outros)</h4>
+    <p><strong>0</strong> desconhecida/calma · <strong>1</strong> NE · <strong>2</strong> E · <strong>3</strong> SE · <strong>4</strong> S · <strong>5</strong> SW · <strong>6</strong> W · <strong>7</strong> NW · <strong>8</strong> N · <strong>9</strong> todas/variável. Gancho: gira no sentido horário a partir de NE e termina no Norte (8). <span class="tag t-duvida">DÚVIDA</span> A edição DPC traz "7 Nordeste" — é erro de impressão; pela sequência, 7 = Noroeste.</p>
+  </div>
+</section>
+
+<!-- ===== REGRAS ===== -->
+<section class="bloco" id="regras">
+  <h2 class="sec"><span class="n">CAPS. I–V · VII · VIII · X</span> Regras de uso e sinais de procedimento</h2>
+  <p class="lede">Explicações, definições, métodos, instruções gerais, bandeiras, sinais acústicos, radiotelefonia e tabelas.</p>
+
+  <div class="box key">
+    <h4>Cap. I — Estrutura do código <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Propósito: comunicação em situações de <strong>segurança da navegação e da vida humana</strong>, sobretudo com <strong>dificuldade de idioma</strong>. Três tipos de sinal: <strong>uma letra</strong> (assuntos urgentes, importantes ou muito comuns) · <strong>duas letras</strong> (Seção Geral) · <strong>três letras começando por M</strong> (Seção Médica). Princípio básico: <span class="hl">cada sinal tem significado completo</span>. Complementos numéricos expressam: (1) variações do significado (CP → CP1), (2) perguntas sobre o mesmo assunto (DY → DY4), (3) respostas (HX → HX1), (4) informações suplementares (IN → IN1). Em vigor desde 1969.</p>
+  </div>
+
+  <div class="box">
+    <h4>Cap. II — Definições</h4>
+    <p><strong>Sinalização visual</strong>: qualquer método cuja transmissão é visível · <strong>sonora</strong>: Morse por sereia, apito, sino ou aparelho sonoro · <strong>Origem</strong>: autoridade que ordena o sinal · <strong>Indicativo</strong>: letras e algarismos que identificam a estação · <strong>Estação de origem / transmissora / de destino / receptora</strong> · <strong>Grupo</strong>: letras e/ou algarismos que formam um sinal · <strong>Içada</strong>: um ou mais grupos numa só adriça · <span class="hl">A MEIO</span>: bandeira de cima a cerca de metade da adriça · <span class="hl">ATOPETADO</span>: na maior altura possível · <strong>Adriça separadora</strong>: cerca de 2 m (6 pés), separa grupos.</p>
+  </div>
+
+  <div class="box">
+    <h4>Cap. III — Sete métodos de sinalização</h4>
+    <p>(1) bandeiras · (2) lampejos (Morse) · (3) sonora (Morse) · (4) voz por megafone · (5) radiotelegrafia · (6) radiotelefonia · (7) bandeirolas ou braços (Morse). Um <strong>regimento</strong> de bandeiras = <span class="hl">26 bandeiras + 10 galhardetes numerais + 3 substitutas + 1 galhardete do código</span> (40 peças). Morse: ponto = 1 unidade, traço = 3; intervalo entre elementos = 1, entre letras = 3, entre palavras = 7. Velocidade padrão de lampejos: 40 letras/min.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Cap. IV — Instruções gerais <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Mensagens entre navios são de <strong>Comandante para Comandante</strong>, salvo indicação. Nomes de navios e locais são <strong>soletrados</strong> (RV GIBRALTAR). Números: por bandeiras, com galhardetes numerais; por lampejo/som, com algarismos Morse; por voz/rádio, com as palavras da tabela fonética. <strong>Vírgula decimal</strong>: bandeiras → galhardete do código no lugar da vírgula · lampejo/som → <span class="cod">AAA</span> · voz → <strong>DECIMAL</strong>. Profundidade/altura: algarismos seguidos de <strong>F</strong> (pés) ou <strong>M</strong> (metros). Marcações e rumos são <strong>verdadeiros</strong> salvo indicação. Data <span class="cod">D1504</span> = 15 de abril; <span class="cod">D181083</span> = 18/10/1983. Código local: precedido de <span class="cod">YV1</span>.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Cap. V — Bandeiras: chamar, responder, completar <span class="tag t-banca">BANCA</span></h4>
+    <p>Uma içada de cada vez; cada içada fica no ar até ser reconhecida. Indicativo do destinatário içado junto com o sinal; sem indicativo, o sinal vale para todos no campo visual. Desconhecendo o indicativo: <span class="cod">VF</span> (ice seu indicativo) ou <span class="cod">CS</span> (qual o nome ou indicativo?).<br>
+    <strong>Receptora</strong>: iça o <strong>galhardete de resposta a meio</strong> ao avistar o sinal e <strong>atopeta</strong> ao entendê-lo; volta a meio quando a transmissora arria, e assim por diante.<br>
+    <strong>Transmissora</strong>: completa o sinal içando o <strong>galhardete de resposta isolado</strong> após a última içada.<br>
+    Se não distinguir: mantém o galhardete <strong>a meio</strong>. Se distinguir mas não entender: <span class="cod">ZQ</span> (sinal parece codificado incorretamente) ou <span class="cod">ZL</span> (recebi, mas não compreendi). Soletrar em linguagem clara: <span class="cod">YZ</span>. Navio de guerra que quer falar com mercante: iça o <strong>galhardete do código</strong> bem visível durante toda a comunicação.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Cap. V — Substitutas <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>A <strong>1ª substituta</strong> repete a <strong>1ª bandeira da mesma classe</strong> (letras ou numerais) que a precede, contando de cima para baixo; a 2ª repete a 2ª; a 3ª repete a 3ª. <span class="hl">Cada substituta só uma vez por grupo.</span> O galhardete de resposta usado como vírgula decimal <strong>não conta</strong>.</p>
+    <div class="tblwrap"><table>
+      <tr><th>Sinal</th><th>Içada (de cima para baixo)</th><th>Por quê</th></tr>
+      <tr><td class="cod">VV</td><td>V · 1ª subst.</td><td>repete a 1ª letra</td></tr>
+      <tr><td class="cod">1100</td><td>1 · 1ª subst. · 0 · 3ª subst.</td><td>o 2º "1" repete o 1º numeral; o 2º "0" repete o 3º numeral</td></tr>
+      <tr><td class="cod">L2330</td><td>L · 2 · 3 · 2ª subst. · 0</td><td>a substituta segue um numeral: repete o 2º <em>numeral</em> (3), não conta o L</td></tr>
+      <tr><td class="cod">1,11</td><td>1 · galh. resposta · 1ª subst. · 2ª subst.</td><td>a vírgula é invisível na contagem</td></tr>
+      <tr class="p3"><td class="cod">CI L2233S G4141W</td><td>C · I ‖ L · 2 · 1ª · 3 · 3ª · S ‖ G · 4 · 1 · 1ª · 2ª · W</td><td>2011-Q51 — gabarito (e). Cada grupo conta as substitutas do zero.</td></tr>
+    </table></div>
+  </div>
+
+  <div class="box">
+    <h4>Cap. VII — Sinais acústicos</h4>
+    <p>São lentos e podem confundir; usar o mínimo indispensável. Sinais que não sejam de uma letra: só em emergência e nunca em águas de tráfego intenso. Executar pausadamente, repetir com intervalo longo, sem confundir letra única com grupo de duas. Os sinais de uma letra com <strong>*</strong> só por som conforme a COLREG.</p>
+  </div>
+
+  <div class="box key">
+    <h4>Cap. VIII — Radiotelefonia <span class="tag t-banca">BANCA</span></h4>
+    <p><strong>Chamada:</strong> indicativo/nome da estação chamada (até 3×) · <span class="cod">DE</span> (Delta Echo) · indicativo/nome da que chama (até 3×). <strong>Resposta:</strong> quem chamou (até 3×) · DE · quem foi chamado (até 3×). <strong>Chamada geral:</strong> <span class="cod">CQ</span> (Charlie Quebec), até 3×. Mensagem codificada: palavra <strong>INTERCO</strong>; palavras em linguagem clara no meio: <span class="cod">YZ</span>. Não pode aceitar o tráfego: <span class="cod">AS</span> (+ minutos de espera). Recebido: <span class="cod">R</span>. Repetir: <span class="cod">RPT</span> + <span class="cod">AA</span> tudo depois · <span class="cod">AB</span> tudo antes · <span class="cod">BN</span> tudo entre · <span class="cod">WA</span> palavra depois · <span class="cod">WB</span> palavra antes. Fim: <span class="cod">AR</span>.</p>
+  </div>
+
+  <h3>Cap. X — Tabelas fonéticas <span class="tag t-decorar">DECORAR</span></h3>
+  <div class="tblwrap"><table>
+    <tr><th>Letra</th><th>Palavra</th><th>Letra</th><th>Palavra</th><th>Algarismo</th><th>Palavra-código</th></tr>
+    <tbody id="fonBody"></tbody>
+  </table></div>
+  <p style="font-size:13.5px;color:var(--mute)">Cada sílaba com a mesma ênfase. A segunda parte de cada palavra-código (ZERO, ONE, TWO…) é a usada no Serviço Móvel Aeronáutico. Vírgula = <strong>DECIMAL</strong>; ponto = <strong>STOP</strong>.</p>
+
+  <h3>Cap. X — Sinais de procedimento <span class="tag t-decorar">DECORAR</span></h3>
+  <div class="tblwrap"><table>
+    <tr><th>Sinal</th><th>Método</th><th>Significado</th></tr>
+    <tbody id="procBody"></tbody>
+  </table></div>
+</section>
+
+<!-- ===== APÊNDICES ===== -->
+<section class="bloco" id="apendices">
+  <h2 class="sec"><span class="n">AP. 1 · 2 · 4</span> Sinais de perigo, bandeiras e procedimentos radiotelefônicos</h2>
+  <p class="lede">O Apêndice 3 (tabela de sinais de salvamento) está fora do recorte.</p>
+
+  <div class="box key">
+    <h4>Apêndice 1 — Sinais de perigo (COLREG Anexo IV) <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p>Usados juntos ou separados, indicam perigo e necessidade de auxílio:</p>
+    <p>(a) tiro de canhão ou sinal explosivo a intervalos de ~1 min · (b) som contínuo de qualquer aparelho de cerração · (c) foguetes ou granadas com estrelas vermelhas, uma de cada vez, a pequenos intervalos · (d) <strong>SOS</strong> (···−−−···) por qualquer método · (e) <strong>MAYDAY</strong> por radiotelefonia · (f) <span class="hl-amb"><strong>NC</strong> do CIS</span> · (g) bandeira quadrada com esfera (ou similar) acima ou abaixo · (h) chamas a bordo (barril de óleo, alcatrão) · (i) foguete com paraquedas ou facho de mão vermelho · (j) <strong>fumaça laranja</strong> · (k) braços estendidos levantados e baixados lenta e repetidamente · (l) alarme radiotelegráfico · (m) alarme radiotelefônico · (n) radiobalizas indicadoras de posição.</p>
+    <p style="font-size:13.5px">Alarme radiotelefônico: dois tons alternados, <strong>2200 Hz e 1300 Hz</strong>, por 30 s a 1 min. Alarme radiotelegráfico: 12 traços de 4 s com intervalo de 1 s. Também chamam atenção (MERSAR): quadrado e círculo pretos sobre lona laranja (identificação aérea) e corante.</p>
+  </div>
+
+  <h3>Apêndice 2 — Tabela de bandeiras</h3>
+  <div class="tblwrap"><table>
+    <tr><th>Bandeira</th><th>Descrição</th><th>Bandeira</th><th>Descrição</th></tr>
+    <tbody id="bandBody"></tbody>
+  </table></div>
+  <p style="font-size:13.5px;color:var(--mute)">O regimento completa-se com 10 galhardetes numerais (0–9), 3 substitutas (cornetas) e o galhardete do código/de resposta. <span class="tag t-duvida">DÚVIDA</span> As cores dos galhardetes e substitutas não estão legíveis no arquivo-base; conferir na edição IMO.</p>
+
+  <div class="box key">
+    <h4>Apêndice 4 — Procedimentos radiotelefônicos <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
+    <p><strong>MAYDAY</strong> (socorro): navio, aeronave ou outro veículo ameaçado de <strong>perigo grave e iminente</strong>, requer auxílio imediato · <strong>PAN PAN</strong> (urgência): mensagem muito urgente sobre a segurança de navio, aeronave, veículo ou pessoa · <strong>SÉCURITÉ</strong> (segurança): aviso à navegação ou meteorológico importante. Ao ouvir qualquer um: atenção e chamar o comandante ou oficial de serviço.</p>
+    <p><strong>Pedido de socorro:</strong> (1) se possível, <strong>sinal de alarme</strong> (dois tons) por 30 s a 1 min — sem atrasar a mensagem; (2) <strong>chamada de perigo</strong>: MAYDAY ×3 + nome/indicativo ×3; (3) <strong>mensagem de socorro</strong>: MAYDAY + nome/indicativo · <strong>posição</strong> · <strong>natureza</strong> do perigo · auxílio desejado e outras informações. Linguagem clara sempre que possível; com dificuldade de idioma, <strong>INTERCO</strong> e as tabelas abaixo.</p>
+    <p><strong>Tabela 2 — Posição:</strong> marcação e distância de um ponto de referência → <span class="cod">A</span> + 3 algarismos (marcação <strong>verdadeira</strong> do navio, tomada <em>do</em> ponto de referência) + nome do ponto + <span class="cod">R</span> + distância em milhas · ou latitude e longitude → <span class="cod">L</span> + 4 algarismos + N/S, <span class="cod">G</span> + 5 algarismos + E/W.</p>
+  </div>
+
+  <div class="tblwrap"><table>
+    <tr><th>Código</th><th>Palavras a transmitir</th><th>Significado</th></tr>
+    <tr class="p3"><td class="cod">AE</td><td>Alfa Echo</td><td>Devo abandonar meu navio</td></tr>
+    <tr class="p3"><td class="cod">BF</td><td>Bravo Foxtrot</td><td>A aeronave fez amerissagem forçada na posição indicada e solicita auxílio imediato</td></tr>
+    <tr class="p3"><td class="cod">CB</td><td>Charlie Bravo</td><td>Solicito auxílio imediato</td></tr>
+    <tr class="p3"><td class="cod">CB6</td><td>Charlie Bravo Soxisix</td><td>Solicito auxílio imediato; estou com incêndio a bordo</td></tr>
+    <tr class="p3"><td class="cod">DX</td><td>Delta X-ray</td><td>Estou afundando</td></tr>
+    <tr class="p3"><td class="cod">HW</td><td>Hotel Whiskey</td><td>Colidi com embarcação de superfície</td></tr>
+    <tr class="sub"><td colspan="3">Resposta ao navio em perigo</td></tr>
+    <tr class="p3"><td class="cod">CP</td><td>Charlie Papa</td><td>Estou indo em seu auxílio</td></tr>
+    <tr class="p3"><td class="cod">ED</td><td>Echo Delta</td><td>Seus sinais de perigo estão entendidos</td></tr>
+    <tr class="p3"><td class="cod">EL</td><td>Echo Lima</td><td>Repita a posição do navio em perigo</td></tr>
+  </table></div>
+  <p style="font-size:13.5px;color:var(--mute)"><span class="cod">BF</span> e <span class="cod">DX</span> pertencem a rubricas fora do recorte da Seção Geral (aeronave; naufrágio), mas entram pelo Apêndice 4.</p>
+
+  <div class="box key">
+    <h4>2008-Q1 decodificada <span class="tag t-banca">BANCA</span></h4>
+    <p><em>"Mayday Mayday Mayday. This is Merchant Ship CINGAPURA ×3. Mayday Merchant Ship CINGAPURA <strong>Interco Alfa Terrathree Kartefour Pantafive Tambelan Romeo Bissotwo Unaone Charlie Bravo Soxisix</strong>"</em></p>
+    <p><span class="cod">A345</span> Tambelan = marcação verdadeira 345° de Tambelan · <span class="cod">R21</span> = 21 milhas · <span class="cod">CB6</span> = auxílio imediato, incêndio a bordo. Gabarito <strong>(a)</strong>: <em>in distress position 345 degrees Tambelan 21 miles. I require immediate assistance. I am on fire.</em> Distratores: 165° (recíproca), "I am sinking" (DX), "safety" e "Pan Pan" (nível de prioridade errado).</p>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO GERAL ===== -->
+<section class="bloco" id="geral">
+  <h2 class="sec"><span class="n">SEÇÃO GERAL</span> Todos os grupos de duas letras do recorte</h2>
+  <p class="lede">Doze rubricas, abertas por família. Linhas em itálico remetem a sinais de outra rubrica com o mesmo assunto. "Não tem significado" aparece em cinza: esses grupos existem e são distratores possíveis.</p>
+  <div class="chips" id="famChips"></div>
+  <div class="chips"><button onclick="abrirTodas(true)">Abrir todas</button><button onclick="abrirTodas(false)">Fechar todas</button></div>
+  <div id="famBox"></div>
+</section>
+
+<!-- ===== MÉDICA ===== -->
+<section class="bloco" id="medica">
+  <h2 class="sec"><span class="n">SEÇÃO MÉDICA</span> Instruções e Cap. 1 — Pedido de assistência médica</h2>
+  <p class="lede">Grupos de três letras começando por M. O recorte cobre só o Cap. 1 (MAA–MAF) e as instruções.</p>
+  <div class="box">
+    <h4>Instruções</h4>
+    <p>Pedir e dar orientação médica <strong>em linguagem clara sempre que possível</strong>; o código só com dificuldade de idioma. <span class="cod">C</span>, <span class="cod">N/NO</span> e <span class="cod">RQ</span> depois do grupo mudam o sentido (<span class="cod">MFE N</span> = o sangramento não é abundante; <span class="cod">MFE RQ</span> = é abundante?). Comandante descreve o caso nesta ordem: <strong>descrição do paciente → antecedentes → localização → sintomas gerais → sintomas específicos → diagnóstico</strong>. Cap. 1 pode ser usado com ou sem a descrição do caso; evolução depois do tratamento: Cap. 7.</p>
+  </div>
+  <div id="medBox"></div>
+</section>
+
+<!-- ===== CONFUSÕES ===== -->
+<section class="bloco" id="confusoes">
+  <h2 class="sec"><span class="n">DISTRATORES</span> Pares que a banca troca</h2>
+  <p class="lede">Distratores reais ou óbvios a partir das provas: grupos vizinhos da mesma família, ou de famílias com assunto parecido.</p>
+  <div class="tblwrap"><table>
+    <tr><th>Par</th><th>Diferença</th></tr>
+    <tr class="p3"><td class="cod">NC · CB · CC</td><td><b>NC</b> = estou em perigo e solicito auxílio imediato (é o sinal de perigo do Ap. 1) · <b>CB</b> = solicito auxílio imediato · <b>CC</b> = estou em perigo <em>na posição…</em> e solicito auxílio</td></tr>
+    <tr class="p3"><td class="cod">CI · JF</td><td><b>CI</b> = o navio encalhado na posição… necessita auxílio (Assistência — no recorte) · <b>JF</b> = estou encalhado (Encalhe — fora). Distrator de 2011-Q51</td></tr>
+    <tr class="p3"><td class="cod">ED · EL · EF</td><td><b>ED</b> sinais de perigo entendidos · <b>EL</b> repita a posição · <b>EF</b> o MAYDAY foi cancelado</td></tr>
+    <tr class="p3"><td class="cod">CP · CR · FE</td><td><b>CP</b> estou indo em seu auxílio · <b>CR</b> seguindo em auxílio do navio em perigo <em>na posição…</em> · <b>FE</b> dirijo-me à posição do acidente a toda força</td></tr>
+    <tr class="p2"><td class="cod">O · GW</td><td>Ambos homem ao mar; <b>GW</b> acrescenta "solicito providências para socorrê-lo"</td></tr>
+    <tr class="p2"><td class="cod">G · H · UC</td><td><b>G</b> solicito prático · <b>H</b> tenho prático a bordo · <b>UC</b> há prático disponível aqui?</td></tr>
+    <tr class="p2"><td class="cod">M · L · SP</td><td><b>M</b> meu navio está parado e sem seguimento · <b>L</b> pare imediatamente <em>seu</em> navio · <b>SP</b> quebre o seguimento do seu navio</td></tr>
+    <tr class="p2"><td class="cod">Y · RB · RC</td><td><b>Y</b>/<b>RB</b> estou arrastando meu ferro · <b>RC</b> estou garrando</td></tr>
+    <tr class="p2"><td class="cod">D · RU · RT · X</td><td><b>D</b>/<b>RU</b> manobro com dificuldade · <b>X</b>/<b>RT</b> suspenda o que está fazendo e observe meus sinais</td></tr>
+    <tr class="p2"><td class="cod">E · I · S</td><td>Guinando para boreste · para bombordo · máquinas dando atrás (1, 2, 3 pontos)</td></tr>
+    <tr class="p2"><td class="cod">QG · QL · QD · QI</td><td>Ordem (G/L) × estado (D/I); adiante (D–H) × atrás (I–M)</td></tr>
+    <tr class="p2"><td class="cod">HW · HX · HY</td><td>Colidi com… · sofreu avarias? · o navio com quem colidi…</td></tr>
+    <tr class="p2"><td class="cod">IW · IX · IY · IZ</td><td>Sob controle · aumentando · posso controlar sem auxílio · extinto</td></tr>
+    <tr class="p2"><td class="cod">KF · Z · KH1</td><td>Solicito rebocador · idem (letra única) · rebocador com prático se dirige a você</td></tr>
+    <tr class="p2"><td class="cod">A (Ap. 4) · A (XI)</td><td>Na mensagem INTERCO, <b>A + 3 algarismos</b> é marcação; sozinho, <b>A</b> é mergulhador n'água</td></tr>
+  </table></div>
+</section>
+
+<!-- ===== BANCA ===== -->
+<section class="bloco" id="banca">
+  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
+  <p class="lede">Quatro competências diferentes: letra única, complemento de duas letras, decodificação INTERCO e montagem de içada.</p>
+  <div class="tblwrap"><table>
+    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
+    <tr><td>2006</td><td><strong>Q70</strong></td><td>Questionado com HV, navio que colidiu com tronco submerso responde…</td><td class="center"><b>HW 4</b></td></tr>
+    <tr><td>2008</td><td><strong>Q1</strong></td><td>Decodificar MAYDAY com INTERCO (A345, R21, CB6)</td><td class="center"><b>(a)</b></td></tr>
+    <tr><td>2008</td><td><strong>Q57</strong></td><td>Contexto COLREG: cilindro + bandeiras HOTEL e DELTA</td><td class="center">H = prático a bordo · D = manobra com dificuldade</td></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q12</strong></td><td>NM que estava fundeado exibe MIKE atopetada</td><td class="center"><b>(d) suspendeu</b> ⚠ provável</td></tr>
+    <tr><td>2011 · Amarela</td><td><strong>Q51</strong></td><td>Montar CI L2233S G4141W com um só regimento</td><td class="center"><b>(e)</b></td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q12</strong></td><td>Duas esferas pretas + bandeira…</td><td class="center"><b>(c) MIKE</b> — sem governo, parada e sem seguimento</td></tr>
+    <tr><td>2012 · Rosa</td><td><strong>Q16</strong></td><td>Contexto COLREG: HOTEL no mastro principal</td><td class="center">H = prático a bordo</td></tr>
+  </table></div>
+  <div class="box key">
+    <h4>2011-Q12 — por que "suspendeu" <span class="tag t-banca">BANCA</span></h4>
+    <p>As alternativas eram I (guinando BB), E (guinando BE), Y (arrasta o ferro), "suspendeu" e D (manobra com dificuldade). Nenhuma traduz M ao pé da letra. <strong>M</strong> = <em>my vessel is stopped and making no way through the water</em>: um navio fundeado não precisa avisar isso; se o mostra, é porque deixou de estar fundeado — suspendeu e está parado. O arquivo da prova não traz o gabarito oficial; a leitura acima é a única compatível com as opções.</p>
+  </div>
+  <div class="box trap">
+    <h4>2011-Q51 — onde os distratores erram <span class="tag t-conflito">BANCA</span></h4>
+    <p>(a) e (b) usam <strong>JF</strong> (estou encalhado) no lugar de <strong>CI</strong> (o navio encalhado… necessita auxílio). (b) ainda usa longitude com 5 algarismos (G04141W) e erra as substitutas. (c) usa <strong>CB</strong> (auxílio imediato, sem o encalhe). (d) erra só a ordem das substitutas da longitude (4141 → 4 · 1 · <strong>1ª</strong> · <strong>2ª</strong>, não 2ª · 3ª).</p>
+  </div>
+</section>
+
+<!-- ===== FLASHCARDS ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Flashcards por família</h2>
+  <p class="lede">Frente: o código e sua soletração fonética (como seria transmitido). Verso: o significado, o original em inglês nas letras únicas e o gancho. Escolha a família e a prioridade; "Sei" tira a carta da rodada, "Revisar" a devolve para o fim. O que você marca como sabido fica guardado neste navegador.</p>
+  <div class="fcwrap">
+    <div class="fcbar">
+      <select id="fcFam" onchange="montarDeck()"></select>
+      <select id="fcPri" onchange="montarDeck()">
+        <option value="0">Todas as prioridades</option>
+        <option value="2" selected>Alto potencial + já cobrados</option>
+        <option value="3">Só já cobrados</option>
+      </select>
+      <button onclick="montarDeck(true)">Embaralhar</button>
+      <button onclick="zerarSabidas()">Zerar "sei"</button>
+    </div>
+    <div class="fc" id="fcCard" onclick="this.classList.toggle('flip')">
+      <div class="fc-in">
+        <div class="fc-face fc-front"><div class="big" id="fcCod"></div><div class="ph" id="fcPh"></div><div class="fm" id="fcFm"></div></div>
+        <div class="fc-face fc-back"><div><div class="en" id="fcEn"></div><div id="fcTx"></div><div class="gk" id="fcGk"></div></div></div>
+      </div>
+    </div>
+    <div class="fcnav">
+      <button onclick="fcPrev()">← Anterior</button>
+      <button class="no" onclick="fcMark(false)">Revisar</button>
+      <button class="ok" onclick="fcMark(true)">Sei ✓</button>
+      <button onclick="fcNext()">Próxima →</button>
+    </div>
+    <div class="fcinfo" id="fcInfo"></div>
+  </div>
+</section>
+
+<!-- ===== SIMULADO ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Simulado no formato da banca</h2>
+  <p class="lede">Quinze questões, cinco alternativas, cinco enunciados em inglês. Questões e alternativas são embaralhadas a cada tentativa; no fim, o resultado por bloco.</p>
+  <div class="score" id="score">Placar: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <span class="blk" id="qBlk"></span>
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <span><button class="restart" onclick="iniciarQuiz()">Recomeçar</button> <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button></span>
+    </div>
+  </div>
+  <div class="box key" id="result">
+    <h4>Resultado por bloco</h4>
+    <div class="tblwrap"><table><tr><th>Bloco</th><th class="center">Acertos</th><th>Leitura</th></tr><tbody id="resBody"></tbody></table></div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Código Internacional de Sinais</summary>
+  <ul>
+    <li><b>Recorte:</b> Caps. I–V, VII, VIII, X, XI, XII · 12 rubricas da Seção Geral · Médica Cap. 1 · Apêndices 1, 2, 4. Fora: Caps. VI, IX, XIII, XIV e Apêndice 3.</li>
+    <li><b>Estrutura:</b> 1 letra (urgente/comum) · 2 letras (Seção Geral) · 3 letras com M (Médica). Cada sinal tem significado completo; complementos dão variação, pergunta, resposta ou detalhe.</li>
+    <li><b>Letra única:</b> o formato mais cobrado, muitas vezes junto com a COLREG. E/I/S = 1/2/3 pontos = 1/2/3 apitos. C, N/NO e RQ não se usam com letra única.</li>
+    <li><b>Cap. XII:</b> A azimute · C rumo · D data · G longitude · K comunicar · L latitude · R distância · S nós · T hora local · V km/h · Z UTC.</li>
+    <li><b>Substitutas:</b> repetem a 1ª/2ª/3ª bandeira da mesma classe; uma vez cada por grupo; galhardete-vírgula não conta. Caiu em 2011-Q51.</li>
+    <li><b>Galhardete de resposta:</b> a meio = avistei · atopetado = entendi · içado isolado pela transmissora = sinal completo.</li>
+    <li><b>Radiotelefonia:</b> DE, CQ, INTERCO, YZ, AS, R, RPT + AA/AB/BN/WA/WB, AR. MAYDAY &gt; PAN PAN &gt; SÉCURITÉ. Ap. 4: AE, BF, CB, CB6, DX, HW, CP, ED, EL; posição A+3 (verdadeira) e R, ou L+4 e G+5.</li>
+    <li><b>Mapa:</b> A abandono · C assistência · D–E perigo · F–H busca e salvamento/sobreviventes · HV–HZ colisão · I–J incêndio · KF–LJ reboque · LX–MC canal · MJ–NJ perigos · Q–S manobras · U prático.</li>
+    <li><b>Padrões:</b> espelho QD–QH/QI–QM (+5) · boreste antes de bombordo · ordem → confirmação · pergunta no complemento 1 (família curta) ou no fim (longa).</li>
+    <li><b>Banca:</b> 2006-Q70 HW4 · 2008-Q1 INTERCO/CB6 · 2011-Q12 M (provável d) · 2011-Q51 CI + substitutas (e) · 2012-Q12 M + duas esferas (c).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · Código Internacional de Sinais (IMO, 2005 · recorte do Anexo 2-B) · Capital Sereno · Comunicações.</div>
+</footer>
+
+<script>
+/* ===================== FONÉTICA ===================== */
+var FON={A:"Alfa",B:"Bravo",C:"Charlie",D:"Delta",E:"Echo",F:"Foxtrot",G:"Golf",H:"Hotel",I:"India",J:"Juliett",K:"Kilo",L:"Lima",M:"Mike",N:"November",O:"Oscar",P:"Papa",Q:"Quebec",R:"Romeo",S:"Sierra",T:"Tango",U:"Uniform",V:"Victor",W:"Whiskey",X:"X-ray",Y:"Yankee",Z:"Zulu"};
+var NUM=["Nadazero","Unaone","Bissotwo","Terrathree","Kartefour","Pantafive","Soxisix","Setteseven","Oktoeight","Novenine"];
+var PRON={A:"Alfa",B:"Bravo",C:"Tchárlie",D:"Délta",E:"Éco",F:"Foxtrót",G:"Golf",H:"Rôtel",I:"Índia",J:"Dgiuliét",K:"Kilo",L:"Lima",M:"Maike",N:"November",O:"Oscar",P:"Papa",Q:"Quibec",R:"Rômio",S:"Siérra",T:"Tango",U:"Iúniform",V:"Víctor",W:"Uísqui",X:"Éksrêi",Y:"Iânki",Z:"Zúlu"};
+function fon(c){return c.split("").map(function(ch){if(FON[ch])return FON[ch];if(/[0-9]/.test(ch))return NUM[+ch];return "";}).filter(Boolean).join(" ");}
+
+/* ===================== MAPA A–Z ===================== */
+var MAPA=[
+ ["AA–AB","Sinais de procedimento (repetição)","Procedural signals",0],
+ ["AC–AI","Abandono","Abandon",1],
+ ["AJ–AT","Acidente · médico · ferido/enfermo","Accident — doctor — injured/sick",0],
+ ["AU–CA","Aeronave · helicóptero","Aircraft — helicopter",0],
+ ["CB–CV","Assistência","Assistance",1],
+ ["CW–DQ","Embarcações · balsas","Boats — rafts",0],
+ ["DR–DY","Incapacitado · à deriva · naufrágio","Disabled — drifting — sinking",0],
+ ["DZ–EQ","Perigo","Distress",1],
+ ["ER–FD","Posição","Position",0],
+ ["FE–HE","Busca e salvamento","Search and rescue",1],
+ ["HF–HU","Sobreviventes","Survivors",1],
+ ["HV–HZ","Colisão","Collision",1],
+ ["IA–IM","Avarias · reparos","Damage — repair",0],
+ ["IN–IR","Mergulhadores · operações submarinas","Divers — underwater operations",0],
+ ["IS–JE","Incêndio · explosão","Fire — explosion",1],
+ ["JF–JV","Encalhe · abicagem · reflutuação","Grounding — beaching — refloating",0],
+ ["JW–KE","Água aberta","Leak",0],
+ ["KF–LJ","Reboque · rebocadores","Towing — tugs",1],
+ ["LK–LW","Auxílios à navegação · barra · marcações","Aids to navigation — bar — bearings",0],
+ ["LX–MC","Canal · via de acesso","Canal — channel — fairway",1],
+ ["MD–MI","Rumo","Course",0],
+ ["MJ–NJ","Perigos à navegação · alarmes","Dangers to navigation — warnings",1],
+ ["NK–OG","Profundidade · calado","Depth — draught",0],
+ ["OH–OQ","Navegação eletrônica","Electronic navigation",0],
+ ["OR–PC","Minas · varredura","Mines — minesweeping",0],
+ ["PD–PS","Luzes · holofote · instruções de navegação e governo","Lights — searchlight — navigation and steering",0],
+ ["PT–QC","Maré","Tide",0],
+ ["QD–SS","Manobras (todas)","Manoeuvres",1],
+ ["ST–TZ","Carga · tripulação · pesca","Cargo — crew — fishing",0],
+ ["UA–UK","Prático","Pilot",1],
+ ["UL–VF","Porto · diversos","Port — miscellaneous",0],
+ ["VG–YF","Meteorologia · gelo · quebra-gelo","Meteorology — ice — icebreaker",0],
+ ["YG","Rotas de navios","Routeing of ships",0],
+ ["YH–ZR","Comunicações","Communications",0],
+ ["ZS–ZZ","Regulamento Sanitário Internacional","International Health Regulations",0],
+ ["MAA–MAF","Seção Médica — Cap. 1 (pedido)","Medical Section — Request",1],
+ ["MAG–MVU","Seção Médica — demais capítulos","Medical Section — others",0]
+];
+(function(){var h="";MAPA.forEach(function(m){var c=m[3]?'in':'out';
+ h+='<tr><td class="cod '+c+'">'+m[0]+'</td><td class="'+c+'">'+m[1]+'</td><td class="'+c+'"><em>'+m[2]+'</em></td><td class="st '+c+'">'+(m[3]?'✅ cobrado':'fora')+'</td></tr>';});
+ document.getElementById('mapBody').innerHTML=h;})();
+
+/* ===================== LETRA ÚNICA ===================== */
+/* [letra, inglês, português, gancho, prioridade] */
+var LETRAS=[
+ ["A","I have a diver down; keep well clear at slow speed.","Tenho mergulhador n'água; mantenha-se bem afastado e a baixa velocidade.","Alfa = Aqua: alguém debaixo d'água",2],
+ ["B","*I am taking in, or discharging, or carrying dangerous goods.","Estou carregando, descarregando ou transportando carga perigosa.","Bravo = Bang (explosivo); bandeira vermelha",2],
+ ["C","*Affirmative — \"YES\" or \"The significance of the previous group should be read in the affirmative\".","Afirmativo, sim, concordo; o grupo anterior deve ser lido na afirmativa.","Charlie = Correct",2],
+ ["D","*Keep clear of me; I am manoeuvring with difficulty.","Mantenha-se afastado; estou manobrando com dificuldade.","Delta = Dificuldade · gêmeo RU",3],
+ ["E","*I am altering my course to starboard.","Estou guinando para boreste.","Echo · 1 ponto = 1 apito curto",2],
+ ["F","I am disabled; communicate with me.","Estou à matroca (sem governo); comunique-se comigo.","Foxtrot = Faulty",2],
+ ["G","*I require a pilot. (Fishing vessels close together on the grounds: \"I am hauling nets\".)","Solicito prático. (Pesqueiros próximos: estou recolhendo redes.)","Golf = Get a pilot",2],
+ ["H","*I have a pilot on board.","Tenho prático a bordo.","Hotel = Here (o prático está aqui)",3],
+ ["I","*I am altering my course to port.","Estou guinando para bombordo.","India · 2 pontos = 2 apitos curtos",2],
+ ["J","Keep well clear of me. I am on fire and have dangerous cargo on board, or I am leaking dangerous cargo.","Mantenha-se bem afastado. Tenho incêndio e carga perigosa a bordo, ou vazamento de carga perigosa.","Juliett = Jeopardy · gêmeo IT1",2],
+ ["K","I wish to communicate with you.","Desejo comunicar-me com você.","Kilo = Kall · com algarismo: Tabela I",2],
+ ["L","You should stop your vessel instantly.","Pare imediatamente seu navio.","Lima = Lay to · gêmeo SO",2],
+ ["M","My vessel is stopped and making no way through the water.","Meu navio está parado e sem seguimento.","Mike = Motionless · gêmeo SP1",3],
+ ["N","No — \"NO\" or \"The significance of the previous group should be read in the negative\". Visual or sound only; by voice or radio: \"NO\".","Negativo, não. Só visual ou sonoro; por voz ou rádio, \"NO\".","November = No",2],
+ ["O","Man overboard.","Homem ao mar.","Oscar = Overboard · gêmeo GW",3],
+ ["P","In harbour: all persons should report on board as the vessel is about to proceed to sea. At sea (fishing vessels): my nets have come fast upon an obstruction.","No porto: todos a bordo, o navio vai partir. No mar (pesqueiros): minhas redes prenderam numa obstrução.","Papa = Partida (Blue Peter)",2],
+ ["Q","My vessel is \"healthy\" and I request free pratique.","O estado sanitário do meu navio é bom e peço livre prática.","Quebec = Quarentena",2],
+ ["R","(Procedural signal: \"Received\".)","Ver sinais de procedimento: recebido.","Romeo = Received",1],
+ ["S","*I am operating astern propulsion.","Minhas máquinas estão dando atrás.","Sierra · 3 pontos = 3 apitos · gêmeo QI1",2],
+ ["T","*Keep clear of me; I am engaged in pair trawling.","Mantenha-se afastado; estou arrastando rede de parelha.","Tango = Trawling (dois navios = tango a dois)",2],
+ ["U","You are running into danger.","Você se dirige para um perigo.","Uniform = yoU · gêmeo NF",2],
+ ["V","I require assistance.","Solicito auxílio.","Victor = V de socorro · CB é o imediato",2],
+ ["W","I require medical assistance.","Solicito assistência médica.","Whiskey = Wound · MAA é o urgente",2],
+ ["X","Stop carrying out your intentions and watch for my signals.","Suspenda a execução do que está fazendo e observe meus sinais.","X-ray = eXecute stop · gêmeo RT",2],
+ ["Y","I am dragging my anchor.","Estou arrastando meu ferro.","Yankee = Yank (o ferro está sendo puxado) · gêmeo RB",2],
+ ["Z","*I require a tug. (Fishing vessels close together on the grounds: \"I am shooting nets\".)","Solicito rebocador. (Pesqueiros próximos: estou lançando redes.)","Zulu = rebocador (o último a chegar) · gêmeo KF",2]
+];
+(function(){var h="";LETRAS.forEach(function(l){var cls=l[4]===3?'p3':(l[4]===2?'p2':'');
+ h+='<tr class="'+cls+'"><td class="cod">'+l[0]+'<span class="gancho">'+FON[l[0]]+'</span></td><td><em>'+l[1]+'</em></td><td>'+l[2]+'</td><td style="font-size:13px">'+l[3]+'</td></tr>';});
+ document.getElementById('letrasBody').innerHTML=h;})();
+
+/* ===================== FONÉTICA (tabela) ===================== */
+(function(){var L="ABCDEFGHIJKLM".split(""),R="NOPQRSTUVWXYZ".split(""),h="";
+ for(var i=0;i<13;i++){var n=i<10?i:null;
+  h+='<tr><td class="cod">'+L[i]+'</td><td>'+FON[L[i]]+' <span style="color:var(--mute);font-size:12px">('+PRON[L[i]]+')</span></td><td class="cod">'+R[i]+'</td><td>'+FON[R[i]]+' <span style="color:var(--mute);font-size:12px">('+PRON[R[i]]+')</span></td>'+
+   (n!==null?'<td class="cod">'+n+'</td><td>'+NUM[n].toUpperCase()+'</td>':(i===10?'<td>vírgula</td><td>DECIMAL</td>':(i===11?'<td>ponto</td><td>STOP</td>':'<td></td><td></td>')))+'</tr>';}
+ document.getElementById('fonBody').innerHTML=h;})();
+
+/* ===================== PROCEDURAIS ===================== */
+var PROC=[
+ ["AA","todos","Tudo depois de… (após RPT: repita tudo depois de…)",3],
+ ["AB","todos","Tudo antes de… (após RPT)",3],
+ ["BN","todos","Tudo entre… e… (após RPT)",3],
+ ["WA","todos","Palavra ou grupo depois de… (após RPT)",2],
+ ["WB","todos","Palavra ou grupo antes de… (após RPT)",2],
+ ["AR","todos","Fim da transmissão ou da mensagem",2],
+ ["AS","todos","Aguarde (espera); entre grupos, separa-os",2],
+ ["C","todos","Afirmativo; o grupo anterior deve ser lido na afirmativa",2],
+ ["CQ","bandeiras · rádio","Chamada geral ou de estação(ões) desconhecida(s)",2],
+ ["CS","todos","Qual é o nome ou indicativo do seu navio (estação)?",2],
+ ["DE","todos","De… — precede o nome ou indicativo da estação que chama",2],
+ ["K","todos","Desejo comunicar-me com você; transmita",2],
+ ["NO","todos (voz: \"nô\")","Negativo; o grupo anterior deve ser lido na negativa",2],
+ ["OK","todos","Repetição correta; está correto",1],
+ ["RQ","todos","Interrogativo; o grupo anterior é uma pergunta",2],
+ ["R","todos","Recebido; recebi seu último sinal",2],
+ ["RPT","todos","Repito / repita o que transmitiu / repita o que recebeu",2],
+ ["INTERCO","voz","Seguem-se grupos do Código Internacional de Sinais",3],
+ ["DECIMAL","voz","Vírgula decimal (bandeiras: galhardete do código · lampejo: AAA)",2],
+ ["STOP","voz","Ponto final",1],
+ ["CORRECTION","voz","Cancele o último grupo; o correto vem a seguir",1],
+ ["AA AA AA","lampejos (Cap. VI, fora)","Chamada geral / estação desconhecida",1],
+ ["TTTT","lampejos","Resposta a uma chamada; T = recebi cada palavra",1],
+ ["EEEEEE","lampejos","Sinal de erro",1],
+ ["AAA","lampejos","Vírgula decimal ou ponto final",1]
+];
+(function(){var h="";PROC.forEach(function(p){var cls=p[3]===3?'p3':(p[3]===2?'p2':'');
+ h+='<tr class="'+cls+'"><td class="cod">'+p[0]+'</td><td style="font-size:12.5px">'+p[1]+'</td><td>'+p[2]+'</td></tr>';});
+ document.getElementById('procBody').innerHTML=h;})();
+
+/* ===================== BANDEIRAS ===================== */
+var BAND=[
+ ["A","Branca (lado da adriça) e azul, com rabo de andorinha"],["B","Vermelha, com rabo de andorinha"],
+ ["C","Faixas horizontais azul-branco-vermelho-branco-azul"],["D","Amarela, com faixa horizontal azul larga ao centro"],
+ ["E","Metade de cima azul, metade de baixo vermelha"],["F","Branca com losango vermelho"],
+ ["G","Seis faixas verticais amarelas e azuis"],["H","Metade branca (adriça) e metade vermelha, verticais"],
+ ["I","Amarela com círculo preto"],["J","Faixas horizontais azul-branco-azul"],
+ ["K","Metade amarela (adriça) e metade azul, verticais"],["L","Quartos amarelos e pretos"],
+ ["M","Azul com aspa (X) branca"],["N","Xadrez azul e branco"],
+ ["O","Vermelha e amarela, divididas na diagonal"],["P","Azul com quadrado branco ao centro"],
+ ["Q","Toda amarela"],["R","Vermelha com cruz amarela"],
+ ["S","Branca com quadrado azul ao centro"],["T","Faixas verticais vermelho-branco-azul"],
+ ["U","Quartos vermelhos e brancos"],["V","Branca com aspa (X) vermelha"],
+ ["W","Borda azul, depois branca, quadrado vermelho ao centro"],["X","Branca com cruz azul"],
+ ["Y","Faixas diagonais amarelas e vermelhas"],["Z","Quatro triângulos: amarelo, azul, vermelho e preto"]
+];
+(function(){var h="";for(var i=0;i<13;i++){var a=BAND[i],b=BAND[i+13];
+ h+='<tr><td class="cod">'+a[0]+' <span class="gancho" style="display:inline">'+FON[a[0]]+'</span></td><td>'+a[1]+'</td><td class="cod">'+b[0]+' <span class="gancho" style="display:inline">'+FON[b[0]]+'</span></td><td>'+b[1]+'</td></tr>';}
+ document.getElementById('bandBody').innerHTML=h;})();
+
+/* ===================== SEÇÃO GERAL — DADOS =====================
+   Linha:  COD|significado|prioridade(1-3)|gancho opcional
+   "# "  = sub-rubrica · "=COD|texto" = remissão a outra rubrica · prioridade 0 = sem significado
+*/
+var FAM=[
+{id:"abandono",faixa:"AC–AI",tit:"Abandono",en:"Abandon",grupo:"I · Distress — Emergency",
+ lede:"Seis grupos-base. AE está no Apêndice 4. AG/AH são o par deve / não deve. AA e AB, no início da letra A, são sinais de procedimento.",
+ d:`=AA|Repita tudo depois de… (procedimento)
+=AB|Repita tudo antes de… (procedimento)
+AC|Estou abandonando meu navio.|2
+AD|Estou abandonando meu navio, que sofreu um acidente nuclear e é possível fonte de perigo radioativo.|1
+AE|Devo abandonar meu navio.|3|Apêndice 4
+AE1|Eu (ou a tripulação do navio indicado) desejo abandonar meu (seu) navio, mas não tenho meios.|1
+AE2|Abandonarei meu navio a menos que você permaneça por perto, pronto a auxiliar-me.|1
+AF|Não tenho intenção de abandonar meu navio.|2
+AF1|Você tem a intenção de abandonar seu navio?|1|pergunta no complemento 1
+AG|Você deve abandonar seu navio tão logo seja possível.|2
+AH|Você não deve abandonar seu navio.|2|par AG/AH: deve / não deve
+AI|O navio (indicado por posição e/ou nome ou indicativo) terá que ser abandonado.|1`},
+{id:"assistencia",faixa:"CB–CV",tit:"Assistência",en:"Assistance",grupo:"I · Distress — Emergency",
+ lede:"O coração do pedido de socorro. CB e CB6 caíram no Apêndice 4 (2008-Q1); CI na montagem de 2011-Q51. CB1–8 dizem o motivo do auxílio imediato.",
+ d:`# Pedido
+=NC|Estou em perigo e solicito auxílio imediato. (Perigos à navegação)
+CB|Solicito auxílio imediato.|3|Apêndice 4 · gêmeo V
+CB1|Solicito auxílio imediato; estou com uma banda perigosa.|1
+CB2|Solicito auxílio imediato; tenho avarias no aparelho de governo.|1
+CB3|Solicito auxílio imediato; tenho sério distúrbio a bordo (motim).|1
+CB4|Solicito auxílio imediato; estou encalhado.|2
+CB5|Solicito auxílio imediato; estou à matroca.|1
+CB6|Solicito auxílio imediato; estou com incêndio a bordo.|3|Apêndice 4 · 2008-Q1
+CB7|Solicito auxílio imediato; estou com água aberta.|1
+CB8|Solicito auxílio imediato; tenho o eixo propulsor partido.|1
+CC|Estou (ou o navio indicado está) em perigo na lat… long… (ou marcação e distância de lugar indicado) e solicito auxílio imediato (complementos da Tabela II, se necessário).|2|CC = posição + perigo
+=V|Solicito auxílio. (letra única)
+CD|Solicito o que se segue… (complementos da Tabela II).|2|CD4 = combate a incêndio
+=W|Solicito assistência médica. (letra única)
+CE|Tentarei obter para você o auxílio necessário.|1
+CF|Os sinais do navio/aeronave que pede auxílio provêm da marcação… tomada de mim (lat… long…, se necessário).|1
+CG|Aguarde para auxiliar-me (ou o navio indicado).|1
+CG1|Aguardarei para ajudar você (ou o navio indicado).|1
+CH|Foi informado que o navio indicado, na lat… long… (ou marcação e distância), necessita auxílio.|1
+CH1|A barca-farol (ou farol) indicada necessita auxílio.|1
+CH2|Veículo espacial caiu ao mar na lat… long… e necessita auxílio imediato.|1
+CI|O navio encalhado na lat… long… necessita auxílio.|3|2011-Q51 · não confundir com JF (estou encalhado)
+CJ|Você necessita auxílio?|2
+CJ1|Você necessita auxílio imediato?|1
+CJ2|Você necessita algum outro auxílio?|1
+CJ3|Que auxílio você necessita?|1
+CJ4|Você pode seguir sem auxílio?|1
+# Não necessitado — dispensado
+CK|Eu (ou o navio indicado) não necessito auxílio (ou não é mais necessário).|2
+CL|Ofereci auxílio mas ele foi dispensado.|1
+# Prestado — não prestado
+CM|Um ou mais navios estão auxiliando o navio em perigo.|1
+CM1|O navio/aeronave assinalado em perigo está recebendo auxílio.|1
+CN|Prestar todo o auxílio possível.|1
+CN1|Auxiliar imediatamente no recolhimento dos sobreviventes.|1
+CN2|Enviar uma embarcação de salvamento para auxiliar o navio indicado.|1
+CO|É impossível auxiliá-lo (ou o navio/aeronave indicado).|1
+CO1|Não posso prestar o auxílio requerido.|1
+# Indo em socorro
+CP|Eu (ou o navio indicado) estou indo em seu auxílio.|3|Apêndice 4 · resposta ao navio em perigo
+CP1|Uma aeronave SAR (busca e salvamento) está a caminho para auxiliá-lo.|2
+=CQ|Chamada geral ou de estação desconhecida. (procedimento)
+CR|Estou seguindo em auxílio do navio/aeronave em perigo na lat… long…|2|CR = com posição; CP = sem
+=CS|Qual é o nome ou indicativo do seu navio (ou estação)? (procedimento)
+CT|Eu (ou o navio indicado) espero chegar a você na hora indicada.|1
+CU|O auxílio chegará na hora indicada.|1
+CU1|Posso auxiliá-lo?|1|DÚVIDA: a DPC repete o texto de CV2
+CV|Não posso auxiliar.|1
+CV1|Você pode ir em auxílio do navio indicado (na lat… long…)?|1
+CV2|Posso auxiliá-lo?|1
+CV3|Você pode auxiliar-me (ou o navio indicado)?|1
+CV4|Você pode auxiliar?|1`},
+{id:"perigo",faixa:"DZ–EQ",tit:"Perigo",en:"Distress",grupo:"I · Distress — Emergency",
+ lede:"Reconhecer e acompanhar um navio em perigo. ED e EL são as respostas do Apêndice 4; EG1–8 alternam pergunta (ímpar) e resposta (par).",
+ d:`# Navio / aeronave em perigo
+=NC|Estou em perigo e solicito auxílio imediato. (Perigos à navegação)
+DZ|O navio (ou aeronave) indicado parece estar em perigo.|1
+DZ1|O navio (ou aeronave) indicado está em perigo?|1
+DZ2|Qual é o nome (ou indicativo) do navio que está em perigo?|1
+EA|Você avistou ou ouviu algo sobre um navio em perigo (posição aproximada lat… long… ou marcação e distância)?|1
+EA1|Alguma notícia do navio/aeronave assinalado como desaparecido ou em perigo nesta área?|1
+=CC|Estou em perigo na lat… long… e solicito auxílio imediato. (Assistência)
+EB|Há um navio (ou aeronave) em perigo na lat… long… (ou marcação e distância de mim; Tabela III).|1
+EC|Um navio que sofreu um acidente nuclear está em perigo na lat… long…|1
+# Sinais de perigo
+ED|Seus sinais de perigo estão entendidos.|3|Apêndice 4 · ED = entenDiDo
+ED1|Seus sinais de perigo estão entendidos; o posto de salvamento mais próximo está sendo informado.|1
+EE|Não tem significado.|0
+EF|O SOS/MAYDAY foi cancelado.|2|EF = Fim do MAYDAY
+EF1|O SOS/MAYDAY foi cancelado?|1
+=FF|Interceptei um SOS/MAYDAY proveniente do navio… (Busca e salvamento)
+EG|Você ouviu o SOS/MAYDAY emitido na hora indicada?|1
+EG1|Pode escutar em 2182 kHz sinais de emergência de radiobalizas indicadoras de posição?|1|EG ímpar = pergunta · par = resposta
+EG2|Estou na escuta em 2182 kHz de sinais de emergência de radiobalizas.|1
+EG3|Você recebeu o sinal de emergência de radiobaliza em 2182 kHz?|1
+EG4|Recebi o sinal de emergência de uma radiobaliza em 2182 kHz.|1
+EG5|Você poderia escutar em … MHz sinais de emergência de radiobalizas?|1
+EG6|Estou na escuta em … MHz de sinais de emergência de radiobalizas.|1
+EG7|Você recebeu o sinal de emergência de radiobaliza em … MHz?|1
+EG8|Recebi o sinal de emergência de uma radiobaliza em … MHz.|1
+EH|Não tem significado.|0
+EI|Não tem significado.|0
+EJ|Recebi o sinal de perigo transmitido pela estação costeira indicada.|1
+EJ1|Você recebeu o sinal de perigo transmitido pela estação costeira indicada?|1
+EK|Avistei um sinal de perigo na lat… long…|1
+EK1|Foi vista ou ouvida uma explosão (posição ou direção e hora podem ser indicadas).|1
+EK2|Você viu ou ouviu o sinal de perigo proveniente da embarcação de salvamento?|1
+# Posição do navio / aeronave em perigo
+EL|Repita a posição do navio em perigo.|3|Apêndice 4 · EL = Location
+EL1|Qual é a posição do navio em perigo?|2
+=FG|A posição dada no SOS/MAYDAY era… (Busca e salvamento)
+=FH|A posição dada no SOS/MAYDAY está errada… (Busca e salvamento)
+EM|Existem outros navios/aeronaves nas proximidades do navio/aeronave em perigo.|1
+# Contato ou localização
+EN|Tentar manter contato com o navio/aeronave em perigo.|1
+EO|Não posso localizar o navio/aeronave em perigo por causa da pouca visibilidade.|1
+EP|Perdi-o de vista.|1
+=GL|Localizei destroços do navio/aeronave em perigo… (Busca e salvamento)
+EQ|Espero estar na posição do navio/aeronave em perigo na hora indicada.|1
+EQ1|Indique sua hora estimada de chegada ao navio/aeronave em perigo.|1
+=CR|Dirijo-me em auxílio do navio/aeronave em perigo na lat… long… (Assistência)
+=GF|Encontrei o navio/aeronave em perigo na lat… long… (Busca e salvamento)`},
+{id:"busca",faixa:"FE–HE",tit:"Busca e salvamento",en:"Search and rescue",grupo:"I · Distress — Emergency",
+ lede:"A família mais longa do Grupo I. Ordem: dirigir-se → posição do acidente → instruções → busca (FR = coordenador; FR1–7 com o MERSAR) → resultado → salvamento → resultado do salvamento. GW é o gêmeo de O.",
+ d:`# Auxílio — dirigir-se a
+=CR|Dirijo-me em auxílio do navio/aeronave em perigo na lat… long… (Assistência)
+FE|Dirijo-me para a posição do acidente a toda força. Espero chegar na hora indicada.|2
+FE1|Você se dirige para a posição do acidente? Caso afirmativo, quando espera chegar?|1
+=CV|Não posso auxiliar. (Assistência)
+# Posição do perigo ou acidente
+FF|Interceptei um SOS/MAYDAY proveniente do navio (nome ou indicativo) ou aeronave, na posição lat… long…, na hora indicada.|2
+FF1|Interceptei um SOS/MAYDAY… na hora indicada; nada mais foi ouvido desde então.|1
+FG|A posição dada no SOS/MAYDAY do navio (ou aeronave) era lat… long… (ou marcação e distância).|1
+FG1|Qual foi a posição indicada no SOS/MAYDAY do navio (ou aeronave)?|1
+FH|A posição dada no SOS/MAYDAY está errada. A posição correta é lat… long…|2
+FI|A posição dada no SOS/MAYDAY pelo navio está errada. Tenho sua marcação radiogoniométrica e posso cruzá-la com a obtida por qualquer outro navio.|1
+FJ|A posição do acidente (ou da embarcação de salvamento) está indicada.|1
+FJ1|A posição do acidente está indicada por chama ou fumaça.|1|FJ1–5: chama · marcador · corante · radiobaliza · destroços
+FJ2|A posição do acidente está indicada por marcador.|1
+FJ3|A posição do acidente está indicada por marcador de tinta (corante).|1
+FJ4|A posição do acidente está indicada por radiobaliza.|1
+FJ5|A posição do acidente está indicada por destroços.|1
+FK|A posição do acidente (ou da embarcação de salvamento) está indicada?|1
+# Informações — instruções
+FL|Governe no rumo… (ou siga-me) para chegar à posição do acidente.|1
+FM|O contato visual com o navio não é contínuo.|1
+FN|Perdi todo o contato com o navio.|1
+FO|Permanecerei perto de você.|1
+FO1|Permanecerei perto de você durante a noite.|1
+FP|A direção e a deriva estimadas da embarcação de salvamento são … graus e … nós.|1
+FP1|Quais são a direção e a deriva estimadas da embarcação de salvamento?|1
+FQ|Transmita seu indicativo e uma série de traços longos, ou ponha sua portadora no ar, para permitir que o navio (ou aeronave) o marque com radiogoniômetro.|1
+FQ1|Devo conduzir/vetorar o navio (ou aeronave) para minha posição atual?|1
+# Busca
+FR|Estou (ou o navio indicado está) encarregado de coordenar a busca.|2|FR = Responsável pela busca
+FR1|Efetuar o padrão de busca… começando às … horas. Rumo inicial…, velocidade de busca … nós. (MERSAR)|1
+FR2|Efetuar busca radar com os navios em linha de frente flexível, intervalo de … milhas. Rumo inicial…, velocidade … nós.|1
+FR3|O navio indicado deve ocupar o posto nº…|1
+FR4|O(s) navio(s) indicado(s) deve(m) ajustar-se aos intervalos entre navios de … milhas.|1
+FR5|Ajustar o espaçamento entre postos para … milhas.|1
+FR6|A velocidade de busca deverá ser de … nós.|1
+FR7|Alterar o rumo como necessário para assumir o posto na nova pernada (ou na hora indicada).|1
+FS|Solicito encarregar-se da busca no setor entre as marcações … e … a partir do navio em perigo.|1
+FT|Solicito encarregar-se da busca no setor entre lat … e … long … e …|1
+FU|A área de busca da aeronave está entre lat … e … long … e …|1
+FV|A busca com aeronave/helicóptero será interrompida devido às condições desfavoráveis.|1
+FW|Você deve procurar nas proximidades de lat… long…|1
+FX|Devo procurar nas proximidades de lat… long…?|1
+FY|Estou na área de busca.|1
+FY1|Você está na área de busca?|1
+FZ|Continuar as buscas de acordo com as instruções até segunda ordem.|2
+FZ1|Continuo a busca.|1
+FZ2|Você continua a busca?|1
+FZ3|Você quer que eu continue a busca?|1
+GA|Não posso continuar a busca.|1
+GB|Cessar a busca e voltar à base ou continuar sua viagem.|2
+# Resultado da busca
+GC|Informo os resultados da busca.|1
+GC1|Os resultados da busca são negativos. Continuo a busca.|1
+GC2|Efetuei busca na área do acidente mas não encontrei sinais de destroços ou sobreviventes.|1
+GC3|Notei manchas de óleo na provável posição do acidente.|1
+GD|Nada recebemos (ou vimos) do navio/aeronave desaparecido ou procurado.|1
+GD1|Você tem algo a informar a respeito do navio/aeronave desaparecido ou procurado?|1
+GD2|Você avistou destroços (ou derelitos)?|1
+GE|O navio/aeronave foi localizado na lat… long…|1
+GF|Encontrei o navio/aeronave em perigo na lat… long…|2
+GG|O navio/aeronave foi plotado pela última vez, na hora indicada, na lat… long…, com rumo…|1
+GH|Avistei embarcação de salvamento na lat… long… (ou marcação e distância de mim).|1
+GI|Acredita-se que as embarcações de salvamento estejam nas proximidades de lat… long…|1
+GJ|Avistados destroços na lat… long…|1
+GJ1|Avistados destroços na lat… long… Não avistei sobreviventes nas proximidades.|1
+GK|Encontrei destroços da aeronave na lat… long…|1
+GL|Localizei (ou encontrei) destroços do navio/aeronave em perigo (posição, se necessário).|1
+# Salvamento
+GM|Não posso salvar meu navio.|2
+GM1|Não posso salvar meu navio; mantenha-se tão perto quanto possível.|1
+GN|Você deve retirar as pessoas de bordo.|1
+GN1|Desejo retirar algumas pessoas de bordo. Permanecerá a bordo tripulação reduzida.|1
+GN2|Retirarei de bordo as pessoas.|1
+GN3|Pode retirar de bordo as pessoas?|1
+GO|Não posso retirar de bordo as pessoas.|1
+GP|Dirija-se para socorrer o navio (ou a aeronave que fez amerissagem forçada) na lat… long…|1
+GQ|Não posso sair para efetuar o salvamento devido às condições do tempo. Você deve fazer tudo o que puder.|1
+GR|O navio que se dirige para socorrê-lo (ou ao navio/aeronave indicado) está no rumo…, com velocidade de … nós.|1
+GR1|Indique o rumo e a velocidade do navio que vem socorrer-me (ou ao navio/aeronave indicado).|1
+GS|Tentarei efetuar o transbordo com assento de carga leve (cadeirinha).|1
+GT|Tentarei ligar com lança-retinida.|1
+GT1|Procure o cabo impulsionado por foguete.|1
+GU|Não é seguro lançar foguete.|1
+GV|Você deve tentar enviar-me um cabo.|1
+GV1|Você tem um lança-retinida?|1
+GV2|Pode ligar empregando lança-retinida?|1
+GV3|Não tenho lança-retinida.|1
+GW|Homem ao mar; solicito providências para socorrê-lo (posição, se necessário).|3|gêmeo de O
+=O|Homem ao mar. (letra única)
+# Resultados do salvamento
+GX|Informe sobre os resultados do salvamento.|1
+GX1|O que você (ou o navio/aeronave de salvamento) recolheu?|1
+GY|Eu (ou o navio/aeronave de salvamento) recolhi destroços.|1
+GZ|Todas as pessoas estão salvas.|2
+GZ1|Todas as pessoas estão perdidas.|2
+HA|Eu (ou o navio/aeronave de salvamento) resgatei … (número) pessoas feridas.|1|HA-HB-HC: feridos · sobreviventes · corpos
+HB|Eu (ou o navio/aeronave de salvamento) resgatei … (número) sobreviventes.|1
+HC|Eu (ou o navio/aeronave de salvamento) resgatei … (número) corpos.|1
+HD|Posso transferir para você as pessoas resgatadas?|1
+HE|Não tem significado.|0`},
+{id:"sobreviventes",faixa:"HF–HU",tit:"Sobreviventes",en:"Survivors",grupo:"I · Distress — Emergency",
+ lede:"Onde foram localizados (HF água · HG embarcação · HJ gelo · HK corpos), em que estado (HM 1–4) e o recolhimento (HN–HT).",
+ d:`HF|Localizei sobreviventes na água na lat… long… (ou marcação e distância).|2|HF = na água (o primeiro lugar)
+HG|Localizei sobreviventes numa embarcação de salvamento na lat… long…|1
+HH|Não tem significado.|0
+HI|Não tem significado.|0
+HJ|Localizei sobreviventes sobre o gelo à deriva, na lat… long…|1
+HK|Localizei corpos na lat… long… (ou marcação e distância).|1
+HL|Ainda não localizei os sobreviventes.|1
+HL1|Ainda estou procurando os sobreviventes.|1
+HL2|Você localizou os sobreviventes? Se afirmativo, em que posição?|1
+HM|Os sobreviventes estão em estado grave. Solicita-se auxílio médico com urgência.|2
+HM1|Os sobreviventes estão em estado grave.|1|HM1 grave · 2 bom · 3 desconhecido · 4 pergunta
+HM2|Os sobreviventes estão em bom estado.|1
+HM3|O estado dos sobreviventes ainda é desconhecido.|1
+HM4|Em que estado estão os sobreviventes?|1
+HN|Dirija-se para lat… long… para recolher os sobreviventes.|1
+HO|Recolha os sobreviventes no gelo à deriva na lat… long…|1
+HO1|Recolha os sobreviventes do navio/aeronave afundado.|1
+HP|Os sobreviventes ainda não foram recolhidos.|1
+HP1|Já foram recolhidos os sobreviventes?|1
+=CN1|Auxiliar imediatamente no recolhimento dos sobreviventes. (Assistência)
+HQ|Transfira os sobreviventes para o meu navio (ou para o navio indicado).|1
+HQ1|Você tem sobreviventes a bordo?|1
+HR|Tratar de obter dos sobreviventes todas as informações possíveis.|1
+HS|Não tem significado.|0
+HT|Indique a posição dos sobreviventes, lançando sinais pirotécnicos.|1
+HU|Não tem significado.|0`},
+{id:"colisao",faixa:"HV–HZ",tit:"Colisão",en:"Collision",grupo:"II · Casualties — Damages",
+ lede:"Família inteira já cobrada (2006-Q70: HV → HW4). Decore HW1–7 e a matriz HX1–4.",
+ d:`HV|Você colidiu?|3|a pergunta abre a família
+HW|Eu (ou o navio indicado) colidi com uma embarcação de superfície.|3|Apêndice 4
+HW1|Eu (ou o navio indicado) colidi com um navio-farol.|3
+HW2|Eu (ou o navio indicado) colidi com um submarino.|3
+HW3|Eu (ou o navio indicado) colidi com um navio desconhecido.|3
+HW4|Eu (ou o navio indicado) colidi com um objeto submerso.|3|2006-Q70 (tronco submerso)
+HW5|Eu (ou o navio indicado) colidi com uma boia de navegação.|3
+HW6|Eu (ou o navio indicado) colidi com um iceberg.|3
+HW7|Eu (ou o navio indicado) colidi com gelo flutuante.|3
+HX|Você sofreu alguma avaria na colisão?|2
+HX1|Sofri sérias avarias acima da linha d'água.|2|1 sérias acima · 2 sérias abaixo
+HX2|Sofri sérias avarias abaixo da linha d'água.|2
+HX3|Sofri avarias leves acima da linha d'água.|2|3 leves acima · 4 leves abaixo
+HX4|Sofri avarias leves abaixo da linha d'água.|2
+HY|O navio (nome ou indicativo) com o qual colidi afundou.|1
+HY1|O navio (nome ou indicativo) com o qual colidi retomou sua viagem.|1
+HY2|Não sei o que sucedeu com o navio com o qual colidi.|1
+HY3|O navio com o qual você colidiu retomou sua viagem?|1
+HY4|Qual o nome do navio com o qual você colidiu?|1
+HY5|Qual o nome (ou indicativo) do navio que colidiu comigo? Meu nome (ou indicativo) é…|1
+HY6|Onde está o navio com o qual você colidiu?|1
+HZ|Houve uma colisão entre os navios indicados (nomes ou indicativos).|1
+=KA|Solicito uma camisa de colisão com urgência. (Água aberta — fora do recorte)`},
+{id:"incendio",faixa:"IS–JE",tit:"Incêndio — explosão",en:"Fire — explosion",grupo:"II · Casualties — Damages",
+ lede:"IT abre (tenho incêndio), IV diz onde, IW–IZ contam a evolução, JA pede equipamento, JB–JE tratam da explosão.",
+ d:`IS|Não tem significado.|0
+IT|Tenho incêndio a bordo.|2
+IT1|Tenho incêndio a bordo e transporto carga perigosa. Mantenha-se bem afastado de mim.|2|gêmeo de J
+=J|Mantenha-se bem afastado. Incêndio e carga perigosa a bordo. (letra única)
+IT2|O navio (nome ou indicativo) está com incêndio a bordo.|1
+IT3|Você tem incêndio a bordo?|1
+IU|O navio (nome ou indicativo) com incêndio a bordo está na posição lat… long…|1
+=CB6|Solicito auxílio imediato; estou com incêndio a bordo. (Assistência)
+IV|Onde está o incêndio?|1
+IV1|Tenho incêndio na praça de máquinas.|1|IV1 máquinas · 2 caldeiras · 3 paiol/carga · 4 alojamentos · 5 combustível
+IV2|Tenho incêndio na praça de caldeiras.|1
+IV3|Tenho incêndio no paiol ou na carga.|1
+IV4|Tenho incêndio no alojamento dos passageiros ou da tripulação.|1
+IV5|O combustível está incendiando.|1
+IW|O incêndio está sob controle.|2|IW → IX → IY → IZ
+IX|O incêndio está aumentando.|2
+IX1|Não posso controlar o incêndio sem auxílio.|1
+IX2|O incêndio não foi extinto.|1
+IY|Posso controlar o incêndio sem auxílio.|2
+IY1|Você pode controlar o incêndio sem auxílio?|1
+IZ|O incêndio foi extinto.|2|Z, a última letra, fecha o incêndio
+IZ1|Estou alagando o compartimento para extinguir o incêndio.|1
+IZ2|O incêndio foi extinto?|1
+JA|Necessito equipamentos de combate a incêndio.|1
+JA1|Necessito extintores de espuma.|1
+JA2|Necessito extintores de CO2.|1
+JA3|Necessito extintores de tetracloreto de carbono.|1
+JA4|Necessito material para extintores de espuma.|1
+JA5|Necessito material para extintores de CO2.|1
+JA6|Necessito material para extintores de tetracloreto de carbono.|1
+JA7|Necessito bomba d'água.|1
+# Explosão
+JB|Há perigo de explosão.|2
+JC|Não há perigo de explosão.|1
+JC1|Há perigo de explosão?|1
+JD|Houve uma explosão na caldeira.|1
+JD1|Houve uma explosão em um tanque.|1
+JD2|Houve uma explosão na carga.|1
+JD3|Há possibilidade de outras explosões?|1
+JD4|Há perigo de efeitos tóxicos?|1
+JE|Há alguma vítima da explosão?|1
+=EK1|Foi vista ou ouvida uma explosão. (Perigo)`},
+{id:"reboque",faixa:"KF–LJ",tit:"Reboque — rebocadores",en:"Towing — tugs",grupo:"II · Casualties — Damages",
+ lede:"A família mais longa do recorte e a mais ligada ao serviço do prático. Ordem: rebocador → passagem do reboque → dispositivos → amarrar/arriar → largar → velocidade. Ordem e confirmação andam em pares (KQ/KQ1, KX/KX1, KZ/KZ1).",
+ d:`# Rebocador
+KF|Solicito rebocador (ou … rebocadores).|2|gêmeo de Z
+=Z|Solicito rebocador. (letra única)
+KG|Você necessita rebocador(es)?|1
+KG1|Não necessito rebocador(es).|1
+KH|O(s) rebocador(es) se dirige(m) para você. Espera(m) chegar na hora indicada.|1
+KH1|Um rebocador com prático se dirige para você.|2|prático no reboque
+KH2|Você deve esperar os rebocadores.|1
+KI|Não há rebocadores disponíveis.|1
+KI1|Os rebocadores não podem sair.|1
+# Reboque — passagem do reboque
+KJ|Estou rebocando um objeto submerso.|1
+KJ1|Estou rebocando um flutuante.|1
+KJ2|Estou rebocando um alvo.|1
+KK|É impossível rebocar com as condições atmosféricas atuais.|1
+KK1|É muito difícil rebocar.|1
+KK2|Não posso passar o cabo de reboque agora, mas tentarei quando melhorarem as condições do tempo.|1
+KK3|Não posso passar o cabo de reboque esta noite. Tentarei de dia.|1
+KK4|Pode ajudá-lo com as máquinas?|1|DÚVIDA: tradução DPC literal; sentido = você pode ajudar com suas máquinas?
+KL|Vejo-me obrigado a parar o reboque temporariamente.|1
+KL1|Pare o reboque temporariamente.|1
+KM|Posso rebocar você (ou o navio indicado).|2|KM posso · KN não posso
+KM1|Devo rebocá-lo?|1
+KN|Não posso rebocar você (ou o navio indicado).|2
+KN1|Não posso rebocá-lo, mas comunicarei e pedirei auxílio imediato.|1
+KN2|Não posso rebocá-lo, mas posso recolher as pessoas a bordo.|1
+KO|Você deve empenhar-se em rebocar o navio (nome ou indicativo).|1
+KO1|Informar se foi rebocado o navio (nome ou indicativo).|1
+KO2|Você pode rebocar-me (ou o navio indicado)?|1
+KP|Você deve rebocar-me ao porto ou fundeadouro mais próximo (ou ao local indicado).|1
+KP1|Rebocarei você até o porto ou fundeadouro mais próximo (ou ao local indicado).|1
+KP2|Buscarei abrigo ou fundeadouro tão logo seja possível.|1
+KQ|Prepare-se para ser rebocado.|2|ordem → confirmação
+KQ1|Estou pronto para ser rebocado.|1
+KQ2|Prepare-se para rebocar-me (ou o navio indicado).|1
+KQ3|Estou pronto para rebocá-lo.|1
+KQ4|Prepare-se para recomeçar o reboque.|1
+KQ5|Estou pronto para recomeçar o reboque.|1
+KR|Está tudo pronto para o reboque.|1
+KR1|Estou começando a rebocar.|1
+KR2|Começar a rebocar.|1
+KR3|Está tudo pronto para rebocar?|1
+# Dispositivos de reboque
+KS|Passar o cabo de leva (mensageiro).|1
+KS1|Recebi o cabo de leva.|1
+KT|Passar-me um cabo de reboque.|1
+KT1|Estou passando um cabo de reboque.|1
+KU|Não posso passar um cabo de reboque.|1
+KU1|Não tenho cabo de reboque, nem outro cabo.|1
+KU2|Não tenho virador de cabo de aço.|1
+KU3|Você tem um cabo?|1
+KV|Pretendo usar meu cabo de reboque / minha amarra.|1
+KV1|Tenho intenção de usar seu cabo de reboque / sua amarra.|1
+KW|Ter pronto cabo de reboque/amarra.|1
+KW1|O cabo de reboque/amarra está pronto.|1
+KW2|Ter pronto outro cabo.|1
+KW3|Ter pronto o cabo de reboque/amarra de reserva.|1
+KW4|O cabo de reboque/amarra de reserva está pronto.|1
+KW5|Ter um cabo de aço pronto.|1
+KW6|O cabo de aço está pronto.|1
+KX|Estar pronto para receber o cabo de reboque.|1
+KX1|Estou pronto a receber o cabo de reboque.|1
+KX2|Aproxime-se mais para receber o cabo de reboque.|1
+KX3|Estou aproximando-me mais para receber o cabo de reboque.|1
+KX4|Recebi o cabo de reboque.|1
+KY|O comprimento do dispositivo de reboque é de … braças.|1
+KZ|Reduzir o cabo de reboque (ou diminuir a distância entre os navios).|1
+KZ1|Estou encurtando o cabo de reboque (ou diminuindo a distância entre os navios).|1
+KZ2|Tesar o cabo.|1
+KZ3|Estou tesando o cabo.|1
+KZ4|Tirar o brando do cabo.|1
+KZ5|Estou tirando o brando do cabo.|1
+LA|O cabo de reboque/cabo partiu-se.|2
+LA1|O cabo de reboque/cabo pode partir-se.|1
+LA2|O cabo de reboque/cabo está em mau estado.|1
+LA3|Reforçar as espias.|1
+LA4|Estou reforçando as espias.|1
+# Amarrar — arriar o cabo
+LB|Dar volta ao cabo de reboque em seu mordente.|1
+LB1|O cabo de reboque está preso sob volta ao mordente.|1
+LB2|Talingar o cabo de reboque à mola.|1
+LB3|O cabo de reboque está talingado à mola.|1
+LB4|Meu cabo de reboque está passado sob volta.|1
+LB5|Seu cabo de reboque está passado sob volta?|1
+LC|Dê volta na popa e governe-me.|1
+LD|Arriar sua espia (… braças).|1
+LE|Estou pronto a arriar minha espia/cabo.|1
+LE1|Estou arriando minha espia/cabo.|1
+LE2|Foi arriada minha espia/cabo.|1
+LE3|Vou arriar o cabo junto à espia.|1
+LE4|Quanto de cabo devo arriar?|1
+LF|Deixar de arriar sua espia/cabo.|1
+LF1|Não posso arriar mais espia/cabo.|1
+# Largar o cabo
+LG|Preparar para largar o(s) cabo(s) de reboque.|1
+LG1|Estou me preparando para largar o(s) cabo(s) de reboque.|1
+LG2|Estou pronto para largar o(s) cabo(s) de reboque.|1
+LG3|Largar o cabo de reboque de boreste.|1|boreste antes de bombordo
+LG4|Foi largado o cabo de reboque de boreste.|1
+LG5|Largar o cabo de reboque de bombordo.|1
+LG6|Foi largado o cabo de reboque de bombordo.|1
+LG7|Largar a(s) espia(s).|1
+LG8|Tenho que largar o(s) cabo(s) de reboque.|1
+# Velocidade no reboque
+=QD|Manobras de máquinas QD–QM e RL–RM: ver Manobras
+LH|A máxima velocidade de reboque é … nós.|1
+LI|Estou aumentando a velocidade.|2|LI = Increase · exceção: estado antes da ordem
+LI1|Aumente a velocidade.|2
+LJ|Estou diminuindo a velocidade.|2
+LJ1|Reduza a velocidade.|2`},
+{id:"canal",faixa:"LX–MC",tit:"Canal — via de acesso",en:"Canal — channel — fairway",grupo:"III · Aids to navigation",
+ lede:"Família curta e muito ligada à praticagem: livre / não livre (LX/LY), navegável (LZ), menor profundidade (MA), posição no canal (MB), obstrução (MC).",
+ d:`# Canal
+LX|O canal está livre.|2|LX livre · LY não livre
+LX1|O canal estará livre na hora indicada.|1
+LX2|Você pode entrar no canal na hora indicada.|1
+LX3|O canal está livre?|1
+LX4|Quando poderei entrar no canal?|1
+LY|O canal não está livre.|2
+LZ|O canal/via de acesso é navegável.|2
+LZ1|Tenho intenção de passar pelo canal/via de acesso.|1
+LZ2|O canal/via de acesso é navegável?|1
+LZ3|Em que estado está o canal/via de acesso?|1
+LZ4|Qual é a menor profundidade do canal/via de acesso?|1|pergunta de MA
+MA|A menor profundidade do canal/via de acesso é … pés ou metros.|2
+MB|Manter-se no meio do canal/via de acesso.|2|MB meio · 1 boreste · 2 bombordo · 3 deixar livre
+MB1|Manter-se a boreste do canal/via de acesso.|2
+MB2|Manter-se a bombordo do canal/via de acesso.|2
+MB3|Deixar livre o canal/via de acesso.|2
+=YG|Parece que você não está cumprindo o esquema de separação de tráfego. (Rotas — fora)
+MC|Existe uma obstrução no canal/via de acesso que não figura na carta. Navegue com precaução.|2
+MC1|O canal/via de acesso não é navegável.|1
+MC2|A via (…) do esquema de separação de tráfego não é navegável (indicar a direção do fluxo).|1`},
+{id:"perigos",faixa:"MJ–NJ",tit:"Perigos à navegação — alarmes",en:"Dangers to navigation — warnings",grupo:"III · Aids to navigation",
+ lede:"Derelitos e destroços (MJ–MP), perigo radioativo (MQ–MX), alarmes (MY–NJ). Aqui mora o NC — o sinal de perigo do CIS listado no Apêndice 1.",
+ d:`# Derelitos — destroços — águas rasas
+MJ|Derelito perigoso à navegação foi informado na posição lat… long… (ou Tabela III).|1
+MK|Avistei derelito (na lat… long…, na hora indicada).|1
+MK1|Você avistou derelito (ou destroços)?|1
+ML|Derelito à deriva próximo da posição lat… long… (ou marcação e distância).|1
+ML1|O casco do derelito está à flor d'água.|1
+ML2|O casco do derelito sobressai bastante da água.|1
+MM|Existem destroços na lat… long…|1
+MM1|Os destroços estão indicados por boia(s).|1
+MM2|Os destroços estão à flor d'água.|1
+MN|Os destroços (na lat… long…) não estão indicados por boia(s).|1
+MO|Colidi com um banco de areia ou objeto submerso (lat… long…).|2|≠ HW4 (objeto submerso, família Colisão)
+MP|Estou em águas rasas. Solicito instruções para navegação.|2
+# Perigo radioativo
+MQ|Há perigo de contaminação por liberação excessiva de material radioativo nesta área (ou próximo de lat… long…). Mantenha a escuta rádio; retransmita aos navios próximos.|1
+MQ1|O material radioativo está sendo levado pelo ar.|1
+MQ2|O material radioativo está sendo levado pela água.|1
+MR|Não há, ou não há mais, risco de contaminação por liberação de material radioativo nesta área.|1
+MR1|Existe risco de contaminação por liberação de material radioativo nesta área?|1
+MS|Meu navio é uma perigosa fonte de radiação.|1
+MS1|Meu navio é perigosa fonte de radiação; você pode aproximar-se por meu boreste.|1|boreste · bombordo · proa · popa
+MS2|Meu navio é perigosa fonte de radiação; você pode aproximar-se por meu bombordo.|1
+MS3|Meu navio é perigosa fonte de radiação; você pode aproximar-se pela minha proa.|1
+MS4|Meu navio é perigosa fonte de radiação; você pode aproximar-se pela minha popa.|1
+MT|Meu navio é perigosa fonte de radiação. Você pode aproximar-se por… (Tabela III).|1
+MU|Meu navio é perigosa fonte de radiação. Não se aproxime a menos de … amarras.|1
+MV|Meu navio está liberando material radioativo e representa um perigo.|1
+MW|Meu navio está liberando material radioativo e representa um perigo. Não se aproxime a menos de … amarras.|1
+MX|O material radioativo está sendo levado pelo ar. Não se aproxime por sotavento.|1
+# Alarmes
+MY|É perigoso parar.|2
+MY1|É perigoso permanecer na posição atual.|1
+MY2|É perigoso continuar no rumo atual.|1
+MY3|É perigoso continuar enquanto as condições do tempo não o permitam.|1
+MY4|É perigoso guinar para boreste.|1
+MY5|É perigoso guinar para bombordo.|1
+MY6|É perigoso aproximar-se muito do meu navio.|1
+MY7|É perigoso largar o ferro ou usar arrasto de fundo.|1
+MY8|É perigoso jogar óleo combustível ao mar.|1
+=GU|Não é seguro lançar foguete. (Busca e salvamento)
+MZ|A navegação é perigosa na área em torno da lat… long…|1
+MZ1|Julgo que você está colocando em perigo a navegação e pretendo comunicar o fato.|1
+NA|A navegação está proibida.|2
+NA1|A navegação somente é possível com auxílio de rebocadores.|2
+NA2|A navegação somente é possível com auxílio de prático.|2|praticagem obrigatória
+NA3|A navegação é proibida num raio de 500 m desta plataforma.|1
+NA4|A navegação é proibida num raio de 500 m da plataforma que está na marcação… tomada de mim.|1
+NA5|Você foi detectado navegando dentro de 500 m da zona de segurança (da plataforma na marcação… tomada de mim) e o fato será comunicado à autoridade competente.|1
+NA6|Ferros com boias estendem-se até uma milha deste navio/plataforma. Afaste-se.|1
+NB|Existem aparelhos de pesca na direção para onde você avança (ou na direção indicada; Tabela III).|1
+NC|Estou em perigo e solicito auxílio imediato.|3|O sinal de perigo do CIS (Apêndice 1)
+ND|Espera-se um tsunami (vaga gigante). Tome as devidas precauções.|1
+NE|Navegue com grande precaução.|2
+NE1|Navegue com grande precaução; a costa é perigosa.|1
+NE2|Navegue com grande precaução; existem submarinos em exercício nesta área.|1
+NE3|Navegue com grande precaução; existe uma barreira (boom) atravessada.|1|DÚVIDA: a DPC traduz "pontal atravessado"
+NE4|Navegue com grande precaução; mantenha-se afastado do alcance de tiro.|1
+NE5|Navegue com grande precaução; navio inimigo avistado (na lat… long…).|1
+NE6|Navegue com grande precaução; submarino inimigo avistado (na lat… long…).|1
+NE7|Navegue com grande precaução; aeronave inimiga avistada (na lat… long…).|1
+=MC|Existe obstrução no canal que não figura na carta. Navegue com precaução. (Canal)
+NF|Você se dirige para um perigo.|2|gêmeo de U
+NF1|Você se dirige para um perigo; há risco de radiação.|1
+NG|Você está em uma posição perigosa.|2
+NG1|Você está em uma posição perigosa; há risco de radiação.|1
+NH|Você está livre de todo perigo.|2
+NH1|Você está livre de todo perigo?|1
+NI|Tenho (ou o navio indicado tem) uma banda de … graus para boreste.|2|NI boreste · NJ bombordo (I antes de J)
+NJ|Tenho (ou o navio indicado tem) uma banda de … graus para bombordo.|2`},
+{id:"manobras",faixa:"QD–SS",tit:"Manobras",en:"Manoeuvres",grupo:"IV · Manoeuvres",
+ lede:"Rubrica inteira no recorte. Ordem: adiante/atrás (espelho +5) → atracação a contrabordo → fundear → ferros → fundeadouro → máquinas → hélice → desembarque/embarque → manobras → seguir/suspender → velocidade → parar/pairar.",
+ d:`# Dar adiante — seguimento para vante
+QD|Estou dando adiante.|2|espelho de QI
+QD1|Minhas máquinas estão dando adiante.|1
+QD2|Continuarei dando adiante.|1
+QD3|Darei adiante.|1
+QD4|Darei adiante muito devagar.|1
+QE|Tenho seguimento para vante.|2|espelho de QJ
+QF|Não posso dar adiante.|2|espelho de QK
+QG|Dê adiante.|2|ordem · espelho de QL
+QG1|Dê adiante devagar.|1
+QG2|Dê adiante a toda força.|2
+QG3|Continue dando adiante.|1
+QG4|Mantenha suas máquinas dando adiante.|1
+QH|Não continue dando adiante.|2|espelho de QM
+# Dar atrás — seguimento para ré
+QI|Estou dando atrás.|2|QD + 5 letras
+QI1|Minhas máquinas estão dando atrás.|2|gêmeo de S
+QI2|Continuarei dando atrás.|1
+QI3|Darei atrás.|1
+QI4|Darei atrás muito devagar.|1
+QJ|Tenho seguimento para ré.|2
+QK|Não posso dar atrás.|2
+QL|Dê atrás.|2|ordem
+QL1|Dê atrás devagar.|1
+QL2|Dê atrás a toda força.|2
+QL3|Continue dando atrás.|1
+QL4|Mantenha suas máquinas dando atrás.|1
+QM|Não continue dando atrás.|2
+# Atracação a contrabordo
+QN|Atraque a meu boreste.|2|boreste antes de bombordo
+QN1|Atraque a meu bombordo.|2
+QN2|Largue o ferro antes de atracar a contrabordo.|1
+QO|Não atraque a contrabordo.|1
+QP|Atraque a contrabordo.|1
+QP1|Tentarei atracar a seu contrabordo.|1
+QQ|Solicito despacho sanitário.|1|à noite: luz vermelha sobre branca
+QR|Não posso atracar a contrabordo.|1
+QR1|Posso atracar a contrabordo?|1
+# Fundear
+QS|Fundeie na hora indicada.|2
+QS1|Fundeie (posição, se necessário).|1
+QS2|Fundeie para esperar o rebocador.|1
+QS3|Fundeie com os dois ferros.|1
+QS4|Fundeie como achar conveniente.|1
+QS5|Você vai fundear?|1
+=UB|Paire ou fundeie até a chegada do prático. (Prático)
+QT|Não fundeie. Você enrascará meu ferro.|1
+QU|É proibido fundear.|2
+QV|Estou fundeando na posição indicada.|1
+QV1|Fundeei com os dois ferros.|1
+QW|Não deverei fundear.|1
+QW1|Não posso fundear.|1
+QX|Solicito permissão para fundear.|2
+QX1|Você tem permissão para fundear.|1
+QY|Desejo fundear logo.|1
+QY1|Onde devo fundear?|1
+# Ferro(s)
+QZ|Tenha seus ferros prontos a largar.|2
+QZ1|Largue outro ferro.|1
+RA|Meu ferro está enrascado.|1
+RA1|Levantei um cabo telegráfico com meu ferro.|1
+RB|Estou arrastando meu ferro.|2|gêmeo de Y
+RB1|Parece que você está garrando.|1
+RB2|É provável que você venha a garrar no local onde está fundeado (ou pretende fundear).|1
+RC|Estou (ou o navio indicado está) garrando.|2
+RC1|Meu navio garrou.|1
+RD|Ice (pique a amarra ou desmanilhe) o ferro imediatamente.|1
+RD1|Ice o ferro na hora indicada.|1
+RD2|Estou incapacitado de içar meu ferro.|1
+# Fundeadouro
+RE|Mude seu fundeadouro/local de atracação. Ele não é seguro.|2
+RF|Você poderia conduzir-me a um fundeadouro seguro?|1
+=KP|Rebocar-me ao porto ou fundeadouro mais próximo. (Reboque)
+RG|Envie uma embarcação miúda para onde eu devo fundear ou atracar.|1
+RG1|A que horas deverei entrar no fundeadouro?|1
+RH|O fundo não é de boa tença na minha área (ou em torno de lat… long…).|1
+RI|O fundo é de boa tença na minha área (ou em torno de lat… long…).|1
+RI1|O fundo é de boa tença em sua área (ou em torno de lat… long…)?|1
+# Máquinas
+RJ|Tenha suas máquinas prontas.|1
+RJ1|Tenha suas máquinas prontas o mais rápido possível.|1
+RJ2|Informe quando suas máquinas estiverem prontas.|1
+RJ3|Suspenda quando suas máquinas estiverem prontas.|1
+RJ4|A que horas suas máquinas estarão prontas?|1
+RK|Minhas máquinas estarão prontas na hora indicada.|1
+RK1|Minhas máquinas estão prontas.|1
+RL|Pare as máquinas imediatamente.|2|RL ordem → RM estado
+RL1|Pare as máquinas.|2
+RM|Minhas máquinas estão paradas.|2
+RM1|Estou parando as máquinas.|1
+RM2|Sou obrigado a parar as máquinas.|1
+RN|Minhas máquinas estão fora de ação.|2
+# Hélice
+RO|O eixo do hélice está partido.|1
+RO1|Meu hélice está enrascado por uma espia ou cabo.|1
+RO2|Perdi meu hélice.|1
+=CB8|Solicito auxílio imediato; tenho o eixo propulsor partido. (Assistência)
+# Desembarque — embarque
+RP|O desembarque aqui é altamente perigoso.|1
+RP1|O desembarque aqui é altamente perigoso. Há local mais favorável na posição indicada.|1
+=RQ|Interrogativo. (procedimento)
+RR|Este é o melhor lugar para desembarque.|1
+RR1|Serão mostradas luzes ou agitada uma bandeira no melhor lugar para desembarque.|1
+RS|Não é permitido a ninguém vir a bordo.|1
+# Manobras
+RT|Suspenda a execução do que está fazendo e observe meus sinais.|2|gêmeo de X
+RT1|Que manobras você pretende fazer?|1
+RU|Mantenha-se ao largo; estou manobrando com dificuldade.|2|gêmeo de D
+RU1|Estou fazendo experiências de manobra.|1
+# Seguir — suspender
+RV|Siga (para o local indicado, se necessário).|1
+RV1|Siga para o destino.|1
+RV2|Entre no porto.|1
+RV3|Siga para o mar.|1
+RW|Siga para fundear na posição indicada (lat… long…).|1
+RX|Siga na hora indicada.|1
+RY|Você deverá estar a baixa velocidade quando me ultrapassar (ou ultrapassar o navio que faz este sinal).|2
+RZ|Não siga (para o lugar indicado, se necessário).|1
+RZ1|Não saia do porto/fundeadouro.|1
+SA|Posso seguir na hora indicada.|1
+SB|Estou rumando para a posição do acidente.|1|≠ FE (a toda força, com hora prevista)
+SC|Estou suspendendo.|1
+SC1|Estou pronto para suspender.|1
+SC2|Suspenderei tão logo as condições do tempo permitam.|1
+SD|Não estou pronto para suspender.|1
+SE|Não tem significado.|0
+SF|Você (ou o navio indicado) está suspendendo?|1
+SF1|Você está pronto para suspender?|1
+SF2|A que horas você suspenderá?|1
+# Velocidade
+SG|Minha velocidade atual é … nós.|1
+SH|Não tem significado.|0
+SI|Não tem significado.|0
+SJ|Minha velocidade máxima é … nós.|1
+SK|Não tem significado.|0
+SL|Qual é a sua velocidade atual?|1
+SL1|Qual é a sua velocidade máxima?|1
+SM|Estou efetuando experiências de velocidade.|1
+=LI|Estou aumentando / LJ diminuindo a velocidade. (Reboque)
+# Parar — pairar
+SN|Pare imediatamente. Não afunde seu navio. Não ponha embarcações n'água. Não utilize o rádio. Se desobedecer, abrirei fogo.|1
+SO|Pare imediatamente seu navio.|2|gêmeo de L
+SO1|Você deve parar. Aproe para o largo.|1
+SO2|Permaneça onde está.|1
+SP|Quebre o seguimento do seu navio.|2
+SP1|Meu navio está com as máquinas paradas e sem seguimento.|2|gêmeo de M
+SQ|Pare, ou paire sob máquinas.|2
+SQ1|Pare, ou paire sob máquinas, senão abrirei fogo.|1
+SQ2|Você deve parar, ou pairar sob máquinas; enviarei uma embarcação.|1
+SQ3|Você deve parar, ou pairar sob máquinas; estou indo para seu bordo.|1
+SR|Não tem significado.|0
+SS|Não tem significado.|0`},
+{id:"pratico",faixa:"UA–UK",tit:"Prático",en:"Pilot",grupo:"V · Miscellaneous (só Pilot)",
+ lede:"A única rubrica de Miscellaneous no recorte — e a do seu ofício. Lida em ordem, conta uma praticagem do começo ao embarque. Tudo aqui é alto potencial.",
+ d:`=G|Solicito prático. (letra única)
+=H|Tenho prático a bordo. (letra única)
+UA|O prático chegará na hora indicada.|2|1 · ele vem
+UB|Paire ou fundeie até a chegada do prático.|2|2 · espere por ele
+UC|Existe algum prático disponível neste lugar (ou no lugar indicado)?|2|3 · há prático?
+UD|Não tem significado.|0
+UE|Onde posso pegar um prático (para o destino indicado, se necessário)?|2|4 · onde pego?
+UF|Siga a embarcação do prático (ou o navio indicado).|2|5 · siga a lancha
+UG|Governe na minha esteira.|2|6 · na esteira
+UH|Você pode me guiar para entrar no porto?|2|7 · pode me guiar?
+UI|O mar está muito agitado; o prático não pode sair para ir a seu encontro.|2|8 · mar agitado
+UJ|Faça uma sombra a boreste para receber a lancha do prático.|2|9 · sombra BE
+UJ1|Faça uma sombra a bombordo para receber a lancha do prático.|2|sombra BB
+UK|A embarcação do prático está provavelmente na marcação … tomada de você.|2|10 · lancha na marcação
+UK1|Você avistou a embarcação do prático?|2
+=KH1|Um rebocador com prático se dirige para você. (Reboque)
+=NA2|A navegação somente é possível com auxílio de prático. (Perigos à navegação)`}
+];
+var MED={id:"medica",faixa:"MAA–MAF",tit:"Pedido — informações gerais",en:"Request — general information",grupo:"Seção Médica · Cap. 1",
+ lede:"Seis grupos. As remissões em itálico são da Seção Geral (rubrica Acidente–médico–ferido, fora do recorte) mas aparecem dentro do Cap. 1.",
+ d:`MAA|Solicito assistência médica urgente.|2|W é o simples; MAA é o urgente
+MAB|Peço que venha ao meu encontro na posição indicada.|1
+MAC|Peço que providencie internação em hospital.|1
+MAD|Estou a … horas do porto mais próximo.|1
+MAE|Estou navegando para o porto mais próximo.|1
+MAF|Estou me afastando do porto mais próximo.|1
+=W|Solicito assistência médica. (letra única)
+=AL|Tenho médico a bordo. · AM Você tem médico a bordo? · AN Necessito de um médico.
+=BR2|Solicito com urgência um helicóptero com médico. · BT2 Um helicóptero se dirige para você com médico.
+=AQ|Devo evacuar urgentemente pessoa(s) ferida(s)/enferma(s). · BS Envie helicóptero/embarcação com maca. · AT Envie os feridos para mim.
+MAG|Não tem significado.|0
+MAH|Não tem significado.|0
+MAI|Não tem significado.|0`};
+
+/* ---- parser ---- */
+function parse(f){var rows=[];f.d.split("\n").forEach(function(l){l=l.trim();if(!l)return;
+  if(l.charAt(0)==="#"){rows.push({t:"sub",x:l.slice(1).trim()});return;}
+  if(l.charAt(0)==="="){var a=l.slice(1).split("|");rows.push({t:"ref",c:a[0],x:a[1]});return;}
+  var p=l.split("|");rows.push({t:"cod",c:p[0],x:p[1],p:+p[2],g:p[3]||"",fam:f});});
+ f.rows=rows;return f;}
+FAM.forEach(parse);parse(MED);
+
+function tabela(f){var h='<div class="tblwrap"><table><tr><th>Código</th><th class="fon">Fonética</th><th>Significado</th></tr>';
+ f.rows.forEach(function(r){
+  if(r.t==="sub"){h+='<tr class="sub"><td colspan="3">'+r.x+'</td></tr>';return;}
+  if(r.t==="ref"){h+='<tr class="ref"><td class="cod">'+r.c+'</td><td class="fon"></td><td>→ '+r.x+'</td></tr>';return;}
+  if(r.p===0){h+='<tr class="nul"><td class="cod">'+r.c+'</td><td class="fon">'+fon(r.c)+'</td><td>Não tem significado</td></tr>';return;}
+  var cls=r.p===3?'p3':(r.p===2?'p2':''),mk=r.p===3?'<span class="mk mk3">COBRADO</span>':(r.p===2?'<span class="mk mk2">ALTO</span>':'');
+  h+='<tr class="'+cls+'"><td class="cod">'+r.c+'</td><td class="fon">'+fon(r.c)+'</td><td>'+r.x+mk+(r.g?'<span class="gancho">↳ '+r.g+'</span>':'')+'</td></tr>';});
+ return h+'</table></div>';}
+function conta(f){var n=0,p3=0,p2=0;f.rows.forEach(function(r){if(r.t==="cod"&&r.p>0){n++;if(r.p===3)p3++;if(r.p===2)p2++;}});return [n,p3,p2];}
+
+(function(){var box=document.getElementById('famBox'),chips=document.getElementById('famChips'),h="",c="",tot=[0,0,0];
+ FAM.forEach(function(f){var k=conta(f);tot[0]+=k[0];tot[1]+=k[1];tot[2]+=k[2];
+  c+='<a href="#fam-'+f.id+'">'+f.faixa+' · '+f.tit+'</a>';
+  h+='<details class="fam" id="fam-'+f.id+'"><summary><span class="fam-faixa">'+f.faixa+'</span><span class="fam-tit">'+f.tit+'</span><span class="fam-en">'+f.en+'</span><span class="fam-n">'+k[0]+' grupos · '+k[1]+' cobrados · '+k[2]+' alto</span></summary><div class="fam-body"><p class="lede2"><b>'+f.grupo+'.</b> '+f.lede+'</p>'+tabela(f)+'</div></details>';});
+ box.innerHTML=h;chips.innerHTML=c;
+ var km=conta(MED);
+ document.getElementById('medBox').innerHTML='<details class="fam" open><summary><span class="fam-faixa">'+MED.faixa+'</span><span class="fam-tit">'+MED.tit+'</span><span class="fam-en">'+MED.en+'</span><span class="fam-n">'+km[0]+' grupos</span></summary><div class="fam-body"><p class="lede2">'+MED.lede+'</p>'+tabela(MED)+'</div></details>';
+ window.addEventListener('hashchange',function(){var id=location.hash.slice(1);var el=document.getElementById(id);if(el&&el.tagName==="DETAILS")el.open=true;});
+ document.querySelectorAll('#famChips a').forEach(function(a){a.addEventListener('click',function(){var el=document.getElementById(a.getAttribute('href').slice(1));if(el)el.open=true;});});
+})();
+function abrirTodas(v){document.querySelectorAll('#famBox details.fam').forEach(function(d){d.open=v;});}
+
+/* ===================== FLASHCARDS ===================== */
+var XII=[["A","Seguida de 3 algarismos: azimute ou marcação (verdadeira)","Azimuth"],["C","Seguida de 3 algarismos: rumo","Course"],["D","Seguida de 2, 4 ou 6 algarismos: data","Date"],["G","Seguida de 4 ou 5 algarismos: longitude","Greenwich"],["K","Seguida de 1 algarismo: desejo comunicar-me por… (Tabela I)","Kall"],["L","Seguida de 4 algarismos: latitude","Latitude"],["R","Seguida de algarismos: distância em milhas","Range"],["S","Seguida de algarismos: velocidade em nós","Speed"],["T","Seguida de 4 algarismos: hora local","Time"],["V","Seguida de algarismos: velocidade em km/h","Velocity"],["Z","Seguida de 4 algarismos: hora UTC","Zulu"]];
+var CARDS=[];
+LETRAS.forEach(function(l){CARDS.push({id:"L-"+l[0],fam:"letras",c:l[0],en:l[1].replace(/^\*/,""),x:l[2],g:l[3],p:l[4]});});
+XII.forEach(function(x){CARDS.push({id:"X-"+x[0],fam:"xii",c:x[0]+" ###",en:"",x:x[1],g:"Gancho: "+x[2],p:(["A","G","L","R"].indexOf(x[0])>=0?3:2)});});
+PROC.forEach(function(p){if(p[1].indexOf("lampejos")===0)return;CARDS.push({id:"P-"+p[0],fam:"proc",c:p[0],en:"",x:p[2],g:"Método: "+p[1],p:p[3]});});
+[["AE","Devo abandonar meu navio."],["BF","A aeronave fez amerissagem forçada na posição indicada e solicita auxílio imediato."],["CB","Solicito auxílio imediato."],["CB6","Solicito auxílio imediato; estou com incêndio a bordo."],["DX","Estou afundando."],["HW","Colidi com embarcação de superfície."],["CP","Estou indo em seu auxílio."],["ED","Seus sinais de perigo estão entendidos."],["EL","Repita a posição do navio em perigo."]].forEach(function(a){CARDS.push({id:"A4-"+a[0],fam:"ap4",c:a[0],en:"",x:a[1],g:"Apêndice 4 — Tabela 3",p:3});});
+FAM.concat([MED]).forEach(function(f){f.rows.forEach(function(r){if(r.t==="cod"&&r.p>0)CARDS.push({id:"G-"+r.c,fam:f.id,c:r.c,en:"",x:r.x,g:r.g,p:r.p});});});
+
+var FAMNOME={letras:"Letra única (Cap. XI)",xii:"Letra + complemento (Cap. XII)",proc:"Sinais de procedimento",ap4:"Apêndice 4 — INTERCO"};
+FAM.forEach(function(f){FAMNOME[f.id]=f.faixa+" · "+f.tit;});FAMNOME.medica="MAA–MAF · Médica Cap. 1";
+(function(){var s=document.getElementById('fcFam'),h='<option value="todas">Todas as famílias</option>';
+ Object.keys(FAMNOME).forEach(function(k){h+='<option value="'+k+'">'+FAMNOME[k]+'</option>';});s.innerHTML=h;s.value="letras";})();
+
+var SAB={};try{SAB=JSON.parse(localStorage.getItem('cis_sabidas')||"{}")||{};}catch(e){SAB={};}
+function salvaSab(){try{localStorage.setItem('cis_sabidas',JSON.stringify(SAB));}catch(e){}}
+var DECK=[],di=0;
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function montarDeck(emb){var f=document.getElementById('fcFam').value,pr=+document.getElementById('fcPri').value;
+ DECK=CARDS.filter(function(c){return (f==="todas"||c.fam===f)&&c.p>=pr&&!SAB[c.id];});
+ if(emb)shuffle(DECK);di=0;showCard();}
+function showCard(){var el=document.getElementById('fcCard');el.classList.remove('flip');
+ var info=document.getElementById('fcInfo');
+ if(!DECK.length){document.getElementById('fcCod').textContent="✓";document.getElementById('fcPh').textContent="Nada pendente neste filtro";document.getElementById('fcFm').textContent="";
+  document.getElementById('fcEn').textContent="";document.getElementById('fcTx').textContent="Troque o filtro ou zere as marcadas como 'sei'.";document.getElementById('fcGk').textContent="";info.textContent="";return;}
+ var c=DECK[di];
+ document.getElementById('fcCod').textContent=c.c;
+ document.getElementById('fcPh').textContent=c.fam==="proc"||c.fam==="xii"?"":fon(c.c);
+ document.getElementById('fcFm').textContent=FAMNOME[c.fam]+(c.p===3?" · já cobrado":(c.p===2?" · alto potencial":""));
+ document.getElementById('fcEn').textContent=c.en||"";
+ document.getElementById('fcTx').textContent=c.x;
+ document.getElementById('fcGk').textContent=c.g?("↳ "+c.g):"";
+ var nSab=CARDS.filter(function(x){return SAB[x.id];}).length;
+ info.textContent="Carta "+(di+1)+" de "+DECK.length+" pendentes · "+nSab+" marcadas como sabidas no total";}
+function fcNext(){if(!DECK.length)return;di=(di+1)%DECK.length;showCard();}
+function fcPrev(){if(!DECK.length)return;di=(di-1+DECK.length)%DECK.length;showCard();}
+function fcMark(ok){if(!DECK.length)return;var c=DECK[di];
+ if(ok){SAB[c.id]=1;salvaSab();DECK.splice(di,1);if(di>=DECK.length)di=0;}
+ else{DECK.splice(di,1);DECK.push(c);if(di>=DECK.length)di=0;}
+ showCard();}
+function zerarSabidas(){SAB={};salvaSab();montarDeck(true);}
+montarDeck(true);
+(function(){var u=CARDS.filter(function(c){return c.fam!=="ap4";});
+ document.getElementById('stCod').textContent=u.length+2;
+ document.getElementById('stP3').textContent=u.filter(function(c){return c.p===3;}).length+2;
+ document.getElementById('stP2').textContent=u.filter(function(c){return c.p===2;}).length;})();
+
+/* ===================== SIMULADO ===================== */
+var QUIZ=[
+ {b:"Letra única",q:"A vessel is flying the single-letter flag \"O\" (Oscar). According to the International Code of Signals, this signal means:",
+  o:["Man overboard.","I require a pilot.","I am dragging my anchor.","I have a pilot on board.","Keep clear of me; I am manoeuvring with difficulty."],a:0,
+  e:"O = <em>Man overboard</em> (homem ao mar). Distratores: G (I require a pilot), Y (dragging anchor), H (pilot on board), D (manoeuvring with difficulty). Gêmeo de duas letras: GW."},
+ {b:"Letra única",q:"Which single-letter signal means \"I require a tug\"?",
+  o:["Z","T","K","G","Y"],a:0,
+  e:"<b>Z</b> = <em>I require a tug</em> (solicito rebocador). T = pair trawling · K = I wish to communicate · G = I require a pilot · Y = dragging anchor. Gêmeo: KF."},
+ {b:"Letra única",q:"A lancha de prático se aproxima, de dia, de um NM que no dia anterior comunicara estar fundeado. No mastro principal, além das bandeiras nacionais, o NM exibe apenas a bandeira MIKE atopetada. Conclui-se que o NM:",
+  o:["suspendeu e está parado, sem seguimento.","está guinando para bombordo.","está guinando para boreste.","está arrastando o ferro.","está manobrando com dificuldade."],a:0,
+  e:"<b>M</b> = <em>My vessel is stopped and making no way through the water</em>. Um navio fundeado não precisa dizer isso; se o diz, deixou de estar fundeado. Distratores: I (BB), E (BE), Y (arrasta o ferro), D (dificuldade). Modelo de 2011-Q12."},
+ {b:"Duas letras",q:"Questioned by \"HV\", a ship that has struck a submerged tree trunk should answer:",
+  o:["HW 4","HW 1","HW 3","HW 5","HX 4"],a:0,
+  e:"<b>HW 4</b> = <em>I have collided with a submerged object</em> (colidi com objeto submerso). HW1 navio-farol · HW3 navio desconhecido · HW5 boia · HX4 = avarias leves abaixo da linha d'água. Cobrada em 2006-Q70."},
+ {b:"Duas letras",q:"Após a colisão, perguntado com HX, o navio informa ter sofrido avarias LEVES ABAIXO da linha d'água. O sinal é:",
+  o:["HX 4","HX 1","HX 2","HX 3","HY 2"],a:0,
+  e:"Matriz HX: primeiro a gravidade, depois a posição — 1 sérias acima · 2 sérias abaixo · 3 leves acima · <b>4 leves abaixo</b>. HY2 = não sei o que sucedeu com o navio com o qual colidi."},
+ {b:"Duas letras",q:"O sinal que significa \"Dê atrás a toda força\" é:",
+  o:["QL 2","QG 2","QI 2","QL 3","QM"],a:0,
+  e:"Espelho +5: QG (dê adiante) ↔ <b>QL</b> (dê atrás); complemento 2 = toda força. QG2 = adiante toda força · QI2 = continuarei dando atrás · QL3 = continue dando atrás · QM = não continue dando atrás."},
+ {b:"Duas letras",q:"O prático, na lancha, pede ao navio: \"Faça uma sombra a bombordo para receber a lancha do prático\". O sinal é:",
+  o:["UJ 1","UJ","UK","UK 1","UB"],a:0,
+  e:"<b>UJ</b> = sombra a boreste; <b>UJ 1</b> = sombra a bombordo (boreste vem antes). UK = lancha do prático na marcação… · UK1 = avistou a lancha? · UB = paire ou fundeie até a chegada do prático."},
+ {b:"Duas letras",q:"Para transmitir por bandeiras a mensagem \"O navio encalhado na latitude… longitude… necessita auxílio\", usa-se o grupo:",
+  o:["CI","JF","CB 4","CH","CC"],a:0,
+  e:"<b>CI</b> = <em>o navio encalhado na lat… long… necessita auxílio</em> (Assistência). JF = estou encalhado (Encalhe, fora do recorte) — o distrator de 2011-Q51. CB4 = solicito auxílio imediato; estou encalhado (sem posição). CH = foi informado que o navio indicado necessita auxílio. CC = estou em perigo na posição… e solicito auxílio."},
+ {b:"Duas letras",q:"Which signal of the International Code of Signals is listed among the distress signals of Annex IV to COLREG?",
+  o:["NC","CB","CC","ED","CP"],a:0,
+  e:"<b>NC</b> = <em>I am in distress and require immediate assistance</em> — é o sinal de perigo do Apêndice 1. CB = solicito auxílio imediato · CC = estou em perigo na posição… · ED = sinais de perigo entendidos · CP = estou indo em seu auxílio."},
+ {b:"Complementos e Cap. XII",q:"In the International Code of Signals, the letter \"G\" followed by four or five numerals indicates:",
+  o:["Longitude.","Latitude.","Azimuth or bearing.","Course.","Local time."],a:0,
+  e:"<b>G</b> = longitude (gancho: Greenwich); 3 algarismos de graus + 2 de minutos, E/W depois. L = latitude (4 algarismos) · A = azimute (3) · C = rumo (3) · T = hora local (4)."},
+ {b:"Bandeiras e substitutas",q:"Com um só regimento de bandeiras, o sinal L 2330 é içado, de cima para baixo, como:",
+  o:["L · 2 · 3 · 2ª substituta · 0","L · 2 · 3 · 3ª substituta · 0","L · 2 · 3 · 1ª substituta · 0","L · 2 · 1ª substituta · 3 · 0","L · 2 · 3 · 3 · 0"],a:0,
+  e:"A substituta segue um numeral, então conta só os numerais: o segundo \"3\" repete o <b>2º numeral</b> → <b>2ª substituta</b>. Contar o L como 1ª posição leva à 3ª substituta (errado). Exemplo do próprio Cap. V."},
+ {b:"Bandeiras e substitutas",q:"Para içar o número 1,11 com um só regimento, usando o galhardete de resposta como vírgula decimal, a sequência correta é:",
+  o:["1 · galh. resposta · 1ª subst. · 2ª subst.","1 · galh. resposta · 2ª subst. · 3ª subst.","1 · galh. resposta · 1ª subst. · 1ª subst.","1 · 1ª subst. · galh. resposta · 2ª subst.","1 · galh. resposta · 1ª subst. · 3ª subst."],a:0,
+  e:"Regra do Cap. V: quando o galhardete de resposta é vírgula, proceda como se ele não existisse para escolher a substituta. Numerais: 1 · 1 · 1 → o 2º repete o 1º (1ª subst.), o 3º repete o 2º (2ª subst.). Cada substituta só uma vez por grupo."},
+ {b:"Bandeiras e substitutas",q:"A estação receptora avistou um sinal de bandeiras, mas não consegue distingui-lo claramente. Ela deve:",
+  o:["manter o galhardete de resposta a meio.","atopetar o galhardete de resposta.","içar ZL.","arriar o galhardete de resposta.","içar RPT."],a:0,
+  e:"Não distinguiu → galhardete <b>a meio</b>. Atopetar = entendi. <b>ZL</b> é para quem distinguiu mas não compreendeu (ou ZQ: parece codificado incorretamente)."},
+ {b:"Radiotelefonia (Ap. 4 e Cap. VIII)",q:"Decode the distress message: \"MAYDAY … Interco Alfa Nadazero Kartefour Pantafive Ushant Romeo Unaone Pantafive Delta X-ray\".",
+  o:["In distress, bearing 045° from Ushant, distance 15 miles; I am sinking.","In distress, bearing 045° from Ushant, distance 15 miles; I am on fire.","In distress, bearing 225° from Ushant, distance 15 miles; I am sinking.","Bearing 045° from Ushant, distance 15 miles; I have collided with a surface craft.","Urgency message: bearing 045° from Ushant, distance 15 miles; I require immediate assistance."],a:0,
+  e:"<b>A045</b> = marcação verdadeira 045° do navio, tomada de Ushant · <b>R15</b> = 15 milhas · <b>DX</b> = <em>I am sinking</em>. Distratores: CB6 (fogo), 225° (recíproca), HW (colisão), PAN PAN (nível errado). Modelo de 2008-Q1."},
+ {b:"Radiotelefonia (Ap. 4 e Cap. VIII)",q:"Em radiotelefonia, para pedir a repetição de \"tudo depois de…\", transmite-se RPT seguido de:",
+  o:["AA","AB","BN","WA","WB"],a:0,
+  e:"<b>AA</b> = all After · AB = all Before · BN = betweeN · WA = Word After · WB = Word Before."}
+];
+var ORDQ=[],qi=0,answered=false,hits=0,tot=0,PORB={};
+function iniciarQuiz(){ORDQ=shuffle(QUIZ.map(function(q){var idx=shuffle(q.o.map(function(_,i){return i;}));
+  return {b:q.b,q:q.q,e:q.e,o:idx.map(function(i){return q.o[i];}),a:idx.indexOf(q.a)};}));
+ qi=0;hits=0;tot=0;PORB={};document.getElementById('result').style.display='none';upScore();loadQ();}
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+ document.getElementById('scPct').textContent=tot?Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=ORDQ[qi];answered=false;
+ document.getElementById('qBlk').textContent=Q.b;
+ document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+ var box=document.getElementById('qOpts');box.innerHTML="";
+ Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent="("+"abcde"[i]+") "+t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+ var fb=document.getElementById('qFb');fb.className='fb';fb.innerHTML="";
+ document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+ORDQ.length;
+ document.getElementById('qNext').disabled=true;
+ document.getElementById('qNext').textContent=(qi>=ORDQ.length-1)?"Ver resultado ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=ORDQ[qi];tot++;
+ PORB[Q.b]=PORB[Q.b]||[0,0];PORB[Q.b][1]++;
+ document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+ var fb=document.getElementById('qFb');
+ if(i===Q.a){hits++;PORB[Q.b][0]++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+ else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ Correta: ("+"abcde"[Q.a]+"). "+Q.e;}
+ upScore();document.getElementById('qNext').disabled=false;}
+function nextQ(){if(qi<ORDQ.length-1){qi++;loadQ();}else{resultado();}}
+function resultado(){var h="";Object.keys(PORB).forEach(function(b){var r=PORB[b],pc=Math.round(100*r[0]/r[1]);
+  var leit=pc===100?"Dominado":(pc>=60?"Revisar os erros nos flashcards":"Prioridade: voltar à seção e aos flashcards");
+  h+='<tr><td>'+b+'</td><td class="center"><b>'+r[0]+'/'+r[1]+'</b> ('+pc+'%)</td><td>'+leit+'</td></tr>';});
+ document.getElementById('resBody').innerHTML=h;var R=document.getElementById('result');R.style.display='block';R.scrollIntoView({behavior:'smooth'});
+ document.getElementById('qNext').disabled=true;}
+iniciarQuiz();
+</script>
+</body>
+</html>

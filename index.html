@@ -124,6 +124,13 @@
    ====================================================================== */
 const CADERNOS = [
   {
+    materia:"comunicacoes", badge:"CIS · Bloco C",
+    titulo:"Código Internacional de Sinais — mapa e todos os códigos",
+    arquivo:"cis_codigo_internacional_sinais.html",
+    desc:"Abre o Módulo VI. Recorte exato do Anexo 2-B (Caps. I–V, VII, VIII, X, XI, XII; 12 rubricas da Seção Geral; Médica Cap. 1; Apêndices 1·2·4). Mapa do alfabeto (KA–KE água aberta × KF–LJ reboque), os padrões que deduzem os complementos (espelho QD–QH/QI–QM +5, boreste antes de bombordo, ordem→confirmação, gêmeos letra única↔duas letras), as 26 letras únicas em inglês, Cap. XII (A·C·D·G·K·L·R·S·T·V·Z), substitutas, procedurais, MAYDAY/INTERCO e ~650 grupos com prioridade (âmbar = já cobrado, amarelo = alto potencial). Mapa da banca (2006-Q70 HW4, 2008-Q1 INTERCO/CB6, 2011-Q12 M, 2011-Q51 CI+substitutas, 2012-Q12 M), flashcards por família e simulado de 15 questões com resultado por bloco.",
+    tags:["BANCA","DECORAR","CIS","INTERCO","Letra única","Substitutas","Seção Geral","MAYDAY","Prático","Reboque","Colisão","IMO 2005"]
+  },
+  {
     materia:"meteorologia", badge:"Ynoue Cap. 1 · Bloco B",
     titulo:"Atmosfera Terrestre — composição e estrutura vertical",
     arquivo:"meteo_cap1_atmosfera.html",
@@ -662,9 +669,10 @@ const MATERIAS = {
   "seakeeping":{ titulo:"Comportamento no Mar (Seakeeping)", sub:"Módulo I · Blocos I–J · Ondas Regulares · Mar Irregular e Espectros (Santos Ondas Cap. 3·4)", cor:"#6B4E8E" },
   "shiphandling":{ titulo:"Arte Naval — Shiphandling/MacElrevey", sub:"Módulo II · Blocos D·E·F·G · MacElrevey 4ª ed.", cor:"#0D3D36" },
   "meteorologia":{ titulo:"Meteorologia e Oceanografia", sub:"Módulo V · Bloco B · Ynoue et al. (2017)", cor:"#1F6F8B" },
-  "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" }
+  "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" },
+  "comunicacoes":{ titulo:"Comunicações", sub:"Módulo VI · SMCP · Radiocomunicações/GMDSS · CIS", cor:"#8A5A2B" }
 };
-const ORDEM = ["navegacao","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia"];
+const ORDEM = ["navegacao","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }
