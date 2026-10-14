@@ -398,7 +398,7 @@
     <p>Uma içada de cada vez; cada içada fica no ar até ser reconhecida. Indicativo do destinatário içado junto com o sinal; sem indicativo, o sinal vale para todos no campo visual. Desconhecendo o indicativo: <span class="cod">VF</span> (ice seu indicativo) ou <span class="cod">CS</span> (qual o nome ou indicativo?).<br>
     <strong>Receptora</strong>: iça o <strong>galhardete de resposta a meio</strong> ao avistar o sinal e <strong>atopeta</strong> ao entendê-lo; volta a meio quando a transmissora arria, e assim por diante.<br>
     <strong>Transmissora</strong>: completa o sinal içando o <strong>galhardete de resposta isolado</strong> após a última içada.<br>
-    Se não distinguir: mantém o galhardete <strong>a meio</strong>. Se distinguir mas não entender: <span class="cod">ZQ</span> (sinal parece codificado incorretamente) ou <span class="cod">ZL</span> (recebi, mas não compreendi). Soletrar em linguagem clara: <span class="cod">YZ</span>. Navio de guerra que quer falar com mercante: iça o <strong>galhardete do código</strong> bem visível durante toda a comunicação.</p>
+    Se não distinguir: mantém o galhardete <strong>a meio</strong>. Se distinguir mas não entender: <span class="cod">ZQ</span> (sinal parece codificado incorretamente) ou <span class="cod">ZL</span> (recebi, mas não compreendi) — <span class="hl-amb">"não compreendido" = ZL</span>; não confundir com <span class="cod">ZP</span> (<em>meu</em> último sinal foi incorreto). Soletrar em linguagem clara: <span class="cod">YZ</span>. Navio de guerra que quer falar com mercante: iça o <strong>galhardete do código</strong> bem visível durante toda a comunicação.</p>
   </div>
 
   <div class="box key">
@@ -527,6 +527,7 @@
     <tr class="p2"><td class="cod">D · RU · RT · X</td><td><b>D</b>/<b>RU</b> manobro com dificuldade · <b>X</b>/<b>RT</b> suspenda o que está fazendo e observe meus sinais</td></tr>
     <tr class="p2"><td class="cod">UF · UG · PM · PM 1</td><td><b>UF</b> siga a embarcação do prático · <b>UG</b> governe na minha esteira (é o prático quem fala — família U) · <b>PM</b> siga minha esteira (instrução genérica de governo — família P) · <b>PM 1</b> siga adiante e mostre o caminho</td></tr>
     <tr class="p3"><td class="cod">AR · AS · RQ · RPT</td><td><b>AR</b> fim da transmissão (✗ "All Repeated") · <b>AS</b> aguarde (✗ "All Stations" — isso é CQ) · <b>RQ</b> interrogativo (✗ "Repeat the question") · <b>RPT</b> repita</td></tr>
+    <tr class="p3"><td class="cod">ZL · ZQ · ZP · RPT</td><td><b>ZL</b> recebi seu sinal, mas não o compreendi (<em>received but not understood</em>) · <b>ZQ</b> seu sinal parece codificado incorretamente; verifique e repita (<em>the error is yours</em>) · <b>ZP</b> <u>meu</u> último sinal foi incorreto; vou repeti-lo corretamente · <b>RPT</b> repita — mas <u>não</u> se usa RPT para sinal não compreendido (Cap. VI): usa-se ZL. Não distinguiu? Galhardete <b>a meio</b>. Distratores de enchimento vistos em questão: ZT e ZZ (livre prática, fora do recorte)</td></tr>
     <tr class="p2"><td class="cod">E · I · S</td><td>Guinando para boreste · para bombordo · máquinas dando atrás (1, 2, 3 pontos)</td></tr>
     <tr class="p2"><td class="cod">QG · QL · QD · QI</td><td>Ordem (G/L) × estado (D/I); adiante (D–H) × atrás (I–M)</td></tr>
     <tr class="p2"><td class="cod">HW · HX · HY</td><td>Colidi com… · sofreu avarias? · o navio com quem colidi…</td></tr>
@@ -594,7 +595,7 @@
 <!-- ===== SIMULADO ===== -->
 <section class="bloco" id="quiz">
   <h2 class="sec"><span class="n">?</span> Simulado no formato da banca</h2>
-  <p class="lede">Dezessete questões, cinco alternativas, seis enunciados em inglês. Questões e alternativas são embaralhadas a cada tentativa; no fim, o resultado por bloco.</p>
+  <p class="lede">Dezoito questões, cinco alternativas, seis enunciados em inglês. Questões e alternativas são embaralhadas a cada tentativa; no fim, o resultado por bloco.</p>
   <div class="score" id="score">Placar: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
   <div class="quiz" id="quizBox">
     <span class="blk" id="qBlk"></span>
@@ -1553,6 +1554,7 @@ XII.forEach(function(x){CARDS.push({id:"X-"+x[0],fam:"xii",c:x[0]+" ###",en:"",x
 PROC.forEach(function(p){if(p[1]===2)return;CARDS.push({id:"P-"+p[0],fam:"proc",c:p[0],en:p[2],x:p[3],g:(p[5]?"Transmitido como um só símbolo (traço sobre as letras) · ":"")+"Parte "+p[1]+" do Cap. X",p:p[4]});});
 [["AE","Devo abandonar meu navio."],["BF","A aeronave fez amerissagem forçada na posição indicada e solicita auxílio imediato."],["CB","Solicito auxílio imediato."],["CB6","Solicito auxílio imediato; estou com incêndio a bordo."],["DX","Estou afundando."],["HW","Colidi com embarcação de superfície."],["CP","Estou indo em seu auxílio."],["ED","Seus sinais de perigo estão entendidos."],["EL","Repita a posição do navio em perigo."]].forEach(function(a){CARDS.push({id:"A4-"+a[0],fam:"ap4",c:a[0],en:"",x:a[1],g:"Apêndice 4 — Tabela 3",p:3});});
 [["PM","Siga minha esteira (ou a esteira do navio indicado).","≠ UG (governe na minha esteira, dito pelo prático) · rubrica fora, citada em Prático"],["PM1","Siga adiante e mostre o caminho.","Remissão da rubrica Prático"],["OL","Neste porto (ou no indicado) faz-se praticagem pelo radar?","Remissão da rubrica Prático"]].forEach(function(a){CARDS.push({id:"R-"+a[0],fam:"pratico",c:a[0],en:"",x:a[1],g:a[2],p:2});});
+[["ZL","Recebi seu sinal, todavia não pude compreendê-lo.","Your signal has been received but not understood.","Cap. V e VI · para sinal não compreendido não se usa RPT",3],["ZQ","Seu sinal parece ter sido codificado incorretamente. Verifique e repita-o integralmente.","Your signal appears incorrectly coded. You should check and repeat the whole.","Cap. V · o erro é de quem transmitiu",3],["ZP","Meu último sinal foi incorreto. Vou repeti-lo corretamente.","My last signal was incorrect. I will repeat it correctly.","Rubrica Comunicações (fora) · o erro é MEU",2]].forEach(function(a){CARDS.push({id:"Z-"+a[0],fam:"proc",c:a[0],en:a[2],x:a[1],g:a[3],p:a[4]});});
 FAM.concat([MED]).forEach(function(f){f.rows.forEach(function(r){if(r.t==="cod"&&r.p>0)CARDS.push({id:"G-"+r.c,fam:f.id,c:r.c,en:"",x:r.x,g:r.g,p:r.p});});});
 
 var FAMNOME={letras:"Letra única (Cap. XI)",xii:"Letra + complemento (Cap. XII)",proc:"Sinais de procedimento",ap4:"Apêndice 4 — INTERCO"};
@@ -1643,6 +1645,9 @@ var QUIZ=[
  {b:"Duas letras",q:"A lancha de prático, à frente do navio, quer que o navio a acompanhe e sinaliza \"Governe na minha esteira\". Dentro da rubrica Prático, o grupo correto é:",
   o:["UG","PM","UF","PM 1","UH"],a:0,
   e:"<b>UG</b> = governe na minha esteira (família U, Prático). <b>PM</b> = siga minha esteira (instrução genérica de governo, rubrica fora do recorte, citada em Prático) · UF = siga a embarcação do prático · PM 1 = siga adiante e mostre o caminho · UH = você pode me guiar para entrar no porto?"},
+ {b:"Sinais de procedimento",q:"De acordo com o CIS, a estação recebe um sinal de outra estação, consegue distingui-lo, mas não o compreende. Qual sinal deve transmitir?",
+  o:["ZL","ZQ","ZP","RPT","ZT"],a:0,
+  e:"<b>ZL</b> = <em>Your signal has been received but not understood</em>. ZQ = seu sinal parece codificado incorretamente (acusa erro de codificação do outro) · ZP = MEU último sinal foi incorreto · RPT não se usa para sinal não compreendido (Cap. VI) · ZT = livre prática, fora do recorte. Se nem distinguiu: galhardete de resposta a meio."},
  {b:"Radiotelefonia (Ap. 4 e Cap. VIII)",q:"Em radiotelefonia, para pedir a repetição de \"tudo depois de…\", transmite-se RPT seguido de:",
   o:["AA","AB","BN","WA","WB"],a:0,
   e:"<b>AA</b> = all After · AB = all Before · BN = betweeN · WA = Word After · WB = Word Before."}
