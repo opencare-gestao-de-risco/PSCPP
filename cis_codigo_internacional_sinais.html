@@ -74,6 +74,7 @@
   .tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
   /* ---- códigos ---- */
+  .ov{text-decoration:overline}
   .cod{font-family:'Courier New',monospace;font-weight:bold;font-size:15px;color:var(--verde);white-space:nowrap}
   td.cod{width:78px}
   td.fon{font-family:'Trebuchet MS',sans-serif;font-size:11.5px;color:var(--mute);width:150px}
@@ -352,8 +353,16 @@
   <div class="box key">
     <h4>Tabela I — complemento de K, YO–YT, ZF, ZI–ZK</h4>
     <p><strong>1</strong> Morse por bandeirolas ou braços · <strong>2</strong> alto-falante (megafone) · <strong>3</strong> Morse por lâmpada · <strong>4</strong> sinais sonoros. Ex.: <span class="cod">K4</span> = desejo comunicar-me por sinais sonoros.</p>
-    <h4>Tabela II — complemento de CC, CD (o que solicito)</h4>
-    <p><strong>0</strong> água · <strong>1</strong> provisões · <strong>2</strong> combustível · <strong>3</strong> bombas · <strong>4</strong> combate a incêndio · <strong>5</strong> assistência médica · <strong>6</strong> reboque · <strong>7</strong> embarcação de sobrevivência · <strong>8</strong> navio para ficar à espera · <strong>9</strong> quebra-gelo. Ex.: <span class="cod">CD4</span> = solicito aparelhagem de combate a incêndio.</p>
+    <h4>Tabela II — complemento de CC, CD (o que solicito) <span class="tag t-decorar">DECORAR</span></h4>
+    <div class="tblwrap"><table>
+      <tr><th class="center">Nº</th><th>Table II (IMO, en)</th><th>Tradução</th><th class="center">Nº</th><th>Table II (IMO, en)</th><th>Tradução</th></tr>
+      <tr><td class="cod center">0</td><td><em>Water</em></td><td>Água</td><td class="cod center">5</td><td><em>Medical assistance</em></td><td>Assistência médica</td></tr>
+      <tr><td class="cod center">1</td><td><em>Provisions</em></td><td>Provisões</td><td class="cod center">6</td><td><em>Towing</em></td><td>Reboque</td></tr>
+      <tr><td class="cod center">2</td><td><em>Fuel</em></td><td>Combustível</td><td class="cod center">7</td><td><em>Survival craft</em></td><td>Embarcação de sobrevivência</td></tr>
+      <tr><td class="cod center">3</td><td><em>Pumping equipment</em></td><td>Equipamento de bombeamento</td><td class="cod center">8</td><td><em>Vessel to stand by</em></td><td>Navio para ficar à espera</td></tr>
+      <tr><td class="cod center">4</td><td><em>Fire-fighting equipment</em></td><td>Combate a incêndio</td><td class="cod center">9</td><td><em>Ice-breaker</em></td><td>Quebra-gelo</td></tr>
+    </table></div>
+    <p style="font-size:13.5px">Ex.: <span class="cod">CD4</span> = solicito equipamento de combate a incêndio · <span class="cod">CC</span> + complemento = estou em perigo na posição… e solicito auxílio imediato (o que preciso). Gancho da ordem: <strong>sobreviver → combater → evacuar</strong> — primeiro o básico (água, provisões, combustível), depois o controle de avaria (bombas, incêndio), depois pessoas e salvamento (médico, reboque, embarcação, navio de espera, quebra-gelo).</p>
     <h4>Tabela III — direções (MJ, MT, NB e outros)</h4>
     <p><strong>0</strong> desconhecida/calma · <strong>1</strong> NE · <strong>2</strong> E · <strong>3</strong> SE · <strong>4</strong> S · <strong>5</strong> SW · <strong>6</strong> W · <strong>7</strong> NW · <strong>8</strong> N · <strong>9</strong> todas/variável. Gancho: gira no sentido horário a partir de NE e termina no Norte (8). <span class="tag t-duvida">DÚVIDA</span> A edição DPC traz "7 Nordeste" — é erro de impressão; pela sequência, 7 = Noroeste.</p>
   </div>
@@ -417,16 +426,20 @@
 
   <h3>Cap. X — Tabelas fonéticas <span class="tag t-decorar">DECORAR</span></h3>
   <div class="tblwrap"><table>
-    <tr><th>Letra</th><th>Palavra</th><th>Letra</th><th>Palavra</th><th>Algarismo</th><th>Palavra-código</th></tr>
+    <tr><th>Letra</th><th>Palavra</th><th>Letra</th><th>Palavra</th><th>Algarismo</th><th>Palavra-código</th><th>Pronúncia IMO</th></tr>
     <tbody id="fonBody"></tbody>
   </table></div>
-  <p style="font-size:13.5px;color:var(--mute)">Cada sílaba com a mesma ênfase. A segunda parte de cada palavra-código (ZERO, ONE, TWO…) é a usada no Serviço Móvel Aeronáutico. Vírgula = <strong>DECIMAL</strong>; ponto = <strong>STOP</strong>.</p>
+  <p style="font-size:13.5px;color:var(--mute)"><em>Note: each syllable should be equally emphasized</em> — cada sílaba com a mesma ênfase. Atenção: <strong>Novenine</strong> se pronuncia "NO-VAY-NINER" e a vírgula é <strong>Decimal</strong> ("DAY-SEE-MAL"). A segunda parte de cada palavra-código (ZERO, ONE, TWO…) é a usada no Serviço Móvel Aeronáutico. Vírgula = <strong>DECIMAL</strong>; ponto = <strong>STOP</strong>.</p>
 
-  <h3>Cap. X — Sinais de procedimento <span class="tag t-decorar">DECORAR</span></h3>
-  <div class="tblwrap"><table>
-    <tr><th>Sinal</th><th>Método</th><th>Significado</th></tr>
-    <tbody id="procBody"></tbody>
-  </table></div>
+  <h3>Cap. X — Sinais de procedimento, nas 4 partes do original <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h3>
+  <p style="font-size:14.5px">O traço sobre as letras (<span class="cod ov">AR</span>, <span class="cod ov">AS</span>) indica que são transmitidas <strong>como um só símbolo</strong>, sem intervalo entre elas. A parte 4 é a cobrada em V/F: a banca inventa significados plausíveis em inglês.</p>
+  <div id="procBox"></div>
+  <div class="box trap">
+    <h4>Distratores inventados — já vistos em questão <span class="tag t-conflito">BANCA</span></h4>
+    <p>✗ <span class="cod ov">AR</span> = <em>"All Repeated"</em> → certo: <em>Ending signal or End of transmission or signal</em>.<br>
+    ✗ <span class="cod">RQ</span> = <em>"Repeat the question"</em> → certo: <em>Interrogative</em> (o grupo anterior vira pergunta). Quem pede repetição é <span class="cod">RPT</span>.<br>
+    Outros que a banca pode criar: <span class="cod ov">AS</span> = "All Stations" (✗ é <em>Waiting signal</em>; todas as estações = <span class="cod">CQ</span>) · <span class="cod">OK</span> = "Over" (✗ é <em>Acknowledging a correct repetition</em>) · <span class="cod">K</span> = "Keep clear" (✗ é <em>I wish to communicate with you</em>) · <span class="cod">R</span> = "Repeat" (✗ é <em>Received</em>).</p>
+  </div>
 </section>
 
 <!-- ===== APÊNDICES ===== -->
@@ -512,6 +525,8 @@
     <tr class="p2"><td class="cod">M · L · SP</td><td><b>M</b> meu navio está parado e sem seguimento · <b>L</b> pare imediatamente <em>seu</em> navio · <b>SP</b> quebre o seguimento do seu navio</td></tr>
     <tr class="p2"><td class="cod">Y · RB · RC</td><td><b>Y</b>/<b>RB</b> estou arrastando meu ferro · <b>RC</b> estou garrando</td></tr>
     <tr class="p2"><td class="cod">D · RU · RT · X</td><td><b>D</b>/<b>RU</b> manobro com dificuldade · <b>X</b>/<b>RT</b> suspenda o que está fazendo e observe meus sinais</td></tr>
+    <tr class="p2"><td class="cod">UF · UG · PM · PM 1</td><td><b>UF</b> siga a embarcação do prático · <b>UG</b> governe na minha esteira (é o prático quem fala — família U) · <b>PM</b> siga minha esteira (instrução genérica de governo — família P) · <b>PM 1</b> siga adiante e mostre o caminho</td></tr>
+    <tr class="p3"><td class="cod">AR · AS · RQ · RPT</td><td><b>AR</b> fim da transmissão (✗ "All Repeated") · <b>AS</b> aguarde (✗ "All Stations" — isso é CQ) · <b>RQ</b> interrogativo (✗ "Repeat the question") · <b>RPT</b> repita</td></tr>
     <tr class="p2"><td class="cod">E · I · S</td><td>Guinando para boreste · para bombordo · máquinas dando atrás (1, 2, 3 pontos)</td></tr>
     <tr class="p2"><td class="cod">QG · QL · QD · QI</td><td>Ordem (G/L) × estado (D/I); adiante (D–H) × atrás (I–M)</td></tr>
     <tr class="p2"><td class="cod">HW · HX · HY</td><td>Colidi com… · sofreu avarias? · o navio com quem colidi…</td></tr>
@@ -579,7 +594,7 @@
 <!-- ===== SIMULADO ===== -->
 <section class="bloco" id="quiz">
   <h2 class="sec"><span class="n">?</span> Simulado no formato da banca</h2>
-  <p class="lede">Quinze questões, cinco alternativas, cinco enunciados em inglês. Questões e alternativas são embaralhadas a cada tentativa; no fim, o resultado por bloco.</p>
+  <p class="lede">Dezessete questões, cinco alternativas, seis enunciados em inglês. Questões e alternativas são embaralhadas a cada tentativa; no fim, o resultado por bloco.</p>
   <div class="score" id="score">Placar: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
   <div class="quiz" id="quizBox">
     <span class="blk" id="qBlk"></span>
@@ -610,6 +625,8 @@
     <li><b>Radiotelefonia:</b> DE, CQ, INTERCO, YZ, AS, R, RPT + AA/AB/BN/WA/WB, AR. MAYDAY &gt; PAN PAN &gt; SÉCURITÉ. Ap. 4: AE, BF, CB, CB6, DX, HW, CP, ED, EL; posição A+3 (verdadeira) e R, ou L+4 e G+5.</li>
     <li><b>Mapa:</b> A abandono · C assistência · D–E perigo · F–H busca e salvamento/sobreviventes · HV–HZ colisão · I–J incêndio · KF–LJ reboque · LX–MC canal · MJ–NJ perigos · Q–S manobras · U prático.</li>
     <li><b>Padrões:</b> espelho QD–QH/QI–QM (+5) · boreste antes de bombordo · ordem → confirmação · pergunta no complemento 1 (família curta) ou no fim (longa).</li>
+    <li><b>Procedurais (parte 4):</b> AR e AS levam traço (um só símbolo). Distratores reais: AR ≠ "All Repeated", RQ ≠ "Repeat the question" (RQ = interrogativo; repetir = RPT).</li>
+    <li><b>Prático:</b> UF siga a lancha · UG governe na minha esteira · PM siga minha esteira (rubrica fora, citada em Prático) · PM 1 siga adiante e mostre o caminho · OL praticagem pelo radar?</li>
     <li><b>Banca:</b> 2006-Q70 HW4 · 2008-Q1 INTERCO/CB6 · 2011-Q12 M (provável d) · 2011-Q51 CI + substitutas (e) · 2012-Q12 M + duas esferas (c).</li>
   </ul>
 </details>
@@ -627,6 +644,7 @@
 /* ===================== FONÉTICA ===================== */
 var FON={A:"Alfa",B:"Bravo",C:"Charlie",D:"Delta",E:"Echo",F:"Foxtrot",G:"Golf",H:"Hotel",I:"India",J:"Juliett",K:"Kilo",L:"Lima",M:"Mike",N:"November",O:"Oscar",P:"Papa",Q:"Quebec",R:"Romeo",S:"Sierra",T:"Tango",U:"Uniform",V:"Victor",W:"Whiskey",X:"X-ray",Y:"Yankee",Z:"Zulu"};
 var NUM=["Nadazero","Unaone","Bissotwo","Terrathree","Kartefour","Pantafive","Soxisix","Setteseven","Oktoeight","Novenine"];
+var NUMPR=["NAH-DAH-ZAY-ROH","OO-NAH-WUN","BEES-SOH-TOO","TAY-RAH-TREE","KAR-TAY-FOWER","PAN-TAH-FIVE","SOK-SEE-SIX","SAY-TAH-SEVEN","OK-TOH-AIT","NO-VAY-NINER"];
 var PRON={A:"Alfa",B:"Bravo",C:"Tchárlie",D:"Délta",E:"Éco",F:"Foxtrót",G:"Golf",H:"Rôtel",I:"Índia",J:"Dgiuliét",K:"Kilo",L:"Lima",M:"Maike",N:"November",O:"Oscar",P:"Papa",Q:"Quibec",R:"Rômio",S:"Siérra",T:"Tango",U:"Iúniform",V:"Víctor",W:"Uísqui",X:"Éksrêi",Y:"Iânki",Z:"Zúlu"};
 function fon(c){return c.split("").map(function(ch){if(FON[ch])return FON[ch];if(/[0-9]/.test(ch))return NUM[+ch];return "";}).filter(Boolean).join(" ");}
 
@@ -712,40 +730,46 @@ var LETRAS=[
 (function(){var L="ABCDEFGHIJKLM".split(""),R="NOPQRSTUVWXYZ".split(""),h="";
  for(var i=0;i<13;i++){var n=i<10?i:null;
   h+='<tr><td class="cod">'+L[i]+'</td><td>'+FON[L[i]]+' <span style="color:var(--mute);font-size:12px">('+PRON[L[i]]+')</span></td><td class="cod">'+R[i]+'</td><td>'+FON[R[i]]+' <span style="color:var(--mute);font-size:12px">('+PRON[R[i]]+')</span></td>'+
-   (n!==null?'<td class="cod">'+n+'</td><td>'+NUM[n].toUpperCase()+'</td>':(i===10?'<td>vírgula</td><td>DECIMAL</td>':(i===11?'<td>ponto</td><td>STOP</td>':'<td></td><td></td>')))+'</tr>';}
+   (n!==null?'<td class="cod">'+n+'</td><td>'+NUM[n]+'</td><td class="fon">'+NUMPR[n]+'</td>':(i===10?'<td>vírgula</td><td>Decimal</td><td class="fon">DAY-SEE-MAL</td>':(i===11?'<td>ponto</td><td>Stop</td><td class="fon">STOP</td>':'<td></td><td></td><td></td>')))+'</tr>';}
  document.getElementById('fonBody').innerHTML=h;})();
 
 /* ===================== PROCEDURAIS ===================== */
+/* [sinal, parte, inglês (IMO), português, prioridade, sobrelinha] */
+var PROCP=["","1 · Signals for voice transmissions (radiotelephone or loud hailer)","2 · Signals for flashing light transmission","3 · Signals for flags, radiotelephony and radiotelegraphy transmissions","4 · Signals for use where appropriate in all forms of transmission"];
 var PROC=[
- ["AA","todos","Tudo depois de… (após RPT: repita tudo depois de…)",3],
- ["AB","todos","Tudo antes de… (após RPT)",3],
- ["BN","todos","Tudo entre… e… (após RPT)",3],
- ["WA","todos","Palavra ou grupo depois de… (após RPT)",2],
- ["WB","todos","Palavra ou grupo antes de… (após RPT)",2],
- ["AR","todos","Fim da transmissão ou da mensagem",2],
- ["AS","todos","Aguarde (espera); entre grupos, separa-os",2],
- ["C","todos","Afirmativo; o grupo anterior deve ser lido na afirmativa",2],
- ["CQ","bandeiras · rádio","Chamada geral ou de estação(ões) desconhecida(s)",2],
- ["CS","todos","Qual é o nome ou indicativo do seu navio (estação)?",2],
- ["DE","todos","De… — precede o nome ou indicativo da estação que chama",2],
- ["K","todos","Desejo comunicar-me com você; transmita",2],
- ["NO","todos (voz: \"nô\")","Negativo; o grupo anterior deve ser lido na negativa",2],
- ["OK","todos","Repetição correta; está correto",1],
- ["RQ","todos","Interrogativo; o grupo anterior é uma pergunta",2],
- ["R","todos","Recebido; recebi seu último sinal",2],
- ["RPT","todos","Repito / repita o que transmitiu / repita o que recebeu",2],
- ["INTERCO","voz","Seguem-se grupos do Código Internacional de Sinais",3],
- ["DECIMAL","voz","Vírgula decimal (bandeiras: galhardete do código · lampejo: AAA)",2],
- ["STOP","voz","Ponto final",1],
- ["CORRECTION","voz","Cancele o último grupo; o correto vem a seguir",1],
- ["AA AA AA","lampejos (Cap. VI, fora)","Chamada geral / estação desconhecida",1],
- ["TTTT","lampejos","Resposta a uma chamada; T = recebi cada palavra",1],
- ["EEEEEE","lampejos","Sinal de erro",1],
- ["AAA","lampejos","Vírgula decimal ou ponto final",1]
+ ["Interco",1,"International Code group(s) follow(s).","Seguem-se grupos do Código Internacional de Sinais",3],
+ ["Stop",1,"Full stop.","Ponto final",1],
+ ["Decimal",1,"Decimal point.","Vírgula decimal",2],
+ ["Correction",1,"Cancel my last word or group. The correct word or group follows.","Cancele minha última palavra ou grupo; o correto vem a seguir",1],
+ ["AA AA AA",2,"Call for unknown station or general call.","Chamada para estação desconhecida ou chamada geral",1],
+ ["EEEEE",2,"Erase signal.","Sinal de erro (apagar)",1],
+ ["AAA",2,"Full stop or decimal point.","Ponto final ou vírgula decimal",1],
+ ["TTTT",2,"Answering signal.","Sinal de resposta a uma chamada",1],
+ ["T",2,"Word or group received.","Palavra ou grupo recebido",1],
+ ["CQ",3,"Call for unknown station(s) or general call to all stations.","Chamada para estação(ões) desconhecida(s) ou chamada geral a todas as estações",2],
+ ["AA",4,"\"All after…\" (used after the \"Repeat signal\" (RPT)) means \"Repeat all after…\".","Tudo depois de… (após RPT: repita tudo depois de…)",3],
+ ["AB",4,"\"All before…\" (used after RPT) means \"Repeat all before…\".","Tudo antes de… (após RPT)",3],
+ ["AR",4,"Ending signal or End of transmission or signal.","Sinal de fim de transmissão ou de mensagem",3,1],
+ ["AS",4,"Waiting signal or period.","Sinal de espera (aguarde) ou de intervalo",3,1],
+ ["BN",4,"\"All between… and…\" (used after RPT) means \"Repeat all between… and…\".","Tudo entre… e… (após RPT)",3],
+ ["C",4,"Affirmative — YES or \"The significance of the previous group should be read in the affirmative\".","Afirmativo; o grupo anterior deve ser lido na afirmativa",2],
+ ["CS",4,"\"What is the name or identity signal of your vessel (or station)?\"","Qual é o nome ou indicativo do seu navio (estação)?",3],
+ ["DE",4,"\"From…\" (used to precede the name or identity signal of the calling station).","De… — precede o nome ou indicativo da estação que chama",3],
+ ["K",4,"\"I wish to communicate with you\" or \"Invitation to transmit\".","Desejo comunicar-me com você; transmita",2],
+ ["NO",4,"Negative — NO or \"The significance of the previous group should be read in the negative\". In voice transmission, the pronunciation should be \"NO\".","Negativo; o grupo anterior deve ser lido na negativa (por voz: \"nô\")",2],
+ ["OK",4,"Acknowledging a correct repetition or \"It is correct\".","Acusa repetição correta; está correto",2],
+ ["RQ",4,"Interrogative or \"The significance of the previous group should be read as a question\".","Interrogativo; o grupo anterior é uma pergunta",3],
+ ["R",4,"\"Received\" or \"I have received your last signal\".","Recebido; recebi seu último sinal",2],
+ ["RPT",4,"Repeat signal \"I repeat\" or \"Repeat what you have sent\" or \"Repeat what you have received\".","Repito / repita o que transmitiu / repita o que recebeu",3],
+ ["WA",4,"\"Word or group after…\" (used after RPT) means \"Repeat word or group after…\".","Palavra ou grupo depois de… (após RPT)",2],
+ ["WB",4,"\"Word or group before…\" (used after RPT) means \"Repeat word or group before…\".","Palavra ou grupo antes de… (após RPT)",2]
 ];
-(function(){var h="";PROC.forEach(function(p){var cls=p[3]===3?'p3':(p[3]===2?'p2':'');
- h+='<tr class="'+cls+'"><td class="cod">'+p[0]+'</td><td style="font-size:12.5px">'+p[1]+'</td><td>'+p[2]+'</td></tr>';});
- document.getElementById('procBody').innerHTML=h;})();
+(function(){var h="";for(var pt=1;pt<=4;pt++){
+  h+='<h4 style="font-family:Trebuchet MS,sans-serif;font-size:13px;letter-spacing:.05em;color:var(--verde);margin:18px 0 4px">'+PROCP[pt]+(pt===2?' <span class="tag t-duvida">Cap. VI fora do recorte, mas a tabela é do Cap. X</span>':'')+'</h4><div class="tblwrap"><table><tr><th>Sinal</th><th>Original (IMO, en)</th><th>Tradução</th></tr>';
+  PROC.filter(function(p){return p[1]===pt;}).forEach(function(p){var cls=p[4]===3?'p3':(p[4]===2?'p2':'');
+   h+='<tr class="'+cls+'"><td class="cod'+(p[5]?' ov':'')+'">'+p[0]+'</td><td><em>'+p[2]+'</em></td><td>'+p[3]+'</td></tr>';});
+  h+='</table></div>';}
+ document.getElementById('procBox').innerHTML=h;})();
 
 /* ===================== BANDEIRAS ===================== */
 var BAND=[
@@ -1462,13 +1486,16 @@ UC|Existe algum prático disponível neste lugar (ou no lugar indicado)?|2|3 · 
 UD|Não tem significado.|0
 UE|Onde posso pegar um prático (para o destino indicado, se necessário)?|2|4 · onde pego?
 UF|Siga a embarcação do prático (ou o navio indicado).|2|5 · siga a lancha
-UG|Governe na minha esteira.|2|6 · na esteira
+UG|Governe na minha esteira.|2|6 · na esteira · ≠ PM (siga minha esteira — instrução genérica de governo)
 UH|Você pode me guiar para entrar no porto?|2|7 · pode me guiar?
 UI|O mar está muito agitado; o prático não pode sair para ir a seu encontro.|2|8 · mar agitado
 UJ|Faça uma sombra a boreste para receber a lancha do prático.|2|9 · sombra BE
 UJ1|Faça uma sombra a bombordo para receber a lancha do prático.|2|sombra BB
 UK|A embarcação do prático está provavelmente na marcação … tomada de você.|2|10 · lancha na marcação
 UK1|Você avistou a embarcação do prático?|2
+=PM|Siga minha esteira (ou a esteira do navio indicado). — remissão da própria rubrica Prático (Instruções de navegação e governo, fora)
+=PM1|Siga adiante e mostre o caminho. — remissão da rubrica Prático
+=OL|Neste porto (ou no porto indicado) faz-se praticagem pelo radar? — remissão da rubrica Prático (Navegação eletrônica, fora)
 =KH1|Um rebocador com prático se dirige para você. (Reboque)
 =NA2|A navegação somente é possível com auxílio de prático. (Perigos à navegação)`}
 ];
@@ -1523,8 +1550,9 @@ var XII=[["A","Seguida de 3 algarismos: azimute ou marcação (verdadeira)","Azi
 var CARDS=[];
 LETRAS.forEach(function(l){CARDS.push({id:"L-"+l[0],fam:"letras",c:l[0],en:l[1].replace(/^\*/,""),x:l[2],g:l[3],p:l[4]});});
 XII.forEach(function(x){CARDS.push({id:"X-"+x[0],fam:"xii",c:x[0]+" ###",en:"",x:x[1],g:"Gancho: "+x[2],p:(["A","G","L","R"].indexOf(x[0])>=0?3:2)});});
-PROC.forEach(function(p){if(p[1].indexOf("lampejos")===0)return;CARDS.push({id:"P-"+p[0],fam:"proc",c:p[0],en:"",x:p[2],g:"Método: "+p[1],p:p[3]});});
+PROC.forEach(function(p){if(p[1]===2)return;CARDS.push({id:"P-"+p[0],fam:"proc",c:p[0],en:p[2],x:p[3],g:(p[5]?"Transmitido como um só símbolo (traço sobre as letras) · ":"")+"Parte "+p[1]+" do Cap. X",p:p[4]});});
 [["AE","Devo abandonar meu navio."],["BF","A aeronave fez amerissagem forçada na posição indicada e solicita auxílio imediato."],["CB","Solicito auxílio imediato."],["CB6","Solicito auxílio imediato; estou com incêndio a bordo."],["DX","Estou afundando."],["HW","Colidi com embarcação de superfície."],["CP","Estou indo em seu auxílio."],["ED","Seus sinais de perigo estão entendidos."],["EL","Repita a posição do navio em perigo."]].forEach(function(a){CARDS.push({id:"A4-"+a[0],fam:"ap4",c:a[0],en:"",x:a[1],g:"Apêndice 4 — Tabela 3",p:3});});
+[["PM","Siga minha esteira (ou a esteira do navio indicado).","≠ UG (governe na minha esteira, dito pelo prático) · rubrica fora, citada em Prático"],["PM1","Siga adiante e mostre o caminho.","Remissão da rubrica Prático"],["OL","Neste porto (ou no indicado) faz-se praticagem pelo radar?","Remissão da rubrica Prático"]].forEach(function(a){CARDS.push({id:"R-"+a[0],fam:"pratico",c:a[0],en:"",x:a[1],g:a[2],p:2});});
 FAM.concat([MED]).forEach(function(f){f.rows.forEach(function(r){if(r.t==="cod"&&r.p>0)CARDS.push({id:"G-"+r.c,fam:f.id,c:r.c,en:"",x:r.x,g:r.g,p:r.p});});});
 
 var FAMNOME={letras:"Letra única (Cap. XI)",xii:"Letra + complemento (Cap. XII)",proc:"Sinais de procedimento",ap4:"Apêndice 4 — INTERCO"};
@@ -1609,6 +1637,12 @@ var QUIZ=[
  {b:"Radiotelefonia (Ap. 4 e Cap. VIII)",q:"Decode the distress message: \"MAYDAY … Interco Alfa Nadazero Kartefour Pantafive Ushant Romeo Unaone Pantafive Delta X-ray\".",
   o:["In distress, bearing 045° from Ushant, distance 15 miles; I am sinking.","In distress, bearing 045° from Ushant, distance 15 miles; I am on fire.","In distress, bearing 225° from Ushant, distance 15 miles; I am sinking.","Bearing 045° from Ushant, distance 15 miles; I have collided with a surface craft.","Urgency message: bearing 045° from Ushant, distance 15 miles; I require immediate assistance."],a:0,
   e:"<b>A045</b> = marcação verdadeira 045° do navio, tomada de Ushant · <b>R15</b> = 15 milhas · <b>DX</b> = <em>I am sinking</em>. Distratores: CB6 (fogo), 225° (recíproca), HW (colisão), PAN PAN (nível errado). Modelo de 2008-Q1."},
+ {b:"Sinais de procedimento",q:"Regarding the procedural signals for use in all forms of transmission (International Code of Signals, Chapter X), analyse the statements:\nI) AR — \"All Repeated\" means \"You repeated your last message\".\nII) AS — Waiting signal or period.\nIII) CS — \"What is the name or identity signal of your vessel (or station)?\"\nIV) DE — \"From…\", used to precede the name or identity signal of the calling station.\nV) RQ — \"Repeat the question\", used after a question.\nWhich statements are correct?",
+  o:["II, III and IV only.","I, II and III only.","II, IV and V only.","I, III and V only.","All of them."],a:0,
+  e:"<b>I falsa</b>: AR = <em>Ending signal or End of transmission or signal</em>. <b>V falsa</b>: RQ = <em>Interrogative</em>; quem pede repetição é RPT. II, III e IV reproduzem a tabela do Cap. X, parte 4."},
+ {b:"Duas letras",q:"A lancha de prático, à frente do navio, quer que o navio a acompanhe e sinaliza \"Governe na minha esteira\". Dentro da rubrica Prático, o grupo correto é:",
+  o:["UG","PM","UF","PM 1","UH"],a:0,
+  e:"<b>UG</b> = governe na minha esteira (família U, Prático). <b>PM</b> = siga minha esteira (instrução genérica de governo, rubrica fora do recorte, citada em Prático) · UF = siga a embarcação do prático · PM 1 = siga adiante e mostre o caminho · UH = você pode me guiar para entrar no porto?"},
  {b:"Radiotelefonia (Ap. 4 e Cap. VIII)",q:"Em radiotelefonia, para pedir a repetição de \"tudo depois de…\", transmite-se RPT seguido de:",
   o:["AA","AB","BN","WA","WB"],a:0,
   e:"<b>AA</b> = all After · AB = all Before · BN = betweeN · WA = Word After · WB = Word Before."}
