@@ -124,6 +124,13 @@
    ====================================================================== */
 const CADERNOS = [
   {
+    materia:"legislacao", badge:"NORMAM-204 · Bloco D · Item 7",
+    titulo:"NORMAM-204/DPC — Tráfego e Permanência em AJB (Caps. 1 a 6)",
+    arquivo:"normam204_cap1_6_trafego_permanencia.html",
+    desc:"Abre o Módulo IV. Cap. 1 despacho como processo único (5 etapas, 2 regimes); Cap. 2 tráfego em AJB e o núcleo de cobrança — SISTRAM (quem envia o quê), LRIT, SIMMAP, seletor do quadro 2.22 e monitoramento da navegação interior (2.23); Cap. 3 rebocadores (Comandante ouvido o Prático), arribada com seletor IAFN × justificada [CONFLITO 204 × 302], fiscalização e laid-up; Cap. 4 transbordo de pessoal (exclui o prático → NORMAM-311); Cap. 5 bunkering, STS, STB e granéis com seletor de competências DPC × CP/DL; Cap. 6 homologação de comboios (HAZID · FMEA · GIS/IALA). Cruzamento com 2006, 2008, 2011 e 2012 (antiga NORMAM-08), um baralho de flashcards por capítulo (240 cartas) com revisão geral e quiz de 33 questões.",
+    tags:["BANCA","DECORAR","CONFLITO","SISTRAM","LRIT","SIMMAP","Arribada","Rebocadores","STS","Bunkering","Comboios","Prático"]
+  },
+  {
     materia:"comunicacoes", badge:"CIS · Bloco C",
     titulo:"Código Internacional de Sinais — mapa e todos os códigos",
     arquivo:"cis_codigo_internacional_sinais.html",
@@ -670,9 +677,10 @@ const MATERIAS = {
   "shiphandling":{ titulo:"Arte Naval — Shiphandling/MacElrevey", sub:"Módulo II · Blocos D·E·F·G · MacElrevey 4ª ed.", cor:"#0D3D36" },
   "meteorologia":{ titulo:"Meteorologia e Oceanografia", sub:"Módulo V · Bloco B · Ynoue et al. (2017)", cor:"#1F6F8B" },
   "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" },
-  "comunicacoes":{ titulo:"Comunicações", sub:"Módulo VI · SMCP · Radiocomunicações/GMDSS · CIS", cor:"#8A5A2B" }
+  "comunicacoes":{ titulo:"Comunicações", sub:"Módulo VI · SMCP · Radiocomunicações/GMDSS · CIS", cor:"#8A5A2B" },
+  "legislacao":{ titulo:"Legislação e Regulamentação", sub:"Módulo IV · LESTA · Tribunal Marítimo · NORMAMs · Portos e Registro", cor:"#4A5A2E" }
 };
-const ORDEM = ["navegacao","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes"];
+const ORDEM = ["navegacao","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes","legislacao"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }
