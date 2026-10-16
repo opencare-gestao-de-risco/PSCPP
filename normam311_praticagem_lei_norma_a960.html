@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<meta name="description" content="NORMAM-311/DPC consolidada com a LESTA (Lei 14.813/2024), o RLESTA e a Resolução IMO A.960(23): serviço, formação, ERU, deveres, recusa, isenção, lancha, Atalaia, ZP e preço. Flashcards por capítulo e quiz.">
+<title>NORMAM-311 · Serviço de Praticagem — Lei, Norma e A.960 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);white-space:nowrap;
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+  nav.toc a.cap{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  .capitulo{background:var(--verde);color:var(--creme);border-radius:14px;padding:22px 24px;margin:46px 0 26px;border-left:8px solid var(--ouro);scroll-margin-top:64px}
+  .capitulo .k{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--ouro);font-weight:bold}
+  .capitulo h2{margin:6px 0 6px;font-weight:normal;font-size:26px;line-height:1.2}
+  .capitulo p{margin:0;color:#cfe3df;font-size:15px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+  ul,ol{padding-left:22px}
+  li{margin:5px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle;text-transform:none}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+  .t-ja{background:var(--ambar);color:#5a3a00}
+  .t-novo{background:#d7e7ff;color:#1b3a6b}
+  .t-analise{background:#e6e1d3;color:#4d4433}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .legenda{display:flex;gap:14px;flex-wrap:wrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:10px 14px;margin:0 0 18px}
+  .legenda span{display:inline-flex;align-items:center;gap:6px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box.info{border-left:6px solid var(--azul)}
+  .box.analise{border-left:6px solid #9a8f74;background:#f8f5ec}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+  .box > :last-child{margin-bottom:0}
+  .mnem{font-family:'Trebuchet MS',sans-serif;font-size:18px;font-weight:bold;color:var(--verde);text-align:center;background:#fff;border:1px dashed var(--ouro);border-radius:8px;padding:12px;margin:10px 0}
+  blockquote{margin:12px 0;padding:10px 16px;border-left:4px solid var(--verde2);background:#f3f8f6;border-radius:0 8px 8px 0}
+
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+  .tw table{margin:0}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.c,th.c{text-align:center}
+  td.ok{text-align:center;font-weight:bold;color:var(--verde-ok)}
+  .min{min-width:640px}
+
+  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
+  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
+  .ictrl{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
+  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer;text-align:left}
+  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+  .iread{font-family:'Trebuchet MS',sans-serif;font-size:14px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:12px 15px;margin-top:12px;min-height:64px}
+  .iread b{color:var(--verde2)}
+  .sys{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 6px}
+  .sys span{font-weight:bold;font-size:13px;border-radius:16px;padding:5px 12px;border:1.5px solid var(--linha);color:#b3a98f;background:#fff}
+  .sys span.on{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
+
+  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
+  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
+  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
+  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
+  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
+  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
+  .quiz .fb.show{display:block}
+  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
+  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
+  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
+  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
+  .quiz button.nextq:disabled{opacity:.4;cursor:default}
+  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .score b{color:var(--ouro);font-size:16px}
+
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.capitulo h2{font-size:21px}h2.sec{font-size:21px;flex-wrap:wrap}th,td{padding:7px 8px;font-size:13px}}
+  /* ---- baralhos (modelo CIS) ---- */
+  .deck{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:16px;box-shadow:var(--sombra);margin:14px 0 6px}
+  .dkbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;font-family:'Trebuchet MS',sans-serif;font-size:13px}
+  .dkbar select{font-family:'Trebuchet MS',sans-serif;font-size:13px;padding:7px 10px;border:1.5px solid #d8cfb4;border-radius:8px;background:#fff;color:var(--tinta);max-width:100%}
+  .dkbar button,.dknav button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
+  .dktot{margin-left:auto;color:var(--mute);font-size:12px}
+  .dknav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  .dknav button.ok{border-color:var(--verde-ok);color:var(--verde-ok)}
+  .dknav button.no{border-color:var(--vermelho);color:var(--vermelho)}
+  .dkcard{perspective:1200px;cursor:pointer;max-width:560px;margin:0 auto}
+  .dk-in{display:grid;transition:transform .5s;transform-style:preserve-3d}
+  .dkcard.flip .dk-in{transform:rotateY(180deg)}
+  .dk-face{grid-area:1/1;min-height:230px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;padding:20px 20px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra);position:relative}
+  .dk-front{background:var(--verde);color:var(--creme)}
+  .dk-k{font-family:'Courier New',monospace;font-size:30px;font-weight:bold;color:var(--ouro);line-height:1.1}
+  .dk-q{font-size:17px;margin-top:10px;line-height:1.4}
+  .dk-fm{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:#a9c8c1;margin-top:12px;letter-spacing:.08em;text-transform:uppercase}
+  .dk-hint{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro)}
+  .dk-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:15px;transform:rotateY(180deg);line-height:1.5}
+  .dk-ref{font-family:'Trebuchet MS',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin-bottom:8px}
+  .dk-g{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:var(--verde2);margin-top:10px}
+  .dkinfo{text-align:center;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:var(--mute);margin-top:8px}
+  @media(max-width:600px){.dk-k{font-size:24px}.dk-q{font-size:15.5px}.dk-back{font-size:14px}.dktot{margin-left:0}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">PSCPP 2027 · Módulo IV · Bloco D — Praticagem e Tráfego · Itens 8, 15 e 21</p>
+    <h1>Serviço de Praticagem — <em>Lei</em>, <em>Norma</em> e <em>IMO</em></h1>
+    <p class="sub">A NORMAM-311/DPC lida junto com a LESTA (na redação da Lei 14.813/2024), o RLESTA e a Resolução IMO A.960(23). Cada tópico reúne o que a lei manda, como a norma detalha e o que a IMO recomenda — da formação do Praticante à recusa, da escala à isenção do Comandante, da lancha às Zonas de Praticagem e ao preço do serviço.</p>
+    <div class="src"><b>Fontes:</b> NORMAM-311/DPC (2026, Mod. 4, Portaria DPC/DGN/MB nº 204/2026) · Lei 9.537/1997 (LESTA), arts. 2º, 4º, 8º, 12 a 15-C, 16, 27, 28 e 33 · Lei 14.813/2024 · Decreto 2.596/1998 (RLESTA), arts. 1º, 6º, 8º, 10, 21, 23 e 25 · Resolução IMO A.960(23), Anexos 1 e 2 · Cruzamento com as provas <b>PSCPP 2006, 2008, 2011 e 2012</b> (antiga NORMAM-12/DPC).</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap"><div class="row">
+    <a href="#mapa">Fontes e provas</a>
+    <a class="cap" href="#cap1">Cap. 1 ▶</a>
+    <a href="#t1">O serviço</a>
+    <a class="cap" href="#cap2">Cap. 2 ▶</a>
+    <a href="#t21">Formação</a>
+    <a href="#t22">ERU</a>
+    <a href="#t23">A bordo</a>
+    <a href="#t24">Recusa ★</a>
+    <a href="#t25">Permanência</a>
+    <a href="#t26">Isenção</a>
+    <a href="#t27">Lotação</a>
+    <a class="cap" href="#cap3">Cap. 3 ▶</a>
+    <a class="cap" href="#cap4">Cap. 4 ▶</a>
+    <a class="cap" href="#cap5">Cap. 5 ▶</a>
+    <a class="cap" href="#cap6">A.960 ▶</a>
+    <a href="#flash">Revisão geral</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#pscpp">Pontos PSCPP</a>
+  </div></div>
+</nav>
+
+<main>
+<div class="wrap">
+<div class="related">
+  📎 <strong>Bloco D — Praticagem e Tráfego</strong> (itens 8 e 15 do Anexo 2-A), com a <strong>Resolução IMO A.960(23)</strong> (item 21, Bloco F) consolidada no mesmo caderno. Conecta-se com a <a href="normam204_cap1_6_trafego_permanencia.html">NORMAM-204</a> (rebocadores, 3.2.5; transbordo de pessoal, Cap. 4), a <strong>NORMAM-302</strong> e a <strong>Lei 2.180/1954</strong> (acidentes e fatos, encalhe) e a <strong>NORMAM-602</strong> (VTS).
+</div>
+
+<div class="legenda">
+  <span><span class="hl">texto</span> alto potencial</span>
+  <span><span class="hl-amb">texto</span> já cobrado</span>
+  <span><span class="tag t-ja">JÁ COBRADO</span></span>
+  <span><span class="tag t-banca">BANCA</span></span>
+  <span><span class="tag t-decorar">DECORAR</span></span>
+  <span><span class="tag t-conflito">CONFLITO</span></span>
+  <span><span class="tag t-novo">LEI 14.813</span> fonte nova no edital 2027</span>
+  <span><span class="tag t-analise">ANÁLISE</span> leitura do caderno, não texto da norma</span>
+</div>
+
+<!-- ===================== 0. FONTES E MAPA ===================== -->
+<section class="bloco" id="mapa">
+  <h2 class="sec"><span class="n">0</span> Três camadas, um assunto</h2>
+  <p class="lede">A praticagem é regida por uma lei, um decreto, uma norma da Autoridade Marítima e uma recomendação internacional. Cada tópico deste caderno junta as quatro: o que a lei manda, como a norma detalha e o que a IMO recomenda.</p>
+
+  <div class="tw"><table class="min">
+    <tr><th>Fonte</th><th>Natureza</th><th>O que regula</th><th>Como obriga</th></tr>
+    <tr><td><strong>LESTA</strong> — Lei 9.537/1997, Cap. III (arts. 12 a 15-C), com a <strong>Lei 14.813/2024</strong></td><td>Lei ordinária</td><td>Conceito, composição, habilitação, isenção, obrigatoriedade, recusa, preço</td><td>Diretamente — topo da matéria</td></tr>
+    <tr><td><strong>RLESTA</strong> — Decreto 2.596/1998</td><td>Decreto regulamentar</td><td>5º Grupo de aquaviários (art. 1º), composição do serviço (art. 6º), <strong>infrações e penas</strong> (arts. 8º, 10, 21, 23, 25)</td><td>Diretamente</td></tr>
+    <tr><td><strong>NORMAM-311/DPC</strong> (2026, Mod. 4)</td><td>Norma da Autoridade Marítima</td><td>Tudo o mais: PSCPP, ERU, deveres, afastamentos, isenção, lancha, Atalaia, ZP</td><td>Detalha a lei e não pode contrariá-la</td></tr>
+    <tr><td><strong>Resolução IMO A.960(23)</strong>, de 05/12/2003</td><td><strong>Recomendação</strong> da Assembleia da IMO — <em>não é convenção</em>. Revogou a A.485(XII)</td><td>Anexo 1: formação e certificação · Anexo 2: procedimentos operacionais</td><td>Só indiretamente: <strong>LESTA, art. 13, § 2º, III</strong> ("desde que reconhecidas pela autoridade marítima") e <strong>311, 2.51</strong> (o ATPR existe "para atender à A.960")</td></tr>
+  </table></div>
+
+  <div class="box key">
+    <h4>Regra de ouro dos conflitos <span class="tag t-banca">BANCA</span></h4>
+    <p>A <strong>lei prevalece</strong> sobre a norma e sobre a A.960. A própria A.960 diz, no preâmbulo, que a IMO <strong>não pretende se envolver com a certificação ou o licenciamento de práticos</strong>: ela só recomenda padrões mínimos aos Estados.</p>
+  </div>
+
+  <h3>O que a Lei 14.813/2024 trouxe <span class="tag t-novo">LEI 14.813</span></h3>
+  <p>Até 2024 a LESTA tinha quatro artigos sobre praticagem (12 a 15). A Lei 14.813 — <strong>a primeira lei específica da atividade</strong>, em vigor na data da publicação (16/01/2024) — acrescentou a definição de ZP, a natureza do serviço, a composição em lei, a escala única, a obrigatoriedade para AB &gt; 500, a isenção do Comandante, rumo e velocidade exclusivos do Prático, os parâmetros da lotação e toda a regulação de preço. Também pôs a <strong>ANTAQ</strong> na comissão de preço (Lei 10.233/2001, art. 27, XXXI) e revogou o § 2º do art. 24 da LESTA. Cada novidade aparece no tópico a que pertence, marcada com a etiqueta azul.</p>
+
+  <h3>A NORMAM-311 em cinco capítulos</h3>
+  <div class="tw"><table class="min">
+    <tr><th>Capítulo</th><th>Conteúdo</th><th>Neste caderno</th><th>Peso</th></tr>
+    <tr><td><strong>1</strong> Estrutura</td><td>Competência, faina, habilitação, RUSP, serviço</td><td>Tópico 1</td><td>Alto (conceitual)</td></tr>
+    <tr><td><strong>2</strong> Dos Práticos</td><td>51 itens em 11 seções</td><td>Tópicos 2.1 a 2.7</td><td><span class="hl-amb"><strong>Núcleo — já cobrado</strong></span></td></tr>
+    <tr><td><strong>3</strong> Lancha e Atalaia</td><td>Especificações, dotação, homologação</td><td>Tópico 3</td><td>Médio</td></tr>
+    <tr><td><strong>4</strong> Zonas de Praticagem</td><td>PEP, obrigatória × facultativa, dispensas, Peru e Colômbia</td><td>Tópico 4</td><td>Alto</td></tr>
+    <tr><td><strong>5</strong> Cobrança</td><td>Navios de guerra estrangeiros (reciprocidade)</td><td>Tópico 5, junto com a regulação de preço da LESTA</td><td>Médio</td></tr>
+  </table></div>
+
+  <h3>O que a banca já cobrou (antiga NORMAM-12/DPC)</h3>
+  <p>A norma de praticagem caiu nas <strong>quatro provas</strong> disponíveis — mais que qualquer outra NORMAM. O padrão é o caso concreto: um Prático, um Comandante, uma Capitania, e a pergunta "houve recusa? quem decide? qual o procedimento?".</p>
+  <div class="tw"><table class="min">
+    <tr><th>Prova</th><th>Caso</th><th>Gab.</th><th>Hoje</th><th>Tópico</th></tr>
+    <tr><td><strong>2006</strong> (V/F)</td><td>"Não é dever do Prático comunicar encalhe na ZP"</td><td>F</td><td>✔ Mantida (2.28.1 f; 2.31)</td><td><a href="#t23">2.3</a></td></tr>
+    <tr><td><strong>2006 Q24</strong></td><td>PEP de São Luís para navio com calado &gt; 11 m</td><td>(a) boia 22</td><td>⚠️ Superada — hoje boia nº 19</td><td><a href="#t4">4</a></td></tr>
+    <tr><td><strong>2008 Q29</strong></td><td>Prático discorda do CP e pede substituição</td><td>(b) recusa</td><td>✔ No mérito; rito hoje é Processo Administrativo</td><td><a href="#t24">2.4</a></td></tr>
+    <tr><td><strong>2008 Q62</strong></td><td>Composição do serviço; grupo do Prático</td><td>(a)</td><td>⚠️ Superada — "estação de praticagem" virou Atalaia (2012)</td><td><a href="#t1">1</a></td></tr>
+    <tr><td><strong>2011 Q40</strong></td><td>Incorreta: "AMD executa faina de praticagem"</td><td>(a)</td><td>✔ Mantida</td><td><a href="#t1">1</a> · <a href="#t22">2.2</a></td></tr>
+    <tr><td><strong>2011 Q42</strong></td><td>Delegado de Itajaí decide a perda da homologação da Atalaia</td><td>(a)</td><td>✔ Mantida (3.15)</td><td><a href="#t3">3</a></td></tr>
+    <tr><td><strong>2012 Q33</strong></td><td>Prático designado para as 10h embarca às 16h</td><td>(d) recusa</td><td>✔ Enquadramento; rito hoje é Processo Administrativo</td><td><a href="#t24">2.4</a></td></tr>
+  </table></div>
+</section>
+
+<!-- =====================================================================
+     TÓPICO 1 — O SERVIÇO (CAP. 1)
+     ===================================================================== -->
+<div class="capitulo" id="cap1">
+  <div class="k">Capítulo 1 · Estrutura do Serviço</div>
+  <h2>O que é, quem o compõe e quem manda</h2>
+  <p>Conceito, natureza, composição, competência, faina, habilitação e RUSP — o vocabulário de toda a norma.</p>
+</div>
+
+<section class="bloco" id="t1">
+  <h2 class="sec"><span class="n">1</span> O serviço de praticagem</h2>
+  <p class="lede">O conceito é o mesmo na lei e na norma; a Lei 14.813 acrescentou a natureza jurídica e levou a composição para o texto legal.</p>
+
+  <h3>Conceito e natureza <span class="tag t-novo">LEI 14.813</span></h3>
+  <p>Serviço de praticagem é o <strong>conjunto de atividades profissionais de assessoria ao Comandante</strong>, requeridas por <strong>peculiaridades locais</strong> que dificultem a livre e segura movimentação da embarcação (LESTA, art. 12, caput; 311, 1.7). O Prático <strong>assessora</strong>: quem comanda continua sendo o Comandante.</p>
+  <p>A Lei 14.813 definiu a natureza: <span class="hl">atividade <strong>essencial</strong>, de <strong>natureza privada</strong>, que serve ao <strong>interesse público</strong></span> da segurança da navegação, da vida humana e do meio ambiente (art. 12, § 1º). Deve estar <strong>permanentemente disponível</strong> (§ 2º; art. 14), e é <strong>dever do Estado</strong> garantir sua adequada e livre prestação (§ 3º). Por ser privada, o Prático e o Praticante <strong>não são servidores e não exercem função pública</strong>, e o PSCPP <strong>não é o concurso público</strong> do art. 37, II, da Constituição (311, 2.1).</p>
+
+  <h3>Composição — o mesmo texto em três níveis <span class="tag t-ja">JÁ COBRADO</span></h3>
+  <div class="tw"><table>
+    <tr><th>Nível</th><th>Dispositivo</th><th>Texto</th></tr>
+    <tr><td>Lei</td><td><strong>LESTA, art. 12-A</strong> (Lei 14.813)</td><td>Prático, lancha de Prático e <strong>Atalaia</strong>. Os <strong>práticos</strong> respondem pela infraestrutura, equipamentos, treinamento de colaboradores e disponibilidade</td></tr>
+    <tr><td>Decreto</td><td><strong>RLESTA, art. 6º</strong> (Decreto 7.860/2012)</td><td>Prático, lancha de Prático e <strong>atalaia</strong></td></tr>
+    <tr><td>Norma</td><td><strong>311, 1.7</strong></td><td>Prático, lancha de Prático e Atalaia. A lancha <strong>pode ser substituída por helicóptero</strong> (NORMAM-223)</td></tr>
+  </table></div>
+  <div class="box analise">
+    <h4>2008 Q62 pelo texto atual <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>O gabarito (a) dizia "prático, <strong>estação de praticagem</strong> e lancha" — redação do RLESTA anterior ao Decreto 7.860/2012. Hoje a (a) estaria errada. A (b) também segue errada, mas por outro motivo: chama o Prático de "<strong>marítimo</strong> do 5º grupo". Marítimos são o <strong>1º Grupo</strong> (tripulantes); o <strong>5º Grupo é o dos Práticos</strong>, aquaviários <strong>não tripulantes</strong> que prestam serviço <strong>embarcado</strong> (LESTA, art. 2º, XV; RLESTA, art. 1º, V).</p>
+  </div>
+
+  <h3>Quem regulamenta</h3>
+  <p>A LESTA dá à autoridade marítima a atribuição de <strong>regulamentar o serviço, estabelecer as ZP em que é obrigatório e especificar as embarcações dispensadas</strong> (art. 4º, II). A 311 entrega as três tarefas ao <span class="hl"><strong>Diretor de Portos e Costas</strong>, como Representante da AM</span> (1.3; 4.1), e acrescenta a ZP <strong>facultativa</strong>, que a lei não menciona. O CP aplica localmente (homologa a ERU, nomeia o RUSP, declara impraticabilidade); quem cria ZP e regulamenta é o DPC. A norma vale para todos os serviços e, "de maneira especial", para Práticos, Praticantes <strong>e usuários</strong> (1.2).</p>
+
+  <h3>Faina de praticagem <span class="tag t-ja">JÁ COBRADO</span></h3>
+  <p>Faina é a atividade com <strong>manobra(s) de praticagem e/ou navegação de praticagem</strong> numa ZP (1.4). Manobra é atracar, desatracar, fundear, suspender, amarrar ou largar a boia, entrar ou sair de dique e carreira e alar ao cais — <strong>com assessoria de Prático</strong>; navegação de praticagem é a feita no interior da ZP com Prático embarcado (Glossário). Conta-se <strong>uma faina do POB</strong> (o Prático se apresenta ao Comandante) <strong>até ser dispensado e desembarcar</strong>, e é esse cômputo que sustenta a manutenção da habilitação e a qualificação do Praticante.</p>
+  <p><strong>2011 Q40 (a)</strong>: o Agente de Manobra e Docagem (6º Grupo) manobra navios em diques, estaleiros e carreiras (RLESTA, art. 1º, VI), mas <strong>não faz faina de praticagem</strong> — que só existe com assessoria de Prático. A alternativa segue incorreta.</p>
+
+  <h3>Habilitação — o que a norma diz e o que a lei exige <span class="tag t-novo">LEI 14.813</span></h3>
+  <p>Habilitação é o nível de capacitação técnica para receber autorização de exercer a atividade; mantê-la exige uma <strong>frequência mínima quadrimestral</strong> de fainas, com quantitativos fixados <strong>anualmente</strong> (311, 1.5). A lei é mais ampla e exige <strong>três</strong> condições (LESTA, art. 13, § 2º):</p>
+  <div class="tw"><table>
+    <tr><th>LESTA, art. 13, § 2º</th><th>Onde a 311 trata</th><th>Fonte internacional</th></tr>
+    <tr><td><strong>I</strong> — frequência mínima de manobras</td><td>1.5; 2.38 a 2.41; Anexo 2-F</td><td>A.960, Anexo 1, 6.1.1 (conhecimento recente da área)</td></tr>
+    <tr><td><strong>II</strong> — cursos de aperfeiçoamento</td><td>2.51 (ATPR)</td><td>A.960, Anexo 1, 5.5 e 6.1</td></tr>
+    <tr><td><strong>III</strong> — recomendações de organismos internacionais reconhecidas pela AM</td><td>2.51 ("para atender à A.960")</td><td>A própria A.960</td></tr>
+  </table></div>
+  <p><span class="tag t-conflito">CONFLITO</span> de amplitude: em questão "segundo a LESTA", são <strong>três requisitos</strong>; "segundo a 311, 1.5", só a frequência. A lei também garante a <strong>todo prático o livre exercício</strong>, "atendida a regulação técnica e econômica" (art. 13, § 3º; 311, 2.25.2), e exige que o serviço seja executado <strong>exclusivamente por práticos habilitados</strong> (art. 13, caput).</p>
+
+  <h3>RUSP — Representante Único do Serviço de Praticagem</h3>
+  <p>É um <strong>Prático da ZP</strong> que representa a Praticagem junto à CP/DL/AG. É indicado <strong>por consenso</strong> entre os Práticos habilitados; sem acordo, <strong>o CP escolhe</strong>; e a designação é formalizada por <strong>Portaria do CP</strong>. O RUSP <strong>elabora, divulga e gere a ERU</strong> (1.6) — a escala que a lei exige seja <strong>única e homologada pela autoridade marítima</strong> (LESTA, art. 13, § 5º).</p>
+
+  <div class="box trap">
+    <h4>Pegadinhas do Capítulo 1 <span class="tag t-banca">BANCA</span></h4>
+    <ol>
+      <li>Composição: <strong>Atalaia</strong>, não "estação de praticagem".</li>
+      <li>Prático: <strong>5º Grupo, não tripulante, embarcado</strong>. Marítimo é o 1º Grupo.</li>
+      <li>Regulamentar, criar ZP e definir dispensas: <strong>DPC</strong>, não o CP nem a DHN.</li>
+      <li>Natureza: <strong>essencial, privada, de interesse público</strong> — e não "serviço público".</li>
+      <li>Faina: do <strong>POB ao desembarque</strong>; AMD não faz faina de praticagem.</li>
+      <li>Manutenção da habilitação: <strong>três requisitos na lei</strong>, um só no 1.5.</li>
+      <li>RUSP: <strong>consenso</strong> ou escolha do CP; <strong>Portaria do CP</strong>; gere a ERU.</li>
+    </ol>
+  </div>
+
+  <h3>Flashcards — Capítulo 1</h3>
+  <div class="deck" data-cap="1"></div>
+</section>
+
+<!-- =====================================================================
+     TÓPICO 2 — DOS PRÁTICOS (CAP. 2)
+     ===================================================================== -->
+<div class="capitulo" id="cap2">
+  <div class="k">Capítulo 2 · Dos Práticos · núcleo de cobrança</div>
+  <h2>Da formação ao afastamento</h2>
+  <p>Sete tópicos na ordem da vida profissional: formação, escala, conduta a bordo, situações-limite, permanência na atividade, isenção do Comandante e quantos práticos cada ZP deve ter.</p>
+</div>
+
+<!-- 2.1 FORMAÇÃO -->
+<section class="bloco" id="t21">
+  <h2 class="sec"><span class="n">2.1</span> Formação: do PSCPP à habilitação</h2>
+  <p class="lede">Seções I e II da 311, com o Anexo 1 da A.960 — o que a IMO recomenda para a formação e como o Brasil o executa.</p>
+
+  <h3>Quem forma e certifica</h3>
+  <p>A A.960 chama de <strong>autoridade competente de praticagem</strong> o governo, nacional ou regional, ou a organização que administra o sistema; é ela quem avalia experiência, qualificação e aptidão do candidato (Anexo 1, 2.1 e 2.2). No Brasil esse papel é da <strong>Autoridade Marítima, pela DPC</strong>: o PSCPP é "<strong>inicial e exclusivamente</strong>" o meio de preencher vaga de Prático, e cabe ao DPC decidir a época, as vagas por ZP e o Edital (311, 2.1). A lei manda que a inscrição como Prático seja concedida <strong>para cada ZP</strong>, após <strong>exame e estágio de qualificação</strong> (LESTA, art. 13, § 1º).</p>
+  <p><span class="tag t-conflito">CONFLITO</span> A A.960 recomenda que os requisitos de ingresso sejam fixados "<strong>em cooperação com as associações de práticos</strong>" (Anexo 1, 2.3). No Brasil, quem fixa é a <strong>DPC</strong>; a Praticagem do Brasil é só <strong>auxiliar</strong> (2.50).</p>
+
+  <h3>Pontos do PSCPP que têm dispositivo próprio</h3>
+  <ul>
+    <li><strong>Corte da escrita</strong> (2.7.6): elimina quem tirar menos da metade <strong>ou</strong> não se classificar entre os convocados para a etapa seguinte.</li>
+    <li><strong>Idoneidade</strong> (2.10.3): o <strong>DPC</strong> decide a eliminação, <strong>sem recurso</strong>.</li>
+    <li><strong>Saúde</strong> (2.13): recurso em <strong>5 dias úteis</strong> a Junta de instância superior, e nada mais; visão <strong>20/200</strong> sem correção, corrigível para <strong>20/20 num olho e 20/30 no outro</strong>; audição até <strong>40 dB de 500 a 3.000 Hz</strong>; toxicológico com janela de <strong>90 dias</strong>; discromatopsia <strong>verde/vermelho</strong> inabilita. A A.960 recomenda o padrão do <strong>STCW para comandantes e oficiais de quarto</strong>, "ou outro" que a autoridade julgar adequado (Anexo 1, 4.1) — a 311 usa padrão próprio, o que a recomendação admite.</li>
+    <li><strong>Teste físico</strong> (2.14): <strong>4 barras</strong>, <strong>50 m em até 1min30s</strong>, <strong>20 min flutuando</strong>; segunda e última chance.</li>
+    <li><strong>Gestação</strong> não é, por si só, inaptidão; seleção condicional e <strong>12 meses</strong> para requerer a seleção psicofísica (2.13.11; 2.20.6).</li>
+    <li><strong>Não integram o PSCPP</strong> a Qualificação do Praticante e o Exame de Habilitação (2.6.4). Não há troca de ZP entre selecionados (2.18.7), e o certame <strong>termina na homologação</strong> (2.21). Apresentação dos primeiros grupos: <strong>no mínimo 15 dias</strong> após o Edital de Homologação (2.20.3).</li>
+  </ul>
+
+  <h3>A linha do tempo do Praticante <span class="tag t-decorar">DECORAR</span></h3>
+  <div class="tw"><table class="min">
+    <tr><th>Marco</th><th>Prazo ou regra</th><th>Item</th></tr>
+    <tr><td>Certificação</td><td>Em <strong>uma única ZP</strong> por categoria</td><td>2.22.1</td></tr>
+    <tr><td>Validade do Certificado de Praticante</td><td><strong>21 meses</strong></td><td>2.22.2</td></tr>
+    <tr><td>Programa de Qualificação</td><td><strong>12 a 18 meses</strong>; o mínimo serve para treinar em <strong>todas as estações do ano</strong></td><td>2.23.2–3</td></tr>
+    <tr><td>Pedido do Exame</td><td>Até <strong>90 dias antes</strong> do fim da validade, com a Declaração de Avaliação Satisfatória (Anexo 2-D)</td><td>2.24.2</td></tr>
+    <tr><td>Início do Exame</td><td>Até <strong>45 dias</strong> após o protocolo</td><td>2.24.3</td></tr>
+    <tr><td>Reprovação</td><td><strong>5 dias</strong> para pedir o 2º e último exame, marcado em até <strong>30 dias</strong></td><td>2.24.11–12</td></tr>
+    <tr><td>2ª reprovação</td><td><strong>Afastamento definitivo</strong> e cancelamento</td><td>2.24.13</td></tr>
+    <tr><td>Sem pedir o Exame</td><td><strong>18 meses</strong> da emissão → afastamento definitivo</td><td>2.37.1 d</td></tr>
+    <tr><td>Restrição no verso do certificado</td><td>Faina típica inexequível na qualificação: superar em até <strong>24 meses</strong></td><td>2.24.16</td></tr>
+  </table></div>
+  <p>Quem já é Prático de outra ZP e passa no PSCPP tem <strong>20 dias</strong> para escolher entre afastamento definitivo, afastamento temporário ou qualificação cumulativa, e <strong>40 dias</strong> para se apresentar (2.22.5 e 2.22.8). Aprovado no exame, tem de novo <strong>20 dias</strong> para requerer o afastamento definitivo da ZP de origem — condição <em>sine qua non</em> — e <strong>40 dias</strong> para se apresentar (2.24.15).</p>
+
+  <h3>Como se qualifica — e o que a IMO recomenda</h3>
+  <div class="tw"><table class="min">
+    <tr><th>Tema</th><th>NORMAM-311</th><th>A.960(23), Anexo 1</th></tr>
+    <tr><td>Programa</td><td>Estabelecido pelo <strong>CP</strong>; executado pela(s) <strong>Entidade(s) de Praticagem</strong> que o CP indicar (2.23.1)</td><td>A autoridade responde pelos padrões de formação e certificação (5.1)</td></tr>
+    <tr><td>Método</td><td><strong>Um Prático monitor</strong> por Praticante; recomendável acompanhar fainas de <strong>todos os Práticos</strong> da ZP (2.23.6–7)</td><td>Experiência prática "<strong>sob supervisão próxima de práticos experientes</strong>", complementada por <strong>simulação</strong> (computador e modelo tripulado) e aula (5.2)</td></tr>
+    <tr><td>Divergência na avaliação</td><td>Decide o <strong>DPC, via CP</strong> (2.23.9)</td><td>—</td></tr>
+    <tr><td>Conteúdo</td><td>O Exame cobra navegação de praticagem; fundeio, suspender, atracar, desatracar e mudar de fundeadouro; <strong>rebocadores</strong>; amarração; <strong>ordens e conversação técnica em inglês</strong> (2.24.4)</td><td>Programa de <strong>28 itens</strong> (item 7): limites da área, COLREG, balizamento, faróis, profundidades e marés, manobra com e sem rebocadores, <strong>squat</strong>, inglês, <strong>SMCP</strong>, <strong>Código de Investigação de Acidentes</strong>, relação Comandante–Prático e <strong>Pilot Card</strong>, poluição, planos de emergência, embarque e desembarque seguros</td></tr>
+    <tr><td>Treino de equipe</td><td>—</td><td><strong>BRM</strong> com ênfase na troca de informações e em emergências em canal estreito: <strong>perda de governo, de propulsão, de radar, de sistemas vitais e de automação</strong> (5.3)</td></tr>
+    <tr><td>Certificado</td><td>Emitido pela <strong>DPC</strong>, após Portaria (2.24.14); restrições no verso (2.24.16)</td><td>Indica a <strong>área</strong> e as <strong>limitações locais</strong> — porte, calado ou arqueação máximos (item 3)</td></tr>
+  </table></div>
+
+  <h3>A banca do Exame de Habilitação</h3>
+  <p>É <strong>designada e presidida pelo CP</strong>, com <strong>um Prático da ZP</strong> e <strong>um CLC</strong>, que pode ser trocado por Oficial Superior da Armada, da ativa ou da reserva remunerada; sem nenhum dos dois, entra outro Prático da ZP. Tem pelo menos um Prático suplente, <strong>só funciona completa</strong>, e <span class="hl"><strong>o monitor do Praticante não pode integrá-la</strong></span> (2.24.7–9). O exame é feito <strong>a bordo</strong>, numa ou mais fainas sorteadas pela CP e publicadas em Portaria, sem precisar passar por todos os portos da ZP (2.24.5–6).</p>
+</section>
+
+<!-- 2.2 ESCALA -->
+<section class="bloco" id="t22">
+  <h2 class="sec"><span class="n">2.2</span> A escala: ERU, estados do Prático e fadiga</h2>
+  <p class="lede">Seção III da 311, a escala única da LESTA (art. 13, § 5º) e o descanso que a A.960 exige (Anexo 2, item 9).</p>
+
+  <p>A <strong>Escala de Rodízio Única (ERU)</strong> é mensal, por ZP, e inclui <strong>todos</strong> os Práticos, qualquer que seja a forma de atuação (2.26.1) — inclusive onde houver duas ou mais entidades, quando continua única e feita pelo RUSP (2.27.5). Seu propósito, que coincide com o da lei, é distribuir as fainas de forma <strong>equânime</strong>, garantir a <strong>disponibilidade permanente</strong>, manter todos <strong>proficientes</strong> e <strong>prevenir a fadiga</strong> (2.26.2; LESTA, art. 13, § 5º). A A.960 dá a razão de fundo: o Prático deve estar "<strong>adequadamente descansado e mentalmente alerta</strong>" durante toda a passagem (Anexo 2, 9).</p>
+  <p>Dentro da ERU, cada Prático está sempre num estado, e classificar corretamente a situação decide se as horas contam como faina efetiva:</p>
+
+  <div class="ichart">
+    <h4>Seletor — onde está o Prático?</h4>
+    <p class="hint">Escolha a situação e veja o enquadramento no 2.26.</p>
+    <div class="ictrl" id="eruBtns"></div>
+    <div class="iread" id="eruRead">Selecione uma situação acima.</div>
+  </div>
+
+  <div class="tw"><table class="min">
+    <tr><th>Estado (2.26)</th><th>Situação</th><th>Faina efetiva?</th></tr>
+    <tr><td rowspan="4"><strong>Período de Escala → Em Serviço</strong><br>apto e pronto</td><td><strong>Em manobra</strong>: em efetiva faina, do POB até ser dispensado pelo Comandante</td><td class="ok">Sim</td></tr>
+    <tr><td><strong>Aguardando pela manobra</strong>, em terra, esperando sua vez no dia</td><td class="c">Não</td></tr>
+    <tr><td><strong>Aguardando pela manobra — Obs. 1</strong>: a bordo, em <strong>descanso por revezamento</strong> numa faina longa</td><td class="c">Não</td></tr>
+    <tr><td><strong>Aguardando pela manobra — Obs. 2</strong>: a bordo, <strong>devidamente acomodado</strong>, à espera de ser requisitado — o "<strong>Prático à disposição do Comandante</strong>"</td><td class="c">Não</td></tr>
+    <tr><td><strong>Período de Escala → Em Prontidão</strong></td><td>Disponível se o <strong>RUSP</strong> o acionar: demanda acima da capacidade ou substituição por força maior. Apresenta-se no prazo da NPCP, <strong>no máximo 12 h</strong>; o acionamento é informado à CP/DL/AG em <strong>até 24 h</strong></td><td class="c">Só quando acionado</td></tr>
+    <tr><td><strong>Período de Indisponibilidade</strong></td><td>Fora da escala, em afastamento temporário ou de férias — <strong>não pode ser requisitado</strong></td><td class="c">—</td></tr>
+  </table></div>
+  <p>A ERU é <strong>ratificada pelo CP</strong> e publicada na página da Capitania; <strong>só faz faina quem está na ERU e em Período de Escala naquele dia</strong>, e as exceções são decididas exclusivamente pelo CP (2.26.7–8). Se o CP não ratificar, ele mesmo elabora a escala do mês (2.27.3).</p>
+
+  <h3>Os números da escala <span class="tag t-decorar">DECORAR</span></h3>
+  <div class="tw"><table class="min">
+    <tr><th>Regra</th><th>Valor</th><th>Item</th></tr>
+    <tr><td>Dia de serviço</td><td><strong>8h às 8h</strong>; mudar o horário exige pedido do RUSP à <strong>DPC</strong>, via CP</td><td>2.27.1</td></tr>
+    <tr><td>Faina efetiva contínua</td><td><strong>máx. 6 h</strong> → revezamento; o substituído fica <strong>≥ 2 h</strong> aguardando</td><td>2.27.4 a</td></tr>
+    <tr><td>Em 24 h</td><td><strong>máx. 12 h</strong> de faina efetiva; um intervalo de espera de <strong>≥ 6 h consecutivas</strong></td><td>2.27.4 a</td></tr>
+    <tr><td>Dias seguidos em escala</td><td>ZP com navegação <strong>&lt; 30 milhas</strong>: <strong>14 dias</strong> · <strong>≥ 30 milhas</strong>: <strong>21 dias</strong> · depois, <strong>1 dia de folga para cada 4</strong> em escala</td><td>2.27.4 b–c</td></tr>
+    <tr><td>Teto de horas</td><td><strong>120 h em 14 dias</strong> ou <strong>180 h em 21 dias</strong></td><td>2.27.4 d</td></tr>
+    <tr><td>Entrega da ERU</td><td><strong>5 dias úteis</strong> antes do mês</td><td>2.27.3</td></tr>
+    <tr><td>Troca de escala</td><td>Pedido com <strong>48 h</strong>; decisão do CP/DL <strong>até 12h do dia anterior</strong>; RUSP sempre informado</td><td>2.27.6</td></tr>
+    <tr><td>Substituição de Prático afastado</td><td>Só com <strong>autorização prévia do CP/DL</strong>, sem reciprocidade (a da Prontidão é informada depois)</td><td>2.27.7</td></tr>
+    <tr><td>Equilíbrio do quadrimestre</td><td>Média <strong>± 40%</strong>; média do ano A = <strong>(fainas de A−2 + A−1) ÷ (6 × Práticos habilitados)</strong>; frequências mínimas revistas pela DPC <strong>até fevereiro</strong></td><td>2.27.2</td></tr>
+  </table></div>
+  <div class="mnem">6 h · 2 h · 12 h · 6 h — 14 ou 21 dias (30 milhas) — 1 por 4 — 120/14 · 180/21</div>
+  <p>O descanso do revezamento tem também um lado de alojamento, que a lei disciplinou: práticos que se revezam ficam <strong>alojados como os oficiais</strong>, de preferência em <strong>camarotes individuais</strong>, com <strong>conforto térmico</strong>, e é o <strong>Comandante</strong> quem garante essa adequação (LESTA, art. 15-A, § 1º; 311, 2.30.2 e, h). Em ZP com navegação acima de 30 milhas, o <strong>Comandante isento</strong> pode substituir um dos Práticos no revezamento (2.42.3).</p>
+  <p>Organização: os serviços se organizam <strong>por estado</strong>, com duas ZP interestaduais — a <strong>ZP-01</strong> (Fazendinha-AP a Itacoatiara-AM) e a <strong>ZP-10</strong> (Alagoas e Sergipe) — e cada Prático pode ter <strong>lancha e Atalaia próprias ou contratadas</strong> (2.25).</p>
+</section>
+
+<!-- 2.3 A BORDO -->
+<section class="bloco" id="t23">
+  <h2 class="sec"><span class="n">2.3</span> A bordo: Prático e Comandante</h2>
+  <p class="lede">Seção IV (2.28 a 2.30), lida lado a lado com o Anexo 2 da A.960 e com o art. 15-B da LESTA. A relação é de assessoria — e de vigilância mútua.</p>
+
+  <h3>O princípio: o Prático assessora, o Comandante responde</h3>
+  <p>A presença do Prático <strong>não desobriga</strong> o Comandante nem a tripulação dos seus deveres com a segurança, e <strong>as ações do Prático devem ser monitoradas permanentemente</strong> (311, 2.30.1). O texto é quase o da A.960: "<em>the pilot's presence on board does not relieve the master…</em>", e comandante e oficiais devem apoiar o Prático e "<em>ensure that his/her actions are monitored at all times</em>" (Anexo 2, 2.1 e 2.3). A lei completa com uma exclusividade: em ZP, <span class="hl"><strong>orientações de rumo e velocidade são transmitidas exclusivamente por práticos</strong></span> (LESTA, art. 15-B; 311, 2.30.2 b) — nem o VTS, nem a Atalaia, nem outro tripulante.</p>
+
+  <h3>Quem deve o quê — comparativo</h3>
+  <div class="tw"><table class="min">
+    <tr><th>Tema</th><th>Prático (2.28.1)</th><th>Comandante (2.30.2)</th><th>A.960(23), Anexo 2</th></tr>
+    <tr><td><strong>Informação</strong></td><td>Assessorar com presteza; conhecer governo, propulsão e condições gerais dos navios (a, g)</td><td>Informar as condições de manobra, <strong>em especial o calado</strong> (a)</td><td><strong>Troca de informações Comandante–Prático (MPX)</strong>, no início de <strong>cada</strong> faina e <strong>contínua</strong> durante a praticagem (5.1–5.2)</td></tr>
+    <tr><td><strong>Rumo e velocidade</strong></td><td>—</td><td>Receber <strong>só do Prático</strong> (b)</td><td>—</td></tr>
+    <tr><td><strong>Registro</strong></td><td>Preencher o comprovante de faina (2.39)</td><td>Registrar no diário os Práticos que o assessoraram e comunicar anormalidades à CP/DL/AG (c)</td><td>—</td></tr>
+    <tr><td><strong>Dispensa</strong></td><td>Executar o serviço <strong>mesmo em divergência com a empresa de navegação</strong>; divergência técnica é dirimida <strong>pela AM</strong> (m)</td><td>Dispensar o Prático que oriente de forma perigosa, pedir <strong>substituto imediato</strong> e justificar à CP/DL/AG em <strong>até 24 h</strong> (d). <strong>Não dispensar antes do PEP</strong> em ZP obrigatória (g)</td><td>O plano de passagem é intenção preferida: Prático e Comandante devem estar prontos para <strong>alterá-lo</strong> (5.5)</td></tr>
+    <tr><td><strong>Comunicações</strong></td><td>Com Atalaia, <strong>VTS (se a Autoridade Portuária o disponibilizar)</strong> e outras embarcações (c)</td><td>—</td><td>Usar <strong>SMCP</strong>; a bordo, <strong>inglês ou idioma comum</strong>; falou com terceiros em outra língua, <strong>explica ao passadiço</strong> (6.1–6.3)</td></tr>
+    <tr><td><strong>Comunicar à AM</strong></td><td>Variações de <strong>profundidade e correnteza</strong>; alterações de <strong>sinalização náutica</strong>; condições desfavoráveis (d, e, f); descumprimento de normas (r)</td><td>LESTA, art. 8º, V: alterações de sinais náuticos, acidentes e fatos, infrações de outras embarcações</td><td>Comunicar o que afete segurança ou poluição, em especial <strong>acidentes</strong> e <strong>irregularidades de luzes, marcas e sinais</strong> do navio praticado (7)</td></tr>
+    <tr><td><strong>Embarque</strong></td><td>Embarcar e desembarcar <strong>no PEP</strong> (z); <strong>colete</strong> no transbordo (q)</td><td>Cumprir as regras de embarque e desembarque (f). Dispositivo inoperante: multa B ou suspensão até 30 dias (RLESTA, art. 21, III)</td><td>Embarque e desembarque seguros entram no programa (Anexo 1, 7.27)</td></tr>
+    <tr><td><strong>Condição física</strong></td><td>Higidez, sem substâncias que afetem reação e julgamento (v); exames de rotina (p)</td><td>Alojar o Prático como oficial (e); <strong>conforto térmico</strong> (h)</td><td>Descansado e alerta (9)</td></tr>
+    <tr><td><strong>Cooperação com a AM</strong></td><td><strong>SAR</strong> e <strong>levantamentos hidrográficos</strong> (i); assistência e salvamento (j); <strong>compor bancas</strong> (l); verificações <em>in loco</em> (w); simulações às custas do interessado (x)</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>Escala</strong></td><td>Cumprir a ERU (n) e a frequência mínima (o); ficar <strong>na ZP</strong> quando em escala (s); qualificar Praticantes (t); fazer o <strong>ATPR</strong> (u); como RUSP, distribuir com equidade (y)</td><td>—</td><td>—</td></tr>
+  </table></div>
+
+  <h3>A troca de informações Comandante–Prático (A.960, Anexo 2, 5.4)</h3>
+  <p>A troca deve incluir, no mínimo: <strong>(1)</strong> o <strong>Pilot Card</strong> preenchido, com taxa de guinada, curva de giro e distância de parada; <strong>(2)</strong> acordo sobre o plano e as contingências; <strong>(3)</strong> condições especiais — tempo, profundidade, correntes, tráfego; <strong>(4)</strong> peculiaridades de manobra, máquinas, equipamentos ou tripulação; <strong>(5)</strong> atracação e rebocadores; <strong>(6)</strong> amarração; <strong>(7)</strong> o idioma do passadiço e com terceiros. Cartão ou formulário <strong>complementa, não substitui</strong>, a conversa (5.3).</p>
+
+  <p><strong>Praticante</strong> (2.29): cumpre o Programa sempre orientado por um Prático, não o interrompe salvo afastamento temporário, e deve os deveres <strong>h, k, p, q e v</strong> do Prático (atualização em documentos náuticos, dados pessoais, exames, colete, higidez). <strong>Prático fora do efetivo</strong> (75 anos ou mais) pode pedir ao DPC dispensa definitiva de uma área mais severa da ZP, sem deixar de cumprir a ERU e a frequência mínima (2.28.2).</p>
+  <p><span class="tag t-ja">JÁ COBRADO</span> <strong>2006</strong> (V/F): "não é dever do Prático comunicar ao CP encalhe na ZP" — <strong>falso</strong>: encalhe é acidente da navegação, e o Prático comunica imediatamente acidentes e fatos (2.31) e condições que impliquem risco (2.28.1 f).</p>
+</section>
+
+<!-- 2.4 SITUAÇÕES-LIMITE -->
+<section class="bloco" id="t24">
+  <h2 class="sec"><span class="n">2.4</span> Situações-limite: risco, impraticabilidade e recusa</h2>
+  <p class="lede">O bloco mais cobrado do caderno. A pergunta é sempre a mesma: <em>quem decide?</em></p>
+
+  <p>Quando há risco, o caminho no Brasil tem três degraus. O <strong>Prático comunica imediatamente</strong> à CP/DL/AG qualquer fato que ameace a segurança — tempo e mar adversos, <strong>acidentes ou fatos da navegação</strong>, deficiências do navio ou da tripulação (2.31). Essa informação <strong>subsidia a CP/DL/AG</strong>, a quem <strong>compete declarar a impraticabilidade</strong> (2.32.1), autorizar que o serviço deixe de ser prestado ou impedir entradas e saídas. E, enquanto a autoridade não decide, o Prático <strong>executa o serviço</strong>, inclusive em divergência (2.28.1 m). O Prático informa; a Capitania decide.</p>
+
+  <div class="tw"><table class="min">
+    <tr><th>Situação</th><th>Quem decide</th><th>Como</th><th>Item</th></tr>
+    <tr><td>Condição desfavorável</td><td>—</td><td><strong>Prático comunica imediatamente</strong> à CP/DL/AG</td><td>2.31</td></tr>
+    <tr><td>Impraticabilidade <strong>total</strong></td><td rowspan="2"><strong>CP/DL/AG</strong></td><td>Nenhuma faina</td><td>2.32.2</td></tr>
+    <tr><td>Impraticabilidade <strong>parcial</strong></td><td>Só certos <strong>locais, embarcações, manobras ou navegação</strong></td><td>2.32.3</td></tr>
+    <tr><td>Parâmetros de impraticabilidade</td><td>NPCP/NPCF; revisão pelo <strong>CP</strong></td><td>A pedido externo, <strong>às custas do interessado</strong> (análise de risco e simulação)</td><td>2.32.4–5</td></tr>
+    <tr><td>Mar impede o <strong>embarque</strong></td><td rowspan="2"><strong>Comandante</strong>, sob <strong>exclusiva responsabilidade</strong>, com <strong>autorização prévia da CP/DL/AG</strong> (de preferência via Atalaia)</td><td>Entra até local abrigado, guiado pelo Prático <strong>na lancha</strong></td><td>2.33</td></tr>
+    <tr><td>Mar impede o <strong>desembarque</strong></td><td>Desembarca em local abrigado e segue, com sinais do Prático na lancha. Se previsto, o Prático vai <strong>pronto para seguir viagem</strong> (passaporte, roupas); se for surpresa, o <strong>Comandante provê</strong> permanência e retorno, com comunicação imediata</td><td>2.34</td></tr>
+  </table></div>
+
+  <h3>Recusa ou atraso <span class="tag t-ja">JÁ COBRADO</span> <span class="tag t-decorar">DECORAR</span></h3>
+  <blockquote><strong>311, 2.35</strong> — O Prático, <strong>em Período de Escala</strong>, não atende ou deixa de atender <strong>tempestivamente</strong> a embarcação que lhe é <strong>designada pela Atalaia</strong> → a <strong>CP/DL/AG instaura Processo Administrativo</strong>, nos termos da LESTA.</blockquote>
+  <p>Os três elementos são cumulativos: estar <strong>em Período de Escala</strong>, ter sido <strong>designado pela Atalaia</strong> e <strong>não atender ou atrasar</strong>. A sanção vem da lei e do decreto:</p>
+  <div class="tw"><table>
+    <tr><th>Fonte</th><th>Pena</th></tr>
+    <tr><td><strong>LESTA, art. 15</strong></td><td>O Prático <strong>não pode se recusar</strong>: suspensão do certificado; na <strong>reincidência, cancelamento</strong></td></tr>
+    <tr><td><strong>RLESTA, art. 25, I</strong></td><td>Recusa: <strong>suspensão até 12 meses</strong> ou, na reincidência, cancelamento</td></tr>
+    <tr><td><strong>RLESTA, art. 25, II</strong></td><td>Descumprir as normas da AM sobre praticagem: <strong>suspensão até 120 dias</strong></td></tr>
+    <tr><td><strong>RLESTA, art. 10</strong></td><td>Reincidência = mesma infração em <strong>até 12 meses</strong>; a pena é multiplicada por 2, 3…</td></tr>
+    <tr><td><strong>LESTA, arts. 27 e 28</strong></td><td>Suspensão <strong>até 12 meses</strong>; após cancelamento, <strong>reabilitação depois de 2 anos</strong>, refazendo todos os requisitos</td></tr>
+  </table></div>
+
+  <div class="box trap">
+    <h4>A.960 × LESTA: o "direito de recusa" <span class="tag t-conflito">CONFLITO</span></h4>
+    <p>A A.960 recomenda que o Prático "<strong>tenha o direito de recusar</strong>" quando o navio oferecer perigo à navegação ou ao ambiente, comunicando o motivo à autoridade (Anexo 2, item 8). A lei brasileira diz o contrário: <strong>o Prático não pode se recusar</strong> (art. 15). Prevalece a lei. No Brasil, o risco é tratado pelo caminho <strong>comunicar (2.31) → CP/DL/AG decide (2.32)</strong>. Se a pergunta for "segundo a A.960", o direito de recusa está no Anexo 2, item 8.</p>
+  </div>
+
+  <h3>As provas pelo texto atual</h3>
+  <div class="tw"><table class="min">
+    <tr><th>Prova</th><th>Caso</th><th>Leitura atual</th></tr>
+    <tr><td><strong>2008 Q29</strong></td><td>Prático avisa a pane de luzes; <strong>o CP decide navegar</strong>; o Prático pede à Atalaia sua substituição</td><td>✔ <strong>Recusa</strong>: quem decide é a CP/DL/AG (2.32.1) e o Prático executa mesmo divergindo (2.28.1 m). ⚠️ O gabarito falava em "inquérito administrativo"; hoje o rito é <strong>Processo Administrativo</strong> (2.35). O Comandante "habilitado como prático da ZP 20" é o antecessor do <strong>Comandante isento</strong> (2.42.3)</td></tr>
+    <tr><td><strong>2012 Q33</strong></td><td>Prático em escala, designado para as 10h, embarca às 16h sem avisar</td><td>✔ <strong>Recusa ou atraso</strong> — o atraso está no próprio título do 2.35. ⚠️ Rito: Processo Administrativo, e não IAFN (que é para acidentes e fatos, LESTA, art. 33)</td></tr>
+    <tr><td><strong>2011 Q40</strong></td><td>(b) recusa do Prático "de sobreaviso"; (c) requisitado "em repouso"; (e) impraticabilidade parcial</td><td>(b) "Sobreaviso" virou <strong>Prontidão</strong>; o conceito de recusa segue. (c) Em <strong>Indisponibilidade</strong> o Prático "não está disponível para ser requisitado" (2.26.5); só a <strong>requisição da AM</strong> (LESTA, art. 14, par. único, III) sustentaria a alternativa. (e) ✔ 2.32.3</td></tr>
+  </table></div>
+  <p><span class="tag t-conflito">CONFLITO</span> A própria 311 usa os dois nomes: <strong>Processo Administrativo</strong> para recusa (2.35) e para extravio de comprovante (2.39); <strong>Inquérito Administrativo</strong> para a falta que gera afastamento (2.36.1 c; 2.36.2 c). Para recusa, siga o 2.35.</p>
+</section>
+
+<!-- 2.5 PERMANÊNCIA NA ATIVIDADE -->
+<section class="bloco" id="t25">
+  <h2 class="sec"><span class="n">2.5</span> Permanecer na atividade: afastamento, manutenção, saúde e atualização</h2>
+  <p class="lede">Seções V, VI, IX e XI da 311 reunidas: o que tira o Prático da escala, como ele volta, e o que a lei e a A.960 exigem para que continue proficiente.</p>
+
+  <h3>Afastamento definitivo × temporário <span class="tag t-decorar">DECORAR</span></h3>
+  <div class="tw"><table class="min">
+    <tr><th></th><th>Definitivo — cancela o certificado</th><th>Temporário (AFTP) — suspende, até 24 meses</th></tr>
+    <tr><td><strong>Prático</strong> (2.36)</td><td>a) falecimento · b) incapacidade <strong>definitiva</strong> (Junta de Saúde da MB) · c) penalidade em Inquérito Administrativo · d) <strong>decisão irrecorrível do Tribunal Marítimo</strong> · e) <strong>mais de 24 meses consecutivos sem exercer</strong> (como Prático assistente não conta) · f) a pedido, <strong>ao DPC via CP</strong></td><td>a) incapacidade temporária · b) <strong>não apresentar o Laudo</strong> no prazo · c) penalidade em Inquérito Administrativo · d) <strong>apreensão do certificado</strong> (LESTA, art. 16, I) · e) decisão irrecorrível do TM · f) <strong>descumprir o Plano de Manutenção</strong> · g) <strong>não fazer o ATPR</strong> · h) a pedido, <strong>ao CP</strong></td></tr>
+    <tr><td><strong>Praticante</strong> (2.37)</td><td>Falecimento · incapacidade definitiva · <strong>duas reprovações</strong> no Exame · <strong>18 meses</strong> sem requerer o Exame · a pedido, ao CP · penalidade de cancelamento</td><td>Incapacidade temporária · penalidade de suspensão · a pedido, ao CP. <strong>Período único de até 12 meses</strong>; acima de <strong>60 dias</strong>, o treinamento é reavaliado (novo Programa, novo prazo, revalidação do certificado)</td></tr>
+  </table></div>
+  <p>Repare na assimetria do pedido: <strong>definitivo vai ao DPC</strong>, temporário <strong>ao CP</strong>. E a suspensão, por qualquer infração, só alcança <strong>aquaviário ou amador embarcados e o Prático</strong> (RLESTA, art. 8º).</p>
+
+  <h3>Manutenção e recuperação da habilitação</h3>
+  <p>Todo Prático cumpre a frequência mínima do <strong>Anexo 2-F</strong>, por quadrimestre contado a partir de <strong>janeiro</strong> (2.38; 2.41 obs. c) — é o inciso I do art. 13, § 2º, da LESTA. Cada faina gera um <strong>Comprovante</strong> assinado <strong>pelo Prático e pelo Comandante</strong> (papel ou digital, com ICP-Brasil ou gov.br), guardado <strong>pelo Prático por 2 anos</strong>; o extravio gera Processo Administrativo. A faina vai também ao <strong>SISGEVI</strong> em <strong>3 dias</strong>, com <strong>5 dias</strong> para corrigir; o 1º Prático lança os demais, o assistente e o Praticante (2.39).</p>
+  <p>Quem não cumpre comunica ao CP (ou o RUSP comunica), é <strong>afastado temporariamente</strong> e, quando pronto, cumpre um <strong>Plano de Recuperação como Prático assistente</strong> (2.40). A A.960 dá o fundamento: depois de ausência, a autoridade deve se assegurar de que o Prático <strong>recuperou a familiaridade</strong> com a área (Anexo 1, 6.3).</p>
+  <div class="tw"><table>
+    <tr><th>Tempo sem cumprir</th><th>Recuperação (2.41)</th></tr>
+    <tr><td><strong>1 quadrimestre</strong></td><td>Assistente em <strong>≥ 50%</strong> das fainas do 2-F no quadrimestre seguinte</td></tr>
+    <tr><td><strong>2 a 5 quadrimestres</strong></td><td><strong>≥ 75%</strong>, precedido de exame pela <strong>Junta Regular de Saúde</strong></td></tr>
+    <tr><td>6 quadrimestres (24 meses)</td><td><span class="tag t-analise">ANÁLISE</span> fora da recuperação: afastamento definitivo (2.36.1 e)</td></tr>
+  </table></div>
+  <p>Cumprido o plano, o CP expede <strong>portaria de reintegração</strong> à ERU. Exemplos do 2-F: RJ (ZP-15) mínimo 58 e máximo 136 fainas; SP (ZP-16) 50 e 118; Lagoa dos Patos (ZP-20) 5 e 11.</p>
+
+  <h3>Saúde do Prático em atividade</h3>
+  <div class="tw"><table class="min">
+    <tr><th>Ponto</th><th>NORMAM-311 (2.49)</th><th>A.960(23), Anexo 1</th></tr>
+    <tr><td>Quem atesta</td><td>Médico com especialização em <strong>Medicina do Trabalho</strong>, só para laudo de aptidão (Anexo 2-J)</td><td>Padrão do STCW "ou outro" (4.1)</td></tr>
+    <tr><td>Periodicidade</td><td><strong>&lt; 50 anos: trienal · 50 a 70: bienal · ≥ 70: anual</strong></td><td>Manter o padrão médico, verificado em até <strong>5 anos</strong> (6.1.2)</td></tr>
+    <tr><td>Sem laudo no prazo</td><td>Fora da ERU → <strong>AFTP</strong> (2.36.2 b)</td><td>—</td></tr>
+    <tr><td>Junta Regular de Saúde</td><td>Inapto pelo médico; queda de rendimento; <strong>acidente ou fato com hipótese de falha humana por saúde</strong>. Despesas do Prático</td><td>Após <strong>lesão ou doença grave</strong>, reavaliar <strong>antes de voltar</strong> (4.2)</td></tr>
+    <tr><td>Quem manda inspecionar / recurso</td><td><strong>CP ou DPC</strong> mandam; JRS realiza. Recurso ao <strong>DPC em 120 dias</strong> → Junta Superior Distrital, instância única; revisão por fato novo: <strong>DGN</strong></td><td>—</td></tr>
+    <tr><td>Incapacidade</td><td>Temporária: <strong>30 a 180 dias</strong> por inspeção, até <strong>24 meses</strong> no total; depois, <strong>definitiva</strong></td><td>—</td></tr>
+    <tr><td>Visão</td><td>20/200 sem correção, <strong>ambos corrigindo para 20/30</strong>; óculos sobressalentes; campo ≥ 100°; lente colorida para daltonismo <strong>proibida</strong></td><td>—</td></tr>
+    <tr><td>Incapacitantes notáveis</td><td>Convulsão, <strong>anticoagulante</strong>, dependência química e insulina: definitivos · <strong>psicotrópico: sempre</strong> · hipoglicemiante oral: temporário até controlar</td><td>—</td></tr>
+  </table></div>
+  <p><strong>Candidato × Prático</strong>: quem entra precisa de <strong>20/20 num olho e 20/30 no outro</strong> (2.13.9); quem está em atividade, <strong>20/30 nos dois</strong> (2.49.2 b).</p>
+
+  <h3>ATPR — onde a lei, a norma e a IMO se encontram</h3>
+  <p>O <strong>Curso de Atualização para Práticos</strong> é aprovado pela DPC <strong>para atender à A.960</strong> e é obrigatório <span class="hl"><strong>a cada 5 anos, contados de janeiro de 2005</strong></span>; quem não o faz fica fora da ERU, em AFTP, até ser aprovado (2.51; 2.36.2 g). A Praticagem do Brasil informa à DPC a relação dos que cursaram <strong>até 15 de dezembro</strong>, e a DPC designa um avaliador para a 2ª fase. É a concretização da LESTA, art. 13, § 2º, <strong>II</strong> (cursos) e <strong>III</strong> (recomendações internacionais).</p>
+  <p>O ciclo de cinco anos vem da A.960: a autoridade deve verificar, "<strong>a intervalos não superiores a cinco anos</strong>", que o Prático mantém conhecimento recente da área, aptidão médica e conhecimento das leis aplicáveis (Anexo 1, 6.1), o que pode ser provado por registros de serviço, cursos ou exame (6.2). O conteúdo de reciclagem recomendado (5.5) tem onze itens: inglês; comunicação com autoridades; planos de emergência; <strong>BRM</strong>; simulação com radar e manobra de emergência; <strong>modelos tripulados</strong>; novos equipamentos; leis locais; <strong>segurança pessoal</strong>; <strong>sobrevivência no mar</strong>; <strong>primeiros socorros, RCP e hipotermia</strong>.</p>
+</section>
+
+<!-- 2.6 ISENÇÃO -->
+<section class="bloco" id="t26">
+  <h2 class="sec"><span class="n">2.6</span> Certificado de Isenção de Praticagem</h2>
+  <p class="lede">Seção VII da 311, regulamentando a LESTA, art. 13, § 4º. É o Comandante que conduz sem Prático — instituto da lei brasileira, fora do escopo da A.960.</p>
+
+  <h3>Lei × Norma <span class="tag t-novo">LEI 14.813</span></h3>
+  <div class="tw"><table class="min">
+    <tr><th>Requisito</th><th>LESTA, art. 13, § 4º</th><th>NORMAM-311</th></tr>
+    <tr><td>Beneficiário</td><td><strong>Comandante brasileiro</strong> de navio de bandeira brasileira</td><td>Comandante de embarcação de <strong>bandeira brasileira</strong> (2.42.1)</td></tr>
+    <tr><td>Porte</td><td>Até <strong>100 m</strong></td><td><strong>LOA até 100 m</strong></td></tr>
+    <tr><td>Tripulação</td><td>≥ <strong>2/3 de brasileiros</strong></td><td>≥ 2/3, calculada sobre o <strong>CTS</strong></td></tr>
+    <tr><td>Experiência</td><td><strong>6 meses</strong> como Comandante na ZP e, depois, <strong>6 meses</strong> de fainas assistidas, <strong>≥ 12 fainas</strong></td><td><strong>12 meses</strong> na função, embarcação e trecho; nos <strong>últimos 6</strong>, <strong>≥ 12 fainas</strong> assessoradas (2.43)</td></tr>
+    <tr><td>Risco</td><td>Precedida de <strong>análise de risco</strong></td><td><strong>PGR</strong> com EAR e PAE (2ª fase)</td></tr>
+    <tr><td>Descanso</td><td>Períodos prévios de descanso fixados pela AM</td><td>Tratado no PGR</td></tr>
+    <tr><td>AB ≥ 500</td><td><strong>Continua pagando</strong> a disponibilidade e <strong>comunicando à Atalaia</strong></td><td>A Seção VII silencia</td></tr>
+  </table></div>
+  <p><span class="tag t-conflito">CONFLITO</span> A lei exige <strong>Comandante brasileiro</strong>; a norma, só <strong>bandeira brasileira</strong> — prevalece a lei. E a A.960 declara não se aplicar a "<strong>comandantes ou tripulantes certificados para fazer praticagem em áreas específicas</strong>" (Anexo 1, 1.2): a isenção não tem base internacional.</p>
+
+  <h3>Disposições gerais — o que não se deduz</h3>
+  <div class="tw"><table class="min">
+    <tr><th>Ponto</th><th>Regra</th><th>Por que engana</th></tr>
+    <tr><td>Quem concede</td><td><strong>Portaria do ComDN</strong> da ZP; <strong>certificado emitido pela DPC</strong>; o processo <strong>entra por ofício na CP</strong> e é conduzido pelo ComDN, com apoio de DPC, DHN, <strong>CASNAV</strong> e CP (2.42.2; 2.44; 2.44.4 c)</td><td>Distratores: CP, DPC ou DHN concedendo</td></tr>
+    <tr><td>Deveres</td><td>O isento assume, no que couber, os <strong>deveres do Prático</strong> (2.28), além dos do 2.30 (2.42.1)</td><td>Passa a ter deveres de Prático</td></tr>
+    <tr><td>Alcance</td><td>Só <strong>aquela embarcação, no período de comando, naquele trecho e porto</strong>; qualquer alteração <strong>revoga</strong>, e o <strong>armador</strong> informa ComDN e CP (2.42.2)</td><td>Não é habilitação pessoal para a ZP</td></tr>
+    <tr><td>ZP &gt; 30 milhas</td><td>O isento <strong>substitui um dos Práticos no revezamento</strong> (2.42.3)</td><td>Não elimina o Prático</td></tr>
+    <tr><td>Excluídos</td><td><strong>Cruzeiros, navios-tanque</strong> (petroleiros, gaseiros, químicos), carga <strong>IMDG 1.1</strong> ou <strong>Classe 7</strong> (2.42.4)</td><td>Qualquer que seja o porte; só a divisão 1.1 da Classe 1</td></tr>
+    <tr><td>Seguro</td><td><strong>P&amp;I do International Group</strong>, com remoção de destroços e poluição; casco e máquinas na 1ª fase (2.42.6)</td><td>Não basta qualquer P&amp;I</td></tr>
+    <tr><td>Peculiaridades da ZP</td><td>A AM avalia óbices à segurança <strong>ou à manutenção da qualificação dos Práticos</strong> (2.42.7)</td><td>Pode ser negada para proteger os Práticos</td></tr>
+    <tr><td>Custos e casos omissos</td><td><strong>Armador</strong> paga tudo (2.42.8); casos não previstos com a <strong>DPC</strong> (2.42.9)</td><td>—</td></tr>
+    <tr><td>Prova da experiência</td><td>As 12 fainas são atestadas pelos <strong>comprovantes do Anexo 2-G</strong>; exige-se ASO, <strong>DPC-1031</strong> e CIR; o CP pode criar requisitos adicionais (2.43)</td><td>Quem atesta a experiência do Comandante é o comprovante do Prático</td></tr>
+  </table></div>
+
+  <h3>As cinco fases (2.44)</h3>
+  <div class="tw"><table class="min">
+    <tr><th>Fase</th><th>Quem faz o quê</th><th>Prazo</th><th>O ponto que cai</th></tr>
+    <tr><td><strong>1ª — Documentos</strong></td><td><strong>Armador</strong>: indica Comandante, tripulação, embarcação, trecho e porto; relaciona <strong>stakeholders</strong>; <strong>indica o simulador</strong> (certificado por classificadora IACS); apresenta apólices. <strong>CP</strong>: confere, verifica CTS, faz <strong>inspeção de Flag State Control</strong> e encaminha ao ComDN. <strong>ComDN</strong>: parecer</td><td>CP <strong>25 dias úteis</strong> · ComDN <strong>30 dias úteis</strong> · óbices: até <strong>30 dias úteis</strong>, prorrogáveis a pedido do armador</td><td>Quem escolhe o simulador é o <strong>armador</strong>. Óbice não sanado <strong>encerra</strong> o processo</td></tr>
+    <tr><td><strong>2ª — PGR</strong></td><td>Especialista <strong>ISO 31000:2018</strong>; <strong>EAR + PAE</strong>; partes interessadas em todas as etapas. ComDN ratifica e autoriza implementar as mitigações</td><td>Armador <strong>45 dias úteis</strong> · ComDN <strong>25 dias úteis</strong></td><td>A 3ª fase só começa <strong>depois de implementadas as mitigações</strong>; o ComDN indica a banca</td></tr>
+    <tr><td><strong>3ª — Simulador</strong></td><td><strong>FMSS</strong>, de pesquisa e engenharia, <strong>multiplayer</strong> (rebocadores); deve <strong>contemplar as mitigações do PGR</strong>; referências PIANC Bulletin 77 e IMO MSC 1053 e MSC 137(76)</td><td>Reprovado: <strong>15 dias</strong> para a 2ª avaliação</td><td>Valida também as mitigações</td></tr>
+    <tr><td><strong>Banca</strong> (3ª e 4ª)</td><td>Pelo <strong>ComDN</strong>: Oficial Superior da Armada com experiência de comando + <strong>PRT da ZP</strong> + <strong>CLC/CCB</strong> com experiência em sister ship ou AB igual ou maior</td><td>—</td><td><strong>PRT e CLC/CCB substituíveis</strong> por Oficial Superior: a banca pode ficar <strong>sem Prático</strong></td></tr>
+    <tr><td><strong>4ª — A bordo</strong></td><td>Só com o <strong>PGR totalmente implementado</strong> e aprovação no simulador; início pelo ComDN</td><td>—</td><td>Reprovação <strong>encerra</strong>, sem segunda chance. Aprovado: portaria do ComDN, certificado da DPC</td></tr>
+    <tr><td><strong>5ª — Acompanhamento</strong></td><td>ComDN pode <strong>reavaliar</strong> após incidente ou acidente no trecho; requisitos de manutenção definidos <strong>no PGR</strong></td><td>—</td><td>Descumprimento → perda e cancelamento</td></tr>
+  </table></div>
+
+  <h3>Exame de Habilitação × Isenção</h3>
+  <div class="tw"><table>
+    <tr><th></th><th>Exame para Prático (2.24)</th><th>Isenção do Comandante (2.44)</th></tr>
+    <tr><td>Banca</td><td><strong>CP</strong> preside; Prático da ZP + CLC</td><td><strong>ComDN</strong> estabelece; Oficial Superior + PRT + CLC/CCB</td></tr>
+    <tr><td>Onde</td><td>A bordo</td><td>Simulador FMSS, depois a bordo</td></tr>
+    <tr><td>Reprovação</td><td>2ª e última chance</td><td>2ª chance só no simulador; a bordo encerra</td></tr>
+    <tr><td>Ato</td><td>Portaria e certificado da DPC</td><td>Portaria do ComDN e certificado da DPC</td></tr>
+  </table></div>
+
+  <div class="box trap">
+    <h4>Pegadinhas da isenção <span class="tag t-banca">BANCA</span></h4>
+    <ol>
+      <li><strong>ComDN aprova, DPC emite, CP recebe o ofício.</strong></li>
+      <li>Vale para <strong>uma embarcação, um período de comando, um trecho e um porto</strong>; alteração revoga.</li>
+      <li>Navio-tanque, cruzeiro, IMDG 1.1 e Classe 7: <strong>nunca</strong>, qualquer que seja o porte.</li>
+      <li>O <strong>armador</strong> indica o simulador, informa alterações e paga tudo.</li>
+      <li>Simulador só depois das <strong>mitigações implementadas</strong>; ele as valida.</li>
+      <li>Segunda chance <strong>só no simulador</strong>.</li>
+      <li>A banca pode ficar <strong>sem Prático</strong>.</li>
+      <li>Em ZP &gt; 30 milhas, substitui <strong>um</strong> Prático no revezamento.</li>
+      <li>Pode ser negada para proteger a <strong>qualificação dos Práticos</strong>.</li>
+      <li>Lei: <strong>Comandante brasileiro</strong>; AB ≥ 500 <strong>continua pagando e comunicando à Atalaia</strong>.</li>
+      <li><strong>O Comandante habilitado é inserido no SISGEVI_PRÁTICO</strong>, para que a <strong>CP</strong> acompanhe e verifique o cumprimento dos requisitos de manutenção da habilitação; descumpri-los leva à <strong>perda da habilitação</strong> e ao <strong>cancelamento do Certificado de Isenção</strong> (2.44.5 c). Distratores: acompanhamento pelo ComDN ou pela DPC, ou nenhum controle depois de habilitado.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 2.7 LOTAÇÃO -->
+<section class="bloco" id="t27">
+  <h2 class="sec"><span class="n">2.7</span> Quantos Práticos por ZP: lotação, vagas, remanejamento</h2>
+  <p class="lede">Seções VIII e X da 311, com os arts. 14 e 15-C da LESTA.</p>
+
+  <p>A lei manda a autoridade marítima <strong>estabelecer e revisar periodicamente o número de práticos</strong> de cada ZP (art. 14, par. único, I) e fixa quatro parâmetros para a lotação (art. 15-C): <strong>I</strong> número e duração média das manobras nos <strong>24 meses anteriores</strong>; <strong>II</strong> alterações significativas do tráfego; <strong>III</strong> manobras <strong>sem sobrecarga permanente</strong>; <strong>IV</strong> frequência que assegure <strong>proficiência uniforme</strong>. A norma entrega a tarefa à <strong>DPC</strong> (2.45; Anexo 2-I) e usa a mesma janela de dois anos no cálculo da média de fainas (2.27.2).</p>
+  <div class="tw"><table class="min">
+    <tr><th>Conceito</th><th>Definição</th><th>Item</th></tr>
+    <tr><td><strong>Lotação</strong></td><td>Número <strong>ideal</strong> de Práticos habilitados; no mínimo <strong>2 × o número diário de Práticos em Serviço</strong></td><td>2.46</td></tr>
+    <tr><td><strong>Efetivo</strong></td><td>Habilitados com <strong>menos de 75 anos</strong>; referência para o cálculo de vagas</td><td>2.46</td></tr>
+    <tr><td><strong>Vaga aberta</strong></td><td>Quando o <strong>efetivo fica abaixo da lotação</strong> — mas isso <strong>não obriga</strong> a fazer PSCPP. O DPC pesa tráfego, relação habilitados/efetivo, qualificação, especificidades da ZP, <strong>custos para a União</strong> e outros fatores</td><td>2.47</td></tr>
+  </table></div>
+
+  <h3>Remanejamento (2.48)</h3>
+  <p>Excepcional e conduzido pela <strong>DPC</strong>, que define as ZP de origem e de destino, quantos e quais Práticos e a data. Só participa o Prático <strong>voluntário</strong>; quem está em <strong>AFTP não concorre</strong>; não há precedência entre eles. O remanejado <strong>sempre</strong> se requalifica como <strong>Praticante</strong> na nova ZP.</p>
+  <div class="tw"><table>
+    <tr><th>Hipótese</th><th>Quem concorre</th></tr>
+    <tr><td>Criação de ZP</td><td>Práticos de <strong>todas</strong> as ZP</td></tr>
+    <tr><td>Extinção de ZP</td><td><strong>Só</strong> os da ZP extinta</td></tr>
+    <tr><td>Fusão de ZP</td><td>Os das ZP fundidas; quem fica qualifica-se na área nova</td></tr>
+    <tr><td>Habilitados abaixo de 2 × o diário em Serviço</td><td>Práticos de <strong>todas</strong> as ZP</td></tr>
+    <tr><td>Queda de fainas que prejudica a qualificação</td><td><strong>Só</strong> os daquela ZP</td></tr>
+  </table></div>
+  <p>Com mais de um voluntário, há <strong>teste escrito</strong> pelo Anexo 2-A; o empate favorece o <strong>mais velho</strong>. A ZP com habilitados ≥ lotação não recebe remanejados; a prioridade de destino é o <strong>maior quociente lotação ÷ habilitados</strong>.</p>
+
+  <h3>Praticagem do Brasil (2.50)</h3>
+  <p>Associação profissional <strong>sem fins lucrativos</strong>, que <strong>não é órgão da AM</strong>. Quando a DPC determinar, atua como <strong>auxiliar</strong> no controle e na fiscalização do exercício profissional do Prático e das Entidades e na aplicação do ATPR; também <strong>homologa Atalaias e tripulações das lanchas</strong> e, excepcionalmente, emite laudos para a homologação da lancha pela AM.</p>
+
+  <div class="box trap">
+    <h4>Pegadinhas do Capítulo 2 <span class="tag t-banca">BANCA</span></h4>
+    <ol>
+      <li><strong>Recusa</strong> = em Período de Escala + designado pela Atalaia + não atende ou atrasa → <strong>Processo Administrativo</strong>; pena: suspensão até 12 meses, cancelamento na reincidência.</li>
+      <li>Impraticabilidade: <strong>declara a CP/DL/AG</strong>; o Prático comunica e executa.</li>
+      <li>Embarque ou desembarque fora do PEP: <strong>Comandante</strong>, sob exclusiva responsabilidade, com <strong>autorização prévia</strong> da CP/DL/AG.</li>
+      <li>Rumo e velocidade: <strong>só do Prático</strong> (LESTA, art. 15-B).</li>
+      <li>Dispensou o Prático por conduta perigosa: <strong>substituto imediato</strong> e justificativa em <strong>24 h</strong>.</li>
+      <li>Descanso no revezamento e "à disposição do Comandante" = <strong>em Serviço, aguardando pela manobra</strong>, não "em manobra".</li>
+      <li>Praticante: <strong>21 meses</strong> de certificado, <strong>12 a 18</strong> de qualificação, exame pedido <strong>90 dias</strong> antes.</li>
+      <li>Banca do Exame: <strong>CP preside</strong>, <strong>sem o monitor</strong>, <strong>só completa</strong>.</li>
+      <li>Afastamento definitivo: <strong>&gt; 24 meses</strong> sem exercer; temporário: até 24 meses.</li>
+      <li>Recuperação: <strong>50%</strong> (1 quadrimestre) × <strong>75% + Junta</strong> (2 a 5).</li>
+      <li>Laudo médico: <strong>3 / 2 / 1 ano</strong> (cortes em 50 e 70).</li>
+      <li><strong>ATPR a cada 5 anos</strong>, desde jan/2005, para atender à A.960 — que fixa "intervalos não superiores a cinco anos".</li>
+      <li>Lotação ≥ <strong>2 × diário em Serviço</strong>; efetivo <strong>&lt; 75 anos</strong>; vaga aberta <strong>não obriga</strong> PSCPP.</li>
+    </ol>
+  </div>
+
+  <h3>Flashcards — Capítulo 2</h3>
+  <div class="deck" data-cap="2"></div>
+</section>
+
+<!-- =====================================================================
+     TÓPICO 3 — LANCHA E ATALAIA
+     ===================================================================== -->
+<div class="capitulo" id="cap3">
+  <div class="k">Capítulo 3</div>
+  <h2>Lancha de Prático, lancha de apoio e Atalaia</h2>
+  <p>Os dois outros elementos do serviço. A lei diz que são responsabilidade dos próprios práticos (art. 12-A, par. único).</p>
+</div>
+
+<section class="bloco" id="t3">
+  <h2 class="sec"><span class="n">3</span> Lanchas e Atalaia</h2>
+  <p class="lede">As especificações da lancha de Prático, comparadas com a lancha de apoio e com a embarcação de transbordo da NORMAM-204.</p>
+
+  <h3>As três embarcações lado a lado <span class="tag t-decorar">DECORAR</span></h3>
+  <div class="tw"><table class="min">
+    <tr><th></th><th>Lancha de Prático (3.1–3.7)</th><th>Lancha de apoio (3.8–3.12)</th><th>Transbordo de pessoal (NORMAM-204, 4.2.2)</th></tr>
+    <tr><td>Emprego</td><td>Leva o Prático ao <strong>PEP</strong> e faz o transbordo lancha–navio–lancha</td><td>Navios <strong>atracados, fundeados ou em boia, em águas abrigadas</strong>; <strong>nunca substitui</strong> a lancha de Prático</td><td>Transbordo de pessoas em águas não abrigadas — <strong>excluído o Prático</strong> (204, 4.1)</td></tr>
+    <tr><td>Comprimento / LPP / boca</td><td><strong>&gt; 9 / &gt; 7 / &gt; 3 m</strong></td><td>Dotação de navegação interior (NORMAM-202)</td><td>&gt; 9 / &gt; 7 / &gt; 3 m</td></tr>
+    <tr><td>Outros mínimos</td><td>Cruzeiro <strong>≥ 15 nós</strong>; calado <strong>≤ 1,5 m</strong>; deslocamento <strong>&gt; 5.000 kg</strong></td><td>—</td><td>—</td></tr>
+    <tr><td>Propulsão</td><td><strong>2 motores diesel ≥ 170 HP</strong>, 2 eixos, 2 hélices</td><td>—</td><td>2 motores, 2 eixos, 2 hélices</td></tr>
+    <tr><td>Holofote</td><td><strong>300 a 500 jardas</strong>, comandado da cabine, 360° horizontal e até 90° vertical</td><td>O mesmo, <strong>obrigatório</strong>, com ecobatímetro e VHF fixo</td><td><strong>≥ 50 m</strong></td></tr>
+    <tr><td>Identificação</td><td>Casco <strong>vermelho</strong>, superestrutura <strong>branca</strong>, <strong>"P" preto refletor 30 × 15 cm</strong> nos dois bordos</td><td><strong>Idêntica</strong> à da lancha de Prático</td><td>Faixa <strong>preta</strong> "TRANSBORDO DE PESSOAL", 40 × 20 cm</td></tr>
+    <tr><td>Quem homologa</td><td><strong>CP</strong> (Anexo 3-B); laudo do CONAPRA só em caso excepcional, ratificado pelo CP</td><td><strong>CP</strong> ("o serviço" da lancha)</td><td>—</td></tr>
+  </table></div>
+  <p>A lancha de Prático é do serviço e fica <strong>disponível 24 h</strong>, em número suficiente para o serviço ininterrupto (3.4–3.5; LESTA, art. 12, § 2º); pode ser usada em <strong>socorro e salvamento</strong> quando a AM requisitar, e em outras atividades sem prejuízo da finalidade — mas <strong>sem o "P"</strong>. A tripulação (CTS de <strong>um Marinheiro de Convés e um Moço de Convés</strong>) é treinada para embarque e desembarque e homologada pela <strong>Praticagem do Brasil</strong>, com certificado válido por <strong>4 anos</strong> (3.6).</p>
+
+  <h3>Dotação da lancha de Prático (3.3)</h3>
+  <div class="tw"><table class="min">
+    <tr><th>Grupo</th><th>Obrigatório</th><th>Opcional ou alternativa</th></tr>
+    <tr><td>Navegação</td><td><strong>Radar banda X</strong>, GPS, ecobatímetro, agulha magnética, cartas da ZP, régua e compasso, binóculo</td><td><strong>AIS</strong></td></tr>
+    <tr><td>Comunicações</td><td><strong>VHF fixo + VHF portátil</strong></td><td><strong>HF</strong>; DSC no VHF fixo; trocar o portátil por <strong>2º VHF fixo com alimentação independente</strong></td></tr>
+    <tr><td>Publicações</td><td>RIPEAM; quadros de governo e navegação, luzes e marcas, sinais sonoros e luminosos</td><td>—</td></tr>
+    <tr><td>Salvatagem</td><td><strong>2 boias com lanterna</strong>; coletes = <strong>lotação</strong></td><td><strong>Balsa classe I ou II só em mar aberto</strong> (ou aparelho flutuante autorizado pela CP)</td></tr>
+    <tr><td>Transbordo</td><td><strong>Enxárcia ou plataforma</strong>, croque, <strong>cinto de segurança</strong>, defensas, holofote</td><td>—</td></tr>
+  </table></div>
+
+  <h3>Atalaia</h3>
+  <p>A Atalaia <strong>controla os navios</strong> que usam o serviço, funciona de modo <strong>ininterrupto</strong> e reúne área de atracação das lanchas e alojamento para Práticos e tripulações de prontidão (3.13). Ponto central: <span class="hl">o serviço é <strong>obrigatoriamente requisitado à Atalaia homologada</strong> da ZP, pelo Comandante ou seu preposto</span> — e é por isso que a recusa do 2.35 se configura quando o Prático não atende a embarcação "<strong>designada pela Atalaia</strong>". A A.960 descreve o mesmo processo pelo lado do navio: a autoridade estabelece o <strong>procedimento de requisição</strong>; o navio informa <strong>ETA ou ETD o quanto antes</strong>, contata a estação por VHF e envia nome, indicativo, agente, dimensões, calado, calado aéreo, velocidade, thrusters, hora prevista no ponto de embarque, destino e bordo de atracação (Anexo 2, item 4).</p>
+  <div class="tw"><table class="min">
+    <tr><th>Dotação da Atalaia (3.14)</th><th>Exigência</th></tr>
+    <tr><td>Comunicações</td><td>Telefones (um com fac-símile); <strong>2 VHF marítimos</strong>; portáteis que falem com Atalaia, lancha, navio e <strong>rebocador</strong>; <strong>operadores bilíngues 24 h</strong>; <strong>energia de emergência</strong></td></tr>
+    <tr><td>Meteorologia</td><td><strong>Anemômetro, termômetro de máxima e mínima e barômetro</strong>, ou estação em tempo real</td></tr>
+    <tr><td>Publicações</td><td>RIPEAM, Almanaque Náutico, Tábuas das Marés, Roteiro, Lista de Faróis, Lista de Auxílios-Rádio, <strong>Escala Beaufort</strong>, <strong>CIS</strong>, estações costeiras, Avisos aos Navegantes, NPCP/NPCF, normas da Autoridade Portuária, LESTA, RLESTA, NORMAM</td></tr>
+    <tr><td>Salvatagem</td><td>Coletes = <strong>Práticos + Praticantes + 20%</strong></td></tr>
+    <tr><td>Navegação</td><td>Quadro com a carta da ZP, mostrando limites, <strong>PEP, fundeadouros e áreas de quarentena</strong>; cartas atualizadas</td></tr>
+  </table></div>
+
+  <h3>Quem homologa e quem cassa <span class="tag t-ja">JÁ COBRADO</span> <span class="tag t-conflito">CONFLITO</span></h3>
+  <div class="tw"><table class="min">
+    <tr><th>Objeto</th><th>Homologa</th><th>Cassa</th><th>Item</th></tr>
+    <tr><td>Lancha de Prático</td><td><strong>CP</strong></td><td>Constatação do <strong>Agente da AM</strong></td><td>3.7</td></tr>
+    <tr><td>Lancha de apoio</td><td><strong>CP</strong></td><td>Como no 3.7</td><td>3.12</td></tr>
+    <tr><td>Tripulação das lanchas</td><td><strong>Praticagem do Brasil</strong> (4 anos)</td><td>—</td><td>3.6; 2.50</td></tr>
+    <tr><td>Atalaia</td><td><strong>CONAPRA</strong>, por delegação da DPC (3.15) — o 2.50 diz <strong>Praticagem do Brasil</strong></td><td><strong>CP/DL/AG</strong></td><td>3.15; 2.50</td></tr>
+  </table></div>
+  <p>CONAPRA é o nome antigo da Praticagem do Brasil, e a norma usa os dois. O que não muda: <strong>a lancha é do CP; Atalaia e tripulação, da entidade de classe; a perda da homologação da Atalaia, da CP/DL/AG</strong>. Foi a <strong>2011 Q42 (a)</strong>, que segue correta: o Delegado em Itajaí <strong>pode decidir pela perda</strong> da homologação da Atalaia da ZP-21. Outras alternativas da mesma questão eram distratores: o Delegado <strong>não fixa preços</strong> (é a AM, extraordinariamente, LESTA art. 15-A, § 3º). Em 2011 Q31, a Atalaia também apareceu como distrator de VTS: <strong>a Atalaia não é VTS</strong>; coordena o serviço de praticagem.</p>
+
+  <div class="box trap">
+    <h4>Pegadinhas do Capítulo 3 <span class="tag t-banca">BANCA</span></h4>
+    <ol>
+      <li>Lancha: <strong>≥ 15 nós, ≤ 1,5 m de calado, &gt; 5 t, 2 × 170 HP</strong>; as medidas 9/7/3 m coincidem com o transbordo da 204.</li>
+      <li>"P" <strong>preto refletor 30 × 15 cm</strong>; lancha de apoio com o <strong>mesmo</strong> padrão; em outra atividade, <strong>sem "P"</strong>.</li>
+      <li><strong>AIS e HF opcionais</strong>; radar banda X obrigatório; balsa só em mar aberto.</li>
+      <li>Holofote <strong>300 a 500 jardas</strong> (lancha) × <strong>50 m</strong> (transbordo da 204).</li>
+      <li>CTS da lancha: <strong>MNC + MOC</strong>.</li>
+      <li>Lancha de apoio: <strong>águas abrigadas</strong>, navio parado, <strong>nunca</strong> no lugar da lancha de Prático.</li>
+      <li>Serviço requisitado <strong>obrigatoriamente à Atalaia homologada</strong>.</li>
+      <li>Coletes: Atalaia <strong>PRT + PRP + 20%</strong>; lancha <strong>= lotação</strong>.</li>
+    </ol>
+  </div>
+
+  <h3>Flashcards — Capítulo 3</h3>
+  <div class="deck" data-cap="3"></div>
+</section>
+
+<!-- =====================================================================
+     TÓPICO 4 — ZONAS DE PRATICAGEM
+     ===================================================================== -->
+<div class="capitulo" id="cap4">
+  <div class="k">Capítulo 4</div>
+  <h2>Zonas de Praticagem: onde o Prático é obrigatório</h2>
+  <p>Conceito, PEP, obrigatória × facultativa, embarcações dispensadas e o confronto com a regra legal de AB &gt; 500.</p>
+</div>
+
+<section class="bloco" id="t4">
+  <h2 class="sec"><span class="n">4</span> Zonas de Praticagem</h2>
+  <p class="lede">A lei fixou uma regra geral; a norma, autorizada pela própria lei, abriu as exceções.</p>
+
+  <h3>ZP e PEP</h3>
+  <p>ZP é a área delimitada por peculiaridades locais que exige um serviço de <strong>funcionamento ininterrupto</strong> (311, 4.1) — na lei, "<strong>disponibilidade permanente</strong>" (LESTA, art. 2º, XXII). <strong>Compete à DPC estabelecer as ZP</strong> (4.1; 1.3). A A.960 explica a razão de ser: praticagem exige conhecimento de <strong>uma área específica</strong>, e é legítimo administrá-la por região (Anexo 1, 1.1). Os anexos fecham o quadro: <strong>4-A</strong> lista as ZP e seus limites, <strong>4-B</strong> as coordenadas dos <strong>Pontos de Espera de Prático</strong>, <strong>4-C</strong> os trechos <strong>obrigatórios</strong> e <strong>4-D</strong> os <strong>facultativos</strong>, com exceções por tipo de navio.</p>
+  <p>O PEP é onde o Prático embarca e desembarca (2.28.1 z), e o Comandante <strong>não pode dispensá-lo antes do PEP</strong> em ZP obrigatória (2.30.2 g). Pela A.960, o ponto de embarque é fixado e divulgado pela autoridade, deve ficar <strong>longe o bastante do início da praticagem</strong> para um embarque seguro e oferecer <strong>tempo e espaço de mar</strong> para a troca de informações com o Comandante (Anexo 2, item 3). <span class="tag t-analise">ANÁLISE</span> A numeração das ZP pula a 11 e a 13.</p>
+
+  <h3>A regra legal e as exceções da norma <span class="tag t-novo">LEI 14.813</span></h3>
+  <p>A LESTA torna a praticagem <strong>obrigatória em todas as ZP para embarcações com AB superior a 500</strong>, salvo (art. 13, § 6º): <strong>I</strong> as hipóteses que a AM previr em regulamento — e então as dispensadas <strong>comunicam suas manobras aos agentes da AM</strong>; <strong>II</strong> embarcações <strong>regionais, empurradores, balsas e comboios integrados de balsas</strong>, só de navegação interior, de <strong>bandeira brasileira</strong>, qualquer que seja a AB. A 311, 4.4.3, é o regulamento do inciso I. Deixar de contratar Prático quando obrigatório: <strong>multa do Grupo D ou suspensão até 60 dias</strong> (RLESTA, art. 23, III).</p>
+
+  <div class="ichart">
+    <h4>Seletor — esta embarcação precisa de Prático?</h4>
+    <p class="hint">Escolha o caso e veja o limite e as condições da dispensa (311, 4.4.3).</p>
+    <div class="ictrl" id="dispBtns"></div>
+    <div class="iread" id="dispRead">Selecione uma embarcação acima.</div>
+  </div>
+
+  <div class="tw"><table class="min">
+    <tr><th>Alínea</th><th>Embarcação</th><th>Limite</th><th>Condições</th></tr>
+    <tr><td><strong>a</strong></td><td>Só de <strong>navegação interior</strong></td><td>Qualquer AB</td><td>Bandeira brasileira</td></tr>
+    <tr><td><strong>b / c</strong></td><td><strong>Rebocador</strong> em mar aberto, com empurrada (unidade integrada) ou rebocada</td><td><strong>AB ≤ 2.000</strong></td><td>Bandeira brasileira</td></tr>
+    <tr><td><strong>d</strong></td><td><strong>Qualquer tipo</strong></td><td>Brasileira <strong>≤ 2.000</strong> · estrangeira <strong>≤ 500</strong></td><td>—</td></tr>
+    <tr><td><strong>e</strong></td><td><strong>Estrangeira</strong></td><td><strong>≤ 2.000</strong></td><td>Contratada por <strong>empresa brasileira com sede e administração no país</strong> <strong>e</strong> comandada por <strong>marítimo brasileiro</strong></td></tr>
+    <tr><td><strong>f</strong></td><td><strong>Apoio marítimo</strong></td><td><strong>LOA ≤ 100 m</strong></td><td>Brasileira (ou estrangeira contratada e com comando brasileiro); <strong>thruster</strong> ou azimutal; <strong>DGPS</strong>; <strong>AIS ativo</strong></td></tr>
+    <tr><td><strong>g</strong></td><td><strong>Draga</strong></td><td><strong>AB &gt; 2.000</strong></td><td>Brasileira (ou estrangeira contratada e com comando brasileiro); só no trajeto <strong>dragagem ↔ despejo</strong>, após adestramento com Prático de <strong>5 + 5 navegações</strong>; dispensa concedida <strong>pela CP</strong>. Fundeio e atracação no porto de operação: dispensa até <strong>AB 5.000</strong> com thruster. <strong>Consulta obrigatória à Atalaia ou VTS</strong></td></tr>
+    <tr><td><strong>h</strong></td><td><strong>Petroleiro</strong></td><td><strong>AB ≤ 3.000</strong></td><td>Brasileiro (ou estrangeiro contratado e com comando brasileiro); thruster; DGPS; AIS ativo</td></tr>
+  </table></div>
+  <div class="mnem">2.000 regra · 500 estrangeira · 3.000 petroleiro · 5.000 draga atracando · 100 m apoio marítimo</div>
+  <p>Duas regras fecham o capítulo. Toda embarcação com <strong>AB &gt; 500</strong> <strong>comunica seus movimentos na ZP ao VTS</strong> ou a outro agente autorizado pela <strong>Autoridade Portuária</strong> (4.4.4). E a AM pode <strong>cancelar a dispensa</strong> num porto específico (4.4.5). Dispensa torna a praticagem <strong>facultativa</strong>; a ZP continua existindo.</p>
+
+  <div class="tw"><table class="min">
+    <tr><th>Ponto</th><th>LESTA, art. 13, § 6º</th><th>NORMAM-311</th><th>Leitura</th></tr>
+    <tr><td>Navegação interior</td><td>Regionais, empurradores, balsas e comboios de balsas</td><td><strong>Qualquer</strong> embarcação classificada só para navegação interior (4.4.3 a)</td><td>Norma mais ampla, apoiada no inciso I</td></tr>
+    <tr><td>Comunicação dos dispensados</td><td>Aos <strong>agentes da AM</strong></td><td>Ao <strong>VTS ou agente da Autoridade Portuária</strong> (4.4.4)</td><td><span class="tag t-conflito">CONFLITO</span> — "segundo a LESTA", agentes da AM</td></tr>
+    <tr><td>Dispensa × isenção</td><td colspan="2">A <strong>dispensa</strong> é da <strong>embarcação</strong> (Cap. 4); a <strong>isenção</strong> é <strong>pessoal do Comandante</strong> (Seção VII)</td><td>Petroleiro até 3.000 é <strong>dispensado</strong>; mas navio-tanque <strong>nunca</strong> tem Comandante <strong>isento</strong></td></tr>
+  </table></div>
+
+  <h3>2006 Q24 — São Luís pelo texto atual <span class="tag t-ja">JÁ COBRADO</span> <span class="tag t-conflito">CONFLITO</span></h3>
+  <p>Navio-tanque brasileiro com <strong>calado de 11,90 m</strong> demandando a ZP-04 (Itaqui, Alumar, Ponta da Madeira). O gabarito de 2006 era (a), "proximidades da <strong>boia nº 22</strong>". Hoje, navios com <strong>calado ≥ 11 m ou TPB &gt; 100.000</strong> recebem Prático no PEP de 02°26'00"S / 044°20'36"W, "<strong>nas proximidades da boia nº 19</strong>", e a praticagem é obrigatória a partir de <strong>2,3 milhas a NE da boia 19</strong>; com calado menor, o trecho da boia 1 à boia 19 é <strong>facultativo</strong>; o desembarque é num ponto <strong>único</strong> para todos (Anexos 4-B e 4-D). O gabarito está superado; a (b) seria a correta, e a (e) continua errada porque, com calado ≥ 11 m, o trecho facultativo <strong>vira obrigatório</strong>. A lição é a lógica: <strong>trecho facultativo pode ter exceções que o tornam obrigatório</strong> (4.4.2).</p>
+
+  <h3>Bandeira peruana e colombiana (4.5)</h3>
+  <p>Nas AJB, a praticagem é exercida <strong>exclusivamente por Práticos de nacionalidade brasileira</strong>, e todas as embarcações se sujeitam à lei brasileira. Para peruanas e colombianas com <strong>AB ≤ 2.000</strong> e <strong>calado compatível</strong> com os rios da região, o serviço é <strong>facultativo</strong>; se usado, o preço <strong>não excede o maior valor cobrado das embarcações brasileiras</strong>.</p>
+
+  <div class="box trap">
+    <h4>Pegadinhas do Capítulo 4 <span class="tag t-banca">BANCA</span></h4>
+    <ol>
+      <li>Quem cria ZP: <strong>DPC</strong>.</li>
+      <li>Regra legal: obrigatória para <strong>AB &gt; 500</strong>; exceções por regulamento da AM.</li>
+      <li>Limites: <strong>2.000 / 500 / 3.000 / 5.000 / LOA 100 m</strong>.</li>
+      <li>Estrangeira até 2.000: <strong>empresa brasileira e comandante brasileiro</strong>, juntos.</li>
+      <li>Draga: <strong>&gt; 2.000</strong>, <strong>5 + 5</strong>, dispensa <strong>pela CP</strong>.</li>
+      <li>AB &gt; 500 <strong>comunica</strong> ao VTS mesmo dispensada.</li>
+      <li>Peru e Colômbia: <strong>≤ 2.000</strong>, <strong>só Prático brasileiro</strong>, preço até o <strong>maior</strong> cobrado das brasileiras.</li>
+    </ol>
+  </div>
+
+  <h3>Flashcards — Capítulo 4</h3>
+  <div class="deck" data-cap="4"></div>
+</section>
+
+<!-- =====================================================================
+     TÓPICO 5 — COBRANÇA E PREÇO
+     ===================================================================== -->
+<div class="capitulo" id="cap5">
+  <div class="k">Capítulo 5 · com a LESTA, art. 15-A</div>
+  <h2>Cobrança e regulação do preço</h2>
+  <p>A 311 só trata dos navios de guerra estrangeiros; a regulação econômica está inteira na lei.</p>
+</div>
+
+<section class="bloco" id="t5">
+  <h2 class="sec"><span class="n">5</span> Quem paga, quanto e quem pode fixar</h2>
+  <p class="lede">Preço livre como regra, fixação pela AM como exceção, e reciprocidade para navios de Estado.</p>
+
+  <h3>Regulação econômica <span class="tag t-novo">LEI 14.813</span> <span class="tag t-decorar">DECORAR</span></h3>
+  <p>A remuneração cobre a <strong>operação do Prático, a lancha e a Atalaia</strong> (art. 15-A, caput). No rito ordinário, o preço é <strong>livremente negociado</strong> entre tomadores e prestadores, com repressão ao abuso de poder econômico (§ 2º). A AM só pode fixá-lo <strong>mediante provocação fundamentada</strong> de uma das partes, em caráter <strong>extraordinário, excepcional e temporário</strong>:</p>
+  <div class="tw"><table class="min">
+    <tr><th>Elemento</th><th>Regra</th><th>§</th></tr>
+    <tr><td>Hipóteses</td><td><strong>I</strong> garantir a ininterruptibilidade (art. 14, par. único, II); <strong>II</strong> <strong>abuso de poder econômico</strong> ou <strong>defasagem de preços</strong> comprovados</td><td>3º</td></tr>
+    <tr><td>Prazo</td><td><strong>Até 12 meses, prorrogável por igual período</strong></td><td>3º</td></tr>
+    <tr><td>Admissibilidade</td><td>A AM decide, fundamentadamente, se conhece do pedido</td><td>4º</td></tr>
+    <tr><td>Comissão</td><td><strong>Temporária, paritária e consultiva</strong>, <strong>presidida pela AM</strong>: entidade de praticagem + armador tomador + <strong>ANTAQ</strong>; parecer em <strong>até 45 dias</strong></td><td>5º</td></tr>
+    <tr><td>Critérios</td><td>Respeitar a livre negociação; pode considerar <strong>atualização monetária anual</strong>, <strong>preços costumeiros</strong> da ZP, <strong>contratos vigentes</strong>, <strong>tempo e qualidade</strong> do serviço</td><td>6º</td></tr>
+  </table></div>
+  <p>A ANTAQ entra na comissão por força da Lei 10.233/2001, art. 27, XXXI, acrescentado pela Lei 14.813. Ela <strong>participa</strong>; não fixa preço.</p>
+
+  <h3>Três regras de preço que a 311 menciona</h3>
+  <div class="tw"><table>
+    <tr><th>Situação</th><th>Regra</th><th>Fonte</th></tr>
+    <tr><td>Navio de guerra ou de Estado estrangeiro, em visita <strong>não comercial</strong> em tempo de paz</td><td>A MB adota, <strong>em princípio, a reciprocidade</strong>; a entidade designada <strong>consulta antes e formalmente a CP/DL/AG</strong> sobre facilidades e isenções</td><td>311, 5.1</td></tr>
+    <tr><td>Peruana ou colombiana</td><td>Até o <strong>maior valor</strong> cobrado das brasileiras</td><td>311, 4.5</td></tr>
+    <tr><td>Comandante isento, AB ≥ 500</td><td><strong>Continua pagando</strong> a disponibilidade do serviço</td><td>LESTA, art. 13, § 4º, I</td></tr>
+  </table></div>
+
+  <div class="box trap">
+    <h4>Pegadinhas do preço <span class="tag t-banca">BANCA</span></h4>
+    <ol>
+      <li>Regra: <strong>livre negociação</strong>. A AM fixa só <strong>a pedido fundamentado</strong>, nunca de ofício.</li>
+      <li>Prazo: <strong>12 + 12 meses</strong>, não indeterminado.</li>
+      <li>Comissão <strong>consultiva</strong>, não deliberativa; a <strong>ANTAQ participa</strong>, não fixa.</li>
+      <li>CP ou Delegado <strong>não fixam preço</strong> (2011 Q42 c, distrator).</li>
+      <li>Navio de guerra estrangeiro: <strong>reciprocidade</strong>, com consulta prévia — não há isenção automática.</li>
+    </ol>
+  </div>
+
+  <h3>Flashcards — Capítulo 5</h3>
+  <div class="deck" data-cap="5"></div>
+</section>
+
+<!-- =====================================================================
+     A.960 EM UMA PÁGINA
+     ===================================================================== -->
+<div class="capitulo" id="cap6">
+  <div class="k">Resolução IMO A.960(23) · Bloco F, item 21</div>
+  <h2>A.960 em uma página</h2>
+  <p>A mesma recomendação vista inteira: o que cada anexo cobre e onde ela já apareceu neste caderno.</p>
+</div>
+
+<section class="bloco" id="t6">
+  <h2 class="sec"><span class="n">A.960</span> Formação e operação, segundo a IMO</h2>
+  <p class="lede">Adotada pela Assembleia em 05/12/2003; revogou a A.485(XII); recomenda aos Governos aplicá-la "o quanto antes" e pede ao MSC que a mantenha em revisão.</p>
+
+  <div class="tw"><table class="min">
+    <tr><th>Anexo 1 — Formação e certificação</th><th>Correspondente brasileiro</th></tr>
+    <tr><td><strong>1</strong> Escopo: práticos de área; <strong>exclui</strong> práticos de alto-mar e comandantes ou tripulantes habilitados para praticar</td><td>Isenção do Comandante fora da A.960 (<a href="#t26">2.6</a>)</td></tr>
+    <tr><td><strong>2</strong> Autoridade competente de praticagem; requisitos fixados com as associações; relatórios de incidentes usados na formação</td><td>AM/DPC; Praticagem do Brasil só auxiliar (<a href="#t21">2.1</a>)</td></tr>
+    <tr><td><strong>3</strong> Certificado indica a <strong>área</strong> e <strong>limitações locais</strong></td><td>Uma ZP; restrição no verso (2.22.1; 2.24.16)</td></tr>
+    <tr><td><strong>4</strong> Aptidão médica pelo <strong>STCW</strong> ou outro padrão; reavaliar após doença ou lesão grave</td><td>2.13; 2.49 (<a href="#t25">2.5</a>)</td></tr>
+    <tr><td><strong>5</strong> Formação: supervisão de práticos experientes, simulação, <strong>BRM</strong> com emergências em canal estreito, MPX, reciclagem em 11 itens</td><td>Programa de Qualificação; ATPR</td></tr>
+    <tr><td><strong>6</strong> Proficiência verificada a intervalos <strong>≤ 5 anos</strong>; recuperar familiaridade após ausência</td><td>ATPR a cada 5 anos; Plano de Recuperação</td></tr>
+    <tr><td><strong>7</strong> Programa de <strong>28 itens</strong></td><td>Exame de Habilitação (2.24.4); Anexo 2-A do PSCPP</td></tr>
+  </table></div>
+  <div class="tw"><table class="min">
+    <tr><th>Anexo 2 — Procedimentos operacionais</th><th>Correspondente brasileiro</th></tr>
+    <tr><td><strong>1–2</strong> Coordenação; a presença do Prático <strong>não desobriga</strong> o Comandante; ações do Prático monitoradas sempre</td><td>2.30.1 (<a href="#t23">2.3</a>)</td></tr>
+    <tr><td><strong>3</strong> Ponto de embarque fixado pela autoridade, distante do início da praticagem, com tempo e espaço para o MPX</td><td>PEP, Anexo 4-B (<a href="#t4">4</a>)</td></tr>
+    <tr><td><strong>4</strong> Procedimento de requisição; ETA/ETD cedo; mensagem inicial por VHF</td><td>Requisição obrigatória à Atalaia (<a href="#t3">3</a>)</td></tr>
+    <tr><td><strong>5</strong> Troca de informações Comandante–Prático: Pilot Card e outros 6 itens; contínua; plano flexível</td><td>2.30.2 a</td></tr>
+    <tr><td><strong>6</strong> Idioma: SMCP; inglês ou língua comum; explicar ao passadiço o que se disse a terceiros</td><td>Exame em inglês (2.24.4 e); Atalaia bilíngue (3.14.1 d)</td></tr>
+    <tr><td><strong>7</strong> Comunicar o que afete segurança ou poluição, em especial acidentes e irregularidades de luzes, marcas e sinais</td><td>2.28.1 d, e, f; 2.31</td></tr>
+    <tr><td><strong>8</strong> <strong>Direito de recusa</strong> diante de navio perigoso</td><td><span class="tag t-conflito">CONFLITO</span> LESTA, art. 15: <strong>não pode recusar</strong> (<a href="#t24">2.4</a>)</td></tr>
+    <tr><td><strong>9</strong> Descansado e alerta</td><td>ERU e limites de fadiga (<a href="#t22">2.2</a>)</td></tr>
+  </table></div>
+
+  <div class="box trap">
+    <h4>Pegadinhas da A.960 <span class="tag t-banca">BANCA</span></h4>
+    <ol>
+      <li><strong>Recomendação</strong> da Assembleia, não convenção; obriga no Brasil só porque a LESTA (art. 13, § 2º, III) e a 311 (2.51) a acolhem.</li>
+      <li>A IMO <strong>não</strong> se envolve com certificação ou licenciamento de práticos.</li>
+      <li>Anexo 1 = <strong>formação e certificação</strong>; Anexo 2 = <strong>procedimentos operacionais</strong>.</li>
+      <li>Verificação de proficiência a intervalos <strong>não superiores a 5 anos</strong>.</li>
+      <li>A troca de informações começa em <strong>toda</strong> faina e é <strong>contínua</strong>; o cartão complementa, não substitui.</li>
+      <li>Direito de recusa existe na A.960 (Anexo 2, item 8) e <strong>não</strong> existe na LESTA.</li>
+    </ol>
+  </div>
+
+  <h3>Flashcards — A.960(23)</h3>
+  <div class="deck" data-cap="6"></div>
+</section>
+
+<!-- ===== REVISÃO GERAL ===== -->
+<section class="bloco" id="flash">
+  <h2 class="sec"><span class="n">↻</span> Revisão geral — todos os baralhos</h2>
+  <p class="lede">As cartas de todos os capítulos num só lugar. Filtre por capítulo e prioridade, embaralhe, marque "Sei ✓" para tirar a carta da rodada e "Revisar" para mandá-la ao fim da fila. O progresso fica salvo neste navegador e é compartilhado com os baralhos de cada capítulo.</p>
+  <div class="deck" data-cap="0"></div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bloco" id="quiz">
+  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
+  <p class="lede" id="quizLede">Questões no formato da banca — com as reais de 2006, 2008, 2011 e 2012 relidas pelo texto atual.</p>
+  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
+  <div class="quiz" id="quizBox">
+    <div class="q" id="qText"></div>
+    <div id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <div class="nav">
+      <span id="qCount"></span>
+      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PSCPP ===== -->
+<details class="pscpp" id="pscpp" open>
+  <summary>Pontos PSCPP — Praticagem: LESTA, RLESTA, NORMAM-311 e A.960</summary>
+  <ul>
+    <li><b>Serviço:</b> assessoria ao Comandante; essencial, privado, de interesse público; Prático + lancha + Atalaia (LESTA, arts. 12 e 12-A; RLESTA, art. 6º; 311, 1.7). Prático: 5º Grupo, não tripulante.</li>
+    <li><b>Competência:</b> DPC regulamenta, cria ZP e define dispensas (1.3; 4.1). Habilitação: frequência + cursos + recomendações internacionais (LESTA, art. 13, § 2º).</li>
+    <li><b>Formação:</b> certificado de PRP 21 meses; qualificação 12–18; exame pedido 90 dias antes; banca do CP sem o monitor; 2ª reprovação = afastamento definitivo.</li>
+    <li><b>ERU:</b> única, mensal, ratificada pelo CP; descanso no revezamento e "à disposição do Comandante" = aguardando pela manobra; 6/2/12/6 h; 14 ou 21 dias; 1 por 4; 120/14 e 180/21.</li>
+    <li><b>A bordo:</b> presença do Prático não desobriga o Comandante; rumo e velocidade só do Prático (art. 15-B); dispensa por conduta perigosa com justificativa em 24 h; não dispensar antes do PEP.</li>
+    <li><b>Risco:</b> Prático comunica (2.31), CP/DL/AG declara impraticabilidade total ou parcial (2.32); embarque/desembarque fora do PEP: Comandante com autorização prévia.</li>
+    <li><b>Recusa:</b> em escala + designado pela Atalaia + não atende ou atrasa → Processo Administrativo; suspensão até 12 meses, cancelamento na reincidência (LESTA, art. 15; RLESTA, art. 25). A.960 admite recusa; a lei não.</li>
+    <li><b>Permanência:</b> definitivo &gt; 24 meses sem exercer; AFTP ≤ 24; recuperação 50% / 75% + Junta; laudo 3/2/1 ano; ATPR a cada 5 anos (A.960, 6.1).</li>
+    <li><b>Isenção:</b> Comandante brasileiro, ≤ 100 m, 2/3; ComDN aprova, DPC emite; 5 fases; tanques e cruzeiros excluídos; SISGEVI e acompanhamento pela CP.</li>
+    <li><b>Lotação:</b> ≥ 2 × diário em Serviço; efetivo &lt; 75 anos; vaga não obriga PSCPP; parâmetros do art. 15-C.</li>
+    <li><b>Lancha e Atalaia:</b> 15 nós, 1,5 m, 5 t, 2 × 170 HP; "P" 30 × 15 cm; requisição obrigatória à Atalaia; perda da homologação da Atalaia pela CP/DL/AG.</li>
+    <li><b>ZP:</b> obrigatória para AB &gt; 500 (art. 13, § 6º); dispensas 2.000/500/3.000/5.000/100 m; AB &gt; 500 comunica ao VTS; Peru e Colômbia ≤ 2.000.</li>
+    <li><b>Preço:</b> livre; fixação pela AM só a pedido, 12 + 12 meses, comissão consultiva com ANTAQ (45 dias); navios de Estado estrangeiros: reciprocidade.</li>
+    <li><b>Banca:</b> 2006 (encalhe; São Luís, hoje superada) · 2008 Q29 (recusa) e Q62 (composição, superada) · 2011 Q40 (AMD) e Q42 (Atalaia) · 2012 Q33 (atraso = recusa).</li>
+  </ul>
+</details>
+
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><b>PSCPP 2027</b> · NORMAM-311/DPC com LESTA, Lei 14.813/2024, RLESTA e Resolução IMO A.960(23) — Serviço de Praticagem · Capital Sereno · Módulo IV — Legislação.</div>
+</footer>
+
+<script>
+/* ===== SELETOR ERU ===== */
+var ERU=[
+  ["Conduzindo a faina",[1,1,1],"<b>Em Serviço — em manobra</b>: em efetiva faina, do POB até ser dispensado pelo Comandante (2.26.3 a). <b>Conta</b> para os limites de 6 h contínuas, 12 h em 24 h e 120 h/180 h (2.27.4)."],
+  ["Em terra, esperando a vez",[1,1,0],"<b>Em Serviço — aguardando pela manobra</b>: espera sua vez na sequência de fainas do dia (2.26.3 a). Não é faina efetiva."],
+  ["A bordo, descansando no revezamento",[1,1,0],"<b>Em Serviço — aguardando pela manobra (Obs. 1)</b>: numa faina de longa duração, o Prático em descanso por revezamento é considerado aguardando. Não é faina efetiva; conta como as ≥ 2 h após o revezamento e entra no intervalo de ≥ 6 h consecutivas (2.27.4 a). Alojamento como oficial (LESTA, art. 15-A, § 1º)."],
+  ["A bordo, acomodado, à espera de ser chamado",[1,1,0],"<b>Em Serviço — aguardando pela manobra (Obs. 2)</b>: devidamente acomodado, é o <b>“Prático à disposição do Comandante da embarcação”</b>. Está em Serviço e a bordo, mas sem faina efetiva."],
+  ["Em casa, de prontidão",[1,0,0],"<b>Período de Escala — em Prontidão</b>: disponível se o <b>RUSP</b> o acionar (demanda acima da capacidade ou substituição por força maior). Prazo para se apresentar: o da NPCP, <b>no máximo 12 h</b>; acionamento informado à CP/DL/AG em até 24 h (2.26.3 b; 2.26.4)."],
+  ["Fora da escala, de férias ou em AFTP",[0,0,0],"<b>Período de Indisponibilidade</b>: não pode ser requisitado para fainas (2.26.5). Só a <b>requisição da AM</b> (LESTA, art. 14, par. único, III) foge à regra."]
+];
+var eb=document.getElementById('eruBtns');
+ERU.forEach(function(r){var b=document.createElement('button');b.type='button';b.textContent=r[0];b.onclick=function(){
+  document.querySelectorAll('#eruBtns button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');
+  var n=["Período de Escala","Em Serviço","Faina efetiva"],h='<div class="sys">';
+  n.forEach(function(s,i){h+='<span class="'+(r[1][i]?'on':'')+'">'+(r[1][i]?'✔ ':'— ')+s+'</span>';});
+  document.getElementById('eruRead').innerHTML=h+'</div>'+r[2];};eb.appendChild(b);});
+
+/* ===== SELETOR DISPENSAS ===== */
+var DSP=[
+  ["Graneleiro BR, AB 1.800",1,"<b>Dispensado</b> — alínea <b>d</b>: bandeira brasileira de qualquer tipo até AB 2.000. Como tem AB &gt; 500, <b>comunica seus movimentos ao VTS</b> (4.4.4)."],
+  ["Carga estrangeira, AB 450",1,"<b>Dispensado</b> — alínea <b>d</b>: estrangeira de qualquer tipo até AB 500."],
+  ["Estrangeira AB 1.500, afretada por empresa BR, comandante estrangeiro",0,"<b>Obrigatório</b> — a alínea <b>e</b> exige as duas condições juntas: contratante brasileira com sede no país <b>e</b> comandante <b>marítimo brasileiro</b>."],
+  ["Estrangeira AB 1.500, empresa BR, comandante brasileiro",1,"<b>Dispensado</b> — alínea <b>e</b>: até AB 2.000, contratada por empresa brasileira com sede e administração no país e comandada por marítimo brasileiro."],
+  ["Empurrador de interior, AB 3.000",1,"<b>Dispensado</b> — alínea <b>a</b> (classificada só para navegação interior, bandeira brasileira, qualquer AB) e LESTA, art. 13, § 6º, II."],
+  ["Rebocador BR com rebocada de AB 2.500, mar aberto",0,"<b>Obrigatório</b> — as alíneas <b>b/c</b> só dispensam até AB <b>2.000</b>."],
+  ["Supridor (apoio marítimo) BR, LOA 85 m, com thruster, DGPS e AIS",1,"<b>Dispensado</b> — alínea <b>f</b>: apoio marítimo com LOA ≤ 100 m, thruster ou azimutal, DGPS e AIS ativo."],
+  ["Draga BR AB 6.000, trajeto dragagem–despejo, adestrada 5+5",2,"<b>Dispensada pela CP</b> — alínea <b>g</b>: único caso acima de AB 2.000; exige 5 + 5 navegações com Prático e autorização da CP. Para fundear ou atracar no porto, a dispensa só vai até AB 5.000 — aqui, <b>não</b>. Consulta obrigatória à Atalaia/VTS."],
+  ["Petroleiro BR, AB 2.800, thruster, DGPS e AIS",1,"<b>Dispensado</b> — alínea <b>h</b>: petroleiro até AB 3.000. Atenção: o <b>Comandante</b> de navio-tanque nunca pode ser <b>isento</b> (2.42.4) — dispensa ≠ isenção."],
+  ["Petroleiro BR, AB 3.500",0,"<b>Obrigatório</b> — acima de AB 3.000 o petroleiro não se enquadra na alínea h."],
+  ["Colombiana, AB 1.900, rio Solimões, calado compatível",1,"<b>Facultativo</b> — 4.5: peruanas e colombianas até AB 2.000 com calado compatível. Se usar, só Prático brasileiro, preço até o maior cobrado das brasileiras."],
+  ["Graneleiro BR AB 25.000",0,"<b>Obrigatório</b> — regra legal: AB &gt; 500 em todas as ZP (LESTA, art. 13, § 6º). Sem Prático: multa D ou suspensão até 60 dias (RLESTA, art. 23, III)."]
+];
+var db=document.getElementById('dispBtns');
+DSP.forEach(function(r){var b=document.createElement('button');b.type='button';b.textContent=r[0];b.onclick=function(){
+  document.querySelectorAll('#dispBtns button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');
+  var t=r[1]===1?'<span class="on">✔ Praticagem facultativa</span>':(r[1]===2?'<span class="on">⚠ Dispensa por ato da CP</span>':'<span>✘ Praticagem obrigatória</span>');
+  document.getElementById('dispRead').innerHTML='<div class="sys">'+t+'</div>'+r[2];};db.appendChild(b);});
+
+var CARTAS=[
+/* ===== CAP 1 ===== */
+["1a",1,"LESTA 12","Conceito legal de serviço de praticagem?","Conjunto de atividades profissionais de assessoria ao Comandante, requeridas por peculiaridades locais que dificultem a livre e segura movimentação da embarcação (LESTA, art. 12; 311, 1.7).","O Prático assessora; o Comandante comanda",2],
+["1b",1,"LESTA 12 §1º","Natureza jurídica do serviço (Lei 14.813)?","Atividade essencial, de natureza privada, que serve ao interesse público da segurança da navegação, da vida humana e do meio ambiente.","Privada — não é serviço público",3],
+["1c",1,"LESTA 12 §§2º-3º","Disponibilidade e papel do Estado?","Deve estar permanentemente disponível (§ 2º; art. 14). É dever do Estado garantir sua adequada e livre prestação (§ 3º).","",2],
+["1d",1,"LESTA 12-A","Composição do serviço de praticagem?","Prático, lancha de Prático e Atalaia (LESTA, art. 12-A; RLESTA, art. 6º; 311, 1.7).","2008 Q62 usou 'estação de praticagem' — redação anterior a 2012",3],
+["1e",1,"LESTA 12-A p.ú.","Quem responde pela infraestrutura do serviço?","Os próprios práticos: implantação e manutenção da infraestrutura e dos equipamentos, treinamento de colaboradores e permanente disponibilidade.","",2],
+["1f",1,"1.7 obs.","A lancha de Prático pode ser substituída?","Sim, por helicóptero, observada a NORMAM-223 (helideque adaptado; área de pick-up).","",1],
+["1g",1,"RLESTA 1º V","Grupo e natureza do Prático?","5º Grupo de aquaviários: não tripulantes que prestam serviço de praticagem embarcados (LESTA, art. 2º, XV).","Marítimo é o 1º Grupo",3],
+["1h",1,"RLESTA 1º VI","Quem é o 6º Grupo e ele faz faina de praticagem?","Agentes de Manobra e Docagem: manobram navios em diques, estaleiros e carreiras. Não fazem faina de praticagem — que exige assessoria de Prático.","2011 Q40 (a)",3],
+["1i",1,"1.3","Quem regulamenta o serviço, estabelece as ZP e define as dispensadas?","O Diretor de Portos e Costas, como Representante da Autoridade Marítima (311, 1.3; LESTA, art. 4º, II).","Não é o CP nem a DHN",3],
+["1j",1,"1.2","A quem se aplica a NORMAM-311?","A todos os Serviços de Praticagem e, de maneira especial, aos Práticos, Praticantes e usuários do serviço. Especificidades locais: NPCP/NPCF.","O usuário também",1],
+["1k",1,"1.4","O que é faina de praticagem?","Atividade com manobra(s) de praticagem e/ou navegação de praticagem numa ZP.","",2],
+["1l",1,"1.4 obs.","Como se conta uma faina?","Do POB (Prático se apresenta ao Comandante) até ser dispensado e desembarcar = uma faina. Vale para manutenção da habilitação e qualificação do PRP.","",2],
+["1m",1,"Glossário","Quais são as manobras de praticagem?","Atracar/desatracar, fundear/suspender, amarrar/largar boia, entrar/sair de dique ou carreira e alar ao cais — com assessoria de Prático.","",1],
+["1n",1,"1.5","Como a 311 define a manutenção da habilitação?","Cumprimento de frequência mínima quadrimestral de fainas, com quantitativos fixados anualmente pela AM.","",2],
+["1o",1,"LESTA 13 §2º","Três requisitos legais para manter a habilitação?","I frequência mínima de manobras; II cursos de aperfeiçoamento; III recomendações de organismos internacionais reconhecidas pela AM.","A 311, 1.5, só fala da frequência",3],
+["1p",1,"LESTA 13 caput/§3º","Quem pode executar o serviço e com que liberdade?","Exclusivamente práticos habilitados pela AM; assegurado o livre exercício, atendida a regulação técnica e econômica.","",2],
+["1q",1,"1.6","Quem é o RUSP e como é escolhido?","Prático da ZP que representa a Praticagem junto à CP/DL/AG; indicado por consenso dos PRT; sem acordo, o CP escolhe; Portaria do CP.","",3],
+["1r",1,"1.6","Principal responsabilidade do RUSP?","Elaborar, disseminar e gerir a Escala de Rodízio Única (ERU).","",2],
+["1s",1,"LESTA 13 §5º","O que a lei exige da escala?","Escala de rodízio única homologada pela AM, garantindo proficiência, distribuição equânime e disponibilidade permanente.","",2],
+/* ===== CAP 2 ===== */
+["2a",2,"2.1","O PSCPP é concurso público?","Não. Prático e Praticante não são servidores nem exercem função pública; o PSCPP não é o concurso do art. 37, II, da CF.","",2],
+["2b",2,"2.1","Quem determina época, vagas e Edital do PSCPP?","O DPC, como Representante da AM. O PSCPP é o meio inicial e exclusivo de preencher vaga de Prático.","",2],
+["2c",2,"2.7.6","Quem é eliminado na prova escrita?","Quem tiver grau inferior à metade ou, mesmo com metade, não se classificar entre os convocados para a 2ª etapa.","",1],
+["2d",2,"2.10.3","Quem decide a eliminação por idoneidade? Cabe recurso?","O Diretor de Portos e Costas; não cabe recurso.","",2],
+["2e",2,"2.13","Índices visuais do candidato?","20/200 sem correção em cada olho, corrigível para 20/20 num olho e 20/30 no outro.","Prático em atividade: 20/30 nos dois",2],
+["2f",2,"2.13","Recurso na seleção psicofísica?","5 dias úteis para pedir à DPC nova inspeção por Junta superior; contra ela não há recurso.","",1],
+["2g",2,"2.14","Provas do teste de suficiência física?","4 barras; nadar 50 m em até 1min30s; flutuar 20 min. Segunda e última chance.","",1],
+["2h",2,"2.6.4","O que não integra o PSCPP?","A Qualificação do Praticante e o Exame de Habilitação para Prático.","",2],
+["2i",2,"2.18/2.21","Pode trocar de ZP? Há convocação posterior?","Nenhuma troca de ZP entre selecionados. O certame termina na homologação, sem convocação posterior.","",1],
+["2j",2,"2.22","Validade do Certificado de Praticante e quantas ZP?","21 meses; uma única ZP por categoria.","",3],
+["2k",2,"2.23.2","Prazo do Programa de Qualificação e por quê?","Mínimo 12, máximo 18 meses; o mínimo garante treino em todas as estações do ano.","",3],
+["2l",2,"2.23","Quem estabelece e quem executa o Programa?","Estabelece: CP. Executa: Entidade(s) de Praticagem indicada(s) pelo CP, com um Prático monitor por Praticante.","",2],
+["2m",2,"2.23.9","Divergência entre Entidade e Praticante sobre a avaliação?","Decide o DPC, via CP.","",1],
+["2n",2,"2.24.2-3","Pedido e início do Exame de Habilitação?","Pedido ao CP até 90 dias antes do fim da validade (com Anexo 2-D); início em até 45 dias do protocolo.","",3],
+["2o",2,"2.24.4","Matérias obrigatórias do Exame?","Navegação de praticagem; fundeio, suspender, atracar, desatracar, mudar fundeadouro; rebocadores; amarração; ordens e conversação técnica em inglês. Feito a bordo.","",2],
+["2p",2,"2.24.7","Composição da banca do Exame?","Designada e presidida pelo CP, com um Prático da ZP e um CLC (substituível por Oficial Superior da Armada). Só funciona completa; o monitor não pode integrá-la.","",3],
+["2q",2,"2.24.11-13","Reprovação no Exame?","5 dias para pedir o 2º e último; marcado em até 30 dias; nova reprovação = afastamento definitivo e cancelamento.","",3],
+["2r",2,"2.24.14","Quem emite o Certificado de Prático?","A DPC, após habilitação formalizada por Portaria (Anexo 2-E).","",2],
+["2s",2,"2.24.16","Faina típica inexequível na qualificação?","Restrição no verso do Certificado de Prático, a superar em até 24 meses.","A.960: certificado registra limitações locais",2],
+["2t",2,"2.22.5/2.24.15","Prático de outra ZP aprovado: prazos?","20 dias para requerer (afastamento ou qualificação cumulativa) e 40 dias para se apresentar; após o exame, 20 dias para o afastamento definitivo da origem — condição sine qua non.","",1],
+["2u",2,"2.26.1","O que é a ERU?","Escala mensal por ZP com todos os Práticos, divididos em Período de Escala e Período de Indisponibilidade.","Única mesmo com várias entidades (2.27.5)",2],
+["2v",2,"2.26.3 a","Duas condições do Prático em Serviço?","Em manobra (efetiva faina, do POB à dispensa) e aguardando pela manobra.","",3],
+["2w",2,"2.26.3 obs.1","Prático a bordo em descanso por revezamento — qual estado?","Em Serviço, aguardando pela manobra (Obs. 1). Não é faina efetiva.","Distrator: 'em manobra'",3],
+["2x",2,"2.26.3 obs.2","Prático a bordo, acomodado, aguardando ser requisitado?","Em Serviço, aguardando pela manobra — o 'Prático à disposição do Comandante' (Obs. 2).","",3],
+["2y",2,"2.26.3 b/2.26.4","Prático em Prontidão: quem aciona e prazo?","Acionado pelo RUSP (demanda excedente ou substituição por força maior); apresenta-se no prazo da NPCP, máx. 12 h; CP/DL/AG informada em até 24 h.","",3],
+["2z",2,"2.26.5","Quem está em Período de Indisponibilidade?","Fora da escala, em afastamento temporário ou de férias — não pode ser requisitado.","",2],
+["2A",2,"2.26.8","Quem pode fazer faina num dia?","Só quem consta da ERU e está em Período de Escala naquele dia; exceções decididas exclusivamente pelo CP.","",2],
+["2B",2,"2.27.1","Início e fim do dia de serviço na ERU?","8h às 8h do dia seguinte; mudança por pedido do RUSP à DPC, via CP.","",2],
+["2C",2,"2.27.4 a","Limites de faina efetiva?","Máx. 6 h contínuas (depois revezamento, ≥ 2 h aguardando); máx. 12 h em 24 h; um intervalo de ≥ 6 h consecutivas.","",3],
+["2D",2,"2.27.4 b-c","Dias consecutivos em escala?","< 30 milhas: 14 dias; ≥ 30 milhas: 21 dias; depois, 1 dia indisponível para cada 4 em escala.","",3],
+["2E",2,"2.27.4 d","Teto de horas de faina efetiva?","120 h a cada 14 dias ou 180 h a cada 21 dias.","",3],
+["2F",2,"2.27.3","Entrega da ERU e se o CP não ratificar?","5 dias úteis antes do mês; sem ratificação, o CP elabora a escala.","",2],
+["2G",2,"2.27.6","Troca de Período de Escala?","Pedido com 48 h de antecedência, justificado, RUSP informado; decisão do CP/DL até 12h do dia anterior.","",2],
+["2H",2,"2.27.7","Substituir na ERU Prático afastado por saúde ou força maior?","Só com autorização prévia do CP/DL, sem reciprocidade. (Acionar a Prontidão é informado depois.)","",1],
+["2I",2,"2.27.2","Média quadrimestral e tolerância?","(Fainas de A−2 + A−1) ÷ (6 × PRT habilitados); faixa de ± 40%. DPC revisa as frequências mínimas até fevereiro.","",2],
+["2J",2,"2.25","Como se organizam as ZP e quais são interestaduais?","Por estado; exceções ZP-01 (AP/AM) e ZP-10 (AL/SE). Lancha e Atalaia podem ser próprias ou contratadas.","",1],
+["2K",2,"2.30.1","A presença do Prático desobriga o Comandante?","Não. As ações do Prático devem ser monitoradas permanentemente (igual à A.960, Anexo 2, 2.1 e 2.3).","",3],
+["2L",2,"LESTA 15-B","Quem transmite rumo e velocidade em ZP?","Exclusivamente o Prático (LESTA, art. 15-B; 311, 2.30.2 b).","Nem VTS, nem Atalaia",3],
+["2M",2,"2.30.2 d","Comandante dispensa Prático que orienta de forma perigosa?","Sim: pede substituto imediatamente e comunica à CP/DL/AG, formalmente, em até 24 h, as razões técnicas.","",3],
+["2N",2,"2.30.2 g","Comandante pode dispensar o Prático antes do PEP?","Não, em ZP de praticagem obrigatória (ressalvados 2.33 e 2.34).","",3],
+["2O",2,"2.30.2 a","O que o Comandante deve informar ao Prático?","Condições de manobra e todos os elementos necessários, particularmente o calado.","",2],
+["2P",2,"2.30.2 e / LESTA 15-A §1º","Alojamento do Prático?","Como os oficiais (equivalência NORMAM-101 para o 5º Grupo); no revezamento, camarotes individuais de preferência; conforto térmico. O Comandante garante.","",2],
+["2Q",2,"2.28.1 m","Prático em divergência com a empresa de navegação?","Executa o serviço mesmo assim; questões nos foros competentes; divergência técnico-operacional é dirimida pela AM.","",3],
+["2R",2,"2.28.1 d-f","O que o Prático comunica à CP/DL/AG?","Variações de profundidade e correnteza; alterações da sinalização náutica; condições desfavoráveis (também ao Comandante).","",2],
+["2S",2,"2.28.1 i-l","Cooperação do Prático com a AM?","SAR e levantamentos hidrográficos; assistência e salvamento; compor bancas (PSCPP, Exame, Isenção).","",1],
+["2T",2,"2.28.1 c","Com quem o Prático se comunica na faina?","Atalaia, VTS (quando disponibilizado pela Autoridade Portuária) e outras embarcações em trânsito.","",1],
+["2U",2,"2.28.1 q/z","Colete e local de embarque?","Colete no transbordo lancha–embarcação–lancha; embarcar e desembarcar no PEP.","",2],
+["2V",2,"2.29","Deveres do Praticante?","Cumprir o Programa orientado por Prático; não interrompê-lo salvo AFTP; cumprir as alíneas h, k, p, q e v do Prático.","",1],
+["2W",2,"2.28.2","Prático fora do efetivo (≥ 75 anos)?","Pode pedir ao DPC, via CP, dispensa definitiva de área mais severa, sem se eximir da ERU e da frequência mínima.","",1],
+["2X",2,"2.31","O que o Prático faz diante de condições desfavoráveis?","Comunica imediatamente à CP/DL/AG (tempo e mar adversos, acidentes ou fatos, deficiências do navio ou tripulação).","2006: encalhe — dever do Prático comunicar",3],
+["2Y",2,"2.32","Quem declara a impraticabilidade?","A CP/DL/AG. Total = nenhuma faina; parcial = só certos locais, embarcações, manobras ou navegação.","2011 Q40 (e)",3],
+["2Z",2,"2.32.5","Revisão dos parâmetros de impraticabilidade a pedido externo?","Promovida pelo CP; o interessado faz, às suas custas, análise de risco e simulações.","",1],
+["2aa",2,"2.33","Mar impede o embarque do Prático?","Comandante, sob exclusiva responsabilidade e com autorização prévia da CP/DL/AG (preferência via Atalaia), demanda local abrigado guiado pelo Prático na lancha.","",3],
+["2ab",2,"2.34","Mar impede o desembarque?","Com autorização prévia, desembarca em local abrigado. Se previsto, Prático pronto para seguir viagem; se surpresa, Comandante provê permanência e retorno e comunica imediatamente.","",2],
+["2ac",2,"2.35","Configuração da recusa ou atraso?","Prático em Período de Escala não atende ou não atende tempestivamente embarcação designada pela Atalaia → CP/DL/AG instaura Processo Administrativo.","2012 Q33: atraso de 6 h = recusa",3],
+["2ad",2,"LESTA 15/RLESTA 25","Pena da recusa?","Suspensão do certificado até 12 meses; reincidência: cancelamento. Descumprir norma da AM: suspensão até 120 dias.","",3],
+["2ae",2,"2008 Q29","Prático discorda do CP que decide navegar e pede substituição?","Recusa: quem decide é a CP/DL/AG e o Prático executa mesmo divergindo. Sujeito a processo administrativo.","",3],
+["2af",2,"A.960 × LESTA","Prático pode recusar navio perigoso?","A.960 (Anexo 2, 8) diz que sim; a LESTA (art. 15) proíbe. Prevalece a lei: comunicar (2.31) e a CP/DL/AG decide (2.32).","",3],
+["2ag",2,"2.36.1","Afastamento definitivo do Prático: motivos?","Falecimento; incapacidade definitiva; penalidade em inquérito; decisão irrecorrível do TM; > 24 meses sem exercer; a pedido ao DPC via CP.","",3],
+["2ah",2,"2.36.2","Afastamento temporário (AFTP): motivos?","Incapacidade temporária; não apresentar Laudo; penalidade; apreensão do certificado; decisão do TM; descumprir Plano de Manutenção; sem ATPR; a pedido ao CP. Até 24 meses.","",3],
+["2ai",2,"2.37","Afastamento definitivo do Praticante?","Falecimento; incapacidade definitiva; 2 reprovações; 18 meses sem pedir o Exame; a pedido ao CP; penalidade de cancelamento.","",2],
+["2aj",2,"2.37.2","AFTP do Praticante?","Período único até 12 meses; acima de 60 dias, reavaliação do treinamento (novo Programa, novo prazo, revalidação).","",2],
+["2ak",2,"RLESTA 8º/LESTA 27-28","Limites da suspensão e reabilitação?","Suspensão só para embarcados e Prático, até 12 meses; após cancelamento, reabilitação depois de 2 anos, refazendo os requisitos.","",2],
+["2al",2,"2.39","Comprovante de faina?","Assinado por Prático e Comandante; guardado pelo Prático 2 anos; extravio = Processo Administrativo; SISGEVI em 3 dias, 5 para corrigir.","",2],
+["2am",2,"2.40-2.41","Recuperação da habilitação?","Como Prático assistente: 1 quadrimestre → ≥ 50% das fainas do 2-F; 2 a 5 → ≥ 75% e exame na Junta Regular de Saúde. Portaria de reintegração.","",3],
+["2an",2,"2.49.1","Periodicidade do laudo médico?","< 50 anos trienal; 50 a 70 bienal; ≥ 70 anual. Sem laudo, fora da ERU.","",3],
+["2ao",2,"2.49.3","Quando o Prático vai à Junta Regular de Saúde?","Inapto pelo médico; queda de capacidade; acidente ou fato com hipótese de falha humana por saúde. Despesas do Prático.","",2],
+["2ap",2,"2.49.4-5","Recurso médico e incapacidade temporária?","Recurso ao DPC em 120 dias → Junta Superior Distrital (única). Temporária: 30 a 180 dias por inspeção, até 24 meses; depois, definitiva.","",2],
+["2aq",2,"2.49.2","Incapacitantes notáveis do Prático?","Convulsão, anticoagulante, dependência química e insulina: definitivos; psicotrópico: sempre; hipoglicemiante oral: temporário.","",1],
+["2ar",2,"2.51","ATPR: periodicidade e base?","A cada 5 anos desde jan/2005, para atender à A.960 (verificação a intervalos ≤ 5 anos). Sem ATPR: fora da ERU, AFTP.","",3],
+["2as",2,"2.51","Papel da Praticagem do Brasil no ATPR?","Informar à DPC, até 15 de dezembro, quem cursou; a DPC designa avaliador da 2ª fase.","",1],
+["2at",2,"LESTA 13 §4º","Requisitos legais da isenção do Comandante?","Comandante brasileiro, navio brasileiro até 100 m, ≥ 2/3 de brasileiros; análise de risco; descanso; 6 meses + 6 meses de fainas assistidas (≥ 12).","Norma diz só 'bandeira brasileira'",3],
+["2au",2,"LESTA 13 §4º I","Isento com AB ≥ 500 deixa de pagar?","Não: continua pagando a disponibilidade e comunicando à Atalaia o trânsito.","",3],
+["2av",2,"2.42.2","Quem concede, quem emite e por onde entra?","Portaria do ComDN; certificado da DPC; ofício à CP; conduzido pelo ComDN com DPC, DHN, CASNAV e CP.","",3],
+["2aw",2,"2.42.2","Alcance da isenção?","Só a embarcação, no período de comando, o trecho e o porto/terminal; qualquer alteração revoga; armador informa ComDN e CP.","",2],
+["2ax",2,"2.42.4","Quem nunca tem Comandante isento?","Cruzeiros, navios-tanque (petroleiro, gaseiro, químico), IMDG 1.1 e Classe 7 — qualquer que seja o porte.","",3],
+["2ay",2,"2.42.3","Isento em ZP > 30 milhas?","Pode substituir um dos Práticos no revezamento.","2008 Q29 (Comandante habilitado na ZP 20)",2],
+["2az",2,"2.43","Experiência exigida pela 311?","12 meses na função, embarcação e trecho; nos últimos 6, ≥ 12 fainas com Prático, atestadas pelos comprovantes do Anexo 2-G.","",2],
+["2bA",2,"2.44 1ª fase","Quem indica o simulador e o que a CP faz?","O armador (certificado por classificadora IACS). A CP verifica documentos e CTS e faz inspeção de Flag State Control, em 25 dias úteis.","",2],
+["2bB",2,"2.44 2ª fase","O que é o PGR da isenção?","Plano por especialista ISO 31000:2018, com EAR e PAE; armador apresenta em 45 dias úteis; ComDN ratifica em 25. Mitigações implementadas antes do simulador.","",2],
+["2bC",2,"2.44 3ª-4ª fase","Simulador e prova a bordo?","Simulador FMSS multiplayer, que valida as mitigações; reprovado: 2ª avaliação em 15 dias. A bordo: reprovação encerra o processo.","",3],
+["2bD",2,"2.44.3 e","Banca da isenção?","Pelo ComDN: Oficial Superior da Armada + PRT da ZP + CLC/CCB; PRT e CLC/CCB substituíveis por Oficial Superior — pode ficar sem Prático.","",2],
+["2bE",2,"2.44.5 c","Onde fica registrado o Comandante isento e quem acompanha?","No SISGEVI_PRÁTICO; a CP acompanha e verifica a manutenção. Descumprir = perda da habilitação e cancelamento do certificado.","",3],
+["2bF",2,"2.42.7","A isenção pode ser negada para proteger os Práticos?","Sim: a AM avalia óbices à segurança ou à manutenção da qualificação dos Práticos da ZP.","",2],
+["2bG",2,"2.46","Lotação e efetivo?","Lotação: número ideal, ≥ 2 × Práticos em Serviço por dia. Efetivo: habilitados com menos de 75 anos.","",3],
+["2bH",2,"2.47","Vaga aberta obriga PSCPP?","Não. Vaga abre quando efetivo < lotação, mas o DPC pondera tráfego, qualificação, especificidades e custos para a União.","",2],
+["2bI",2,"LESTA 15-C","Parâmetros legais da lotação?","Manobras e duração média nos 24 meses anteriores; alterações de tráfego; sem sobrecarga permanente; proficiência uniforme.","",2],
+["2bJ",2,"2.48","Remanejamento: regras-chave?","Conduzido pela DPC; só voluntários; AFTP não concorre; teste escrito se houver mais de um (empate: o mais velho); requalificação como PRP.","",2],
+["2bK",2,"2.48","Quem concorre no remanejamento?","Criação de ZP ou ZP abaixo do mínimo: todas as ZP. Extinção ou queda de fainas: só a própria ZP.","",1],
+["2bL",2,"2.50","O que é a Praticagem do Brasil?","Associação profissional sem fins lucrativos, auxiliar da DPC no controle profissional e no ATPR; homologa Atalaias e tripulações das lanchas.","Não é órgão da AM",2],
+/* ===== CAP 3 ===== */
+["3a",3,"3.1","Velocidade, calado e deslocamento da lancha de Prático?","Cruzeiro ≥ 15 nós; calado máximo 1,5 m; deslocamento > 5.000 kg.","",3],
+["3b",3,"3.1","Dimensões e propulsão da lancha de Prático?","Comprimento > 9 m; LPP > 7 m; boca > 3 m; 2 motores diesel ≥ 170 HP, 2 eixos, 2 hélices.","9/7/3 iguais ao transbordo da 204",3],
+["3c",3,"3.2","Identificação visual da lancha?","Casco vermelho, superestrutura branca; 'P' preto refletor de 30 × 15 cm nos dois bordos.","",3],
+["3d",3,"3.4","Lancha em outra atividade?","Permitido sem prejuízo da finalidade, mas sem o 'P'. Socorro e salvamento quando requisitada pela AM.","",2],
+["3e",3,"3.3","Equipamentos opcionais da lancha?","AIS, HF e DSC no VHF fixo. Radar banda X é obrigatório.","",2],
+["3f",3,"3.3.2","Comunicações obrigatórias da lancha?","VHF fixo + VHF portátil (portátil pode ser trocado por 2º VHF fixo com alimentação independente).","",1],
+["3g",3,"3.3.4","Salvatagem da lancha?","2 boias com lanterna; balsa classe I ou II só em mar aberto (ou aparelho flutuante autorizado pela CP); coletes = lotação.","",2],
+["3h",3,"3.3.5","Dispositivos de transbordo?","Enxárcia ou plataforma, croque, cinto de segurança, defensas e holofote de 300 a 500 jardas (360° e até 90°).","Transbordo da 204: holofote 50 m",2],
+["3i",3,"3.6","Tripulação da lancha?","CTS: Marinheiro de Convés + Moço de Convés; treinada e homologada pela Praticagem do Brasil, certificado de 4 anos.","",2],
+["3j",3,"3.7","Quem homologa a lancha de Prático?","O CP (Anexo 3-B); CONAPRA só emite laudo em caso excepcional, ratificado pelo CP. Descumprimento constatado = perda.","",3],
+["3k",3,"3.8","Lancha de apoio: emprego e limite?","Prático a navios atracados, fundeados ou em boia, em águas abrigadas; nunca substitui a lancha de Prático.","",3],
+["3l",3,"3.9-3.10","Lancha de apoio: identificação e dotação?","Identificação idêntica à lancha de Prático; dotação de navegação interior (NORMAM-202) + ecobatímetro, VHF fixo e holofote obrigatórios.","",2],
+["3m",3,"3.13","A quem se requisita o serviço?","Obrigatoriamente à Atalaia homologada da ZP, pelo Comandante ou seu preposto.","Por isso a recusa fala em 'designada pela Atalaia'",3],
+["3n",3,"3.14.1","Comunicações da Atalaia?","2 VHF marítimos; portáteis para lancha, navio e rebocador; operadores bilíngues 24 h; energia de emergência.","",2],
+["3o",3,"3.14.2","Meteorologia da Atalaia?","Anemômetro, termômetro de máxima e mínima e barômetro — ou estação em tempo real.","",1],
+["3p",3,"3.14.4","Coletes na Atalaia?","Número de Práticos + Praticantes, acrescido de 20%.","Lancha: = lotação",2],
+["3q",3,"3.15","Quem homologa e quem cassa a Atalaia?","Homologa: CONAPRA, com delegação da DPC (Anexo 3-C). Perda: decisão da CP/DL/AG.","2011 Q42 (a)",3],
+["3r",3,"2011 Q31","A Atalaia é um VTS?","Não. A Atalaia coordena o serviço de praticagem; operadores bilíngues são requisito do 3.14.1 d.","",1],
+/* ===== CAP 4 ===== */
+["4a",4,"4.1","Quem estabelece as ZP?","A DPC (4.1; 1.3). Na lei: a autoridade marítima (art. 4º, II).","",3],
+["4b",4,"LESTA 2º XXII","Definição legal de ZP?","Área delimitada por peculiaridades locais que exige a constituição e a disponibilidade permanente do serviço (Lei 14.813).","311: 'funcionamento ininterrupto'",2],
+["4c",4,"4.2-4.4","Anexos do Cap. 4?","4-A relação das ZP; 4-B PEP; 4-C trechos obrigatórios; 4-D trechos facultativos (com exceções).","",1],
+["4d",4,"LESTA 13 §6º","Regra legal de obrigatoriedade?","Obrigatória em todas as ZP para AB > 500, salvo hipóteses da AM e embarcações regionais, empurradores, balsas e comboios de interior, bandeira brasileira.","",3],
+["4e",4,"RLESTA 23 III","Deixar de contratar Prático quando obrigatório?","Multa do Grupo D ou suspensão até 60 dias.","",2],
+["4f",4,"4.4.3 a","Navegação interior dispensada?","Classificada exclusivamente para navegação interior, bandeira brasileira, qualquer AB.","",2],
+["4g",4,"4.4.3 b-c","Rebocadores dispensados?","Brasileiros, em mar aberto, com empurrada (unidade integrada) ou rebocada de AB ≤ 2.000.","",2],
+["4h",4,"4.4.3 d","Dispensa de qualquer tipo?","Brasileira AB ≤ 2.000; estrangeira AB ≤ 500.","",3],
+["4i",4,"4.4.3 e","Estrangeira até AB 2.000?","Só se contratada por empresa brasileira com sede e administração no país E comandada por marítimo brasileiro.","",3],
+["4j",4,"4.4.3 f","Apoio marítimo dispensado?","LOA ≤ 100 m; brasileira (ou contratada com comando brasileiro); thruster ou azimutal; DGPS; AIS ativo.","",2],
+["4k",4,"4.4.3 g","Draga dispensada?","AB > 2.000, no trajeto dragagem ↔ despejo, após 5 + 5 navegações com Prático; dispensa concedida pela CP.","Único caso acima de 2.000",3],
+["4l",4,"4.4.3 g obs.","Draga para fundear ou atracar?","Dispensada até AB 5.000 com equipamento auxiliar de manobra; consulta obrigatória à Atalaia ou VTS.","",2],
+["4m",4,"4.4.3 h","Petroleiro dispensado?","AB ≤ 3.000; brasileiro (ou contratado com comando brasileiro); thruster; DGPS; AIS ativo.","Comandante de tanque nunca é isento",3],
+["4n",4,"4.4.4","AB > 500 dispensada precisa fazer algo?","Comunicar seus movimentos na ZP ao VTS ou agente autorizado pela Autoridade Portuária.","Lei: aos agentes da AM — CONFLITO",3],
+["4o",4,"4.4.5","A AM pode cancelar uma dispensa?","Sim, num porto ou terminal específico, por peculiaridades da ZP.","",2],
+["4p",4,"Cap.4 × Seç.VII","Dispensa × isenção?","Dispensa é da embarcação (Cap. 4); isenção é pessoal do Comandante (Seção VII).","",3],
+["4q",4,"2006 Q24","PEP de São Luís para calado ≥ 11 m hoje?","Proximidades da boia nº 19 (02°26'S/044°20,6'W); obrigatória a 2,3 MN a NE da boia 19. Gabarito de 2006 (boia 22) superado.","",3],
+["4r",4,"4.4.2","Trecho facultativo pode ser obrigatório?","Sim, para certas embarcações (exceções do Anexo 4-D), como calado ≥ 11 m em São Luís ou carga perigosa no Quiriri.","",2],
+["4s",4,"4.5","Peru e Colômbia?","Só Práticos brasileiros nas AJB; facultativa para AB ≤ 2.000 com calado compatível; preço até o maior cobrado das brasileiras.","",3],
+["4t",4,"A.960 A2-3","Requisitos do ponto de embarque segundo a A.960?","Fixado e divulgado pela autoridade; distante do início da praticagem; com tempo e espaço de mar para a troca de informações.","",2],
+/* ===== CAP 5 ===== */
+["5a",5,"LESTA 15-A","O que a remuneração compreende?","Operação do Prático, lancha de Prático e Atalaia.","",2],
+["5b",5,"LESTA 15-A §2º","Regra geral de preço?","Livre negociação entre tomadores e prestadores, reprimido o abuso de poder econômico.","",3],
+["5c",5,"LESTA 15-A §3º","Quando a AM pode fixar o preço?","Mediante provocação fundamentada, de forma extraordinária: para garantir a continuidade do serviço ou por abuso de poder econômico ou defasagem comprovados.","Nunca de ofício",3],
+["5d",5,"LESTA 15-A §3º","Prazo da fixação?","Até 12 meses, prorrogável por igual período.","",3],
+["5e",5,"LESTA 15-A §5º","Comissão de preço?","Temporária, paritária e consultiva, presidida pela AM: praticagem + armador + ANTAQ; parecer em até 45 dias.","",3],
+["5f",5,"LESTA 15-A §6º","Critérios da regulação econômica?","Respeito à livre negociação; atualização monetária anual; preços costumeiros; contratos vigentes; tempo e qualidade do serviço.","",1],
+["5g",5,"Lei 14.813 art. 3º","Papel da ANTAQ?","Participar da comissão do art. 15-A, § 5º (Lei 10.233, art. 27, XXXI). Não fixa preço.","",2],
+["5h",5,"5.1","Navio de guerra estrangeiro em visita?","Em princípio, reciprocidade; a entidade consulta antecipada e formalmente a CP/DL/AG sobre facilidades e isenções. Só visitas não comerciais em tempo de paz.","",2],
+["5i",5,"2011 Q42 c","CP ou Delegado fixa preço do serviço?","Não. Só a autoridade marítima, extraordinariamente, nos termos do art. 15-A.","",2],
+["5j",5,"Lei 14.813","Vigência e revogação da Lei 14.813?","Em vigor na data da publicação (16/01/2024); revogou o § 2º do art. 24 da LESTA.","",1],
+/* ===== A.960 ===== */
+["6a",6,"A.960","Natureza da A.960(23)?","Recomendação da Assembleia da IMO (05/12/2003), não convenção; revogou a A.485(XII).","",3],
+["6b",6,"A.960 preâmbulo","A IMO certifica práticos?","Não: a IMO não pretende se envolver com certificação ou licenciamento de práticos.","",2],
+["6c",6,"A.960","Como a A.960 obriga no Brasil?","Indiretamente: LESTA, art. 13, § 2º, III (recomendações reconhecidas pela AM) e 311, 2.51 (ATPR).","",3],
+["6d",6,"A.960","O que cada anexo trata?","Anexo 1: formação e certificação. Anexo 2: procedimentos operacionais.","",3],
+["6e",6,"A.960 A1-1.2","A quem a A.960 não se aplica?","Práticos de alto-mar e comandantes ou tripulantes certificados para fazer praticagem em áreas específicas.","Isento está fora",2],
+["6f",6,"A.960 A1-2","Autoridade competente de praticagem?","Governo nacional ou regional, ou organização local que administra o sistema; avalia candidatos; fixa requisitos com as associações de práticos.","No Brasil: DPC",2],
+["6g",6,"A.960 A1-3","O que o certificado de prático deve registrar?","A área e limitações locais, como porte, calado ou arqueação máximos.","",2],
+["6h",6,"A.960 A1-4","Padrão médico recomendado?","O do STCW para comandantes e oficiais de quarto, ou outro adequado; reavaliar após doença ou lesão grave antes de voltar.","",2],
+["6i",6,"A.960 A1-5.2","Como deve ser a formação inicial?","Experiência prática sob supervisão próxima de práticos experientes, complementada por simulação, modelos tripulados e aulas.","",2],
+["6j",6,"A.960 A1-5.3","Emergências do treino de BRM?","Perda de governo, de propulsão, de radar, de sistemas vitais e de automação, em canal estreito.","",2],
+["6k",6,"A.960 A1-6.1","Intervalo de verificação da proficiência?","Não superior a 5 anos: conhecimento recente da área, aptidão médica e leis aplicáveis.","Base do ATPR quinquenal",3],
+["6l",6,"A.960 A1-6.3","Prático ausente por um período?","A autoridade deve se assegurar de que recuperou a familiaridade com a área.","Plano de Recuperação",2],
+["6m",6,"A.960 A1-7","Quantos itens tem o programa da A.960 e alguns deles?","28: limites da área, COLREG, balizamento, marés, manobra com rebocadores, squat, inglês, SMCP, Código de Investigação, Pilot Card, embarque seguro.","",2],
+["6n",6,"A.960 A2-2","Presença do Prático e deveres do Comandante?","Não o desobriga; Comandante e oficiais apoiam o Prático e monitoram suas ações o tempo todo.","= 311, 2.30.1",3],
+["6o",6,"A.960 A2-4","Mensagem inicial de ETA à estação de praticagem?","Nome, indicativo, agente; comprimento, boca, calado, calado aéreo, velocidade, thrusters; hora no ponto de embarque; destino, berço e bordo.","",1],
+["6p",6,"A.960 A2-5","Troca de informações Comandante–Prático?","No início de toda faina e contínua; mínimo: Pilot Card, plano e contingências, condições especiais, peculiaridades do navio, rebocadores, amarração, idioma.","Cartão complementa, não substitui",3],
+["6q",6,"A.960 A2-5.5","O plano de passagem é rígido?","Não: é intenção preferida; Prático e Comandante devem estar prontos para alterá-lo.","",1],
+["6r",6,"A.960 A2-6","Idioma na faina?","SMCP; a bordo, inglês ou língua comum; ao falar com terceiros em outra língua, o Prático explica ao passadiço.","",2],
+["6s",6,"A.960 A2-7","O que o Prático deve comunicar?","O que afete segurança ou poluição, em especial acidentes e irregularidades de luzes, marcas e sinais do navio praticado.","",2],
+["6t",6,"A.960 A2-8","Direito de recusa na A.960?","Sim, se o navio oferecer perigo, comunicando o motivo à autoridade. No Brasil, a LESTA proíbe a recusa.","CONFLITO",3],
+["6u",6,"A.960 A2-9","Aptidão para o serviço?","Descansado e mentalmente alerta durante toda a passagem.","",1]
+];
+
+
+/* ===================== MOTOR DOS BARALHOS (modelo do caderno CIS) ===================== */
+var CAPNOME={1:"Cap. 1 — O serviço",2:"Cap. 2 — Dos Práticos",3:"Cap. 3 — Lancha e Atalaia",4:"Cap. 4 — Zonas de Praticagem",5:"Cap. 5 — Cobrança e preço",6:"A.960(23)"};
+var SAB={};try{SAB=JSON.parse(localStorage.getItem('n311_sabidas')||"{}")||{};}catch(e){SAB={};}
+function salvaSab(){try{localStorage.setItem('n311_sabidas',JSON.stringify(SAB));}catch(e){}}
+function embaralha(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var DECKS=[];
+function criaDeck(el){
+  var capFixo=+el.getAttribute('data-cap');
+  var st={el:el,capFixo:capFixo,deck:[],i:0};
+  var selCap=capFixo?'':'<select class="dkcap"><option value="0">Todos os capítulos</option>'+[1,2,3,4,5,6].map(function(c){return '<option value="'+c+'">'+CAPNOME[c]+'</option>';}).join('')+'</select>';
+  var tot=CARTAS.filter(function(c){return !capFixo||c[1]===capFixo;}).length;
+  el.innerHTML='<div class="dkbar">'+selCap+
+    '<select class="dkpri"><option value="1">Todas as cartas</option><option value="2">Alto potencial + já cobrados</option><option value="3">Só já cobrados</option></select>'+
+    '<button type="button" class="dkemb">Embaralhar</button><button type="button" class="dkzera">Zerar "sei"</button>'+
+    '<span class="dktot">'+tot+' cartas</span></div>'+
+    '<div class="dkcard"><div class="dk-in">'+
+      '<div class="dk-face dk-front"><div class="dk-k"></div><div class="dk-q"></div><div class="dk-fm"></div><span class="dk-hint">toque para virar ↻</span></div>'+
+      '<div class="dk-face dk-back"><div class="dk-ref"></div><div class="dk-a"></div><div class="dk-g"></div></div>'+
+    '</div></div>'+
+    '<div class="dknav"><button type="button" class="dkprev">← Anterior</button><button type="button" class="no dkrev">Revisar</button><button type="button" class="ok dksei">Sei ✓</button><button type="button" class="dknext">Próxima →</button></div>'+
+    '<div class="dkinfo"></div>';
+  var q=function(s){return el.querySelector(s);};
+  st.q=q;
+  q('.dkcard').onclick=function(){this.classList.toggle('flip');};
+  if(!capFixo)q('.dkcap').onchange=function(){monta(st);};
+  q('.dkpri').onchange=function(){monta(st);};
+  q('.dkemb').onclick=function(){monta(st,true);};
+  q('.dkzera').onclick=function(){
+    CARTAS.forEach(function(c){if(capAtual(st)===0||c[1]===capAtual(st))delete SAB[c[0]];});salvaSab();atualizaTodos();monta(st,true);};
+  q('.dkprev').onclick=function(){if(!st.deck.length)return;st.i=(st.i-1+st.deck.length)%st.deck.length;mostra(st);};
+  q('.dknext').onclick=function(){if(!st.deck.length)return;st.i=(st.i+1)%st.deck.length;mostra(st);};
+  q('.dksei').onclick=function(){if(!st.deck.length)return;var c=st.deck[st.i];SAB[c[0]]=1;salvaSab();st.deck.splice(st.i,1);if(st.i>=st.deck.length)st.i=0;mostra(st);atualizaTodos(st);};
+  q('.dkrev').onclick=function(){if(!st.deck.length)return;var c=st.deck.splice(st.i,1)[0];st.deck.push(c);if(st.i>=st.deck.length)st.i=0;mostra(st);};
+  DECKS.push(st);monta(st,true);
+}
+function capAtual(st){return st.capFixo||+st.q('.dkcap').value;}
+function monta(st,emb){
+  var cap=capAtual(st),pr=+st.q('.dkpri').value;
+  st.deck=CARTAS.filter(function(c){return (cap===0||c[1]===cap)&&c[6]>=pr&&!SAB[c[0]];});
+  if(emb)embaralha(st.deck);st.i=0;mostra(st);
+}
+function atualizaTodos(exceto){DECKS.forEach(function(d){if(d!==exceto)monta(d);});}
+function mostra(st){
+  var q=st.q;q('.dkcard').classList.remove('flip');
+  var cap=capAtual(st);
+  var nSab=CARTAS.filter(function(c){return (cap===0||c[1]===cap)&&SAB[c[0]];}).length;
+  if(!st.deck.length){q('.dk-k').textContent="✓";q('.dk-q').textContent="Nada pendente neste filtro";q('.dk-fm').textContent="";
+    q('.dk-ref').textContent='';q('.dk-a').textContent="Troque o filtro ou use 'Zerar sei' para recomeçar.";q('.dk-g').textContent="";
+    q('.dkinfo').textContent=nSab+" cartas marcadas como sabidas neste baralho";return;}
+  var c=st.deck[st.i];
+  q('.dk-k').textContent=c[2];
+  q('.dk-q').textContent=c[3];
+  q('.dk-fm').textContent=CAPNOME[c[1]]+(c[6]===3?" · já cobrado":(c[6]===2?" · alto potencial":""));
+  q('.dk-a').textContent=c[4];q('.dk-ref').textContent=c[2];
+  q('.dk-g').textContent=c[5]?("↳ "+c[5]):"";
+  q('.dkinfo').textContent="Carta "+(st.i+1)+" de "+st.deck.length+" pendentes · "+nSab+" marcadas como sabidas";
+}
+document.querySelectorAll('.deck').forEach(criaDeck);
+
+/* ===== QUIZ ===== */
+var QUIZ=[
+  {q:"(2008 Q62, atualizada) De acordo com a LESTA, o RLESTA e a NORMAM-311, é correto afirmar que o serviço de praticagem é constituído de:",
+   o:["Prático, estação de praticagem e lancha de prático","Prático, lancha de prático e atalaia","Prático, praticante e lancha de prático","Prático, atalaia e VTS","Prático, rebocador e lancha de prático"],a:1,
+   e:"LESTA, art. 12-A (Lei 14.813/2024); RLESTA, art. 6º (redação do Decreto 7.860/2012); 311, 1.7. 'Estação de praticagem' era a redação anterior a 2012 — o gabarito de 2008 estaria hoje errado."},
+  {q:"O Prático é classificado como:",
+   o:["Marítimo do 1º Grupo, tripulante","Aquaviário do 5º Grupo, não tripulante, que presta serviço embarcado","Aquaviário do 6º Grupo","Profissional não tripulante sem grupo de aquaviário","Servidor público da Autoridade Marítima"],a:1,
+   e:"RLESTA, art. 1º, V; LESTA, art. 2º, XV. O 6º Grupo é o dos Agentes de Manobra e Docagem; o 1º, dos Marítimos (tripulantes)."},
+  {q:"Segundo a Lei 14.813/2024, o serviço de praticagem é atividade:",
+   o:["Pública, prestada por delegação","Essencial, de natureza privada, que serve ao interesse público","Privada e facultativa em todas as ZP","Pública e essencial, exercida por servidores","Econômica livre, sem regulação"],a:1,
+   e:"LESTA, art. 12, § 1º. Por ser privada, o Prático não exerce função pública e o PSCPP não é concurso público (311, 2.1)."},
+  {q:"(2011 Q40) De acordo com a LESTA, o RLESTA e a norma de praticagem, é INCORRETO afirmar:",
+   o:["O Agente de Manobra e Docagem executa faina de praticagem quando assessora manobra de navio para entrada em dique","Configura recusa a situação em que o Prático em escala deixa de atender tempestivamente faina para a qual foi designado","A navegação no interior de uma ZP com assessoria de Prático embarcado é faina de praticagem","A impraticabilidade parcial declarada pela CP/DL/AG pode impedir a entrada de determinadas embarcações","A faina se computa do POB até a dispensa e desembarque do Prático"],a:0,
+   e:"Faina de praticagem exige assessoria de Prático (311, 1.4 e Glossário). O AMD (6º Grupo) manobra em diques e carreiras, mas não faz faina de praticagem."},
+  {q:"Para a manutenção da habilitação do Prático, a LESTA (art. 13, § 2º) exige:",
+   o:["Apenas a frequência mínima de manobras","Frequência mínima, cursos de aperfeiçoamento e cumprimento de recomendações internacionais reconhecidas pela AM","Frequência mínima e exame anual","Cursos de aperfeiçoamento e aprovação do RUSP","Frequência mínima e certificado da Praticagem do Brasil"],a:1,
+   e:"LESTA, art. 13, § 2º, I a III. A 311, 1.5, menciona só a frequência mínima quadrimestral; os cursos e as recomendações aparecem no 2.51 (ATPR, para atender à A.960)."},
+  {q:"O Representante Único do Serviço de Praticagem (RUSP):",
+   o:["É nomeado pelo DPC entre os Práticos mais antigos","É indicado por consenso dos Práticos habilitados ou, sem acordo, escolhido pelo CP, e designado por Portaria do CP","É o presidente da Praticagem do Brasil","É eleito por maioria simples e homologado pela DPC","É o Prático com mais fainas no quadrimestre"],a:1,
+   e:"311, 1.6. O RUSP elabora, divulga e gere a ERU."},
+  {q:"O Programa de Qualificação do Praticante de Prático tem duração:",
+   o:["Mínima de 6 e máxima de 12 meses","Mínima de 12 e máxima de 18 meses, para treinar em todas as estações do ano","Exata de 21 meses","Mínima de 18 e máxima de 24 meses","Definida livremente pela Entidade de Praticagem"],a:1,
+   e:"311, 2.23.2–3. O Certificado de Praticante vale 21 meses (2.22.2) e o Exame é pedido até 90 dias antes do fim da validade (2.24.2)."},
+  {q:"Sobre a banca do Exame de Habilitação para Prático, é correto afirmar:",
+   o:["É presidida pelo DPC","É presidida pelo CP, com um Prático da ZP e um CLC; o monitor do Praticante não pode integrá-la","Pode funcionar incompleta, se houver urgência","É composta só por Práticos da ZP","Inclui obrigatoriamente o RUSP"],a:1,
+   e:"311, 2.24.7–9. O CLC pode ser substituído por Oficial Superior da Armada; sem ele, outro Prático da ZP. A banca só funciona completa."},
+  {q:"Numa faina de longa duração, o Prático que está a bordo em descanso por motivo de revezamento é considerado:",
+   o:["Em manobra","Em Prontidão","Em Período de Indisponibilidade","Em Serviço, aguardando pela manobra","Fora da ERU"],a:3,
+   e:"311, 2.26.3 a, Obs. 1. Da mesma forma, o Prático a bordo, devidamente acomodado e à espera de ser requisitado, é o 'Prático à disposição do Comandante' — também aguardando pela manobra (Obs. 2)."},
+  {q:"Pelas regras da ERU, o Prático em Serviço pode permanecer em efetiva faina, no máximo:",
+   o:["4 h contínuas e 10 h em 24 h","6 h contínuas e 12 h em 24 h","8 h contínuas e 16 h em 24 h","12 h contínuas","6 h contínuas e 18 h em 24 h"],a:1,
+   e:"311, 2.27.4 a. Após o revezamento, ≥ 2 h aguardando; a cada 24 h, um intervalo de ≥ 6 h consecutivas. Teto: 120 h em 14 dias ou 180 h em 21."},
+  {q:"(2008 Q29) O Prático comunica à Capitania o risco de navegar com as luzes de mastro inoperantes. O CP decide pela realização da navegação e o Prático, inconformado, pede à atalaia sua substituição. É correto afirmar:",
+   o:["O CP deveria ter declarado a impraticabilidade","O Prático está sujeito a processo administrativo por recusa","O Prático agiu corretamente e não pode ser punido","O Prático deveria apenas ter comunicado o problema, sem embarcar","O Comandante deveria ter dispensado o Prático"],a:1,
+   e:"Quem declara a impraticabilidade é a CP/DL/AG (2.32.1); o Prático comunica (2.31) e executa mesmo em divergência (2.28.1 m). A recusa leva a Processo Administrativo (2.35) e à suspensão (LESTA, art. 15)."},
+  {q:"(2012 Q33) Prático em período de escala, designado para atender às 10h, só embarca às 16h, sem comunicar impedimento. Pela norma atual:",
+   o:["Não é recusa; a CP notifica a empresa de praticagem","Trata-se de recusa ou atraso; a CP/DL/AG instaura Processo Administrativo","Trata-se de recusa; a CP/DL/AG instaura IAFN","Não é recusa, porque o Prático acabou embarcando","Trata-se de recusa, e o Prático tem o certificado cancelado de imediato"],a:1,
+   e:"311, 2.35: não atender ou deixar de atender tempestivamente a embarcação designada pela Atalaia. Rito: Processo Administrativo. IAFN é para acidentes e fatos (LESTA, art. 33). Cancelamento só na reincidência."},
+  {q:"A pena para o Prático que se recusa a prestar o serviço é:",
+   o:["Multa do Grupo G","Suspensão do certificado até 12 meses ou, na reincidência, cancelamento","Cancelamento imediato","Advertência e multa","Suspensão até 120 dias"],a:1,
+   e:"LESTA, art. 15; RLESTA, art. 25, I. Suspensão até 120 dias é a pena por descumprir as normas da AM sobre praticagem (art. 25, II)."},
+  {q:"Sobre o direito de recusa do Prático, é correto afirmar:",
+   o:["A LESTA e a A.960 o admitem diante de navio perigoso","A A.960 recomenda esse direito, mas a LESTA proíbe a recusa; no Brasil o Prático comunica e a CP/DL/AG decide","A A.960 proíbe a recusa","A NORMAM-311 autoriza a recusa por divergência com o armador","A recusa é livre fora do Período de Escala"],a:1,
+   e:"A.960, Anexo 2, item 8 × LESTA, art. 15. Prevalece a lei; o risco segue o caminho 2.31 → 2.32."},
+  {q:"Quando o estado do mar impede o embarque do Prático com segurança:",
+   o:["O Prático decide o novo ponto de embarque","O Comandante, sob sua exclusiva responsabilidade e com autorização prévia da CP/DL/AG, pode demandar a ZP até local abrigado, guiado pelo Prático na lancha","A Atalaia declara a impraticabilidade","O navio entra sem Prático, comunicando depois","O RUSP autoriza a entrada"],a:1,
+   e:"311, 2.33. A autorização é pedida, de preferência, via Atalaia."},
+  {q:"Sobre a relação entre Prático e Comandante, é correto afirmar:",
+   o:["A presença do Prático transfere a responsabilidade pela segurança","Orientações de rumo e velocidade podem vir do VTS","A presença do Prático não desobriga o Comandante, que deve monitorar suas ações; rumo e velocidade vêm só do Prático","O Comandante não pode dispensar o Prático em nenhuma hipótese","O Prático pode ser dispensado antes do PEP a critério do Comandante"],a:2,
+   e:"311, 2.30.1 e 2.30.2 b; LESTA, art. 15-B; A.960, Anexo 2, 2.1 e 2.3. O Comandante pode dispensar o Prático que oriente de forma perigosa, com substituto imediato e justificativa em 24 h (2.30.2 d)."},
+  {q:"É motivo de afastamento DEFINITIVO do Prático:",
+   o:["Deixar de apresentar o Laudo de Avaliação Médica","Não realizar o ATPR","Deixar de exercer a atividade por mais de 24 meses consecutivos","Descumprir o Plano de Manutenção da Habilitação","Apreensão do Certificado de Habilitação"],a:2,
+   e:"311, 2.36.1 e. As demais são hipóteses de afastamento temporário (2.36.2)."},
+  {q:"O Prático com 55 anos deve apresentar o Laudo de Avaliação Médica e Psicofísica:",
+   o:["Anualmente","A cada 2 anos","A cada 3 anos","A cada 5 anos","Só quando requisitado"],a:1,
+   e:"311, 2.49.1 e: menor de 50 anos, trienal; de 50 a 70, bienal; a partir de 70, anual."},
+  {q:"O Curso de Atualização para Práticos (ATPR):",
+   o:["É anual, conforme a NORMAM-101","Deve ser cursado a cada 5 anos, para atender à A.960, que prevê verificação a intervalos não superiores a cinco anos","É facultativo","É cursado só pelo RUSP","É exigido a cada 3 anos"],a:1,
+   e:"311, 2.51 (ciclos desde jan/2005); A.960, Anexo 1, 6.1. Sem ATPR, o Prático fica fora da ERU, em afastamento temporário."},
+  {q:"O Certificado de Isenção de Praticagem pode ser concedido, nos termos da LESTA:",
+   o:["A qualquer comandante de navio até 200 m","Exclusivamente a Comandantes brasileiros de navios de bandeira brasileira com até 100 m e tripulação com no mínimo 2/3 de brasileiros","A comandantes de navios-tanque até AB 3.000","A comandantes estrangeiros com 12 fainas na ZP","Só em ZP facultativas"],a:1,
+   e:"LESTA, art. 13, § 4º. A 311 exclui cruzeiros, navios-tanque, IMDG 1.1 e Classe 7 (2.42.4). Com AB ≥ 500, o tomador continua pagando e comunicando à Atalaia."},
+  {q:"No processo de habilitação do Comandante para isenção:",
+   o:["A portaria é do CP e o certificado da DHN","A portaria é do ComDN, o certificado é emitido pela DPC, e o Comandante é inserido no SISGEVI_PRÁTICO, acompanhado pela CP","Tudo é conduzido pela Praticagem do Brasil","A reprovação a bordo admite segunda avaliação","O simulador é indicado pela CP"],a:1,
+   e:"311, 2.42.2; 2.44.4 c; 2.44.5 c. A 2ª chance existe só no simulador; o simulador é indicado pelo armador."},
+  {q:"(2011 Q42) O Delegado da Capitania dos Portos em Itajaí:",
+   o:["Pode decidir pela perda da homologação da Atalaia da ZP-21","É o representante da AM que estabelece as ZP","Fixa os preços quando não há acordo","Estabelece regras complementares ao COLREG","Não pode instaurar IAFN"],a:0,
+   e:"311, 3.15: a perda da homologação da Atalaia é decidida pela CP/DL/AG. Quem cria ZP é a DPC; preço só é fixado pela AM, extraordinariamente (LESTA, art. 15-A)."},
+  {q:"A lancha de Prático deve ter:",
+   o:["Cruzeiro ≥ 10 nós e um motor de 200 HP","Cruzeiro ≥ 15 nós, calado ≤ 1,5 m, deslocamento > 5 t e dois motores diesel ≥ 170 HP","Casco branco e faixa preta 'TRANSBORDO DE PESSOAL'","AIS e HF obrigatórios","Holofote com alcance de 50 m"],a:1,
+   e:"311, 3.1. Casco vermelho, superestrutura branca e 'P' preto refletor 30 × 15 cm (3.2); AIS e HF são opcionais (3.3); holofote de 300 a 500 jardas. Holofote de 50 m e faixa preta são da embarcação de transbordo da NORMAM-204."},
+  {q:"A lancha de apoio à praticagem:",
+   o:["Pode substituir a lancha de Prático em mar aberto","Transporta o Prático a navios atracados, fundeados ou em boia, em águas abrigadas, e nunca substitui a lancha de Prático","Tem identificação diferente da lancha de Prático","É homologada pela Praticagem do Brasil","Só opera à noite"],a:1,
+   e:"311, 3.8 a 3.12. A identificação é idêntica à da lancha de Prático; o serviço é homologado pelo CP."},
+  {q:"Pela LESTA (art. 13, § 6º) e pela NORMAM-311 (4.4.3), está dispensada do serviço de praticagem:",
+   o:["Embarcação estrangeira de AB 1.500 de qualquer tipo","Embarcação brasileira de qualquer tipo com AB até 2.000","Petroleiro brasileiro de AB 5.000","Rebocador brasileiro com rebocada de AB 3.000","Apoio marítimo com LOA de 120 m"],a:1,
+   e:"4.4.3 d: brasileira até AB 2.000; estrangeira só até AB 500 (ou até 2.000 se contratada por empresa brasileira e comandada por brasileiro). Petroleiro até 3.000; rebocador até 2.000; apoio marítimo até LOA 100 m."},
+  {q:"Embarcações com AB maior que 500, mesmo dispensadas do Prático, devem:",
+   o:["Contratar Prático para a saída","Comunicar suas movimentações na ZP ao VTS ou a outro agente autorizado pela Autoridade Portuária","Pedir autorização ao DPC a cada manobra","Navegar só de dia","Embarcar Praticante de Prático"],a:1,
+   e:"311, 4.4.4. A LESTA, art. 13, § 6º, I, manda comunicar as manobras aos agentes da autoridade marítima — divergência de destinatário."},
+  {q:"(2006 Q24, atualizada) Navio-tanque brasileiro com calado de 11,90 m demanda o Porto de Itaqui (ZP-04). O Prático embarca:",
+   o:["Nas proximidades da boia nº 22","Nas proximidades da boia nº 19, porque o calado é igual ou superior a 11 m","Nas proximidades da BF-01","Nas proximidades do píer, pois não há restrição","Na boia nº 19, por se tratar de trecho facultativo"],a:1,
+   e:"Anexos 4-B e 4-D atuais: calado ≥ 11 m ou TPB > 100.000 → PEP nas proximidades da boia nº 19, com praticagem obrigatória a partir de 2,3 MN a NE da boia 19. O gabarito de 2006 (boia 22) está superado; com esse calado, o trecho não é facultativo."},
+  {q:"Pela LESTA, a autoridade marítima pode fixar o preço do serviço de praticagem:",
+   o:["Sempre que julgar conveniente, de ofício","Mediante provocação fundamentada, em caráter extraordinário, por até 12 meses prorrogáveis por igual período","Por prazo indeterminado, ouvida a ANTAQ","Somente a pedido da ANTAQ","Nunca, pois o preço é livre"],a:1,
+   e:"LESTA, art. 15-A, § 3º. Comissão temporária, paritária e consultiva, presidida pela AM, com praticagem, armador e ANTAQ, parecer em 45 dias (§ 5º)."},
+  {q:"A Resolução A.960(23) da IMO:",
+   o:["É convenção internacional ratificada, de aplicação direta","É recomendação da Assembleia; seu Anexo 1 trata de formação e certificação, e o Anexo 2, de procedimentos operacionais","Regula a certificação de práticos de alto-mar","Atribui à IMO o licenciamento de práticos","Trata apenas de embarque e desembarque de Prático"],a:1,
+   e:"A.960, parágrafos 1 a 4 e preâmbulo. Obriga no Brasil pela LESTA, art. 13, § 2º, III, e pela 311, 2.51."},
+  {q:"Segundo a A.960, a troca de informações entre Comandante e Prático:",
+   o:["Ocorre só na primeira faina com o navio","Substitui-se pelo Pilot Card","Inicia cada faina e prossegue durante toda a praticagem; o cartão complementa, não substitui, a conversa","É dispensável em ZP facultativa","Só ocorre em emergências"],a:2,
+   e:"A.960, Anexo 2, 5.1 a 5.4. No mínimo: Pilot Card, plano e contingências, condições especiais, peculiaridades do navio, rebocadores, amarração e idioma."}
+];
+
+document.getElementById("quizLede").textContent=QUIZ.length+" questões no formato da banca — com as reais de 2006, 2008, 2011 e 2012 relidas pelo texto atual.";
+var qi=0,answered=false,hits=0,tot=0;
+function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
+  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
+function loadQ(){var Q=QUIZ[qi];answered=false;
+  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
+  var box=document.getElementById('qOpts');box.innerHTML="";
+  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(97+i)+") "+t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
+  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
+  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
+  document.getElementById('qNext').disabled=true;
+  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
+function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
+  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
+  var fb=document.getElementById('qFb');
+  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
+  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
+  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
+function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
+loadQ();upScore();
+</script>
+</body>
+</html>
