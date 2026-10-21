@@ -124,6 +124,13 @@
    ====================================================================== */
 const CADERNOS = [
   {
+    materia:"economia", badge:"Stopford · Caps. 1–5 · Bloco E · Item 7",
+    titulo:"Stopford — O mercado marítimo (Caps. 1 a 5): economia global, organização do mercado, ciclos, oferta e demanda, os quatro mercados",
+    arquivo:"stopford_e1_mercado_maritimo_cap1_5.html",
+    desc:"Caderno E1 de 4 da Economia Marítima (itens 7.1 e 7.2). Cada dado dentro do raciocínio do autor, termos como na edição brasileira, página ao lado e a caixa 'onde a banca troca a palavra'. Cap. 1: a Linha Oeste, as quatro inovações do séc. XIX, Baltic Exchange, Bretton Woods, bandeiras de conveniência, as três lições. Cap. 2: três segmentos (granel, linha regular, especializado), PSD, granel × carga geral, quatro aspectos do produto, classes de tamanho da frota, custo unitário, portos em quatro níveis, consórcios. Cap. 3: componentes e quatro estágios do ciclo, risco e as três opções do embarcador, 22 ciclos em 266 anos, era do granel 1945–2008. Cap. 4: as dez variáveis, demanda em toneladas-milhas, produtividade, demolição, três equilíbrios e o modelo composto. Cap. 5: os quatro mercados e o fluxo de caixa, glossário de afretamento, Tabela 5.1 (quem paga o quê), Gencon, Worldscale, FFA, compra e venda em cinco estágios, novas construções e demolição. 324 flashcards por capítulo com revisão geral e quiz de 87 questões. [CONFLITO] marca onde o livro diz de dois jeitos.",
+    tags:["BANCA","DECORAR","CONFLITO","Stopford","Quatro mercados","Afretamento","Ciclos","Oferta e demanda","Worldscale","FFA","PSD","Granel","Linha regular","Portos"]
+  },
+  {
     materia:"legislacao", badge:"NORMAM-311 · LESTA · A.960 · Bloco D",
     titulo:"Serviço de Praticagem — NORMAM-311 com LESTA (Lei 14.813/2024), RLESTA e A.960(23)",
     arquivo:"normam311_praticagem_lei_norma_a960.html",
@@ -685,9 +692,10 @@ const MATERIAS = {
   "meteorologia":{ titulo:"Meteorologia e Oceanografia", sub:"Módulo V · Bloco B · Ynoue et al. (2017)", cor:"#1F6F8B" },
   "arte-naval":{ titulo:"Arte Naval", sub:"Fonseca · por retorno em prova", cor:"#C8A84B" },
   "comunicacoes":{ titulo:"Comunicações", sub:"Módulo VI · SMCP · Radiocomunicações/GMDSS · CIS", cor:"#8A5A2B" },
-  "legislacao":{ titulo:"Legislação e Regulamentação", sub:"Módulo IV · LESTA · Tribunal Marítimo · NORMAMs · Portos e Registro", cor:"#4A5A2E" }
+  "legislacao":{ titulo:"Legislação e Regulamentação", sub:"Módulo IV · LESTA · Tribunal Marítimo · NORMAMs · Portos e Registro", cor:"#4A5A2E" },
+  "economia":{ titulo:"Economia Marítima — Stopford", sub:"Módulo VII · Bloco E · Economia marítima, 3. ed. (Blucher, 2017) · Caps. 1–17", cor:"#0D3D36" }
 };
-const ORDEM = ["navegacao","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes","legislacao"];
+const ORDEM = ["navegacao","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes","legislacao","economia"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }
