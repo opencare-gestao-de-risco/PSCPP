@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classificação Interativa dos Rebocadores — Hensen Tab. 2A.1 | PSCPP 2027</title>
+<style>
+:root{--vd:#0D3D36;--tl:#1A7A6E;--tlc:#2a9d8f;--cr:#F7F3EA;--or:#C8A84B;--orc:#e9d090;--tx:#1a1a1a;--cl:#f0ece0;--cm:#ddd6c4;--am:#fff8e1;--amb:#7a5c00;--vt:#2e7d32;--vtb:#e8f5e9;--rd:#c62828;--rdb:#fdecea}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,serif;background:var(--cr);color:var(--tx);font-size:15px;line-height:1.65}
+header{background:var(--vd);color:var(--cr);padding:1.6rem 2rem 1.2rem;border-bottom:4px solid var(--or)}
+header .ey{font-family:Arial,sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orc);margin-bottom:.45rem}
+header h1{font-size:1.5rem;line-height:1.2;color:var(--cr);margin-bottom:.3rem}
+header h1 span{color:var(--or)}
+header .sub{font-size:.82rem;color:#aad3cd;font-style:italic}
+.badges{margin-top:.7rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.badge{font-family:Arial,sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .6rem;border-radius:2px;font-weight:700}
+.bb{background:var(--or);color:var(--vd)}.bt{background:var(--tl);color:var(--cr)}
+
+/* barra de controle */
+.ctrl{background:#1a2f2a;padding:.6rem 2rem;display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;font-family:Arial,sans-serif;font-size:.74rem;border-bottom:1px solid var(--tl);position:sticky;top:0;z-index:50}
+.ctrl .lbl{color:var(--orc);text-transform:uppercase;letter-spacing:.12em;font-size:.6rem;font-weight:700}
+.cbtn{font-family:Arial,sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:.35rem .8rem;border-radius:3px;border:1.5px solid var(--tl);background:transparent;color:#aad3cd;cursor:pointer}
+.cbtn:hover{background:var(--tl);color:var(--cr)}
+.cbtn.on{background:var(--or);border-color:var(--or);color:var(--vd)}
+.ctrl .hint{color:#8fb8b2;font-style:italic;font-family:Georgia,serif;font-size:.78rem}
+
+main{max-width:1500px;margin:0 auto;padding:1.4rem 1.6rem 4rem}
+.intro{font-size:.86rem;color:#444;margin-bottom:1rem;max-width:1000px}
+.intro b{color:var(--vd)}
+
+/* layout */
+.wrap{display:grid;grid-template-columns:minmax(470px,46%) 1fr;gap:1.4rem;align-items:start}
+@media(max-width:1000px){.wrap{grid-template-columns:1fr}}
+
+/* ORGANOGRAMA */
+.org{background:white;border:1px solid var(--cm);border-radius:5px;padding:1rem;position:sticky;top:58px}
+@media(max-width:1000px){.org{position:static}}
+.org h2{font-family:Arial,sans-serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tl);margin-bottom:.7rem}
+.cols{display:grid;grid-template-columns:1.55fr 1fr 1fr;gap:.7rem}
+@media(max-width:560px){.cols{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:.45rem}
+.nb{display:block;width:100%;text-align:center;border-radius:4px;cursor:pointer;font-family:Georgia,serif;border:1.5px solid var(--vd);padding:.45rem .5rem;background:var(--cr);color:var(--vd);transition:transform .08s,box-shadow .08s;position:relative}
+.nb:hover{box-shadow:0 2px 8px rgba(13,61,54,.25);transform:translateY(-1px)}
+.nb .n{display:block;font-weight:700;font-size:.86rem;line-height:1.2}
+.nb .d{display:block;font-size:.68rem;font-style:italic;color:var(--tl);line-height:1.25;margin-top:.15rem}
+.nb.g1{background:var(--vd);color:var(--cr);border-color:var(--vd)}.nb.g1 .d{color:var(--orc)}.nb.g1 .n{font-size:.92rem;letter-spacing:.04em}
+.nb.g2{background:var(--tl);color:var(--cr);border-color:var(--tl)}.nb.g2 .d{color:#d9efe9}
+.nb.g3{background:#154c43;color:var(--cr);border-color:#154c43}.nb.g3 .d{color:#aad3cd}
+.nb.sel{outline:3px solid var(--or);outline-offset:1px}
+.nb.selB{outline:3px solid #2980b9;outline-offset:1px}
+.nb .tag{position:absolute;top:-7px;right:-6px;background:var(--or);color:var(--vd);font-family:Arial,sans-serif;font-size:.58rem;font-weight:700;padding:.05rem .35rem;border-radius:8px}
+.nb .tagB{background:#2980b9;color:white}
+.sub2{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.ind{margin-left:.9rem;border-left:2px solid var(--cm);padding-left:.5rem;display:flex;flex-direction:column;gap:.45rem}
+.org .nota{font-size:.7rem;color:#666;margin-top:.7rem;line-height:1.4}
+
+/* PAINEL DE FICHAS */
+.panel{min-height:300px}
+.empty{background:white;border:1px dashed var(--cm);border-radius:5px;padding:2rem;text-align:center;color:#777;font-style:italic}
+.fichas{display:grid;gap:1rem}
+.fichas.two{grid-template-columns:1fr 1fr}
+@media(max-width:1250px){.fichas.two{grid-template-columns:1fr}}
+.ficha{background:white;border:1px solid var(--cm);border-radius:5px;overflow:hidden}
+.fh{background:var(--vd);color:var(--cr);padding:.9rem 1.1rem;border-left:5px solid var(--or)}
+.fh .k{font-family:Arial,sans-serif;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orc)}
+.fh h3{font-size:1.15rem;line-height:1.2;margin:.15rem 0}
+.fh .p{font-size:.8rem;color:#aad3cd;font-style:italic}
+.fh .refs{font-family:Arial,sans-serif;font-size:.62rem;color:#8fb8b2;margin-top:.35rem}
+.fb{padding:.6rem .9rem .9rem}
+details{border:1px solid var(--cm);border-radius:4px;margin-top:.5rem;background:#fff}
+details[open]{border-color:var(--tl)}
+summary{cursor:pointer;list-style:none;font-family:Arial,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--vd);padding:.5rem .7rem;background:var(--cl);display:flex;align-items:center;gap:.5rem}
+summary::-webkit-details-marker{display:none}
+summary .ic{font-size:.85rem;color:var(--or)}
+summary .cnt{margin-left:auto;font-weight:400;color:#888;font-size:.6rem;letter-spacing:0}
+summary::after{content:'▸';color:var(--tl);margin-left:.3rem}
+details[open] summary::after{content:'▾'}
+details.s-modo summary{background:#e8f4f3;color:#0b4a42}
+details.s-vant summary{background:var(--vtb);color:#1b5e20}
+details.s-lim summary{background:var(--rdb);color:#8e1b1b}
+details.s-num summary{background:#fffde7;color:#6d4c00}
+details.s-seg summary{background:#fff3e0;color:#7a3e00}
+details.s-banca summary{background:var(--am);color:var(--amb)}
+details.s-vf summary{background:#ede7f6;color:#4a148c}
+.dc{padding:.45rem .8rem .6rem}
+.dc ul{list-style:none}
+.dc li{font-size:.84rem;line-height:1.5;padding:.22rem 0 .22rem 1rem;position:relative;border-bottom:1px solid rgba(0,0,0,.05)}
+.dc li:last-child{border-bottom:none}
+.dc li::before{content:'›';position:absolute;left:0;color:var(--tl);font-weight:700}
+.dc li b{color:var(--vd)}
+.ref{font-family:Arial,sans-serif;font-size:.6rem;color:#888;white-space:nowrap;margin-left:.3rem}
+.ref::before{content:'['}.ref::after{content:']'}
+.et{font-family:Arial,sans-serif;font-size:.58rem;font-weight:700;padding:.05rem .35rem;border-radius:2px;margin-right:.25rem;vertical-align:1px}
+.et-dec{background:#2e7d32;color:white}.et-dis{background:#c62828;color:white}.et-ban{background:var(--or);color:var(--vd)}.et-calc{background:#1565c0;color:white}.et-conf{background:#6a1b9a;color:white}.et-ver{background:#555;color:white}
+.sub{font-size:.7rem;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--tl);margin:.5rem 0 .15rem;font-weight:700}
+.dc li.h{padding-left:0;font-family:Arial,sans-serif;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tl);font-weight:700;border-bottom:none;margin-top:.35rem}
+.dc li.h::before{content:''}
+
+/* V/F */
+.vf{margin-top:.5rem}
+.vfq{border:1px solid var(--cm);border-radius:4px;padding:.6rem .75rem;margin-bottom:.5rem;background:#fcfbf7}
+.vfq .en{font-size:.84rem;line-height:1.45;margin-bottom:.4rem}
+.vfq .bt{display:flex;gap:.4rem;flex-wrap:wrap}
+.vfb{font-family:Arial,sans-serif;font-size:.7rem;font-weight:700;padding:.3rem .8rem;border-radius:3px;border:1.5px solid var(--vd);background:white;color:var(--vd);cursor:pointer}
+.vfb:hover{background:var(--cl)}
+.vfb.ok{background:var(--vt);border-color:var(--vt);color:white}.vfb.no{background:var(--rd);border-color:var(--rd);color:white}
+.vfb:disabled{cursor:default;opacity:.85}
+.vfx{display:none;font-size:.8rem;margin-top:.45rem;padding:.4rem .6rem;border-left:3px solid var(--or);background:var(--am);line-height:1.45}
+.vfx.show{display:block}
+.vfx b{color:var(--vd)}
+
+/* COMPARAÇÃO */
+.cmp{background:white;border:1px solid var(--cm);border-radius:5px;overflow:hidden}
+.cmph{background:var(--vd);color:var(--cr);padding:.9rem 1.1rem;border-left:5px solid var(--or)}
+.cmph .k{font-family:Arial,sans-serif;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orc)}
+.cmph h3{font-size:1.05rem;line-height:1.3;margin:.2rem 0 .4rem}
+.cmph .ta{color:var(--orc)}.cmph .tb{color:#7fc4ff}.cmph .vs{color:#aad3cd;margin:0 .3rem}
+.cmpc{display:flex;gap:1.2rem;flex-wrap:wrap;font-family:Arial,sans-serif;font-size:.72rem;color:#c8e6e3}
+.cmpc label{cursor:pointer;display:flex;align-items:center;gap:.35rem}
+.tw{overflow-x:auto}
+table.ct2{width:100%;border-collapse:collapse;font-size:.8rem}
+.ct2 thead th{background:var(--cl);color:var(--vd);text-align:left;padding:.5rem .6rem;font-family:Arial,sans-serif;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--cm)}
+.ct2 thead th.ha{color:#7a5c00}.ct2 thead th.hb{color:#1a4f7a}
+.ct2 td,.ct2 th.mh{padding:.5rem .6rem;vertical-align:top;border-bottom:1px solid var(--cm)}
+.ct2 th.mh{width:21%;text-align:left;font-weight:700;color:var(--vd);font-size:.8rem;line-height:1.3;background:#fcfbf7}
+.ct2 th.mh small{display:block;font-weight:400;color:#777;font-family:Arial,sans-serif;font-size:.62rem;margin-top:.15rem}
+.ct2 td.cc{width:31%;border-left:4px solid transparent}
+.rt{font-family:Arial,sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .4rem;border-radius:2px;display:inline-block;margin-bottom:.25rem}
+.ct{line-height:1.45;font-size:.79rem}
+.r4{border-left-color:#2e7d32!important}.r4 .rt{background:#2e7d32;color:white}
+.r3{border-left-color:#1A7A6E!important}.r3 .rt{background:#1A7A6E;color:white}
+.r2{border-left-color:#e6a100!important}.r2 .rt{background:#f1c40f;color:#3a2a00}
+.r1{border-left-color:#c62828!important}.r1 .rt{background:#c62828;color:white}
+.r0{border-left-color:#999!important}.r0 .rt{background:#999;color:white}
+.rx{border-left-color:#ddd!important}.rx .rt{background:#ddd;color:#555}
+.vd{font-family:Arial,sans-serif;font-size:.68rem;font-weight:700;width:14%;text-align:center}
+.va{color:#7a5c00;background:#fff8e1}.vb{color:#1a4f7a;background:#e8f1fb}.v\={color:#2e7d32;background:#f1f8f1}.vc{color:#6a1b9a;background:#f3e5f5}.v0{color:#777;background:#f4f4f4}.vx{color:#999;background:#fafafa;font-weight:400}
+.pair{padding:.8rem 1rem 1rem;border-top:2px solid var(--or);background:var(--am)}
+.pair .k{font-family:Arial,sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amb);margin-bottom:.3rem;font-weight:700}
+.pair ul{list-style:none}.pair li{font-size:.83rem;line-height:1.5;padding:.2rem 0 .2rem 1rem;position:relative}
+.pair li::before{content:'›';position:absolute;left:0;color:var(--amb);font-weight:700}
+.pair .np{font-size:.82rem;font-style:italic;color:#6b5a1e}
+.leg{font-family:Arial,sans-serif;font-size:.64rem;color:#777;padding:.5rem 1rem .8rem}
+@media(max-width:700px){.ct2 th.mh{width:auto}.ct2 td.cc{width:auto}}
+@media print{.cmpc{display:none}}
+
+/* painel supabase */
+.painel{background:var(--vd);color:var(--cr);border-radius:5px;padding:1rem 1.2rem;margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;border-left:5px solid var(--or)}
+.painel .pl{font-family:Arial,sans-serif;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orc)}
+.painel .sc{font-size:.85rem;color:#c8e6e3;font-family:Arial,sans-serif}
+.btnsup{font-family:Arial,sans-serif;font-size:.74rem;font-weight:700;padding:.5rem 1rem;border-radius:3px;border:none;background:var(--or);color:var(--vd);cursor:pointer;margin-left:auto}
+.btnsup:hover{background:var(--orc)}
+.supstatus{font-size:.76rem;font-style:italic;color:#aad3cd;width:100%}
+
+footer{text-align:center;font-family:Arial,sans-serif;font-size:.62rem;color:#777;padding:1.5rem 0 0;letter-spacing:.05em}
+.glos{background:var(--cl);border-radius:4px;padding:.9rem 1.2rem;font-size:.78rem;margin-top:1.4rem;color:#444}
+.glos h4{font-family:Arial,sans-serif;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--tl);margin-bottom:.4rem}
+.glos dl{columns:2;column-gap:2rem}
+@media(max-width:700px){.glos dl{columns:1}main{padding:1rem .9rem 3rem}header,.ctrl{padding-left:1rem;padding-right:1rem}}
+@media print{.ctrl,.org,.painel,.vf{display:none}.wrap{display:block}details{break-inside:avoid}.fichas.two{display:block}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="ey">PSCPP 2027 · Módulo II · Bloco H — Rebocadores · H1 · Hensen, Tug Use in Port, 4ª ed. (2021)</div>
+  <h1>Classificação Interativa dos <span>Rebocadores Portuários</span></h1>
+  <p class="sub">Tabela 2A.1 clicável · fichas completas por tipo extraídas dos Cap. 2, 3, 4, 5, 6 e 9 (+ Hensen/Van der Laan, Tug Stability, Cap. 2) · Capital Sereno / Fred Brandão</p>
+  <div class="badges">
+    <span class="badge bb">Resumo completo por tópicos</span>
+    <span class="badge bt">Comparar emprego: 19 métodos</span>
+    <span class="badge bt">V/F → Painel PSCPP</span>
+  </div>
+</header>
+
+<div class="ctrl">
+  <span class="lbl">Modo</span>
+  <button class="cbtn on" id="mUm" onclick="setModo('um')">Ficha única</button>
+  <button class="cbtn" id="mDois" onclick="setModo('comparar')">Comparar emprego</button>
+  <span class="lbl" style="margin-left:.6rem">Seções</span>
+  <button class="cbtn" onclick="toggleAll(true)">Abrir todas</button>
+  <button class="cbtn" onclick="toggleAll(false)">Fechar todas</button>
+  <span class="hint" id="hint">Clique numa caixa da tabela para abrir a ficha.</span>
+</div>
+
+<main>
+<p class="intro"><b>Como usar:</b> a tabela à esquerda reproduz a Tabela 2A.1 (classificação dos rebocadores portuários). Cada caixa abre uma ficha com <b>configuração, modos de operação peculiares, vantagens, limitações, métodos de assistência, números-chave, segurança/interação, comparações e padrões de banca</b>, tudo com a seção do Hensen entre colchetes. As caixas de grupo (<i>Basic tug types</i>, <i>Propulsão a vante/a ré</i>, <i>Tractor tugs</i>, <i>FAST</i>…) trazem o que vale para o grupo inteiro. Em <b>Comparar emprego</b>, clique em dois tipos: aparece só o que importa para o emprego — método a método, quem faz melhor, onde são equivalentes e onde um complementa o outro — mais o que Hensen diz ao comparar o par.</p>
+
+<div class="wrap">
+  <section class="org" id="org">
+    <h2>Tabela 2A.1 — Classificação dos rebocadores portuários (clique)</h2>
+    <div class="cols">
+      <div class="col">
+        <button class="nb g1" data-k="GRUPO_basic"><span class="n">BASIC TUG TYPES</span><span class="d">Tipos básicos de rebocador</span></button>
+        <div class="sub2">
+          <div class="col">
+            <button class="nb g2" data-k="GRUPO_vante"><span class="n">Propulsão a vante</span><span class="d">Propulsion forward</span></button>
+            <button class="nb g3" data-k="GRUPO_tractor"><span class="n">Tractor tugs</span><span class="d">rebocadores tratores</span></button>
+            <div class="ind">
+              <button class="nb" data-k="tractor_vs"><span class="n">Com propulsão Voith Schneider</span><span class="d">trator VS / cicloidal</span></button>
+              <button class="nb" data-k="tractor_azimuth"><span class="n">Com hélices azimutais</span><span class="d">trator azimutal (ATD)</span></button>
+              <button class="nb" data-k="asd_proa"><span class="n">ASD-tugs incl. Azistern</span><span class="d">(operando pela proa, como trator reverso)</span></button>
+              <button class="nb" data-k="reverse_tractor"><span class="n">Reverse tractor tug</span><span class="d">(pusher tugs — empurradores)</span></button>
+            </div>
+          </div>
+          <div class="col">
+            <button class="nb g2" data-k="GRUPO_re"><span class="n">Propulsão a ré</span><span class="d">Propulsion aft</span></button>
+            <div class="ind">
+              <button class="nb" data-k="conventional"><span class="n">Conventional tugs</span><span class="d">(um, dois ou três hélices; Smart Tug)</span></button>
+              <button class="nb" data-k="asd_popa"><span class="n">ASD-tugs incl. Azistern</span><span class="d">(operando pela popa do rebocador)</span></button>
+              <button class="nb" data-k="combi"><span class="n">Combi-tugs</span><span class="d">convencional + propulsor de proa 360°</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <button class="nb g1" data-k="GRUPO_related"><span class="n">RELATED TUG TYPES</span><span class="d">Tipos relacionados</span></button>
+        <div class="ind">
+          <button class="nb" data-k="rotortug"><span class="n">ROTOR-tug</span><span class="d">3 azimutais em triângulo</span></button>
+          <button class="nb" data-k="ztech"><span class="n">Z-tech tug</span><span class="d">trator + ASD num só casco</span></button>
+          <button class="nb" data-k="rsd"><span class="n">RSD tug</span><span class="d">(Reverse Stern Drive)</span></button>
+          <button class="nb" data-k="carrousel"><span class="n">Carrousel tug</span><span class="d">anel de reboque giratório</span></button>
+          <button class="nb" data-k="dot"><span class="n">DOT tug</span><span class="d">Dynamic Oval Towing</span></button>
+          <button class="nb" data-k="allrounder"><span class="n">All-Rounder AR360T</span><span class="d">nota da tabela (2021)</span></button>
+        </div>
+      </div>
+      <div class="col">
+        <button class="nb g1" data-k="GRUPO_fast"><span class="n">FAST TUG TYPES</span><span class="d">Forward &amp; Aft Single Thruster</span></button>
+        <div class="ind">
+          <button class="nb" data-k="sdm_att"><span class="n">SDM / ATT</span><span class="d">Ship Docking Module / Asymmetric Tractor Tug</span></button>
+          <button class="nb" data-k="eddy"><span class="n">EDDY</span><span class="d">Efficient Double-ended Dynamic tug</span></button>
+          <button class="nb" data-k="giano"><span class="n">GIANO tug</span><span class="d">FAST com dois azimutais em linha</span></button>
+          <button class="nb" data-k="rave_crt"><span class="n">RAVE tug (CRT)</span><span class="d">Carrousel RAVE Tug — Voith a vante e a ré</span></button>
+        </div>
+      </div>
+    </div>
+    <p class="nota">Nomes dos tipos em inglês (Hensen); descrições traduzidas. Nota de Hensen: o All-Rounder, em construção em 2021, pode ser acrescentado aos <i>Related Tug Types</i>. A ficha do ASD é dividida nos dois modos de operação porque as capacidades e os riscos mudam com o ponto de reboque em uso.</p>
+  </section>
+
+  <section class="panel" id="panel">
+    <div class="empty">Nenhuma ficha aberta. Clique numa caixa da tabela.</div>
+  </section>
+</div>
+
+<div class="painel">
+  <span class="pl">Painel PSCPP</span>
+  <span class="sc" id="placar">V/F respondidos: 0 · acertos: 0</span>
+  <button class="btnsup" id="btnSupabase">⬆ Enviar ao Painel PSCPP</button>
+  <div class="supstatus" id="supStatus"></div>
+</div>
+
+<div class="glos">
+  <h4>Glossário rápido</h4>
+  <dl id="glos"></dl>
+</div>
+
+<footer>Capital Sereno · PSCPP 2027 · Módulo II · Bloco H — Rebocadores · Fonte: Hensen, Tug Use in Port, 4ª ed. · Hensen &amp; Van der Laan, Tug Stability</footer>
+</main>
+
+<script>
+const T = {};
+
+/* ===================== GRUPOS ===================== */
+T.GRUPO_basic = {
+ nome:"BASIC TUG TYPES — tipos básicos", pt:"Convencional · ASD · Combi · Trator VS · Trator azimutal · Trator reverso", grupo:"Grupo · Tabela 2A.1",
+ ref:"Cap. 2 § 2.1–2.2 · Cap. 4 § 4.1–4.3 · Cap. 6 § 6.2–6.4",
+ sec:{
+  config:[
+   "Critério de classificação do Hensen: <b>posição da propulsão + posição do ponto de reboque</b> (<i>towing point</i>). Nomes por fabricante/propulsor (Z-peller, Kort nozzle…) confundem: um \"Z-peller\" pode ter azimutais à proa ou à popa [DECORAR] [§ 2.1]",
+   "Dois grupos: (a) propulsão a ré + ponto de reboque perto de meia-nau = convencionais; (b) ponto de reboque a ré + propulsão a vante de meia-nau = tratores (Voith e azimutal) [§ 2.1]",
+   "Tipos que mudam de grupo conforme o modo: trator reverso/pusher, ASD (pela proa = trator reverso; pela popa = convencional) e combi (convencional + bow thruster azimutal + ponto de reboque extra na popa) [§ 2.1]",
+   "Cinco tipos básicos: convencional, trator (azimutal ou Voith), ASD, trator reverso, combi [§ 2.1]",
+   "Ponto de reboque = ponto de onde a espia sai em linha reta para o navio (em geral o <i>staple</i> ou a buzina), não o guincho/gancho [§ 4.2.2]",
+   "Três centros que decidem desempenho e segurança: centro de impulso (P), ponto de reboque/empurre (T/Pu) e centro lateral de pressão do fluxo (C). Convencional: C ≈ 0,3 LWL da popa (fluxo de través); trator: ≈ 0,4 LWL; trator reverso/ASD: pode ficar mais a vante [§ 4.2.2]"
+  ],
+  modos:[
+   "## Método direto × indireto (rebocador de popa)",
+   "<b>Direto</b> (<i>direct towing</i>): rebocador de popa a baixa velocidade puxa na direção desejada; tratores com a popa para a popa do navio; ASD/trator reverso com a proa para a popa do navio. Quanto menor C–T em relação a P–T, melhor [§ 4.2.2, fig. 4.8]",
+   "<b>Indireto</b> (<i>indirect towing</i>): acima de ~5–6 nós, usa forças hidrodinâmicas do fluxo no skeg/obra viva; forças no cabo podem exceder em muito o BP (ex.: VS Velox 65 t BP → 131 t de governo a 10 nós; Ajax 93 t → 155 t) [DECORAR] [§ 4.2.2; fig. 4.3; Cap. 9 § 9.6.2]",
+   "Com o navio parado, 30 t de BP produzem o mesmo efeito em qualquer tipo; as diferenças só aparecem com o navio em movimento [DECORAR] [§ 4.1]",
+   "## Frenagem com azimutais (termos Aquamaster)",
+   "<b>Reverse arrest</b>: propulsores girados 180°, em linha com o eixo (fluxo negativo) — até ~8 nós, frenagem até <b>1,5 × BP a ré</b>; acima disso a força cai drasticamente e o motor sobrecarrega [DECORAR] [§ 4.3.4]",
+   "<b>Transverse arrest</b> (arrasto transverso): propulsores apontados para fora a ≈ 90° do eixo; força por <i>momentum drag</i> (aceleração da componente transversal da esteira); cresce com a velocidade e supera o BP a ré acima de ~8 nós sem sobrecarregar [§ 4.3.4]",
+   "Nota 6: o limite de 8 nós é indicativo; em ASD 2411 com célula de carga, <b>6 nós</b> é consistentemente o ponto em que o transverso passa a ser mais eficaz; acima de 6 nós, girar para reverse arrest perde carga na espia na hora e arrisca sobrecarga [DISTRATOR] [§ 4.3.4, Nota 6]",
+   "Vale para todo tipo com propulsores orientáveis (ASD, ATD, trator reverso, Rotortug, Z-tech, RSD). FAST (um propulsor em cada extremidade) <b>não</b> fazem transverse arrest; carrossel e às vezes Voith freiam de través atrás do navio [§ 4.3.4]"
+  ],
+  vant:[
+   "Tempo de resposta curto e manobrabilidade são o requisito nº 1 — inclusive para passar a espia (tripulações de navio cada vez menores) [§ 2.2.1]",
+   "Eficácia e segurança dependem de manobrabilidade, BP, forma da obra viva, estabilidade e equipamento de reboque; com o navio em movimento a perda por velocidade/direção deve ser mínima [§ 2.2.1]"
+  ],
+  lim:[
+   "Todos os efeitos de interação crescem com o <b>quadrado da velocidade</b> e são mais perigosos junto à proa; margem entre seguro e inseguro é pequena [§ 6.2.3; § 6.3.3]",
+   "Velocidade segura para rebocadores de proa: ≤ 6 nós; fazer firme a 5 nós é normal, 9–10 nós não é incomum (interação muito grande) [DECORAR] [§ 6.2.3; § 6.3.3]",
+   "Visibilidade: assistência com nevoeiro é muito arriscada; limite comum 0,5 milha (portos) / 1 milha (alguns terminais) [§ 4.5.1; Cap. 9 § 9.6.2]",
+   "Hs máximo indicativo: convencionais 1,5–1,8 m; tratores (incl. reverso) e ASD 2,0 m [DECORAR] [§ 4.5.1]"
+  ],
+  met:[
+   "Só há dois métodos marcadamente diferentes: rebocar no cabo e operar ao costado (push-pull / a contrabordo); quase todos os tipos fazem os dois, mas nem todos bem [Cap. 3 § 3.2.1]",
+   "Rebocador de proa no cabo: qualquer tipo governa para os dois bordos; a diferença está no tempo de resposta e na eficácia com velocidade [§ 4.3.1]",
+   "Rebocador de popa no cabo: depende totalmente do tipo e da velocidade poder governar para os dois bordos e controlar velocidade [§ 4.3.1]",
+   "Posições (fig. 4.29, navio com seguimento guinando para BE): nº 5 (popa no cabo, lado externo) é a mais eficaz — maior braço, não acelera, freia e governa para os dois bordos; nº 2 (empurrando na proa) é ruim e pode até inverter o giro [DECORAR] [§ 4.3.5, fig. 4.29]",
+   "Puxar a contrabordo exige potência a ré ≈ avante → omnidirecionais; perda por esteira no casco pode igualar ou superar o BP (SAFETUG: 43–64 % a 1 comprimento de casco; até 90 % em ondas; no cabo 12 %) [§ 4.3.1; § 4.5.2]"
+  ],
+  num:[
+   "BP por potência (Tab. 2E.3, t/100 bhp): convencional c/ tubulão 1,3–1,5 > ASD 1,1–1,3 > ATD 1,0–1,1 ≈ convencional hélice aberta 1,0–1,1 > VS 0,9–1,0; CPP −2 %; classe de gelo −2 a −4 % (não para VS) [DECORAR] [§ 2.26, Tab. 2E.3]",
+   "Diagrama de vetor de empuxo a velocidade zero (fig. 2E.23): avante VS 1,1 t/100 bhp; azimutais 1,4; convencional c/ tubulão 1,5; a ré: ASD 90–95 %; convencional FPP ≈ 65 %; Towmaster > 70 % [§ 2.26]",
+   "Tração ∝ (rotações)²; potência ∝ (rotações)³: dobrar rotação = força × 4, potência × 8 [CALCULO] [§ 2.26]",
+   "Prova de BP: profundidade ≈ 6 × imersão do hélice e espia = 50 × diâmetro do hélice evitam degradação (JIP MARIN 2016); BP contínuo certificado = força mantida ≥ 5 min sem queda [§ 2.26]",
+   "Velocidade típica em trânsito ≈ 3–6 nós; até 6 nós já pode ser alto para assistência eficaz; controle de velocidade pelo rebocador de popa mantém 3–4 nós [Cap. 3 § 3.1, § 3.2.1]",
+   "Bow thruster de túnel: eficácia cai 50 % a 2 nós e ≈ zero a 4 nós [Cap. 5 § 5.3.1; § 2.3.2]"
+  ],
+  seg:[
+   "Girting (capotamento lateral): duas formas na IMO 2020 — <i>self-tripping</i> (binário espia + hélices) e <i>tow-tripping</i> (arrastado de través, ex. perda de propulsão); critério: braço calculado para arrasto a 5 nós, equilíbrio < ângulo de alagamento; escolta: banda estática máx. 15°; liberação rápida obrigatória também no guincho [DECORAR] [§ 4.2.3.1]",
+   "Outras regras: ABS — tração a 90° de 50 % do BP (convencional bi-hélice) e 70 % (azimutal/cicloidal); Noruega — 5 nós transversais com 65 % do BP sem imersão do convés [§ 4.2.3.1]",
+   "Ângulo máximo de banda = imersão da borda do convés (exceto carrossel/braço radial grande); acima de 4–5 nós a água entra no convés com força crescente [§ 4.2.3.2]",
+   "Única fuga segura quando encostado à proa do navio: <b>Full Astern</b> (≈ 50 anos de estudos) [DECORAR] [§ 6.3.3]",
+   "Curva GZ típica de portuário: máximo ≈ 33°, alagamento ≈ 50°, GZ negativo ≈ 75°; castelo elevado ajuda após ≈ 20° (só com aberturas fechadas) [VdL § 2.3]",
+   "Num rebocador o GM <b>não</b> é o critério principal: importa toda a curva, inclusive o ângulo de alagamento, porque ângulo e força da espia variam o tempo todo [VdL § 2.2]",
+   "Boca grande (até 1/3 do comprimento) dá estabilidade, mas torna o rebocador instável de rumo [§ 6.2.3; VdL § 2.5]"
+  ],
+  comp:[
+   "Rebocador de proa com navio em movimento: convencional > trator (e a diferença cresce com a velocidade) [§ 4.3.1]",
+   "Rebocador de popa: tratores e ASD/trator reverso ≫ convencional (que acima de ~3 nós só governa para um bordo) [§ 4.3.1]",
+   "Indireto à popa a alta velocidade: VS é o mais eficaz; ATD, trator reverso e ASD \"algo menos\" (depende do skeg); no direto, ATD/ASD/reverso podem ser algo mais eficazes (menor calado) [§ 2.6.4; § 2.9.2]",
+   "Troca espia → empurrar sem largar: convencional não; VS/ATD como rebocador de proa até ~2 nós; trator reverso e ASD \"facilmente\" [§ 2.5.4; § 2.9.2]"
+  ],
+  banca:[
+   "[BANCA: 2006-Q08] Correlação tipo × característica (combi = ponto de reboque extra a ré + bow thruster 360°; pusher = azimutais a ré, ponto a vante; tractor = azimutais a vante; convencional = propulsão a ré, ponto a meia-nau)",
+   "[BANCA: 2012-Q32] Tratores = VS + azimutais; tratores reversos eficazes na proa; convencionais eficazes na ré ou costado; direto = puxar/empurrar na direção; indireto = forças hidrodinâmicas do casco",
+   "[BANCA: 2006-Q19] Fronteira direto/indireto 5–6 nós; ASD opera em posições DIFERENTES no direto e no indireto (distrator: \"mesma posição\")",
+   "[DISTRATOR] Trocar 8 nós (regra) por 6 nós (Nota 6, ASD 2411) no arrasto transverso: ambos estão no livro — ler o enunciado",
+   "[DISTRATOR] \"Bollard pull define o desempenho\": só com o navio parado; em movimento, tipo e posição mandam [§ 4.1]"
+  ]
+ },
+ vf:[
+  {s:"Segundo Hensen, a classificação mais útil dos rebocadores portuários baseia-se na localização da propulsão e do ponto de reboque, e não no fabricante do propulsor.", v:true, fb:"É o critério do § 2.1: nomes por fabricante (Z-peller etc.) geram confusão. [§ 2.1]"},
+  {s:"No arrasto transverso (transverse arrest), os propulsores azimutais são girados 180°, ficando alinhados com o eixo do rebocador.", v:false, fb:"180° em linha é o <i>reverse arrest</i>; o transverso usa propulsores a ≈ 90° do eixo, com força por <i>momentum drag</i>. [§ 4.3.4]"},
+  {s:"Com o navio parado, rebocadores de tipos diferentes e mesmo bollard pull produzem essencialmente o mesmo efeito.", v:true, fb:"As diferenças de desempenho só aparecem quando o navio tem velocidade através da água. [§ 4.1]"}
+ ]
+};
+
+T.GRUPO_vante = {
+ nome:"Propulsão a vante (Propulsion forward)", pt:"Tratores VS e azimutais; ASD operando pela proa; trator reverso", grupo:"Grupo · Básicos",
+ ref:"Cap. 2 § 2.1, 2.5–2.9 · Cap. 4 § 4.2.2, 4.3.1 · Cap. 6 § 6.2.3",
+ sec:{
+  config:[
+   "Na Tabela 2A.1 este ramo reúne quem opera com o ponto de reboque voltado para o navio e a propulsão afastada dele: tratores (VS e azimutal) e os que operam \"invertidos\" pela proa — trator reverso e ASD usando o guincho de vante [§ 2.1]",
+   "Cuidado: trator reverso e ASD têm os propulsores fisicamente <b>a ré</b>; estão neste ramo porque, operando pela proa, funcionam como trator (ponto de reboque na extremidade voltada ao navio) [DISTRATOR] [§ 2.1; § 2.7.2]",
+   "Nos tratores de verdade o ponto de reboque fica a ré, um pouco a ré de C (VS: logo acima do meio do skeg) → o rebocador alinha-se com a espia com máquinas paradas e precisa de pouco governo no indireto [§ 4.2.2, fig. 4.6]"
+  ],
+  modos:[
+   "Força de governo aplicada <b>na direção da guinada</b> (no convencional a popa vai ao contrário) [§ 2.3.3]",
+   "À popa: direto a baixa velocidade (pos. 1a acelera o navio; 1b não acelera e freia), troca fácil para controle de velocidade (pos. 2) ou outro bordo; indireto (pos. 1c) a velocidade maior, governo para os dois bordos + controle de velocidade [§ 4.3.1, fig. 4.19C]",
+   "À proa no cabo: muda de bordo fácil e rápido pelo impulso lateral, mas com o navio em movimento fica em linha com a espia e perde tração para vencer a resistência lateral — eficácia cai com a velocidade [§ 4.3.1, fig. 4.19A]"
+  ],
+  vant:[
+   "Mais seguros junto à proa de navio com seguimento: dirigem a propulsão para longe do casco, contrariando guinada e sucção ao mesmo tempo (pos. 1 e 4–5) [DECORAR] [§ 6.2.3; § 6.3.3]",
+   "Girting \"menos perigoso\": com o ponto de reboque na extremidade o rebocador gira na espia e encosta (<i>tripping</i>) em vez de emborcar [§ 6.3.6, fig. 6.13C]",
+   "Manobra de sair da alheta para trás da popa (fig. 6.14C) \"não é problema\" mesmo a velocidade razoável (convencional > 3 nós é perigoso) [§ 6.3.9]",
+   "Empurram a 90° a velocidades muito maiores; BP a ré ≈ avante → frenagem a contrabordo melhor [§ 4.3.1]"
+  ],
+  lim:[
+   "Entre pos. 1–2 e nas pos. 3–4 da aproximação à proa a propulsão tem de apontar para o costado (força no sentido da sucção) — \"não é seguro\" [§ 6.2.3]",
+   "Como rebocador de proa no cabo com navio em movimento: menos eficaz que o convencional; se o ângulo ficar grande demais, gira em torno do ponto de reboque de ré e vai para o costado (largar/folgar rápido) [§ 4.3.1]",
+   "Tratores: calado máximo maior (águas rasas); propulsão sob o casco aumenta a resistência [§ 4.6; § 2.11.3]"
+  ],
+  met:[
+   "Muito adequados como rebocador de popa (rumo e velocidade, dois bordos) e em push-pull; não são os mais eficazes como rebocador de proa no cabo com velocidade [§ 2.5.4; § 2.7.2]",
+   "Fazer firme direto no costado como push-pull: navio ≤ ~5 nós [§ 2.5.4]"
+  ],
+  num:[
+   "VS: propulsão a ~0,25–0,30 LWL de vante; ponto de reboque a 0,1–0,2 LWL da popa. ATD: propulsores a 0,30–0,35 LWL; ponto ~0,1 LWL da popa. Trator reverso/ASD: propulsão ~0,1 LWL da popa [DECORAR] [§ 2.5.1; § 2.6.1; § 2.7.1; § 2.9.1]",
+   "BP a ré: ATD ~5 % menor; trator reverso/ASD 5–10 % menor; VS ≈ igual [§ 2.6.1; § 2.7.2; § 2.5.3]"
+  ],
+  seg:[
+   "Falha de propulsão com espia passada: o ponto de reboque deve levar as forças hidrodinâmicas a girar o rebocador para posição segura (tratores e ASD/reverso) [Cap. 9 § 9.6.2]",
+   "Azimutais adernam apreciavelmente com impulso súbito pelo través; em tratores esse momento contraria o da espia; no ASD pela popa (modo convencional) soma-se [§ 4.2.3]"
+  ],
+  comp:[
+   "Trator (anda avante, proa alta, move-se de lado) × ASD bow-to-bow (anda a ré, gira em vez de deslizar, \"nervoso\" a baixa velocidade) → \"certas vantagens\" para o trator [§ 6.3.13]"
+  ],
+  banca:[
+   "[BANCA: 2011-Q49] Identificação por descrição: \"lâminas verticais lado a lado a vante\" = VS; \"motores em tubos 360° a ré + guincho a vante\" = ASD/reverso; três azimutais (2 AV + 1 AR) = Rotortug",
+   "[DISTRATOR] \"Trator reverso tem propulsão a vante\": não — propulsão a ré, ponto de reboque a vante; opera pela proa"
+  ]
+ },
+ vf:[
+  {s:"O trator reverso aparece no ramo \"propulsão a vante\" da Tabela 2A.1 porque seus propulsores azimutais ficam sob a proa.", v:false, fb:"Os propulsores ficam sob a popa; ele está no ramo porque opera invertido, com o ponto de reboque (proa) voltado ao navio, como um trator. [§ 2.1; § 2.7.1]"},
+  {s:"Num trator, a força de governo é aplicada na direção da guinada pretendida, ao contrário do convencional.", v:true, fb:"[§ 2.3.3]"}
+ ]
+};
+
+T.GRUPO_re = {
+ nome:"Propulsão a ré (Propulsion aft)", pt:"Convencionais (um, dois ou três hélices), ASD operando pela popa, combi", grupo:"Grupo · Básicos",
+ ref:"Cap. 2 § 2.1, 2.3–2.4, 2.9 · Cap. 4 § 4.2–4.3 · Cap. 6 § 6.2.3, 6.3",
+ sec:{
+  config:[
+   "Grupo (a): propulsão a ré e ponto de reboque perto de meia-nau (~0,45 LWL da popa; nos EUA mais a ré). Para o Cap. 6, \"convencional\" inclui o ASD operando pela popa [§ 2.1; § 2.3.1; § 6.2.3]",
+   "Ponto de reboque a vante da propulsão (oposto aos tratores) [§ 4.3.1, fig. 4.18]"
+  ],
+  modos:[
+   "Governando com máquina avante e leme, a popa move-se em sentido oposto à guinada pretendida — relevante para a interação junto à proa [§ 2.3.3]",
+   "Avançando no cabo (fig. 4.5): a correção de leme a ré gera pouco arrasto e <b>força extra</b> na espia (no trator a correção reduz a força) — por isso são bons rebocadores de proa; mas as forças de governo aumentam a banda [§ 4.2.2]",
+   "Gob rope / buzina a ré: transfere o ponto de reboque para a popa → pode ficar de través, ser arrastado a ré sem capotar e controlar velocidade; perigo: esteira do hélice do navio na obra viva → banda extra [§ 4.2.2, fig. 4.7]"
+  ],
+  vant:[
+   "Melhor rendimento avante por potência (com tubulão 1,3–1,5 t/100 bhp) [§ 2.26, Tab. 2E.3]",
+   "Rebocando no cabo pela popa (convencionais e ASD <i>over the stern</i>) é o arranjo que melhor reduz a largura total do conjunto em pontes e eclusas [Cap. 3 § 3.2.2]"
+  ],
+  lim:[
+   "Limitação central = posição do ponto de reboque: risco de <b>girting</b> no cabo; liberação rápida ajuda <b>desde que funcione na condição extrema</b>, o que nem sempre ocorre [DECORAR] [§ 2.3.1]",
+   "Como rebocador de popa acima de ~3 nós: só um bordo, não troca de bordo, não controla velocidade [§ 2.3.4; § 4.3.1]",
+   "Não opera a ré pela água com velocidade: ângulo de ataque cresce e as forças na espia capotam o rebocador [§ 4.2.2, fig. 4.6]",
+   "Perda por esteira no casco do navio é maior (hélices mais perto do navio) [Cap. 5 § 5.2.6; § 6.2.4]",
+   "Grande desvantagem: não pode girar livremente em relação à direção da espia — carrossel/DOT/All-Rounder nasceram para resolver isso [§ 2.14–2.16]"
+  ],
+  met:[
+   "Eficazes no cabo à proa; rebocador de popa muito restrito; push-pull com eficácia de tração baixa (hélice a ré) [§ 2.9.2; Cap. 3 § 3.2.2]"
+  ],
+  num:[
+   "Centro de pressão com fluxo de través ≈ 0,3 LWL da popa; não passa de meia-nau com fluxo de proa [§ 4.2.2]",
+   "Empurre lateral eficaz: máximo ≈ 3–4 nós (provas EUA 1982; C H Cates: 4 nós contra 8 do trator reverso); puxar eficaz só abaixo de 1 nó [DECORAR] [§ 4.3.1; § 4.3.4]"
+  ],
+  seg:[
+   "Aproximação à proa (fig. 6.4): pos. 1 leme BB (força no sentido da sucção → manter distância); 1→2 passar a leme BE; 3–4 leme BE; 4→5 leme BB abruptamente — quem mantém potência aí acelera para BE e vai sob a proa [DECORAR] [§ 6.2.3]",
+   "Governar para longe da proa gera força <b>para</b> o navio (leme e propulsão a ré); única fuga segura: Full Astern [§ 6.3.3]",
+   "Interação junto à proa é particularmente perigosa para convencionais e ASD pela popa [§ 4.2.3.2]"
+  ],
+  comp:[
+   "Acima de 3–4 nós convencionais perdem eficácia em governar e passam a empurrar (acelera o navio); omnidirecionais governam sem acelerar [Cap. 9 § 9.5.1]"
+  ],
+  banca:[
+   "[BANCA: 2008-Q16] Reboque no cabo com convencionais: vantagem em águas estreitas (<i>narrow</i>); rebocador de vante com duas espias cruzadas (<i>cross/gate lines</i>)",
+   "[BANCA: 2011-Q60] Monohélice passo direito no costado: popa vai para BB em marcha a ré → opera melhor pelo costado de BB"
+  ]
+ },
+ vf:[
+  {s:"Um rebocador convencional de popa, com o navio acima de cerca de 3 nós, só consegue aplicar força de governo para um bordo e não controla a velocidade do navio.", v:true, fb:"[§ 2.3.4; § 4.3.1]"},
+  {s:"Num convencional avançando no cabo à proa, a correção de leme a ré reduz a força disponível na espia.", v:false, fb:"É o contrário: a correção a ré gera pouco arrasto adicional e força extra na espia; é no trator que a correção lateral reduz a força. [§ 4.2.2, fig. 4.5]"}
+ ]
+};
+
+T.GRUPO_tractor = {
+ nome:"Tractor tugs — tratores", pt:"Voith Schneider e azimutal (ATD); propulsão sob o corpo de proa, ponto de reboque a ré", grupo:"Grupo · Básicos · propulsão a vante",
+ ref:"Cap. 2 § 2.5–2.6 · Cap. 4 § 4.2.2, 4.3.1, 4.5 · Cap. 6 § 6.2.3, 6.3 · Cap. 9 § 9.6.2",
+ sec:{
+  config:[
+   "Operam com o ponto de reboque (popa) para o navio e as hélices (proa) afastadas dele; grande skeg a ré (sobretudo VS) → estabilidade de rumo e C a ré (≈ 0,4 LWL da popa) [§ 2.1; § 2.5.1; § 4.2.2]",
+   "Empurram <b>com a popa</b> → defensas de popa pesadas, grande área e raio [§ 2.5.1; § 2.2.4]",
+   "Proa cheia e fundo largo/chato (espaço para as unidades) → comportamento no mar pode ser pior [§ 2.5.3]",
+   "Ponto de reboque a vante (fig. 4.6) seria muito perigoso movendo-se a ré: grande momento de adernamento e grande distância vertical propulsão–ponto → por isso fica a ré, um pouco a ré de C [§ 4.2.2]"
+  ],
+  modos:[
+   "Indireto a alta velocidade e direto a baixa; à popa pode girar com segurança da pos. 1a para a 2 mesmo a velocidades maiores (ex. 7 nós) graças ao ponto de reboque a ré [§ 2.5.4; § 4.3.1, fig. 4.19C]",
+   "Troca espia → empurrar sem largar (proa ou popa); como rebocador de proa até ~2 nós [§ 2.5.4, fig. 2B.25C/D]",
+   "Em escolta amarrada navegam <b>popa à frente</b> (convés baixo na direção de marcha) — velocidade menor e água no convés; alguns VS de escolta são <i>fin first</i> [Cap. 9 § 9.6.2; § 2.5.3]",
+   "Segundo ponto de reboque na extremidade de ré (VS; ATD também podem): prende o rebocador sob a espia em linha e evita a guinada por fluxo no skeg; para governar, libera-se a espia desse ponto [§ 4.2.2; Cap. 9 § 9.6.2]"
+  ],
+  vant:[
+   "Giram no lugar, movem-se de lado, impulso em qualquer direção, BP a ré ≈ avante; sem as desvantagens do convencional (baixa potência a ré, sem impulso lateral, efeito transversal) [§ 2.5.3; § 2.6.3]",
+   "Mais seguros ao passar espia junto à proa (compensam interação com impulso lateral); Voith Water Tractor foi o único a largar da proa \"em praticamente qualquer condição\" (HSVA 1964) [DECORAR] [§ 2.3.1; § 6.3.3]",
+   "Rebocador de popa: desempenho muito bom, governo para os dois bordos e controle de velocidade mesmo a velocidades bastante altas; risco de capotamento praticamente inexistente em porto; pouco afetado pelo hélice do navio [§ 4.3.3]",
+   "Push-pull: ficam a 90° a velocidades muito maiores; boca larga + propulsão profunda compensam o adernamento [§ 4.3.1]",
+   "Operam com mais segurança em ondas um pouco maiores que convencionais; passar espias é mais seguro [§ 4.5.1]",
+   "Hélices profundamente imersos (gelo) e mais afastados do casco do navio (menor perda por esteira) [§ 2.24; Cap. 5 § 5.2.6]",
+   "Governo indireto um pouco <b>maior</b> que o dos ASD de escolta (ASD: frenagem um pouco maior) [Cap. 9 § 9.6.2]"
+  ],
+  lim:[
+   "Rebocador de proa no cabo com navio em movimento: menos eficaz que convencional; fica em linha com a espia e gasta tração vencendo resistência lateral; se o ângulo for grande demais e a espia não for folgada rápido, gira em torno do ponto de ré e vai para o costado [§ 4.3.1, fig. 4.19A]",
+   "À proa só governo (sem frenagem) e pode acelerar o navio [§ 4.3.3]",
+   "Calado máximo relativamente grande (desvantagem em águas rasas); propulsores sob o casco aumentam a resistência [§ 4.3.3; § 4.6; § 2.11.3]",
+   "Estabilidade de rumo pobre em tratores curtos (baixo L/B): skeg central no jato pode gerar força de governo oposta (interação propulsor–skeg); braço dos propulsores curto [§ 2.6.1, fig. 2B.28]",
+   "Aproximando-se por ré do navio, a esteira do hélice atua no skeg → governo cuidadoso; passar espia junto à popa é mais difícil que para <i>stern drive</i> [§ 4.3.1; Cap. 9 § 9.6.2]",
+   "Alguns tratores modernos vulneráveis a entrada de água pelas grandes saídas de ventilação laterais da praça de máquinas [§ 4.5.2]",
+   "Trator como rebocador de popa no cabo tem a popa baixa voltada ao fluxo/ondas (RSD elimina isso) [§ 2.13.1]"
+  ],
+  met:[
+   "No cabo na aproximação + push-pull na atracação é a prática comum onde há tratores, reversos e ASD [Cap. 3 § 3.2.1, fig. 3.14]",
+   "A contrabordo peiam-se com espia <b>da popa</b> (ASD/reverso usam espia de proa) [DECORAR] [Cap. 3 § 3.2.1, fig. 3.3]",
+   "Fazer firme direto no costado (push-pull) aproximando de popa ou de proa: navio ≤ ~5 nós [§ 2.5.4]",
+   "Submarinos/porta-aviões: Voith e azimutais recomendados (defensa submersa, mastro rebatível) [Cap. 3 § 3.4]"
+  ],
+  num:[
+   "C ≈ 0,4 LWL da popa (través); Hs ≈ 2,0 m; push-pull ≤ 5 nós; troca espia→empurrar ≤ 2 nós (proa) [§ 4.2.2; § 4.5.1; § 2.5.4]",
+   "Força máxima de governo de rebocadores curtos (ASD/ATD twin fin): ≈ 85–90 % do BP a 6, 8 e 10 nós; rebocadores mais longos alcançam mais no indireto [Cap. 9 § 9.6.2]"
+  ],
+  seg:[
+   "Aproximação à proa: pos. 1 segura (propulsão para fora); 1→2 e 3–4 \"não seguro\" (propulsão para o costado); 4–5 difícil manter posição mas mais seguro se chegar perto demais [§ 6.2.3]",
+   "Pos. 5: opera na esteira e no jato do hélice do navio; na frenagem a esteira reduz o rendimento (pior em águas rasas) [§ 6.2.4, fig. 6.5]",
+   "Tratores azimutais: impulso profundo → longo braço de adernamento com impulso súbito pelo través (o momento contraria o da espia) [§ 4.2.3]"
+  ],
+  comp:[
+   "VS × ATD: VS maior calado/deslocamento e melhor no indireto; ATD menor calado, ~100 % de impulso em qualquer direção e melhor no direto; ATD opera com ângulo de reboque maior → mais força lateral [§ 2.6.1; § 2.6.4; § 4.3.1]",
+   "Trator × ASD à proa (bow-to-bow): trator anda avante, move-se de lado, menor interação propulsor–skeg [§ 6.3.13]"
+  ],
+  banca:[
+   "[BANCA: 2006-Q18] Rebocador na proa: trator é MAIS eficiente que convencional com grande ângulo espia–proa? Falso no sentido da banca — cuidado com a inversão; tratores operam geralmente proa com proa do navio",
+   "[BANCA: 2012-Q30; 2011-Q63] VS tem maior calado que azimutal (a banca inverte); VS menor tração por BHP; comportamento pior em mar aberto",
+   "[DISTRATOR] \"Tratores são os melhores rebocadores de proa no cabo com o navio em movimento\" — não; são os melhores à popa"
+  ]
+ },
+ vf:[
+  {s:"Tratores são os rebocadores mais eficazes como rebocador de proa no cabo quando o navio tem seguimento.", v:false, fb:"À proa com velocidade o convencional é mais eficaz; o trator é limitado pela velocidade e brilha como rebocador de popa. [§ 4.3.1]"},
+  {s:"A contrabordo, o trator peia-se com uma espia da popa, enquanto ASD e trator reverso usam espia de proa.", v:true, fb:"[Cap. 3 § 3.2.1, fig. 3.3]"},
+  {s:"Nos ensaios HSVA de 1964, o Voith Water Tractor foi o único tipo capaz de afastar-se da proa do navio em praticamente qualquer condição.", v:true, fb:"[§ 6.3.3]"}
+ ]
+};
+
+T.GRUPO_related = {
+ nome:"RELATED TUG TYPES — tipos relacionados", pt:"Rotortug · Z-tech · RSD · Carrousel · DOT (· All-Rounder)", grupo:"Grupo · Tabela 2A.1",
+ ref:"Cap. 2 Parte C § 2.11–2.16 · Cap. 4 § 4.3.2–4.3.4",
+ sec:{
+  config:[
+   "Chamam-se \"relacionados\" porque suas capacidades são em grande parte comparáveis às dos tipos básicos [§ 2 Parte C, intro]",
+   "Rotortug = três azimutais; Z-tech e RSD = dois azimutais sob uma das extremidades; Carrousel/DOT = convencionais com ponto de reboque móvel; All-Rounder (2021) pode ser acrescentado [§ 2.1, Tab. 2A.1]",
+   "Z-tech e RSD não diferem muito de ATD/ASD; Rotortug comparável a trator com capacidades aumentadas no cabo e em push-pull [§ 4.3.3]"
+  ],
+  modos:[
+   "Rotortug, Z-tech e RSD podem aplicar reverse/transverse arrest (propulsores orientáveis) [§ 4.3.4]",
+   "Carrossel/DOT: o casco gira livremente sob a espia; ponto de reboque desloca-se para o bordo baixo → banda de equilíbrio cai de 31° para 18° (fig. 4.14) [DECORAR] [§ 4.2.3]"
+  ],
+  vant:["Z-tech, RSD e Rotortug são respostas ao mesmo problema: combinar o melhor do trator (segurança à proa) com o do ASD, ou operar dentro da boca do navio [§ 2.12; § 2.13; § 2.11.3]"],
+  lim:["Hensen não detalha capacidades/limitações destes tipos no Cap. 4: \"o leitor é desafiado a avaliá-las\" com os princípios do capítulo e as informações do Cap. 2 [§ 4.3]"],
+  comp:["Curvas Rotortug × ASD: Rotortug melhor em 4–8 nós, ASD melhor acima de 8 nós (fig. 2C.4) [DECORAR] [§ 2.11.3]"],
+  banca:["[BANCA: 2006-Q53; 2011-Q53] Definição do Rotortug: trator azimutal com o skeg substituído por um terceiro azimutal na linha de centro (distratores: 4 thrusters; 2 em linha; ASD com 4)"]
+ },
+ vf:[{s:"Os tipos relacionados (Rotortug, Z-tech, RSD) têm capacidades em grande parte comparáveis às dos tipos básicos.", v:true, fb:"[§ 2 Parte C, intro]"}]
+};
+
+T.GRUPO_fast = {
+ nome:"FAST TUG TYPES — Forward & Aft Single Thruster", pt:"SDM/ATT · EDDY · Giano · RAVE/CRT — um propulsor único a vante e um a ré", grupo:"Grupo · Tabela 2A.1",
+ ref:"Cap. 2 Parte D § 2.17–2.21 · Cap. 4 § 4.3.2–4.3.4 · Cap. 6 § 6.2.3 · Cap. 9 § 9.6.3",
+ sec:{
+  config:[
+   "FAST = <i>Forward and Aft a Single Thruster</i> (ou uma única unidade Voith em cada extremidade). Tipos: SDM/ATT, EDDY, CRT (RAVE), Giano [DECORAR] [§ 2.17]",
+   "Mesma potência a vante e a ré; manejo totalmente diferente dos tipos usuais; comparáveis até certo ponto a um combi e, mais, a um Rotortug [§ 2.17]",
+   "Poucos construídos; os operacionais (SDM, EDDY, Giano) trabalham satisfatoriamente, mas a utilidade ainda está a ser provada na prática diária [§ 2.17]"
+  ],
+  modos:[
+   "Propulsor junto ao ponto de reboque/empurre gera força adicional; espaço de manobra menor, operam dentro da boca do navio (eclusas, pontes), como o Rotortug [§ 4.1; § 4.3.2; Cap. 3 § 3.2.3]",
+   "Desempenho indireto comparável ao dos Rotortugs (indicação de capacidade de escolta) [§ 2.17]",
+   "Parada rápida varia por tipo: CPP a ré (perda ≈ 55 % do empuxo); diesel-elétrico inverte o FPP; girar propulsores (instabilidade temporária); ou mesmo empuxo nos dois sentidos [§ 2.17]"
+  ],
+  vant:["Alta manobrabilidade; <i>side-stepping</i>: SDM 6,5 nós, EDDY 7, Giano 7 (Rotortug ~6) [§ 2.18.3; § 2.19.3; § 2.21.1]"],
+  lim:[
+   "<b>Lógica dos 50 %</b>: em cada extremidade há no máximo metade da potência; tratores/reversos têm 100 % na extremidade de vante → compensam muito melhor sucção e momentos de giro junto à proa de navio com seguimento [DECORAR] [§ 2.17]",
+   "No cabo em ângulo com navio em movimento: a menor potência na extremidade sem espia limita o quanto o rebocador abre; a força hidrodinâmica cresce e ele pode girar (<i>swing around</i>) — folgar rápido [§ 2.17]",
+   "<b>Não</b> podem aplicar transverse arrest; frenagem alta, mas limitada [DISTRATOR] [§ 4.3.4]",
+   "Falha do propulsor da extremidade sem espia: o outro ainda pode tentar evitar acidente; como rebocador de proa no cabo pode ficar arriscado. Com carrossel (CRT) isso não se aplica [§ 2.17]",
+   "Usar o propulsor <b>errado</b> perto da proa = mesmo risco do convencional tentando afastar-se do casco; manetes de vante/ré não podem ser confundidas [§ 2.17]",
+   "Interação skeg–propulsor sempre exige atenção (SDM e Giano tiveram de alterar skegs); navegabilidade; híbridos em modo econômico têm ainda menos potência disponível [§ 2.17]",
+   "Redundância menor que trator/reverso com um propulsor avariado [§ 2.17]"
+  ],
+  met:["Citados no Cap. 3 só genericamente: reduzem a largura do conjunto no cabo e assistem dentro da boca do navio em eclusas (§ 2.19.3) [Cap. 3 § 3.2.2–3.2.3]"],
+  seg:[
+   "Na aproximação à proa, o propulsor de vante tende a dar efeito semelhante ao do trator (como o bow thruster do combi) [§ 6.2.3]",
+   "Projetos fora do padrão (EDDY, CRT) podem exigir abordagem de estabilidade específica (IMO 2020) [§ 4.2.3.1]",
+   "Um propulsor AV + um AR orientados geram frenagem plena imediata como rebocador de popa [Cap. 5 § 5.3.5]"
+  ],
+  comp:["EDDY, Giano e SDM poderiam ampliar capacidades com carrossel, como o CRT [§ 2.17]"],
+  banca:["[DISTRATOR] FAST = um propulsor em cada extremidade, não dois na mesma; [DISTRATOR] FAST fazem arrasto transverso — não"]
+ },
+ vf:[
+  {s:"Rebocadores FAST podem aplicar o arrasto transverso (transverse arrest) como os ASD.", v:false, fb:"Com um só propulsor em cada extremidade não é possível o transverse arrest. [§ 4.3.4]"},
+  {s:"Num rebocador FAST há no máximo 50 % da potência total disponível em cada extremidade.", v:true, fb:"É a 'lógica dos 50 %' do § 2.17; tratores têm 100 % a vante."}
+ ]
+};
+/* ===================== PROPULSÃO A RÉ ===================== */
+T.conventional = {
+ nome:"Conventional tugs", pt:"Convencionais — um, dois ou três hélices (single/twin/triple screw); Smart Tug", grupo:"Básico · propulsão a ré",
+ ref:"Cap. 2 § 2.3 · Cap. 3 § 3.2 · Cap. 4 § 4.3.1–4.3.4 · Cap. 5 § 5.2.6 · Cap. 6 § 6.2–6.3 · Cap. 9 § 9.5",
+ sec:{
+  config:[
+   "Propulsão a ré, ponto de reboque ≈ <b>0,45 × LWL da popa</b> (às vezes menos; EUA mais a ré — permite superestrutura maior, mas limita o reboque no cabo com velocidade) [DECORAR] [§ 2.3.1]",
+   "Mais simples: monohélice com leme de chapa; variantes bi e tri-hélice (mais manobráveis); hélices abertos ou em tubulão [§ 2.3.1; § 2.3.2]",
+   "Grande plano submerso → momentos de adernamento difíceis de compensar com as forças de governo mais baixas [§ 4.3.1]",
+   "## Impulso a ré em % do avante",
+   "FPP hélice aberta ≈ 60 %; CPP aberta ≈ 40–45 %; com tubulão tipo 37: FPP ≈ 65 %, CPP ≈ 45 % (pás de CPP invertidas têm passo menor na raiz) [DECORAR] [§ 2.3.2]",
+   "Towmaster (lemes persiana, normalmente 3 atrás e 2 à frente de cada tubulão, até 60°): > 70 % a ré e > 1,50 t BP/100 bhp avante; ex. Hazam 70 t AV / 50 t AR [§ 2.3.2; § 2.26]",
+   "## Tubulões (nozzles)",
+   "+15–25 % de impulso em reboque/empurre e ≈ +30 % a velocidade zero; reduzem a capacidade de governo (agem como área lateral) → lemes especiais [§ 2.3.2]",
+   "Tipos: 19A (avante, comum); 37 (<i>backing nozzle</i>: melhor a ré, pouco pior avante); Hannan Ring (~70 % a ré com pás especiais); Nautican/Lips HR (+8–12 % de BP avante vs 19A); Optima; Schottel SDV45 (águas rasas) [§ 2.3.2]",
+   "## Lemes",
+   "Leme de flap (Becker etc.): sustentação máx. +60–70 % a ~30°; impulso lateral até 50 % do avante; a ré geralmente pior que leme sem flap. Schilling (rabo de peixe): +30–40 %, até 70°; VecTwin: impulso lateral 70 % do avante, vetoriza 360° sem reverter [§ 2.3.2]",
+   "Tubulão dirigível (25–30°): manobra superior ao leme, muito boa a ré. Lemes de flanco (<i>flanking rudders</i>): à vante do hélice, melhoram governo a ré [§ 2.3.2]",
+   "Rebocador de popa convencional pode ter <b>gob rope</b> (transfere o ponto de reboque para ré); bi-hélice nem sempre precisa dele para ficar de través [§ 6.3.7; § 4.2.2]",
+   "Pequenos: Smart Tug (Uzmar, 20,4 m, BP 19 t, bi-hélice em tubulões, três lemes); Container tug (6 m, BP 1,5 t) [§ 2.3.1]"
+  ],
+  modos:[
+   "## Monohélice",
+   "Efeito transversal (<i>paddle wheel</i>): passo direito, a ré o jato bate a popa a BE → popa vai para BB, proa para BE; com mais seguimento a ré o leme recupera eficácia. Gira no lugar só com leme de alta sustentação; <b>nenhum</b> movimento lateral sem bow thruster [DECORAR] [§ 2.3.3]",
+   "## Bi-hélice",
+   "Gira no lugar e anda a ré em linha reta; hélices de giro para dentro (mais rendimento; com FPP o diâmetro de giro aumenta). <i>Flanking</i> para BE: BB avante, BE a ré, leme a BB [BANCA: 2006-Q07] [§ 2.3.3, fig. 2B.13]",
+   "## Governo atravessado (steering broadside)",
+   "Rebocador de proa governa navio que anda a ré dando máquina avante/a ré, normalmente com gob rope; como rebocador de popa (navio avante) só a velocidade muito baixa [§ 6.3.7–6.3.8]",
+   "## Rebocador de leme (rudder/steering tug)",
+   "À popa, governa o navio com impulso avante + leme a BE/BB e controla velocidade (EUA, Panamá, Holanda interior) [Cap. 3 § 3.2.1, fig. 3.8]",
+   "## A contrabordo (alongside / on the hip)",
+   "Peado rígido com 2–3 espias (<i>backing line</i>, <i>spring</i>, <i>stern line</i>); conjunto = navio bi-hélice com lemes independentes; peado a vante com proa para ré age como \"bow thruster dirigível\" [Cap. 3 § 3.2.1, figs. 3.4–3.6]",
+   "Espias cruzadas (<i>cross/gate lines</i>) do rebocador de vante em pontes/eclusas: reação rápida, pouco espaço [BANCA: 2008-Q16] [Cap. 3 § 3.2.1, fig. 3.13]"
+  ],
+  vant:[
+   "<b>Rebocador de proa no cabo mais eficaz que o trator</b> com o navio em movimento: gira em torno do ponto de reboque, menor ângulo de ataque; a correção de leme a ré ainda acrescenta força na espia; eficácia cresce com a velocidade (conforme o ângulo) [DECORAR] [§ 4.2.2; § 4.3.1, fig. 4.19B]",
+   "Navio muito devagar, posição travada (1b): resistência do casco gera altas forças de governo sem acelerar o navio [§ 4.3.1]",
+   "Desatracação com um só rebocador de proa + leme todo para o cais e muito devagar avante (navios não muito grandes) [§ 4.3.1, fig. 4.20]",
+   "Maior BP por potência de todos quando com tubulão (1,3–1,5 t/100 bhp) [§ 2.26, Tab. 2E.3]",
+   "No cabo pela popa reduz a largura total do conjunto à do navio (pontes, eclusas) [Cap. 3 § 3.2.2]",
+   "Gelo: convencional bi-hélice com hélices abertos é o mais confiável; ASD/convencional são os mais adequados a gelo severo [Cap. 3 § 3.3.4; § 2.24]",
+   "Com mestre experiente podem ser muito eficazes [§ 2.3.1]"
+  ],
+  lim:[
+   "<b>Girting</b> à proa e à popa (ponto de reboque a meia-nau + forças transversais); ganchos de liberação rápida frequentemente não abrem com carga alta e espia com grande ângulo vertical → guincho com liberação rápida é mais seguro [DECORAR] [§ 2.3.1; § 4.3.1; § 4.3.3]",
+   "Rebocador de popa: acima de ≈ 3 nós só governa para um bordo e acelera o navio; mudar de bordo atrás da popa é impossível acima de 1–2 nós; passar da pos. 1 para a 2 acima de 3 nós é perigoso (gob rope permite um pouco mais) [DECORAR] [§ 4.3.1]",
+   "Frenagem: nula como rebocador de proa no cabo; à popa só a velocidades muito baixas [§ 4.3.3]",
+   "Rebocador de proa com velocidade gera força que aumenta a velocidade do navio [§ 4.3.3]",
+   "Empurrar com navio em movimento: C a ré dificulta ficar a 90°; usa <i>stern line</i>; limite eficaz ≈ 3–4 nós; força longitudinal cresce muito acima de 4 nós (acelera o navio); em ondas de 1,8 m cai já acima de 3 nós [§ 4.3.1; § 4.3.4, fig. 4.24]",
+   "Puxar a contrabordo: gira (<i>swing</i>); monohélice não puxa a 90° (efeito transversal); eficaz só abaixo de 1 nó / navio parado [§ 2.3.4; § 4.3.4]",
+   "Não troca de espia para empurrar sem largar (teria de empurrar com a popa) [§ 2.3.4]",
+   "Esteira mais pronunciada e hélices mais perto do casco do navio → maior perda de tração; efeito Coanda com espia curta a 90° e pouca UKC pode anular a tração e até inverter o movimento do navio [§ 5.2.6, fig. 5.12]",
+   "Propulsão de dois eixos não serve para controlar ângulo de reboque em ondas; Hs ≈ 1,5–1,8 m; maior risco de girting em ondas [§ 4.5.1–4.5.2]",
+   "Em escolta: acima de 3–4 nós perde eficácia em governar e passa a empurrar; à proa não freia; velocidade do navio ≤ 3–4 nós se o rebocador de popa for convencional [Cap. 9 § 9.5.1]"
+  ],
+  met:[
+   "<b>Adequado</b>: cabo à proa (navio em movimento); rebocador de popa só a velocidade muito baixa; push-pull com eficácia de tração baixa; a contrabordo com 2–3 espias [§ 2.3.4; Cap. 3 § 3.2.1–3.2.2]",
+   "<b>Não adequado</b>: rebocador de popa em velocidade; indireto; escolta de alta velocidade; puxar a contrabordo com seguimento; reboque no cabo em gelo com calado leve e tubulão [§ 4.3.1; Cap. 3 § 3.3.4]",
+   "Tabela Guia Fragoso/Cajaty: cabo na popa = Ruim; costado com corrente = Ruim; costado sem corrente = Regular; cabo na proa = Bom [BANCA: 2011-Q71] [CONFLITO]"
+  ],
+  num:[
+   "Ponto de reboque 0,45 LWL da popa; C ≈ 0,3 LWL da popa (través) [§ 2.3.1; § 4.2.2]",
+   "Limites: popa 1 bordo > 3 nós; mudar de bordo atrás da popa ≤ 1–2 nós; empurrar ≤ 3–4 nós; puxar < 1 nó; Hs 1,5–1,8 m; escolta 3–4 nós [§ 4.3.1; § 4.3.4; § 4.5.1; Cap. 9 § 9.5.1]",
+   "BP a ré: 60 / 40–45 / 65 / 45 % (FPP aberto / CPP aberto / FPP tubulão 37 / CPP tubulão 37) [§ 2.3.2]",
+   "Simulação 40 m, 5 750 bhp, 50 t: força transversal de empurre cai acima de 5 nós; sem espia de proa pior acima de 5 nós [§ 4.3.4, fig. 4.24]",
+   "Bow thruster de túnel: −50 % de eficácia já a 2 nós [§ 2.3.2]"
+  ],
+  seg:[
+   "Aproximação à proa (fig. 6.4): pos. 1 leme BB cria força no sentido da sucção → ficar longe; 1→2 passar rápido a leme BE; 3–4 leme BE; 4→5 leme BB abruptamente e reduzir potência — quem mantém potência acelera para BE e vai sob a proa [DECORAR] [§ 6.2.3]",
+   "Fig. 6.7B: tentar sair com toda avante e leme BB é empurrado contra o navio e vai atravessado sob a proa; só <b>Full Astern</b> funciona [§ 6.3.3]",
+   "HSVA 1964: sem bow thruster não consegue largar da proa; Dand 1976: pode \"conduzir-se\" sob a proa se leme/potência não forem corrigidos rápido [§ 6.3.3]",
+   "Fazer firme na proa com seguimento é \"muito perigoso para um convencional\" (Fairplay 1/1954, Hans/1978, Barta/2008 ~6 nós) [§ 6.3.3; § 6.3.5]",
+   "Girting (fig. 6.13A): navio guina para BE e acelera, rebocador de proa vem pelo través (pos. 2) e mais a ré com espia tensa (pos. 3); forças de governo que tenta aplicar somam ao adernamento. Também em rumo reto por velocidade excessiva [§ 6.3.6]",
+   "Popa convencional atravessada: máquina do navio dada subitamente a meia força avante → adernamento severo/emborcamento (já aconteceu); rebocador que emborca é puxado popa primeiro (Voima, 2001) [§ 6.3.8–6.3.9]",
+   "Travessia de alheta a alheta rente à popa só com o navio praticamente parado [§ 6.3.10]",
+   "Bi-hélice de fundo chato preso ao costado: máquina a ré no hélice <b>interno</b> sobe a pressão entre cascos e solta o rebocador [§ 6.3.2]",
+   "Em nevoeiro, convencionais na proa sem tração preferem ficar ao lado da esteira do navio [§ 6.3.13]"
+  ],
+  comp:[
+   "× trator: melhor à proa no cabo; pior à popa, em push-pull, em frenagem e junto à proa (segurança) [§ 4.3.1; § 6.2.3]",
+   "× ASD: a ré ≈ 65 % contra 90–95 %; avante 1,3–1,5 contra 1,1–1,3 t/100 bhp (c/ tubulão) [§ 2.26]",
+   "× VS: avante 1,5 contra 1,1 t/100 bhp, mas esteira mais pronunciada prejudica mais a tração junto ao costado [§ 2.26; § 5.2.6]",
+   "× combi: combi = convencional com mais velocidade, manobra, BP, menos girting e menor tempo de resposta [§ 2.4.2]",
+   "Bi/tri-hélice e lemes especiais (alta sustentação, Towmaster, Nautican) ou tubulões dirigíveis reduzem as limitações [§ 4.3.1, Nota 5]"
+  ],
+  banca:[
+   "[BANCA: 2006-Q06] FPP aberto dá MAIS impulso a ré que CPP aberto; tubulões REDUZEM governo; Becker a ré melhor que leme sem flap",
+   "[BANCA: 2006-Q07] Deslocamento lateral do bi-hélice FPP: BE a ré + BB avante + lemes a BB",
+   "[BANCA: 2008-Q64] Flanking rudders = lemes à vante do hélice para melhorar a ré",
+   "[BANCA: 2011-Q60] Monohélice passo direito: costado de BB",
+   "[DISTRATOR] Atribuir ao convencional \"Ótimo\" na popa ou costado com corrente (Tabela Guia); [DISTRATOR] trocar 60/65 % (FPP) por 40–45 % (CPP)"
+  ]
+ },
+ vf:[
+  {s:"Num convencional com hélice de passo fixo aberto, o impulso a ré é da ordem de 60 % do avante; com CPP aberto cai para cerca de 40–45 %.", v:true, fb:"[§ 2.3.2]"},
+  {s:"Um rebocador convencional é o tipo menos eficaz como rebocador de proa no cabo quando o navio tem seguimento.", v:false, fb:"É o mais eficaz nessa posição: gira em torno do ponto de reboque e a correção a ré acrescenta força na espia. [§ 4.3.1, fig. 4.19B]"},
+  {s:"Encostado à proa de um navio com seguimento, a manobra de escape segura para o convencional é dar máquina toda avante com leme para fora.", v:false, fb:"Isso o empurra contra o navio (fig. 6.7B); a única fuga segura é Full Astern. [§ 6.3.3]"}
+ ]
+};
+
+T.asd_popa = {
+ nome:"ASD-tugs incl. Azistern — operando pela popa", pt:"Azimuth Stern Drive usando o ponto de reboque de ré: comporta-se como convencional (stern-to-bow)", grupo:"Básico · propulsão a ré · modo convencional",
+ ref:"Cap. 2 § 2.9 · Cap. 4 § 4.2.2–4.3.3 · Cap. 6 § 6.2.3, 6.3.3, 6.3.13",
+ sec:{
+  config:[
+   "Mesmo rebocador da ficha <b>ASD pela proa</b>: dois azimutais sob a popa (~0,1 LWL), guincho a vante e guincho/gancho a ré; alguns com um só guincho que serve os dois lados por um túnel na superestrutura [§ 2.9.1]",
+   "<b>Ponto de reboque de ré a 0,35–0,40 × LWL da popa</b> — posição pensada para o reboque no cabo como convencional [DECORAR] [§ 2.9.1]",
+   "No trator reverso puro o ponto de ré fica longe demais para ré (quase sobre os propulsores) e não serve para isto — é o que distingue o ASD [§ 2.7.1; § 2.9.1]",
+   "Para o Cap. 6, ASD pela popa <b>é</b> um convencional (propulsão e governo a ré); \"leme\" = ajuste equivalente dos propulsores [§ 6.2.3, Nota 1]"
+  ],
+  modos:[
+   "<b>Rebocador de proa no cabo como convencional</b> (situação 1 da fig. 2B.45): muito eficaz com o navio em movimento, <b>mas com risco de girting</b> — minimizado por liberação rápida confiável [DECORAR] [§ 2.9.2]",
+   "Vantagem sobre o convencional: forças de governo altas e C mais a vante → mais força na espia, mas também mais adernamento, compensado pela boca grande [§ 4.2.2; § 4.2.3]",
+   "Escolta: reboca eficazmente no cabo a velocidades relativamente altas também pelo guincho de <b>ré</b> [Cap. 9 § 9.6.2]",
+   "No cabo pela popa reduz a largura total em pontes/eclusas (como o convencional) [Cap. 3 § 3.2.2]",
+   "Gelo espesso: como rebocador de proa usa espias do navio no gancho de ré e avança com a proa no gelo para proteger hélices e tubulões [Cap. 3 § 3.3.4, Nota 2]",
+   "Se as ondas tornarem o bow-to-bow problemático, mudar para stern-to-bow ou reduzir a velocidade do navio [§ 6.3.13]"
+  ],
+  vant:[
+   "Combina os dois modos num só casco: pela popa é o rebocador de proa eficaz; pela proa é o trator reverso → \"adequado a todos os tipos de manobra\" [§ 2.9.2]",
+   "Stern-to-bow: as forças de governo podem <b>não</b> cair e até crescer com a velocidade (ao contrário do bow-to-bow, que cai acima de ~4 nós) [§ 6.3.13]",
+   "Skeg de proa/quilha-caixa gera força adicional também quando opera como convencional com o navio em movimento [§ 4.2.2]",
+   "Velocidade segura para fazer firme/operar stern-to-bow é maior que bow-to-bow: até 7 nós [§ 6.3.13]"
+  ],
+  lim:[
+   "Herda os riscos do convencional: <b>girting</b> e interação perigosa junto à proa de navio com seguimento [§ 4.2.3.2; § 4.3.1]",
+   "No indireto os propulsores de um ASD pela popa (modo convencional) <b>somam</b> ao adernamento da espia, em vez de contrariá-lo [§ 4.2.3]",
+   "Sofre grandes forças transversais na espia no cabo à proa ou à popa [§ 4.2.3]",
+   "Aproximação à proa: mesma sequência de risco do convencional (pos. 1 → 5), fuga só com Full Astern [§ 6.2.3; § 6.3.3]",
+   "Acidentes de ASD fazendo firme à proa: Burcht (Antuérpia 2003, 65 t, 1 morto); Fairplay 22 × Stena Britannica (2010, 2 mortos) — MARIN: forte momento para dentro quando as perpendiculares de vante se alinham; ângulo de deriva do navio de ~10° aumenta muito as forças; recomendação ≤ 6 nós [§ 6.3.3]"
+  ],
+  met:[
+   "<b>Adequado</b>: cabo à proa como convencional; reboque no cabo em escolta pelo guincho de ré; passagens estreitas [§ 2.9.2; Cap. 9 § 9.6.2; Cap. 3 § 3.2.2]",
+   "<b>Evitar</b>: fazer firme à proa acima de ~7 nós (60 % da velocidade livre); operar como rebocador de popa pela popa (para isso usa o modo trator reverso) [§ 6.3.13]"
+  ],
+  num:[
+   "Ponto de reboque de ré 0,35–0,40 LWL; fazer firme/operar stern-to-bow ≤ 7 nós e nunca > ~60 % da velocidade livre; recomendação MARIN ≤ 6 nós à proa [DECORAR] [§ 2.9.1; § 6.3.13; § 6.3.3]",
+   "BP a ré 5–10 % menor que avante (jato bate no casco a vante dos propulsores); exemplos: Mars 82,5/76,1 t; ASD 2312 70/65 t; Smit Seine 60/57 t [§ 2.9.2; § 6.2.1]"
+  ],
+  seg:[
+   "Risco de emborcar existe no stern-to-bow (não no bow-to-bow preso) [§ 6.3.13]",
+   "Velocidade segura de conexão (Nota 8): velocidade em que o mestre controla o rebocador com um só motor, menos 1 nó [§ 6.3.13, Nota 8]",
+   "Dead Slow Ahead de grandes porta-contêineres pode passar de 7 nós → não fazer firme nessa velocidade [§ 6.3.15]",
+   "Liberação rápida testada com cargas máximas; guincho de liberação rápida preferível ao gancho [§ 4.2.3.2; § 6.3.12]"
+  ],
+  comp:[
+   "× convencional: mesma função à proa, mais potência/manobra, mas o mesmo girting [§ 2.9.2]",
+   "× ASD pela proa: pela popa é mais rápido/seguro fazer firme até 7 nós; pela proa é mais seguro contra emborcamento mas limitado a 4–7 nós conforme o projeto [§ 6.3.13]"
+  ],
+  banca:[
+   "[BANCA: 2011-Q71] Na Tabela Guia o ASD com espia no guincho da popa conta como CONVENCIONAL",
+   "[BANCA: 2006-Q08] ASD = azimutais a ré, opera pela proa E pela popa",
+   "[DISTRATOR] \"ASD não sofre girting\": sofre quando opera pela popa como convencional"
+  ]
+ },
+ vf:[
+  {s:"Um ASD rebocando no cabo à proa do navio pelo seu ponto de reboque de ré opera como um convencional e está sujeito a girting.", v:true, fb:"[§ 2.9.2; § 4.3.1]"},
+  {s:"O ponto de reboque de ré de um ASD fica a cerca de 0,35–0,40 do LWL contado da popa.", v:true, fb:"[§ 2.9.1]"},
+  {s:"Fazer firme stern-to-bow é mais arriscado quanto ao emborcamento do que fazer firme bow-to-bow.", v:true, fb:"Hensen: riscos menores bow-to-bow; o risco de emborcar existe no stern-to-bow. [§ 6.3.13]"}
+ ]
+};
+
+T.combi = {
+ nome:"Combi-tugs", pt:"Convencional (geralmente antigo) + bow thruster azimutal 360° + ponto de reboque adicional na popa", grupo:"Básico · propulsão a ré",
+ ref:"Cap. 2 § 2.4 · Cap. 4 § 4.2.2, 4.3.2–4.3.3 · Cap. 6 § 6.2.3 · Cap. 9 § 9.5.1",
+ sec:{
+  config:[
+   "Monohélice convencional com <b>bow thruster azimutal 360°</b> (em tubulão, retrátil ou fixo) e <b>ponto de reboque adicional junto à popa</b> (gob rope ou buzina forte que abre de lado); primeiros no início dos anos 1960 [DECORAR] [§ 2.1; § 2.4.1]",
+   "Thruster azimutal sob a quilha tem alta eficiência em qualquer direção mesmo com o rebocador rápido (ao contrário do túnel) [§ 2.4.1]",
+   "Ex. Serwal 3: 28,5 × 6,9 m; 900 bhp + thruster 420 bhp; BP 15 t → 20 t com thruster; 11,9 nós avante, 10,2 nós a ré. San Pedro: thruster 600 bhp, BP 25 → 35 t (+40 %) [§ 2.4.1, fig. 2B.15]",
+   "Multratug 12 (primeiro carrossel) era um combi [§ 2.14]",
+   "Thruster fora de uso = resistência extra (daí retrátil); em águas rasas recolher a tempo — alarme de profundidade recomendado [§ 2.4.1]"
+  ],
+  modos:[
+   "Com o ponto de reboque de ré em uso opera <b>como trator</b> (popa para o navio) [§ 2.4.2]",
+   "Sequência típica (fig. 2B.17): faz firme a ré aproximando-se de popa com o navio ainda a ~7–8 nós; com ponto a ré controla velocidade (propulsão + thruster no mesmo sentido) ou governo (abre para BB/BE com propulsão a ré e thruster lateral; a sustentação do fluxo gera força na espia); com a velocidade caindo solta o gob rope e volta a operar como convencional [§ 2.4.2]",
+   "Com vento/corrente fortes é mais eficaz seguir o navio como convencional com toda a potência avante e o thruster somando BP [§ 2.4.2]",
+   "Navegação livre: gira no lugar, anda a ré em linha reta e move-se de lado; thruster na mesma direção da propulsão soma BP e velocidade [§ 2.4.1]"
+  ],
+  vant:[
+   "Como rebocador de proa: igual ao convencional com mais velocidade, manobra e BP, <b>menos risco de girting</b> e menor tempo de resposta [§ 2.4.2]",
+   "Como rebocador de popa: trabalha pela popa a velocidades maiores graças ao thruster — suas maiores vantagens; usado em passagens longas para controle de velocidade e rumo [§ 2.4.2]",
+   "Com ponto de reboque bem a ré, à popa aplica frenagem e governo para os dois bordos (como omnidirecional/carrossel) [Cap. 9 § 9.5.1]",
+   "Forma satisfatória e barata de modernizar rebocadores antigos (Amsterdã, San Pedro, Moran) [§ 2.4.1]"
+  ],
+  lim:[
+   "Trabalhar pela popa <b>exige</b> o ponto de reboque adicional junto à popa para evitar girting (o original fica a 0,45 LWL) [§ 2.4.2]",
+   "No costado: muitas desvantagens do convencional; empurrando com a popa a eficácia é reduzida e é difícil manter 90° com navio em movimento (thruster de pouca potência); puxar com máquina a ré tem as mesmas desvantagens do convencional [§ 2.4.2; § 4.3.2]",
+   "Projeto de compromisso: o thruster tem potência baixa comparada à propulsão de um trator [§ 6.2.3]",
+   "Gob rope normalmente exige 2 pessoas no convés → buzina abrível é mais prática e segura [§ 2.4.2]"
+  ],
+  met:["Cabo à proa e à popa; push-pull; empurra com proa ou popa [§ 2.4.2]"],
+  num:["Fazer firme a ré com o navio a ~7–8 nós (fig. 2B.17); thruster de 400 hp em rebocador de 1.500 bhp: +0,5 nó de velocidade máx., ~5 nós só com thruster, +5 t de força de reboque [§ 2.4.1–2.4.2]"],
+  seg:[
+   "Na aproximação à proa o thruster tende a dar efeito semelhante ao do trator (força para fora), mas com pouca potência; HSVA 1964: só um thruster <b>muito</b> potente permite largar da proa em condições favoráveis [§ 6.2.3; § 6.3.3]",
+   "Alguns combi têm buzina a ré que permite operar de través a baixa velocidade (função de gob rope) [§ 4.2.2]"
+  ],
+  comp:["FAST são comparáveis até certo ponto a um combi; o carrossel amplia muito a capacidade de convencionais e combis [§ 2.17; § 2.14]"],
+  banca:["[BANCA: 2006-Q08] Combi = \"ponto de reboque adicional a ré + bow thruster 360°\"; [BANCA: 2012-Q32] classificação dual (convencional ou trator conforme o ponto em uso)"]
+ },
+ vf:[
+  {s:"O combi-tug usa um bow thruster de túnel convencional para melhorar a manobra.", v:false, fb:"Usa bow thruster azimutal 360° (em tubulão, normalmente retrátil); o de túnel perde eficácia com seguimento. [§ 2.4.1]"},
+  {s:"Quando usa o ponto de reboque junto à popa, o combi-tug opera como um trator, com a popa voltada ao navio.", v:true, fb:"[§ 2.4.2]"}
+ ]
+};
+/* ===================== PROPULSÃO A VANTE ===================== */
+T.tractor_vs = {
+ nome:"Tractor tug — Voith Schneider (VS)", pt:"Trator com propulsão cicloidal (Voith Water Tractor); duas unidades de pás verticais sob a proa, skeg grande, ponto de reboque a ré", grupo:"Básico · propulsão a vante · tractor",
+ ref:"Cap. 2 § 2.5 · Cap. 3 § 3.2, 3.4 · Cap. 4 § 4.2.2, 4.3 · Cap. 5 § 5.2.6 · Cap. 6 § 6.3.3 · Cap. 9 § 9.6",
+ sec:{
+  config:[
+   "Duas unidades VSP lado a lado sob o corpo de proa: <b>propulsão a ~0,25–0,30 LWL de vante; ponto de reboque a 0,1–0,2 LWL da popa</b>, normalmente exatamente acima do meio do skeg [DECORAR] [§ 2.5.1]",
+   "Skeg grande: estabilidade de rumo e C a ré — base da segurança e do desempenho no indireto; no VS a posição do ponto de reboque e do C é \"mais ou menos determinada pelo skeg\" [§ 2.5.1; Cap. 9 § 9.6.2]",
+   "Placa de proteção das pás: protege, funciona como tubulão (↑ rendimento) e apoia na docagem (com o skeg) [§ 2.5.1]",
+   "Motor a rotação <b>constante</b>; magnitude e direção do impulso reguladas do passadiço (passo), em 360° e <b>sem atraso</b>; o VSP é uma espécie de CPP [DECORAR] [§ 2.5.1]",
+   "Casco largo e chato; <b>calado máximo e deslocamento maiores</b> que o do trator azimutal equivalente (unidades mais pesadas, reforços) [BANCA: 2012-Q30] [§ 2.5.1; § 2.6.1]",
+   "Passo recomendado: empurrando ~9; puxando ~8; navegação livre ~10; restritor de passo em tração/empurre; alarme a 110 % de potência [§ 2.5.1; § 2.5.4]",
+   "Alguns têm segundo ponto de reboque na extremidade de ré (escolta); <i>fin first design</i> para escolta de alta velocidade (navega com o skeg à frente) [§ 2.5.1, Nota 4; § 2.5.3]",
+   "Escolta: skegs de alta sustentação; Voith Turbo Fin (+18 % de governo); Ajax: 41,6 m, BP 93 t, governo 155 t e frenagem 180 t a 10 nós, 15 nós livre [Cap. 9 § 9.6.2]"
+  ],
+  modos:[
+   "## Controle",
+   "<b>Roda</b> = impulso transversal (prioridade); <b>alavancas de passo</b> = longitudinal; não se aplica 100 % do impulso em qualquer direção. Passo total + roda ~5 → ≈ 55 % longitudinal / 45 % transversal; roda 10 → 25 / 75 %; passo zero + roda 10 → 100 % lateral [DECORAR] [§ 2.5.2, fig. 2B.22]",
+   "As duas unidades são independentes no longitudinal, mas <b>só juntas</b> no transversal [§ 2.5.2]",
+   "Girar no lugar: roda toda a um bordo. Mover de lado (p. ex. para BB): passo BB avante, BE a ré, roda a BB (passo avante um pouco menor, pois a ré é menos eficaz) [§ 2.5.3]",
+   "## Em manobra de navios",
+   "À popa: indireto a alta velocidade, direto a baixa; forças no indireto podem ser muito maiores que o BP (Velox 65 t → 131 t a 10 nós); frenagem: alavancas de passo conforme a velocidade do navio e mínimo de roda, em linha atrás do navio [§ 2.5.4; fig. 4.3]",
+   "Troca espia → empurrar sem largar (proa ou popa); como rebocador de proa até ~2 nós [§ 2.5.4]",
+   "Manobra especial a ~5 nós quando o prático quer só leve tração (fig. 2B.25B) [§ 2.5.4]",
+   "Frenagem de través atrás do navio (como o carrossel) é usada às vezes por Voiths; <i>powered indirect</i> também é usado por VS em assistência portuária normal [§ 4.3.4; Cap. 9 § 9.6.2]",
+   "Crash stop: alavancas de passo conforme a velocidade (evitar sobrecarga) [§ 4.3.4]"
+  ],
+  vant:[
+   "Impulso a ré ≈ avante; gira no lugar; anda a ré em linha reta a alta velocidade; supera baixa potência a ré, falta de impulso lateral e efeito transversal do convencional [§ 2.5.3]",
+   "<b>O mais eficaz no modo indireto à popa a alta velocidade</b>; com a mesma estabilidade e força de espia tem <b>menor banda</b> que o ASD (menor distância vertical T–COP, maior T–P) [DECORAR] [§ 2.6.4; Cap. 9 § 9.6.2, fig. 9.14]",
+   "Jato pouco concentrado: menor perda por esteira no casco do navio que azimutais/convencionais com tubulão; valioso perto de chatas e em recolha de óleo [§ 2.5.3; § 5.2.6]",
+   "Único que largou da proa \"em praticamente qualquer condição\" nos ensaios HSVA 1964 [§ 6.3.3]",
+   "Gelo (Aker Arctic/Voith): impacto no bordo de ataque da pá (módulo máximo), perto dos mancais; blocos empurrados de lado; deixa canal mais largo; jato dirigível para lavar gelo — mas há opiniões contrárias [§ 2.24]",
+   "SAFETUG: amortecimento ativo de roll ≈ 50 %; dirige o impulso com mais eficácia ainda que azimutais [§ 4.5.2]",
+   "Maioria dos tratores de escolta tem propulsão VS; team towing (Long Beach) com VS modernos [Cap. 9 § 9.6.2; § 9.6.1]"
+  ],
+  lim:[
+   "<b>Menor BP por potência</b> de todos: 0,9–1,0 t/100 bhp (1,1 t/100 bhp no diagrama de empuxo) [BANCA: 2011-Q63] [§ 2.26]",
+   "Maior calado e deslocamento que ATD; proa cheia/fundo chato e placas de fundo prejudicam o comportamento no mar [BANCA: 2011-Q63] [§ 2.5.1; § 2.5.3]",
+   "Não é o mais eficaz como rebocador de proa no cabo com navio em movimento (ponto de reboque a ré) [§ 2.5.4; § 4.3.1]",
+   "Para a mesma velocidade opera com ângulo de reboque menor que o ATD → forças laterais menores no direto; ATD/ASD/reverso podem ser mais eficazes no direto (menor calado/resistência) [§ 4.3.1; § 2.6.4]",
+   "Estabilidade de rumo: alguns VS guinavam por vórtices alternados na popa → defletores no skeg, tiras verticais (StRAke) [§ 2.5.3, Nota 5]",
+   "Gelo (opinião contrária): não funciona além de gelo muito leve; controle acoplado limita limpar cada unidade; sem casco arando o gelo à frente das unidades (ATD tem); mais estudo necessário [§ 2.24]",
+   "Correções CPP/ICE da Tab. 2E.3 não se aplicam ao VS [§ 2.26]",
+   "Atrás de navio com seguimento pode guinar de bordo a bordo pelo fluxo no skeg → segundo ponto de reboque a ré [Cap. 9 § 9.6.2]"
+  ],
+  met:[
+   "<b>Adequado</b>: rebocador de popa (direto/indireto, dois bordos, velocidade); push-pull (peia com espia da popa); escolta; <i>rudder tug</i>; navio morto a contrabordo (Cape Town, navios até 100 m) [§ 2.5.4; Cap. 3 § 3.2.1; Cap. 9]",
+   "<b>Limitado</b>: rebocador de proa no cabo com velocidade [§ 4.3.1]",
+   "Submarinos/porta-aviões: recomendado com defensa submersa [Cap. 3 § 3.4]",
+   "Tabela Guia Fragoso/Cajaty (trator): cabo na popa = Bom; costado com/sem corrente = Ótimo; cabo na proa = Ótimo [BANCA: 2011-Q71] [CONFLITO]"
+  ],
+  num:[
+   "0,25–0,30 LWL (propulsão) / 0,1–0,2 LWL (ponto); passo 9/8/10; 55-45 / 25-75 / 0-100 %; direto ≤ ~5 nós, indireto > 5–6 nós; troca espia→empurrar ≤ 2 nós; push-pull ≤ 5 nós [§ 2.5]",
+   "BP/potência 1,2–1,4 t/100 kW = 0,9–1,0 t/100 bhp; empuxo avante 1,1 t/100 bhp [§ 2.26]",
+   "Velox: 37 m, 14 m, BP 65 t, governo 131 t a 10 nós (≈ 2 × BP) [fig. 4.3]"
+  ],
+  seg:[
+   "Compensam a interação à proa apontando as unidades para longe do navio; mesmo assim, encostado, a fuga é Full Astern [§ 6.3.3]",
+   "Posição segura do ponto de reboque foi objeto de estudo extenso com rebocadores Voith; segundo ponto a ré aumenta segurança em condições extremas (modelos radiocontrolados) [§ 2.17; Cap. 9 § 9.6.2]",
+   "Hélices VS interagem entre si conforme a direção do empuxo [§ 6.2.1]"
+  ],
+  comp:[
+   "× ATD: maior calado/deslocamento; melhor no indireto; pior no direto; menor BP/potência (0,9–1,0 vs 1,0–1,1) [§ 2.6.1; § 2.6.4; § 2.26]",
+   "× ASD (escolta): governo indireto um pouco maior, ASD frenagem um pouco maior; VS menor banda à mesma força [Cap. 9 § 9.6.2]",
+   "× convencional: avante 1,1 vs 1,5 t/100 bhp, mas esteira menos prejudicial junto ao costado [§ 2.26; § 5.2.6]",
+   "[BANCA: 2011-Q58] Braço ponto de reboque / centro de pressão: Perseu (VS) tem relação mais favorável que Ajax (ASD) para o indireto"
+  ],
+  banca:[
+   "[BANCA: 2012-Q30] INCORRETA: \"azimutais com propulsão a vante têm maior calado que os cicloidais\" — é o contrário",
+   "[BANCA: 2011-Q63] VS: maior calado, MENOR tração por BHP, pior em mar aberto",
+   "[BANCA: 2011-Q49] \"lâminas verticais lado a lado a vante\" = VS",
+   "[DISTRATOR] \"Volante controla o longitudinal\": roda = transversal; alavancas = longitudinal"
+  ]
+ },
+ vf:[
+  {s:"No trator Voith Schneider o motor gira a rotação constante e a magnitude e direção do impulso são ajustadas pelo passo das pás, sem atraso.", v:true, fb:"[§ 2.5.1]"},
+  {s:"O trator VS tem calado e deslocamento menores que um trator azimutal de potência equivalente.", v:false, fb:"É o contrário (distrator clássico da banca, 2012-Q30). [§ 2.5.1; § 2.6.1]"},
+  {s:"Com a mesma estabilidade e a mesma força na espia, o VS aderna menos que o ASD no modo indireto.", v:true, fb:"Menor distância vertical T–COP e maior T–P (fig. 9.14). [Cap. 9 § 9.6.2]"}
+ ]
+};
+
+T.tractor_azimuth = {
+ nome:"Tractor tug — azimuth propellers (ATD)", pt:"Trator com dois azimutais 360° sob o corpo de proa; skeg (às vezes twin fin), ponto de reboque a ré", grupo:"Básico · propulsão a vante · tractor",
+ ref:"Cap. 2 § 2.6 · Cap. 3 § 3.2, 3.4 · Cap. 4 § 4.3.1, 4.3.4 · Cap. 6 § 6.3.13 · Cap. 9 § 9.6.2",
+ sec:{
+  config:[
+   "Dois azimutais sob o corpo de proa: <b>propulsores a 0,30–0,35 LWL de vante</b> (0,25 em alguns italianos); <b>ponto de reboque ~0,1 LWL da popa</b>; propulsores mais a vante aumentam a eficácia [DECORAR] [§ 2.6.1]",
+   "Projeto básico ≈ VS, com <b>menos deslocamento e menos calado de casco</b>; skeg às vezes menor e menos ligado ao ponto de reboque [§ 2.6.1]",
+   "FPP com embreagem moduladora (<i>slipping clutch</i>) dispensa em grande parte o CPP; CPP acelera mais rápido e aciona FiFi pela propulsão principal [§ 2.6.1]",
+   "Tubulões 19A (o impulso a ré é obtido girando o tubulão); placas de docagem ou barras de proteção; versão ATD 2412 sem <i>struts</i> → menos resistência [§ 2.6.1; § 2.3.2, Nota 3]",
+   "<b>Twin Fin</b> (Damen ATD 2412, L/B 1,89): resolve a instabilidade de rumo (antes precisava de 5–10° de azimute e 3–5° de deriva para ir reto); governo bom avante e a ré. ATD 2412: BP 70 t, 12 nós avante e a ré, 24,74 × 12,63 m, calado 5,8 m, guincho split drum freio 150 t [§ 2.6.1]",
+   "Impulso a ré ≈ 5 % menor; jatos que interagem reduzem o rendimento → ajustar os propulsores com pequeno ângulo entre si [§ 2.6.1]"
+  ],
+  modos:[
+   "## Controle",
+   "Três opções: um dispositivo por propulsor (direção + rpm/passo); joystick combinado (Uni-lever, Combi-lever, master pilot); duas alavancas + roda + duas de velocidade (Niigata) [§ 2.6.2]",
+   "Nota 7: Uni-lever é intuitivo mas pode sobrepor o pedido e \"travar avante\" se puxado de todo avante a todo a ré rápido demais (minutos para resolver); controles separados fazem só o que o mestre pede; em algumas marcas o propulsor toma o caminho mais curto [§ 2.6.2, Nota 7]",
+   "Com CPP, para potência máxima a ré os propulsores devem ser <b>girados</b> para ré (não só passo a ré) [§ 2.6.2]",
+   "## Em manobra de navios",
+   "Capacidades ≈ VS: costado ou cabo; indireto/direto à popa; <b>mais eficaz em velocidade no direto</b> (menor resistência submersa, ~100 % de impulso em qualquer direção) [§ 2.6.4]",
+   "Reverse arrest (180°) até 8 nós, até 1,5 × BP a ré; transverse arrest (90°) acima [§ 4.3.4]",
+   "Opera com ângulo de reboque maior que o VS à mesma velocidade → forças laterais/de governo maiores [§ 4.3.1]",
+   "Puxando de ré (<i>pulling backwards</i>) na aproximação a eclusa para manter a máquina do navio girando (Arion) [Cap. 3 § 3.2.1, fig. 3.16]",
+   "Submarinos: <i>Active Escort</i> a contrabordo, movendo-se a ré com os propulsores junto à popa do submarino (USS Alaska) [Cap. 3 § 3.4.1]"
+  ],
+  vant:[
+   "Quase 100 % de impulso em qualquer direção; menor calado que VS; seguro, gira no lugar, move-se de lado, BP a ré ≈ avante [§ 2.6.3]",
+   "Polares (fig. 4.28, 70 t): a 6 nós ≈ ASD; a 8 nós um pouco melhor à popa; <b>acima de 8 nós supera o ASD em governo e frenagem</b>; twin fins → menos banda que skeg tradicional acima de 6 nós; boca maior ajuda a estabilidade [§ 4.3.4]",
+   "Hvide Marine escolheu trator azimutal (Broward) pelas altas forças de <b>frenagem</b> [Cap. 9 § 9.6.2]",
+   "Gelo: o casco ara o gelo à frente dos propulsores (VS não); hélices profundos [§ 2.24]",
+   "Propulsores independentes podem ser angulados para desviar a esteira do casco do navio [§ 5.2.6; § 4.3.1]",
+   "Como rebocador de proa bow-to-bow anda <b>avante</b> (proa alta), move-se de lado e tem menor interação propulsor–skeg que o ASD [§ 6.3.13]"
+  ],
+  lim:[
+   "<b>Menos eficaz que o VS no indireto</b> à popa a velocidades maiores [§ 2.6.4]",
+   "Estabilidade de rumo pobre em ATD curtos: skeg central no jato gera força oposta (pode guinar ao contrário), braço curto, amortecimento — mitigado por twin fin / StRAke [§ 2.6.1, fig. 2B.28]",
+   "Ponto de impulso profundamente imerso → longo braço de adernamento com impulso súbito pelo través [§ 4.2.3]",
+   "Hélices sob o casco: maior velocidade de entrada e atrito adicional (ASD tem hélices avante um pouco melhores) [§ 4.3.4]",
+   "Transverse arrest em alta velocidade: mais seguro com ponto de reboque bem a ré, para não emborcar se um propulsor falhar [Cap. 9 § 9.6.2]",
+   "Eficácia relativamente baixa como rebocador de proa no cabo com navio em movimento (como todo trator) [§ 6.3.13; § 4.3.1]"
+  ],
+  met:[
+   "Rebocador de popa (direto preferencialmente), push-pull, <i>steering tug</i> em eclusas (Panamá, Cerro Picacho com duas espias), escolta; submarinos a contrabordo com defensa submersa [Cap. 3 § 3.2.1; § 3.4; Cap. 9]"
+  ],
+  num:[
+   "0,30–0,35 LWL / 0,1 LWL; BP a ré −5 %; BP/potência 1,3–1,5 t/100 kW = 1,0–1,1 t/100 bhp; empuxo avante 1,4 t/100 bhp; Hs 2,0 m [§ 2.6.1; § 2.26; § 4.5.1]",
+   "Força máxima de governo (ATD/ASD curtos, twin fin): ≈ 85–90 % do BP a 6/8/10 nós [Cap. 9 § 9.6.2]",
+   "Broward: 30 m, BP 53 t, L/B 2,5 [§ 4.2.3]"
+  ],
+  seg:[
+   "Lida com a interação à proa apontando a propulsão para longe (artigo 1983: mesmo assim, encostado, só Full Astern) [§ 6.3.3]",
+   "Rebocadores de popa omnidirecionais (azimutal ou Voith) devem fazer firme primeiro em navios com Dead Slow alto em mau tempo [§ 6.3.15]"
+  ],
+  comp:[
+   "× VS: menor calado/deslocamento; melhor no direto, pior no indireto; mais BP/potência; ângulo de reboque maior [§ 2.6; § 4.3.1; § 2.26]",
+   "× ASD: menor BP/potência (1,0–1,1 vs 1,1–1,3); supera o ASD acima de 8 nós nas polares; hélices do ASD um pouco melhores avante [§ 2.26; § 4.3.4]",
+   "Z-tech compara-se operacionalmente ao ATT/trator azimutal (um guincho, manobra pela ponta do skeg) [§ 2.12.2]"
+  ],
+  banca:[
+   "[BANCA: 2012-Q30] ATD tem MENOR calado que VS (a banca inverte)",
+   "[BANCA: 2011-Q49] \"motores a vante em tubos 360° + patilhão a ré\" = trator azimutal",
+   "[DECORAR] Twin fin/skegs: estabilidade a ré, momento de giro, menos interação, indireto, bow-to-bow"
+  ]
+ },
+ vf:[
+  {s:"Num trator azimutal com CPP, a potência máxima a ré obtém-se simplesmente aplicando passo a ré, sem girar os propulsores.", v:false, fb:"Para potência máxima a ré os propulsores devem ser girados para ré. [§ 2.6.2]"},
+  {s:"Nas polares de 70 t de BP, acima de 8 nós o trator azimutal supera o ASD em governo e frenagem.", v:true, fb:"[§ 4.3.4, fig. 4.28]"}
+ ]
+};
+
+T.asd_proa = {
+ nome:"ASD-tugs incl. Azistern — operando pela proa", pt:"Azimuth Stern Drive usando o guincho de vante: funciona como trator reverso (rebocador de popa; bow-to-bow; push-pull)", grupo:"Básico · propulsão a vante · modo trator reverso",
+ ref:"Cap. 2 § 2.9 · Cap. 3 § 3.2–3.4 · Cap. 4 § 4.2.2, 4.3 · Cap. 5 § 5.2.6, 5.3.5 · Cap. 6 § 6.3.13 · Cap. 9 § 9.6",
+ sec:{
+  config:[
+   "Quase igual ao trator reverso, mas projetado para operar <b>pela proa E pela popa</b>; dois azimutais sob a popa a <b>~0,1 LWL</b>; guincho a vante; ponto de reboque de ré a 0,35–0,4 LWL (ver ficha ASD pela popa) [DECORAR] [§ 2.9.1]",
+   "Calado máximo menor que tratores; centro de pressão geralmente mais a vante que no convencional (pé de roda profundo, skeg de proa, quilha-caixa, skegs gêmeos) [§ 2.9.1; § 4.2.2]",
+   "<b>Twin skegs</b> (ASD 2312): ↑ estabilidade de rumo a ré, ↑ momento de giro, ↓ interação propulsor–skeg, forças hidrodinâmicas mais a vante → melhor no indireto e no bow-to-bow [DECORAR] [fig. 2B.43b; § 4.2.2]",
+   "Skeg que se estende para ré até perto dos propulsores é ruim para bow-to-bow; quilha-caixa mais a vante é melhor [§ 6.3.13, figs. 6.21–6.23]",
+   "Marcas: RAmparts, <b>Azistern</b> (24–37 m, 60–120 t), HT-67, Yeniçay; opção de bow thruster azimutal retrátil (Erin McAllister); Schottel SYDRIVE (um motor para os dois azimutais em trânsito) [§ 2.9.1]",
+   "Casco para bow-to-bow com seguimento/terminal: convés de popa com muito tosamento e linhas de popa submersas ascendentes, para a popa \"subir\" a ré [§ 2.22]",
+   "Exemplos: ASD 3212 Mars 82,5/76,1 t; ASD 2312 70/65 t; Smit Seine 60/57 t; ASD 2411 70 t; Multratug 28 95/89 t; RAstar 4000-DF 107,5/103 t [§ 2.9.1; Cap. 4; Cap. 9]"
+  ],
+  modos:[
+   "## Rebocador de popa (modo normal)",
+   "Situações 1 e 2 da fig. 2B.45: direto (1) pode ser algo mais eficaz que o VS; indireto (2) geralmente algo menos eficaz que o VS; governo para os dois bordos e controle de velocidade mesmo a velocidades altas; risco de capotamento quase nulo [§ 2.9.2; § 4.3.3]",
+   "Em escolta navega <b>proa à frente</b> (livre e amarrado): mais rápido e mais seguro para a tripulação em ondas, alta velocidade e indireto [Cap. 9 § 9.6.2]",
+   "## Frenagem: reverse × transverse arrest",
+   "<b>Reverse arrest</b>: propulsores girados 180°, em linha com o eixo, fluxo negativo → até ~8 nós frenagem até <b>1,5 × BP a ré</b>; acima de 8 nós a força cai drasticamente e o motor entra em sobrecarga [DECORAR] [§ 4.3.4]",
+   "<b>Transverse arrest</b> (arrasto transverso): propulsores apontados para fora a ≈ 90°; força por <i>momentum drag</i> ao acelerar a componente transversal da esteira; cresce com a velocidade e excede o BP a ré acima de ~8 nós <b>sem</b> sobrecarregar o motor [DECORAR] [§ 4.3.4]",
+   "Nota 6: em ASD 2411 com célula de carga, <b>6 nós</b> é consistentemente o ponto de troca; acima de 6 nós girar para reverse arrest = perda imediata de carga na espia + risco de sobrecarga. O ponto de troca depende do projeto (fig. 9.12) [DISTRATOR] [§ 4.3.4, Nota 6; Cap. 9 § 9.6.2]",
+   "Acima de 5 nós, parar o navio puxando com pequeno ângulo em relação ao eixo rende mais que puxar diretamente para ré (TUGSIM) [§ 4.3.4]",
+   "Escolta (Aquamaster): <i>indirect arrest</i> para iniciar guinada; <i>combination arrest</i> para opor-se a uma guinada; reverse/transverse arrest para frear [Cap. 9 § 9.6.2, fig. 9.8]",
+   "Como rebocador de popa gera frenagem plena de imediato mesmo com o navio já lento (6 nós) — recomendado como precaução contra perda de propulsão [Cap. 5 § 5.3.5]",
+   "## Power indirect",
+   "A 8 nós opera com a espia ≈ 90° do navio; pode ir mais a vante mas as forças caem rápido; <i>powered indirect</i> (3–7 nós): 75–125 % do BP na espia (ex. 52 t BP → 62 t a 5 nós) [§ 4.3.4, fig. 4.28; Cap. 9 § 9.6.2]",
+   "## Bow-to-bow (rebocador de proa pela proa)",
+   "Com navio com seguimento o ASD navega <b>a ré</b>; ao ajustar os propulsores para um lado ele <b>gira</b> (não desliza de lado); \"nervoso\" a baixa velocidade; estabilidade direcional a ré baixa a velocidades maiores [§ 6.3.13]",
+   "Uso correto: para virar a popa a BB, primeiro o propulsor <b>interno</b> à curva; depois o outro ajuda; funciona melhor com skeg que não se estende para ré; controles separados são mais lógicos [§ 6.3.13, fig. 6.24]",
+   "Interação propulsor–skeg: jato no skeg cria força na popa que se <b>opõe</b> ao momento pretendido (quase todos os ângulos para dentro); efeito secundário de baixa pressão pode ajudar — quanto maior a distância skeg–propulsor, menor o efeito [§ 6.3.13]",
+   "## Push-pull e costado",
+   "Troca espia → push-pull sem largar nem mudar a espia (situação 3): o rebocador de proa assiste então pela proa como trator reverso — caso muito frequente [DECORAR] [§ 2.9.2]",
+   "Empurrar: só forças transversais, nenhuma longitudinal; a ≈ 8,5 nós 80 % da força transversal vem da sustentação do casco; eficaz a velocidade muito maior que o convencional; limites: torque do motor e banda [§ 4.3.1; § 4.3.4, fig. 4.25]",
+   "A contrabordo peia-se no ombro de vante com <b>uma</b> espia de proa; empurra a proa de navio que anda a ré (BB → guina BE) [Cap. 3 § 3.2.1]",
+   "Gelo: desbloqueio de tubulão girando o propulsor desembreado; limpa gelo entre navio e cais com um propulsor avante e outro a ré [Cap. 3 § 3.3.5–3.3.6]"
+  ],
+  vant:[
+   "<b>Multifuncional</b>: serve a todos os métodos (combina convencional e trator reverso); predomina em portos modernos [§ 2.9.2]",
+   "Hélices o mais longe possível do casco do navio puxando pela proa → menor perda por esteira (costado, bacias estreitas); propulsores anguláveis para desviar a esteira [Cap. 5 § 5.2.6]",
+   "Melhor BP/potência entre os azimutais: 1,1–1,3 t/100 bhp; a ré 90–95 % (5–10 % menos) [§ 2.26]",
+   "Hélices avante um pouco melhores que os do trator (menor velocidade de entrada da água, sem atrito sob o casco) [§ 4.3.4; § 6.2.1]",
+   "Gelo: \"em geral o mais versátil\"; com CPP recupera o empuxo rápido após bloqueio; entre os melhores em gelo com o convencional bi-hélice [§ 2.24; Cap. 3 § 3.3.4]",
+   "Bow-to-bow: riscos <b>menores</b> ao fazer firme do que stern-to-bow; risco de emborcar preso bow-to-bow é mínimo; visão ótima do guincho [§ 6.3.13]",
+   "Passar espia junto à popa do navio é mais fácil para <i>stern drive</i> que para trator [Cap. 9 § 9.6.2]",
+   "No indireto os propulsores do ASD <b>contra-atuam</b> o adernamento (no Rotortug aumentam) [§ 2.11.1]",
+   "Submarinos: ASD preferido porque empurra com a proa; frenagem um pouco maior que tratores em escolta [Cap. 3 § 3.4.1; Cap. 9 § 9.6.2]"
+  ],
+  lim:[
+   "Indireto à popa geralmente um pouco menos eficaz que o VS; distância T–C maior → mais impulso transversal para manter posição → menor força na espia [§ 4.2.2; § 4.3.1]",
+   "Bow-to-bow: acima de ~4 nós a força de governo cai rapidamente; eficácia relativamente baixa como rebocador de proa no cabo com seguimento (§ 4.3.1–4.3.2); só ASD de casco/skeg/popa bem projetados, mestre treinado e velocidade controlada [§ 6.3.13]",
+   "Popa não projetada como proa: a só 4 nós a ré a popa de um ASD submergiu (fig. 6.20); ondas pela popa, <i>freeing ports</i> e ventilação exigem atenção [§ 6.3.13; § 2.13.1]",
+   "Risco de dano dos propulsores no bulbo do navio (que o Rotortug evita) [§ 2.11.4]",
+   "Preso bow-to-bow no rumo do navio, falha de máquina/propulsor deixa quase nenhum tempo para sair; sobreaquecimento de embreagens em águas quentes pode parar um propulsor [§ 6.3.13]",
+   "Nevoeiro: imagem radar 180° \"errada\" olhando para ré; águas com detritos: não recomendado bow-to-bow [§ 6.3.12; § 6.3.15]",
+   "Nota 11: giro rápido dos propulsores a alta velocidade pode causar colapso de empuxo (<i>thrust breakdown</i>); em alguns, mandar > 180° faz o propulsor ir pelo caminho mais curto — perigoso perto da proa [§ 6.3.13, Nota 11]",
+   "Chegada a contrabordo com propulsores ligeiramente para fora: o jato interno acelera a água entre cascos → sucção violenta (pior com FPP sem embreagem moduladora) [§ 6.3.2]",
+   "Com espia curta atrás do navio: vibração excessiva dos azimutais pela turbulência do hélice do navio (alongar a espia); espia de 50–60 m a 4 quartas pode \"sugar\" a popa do navio pelo efeito da esteira (alongar ou puxar a 90°) [§ 4.3.1; Cap. 5 § 5.2.6]",
+   "Skeg grande para o indireto piora o modo direto (mais resistência lateral) [Cap. 9 § 9.6.2, Nota 1]",
+   "Método IMO de estabilidade não considera ASD pela proa; com a mesma força de espia aderna <b>mais</b> que o VS (fig. 9.14) [§ 4.2.3.1; Cap. 9 § 9.6.2]"
+  ],
+  met:[
+   "<b>Adequado</b>: rebocador de popa (direto/indireto); push-pull e costado com seguimento; escolta (todos os rebocadores de escolta são omnidirecionais; ASD/reverso e VS); no cabo na aproximação + push-pull na atracação; team towing [§ 2.9.2; Cap. 3 § 3.2.1; Cap. 9 § 9.6]",
+   "<b>Com restrição</b>: bow-to-bow só em ASD adequados e velocidade controlada; alternativa: stern-to-bow, a contrabordo perto da proa ou outro rebocador [§ 6.3.13]",
+   "Tabela Guia Fragoso/Cajaty (espia no guincho da proa = trator reverso): cabo na popa = Ótimo; costado com/sem corrente = Ótimo; cabo na proa = Bom [BANCA: 2011-Q71] [CONFLITO]"
+  ],
+  num:[
+   "Propulsão ~0,1 LWL da popa; BP a ré 90–95 %; 1,1–1,3 t/100 bhp; Hs 2,0 m [§ 2.9; § 2.26; § 4.5.1]",
+   "Arrest: reverse ≤ 8 nós (1,5 × BP a ré); transverse > 8 nós; na prática 6 nós (ASD 2411) [§ 4.3.4]",
+   "Bow-to-bow: fazer firme 3–4 nós (alguns) a ~6 nós (capazes); operar preso 4–5 nós ou menos a ~7 nós (bem projetados); River Yarra: máx. 5 nós; força de governo cai acima de ~4 nós [DECORAR] [§ 6.3.13]",
+   "Governo máx. (rebocadores curtos) ≈ 85–90 % do BP a 6/8/10 nós; polares: governo à proa cai rápido com a velocidade; frenagem à popa pouco varia [Cap. 9 § 9.6.2; § 4.3.4]",
+   "Escolta: espia pode chegar a 1,5–2 × BP a 10 nós; RAstar 4000-DF 107,5 t → 167 t governo / 200 t frenagem a 10 nós; ASD 3212 66 t → 126 t a 8 nós [Cap. 9 § 9.6.2]",
+   "Empurre lateral: 80 % de sustentação a 8,5 nós; perda a contrabordo 43–64 % (até 90 % em ondas) [§ 4.3.4; § 4.5.2]"
+  ],
+  seg:[
+   "Fazer firme bow-to-bow: menos risco que stern-to-bow; prático não vê o rebocador e o mestre quase não percebe guinadas do navio → comunicação clara de direções de tração (navio avante, rebocador a ré) [§ 6.3.13]",
+   "Nota 8: velocidade segura de conexão = velocidade controlável com um só motor (a ré) − 1 nó [§ 6.3.13]",
+   "Falha de propulsão no governo: ponto de reboque deve girar o rebocador para posição segura; foco de projeto = altura do ponto de reboque; staple largo (RAstar 85) ou guincho autoposicionante (John Rie) reduzem banda [Cap. 9 § 9.6.2]",
+   "Aproximação à proa como trator reverso: pos. 1 segura (propulsão para fora); 1→2 e 3–4 propulsão para o costado (\"não seguro\"); pos. 5 opera na esteira/jato do hélice [§ 6.2.3–6.2.4]",
+   "Sponsons protetores dos propulsores para submarinos [§ 2.2.4]"
+  ],
+  comp:[
+   "× trator reverso: ASD tem guincho a vante E ponto de reboque a ré em posição útil (0,35–0,4 LWL); trator reverso só a vante [§ 2.9.1]",
+   "× VS: indireto um pouco pior, direto um pouco melhor; mais banda à mesma força; passar espia à popa mais fácil [§ 2.9.2; Cap. 9 § 9.6.2]",
+   "× ATD: polares iguais a 6 nós; ATD melhor acima de 8 nós; ASD melhor BP/potência [§ 4.3.4; § 2.26]",
+   "× Rotortug: Rotortug melhor 4–8 nós, ASD acima de 8 nós; Rotortug sem risco no bulbo; ASD contra-atua heel no indireto [§ 2.11]",
+   "× trator (bow-to-bow): trator anda avante e desliza de lado; ASD anda a ré e gira [§ 6.3.13]",
+   "ASD compactos de 24 m operam até certo ponto em espaços confinados como o Rotortug [§ 2.11.1]"
+  ],
+  banca:[
+   "[BANCA: 2006-Q19] ASD em posições DIFERENTES no direto e no indireto; distância ponto de reboque / centro de pressão: mais a vante = melhor",
+   "[BANCA: 2008-Q21] Rebocador omnidirecional à popa pode aplicar força SUPERIOR ao próprio BP (indireto)",
+   "[BANCA: 2008-Q73] Arrasto transverso: um propulsor para cada bordo",
+   "[BANCA: 2006-Q44] ASD/trator reverso/trator freiam melhor que convencional (BP a ré ≈ avante)",
+   "[BANCA: 2011-Q49] Prioridade para espia na proa: trator reverso/ASD com guincho a vante",
+   "[DISTRATOR] 8 nós (regra) × 6 nós (Nota 6); [DISTRATOR] \"transverse arrest sobrecarrega o motor\" — é o reverse que sobrecarrega acima de 8 nós"
+  ]
+ },
+ vf:[
+  {s:"No arrasto transverso, a força de frenagem cresce com a velocidade e pode exceder o bollard pull a ré acima de cerca de 8 nós sem sobrecarregar o motor.", v:true, fb:"[§ 4.3.4]"},
+  {s:"Acima de 8 nós, o reverse arrest (propulsores a 180°) continua sendo o modo mais eficaz de frenagem do ASD.", v:false, fb:"Acima de ~8 nós a força do reverse arrest cai drasticamente e o motor sobrecarrega; passa-se ao transverse arrest (na prática já a 6 nós em ASD 2411). [§ 4.3.4, Nota 6]"},
+  {s:"Operando bow-to-bow com o navio em seguimento, a capacidade do ASD de gerar força de governo cai rapidamente acima de cerca de 4 nós.", v:true, fb:"[§ 6.3.13]"},
+  {s:"Um ASD pode passar do reboque no cabo para o push-pull sem largar nem mudar a espia.", v:true, fb:"Situação 3 da fig. 2B.45; o rebocador de proa assiste então como trator reverso. [§ 2.9.2]"}
+ ]
+};
+
+T.reverse_tractor = {
+ nome:"Reverse tractor tug (pusher tug)", pt:"Dois azimutais sob a popa, guincho só a vante; opera pela proa; inclui o conceito japonês", grupo:"Básico · propulsão a vante · modo invertido",
+ ref:"Cap. 2 § 2.7–2.8 · Cap. 3 § 3.2.1–3.2.3 · Cap. 4 § 4.2.2, 4.3.1 · Cap. 6 § 6.2.3 · Cap. 9 § 9.6",
+ sec:{
+  config:[
+   "Antes <i>pusher tugs</i>; dois azimutais sob a popa (<b>~0,1 LWL da popa</b>); guincho grande à proa; a ré só gancho pequeno, com ponto de reboque longe demais para ré para rebocar no cabo como convencional [DECORAR] [§ 2.7.1]",
+   "Opera como trator mas invertido: ponto de reboque (proa) para o navio, propulsão (popa) afastada; Pacífico Ocidental (Japão, HK, Taiwan); cada vez mais chamados de ASD [§ 2.1; § 2.7.2]",
+   "Calado máximo menor que tratores; passadiço totalmente voltado para vante (mestre sentado vê guincho, convés, defensas e navio) [§ 2.7.1; § 2.2.2]",
+   "Skeg de proa / quilha-caixa: estabilidade de rumo a ré, indireto e bow-to-bow; C pode ficar mais a vante que no trator [§ 4.2.2]",
+   "Ex.: 25,4 × 8,5 m, 45 t; Tiger Sun 21,7 × 10,7 m, 70 t, L/B 2,0 [§ 2.7.1; § 4.2.3]",
+   "## Conceito japonês (§ 2.8)",
+   "8 traços: proa com grande flare e pneus; <b>espelho de popa abaixo da linha d'água</b> (↑ LWL → velocidade); tosamento; superestrutura longa; guincho relativamente a ré / convés de trabalho alto; <b>boca pequena</b>; <b>calado pequeno</b>; velocidade livre <b>≥ 15 nós</b> [DECORAR] [§ 2.8.1]",
+   "Sem skeg (só pequeno skeg à frente das hélices), bolinas, Niigata, Uni-lever, às vezes sem chaminé (escape pelo espelho → visão 360°); BP a ré ≥ 95 % [§ 2.8.1–2.8.2]"
+  ],
+  modos:[
+   "Rebocador de popa: muito adequado para governo e velocidade com seguimento, direto ou indireto (indireto algo menos eficaz que VS; direto pode ser mais eficaz pelo menor calado) [§ 2.7.2]",
+   "Reverse/transverse arrest como o ASD [§ 4.3.4]",
+   "Rebocando pela proa muda facilmente para empurrar/push-pull ao atracar; no costado muito eficaz em velocidade [§ 2.7.2]",
+   "À proa no cabo: opera como trator mas bow-to-bow; desempenho comparável ao trator; navega a ré com baixa estabilidade direcional a velocidades maiores [§ 4.3.1; § 6.3.13]",
+   "Método japonês: rebocador de vante a contrabordo no ombro (espia de proa) + rebocador de ré no cabo peado a meia-nau/alheta seguindo o navio; na atracação ambos passam a push-pull; guincho duplo na proa permite duas espias em pontes/eclusas [Cap. 3 § 3.2.1, fig. 3.11; § 3.2.3]",
+   "Japonês de escolta: ≥ 15 nós, <b>não faz firme</b> durante a escolta (standby); subtipo de atracação faz push-pull e tração direta pela proa [§ 2.8.2]"
+  ],
+  vant:[
+   "Altamente manobrável e seguro (dois azimutais + ponto de reboque a vante); gira no lugar, move-se de lado [§ 2.7.2]",
+   "Hélices o mais longe do casco do navio puxando pela proa → menor perda por esteira [Cap. 5 § 5.2.6]",
+   "Empurre a 90° até <b>8 nós</b> (C H Cates) contra 4 do convencional [§ 4.3.1]",
+   "Manobra de sair da alheta para trás da popa \"não é problema\" mesmo a velocidade razoável; girting vira <i>tripping</i> (ponto na extremidade) [§ 6.3.9; § 6.3.6]",
+   "100 % da potência na extremidade de vante (vantagem sobre os FAST) [§ 2.17]",
+   "Japonês: trabalha sob grandes flares e popas em balanço; proa de grande raio reduz pressão no casco; buzina a ré permite espias íngremes (estaleiros, FLNG) [§ 2.8.2]",
+   "Em Yokohama substituiu os VS; previsto como o tipo normalmente encomendado no Pacífico Ocidental [Cap. 3 § 3.2.3]"
+  ],
+  lim:[
+   "Como rebocador de <b>proa</b> no cabo não é muito eficaz para governar navio com seguimento: anda a ré e o ponto de reboque está na extremidade de vante → mesma queda de eficácia com a velocidade que o trator [§ 2.7.2]",
+   "BP a ré 5–10 % menor (jato bate no casco a vante dos propulsores) [§ 2.7.2; § 6.2.1]",
+   "Maior distância T–C que o trator → mais impulso transversal para manter posição → menor força na espia [§ 4.2.2]",
+   "Não reboca no cabo pela popa como convencional (ponto de ré mal situado) — o ASD corrige isso [§ 2.7.1; § 2.9.1]",
+   "Japonês: <b>indireto não é opção</b> (boca estreita — pode ser perigoso); escolta sem fazer firme; espelho + convés de ré baixo embarcam água com mar de ré/través [DECORAR] [§ 2.8.2]",
+   "Aproximação à proa: pos. 1→2 e 3–4 propulsão apontada ao navio (\"não seguro\") [§ 6.2.3]"
+  ],
+  met:[
+   "Adequado: rebocador de popa; push-pull; costado em velocidade; team towing/escolta (agrupado com ASD) [§ 2.7.2; Cap. 9]",
+   "Limitado: rebocador de proa no cabo com velocidade [§ 2.7.2]",
+   "Tabela Guia Fragoso/Cajaty: cabo na popa = Ótimo; costado = Ótimo; cabo na proa = Bom [BANCA: 2011-Q71] [CONFLITO]"
+  ],
+  num:["0,1 LWL; BP a ré −5–10 % (japonês ≥ 95 %); empurre a 90° até 8 nós; japonês ≥ 15 nós; Hs 2,0 m [§ 2.7; § 2.8; § 4.3.1; § 4.5.1]"],
+  seg:[
+   "Na aproximação à proa comporta-se como trator (pos. 1 segura; pos. 5 na esteira/jato) [§ 6.2.3–6.2.4]",
+   "Fail-safe do ponto de reboque, ponto não muito alto e um pouco a ré, C a vante (como ASD em escolta) [Cap. 9 § 9.6.2]"
+  ],
+  comp:[
+   "× ASD: ASD = trator reverso + guincho/gancho útil a ré (opera também pela popa) [§ 2.9.1]",
+   "× convencional: convencional eficaz à proa; trator reverso eficaz à popa e em push-pull [§ 2.9.2]",
+   "Z-tech compara-se em parte ao trator reverso (manobra pela ponta do skeg = proa) [§ 2.12.2]"
+  ],
+  banca:[
+   "[BANCA: 2006-Q08] Pusher = azimutais a ré, ponto a vante, opera pela proa",
+   "[BANCA: 2012-Q32] Tratores reversos efetivos na PROA (do navio); convencionais na RÉ ou costado",
+   "[DISTRATOR] \"Japonês usa indireto\" — não; \"japonês faz firme na escolta\" — não"
+  ]
+ },
+ vf:[
+  {s:"O trator reverso é muito eficaz como rebocador de proa no cabo para governar um navio com seguimento.", v:false, fb:"Não é muito eficaz nessa posição: anda a ré com o ponto de reboque a vante, perdendo eficácia com a velocidade como o trator. [§ 2.7.2]"},
+  {s:"No conceito japonês de rebocador, o reboque indireto não é uma opção por causa da boca estreita.", v:true, fb:"[§ 2.8.2]"},
+  {s:"Um trator reverso consegue empurrar a 90° no costado com o navio a cerca de 8 nós, contra ~4 nós do convencional.", v:true, fb:"Experiência da C H Cates & Sons. [§ 4.3.1]"}
+ ]
+};
+/* ===================== RELACIONADOS ===================== */
+T.rotortug = {
+ nome:"ROTOR-tug (Rotortug / ART)", pt:"Três azimutais em triângulo (dois a vante, um a ré); guinchos a vante e a ré; Robert Allan Ltd / Kotug", grupo:"Relacionado",
+ ref:"Cap. 2 § 2.11 · Cap. 3 § 3.2.2–3.2.3 · Cap. 4 § 4.2.3, 4.3.2–4.3.4 · Cap. 5 § 5.3.5 · Cap. 9 § 9.6.3",
+ sec:{
+  config:[
+   "Trator azimutal em que o <b>skeg foi substituído por um terceiro azimutal</b> na linha de centro, a ré; guincho de reboque/escolta a vante e guincho a ré [BANCA: 2006-Q53; 2011-Q53] [DECORAR] [§ 2.11.1]",
+   "Geração atual ART (<i>Advanced Rotortug</i>): ART 65-28 (27,50 × 12,50 m, 65 t); ART 80-32 (31,95 × 12,6 m, 80 t); ART 85-32W <i>wide body</i> (31,5 × 13,8 m, 85 t, Port Hedland); ART100-42/46 para FLNG (42–47 m, 100 t, DP2) [§ 2.11.1; § 2.11.5]",
+   "Ponto de reboque de ré fica perpendicularmente acima do propulsor de ré → controle de rumo fácil como rebocador de proa [§ 2.11.3]",
+   "Controle individual por propulsor; FPP com embreagens moduladoras (só quatro com CPP); mesmos fabricantes/estaleiros e custos semelhantes a ASD/tratores [§ 2.11.1; § 2.11.3]",
+   "FiFi: o propulsor de BB é desengatado e o motor aciona a bomba → grande vantagem de manutenção de posição [§ 2.11.3]",
+   "Meados de 2018: 44 em operação, 12 em construção [§ 2.11.2]"
+  ],
+  modos:[
+   "<b>Rotoring</b>: a baixa velocidade do navio, aplica forças de governo <b>dentro da boca do navio</b> (eclusas, pontes); com espia na extremidade de vante gera força transversal de <b>70 % do BP</b> com resposta rápida; também na atracação para encostar ao máximo no cais [DECORAR] [§ 2.11.3, fig. 2C.3]",
+   "<b>Combination-arrest</b>: como rebocador de popa, forças de governo e frenagem altas no modo direto até <b>10 nós</b>, praticamente sem adernamento [§ 2.11.3]",
+   "Entre 6 e 10 nós usa empuxo direto e sustentação hidrodinâmica (indireto); forças ativas em toda a faixa 10 → 0 nós [§ 2.11.1; § 2.11.3]",
+   "Sempre pode operar <i>bow-first</i>, como rebocador de proa ou de popa (<i>double-ended control</i>) [§ 2.11.3]",
+   "Reverse/transverse arrest aplicáveis; o propulsor de ré funciona como \"skeg ativo\", acrescentando força na espia ou no empurre [§ 4.3.4; § 4.3.2]",
+   "Híbrido RT Evolution (32 m, 83 t): modos IDLE (baterias), TRNST 1 (diesel-elétrico, até 6 nós), TRNST 2 (um motor direto + gerador, 9 nós), ASSIST (tudo) [§ 2.23]",
+   "ISV em FLNG: com mar piorando, de empurrar ao costado passa a rebocar no cabo com rotoring [§ 2.11.5]"
+  ],
+  vant:[
+   "Giro no lugar com alta taxa, velocidade a ré igual à de vante, <i>side-stepping</i> ~6 nós; posicionamento rápido; muitos modos com tempos de resposta curtos [§ 2.11.4]",
+   "Empuxo lateral até <b>95 % do BP</b>; BP maior (ou igual com menor calado) que trator de dois azimutais [§ 2.11.4]",
+   "Redundância: com um motor avariado segue operacional (dois propulsores já bastam para o dia a dia) [§ 2.11.3–2.11.4]",
+   "Praticamente sem risco de danificar os propulsores no bulbo do navio (como pode ocorrer com ASD); seguro junto à proa de navio com seguimento; compensa a interação com segurança [§ 2.11.4]",
+   "Opera dentro da largura do navio → menos rebocadores; escolta com altas forças pela popa ou pela proa; pode receber DP [§ 2.11.4; Cap. 3 § 3.2.3]",
+   "Boa controlabilidade na esteira do hélice → apto a operar pelos <i>centre leads</i> de vante e de ré [§ 2.11.3]",
+   "Único dos novos tipos com uso efetivo conhecido em escolta [Cap. 9 § 9.6.3]"
+  ],
+  lim:[
+   "Complexo (três propulsores, dois guinchos): mais resistência submersa, custo de aquisição e manutenção possivelmente maiores [§ 2.11.4]",
+   "Três propulsores próximos podem perder eficácia por interação propulsor–propulsor; propulsores sob o casco aumentam a resistência [§ 2.11.3]",
+   "Manejo desafiador: treinamento específico recomendado antes de operar (simulador Kotug, Rotortug de treino de 15 m) [§ 2.11.3]",
+   "No indireto os propulsores <b>aumentam</b> o adernamento (no ASD contra-atuam); se ficar grande, reduz-se o empuxo [DISTRATOR] [§ 2.11.1; § 4.2.3]",
+   "Acima de 8 nós o ASD tem melhor desempenho [fig. 2C.4]"
+  ],
+  met:["Cabo (proa e popa, dentro da boca com duas espias), push-pull, escolta, DP/offshore; eclusas e pontes [§ 2.11; Cap. 3 § 3.2.2–3.2.3]"],
+  num:["Rotoring 70 % BP transversal; empuxo lateral 95 % BP; side-stepping ~6 nós; combination-arrest até 10 nós; cruzamento com ASD a 8 nós (melhor 4–8, pior > 8) [DECORAR] [§ 2.11.3–2.11.4; fig. 2C.4]"],
+  seg:["Pontos de reboque nas duas extremidades e compensação segura da interação tornam o rebocador seguro; adernamento quase nulo no combination-arrest; heel cresce no indireto (reduzir empuxo) [§ 2.11.1; § 2.11.3]"],
+  comp:[
+   "× ASD: melhor 4–8 nós, pior > 8 nós; sem risco no bulbo; heel oposto no indireto [§ 2.11]",
+   "× trator de dois azimutais: mais BP ou menos calado; o desempenho indireto dos FAST é comparado ao do Rotortug [§ 2.11.4; § 2.17]",
+   "Mesmo casco de 25 m pode ser trator (TRAktor 2500-SX, 70 t) ou Rotortug (ART-60-25SX, 60 t) [§ 2.6.4, Nota 8]"
+  ],
+  banca:["[BANCA: 2006-Q53; 2011-Q53 (gab. d)] Definição: trator azimutal com o skeg substituído por 3º azimutal; distratores: 4 thrusters, 2 em linha, ASD com 4; [DISTRATOR] heel no indireto: Rotortug aumenta, ASD compensa"]
+ },
+ vf:[
+  {s:"O Rotortug é um trator azimutal em que o skeg foi substituído por um terceiro propulsor azimutal na linha de centro.", v:true, fb:"[§ 2.11.1] — gabarito 2006-Q53 / 2011-Q53."},
+  {s:"No modo indireto, os propulsores do Rotortug contra-atuam o ângulo de adernamento, como nos ASD.", v:false, fb:"No Rotortug os propulsores aumentam o adernamento; nos ASD contra-atuam. [§ 2.11.1]"},
+  {s:"No rotoring com espia na extremidade de vante, o Rotortug gera força transversal de cerca de 70 % do BP dentro da boca do navio.", v:true, fb:"[§ 2.11.3]"}
+ ]
+};
+
+T.ztech = {
+ nome:"Z-tech tug", pt:"PSA Marine / Robert Allan (2003): o melhor do trator e do ASD num só casco; opera sob o flare de porta-contêineres", grupo:"Relacionado",
+ ref:"Cap. 2 § 2.12 · Cap. 4 § 4.3.2–4.3.4, 4.4 · Cap. 9 § 9.6.2",
+ sec:{
+  config:[
+   "Nasceu da divisão dos mestres da PSA (trator × ASD); casaria bem a ré (junto aos propulsores) deixando grande convés de trabalho a vante; âncoras na extremidade dos propulsores [§ 2.12.1]",
+   "Proa (extremidade do skeg) larga, plana e fortemente defendida para empurrar/puxar sob o flare; popa com forte tosamento para navegabilidade [§ 2.12.1]",
+   "<b>Velocidade e BP a ré ≥ 95 % dos de vante</b> (PSA); skeg inicialmente fechado, hoje aberto [DECORAR] [§ 2.12.1]",
+   "Normalmente um só guincho; manobra pelo guincho e pela <i>towing staple</i> na ponta do skeg (= proa); FPP sem embreagem moduladora (Panamá: com MCD) [§ 2.12.2]",
+   "Panamá: Z-tech 6500 (27,40 × 12,20 m, 65 t, dois guinchos a vante, boca maior, casaria baixa); Z-tech 30-80 com sponsons: +15 % de escolta (CFD); ~70 no mundo (2017) [§ 2.12.1]"
+  ],
+  modos:[
+   "Navega <i>skeg first</i> ou <i>thrusters first</i> conforme a situação; em distância/mar, <i>thrusters first</i> com o convés alto a vante [§ 2.12.2]",
+   "Manobra bem com a ponta do skeg sob o flare ou popa saliente; reverse/transverse arrest aplicáveis [§ 2.12.2; § 4.3.4]",
+   "Z-tech 7500 em dual escort com <i>powered indirect</i> a 8 nós (Hunter M, Lamar) [Cap. 9 § 9.6.2, fig. 9.15]"
+  ],
+  vant:[
+   "Skeg dá estabilidade direcional a ré sem prejudicar o governo a vante nem criar interação excessiva ao atracar a contrabordo de navio com seguimento (como no ASD) [§ 2.12.1]",
+   "Skeg gera forças extras no indireto e desloca o centro de pressão para o ponto de reboque [§ 2.12.2]",
+   "Convés plano sem guincho de amarra; trabalha perto do navio [§ 2.12.1–2.12.2]"
+  ],
+  lim:[
+   "No indireto a situação ideal (ponto de reboque horizontalmente próximo ao centro de pressão) é difícil de obter pela posição do skeg — como no ASD [§ 2.12.2]",
+   "Hensen não detalha capacidades no Cap. 4: \"não difere muito\" de ATD/ASD [§ 4.3.3]"
+  ],
+  met:["Cabo pela ponta do skeg, push-pull sob flares, escolta (dual escort); todo tipo de navio em Singapura [§ 2.12; Cap. 9]"],
+  num:["BP/velocidade a ré ≥ 95 %; 60–70 t, 27–30 m (Cheoy Lee, 45 unidades); 30-80: 80 t [§ 2.12.1]"],
+  comp:[
+   "Operacionalmente compara-se ao trator azimutal (ATT) ou, em parte, ao trator reverso: um guincho, manobra pela ponta do skeg (proa no Z-tech e no reverso; popa no ATT) [§ 2.12.2]",
+   "RSD executa as mesmas manobras com a mesma segurança; mesma ideia de combinar ASD e ATD [§ 2.13.1]"
+  ],
+  banca:["[BANCA: similaridade temática] Novo na 4ª ed.; provável correlação tipo × característica: \"casaria a ré + convés livre a vante + BP a ré ≥ 95 % + opera sob flare\" = Z-tech"]
+ },
+ vf:[
+  {s:"No Z-tech, a extremidade de trabalho junto ao navio é a do skeg, que faz as vezes de proa.", v:true, fb:"[§ 2.12.2]"},
+  {s:"O Z-tech tem BP a ré muito inferior ao de vante, como os convencionais.", v:false, fb:"PSA Marine: velocidade e BP a ré ≥ 95 % dos de vante. [§ 2.12.1]"}
+ ]
+};
+
+T.rsd = {
+ nome:"RSD tug (Reverse Stern Drive)", pt:"Damen: combina ASD e ATD; a extremidade dos propulsores é a de vante; proa e popa de igual altura (\"duas proas\"); twin fin", grupo:"Relacionado",
+ ref:"Cap. 2 § 2.13, 2.23 · Cap. 4 § 4.3.2–4.3.4, 4.4",
+ sec:{
+  config:[
+   "Novo tipo Damen; <b>a extremidade de vante é a dos propulsores</b>; proa e popa de altura aproximadamente igual; twin fin → compacto, muito manobrável, governo perfeito avante e a ré, muito boa navegabilidade [DECORAR] [§ 2.13.1]",
+   "RSD 2513: 24,75 × 13,13 m, 4.480 bkW, BP 70 t avante / 67 t a ré [§ 2.13.1]",
+   "RSD-E 2513 Sparky (Auckland): totalmente elétrico, 4 bancos de baterias independentes, push-pull de 70 t por ≥ 30 min, recarga em 2 h, operação por dois homens [§ 2.23]"
+  ],
+  modos:[
+   "Como rebocador de proa: opera como trator verdadeiro ou como trator reverso (ASD pela proa); como rebocador de popa: como trator reverso (skeg a vante) ou como trator [§ 2.13.1]",
+   "Ao passar espia na proa navega <i>thrusters first</i>, como trator, e vence a interação [§ 2.13.1]",
+   "Mastro rebatido → trabalha sob flares/popas salientes; reverse/transverse arrest aplicáveis [§ 2.13.1; § 4.3.4]"
+  ],
+  vant:[
+   "Seguro junto à proa de navio com seguimento pelo mesmo motivo dos tratores; \"substituto <b>seguro</b> de um ASD trabalhando pela proa\" [DECORAR] [§ 2.13.1]",
+   "Elimina a desvantagem do ASD a ré (popa não projetada como proa) e do trator à popa no cabo (popa baixa ao fluxo) [§ 2.13.1]"
+  ],
+  lim:["Capacidades não detalhadas no Cap. 4: \"não difere muito\" de ATD/ASD [§ 4.3.3]"],
+  met:["Mesmas manobras do Z-tech (fig. 2C.10); porto e terminal [§ 2.13.1]"],
+  num:["70 / 67 t (≈ 96 %); 24,75 × 13,13 m [§ 2.13.1]"],
+  comp:["Combina vantagens de ASD e ATD — mesma ideia original do Z-tech [§ 2.13.1]"],
+  banca:["[BANCA: similaridade temática] Novo na 4ª ed.; distrator provável: confundir RSD (propulsores a vante na operação) com ASD"]
+ },
+ vf:[
+  {s:"No RSD a extremidade dos propulsores é tratada como a extremidade de vante do rebocador.", v:true, fb:"[§ 2.13.1]"},
+  {s:"Hensen considera o RSD um substituto seguro para um ASD trabalhando pela proa.", v:true, fb:"[§ 2.13.1]"}
+ ]
+};
+
+T.carrousel = {
+ nome:"Carrousel tug", pt:"Convencional/combi com anel de reboque giratório em volta da superestrutura (diâmetro ≈ boca); Multratug 12 (2002)", grupo:"Relacionado",
+ ref:"Cap. 2 § 2.14 · Cap. 4 § 4.2.2–4.2.3, 4.3.2–4.3.4, 4.4 · Cap. 5 § 5.3.5 · Cap. 9 § 9.5.1",
+ sec:{
+  config:[
+   "Sistema radial de <b>círculo completo</b> (os antigos eram meio círculo), diâmetro ≈ boca; situado inicialmente acima do centro lateral de pressão; o ponto de reboque gira livremente sem a espia tocar a superestrutura [DECORAR] [§ 2.14]",
+   "Multratug 12: combi (29,07 m, boca 6,96 m, BP 21 t = 15 t hélice + 6 t azimutal de proa), convertido em 2002; dois skegs verticais sob o carrossel (6 × 0,4 m, a 1/4 da boca de cada costado) [§ 2.14; fig. 4.13]",
+   "Um carrossel novo pode ter eixos convencionais eficientes ou thrusters; curto e largo em espaços confinados [§ 2.14]",
+   "Também aplicado no CRT (Voith AV e AR); DOT e All-Rounder são comparáveis [§ 2.14–2.16; § 2.20]"
+  ],
+  modos:[
+   "O <b>casco inteiro gira</b> para alinhar-se com a força da espia (em vez de girar propulsores); rebocador de popa pode operar <b>atravessado</b> atrás do navio → altas forças de frenagem [§ 2.14]",
+   "Dá governo para BE e BB como rebocador de popa em navio com seguimento; gira 180° com a espia passada [§ 2.14]",
+   "Ponto de reboque desloca-se para o bordo baixo do rebocador adernado → menor braço; fig. 4.14: banda de equilíbrio cai de 31° (ponto central) para 18° com raio 0,5 B (fig. 4.13 ≈ 20°) [DECORAR] [§ 4.2.2–4.2.3]",
+   "Frenagem plena imediata quando girado para a posição mais eficaz [Cap. 5 § 5.3.5]"
+  ],
+  vant:[
+   "Suporta com segurança grandes forças hidrodinâmicas na espia com adernamentos menores; <b>capotamento por força transversal não é possível</b>; grande reserva de estabilidade dinâmica [§ 2.14; § 4.2.3]",
+   "Quanto maior a velocidade, maiores as forças seguras; Multratug 12: 21 t estáticos → 90 t dinâmicos a 10 nós, adernando ≈ 20° [fig. 4.13]",
+   "Amplia muito a capacidade de convencionais e combis (resolve a falta de liberdade na direção da espia); permite hélices de eixo eficientes [§ 2.14]",
+   "Imersão da borda do convés deixa de ser o limite de banda [§ 4.2.3.2]"
+  ],
+  lim:[
+   "Eficácia <b>cresce com a velocidade e cai quando ela cai</b> — o oposto do que muitos portos exigem (assistência abaixo de ~6 nós) → o BP continua importante [DISTRATOR] [§ 2.14]",
+   "Não é projetado para operar ao costado do navio (para isso: omnidirecionais com ponto na extremidade) [§ 2.14]",
+   "Exige <b>tensão constante</b> na espia — mesmo pequena pode acelerar o navio ou criar momento de giro [§ 2.14]",
+   "Posição longitudinal do anel é crítica (sem momento com força a 90°); guincho adequado às altas forças; estudo de lead, convés com tripulação mínima, flutuabilidade, limites seguros, manobras de abortar, ondas; frenagem alta sem imprimir guinada indesejada [§ 2.14; § 4.2.2]"
+  ],
+  met:["Assistência em trânsito (canais, aproximações, \"mais ou menos escolta\"); com BP suficiente também atracação; rebocador de proa ou popa com altas forças de governo [§ 2.14; Cap. 9 § 9.5.1]"],
+  num:["31° → 18° (fig. 4.14); 21 t → 90 t a 10 nós; skegs 6 × 0,4 m [§ 4.2.3; fig. 4.13; § 2.14]"],
+  seg:["Sistema muito seguro; risco de capotamento nulo; nos FAST com carrossel os riscos de falha de propulsor/swing não se aplicam [§ 2.14; § 4.3.3; § 2.17]"],
+  comp:["× DOT: carrossel original do Multratug 12 fica mais baixo sobre o convés → adernamentos menores [§ 2.15]"],
+  banca:["[BANCA: similaridade temática] Carrossel elimina capotamento por força transversal (não elimina a necessidade de BP); eficácia cresce com a velocidade"]
+ },
+ vf:[
+  {s:"A eficácia do rebocador carrossel aumenta quando a velocidade do navio diminui, o que o torna ideal para atracação.", v:false, fb:"É o contrário: a eficácia cresce com a velocidade e cai quando ela cai; por isso o BP continua importante. [§ 2.14]"},
+  {s:"Com o carrossel, a mesma força transversal na espia que produziria 31° de banda com ponto de reboque central produz cerca de 18°.", v:true, fb:"[§ 4.2.3, fig. 4.14]"}
+ ]
+};
+
+T.dot = {
+ nome:"DOT tug (Dynamic Oval Towing)", pt:"Convencional com ponto de reboque móvel num trilho oval em volta da superestrutura", grupo:"Relacionado",
+ ref:"Cap. 2 § 2.15 · Cap. 4 § 4.2.2–4.2.3, 4.3.2–4.3.3",
+ sec:{
+  config:["Trilho pesado em volta da superestrutura ao longo do qual o gancho/ponto de reboque se desloca; poucos construídos, sobretudo convencionais pequenos (Ugie Runner, Macduff, UK) [§ 2.15]"],
+  modos:["Gira em qualquer direção com a espia passada → puxa pela proa ou pela popa sem largar; basicamente igual ao ponto móvel do carrossel [§ 2.15; § 4.2.2]"],
+  vant:["Impede o capotamento quando a espia sob alta tensão fica perpendicular ao rebocador; grande aumento de capacidade e segurança no cabo; risco de capotamento nulo [§ 2.15; § 4.3.3]"],
+  lim:["O trilho fica mais alto que o carrossel original do Multratug 12 → adernamentos maiores; posição longitudinal crítica como no carrossel [§ 2.15; § 4.2.2]"],
+  comp:["Mesmo princípio do carrossel (ver ficha) [§ 2.15]"],
+  banca:["[BANCA: similaridade temática] DOT ≈ carrossel; diferença = altura do trilho (DOT mais alto → mais banda)"]
+ },
+ vf:[{s:"O DOT tug tem o mesmo princípio do carrossel, mas o trilho fica mais alto, o que produz adernamentos maiores.", v:true, fb:"[§ 2.15]"}]
+};
+
+T.allrounder = {
+ nome:"All-Rounder AR360T", pt:"Convencional recente (2021) de dois eixos com guincho em trilho circular; nota da Tabela 2A.1", grupo:"Relacionado (nota)",
+ ref:"Cap. 2 § 2.16",
+ sec:{
+  config:[
+   "24 × 10 m; BP até 65 t com dois FPP grandes em tubulões; hélices bem afastados (grande braço), <i>flap rudders</i> independentes e forte bow thruster [§ 2.16]",
+   "Casco com área lateral centrada e extremidades inclinadas para cima (giro fácil sob vários ângulos de fluxo); dois grandes skegs (hidrodinâmica, proteção da propulsão, fundação dos motores, docagem) [§ 2.16]",
+   "Convés central levemente ascendente para a proa; acomodação sob o convés de proa; grande flutuabilidade de proa [§ 2.16]",
+   "Guincho em trilhos duplos em volta da acomodação, com liberação automática instantânea por sobrecarga; dois power packs; controle remoto; FEM [§ 2.16]",
+   "Primeiro encomendado em 2021 na Malásia (Harbour 360 / Labuan) — por isso é só nota na Tabela 2A.1 [§ 2.16; § 2.1]"
+  ],
+  vant:["Reboque e frenagem eficazes à proa e à popa, de zero até com seguimento, <b>sem risco de capotamento</b>; também empurra/puxa ao costado; alvo: porto, escolta, navio-a-navio [§ 2.16]"],
+  seg:["Passadiço com guarda-corpo externo para observar o convés antes de entrar na zona do guincho giratório; guincho travado por freio de estacionamento quando há gente no convés; portas na linha de centro; SaferVents; treino em simulador (ALAM) [§ 2.16]"],
+  comp:["Sistema comparável ao carrossel e ao DOT [§ 2.14]"],
+  banca:["[BANCA: similaridade temática] Na Tabela 2A.1 aparece só como nota: \"pode ser acrescentado aos Related Tug Types\""]
+ },
+ vf:[{s:"O All-Rounder AR360T é um rebocador azimutal com três propulsores.", v:false, fb:"É convencional de dois eixos (FPP em tubulões) com guincho em trilho circular tipo carrossel. [§ 2.16]"}]
+};
+
+/* ===================== FAST ===================== */
+T.sdm_att = {
+ nome:"SDM / ATT", pt:"Ship Docking Module (Hvide/Seabulk, EUA) = Asymmetric Tractor Tug (P&O Reyser, Espanha); FAST assimétrico de boca muito larga", grupo:"FAST",
+ ref:"Cap. 2 § 2.18 (Parte D) · Cap. 4 § 4.2.3, 4.3.2",
+ sec:{
+  config:[
+   "Fundo raso e chato, forma elíptica, boca muito larga (<b>L/B ≈ 1,8</b>, o menor de todos); dois azimutais e dois skegs: um propulsor a ~1/4 do comprimento de vante deslocado para BE, outro a ~1/4 de ré deslocado para BB; um skeg na linha de centro em cada extremidade [DECORAR] [§ 2.18.1; § 4.2.3]",
+   "Conceito: BP alto e <b>igual em qualquer direção</b>; posicionamento rápido; alto side-stepping; trabalho sob flare; áreas confinadas e semi-abrigadas [§ 2.18.1]",
+   "Mark I / Mark II: 27,4 m, boca 15,2 m, calado 4,9–5,0 m, 4.000–4.200 hp, 55–60 t; Espanha (ATT, 2005–2008): 75–78 t, acomodação maior; guincho sob o passadiço, espia Dyneema 150 m + pendente 50 m [§ 2.18.1]",
+   "Casaria dentro da amurada → opera sob flare/popa saliente; distância superestrutura–ponto de reboque evita colisão [§ 2.18.1]",
+   "ATT2020 (Azabra, 75 t, fim de 2020): proa mais alta, convés extra sob o passadiço, defensas cilíndricas mais fortes, baixa emissão [§ 2.18.5]",
+   "[CONFLITO] Sigla ATT: aqui = <i>Asymmetric Tractor Tug</i>; na Parte C (§ 2.12.2) o Hensen usa ATT para <i>azimuth tractor tug</i>"
+  ],
+  modos:[
+   "EUA: geralmente ao costado; Espanha: pelos <i>centre leads</i> de vante e de ré, modo direto usual [§ 2.18.6]",
+   "Em pontes/eclusas/diques (boca larga atrapalha ao costado) reboca no cabo pela staple central ou de ré, ou com espia dupla [§ 2.18.6]",
+   "Indireto com ponto de reboque de ré: espia + força hidrodinâmica geram grande momento de giro, limitando o propulsor de ré; recomenda-se estudar ponto de ré <b>acima</b> do propulsor de ré [§ 2.18.6, fig. 2D.13]",
+   "Furos nos skegs reduzem a diferença de pressão do fluxo entre tubulões (antes era preciso governar o propulsor de ré 5–10° para BE) [§ 2.18.3]"
+  ],
+  vant:[
+   "Velocidade livre ~12,5 nós; <b>side-stepping 6,5 nós</b>; boca larga → grande estabilidade; costados com flare (momento restaurador, evita contato da obra viva) [§ 2.18.3]",
+   "Muito bom em áreas confinadas, slips apertados e diques secos; altas forças laterais [§ 2.18.1; § 2.18.6]",
+   "MARIN 2008 / Siport 2010: capaz de trabalhar em ondas fora do porto e de escoltar [§ 2.18.3]",
+   "Grande convés de trabalho a ré e casaria dentro da amurada aumentam a segurança [§ 2.18.1]"
+  ],
+  lim:[
+   "Perda de eficácia com propulsores perto do casco do navio (empurrando, e sobretudo puxando a curta distância); força líquida de empurre ≈ 90 % do máximo [§ 2.18.3; fig. 2D.14]",
+   "Projetado como puramente portuário; chaminés limitam visão pelo través; proa baixa (~3 m) embarca água em ondas — resolvidos no ATT2020 [§ 2.18.4]",
+   "Boca larga é desvantagem ao costado em pontes/eclusas [§ 2.18.6]",
+   "Herda os limites dos FAST: 50 % da potência por extremidade, sem transverse arrest, interação skeg–propulsor (skegs modificados) [§ 2.17; § 4.3.4]",
+   "Tripulação: concebido como dayboat de 2 homens (nunca ocorreu); Espanha exige 3 no porto e 6 fora [§ 2.18.2]"
+  ],
+  met:["Costado (EUA); centre lead AV/AR e modo direto (Espanha); cabo central/de ré ou espia dupla em espaços estreitos; escolta demonstrada em simulação [§ 2.18.6; § 2.18.3]"],
+  num:["L/B 1,8; 12,5 nós; side-stepping 6,5 nós; empurre ≈ 90 %; 55/60/75/78 t; freio do guincho 135 t; gancho 50 t SWL [§ 2.18]"],
+  comp:["Z-tech compara-se ao ATT (um guincho, manobra pela ponta do skeg — popa no ATT); Giano tem a mesma perda ao empurrar lateralmente [§ 2.12.2; § 2.21.2]"],
+  banca:["[BANCA: similaridade temática] SDM = ATT (mesmo rebocador, nomes EUA/Espanha); [DISTRATOR] ATT ≠ azimuth tractor tug neste contexto"]
+ },
+ vf:[
+  {s:"No SDM/ATT os dois propulsores azimutais ficam na linha de centro, um em cada extremidade.", v:false, fb:"São deslocados: o de vante para BE e o de ré para BB (assimétrico), com um skeg central em cada extremidade. [§ 2.18.1]"},
+  {s:"ATT, no Cap. 2 Parte D, é o nome espanhol do SDM (Asymmetric Tractor Tug).", v:true, fb:"[§ 2.18.1]"}
+ ]
+};
+
+T.eddy = {
+ nome:"EDDY", pt:"Efficient Double-ended Dynamic tug: propulsores em linha, um em cada extremidade na linha de centro, ponto de reboque entre eles", grupo:"FAST",
+ ref:"Cap. 2 § 2.19 (Parte D) · Cap. 4 § 4.2.3.1, 4.3.2 · Cap. 9 § 9.6.3",
+ sec:{
+  config:[
+   "Propulsores na linha de centro em cada extremidade; portfólio 24–37 m e 45–100 t; híbrido diesel-elétrico/diesel direto padrão [§ 2.19.1]",
+   "Ex.: EDDY 1 (30-65); Telstar (EDDY 24-75): 25,45 × 12,20 m, BP 75 t; Telstar tem ponto de reboque adicional bem acima do propulsor de ré [§ 2.19.1; § 2.19.3]",
+   "Casco em cinco compartimentos fechados em operação, portas externas duplas → \"virtualmente inafundável\"; borda-livre alta; propulsores protegidos na linha de centro [§ 2.19.1]",
+   "Consumo 30–50 % menor que rebocadores similares (2/3 pelo casco/deslocamento, 1/3 pelo híbrido); sem onda de popa até 10 nós (30 m) / 8 nós (24 m); baixo ruído [§ 2.19.1]",
+   "Guinchos: SafeWinch (EDDY 1); tambor duplo → duas espias (Telstar); towing pins opcionais [§ 2.19.3]"
+  ],
+  modos:[
+   "Parar com seguimento: girar os propulsores ou, mais rápido, inverter a rotação do eletromotor; girar a toda velocidade cria instabilidade de rumo temporária [§ 2.19.2]",
+   "Tensão contínua na espia em qualquer direção, inclusive reposicionando; em eclusas aproxima-se muito do navio, escolhe o ângulo de ataque, até paralelo ao muro; espia dupla dá controle mais rápido [§ 2.19.4]",
+   "Esteira dirigível para reduzir interferência com a obra viva do navio [§ 2.19.4]"
+  ],
+  vant:[
+   "Forças na espia próximas do BP máximo em <b>270°</b>; <b>side-stepping 7 nós</b>; altas forças de governo no indireto (conceito, casco largo, posição dos propulsores) [DECORAR] [§ 2.19.3]",
+   "Espaço requerido menor que ASD/trator do mesmo porte, sobretudo com espia dupla (opera dentro da boca do navio) [§ 2.19.4]",
+   "Citado como novo tipo com capacidade de escolta (uso efetivo desconhecido) [Cap. 9 § 9.6.3]"
+  ],
+  lim:[
+   "Limites gerais dos FAST (50 %, interação, sem transverse arrest); projeto fora do padrão pode exigir abordagem de estabilidade sob medida (IMO 2020) [§ 2.17; § 4.2.3.1]",
+   "Poderia ampliar capacidades com carrossel [§ 2.17]"
+  ],
+  met:["Cabo único ou duplo, eclusas, espaços confinados, escolta (potencial) [§ 2.19.4]"],
+  num:["270°; 7 nós side-stepping; −30 a −50 % de consumo; 24–37 m / 45–100 t [§ 2.19]"],
+  comp:["Giano tem a mesma configuração em linha na linha de centro [§ 2.21.1]"],
+  banca:["[BANCA: similaridade temática] \"double-ended\" = duas extremidades iguais, propulsores em linha (≠ SDM assimétrico)"]
+ },
+ vf:[
+  {s:"O EDDY pode aplicar forças na espia próximas do BP máximo num setor de cerca de 270°.", v:true, fb:"[§ 2.19.3]"},
+  {s:"O EDDY tem os propulsores deslocados lateralmente, como o SDM.", v:false, fb:"Ficam na linha de centro, um em cada extremidade. [§ 2.19.1]"}
+ ]
+};
+
+T.giano = {
+ nome:"GIANO tug", pt:"FAST italiano (Rimorchiatori Napoletani, 2016): um azimutal a vante e um a ré na linha de centro; dois guinchos de escolta; L/B ≈ 2", grupo:"FAST",
+ ref:"Cap. 2 § 2.21 (Parte D) · Cap. 4 § 4.2.2–4.2.3, 4.3.2",
+ sec:{
+  config:[
+   "Nome do deus Jano (duas faces); como o EDDY, um propulsor em cada extremidade na linha de centro; dois guinchos de escolta (AV e AR) → pontos de reboque junto à proa e à popa [§ 2.21.1]",
+   "25,75 × 13,02 m, 4.562 hp, <b>BP 55 t em todas as direções</b>, side-stepping 7 nós, CPP, notação de escolta LR; versão maior 6.940 hp / 75 t [§ 2.21.1]",
+   "Originalmente três quilhas; a central foi removida após provas → dois skegs que formam um túnel, com defensas submersas; casco duplo, L/B ≈ 2; duas praças de máquinas separadas [§ 2.21.1; § 4.2.2]",
+   "Guinchos (75 t tração / 190 t freio, Dyneema) e fairleads altos: espia horizontal do guincho à staple; na assistência a espia faz ângulo no fairlead [§ 2.21.1]"
+  ],
+  modos:[
+   "Empurra a toda força lateralmente em navio parado sem adernar (túnel dos skegs + defensas submersas) [§ 2.21.2]",
+   "Empurrando lateralmente navio com seguimento parte da potência vai acompanhar o navio; empurrando em ângulo as forças hidrodinâmicas podem ser grandes; em manobra normal alterna empurrar/puxar com espia, empurrando com proa ou popa [§ 2.21.2]",
+   "Escolta: altas forças de governo porque o ponto de reboque de vante fica a pequena distância horizontal do propulsor de vante; no indireto o propulsor de vante soma força à espia e o de ré mantém o rumo; pela popa pode gerar forças maiores (ponto de ré mais acima do propulsor) [§ 2.21.2, fig. 2D.33]"
+  ],
+  vant:["BP igual em todas as direções; side-stepping 7 nós; grande capacidade de escolta; bem manejado, opera com segurança junto à proa de navio com seguimento [§ 2.21.1–2.21.2]"],
+  lim:[
+   "Como nos SDMs, perda de eficácia ao empurrar lateralmente por fluxo não ótimo aos propulsores [§ 2.21.2]",
+   "Guinchos/fairleads altos podem gerar grandes momentos de adernamento em picos dinâmicos (afirma-se compensado pela alta estabilidade) [§ 2.21.1]",
+   "Limites gerais dos FAST (50 %, sem transverse arrest, interação skeg–propulsor — precisou alterar skegs) [§ 2.17; § 4.3.4]"
+  ],
+  met:["Push-pull, cabo pela proa ou pela popa, escolta [§ 2.21.2]"],
+  num:["55 t omnidirecional; 7 nós side-stepping; L/B 2,0; banda estática em escolta 8° (limite IMO 15°) [§ 2.21.1; § 4.2.3]"],
+  seg:["Estabilidade acima do IS Code 2020: ângulo de adernamento estático de 8° em escolta (limite 15°) [§ 2.21.1]"],
+  comp:["EDDY: mesma configuração; SDM: mesma perda ao empurrar lateralmente [§ 2.21.1–2.21.2]"],
+  banca:["[BANCA: similaridade temática] \"Giano = Jano, duas faces\" → dois guinchos de escolta, duas extremidades de trabalho"]
+ },
+ vf:[
+  {s:"O Giano mantém três quilhas sob o casco, conforme o projeto original.", v:false, fb:"A quilha central foi removida após as provas; ficaram dois skegs que formam um túnel. [§ 2.21.1]"},
+  {s:"O Giano tem BP de cerca de 55 t em todas as direções e dois guinchos de escolta.", v:true, fb:"[§ 2.21.1]"}
+ ]
+};
+
+T.rave_crt = {
+ nome:"RAVE tug (CRT — Carrousel RAVE Tug)", pt:"Robert Allan Ltd Voith Escort com carrossel: um Voith a vante e um a ré na linha de centro; Multratug 32 e 33 (2018)", grupo:"FAST + carrossel",
+ ref:"Cap. 2 § 2.20 (Parte D), 2.14 · Cap. 4 § 4.2.3, 4.3.2–4.3.3 · Cap. 9 § 9.6.3",
+ sec:{
+  config:[
+   "Dois Voith Schneider, um a ré e um a vante, na linha de centro; carrossel no convés principal entre as unidades, guincho girando em volta da superestrutura; cooperação RAL/Voith/Novatug/Multraship [DECORAR] [§ 2.20.1]",
+   "31,9 × 13,2 m, 2 × 2.650 kW; <b>BP estático 70 t; a 10 nós ≥ 150 t de governo e 170 t de frenagem</b> [§ 2.20.1]",
+   "Unidades em linha, mas giradas 5–10° fora da linha de centro para o fluxo da de vante não entrar na de ré (reduziria o BP) [§ 2.20.3]",
+   "Guincho split drum com power pack diesel-hidráulico próprio; <b>não é render-recovery</b>; recolhe com força < 25 t (se maior, o rebocador reduz a força mudando o rumo) [§ 2.20.1]",
+   "Dois pinos hidráulicos na proa e dois na popa → três formas: carrossel (qualquer direção, máximas forças dinâmicas), pinos de proa, pinos de popa [§ 2.20.3]"
+  ],
+  modos:[
+   "Carrossel: o casco gira para alinhar-se com a espia; opera atravessado para frear; 180° com a espia passada (ver ficha Carrousel) [§ 2.14]",
+   "Diagrama de desempenho como rebocador de popa (SVA): muitos testes sem potência total — reserva para mudar o rumo e reduzir a força na espia de imediato, foco do treinamento [§ 2.20.3]"
+  ],
+  vant:[
+   "Carrossel elimina os riscos típicos dos FAST (falha do propulsor distante do ponto de reboque, swing na espia); grande variedade de métodos e altas forças [§ 2.17; § 4.3.3]",
+   "Sem capotamento por força transversal; adernamentos menores; forças dinâmicas muito acima do BP (150/170 t com 70 t) [§ 2.14; § 2.20.1]",
+   "Citado como novo tipo com capacidade de escolta (uso efetivo desconhecido) [Cap. 9 § 9.6.3]"
+  ],
+  lim:[
+   "Ainda 50 % da potência em cada extremidade; sem transverse arrest [§ 4.3.3; § 4.3.4]",
+   "Eficácia do carrossel cai com a velocidade; exige tensão constante na espia [§ 2.14]",
+   "Projeto fora do padrão → estabilidade sob medida (IMO 2020) [§ 4.2.3.1]",
+   "Riscos à tripulação no convés com o carrossel mal operado [§ 2.20.2]"
+  ],
+  met:["Escolta e assistência em trânsito; atracação com pinos de proa/popa; passagem/largada da espia pelos pinos da proa [§ 2.20.3]"],
+  num:["70 t estático; ≥ 150 t governo / 170 t frenagem a 10 nós; recolhe < 25 t; 5–10° de desalinhamento das unidades [§ 2.20]"],
+  seg:["Tripulação só vai ao convés com a espia entre os pinos; carrossel travado fora de uso; abrir porta com o guincho trabalhando dispara alarme; câmera; freio hidráulico adicional previsto [§ 2.20.2]"],
+  comp:["Único FAST com propulsão Voith e com carrossel; EDDY, Giano e SDM poderiam ganhar capacidades com carrossel [§ 2.17]"],
+  banca:["[BANCA: similaridade temática] RAVE/CRT = único com VS entre os FAST; carrossel elimina girting/capotamento por força transversal"]
+ },
+ vf:[
+  {s:"O CRT usa dois propulsores azimutais, um a vante e um a ré.", v:false, fb:"Usa duas unidades Voith Schneider (RAVE = Robert Allan Voith Escort). [§ 2.20.1]"},
+  {s:"Com 70 t de BP estático, o CRT atinge pelo menos 150 t de governo e 170 t de frenagem a 10 nós.", v:true, fb:"[§ 2.20.1]"}
+ ]
+};
+
+/* ===================== GLOSSÁRIO ===================== */
+const GLOS = [
+ ["Bollard pull (BP)","Tração a ponto fixo; prova com ≥ 5 min sem queda [§ 2.26]"],
+ ["Girting / tripping","Capotamento lateral por espia atravessada; self-tripping × tow-tripping [§ 4.2.3.1; § 6.3.6]"],
+ ["Método direto","Rebocador de popa a baixa velocidade puxa na direção desejada; ≤ ~5–6 nós [§ 4.2.2]"],
+ ["Método indireto","Forças hidrodinâmicas no casco/skeg; > 5–6 nós; forças podem exceder o BP [§ 4.2.2]"],
+ ["Reverse arrest","Propulsores a 180°, frenagem até 1,5 × BP a ré, ≤ ~8 nós [§ 4.3.4]"],
+ ["Transverse arrest","Arrasto transverso: propulsores a ~90°, momentum drag, > ~8 nós (6 na prática) [§ 4.3.4]"],
+ ["Combination / indirect arrest","Termos Aquamaster de escolta: opor-se a / iniciar guinada [Cap. 9 § 9.6.2]"],
+ ["Powered indirect","Indireto propulsado, 3–7 nós, 75–125 % do BP [Cap. 9 § 9.6.2]"],
+ ["Rotoring","Rotortug aplicando forças dentro da boca do navio; 70 % BP transversal [§ 2.11.3]"],
+ ["Bow-to-bow","ASD/trator reverso à proa do navio navegando a ré; stern-to-bow = pela popa [§ 6.3.13]"],
+ ["Gob rope","Cabo que transfere o ponto de reboque do convencional para ré [§ 4.2.2]"],
+ ["Twin skegs / twin fin","Estabilidade a ré, momento de giro, menos interação, indireto, bow-to-bow [§ 2.6.1; fig. 2B.43b]"],
+ ["Centro lateral de pressão (C)","Ponto de aplicação da força hidrodinâmica; ≈ 0,3 LWL (conv.) / 0,4 LWL (trator) da popa [§ 4.2.2]"],
+ ["Side-stepping","Velocidade de deslocamento lateral: Rotortug ~6, SDM 6,5, EDDY/Giano 7 nós [§ 2.11–2.21]"],
+ ["FAST","Forward & Aft Single Thruster: SDM/ATT, EDDY, Giano, CRT [§ 2.17]"],
+ ["Carrossel","Anel de reboque giratório; banda 31° → 18°; sem capotamento transversal [§ 2.14; § 4.2.3]"],
+ ["Uni-lever / master pilot","Joystick combinado dos azimutais (Niigata); pode 'travar avante' [§ 2.6.2, Nota 7; § 2.10]"],
+ ["Backing nozzle","Tubulão tipo 37: melhor a ré, pouco pior avante [§ 2.3.2]"],
+ ["Towmaster","Lemes persiana + tubulão fixo: > 70 % a ré [§ 2.3.2; § 2.26]"],
+ ["Render-recovery","Guincho que paga sob sobrecarga e recolhe o seio; essencial em escolta/terminal [§ 2.22; Cap. 9]"]
+];
+/* ===================== COMPARAÇÃO DE EMPREGO ===================== */
+/* Escala: 4 Ótimo · 3 Bom · 2 Limitado · 1 Ruim · 0 Não faz / não aplicável · -1 Hensen não trata */
+const METODOS = [
+ ['proa_seg','Rebocador de proa no cabo — navio com seguimento','Governar pela proa com o navio em movimento'],
+ ['proa_parado','Rebocador de proa no cabo — navio parado/muito lento','Giro, atracação, compensar vento/corrente'],
+ ['popa_direto','Rebocador de popa — método direto','Baixa velocidade (≤ ~5–6 nós): governo e controle de velocidade'],
+ ['popa_indireto','Rebocador de popa — método indireto','> 5–6 nós: forças hidrodinâmicas no casco/skeg'],
+ ['rev_arrest','Frenagem — reverse arrest (180°)','Propulsores em linha, fluxo negativo'],
+ ['trans_arrest','Frenagem — transverse arrest (≈ 90°)','Arrasto transverso por momentum drag'],
+ ['freio_traves','Frenagem de través atrás do navio','Casco atravessado na esteira'],
+ ['pushpull','Push-pull / empurrar a 90° com seguimento','Costado com espia curta, navio em movimento'],
+ ['puxar','Puxar a contrabordo','Potência a ré junto ao costado'],
+ ['troca','Trocar cabo → empurrar sem largar a espia','Chegada ao berço'],
+ ['firme_proa','Fazer firme à proa com navio em seguimento','Aproximação e passagem da espia na proa'],
+ ['bow_to_bow','Bow-to-bow (rebocador de proa pela proa, navegando a ré)','ASD/reverso à proa do navio'],
+ ['escolta_at','Escolta ativa (amarrada) em velocidade','8–10 nós, forças de governo/frenagem'],
+ ['escolta_pas','Escolta passiva / rebocador portuário em escolta','Baixa velocidade, standby'],
+ ['rudder','Rudder tug / controle de velocidade pelo rebocador de popa','Governar e frear mantendo 3–4 nós'],
+ ['largura','Pontes, eclusas e espaços confinados','Largura do conjunto / operar dentro da boca'],
+ ['alongside','Reboque a contrabordo rígido (alongside / navio morto)','Peado com 2–3 espias; dead ship'],
+ ['gelo','Assistência em gelo','Confiabilidade da propulsão'],
+ ['girting','Exposição a girting','Risco pelo ponto de reboque']
+];
+const E = {};
+E.conventional = {
+ proa_seg:[4,'O mais eficaz: gira no ponto de reboque, a correção de leme a ré soma força na espia; eficácia cresce com a velocidade; risco de girting [§ 4.3.1]'],
+ proa_parado:[3,'Governa para os dois bordos; muda de bordo mais devagar que o trator (gira na espia tesa, não recomendado) [§ 4.3.1]'],
+ popa_direto:[1,'Acima de ~3 nós só um bordo e acelera o navio; mudar de bordo atrás da popa só ≤ 1–2 nós; frenagem só a velocidade muito baixa [§ 4.3.1; § 4.3.3]'],
+ popa_indireto:[0,'Não executa; forças transversais capotam o rebocador [§ 4.2.2; § 2.3.4]'],
+ rev_arrest:[0,'Não aplicável (propulsão fixa); frenagem pela popa só muito lenta; FPP pode não reverter sob carga [§ 4.3.4]'],
+ trans_arrest:[0,'Não aplicável [§ 4.3.4]'],
+ freio_traves:[1,'Só com gob rope e navio muito lento; esteira do hélice do navio pode emborcar [§ 4.2.2; § 6.3.8]'],
+ pushpull:[2,'Eficaz só até ~3–4 nós (precisa de stern line); força longitudinal acelera o navio acima de 4 nós [§ 4.3.1; § 4.3.4]'],
+ puxar:[1,'Gira (swing); monohélice não puxa a 90°; eficaz só < 1 nó [§ 2.3.4; § 4.3.4]'],
+ troca:[0,'Teria de empurrar com a popa; largar a espia e reposicionar [§ 2.3.4]'],
+ firme_proa:[1,'"Muito perigoso": ≤ 6 nós; sequência de leme 1→5; encostado, só Full Astern [§ 6.3.3]'],
+ bow_to_bow:[0,'Não aplicável (faz firme à proa pela popa, como stern-to-bow)'],
+ escolta_at:[1,'Perde governo acima de 3–4 nós e passa a empurrar; rebocador de popa convencional exige navio ≤ 3–4 nós; à proa não freia [Cap. 9 § 9.5.1]'],
+ escolta_pas:[2,'"Comparável à assistência portuária": velocidade do escoltado ≤ ~5 nós, posições de alheta/leme [Cap. 9 § 9.5]'],
+ rudder:[3,'Método clássico (EUA, Panamá): governa com impulso avante + leme e controla velocidade [Cap. 3 § 3.2.1]'],
+ largura:[3,'No cabo pela popa reduz a largura do conjunto à do navio; não opera dentro da boca [Cap. 3 § 3.2.2]'],
+ alongside:[4,'Método típico dos EUA com 2–3 espias; conjunto vira navio bi-hélice [Cap. 3 § 3.2.1]'],
+ gelo:[4,'Bi-hélice com hélices abertos é o mais confiável; não rebocar no cabo em gelo com calado leve e tubulão [Cap. 3 § 3.3.4]'],
+ girting:[1,'Alta: ponto de reboque a meia-nau, à proa e à popa; liberação rápida nem sempre abre [§ 2.3.1; § 4.3.3]']
+};
+E.combi = {
+ proa_seg:[4,'Como o convencional, com mais velocidade/BP, menos girting e resposta mais rápida [§ 2.4.2]'],
+ proa_parado:[3,'Thruster azimutal facilita mudar de bordo e manter a proa [§ 2.4.1]'],
+ popa_direto:[3,'Com ponto de reboque a ré opera como trator: controla velocidade e governa para os dois bordos (fig. 2B.17) [§ 2.4.2; Cap. 9 § 9.5.1]'],
+ popa_indireto:[2,'Abre para BB/BE com propulsão a ré + thruster; sustentação do fluxo gera força na espia; limitado pelo thruster de pouca potência [§ 2.4.2]'],
+ rev_arrest:[0,'Não aplicável'],
+ trans_arrest:[0,'Não aplicável'],
+ freio_traves:[2,'Propulsão + thruster no mesmo sentido pelo ponto de ré [§ 2.4.2]'],
+ pushpull:[2,'Empurrando com a proa o thruster ajuda a manter posição; com a popa eficácia reduzida [§ 2.4.2]'],
+ puxar:[1,'Mesmas desvantagens do convencional [§ 4.3.2]'],
+ troca:[1,'Não melhor que o convencional [§ 2.4.2]'],
+ firme_proa:[2,'Thruster dá efeito parecido com trator, mas pouca potência: só thruster muito potente larga da proa [§ 6.2.3; § 6.3.3]'],
+ bow_to_bow:[0,'Não aplicável'],
+ escolta_at:[2,'Com ponto de reboque bem a ré freia e governa para os dois bordos (como omnidirecional) [Cap. 9 § 9.5.1]'],
+ escolta_pas:[2,'Como convencional melhorado [Cap. 9 § 9.5]'],
+ rudder:[3,'Passagens longas de controle de velocidade e rumo são seu melhor emprego [§ 2.4.2]'],
+ largura:[3,'Como convencional'],
+ alongside:[4,'Como convencional'],
+ gelo:[3,'Convencional reforçado; thruster vulnerável Hensen não detalha'],
+ girting:[2,'Menor que o convencional; trabalhar pela popa EXIGE o ponto de ré [§ 2.4.2]']
+};
+E.asd_popa = {
+ proa_seg:[4,'Muito eficaz, como convencional; C mais a vante dá mais força e mais banda; risco de girting [§ 2.9.2; § 4.2.2]'],
+ proa_parado:[3,'Governa para os dois bordos [§ 4.3.1]'],
+ popa_direto:[0,'Para rebocador de popa usa o modo pela proa (ver ASD pela proa)'],
+ popa_indireto:[0,'Idem; no modo convencional os propulsores somam ao adernamento [§ 4.2.3]'],
+ rev_arrest:[0,'Usa o modo pela proa'],
+ trans_arrest:[0,'Usa o modo pela proa'],
+ freio_traves:[0,'Não'],
+ pushpull:[0,'Usa o modo pela proa'],
+ puxar:[0,'Usa o modo pela proa'],
+ troca:[0,'Pela popa não; a troca sem largar é feita no modo pela proa [§ 2.9.2]'],
+ firme_proa:[2,'Stern-to-bow até 7 nós (≤ 60 % da velocidade livre); risco de emborcar existe; interação como convencional; MARIN ≤ 6 nós [§ 6.3.13; § 6.3.3]'],
+ bow_to_bow:[0,'Não aplicável neste modo'],
+ escolta_at:[3,'Reboca eficazmente no cabo a velocidades relativamente altas pelo guincho de ré [Cap. 9 § 9.6.2]'],
+ escolta_pas:[3,'Omnidirecional em escolta de baixa velocidade [Cap. 9 § 9.5]'],
+ rudder:[3,'Como convencional/VS [Cap. 3 § 3.2.1]'],
+ largura:[3,'Pela popa reduz a largura à do navio (pontes/eclusas) [Cap. 3 § 3.2.2]'],
+ alongside:[3,'Possível; não é o emprego típico'],
+ gelo:[4,'ASD "o mais versátil" em gelo; espias no gancho de ré, proa no gelo [§ 2.24; Cap. 3 § 3.3.4]'],
+ girting:[1,'Alta neste modo: sujeito a girting como o convencional [§ 2.9.2; § 4.3.1]']
+};
+E.asd_proa = {
+ proa_seg:[2,'Bow-to-bow: força de governo cai rápido acima de ~4 nós; eficácia relativamente baixa [§ 6.3.13; § 4.3.1]'],
+ proa_parado:[4,'Omnidirecional: troca de bordo rápida, força nos dois sentidos [§ 4.3.1]'],
+ popa_direto:[4,'Modo normal; pode ser algo MAIS eficaz que o VS; governo nos dois bordos + velocidade mesmo rápido; risco de capotar quase nulo [§ 2.9.2; § 4.3.3]'],
+ popa_indireto:[3,'Geralmente algo MENOS eficaz que o VS; aderna mais à mesma força; power indirect a 8 nós com espia ≈ 90° [§ 2.9.2; § 4.3.4; Cap. 9 § 9.6.2]'],
+ rev_arrest:[4,'Até ~8 nós, até 1,5 × BP a ré; acima cai e sobrecarrega [§ 4.3.4]'],
+ trans_arrest:[4,'Acima de ~8 nós (6 na prática, ASD 2411) supera o BP a ré sem sobrecarregar [§ 4.3.4, Nota 6]'],
+ freio_traves:[1,'Não é o método do ASD (carrossel/Voith) [§ 4.3.4]'],
+ pushpull:[4,'Muito eficaz com seguimento: só força transversal; 80 % por sustentação a 8,5 nós [§ 4.3.1; § 4.3.4]'],
+ puxar:[4,'Potência a ré ≈ avante; propulsores angulados desviam a esteira [§ 4.3.1]'],
+ troca:[4,'Sem largar nem mudar a espia; assiste então como trator reverso [§ 2.9.2]'],
+ firme_proa:[3,'Bow-to-bow: fazer firme 3–4 a ~6 nós; operar preso 4–5 a ~7 nós; risco de emborcar mínimo [§ 6.3.13]'],
+ bow_to_bow:[3,'Possível em ASD bem projetados (skeg curto/quilha-caixa), mestre treinado, velocidade controlada; navega a ré, gira em vez de deslizar [§ 6.3.13]'],
+ escolta_at:[4,'Tipo dominante em escolta com VS; 1,5–2 × BP a 10 nós; frenagem um pouco maior que tratores [Cap. 9 § 9.6]'],
+ escolta_pas:[4,'Omnidirecional; team towing [Cap. 9 § 9.6.1]'],
+ rudder:[4,'Controle de velocidade pelo rebocador de popa omnidirecional (3–4 nós) [Cap. 3 § 3.2.1]'],
+ largura:[2,'ASD compactos de 24 m operam "até certo ponto" em espaços confinados; não dentro da boca [§ 2.11.1]'],
+ alongside:[3,'Peia no ombro com UMA espia de proa [Cap. 3 § 3.2.1]'],
+ gelo:[4,'Entre os melhores; CPP recupera empuxo rápido [§ 2.24]'],
+ girting:[3,'Baixa neste modo: gira na espia (tripping) em vez de emborcar [§ 6.3.6]']
+};
+E.reverse_tractor = {
+ proa_seg:[2,'Não muito eficaz: anda a ré com ponto de reboque a vante; cai com a velocidade como o trator [§ 2.7.2]'],
+ proa_parado:[4,'Omnidirecional [§ 2.7.2]'],
+ popa_direto:[4,'Muito adequado; pode ser mais eficaz que VS pelo menor calado [§ 2.7.2]'],
+ popa_indireto:[3,'Algo menos eficaz que VS similar (depende do skeg) [§ 2.7.2]'],
+ rev_arrest:[4,'Como ASD [§ 4.3.4]'],
+ trans_arrest:[4,'Como ASD [§ 4.3.4]'],
+ freio_traves:[1,'Não é o método'],
+ pushpull:[4,'Empurre a 90° até 8 nós (C H Cates) [§ 4.3.1]'],
+ puxar:[4,'Propulsores eficientes a ré + C a vante [§ 4.3.1]'],
+ troca:[4,'Rebocando pela proa muda facilmente para empurrar/push-pull [§ 2.7.2]'],
+ firme_proa:[3,'Como ASD bow-to-bow (mesmas velocidades) [§ 6.3.13]'],
+ bow_to_bow:[3,'Como ASD [§ 6.3.13]'],
+ escolta_at:[4,'Agrupado com ASD em todo o Cap. 9 [Cap. 9 § 9.6]'],
+ escolta_pas:[3,'Japonês: ≥ 15 nós, NÃO faz firme na escolta; indireto não é opção [§ 2.8.2]'],
+ rudder:[4,'Método japonês: rebocador de ré no cabo a meia-nau/alheta controla rumo e velocidade [Cap. 3 § 3.2.1]'],
+ largura:[2,'Guincho duplo na proa (duas espias) em pontes/eclusas [Cap. 3 § 3.2.1]'],
+ alongside:[3,'Espia de proa no ombro [Cap. 3 § 3.2.1]'],
+ gelo:[3,'Pusher convertível em quebra-gelo (proa removível) [§ 2.24]'],
+ girting:[3,'Baixa: ponto na extremidade → tripping [§ 6.3.6]']
+};
+E.tractor_vs = {
+ proa_seg:[2,'Limitado pela velocidade: fica em linha com a espia e perde tração; se o ângulo passar, gira para o costado [§ 4.3.1; § 2.5.4]'],
+ proa_parado:[4,'Muda de bordo fácil e rápido pelo impulso lateral [§ 4.3.1]'],
+ popa_direto:[3,'Muito bom; um pouco atrás de ATD/ASD por maior calado/resistência; forças laterais menores (ângulo de reboque menor) [§ 2.6.4; § 4.3.1]'],
+ popa_indireto:[4,'O MAIS eficaz a alta velocidade; menor banda que ASD à mesma força; forças ≈ 2 × BP (Velox 65 → 131 t a 10 nós) [§ 2.6.4; Cap. 9 § 9.6.2; fig. 4.3]'],
+ rev_arrest:[0,'Não aplicável (cicloidal): frenagem com alavancas de passo conforme a velocidade, mínimo de roda [§ 2.5.4; § 4.3.4]'],
+ trans_arrest:[0,'Não aplicável'],
+ freio_traves:[3,'Método "às vezes aplicado por Voiths" (como carrossel) [§ 4.3.4]'],
+ pushpull:[4,'A 90° a velocidades muito maiores que convencional; empurra com a popa [§ 4.3.1]'],
+ puxar:[4,'Potência a ré ≈ avante; jato pouco concentrado = menor perda no casco [§ 2.5.3; § 5.2.6]'],
+ troca:[3,'Sem largar, à proa até ~2 nós [§ 2.5.4]'],
+ firme_proa:[4,'O mais seguro junto à proa (HSVA 1964); Nota 6 do Maneuver Manual [§ 6.3.3; § 2.5.4]'],
+ bow_to_bow:[0,'Não aplicável: faz firme à proa navegando avante, com a popa para o navio'],
+ escolta_at:[4,'Maioria dos tratores de escolta é VS; governo indireto um pouco maior que ASD; Ajax 155 t governo / 180 t frenagem a 10 nós [Cap. 9 § 9.6.2]'],
+ escolta_pas:[4,'Team towing com VS modernos [Cap. 9 § 9.6.1]'],
+ rudder:[4,'Rudder tug e controle de velocidade pelo rebocador de popa [Cap. 3 § 3.2.1]'],
+ largura:[2,'Não opera dentro da boca; eclusas com uma espia [Cap. 3 § 3.2.3]'],
+ alongside:[4,'Navio morto até 100 m peado a contrabordo (Cape Town); peia com espia da popa [Cap. 3 § 3.2.1]'],
+ gelo:[2,'Controverso: muito eficaz (Aker Arctic) × "só gelo leve"; sem casco arando o gelo à frente [§ 2.24]'],
+ girting:[3,'Baixa: gira na espia (tripping); ponto a ré estudado extensamente [§ 6.3.6; § 2.17]']
+};
+E.tractor_azimuth = {
+ proa_seg:[2,'Como trator: limitado pela velocidade; anda avante (proa alta), desliza de lado — vantagem sobre ASD bow-to-bow [§ 4.3.1; § 6.3.13]'],
+ proa_parado:[4,'Omnidirecional, ~100 % em qualquer direção [§ 2.6.3]'],
+ popa_direto:[4,'Mais eficaz que VS em velocidade no direto (menor calado); ângulo de reboque maior = mais força lateral; acima de 8 nós supera o ASD (polares) [§ 2.6.4; § 4.3.1; § 4.3.4]'],
+ popa_indireto:[3,'Menos eficaz que VS a velocidades maiores (skeg menor); twin fins reduzem banda acima de 6 nós [§ 2.6.4; § 4.3.4]'],
+ rev_arrest:[4,'Até 8 nós, 1,5 × BP a ré; com CPP os propulsores devem ser girados [§ 4.3.4; § 2.6.2]'],
+ trans_arrest:[4,'Acima de 8 nós; em alta velocidade usar ponto de reboque bem a ré por segurança [§ 4.3.4; Cap. 9 § 9.6.2]'],
+ freio_traves:[1,'Não é o método'],
+ pushpull:[4,'Como VS; empurra com a popa [§ 4.3.1]'],
+ puxar:[4,'Propulsores angulados desviam a esteira [§ 4.3.1]'],
+ troca:[3,'Sem largar, à proa até ~2 nós [§ 2.5.4 (vale para ATD)]'],
+ firme_proa:[4,'Dirige a propulsão para fora; mesmo assim, encostado, só Full Astern [§ 6.3.3]'],
+ bow_to_bow:[0,'Não aplicável (navega avante)'],
+ escolta_at:[4,'Escolhido por Hvide pelas altas forças de FRENAGEM; 85–90 % BP de governo (curtos) [Cap. 9 § 9.6.2]'],
+ escolta_pas:[4,'Omnidirecional'],
+ rudder:[4,'Steering tug em eclusas (Panamá, duas espias); puxar de ré para manter a máquina do navio girando [Cap. 3 § 3.2.1]'],
+ largura:[2,'Não opera dentro da boca'],
+ alongside:[4,'Espia da popa; Active Escort de submarino a contrabordo [Cap. 3 § 3.2.1; § 3.4.1]'],
+ gelo:[3,'Casco ara o gelo à frente dos propulsores; hélices profundos [§ 2.24]'],
+ girting:[3,'Baixa: tripping; transverse arrest rápido exige ponto bem a ré [§ 6.3.6; Cap. 9 § 9.6.2]']
+};
+E.rotortug = {
+ proa_seg:[3,'Seguro junto à proa; ponto de ré sobre o propulsor de ré facilita o rumo como bow tug; opera pelos centre leads [§ 2.11.3–2.11.4]'],
+ proa_parado:[4,'Side-stepping ~6 nós; empuxo lateral 95 % BP [§ 2.11.4]'],
+ popa_direto:[4,'Combination-arrest: governo e frenagem altos até 10 nós quase sem banda [§ 2.11.3]'],
+ popa_indireto:[3,'Forças de lift entre 6–10 nós; os propulsores AUMENTAM a banda (reduzir empuxo); melhor que ASD 4–8 nós, pior > 8 [§ 2.11.1; § 2.11.3; fig. 2C.4]'],
+ rev_arrest:[4,'Aplicável (propulsores orientáveis) [§ 4.3.4]'],
+ trans_arrest:[4,'Aplicável [§ 4.3.4]'],
+ freio_traves:[1,'Não é o método'],
+ pushpull:[4,'Capacidades aumentadas em push-pull [§ 4.3.3]'],
+ puxar:[4,'Frenagem plena imediata; propulsor junto ao ponto de empurre/reboque soma força [Cap. 5 § 5.3.5; § 4.3.2]'],
+ troca:[4,'Bow-first em qualquer função; double-ended control [§ 2.11.3]'],
+ firme_proa:[4,'Compensa a interação com segurança; sem risco no bulbo [§ 2.11.4]'],
+ bow_to_bow:[0,'Não aplicável (opera bow-first como trator)'],
+ escolta_at:[4,'Altas forças pela popa ou pela proa; único novo tipo com uso conhecido em escolta [§ 2.11.4; Cap. 9 § 9.6.3]'],
+ escolta_pas:[4,'Omnidirecional; ISV/FLNG [§ 2.11.5]'],
+ rudder:[4,'Omnidirecional'],
+ largura:[4,'ROTORING: forças dentro da boca do navio (70 % BP transversal), eclusas e pontes com menos rebocadores [§ 2.11.3; Cap. 3 § 3.2.3]'],
+ alongside:[3,'Possível Hensen não detalha'],
+ gelo:[-1,'Hensen não trata'],
+ girting:[4,'Mínima: pontos de reboque nas duas extremidades [§ 2.11.3]']
+};
+E.ztech = {
+ proa_seg:[2,'Como ATD/trator reverso: manobra pela ponta do skeg; não detalhado [§ 2.12.2; § 4.3.3]'],
+ proa_parado:[4,'Omnidirecional; BP a ré ≥ 95 % [§ 2.12.1]'],
+ popa_direto:[4,'"Não difere muito" de ATD/ASD [§ 4.3.3]'],
+ popa_indireto:[3,'Skeg soma força, mas a posição ideal ponto/C é difícil (como ASD) [§ 2.12.2]'],
+ rev_arrest:[4,'Aplicável [§ 4.3.4]'],
+ trans_arrest:[4,'Aplicável [§ 4.3.4]'],
+ freio_traves:[1,'Não é o método'],
+ pushpull:[4,'Projetado para empurrar/puxar sob o flare de porta-contêineres [§ 2.12.1]'],
+ puxar:[4,'Como ASD'],
+ troca:[4,'Como ASD/reverso'],
+ firme_proa:[3,'Skeg sem interação excessiva ao atracar a contrabordo com seguimento [§ 2.12.1]'],
+ bow_to_bow:[3,'Opera skeg first ou thrusters first; ponta do skeg = proa [§ 2.12.2]'],
+ escolta_at:[4,'Z-tech 7500 em dual escort powered indirect a 8 nós; 30-80: +15 % de escolta [Cap. 9 § 9.6.2; § 2.12.1]'],
+ escolta_pas:[4,'Omnidirecional'],
+ rudder:[4,'Omnidirecional'],
+ largura:[3,'Trabalha perto do navio, convés livre; não dentro da boca [§ 2.12.1]'],
+ alongside:[3,'Hensen não detalha'],
+ gelo:[-1,'Hensen não trata'],
+ girting:[3,'Baixa (ponto na extremidade)']
+};
+E.rsd = {
+ proa_seg:[3,'Como trator verdadeiro ou como reverso; substituto SEGURO do ASD pela proa [§ 2.13.1]'],
+ proa_parado:[4,'Omnidirecional; governo perfeito avante e a ré [§ 2.13.1]'],
+ popa_direto:[4,'Como trator reverso (skeg a vante) ou trator [§ 2.13.1]'],
+ popa_indireto:[3,'"Não difere muito" de ATD/ASD [§ 4.3.3]'],
+ rev_arrest:[4,'Aplicável [§ 4.3.4]'],
+ trans_arrest:[4,'Aplicável [§ 4.3.4]'],
+ freio_traves:[1,'Não é o método'],
+ pushpull:[4,'Push-pull de 70 t por 30 min (RSD-E) [§ 2.23]'],
+ puxar:[4,'Como ASD'],
+ troca:[4,'Como ASD'],
+ firme_proa:[4,'Passa espia thrusters first, como trator, vencendo a interação [§ 2.13.1]'],
+ bow_to_bow:[4,'Elimina a desvantagem do ASD a ré: "duas proas" de igual altura [§ 2.13.1]'],
+ escolta_at:[3,'Hensen não detalha no Cap. 9'],
+ escolta_pas:[4,'Omnidirecional'],
+ rudder:[4,'Omnidirecional'],
+ largura:[3,'Mastro rebatido sob flares; compacto [§ 2.13.1]'],
+ alongside:[3,'Hensen não detalha'],
+ gelo:[-1,'Hensen não trata'],
+ girting:[3,'Baixa (ponto na extremidade)']
+};
+E.carrousel = {
+ proa_seg:[4,'Altas forças de governo com segurança, sem restrição pela direção da espia [§ 2.14]'],
+ proa_parado:[2,'Eficácia cai com a velocidade; fica dependente do BP (Multratug 12: 21 t) [§ 2.14]'],
+ popa_direto:[2,'Governa para os dois bordos, mas a baixa velocidade vale só o BP [§ 2.14]'],
+ popa_indireto:[4,'Forças hidrodinâmicas sem capotar: 21 t → 90 t a 10 nós; banda 31° → 18° [fig. 4.13; § 4.2.3]'],
+ rev_arrest:[0,'Não aplicável (eixo convencional)'],
+ trans_arrest:[0,'Não aplicável'],
+ freio_traves:[4,'Método próprio: opera atravessado atrás do navio com segurança; frenagem plena ao girar para a posição eficaz [§ 2.14; Cap. 5 § 5.3.5]'],
+ pushpull:[1,'Não projetado para o costado [§ 2.14]'],
+ puxar:[1,'Idem'],
+ troca:[1,'Idem'],
+ firme_proa:[2,'Como convencional/combi na aproximação (não detalhado)'],
+ bow_to_bow:[0,'Não aplicável'],
+ escolta_at:[4,'"Mais ou menos escolta": canais e aproximações; exige guincho adequado e tensão constante [§ 2.14]'],
+ escolta_pas:[3,'Freia e governa para os dois bordos à popa [Cap. 9 § 9.5.1]'],
+ rudder:[3,'À popa controla velocidade e rumo [Cap. 9 § 9.5.1]'],
+ largura:[2,'Hensen não detalha'],
+ alongside:[2,'Hensen não detalha'],
+ gelo:[-1,'Hensen não trata'],
+ girting:[4,'Capotamento por força transversal NÃO é possível [§ 2.14]']
+};
+E.dot = {
+ proa_seg:[4,'Puxa pela proa ou popa sem largar; sem capotamento [§ 2.15]'],
+ proa_parado:[2,'Convencional pequeno'],
+ popa_direto:[2,'Como carrossel'],
+ popa_indireto:[3,'Como carrossel, com trilho mais alto → mais banda [§ 2.15]'],
+ rev_arrest:[0,'Não aplicável'], trans_arrest:[0,'Não aplicável'],
+ freio_traves:[4,'Como carrossel [§ 2.15]'],
+ pushpull:[1,'Convencional'], puxar:[1,'Convencional'], troca:[1,'Convencional'],
+ firme_proa:[2,'Como convencional'], bow_to_bow:[0,'Não aplicável'],
+ escolta_at:[3,'Como carrossel, poucos construídos [§ 2.15]'], escolta_pas:[3,'Como carrossel'],
+ rudder:[3,'Como carrossel'], largura:[2,'Hensen não detalha'], alongside:[2,'Hensen não detalha'], gelo:[-1,'Hensen não trata'],
+ girting:[4,'Impede o capotamento com espia perpendicular [§ 2.15]']
+};
+E.allrounder = {
+ proa_seg:[4,'Reboque e frenagem eficazes à proa e à popa, de zero até com seguimento, sem capotamento [§ 2.16]'],
+ proa_parado:[3,'BP 65 t; flap rudders + bow thruster forte [§ 2.16]'],
+ popa_direto:[3,'Idem [§ 2.16]'], popa_indireto:[3,'Guincho radial como carrossel [§ 2.16]'],
+ rev_arrest:[0,'Não aplicável'], trans_arrest:[0,'Não aplicável'],
+ freio_traves:[3,'Sistema comparável ao carrossel [§ 2.14]'],
+ pushpull:[3,'Empurra/puxa ao costado [§ 2.16]'], puxar:[2,'Hensen não detalha'], troca:[2,'Hensen não detalha'],
+ firme_proa:[2,'Hensen não detalha'], bow_to_bow:[0,'Não aplicável'],
+ escolta_at:[3,'Alvo: porto, escolta, navio-a-navio [§ 2.16]'], escolta_pas:[3,'Idem'],
+ rudder:[3,'Idem'], largura:[2,'Hensen não detalha'], alongside:[3,'Hensen não detalha'], gelo:[-1,'Hensen não trata'],
+ girting:[4,'Sem risco de capotamento [§ 2.16]']
+};
+E.sdm_att = {
+ proa_seg:[2,'Lógica dos 50 %: compensa pior a interação que trator/reverso [§ 2.17]'],
+ proa_parado:[4,'BP igual em qualquer direção; side-stepping 6,5 nós [§ 2.18.1; § 2.18.3]'],
+ popa_direto:[3,'Modo direto é o usual na Espanha (centre leads) [§ 2.18.6]'],
+ popa_indireto:[2,'Com ponto de ré o momento de giro limita o propulsor de ré; sugere-se ponto acima do propulsor [§ 2.18.6]'],
+ rev_arrest:[2,'Girar/inverter; sem transverse arrest [§ 4.3.4]'],
+ trans_arrest:[0,'Não possível (um propulsor por extremidade) [§ 4.3.4]'],
+ freio_traves:[1,'Não é o método'],
+ pushpull:[3,'Método usual nos EUA; perda ≈ 10 % por fluxo não ótimo [§ 2.18.6; § 2.18.3]'],
+ puxar:[2,'Perde eficácia puxando a curta distância do casco [§ 2.18.3]'],
+ troca:[3,'Hensen não detalha; omnidirecional'],
+ firme_proa:[2,'Risco dos FAST perto da proa com seguimento [§ 2.17]'],
+ bow_to_bow:[0,'Não aplicável'],
+ escolta_at:[3,'Capacidade demonstrada em tanque/simulação (MARIN 2008, Siport 2010) [§ 2.18.3]'],
+ escolta_pas:[3,'Idem'],
+ rudder:[3,'Omnidirecional'],
+ largura:[4,'Projetado para áreas confinadas (Barcelona, slips, diques); boca larga atrapalha ao costado → cabo ou espia dupla [§ 2.18.1; § 2.18.6]'],
+ alongside:[3,'Costado é o método dos EUA [§ 2.18.6]'],
+ gelo:[-1,'Hensen não trata'],
+ girting:[3,'Alta estabilidade (boca 15,2 m) [§ 2.18.3]']
+};
+E.eddy = {
+ proa_seg:[2,'Lógica dos 50 % [§ 2.17]'],
+ proa_parado:[4,'Forças ≈ BP em 270°; side-stepping 7 nós [§ 2.19.3]'],
+ popa_direto:[3,'Tensão contínua em qualquer direção [§ 2.19.4]'],
+ popa_indireto:[3,'Altas forças de governo no indireto (casco largo, posição dos propulsores) [§ 2.19.3]'],
+ rev_arrest:[2,'Parar girando propulsores ou invertendo o eletromotor (mais rápido) [§ 2.19.2]'],
+ trans_arrest:[0,'Não possível [§ 4.3.4]'],
+ freio_traves:[1,'Não é o método'],
+ pushpull:[3,'Esteira dirigível reduz interferência com o navio [§ 2.19.4]'],
+ puxar:[3,'Idem'],
+ troca:[3,'Reposiciona mantendo tensão [§ 2.19.4]'],
+ firme_proa:[2,'Risco dos FAST [§ 2.17]'],
+ bow_to_bow:[0,'Não aplicável'],
+ escolta_at:[3,'Capacidade de escolta afirmada; uso efetivo desconhecido [Cap. 9 § 9.6.3]'],
+ escolta_pas:[3,'Idem'],
+ rudder:[3,'Omnidirecional'],
+ largura:[4,'Opera dentro da boca; menos espaço que ASD/trator, sobretudo com espia dupla [§ 2.19.4]'],
+ alongside:[2,'Hensen não detalha'],
+ gelo:[-1,'Hensen não trata'],
+ girting:[3,'Alta estabilidade; abordagem IMO sob medida [§ 2.19.1; § 4.2.3.1]']
+};
+E.giano = {
+ proa_seg:[3,'Bem manejado opera com segurança junto à proa com seguimento (observado o § 2.17) [§ 2.21.2]'],
+ proa_parado:[4,'55 t em todas as direções; 7 nós side-stepping [§ 2.21.1]'],
+ popa_direto:[3,'Dois guinchos de escolta (AV/AR) [§ 2.21.1]'],
+ popa_indireto:[4,'Altas forças de governo: ponto de vante perto do propulsor de vante; pela popa pode ser ainda maior [§ 2.21.2]'],
+ rev_arrest:[2,'CPP a ré (perda ≈ 55 %) ou girar [§ 2.17]'],
+ trans_arrest:[0,'Não possível [§ 4.3.4]'],
+ freio_traves:[1,'Não é o método'],
+ pushpull:[3,'Empurra a toda força em navio parado sem adernar (túnel dos skegs); com seguimento parte da potência vai acompanhar [§ 2.21.2]'],
+ puxar:[3,'Alterna empurrar/puxar com espia [§ 2.21.2]'],
+ troca:[3,'Idem'],
+ firme_proa:[3,'Compensa sucção e momentos (fig. 2D.34) [§ 2.21.2]'],
+ bow_to_bow:[0,'Não aplicável'],
+ escolta_at:[4,'Notação de escolta LR; banda estática 8° [§ 2.21.1]'],
+ escolta_pas:[3,'Idem'],
+ rudder:[3,'Omnidirecional'],
+ largura:[3,'Como FAST (dentro da boca) [§ 4.3.2]'],
+ alongside:[2,'Hensen não detalha'],
+ gelo:[-1,'Hensen não trata'],
+ girting:[3,'Estabilidade acima do IS Code [§ 2.21.1]']
+};
+E.rave_crt = {
+ proa_seg:[4,'Carrossel: espia em qualquer direção, sem o risco de swing dos FAST [§ 2.17; § 2.20.3]'],
+ proa_parado:[3,'70 t estáticos; pinos de proa/popa [§ 2.20.1]'],
+ popa_direto:[3,'Pelos pinos ou carrossel [§ 2.20.3]'],
+ popa_indireto:[4,'≥ 150 t governo / 170 t frenagem a 10 nós com 70 t de BP [§ 2.20.1]'],
+ rev_arrest:[0,'Não aplicável (Voith)'],
+ trans_arrest:[0,'Não possível [§ 4.3.4]'],
+ freio_traves:[4,'Carrossel: atravessado atrás do navio [§ 2.14]'],
+ pushpull:[2,'Voith; carrossel não é para o costado [§ 2.14]'],
+ puxar:[2,'Idem'],
+ troca:[2,'Hensen não detalha'],
+ firme_proa:[3,'Passagem da espia pelos pinos da proa com segurança [§ 2.20.3]'],
+ bow_to_bow:[0,'Não aplicável'],
+ escolta_at:[4,'Projeto de escolta (RAVE = Voith Escort); reserva de potência para reduzir força mudando o rumo [§ 2.20.3]'],
+ escolta_pas:[3,'Uso efetivo desconhecido [Cap. 9 § 9.6.3]'],
+ rudder:[3,'Omnidirecional'],
+ largura:[3,'Como FAST'],
+ alongside:[2,'Hensen não detalha'],
+ gelo:[-1,'Hensen não trata'],
+ girting:[4,'Carrossel: sem capotamento por força transversal; guincho não é render-recovery (< 25 t para recolher) [§ 2.14; § 2.20.1]']
+};
+
+/* Leitura de Hensen sobre pares específicos (só emprego) */
+const PAIR = {
+ 'tractor_vs|tractor_azimuth':[
+  "Indireto à popa em velocidade: VS é mais eficaz; ATD \"algo menos\" (skeg menor) [§ 2.6.4]",
+  "Direto à popa e à proa: ATD mais eficaz (menor calado/resistência, ~100 % de impulso em qualquer direção) e opera com ângulo de reboque maior → mais força lateral [§ 2.6.4; § 4.3.1]",
+  "Frenagem: ATD usa reverse/transverse arrest; VS freia com passo + mínimo de roda, ou de través [§ 4.3.4]",
+  "Gelo: ATD tem o casco arando o gelo à frente dos propulsores; VS não [§ 2.24]",
+  "Iguais: rebocador de proa limitado pela velocidade; seguros junto à proa; push-pull a 90° em velocidade; troca sem largar ≤ 2 nós [§ 4.3.1; § 2.5.4]"
+ ],
+ 'conventional|tractor_vs':[
+  "Proa com seguimento: convencional mais eficaz; a diferença cresce com a velocidade [§ 4.3.1]",
+  "Popa: trator muito superior — governo nos dois bordos e velocidade mesmo rápido; convencional > 3 nós só um bordo [§ 4.3.1]",
+  "Push-pull/frenagem: trator muito mais eficaz (BP a ré ≈ avante, 90° em velocidade) [§ 4.3.1]",
+  "Segurança junto à proa: trator muito mais seguro; convencional só Full Astern [§ 6.3.3]",
+  "Girting: convencional alto risco; trator gira na espia (tripping) [§ 6.3.6]"
+ ],
+ 'conventional|tractor_azimuth':[
+  "Mesma leitura de convencional × VS; ATD ainda melhor no direto à popa e freia por reverse/transverse arrest [§ 4.3.1; § 4.3.4]",
+  "Ponto de giro da curva: convencional é o melhor rebocador de proa com seguimento; ATD é o melhor rebocador de popa em velocidade no direto [§ 2.6.4]"
+ ],
+ 'asd_proa|tractor_vs':[
+  "Indireto: VS um pouco melhor e com menos banda; ASD frenagem um pouco maior [§ 2.9.2; Cap. 9 § 9.6.2]",
+  "Direto: ASD pode ser algo mais eficaz [§ 2.9.2]",
+  "Passar espia junto à popa: mais fácil para o ASD (esteira no skeg do trator) [Cap. 9 § 9.6.2]",
+  "Fazer firme à proa com seguimento: VS navega avante e larga da proa; ASD bow-to-bow navega a ré, limitado a 4–7 nós [§ 6.3.3; § 6.3.13]",
+  "Escolta amarrada: ASD navega proa à frente; VS popa à frente (convés baixo ao fluxo) [Cap. 9 § 9.6.2]"
+ ],
+ 'asd_proa|tractor_azimuth':[
+  "Polares de 70 t: a 6 nós quase iguais (ASD um pouco mais governo; ATD menos frenagem); 8 nós ATD um pouco melhor à popa; > 8 nós ATD supera em governo e frenagem [§ 4.3.4, fig. 4.28]",
+  "Bow-to-bow × trator à proa: ATD anda avante e desliza de lado; ASD anda a ré e gira — vantagens para o trator [§ 6.3.13]",
+  "Ambos: reverse arrest ≤ 8 nós, transverse > 8 nós; twin fins/skeg mudam a banda [§ 4.3.4]"
+ ],
+ 'asd_proa|asd_popa':[
+  "Mesmo rebocador, dois empregos: pela proa = trator reverso (rebocador de popa, push-pull, arrest modes, bow-to-bow); pela popa = convencional (rebocador de proa eficaz com seguimento, girting) [§ 2.9.2]",
+  "Fazer firme à proa: pela popa até 7 nós com risco de emborcar; pela proa (bow-to-bow) 4–7 nós com risco de emborcar mínimo [§ 6.3.13]",
+  "Indireto: pela proa os propulsores contra-atuam a banda; pela popa somam a ela [§ 4.2.3; § 2.11.1]"
+ ],
+ 'asd_proa|reverse_tractor':[
+  "Emprego pela proa é igual (rebocador de popa, push-pull, arrest, bow-to-bow); o ASD acrescenta o emprego pela popa como convencional, que o trator reverso não tem (ponto de ré mal situado) [§ 2.9.1; § 2.7.1]",
+  "Japonês (reverso): indireto não é opção; escolta sem fazer firme [§ 2.8.2]"
+ ],
+ 'asd_proa|rotortug':[
+  "Rotortug melhor em 4–8 nós, ASD melhor acima de 8 nós [fig. 2C.4]",
+  "Indireto: no ASD os propulsores reduzem a banda; no Rotortug aumentam [§ 2.11.1]",
+  "Rotortug: rotoring dentro da boca (70 % BP) e sem risco no bulbo; ASD compacto só \"até certo ponto\" em espaços confinados [§ 2.11.3–2.11.4]"
+ ],
+ 'conventional|asd_popa':[
+  "Mesmo emprego (rebocador de proa com seguimento, girting); o ASD tem mais potência, C mais a vante (mais força e mais banda) e faz firme até 7 nós [§ 2.9.2; § 4.2.2; § 6.3.13]"
+ ],
+ 'conventional|carrousel':[
+  "O carrossel nasceu dos riscos do ponto a meia-nau do convencional: governa para os dois bordos à popa, freia de través e não capota; mas depende de velocidade e não serve ao costado [§ 4.4; § 2.14]"
+ ],
+ 'carrousel|dot':["Mesmo princípio; o trilho do DOT é mais alto → adernamentos maiores [§ 2.15]"],
+ 'ztech|rsd':["O RSD executa as mesmas manobras do Z-tech com a mesma segurança; mesma ideia de combinar ASD e ATD; RSD elimina a popa baixa a ré [§ 2.13.1]"],
+ 'sdm_att|giano':["Ambos perdem eficácia ao empurrar lateralmente por fluxo não ótimo aos propulsores; Giano empurra sem adernar (túnel dos skegs) [§ 2.18.3; § 2.21.2]"],
+ 'eddy|giano':["Mesma configuração em linha na linha de centro; Giano com dois guinchos de escolta e BP igual em todas as direções [§ 2.21.1]"],
+ 'rave_crt|carrousel':["O CRT é o carrossel aplicado a um FAST Voith: os riscos de falha/swing dos FAST deixam de existir; eficácia do carrossel ainda cresce com a velocidade [§ 2.17; § 2.14]"],
+ 'tractor_vs|rotortug':["Rotortug = trator com 3º azimutal no lugar do skeg: ganha rotoring, double-ended e forças ativas 10 → 0 nós; perde o skeg passivo do indireto [§ 2.11.1; § 2.11.3]"]
+};
+
+
+/* ============ RENDER ============ */
+const SEC = [
+  ['config','Configuração e projeto','s-config','⚓'],
+  ['modos','Modos de operação peculiares','s-modo','⚙'],
+  ['vant','Vantagens','s-vant','✔'],
+  ['lim','Limitações, desvantagens e riscos','s-lim','✖'],
+  ['met','Métodos de assistência: adequados × não adequados','s-met','↔'],
+  ['num','Velocidades e números-chave','s-num','#'],
+  ['seg','Segurança, interação e estabilidade','s-seg','⚠'],
+  ['comp','Comparações diretas com outros tipos','s-comp','⇄'],
+  ['banca','Padrões de banca e distratores','s-banca','★'],
+];
+const ET = {DECORAR:'et-dec',DISTRATOR:'et-dis',BANCA:'et-ban',CALCULO:'et-calc',CONFLITO:'et-conf',VERIFICAR:'et-ver'};
+function fmt(s){
+  s = s.replace(/\[((?:§|Cap\.|VdL|Fig\.|Tab\.)[^\]]*)\]/g,'<span class="ref">$1</span>');
+  s = s.replace(/\[(DECORAR|DISTRATOR|BANCA|CALCULO|CONFLITO|VERIFICAR)(:[^\]]*)?\]/g,(m,a,b)=>'<span class="et '+ET[a]+'">'+a+(b?b:'')+'</span>');
+  return s;
+}
+function li(items){
+  return '<ul>'+items.map(x=> x.startsWith('##') ? '<li class="h">'+x.slice(2).trim()+'</li>' : '<li>'+fmt(x)+'</li>').join('')+'</ul>';
+}
+const registro=[]; let respondidas=0, acertos=0;
+function ficha(k, slot){
+  const t=T[k]; if(!t) return '<div class="empty">Ficha ainda não disponível.</div>';
+  let h='<article class="ficha" data-k="'+k+'"><div class="fh"><div class="k">'+(t.grupo||'')+'</div><h3>'+t.nome+'</h3><div class="p">'+(t.pt||'')+'</div><div class="refs">Fontes: '+(t.ref||'')+'</div></div><div class="fb">';
+  SEC.forEach(([key,title,cls,ic])=>{
+    const items=t.sec&&t.sec[key]; if(!items||!items.length) return;
+    const n=items.filter(x=>!x.startsWith('##')).length;
+    h+='<details class="'+cls+'" '+(key==='config'||key==='modos'?'open':'')+'><summary><span class="ic">'+ic+'</span>'+title+'<span class="cnt">'+n+'</span></summary><div class="dc">'+li(items)+'</div></details>';
+  });
+  if(t.vf&&t.vf.length){
+    h+='<details class="s-vf"><summary><span class="ic">?</span>V/F rápido — '+t.vf.length+' afirmativas<span class="cnt">→ painel</span></summary><div class="dc vf">';
+    t.vf.forEach((q,i)=>{
+      const id=k+'_'+slot+'_'+i;
+      h+='<div class="vfq" id="q_'+id+'"><div class="en">'+(i+1)+'. '+fmt(q.s)+'</div><div class="bt"><button class="vfb" onclick="resp(\''+k+'\','+i+',true,this)">Verdadeiro</button><button class="vfb" onclick="resp(\''+k+'\','+i+',false,this)">Falso</button></div><div class="vfx">'+'</div></div>';
+    });
+    h+='</div></details>';
+  }
+  h+='</div></article>'; return h;
+}
+function resp(k,i,val,btn){
+  const q=T[k].vf[i]; const box=btn.closest('.vfq'); if(box.dataset.done) return; box.dataset.done='1';
+  const ok = (val===q.v);
+  box.querySelectorAll('.vfb').forEach(b=>{b.disabled=true; const isV=b.textContent==='Verdadeiro'; if(isV===q.v) b.classList.add('ok'); if(b===btn&&!ok) b.classList.add('no');});
+  const x=box.querySelector('.vfx'); x.innerHTML='<b>'+(ok?'Correto. ':'Errado. ')+'Gabarito: '+(q.v?'VERDADEIRO':'FALSO')+'.</b> '+fmt(q.fb); x.classList.add('show');
+  respondidas++; if(ok) acertos++;
+  registro.push({caderno_id:'classificacao_rebocadores_interativa', tipo:'vf', bloco:'Módulo II · Bloco H', tema:'Rebocadores — Classificação Hensen 2A.1', assunto:T[k].nome, enunciado:q.s.replace(/<[^>]+>/g,'').slice(0,160), acertou:ok});
+  document.getElementById('placar').textContent='V/F respondidos: '+respondidas+' · acertos: '+acertos;
+}
+
+/* ============ SELEÇÃO / MODOS ============ */
+let modo='um', selA=null, selB=null;
+const panel=document.getElementById('panel');
+function setModo(m){
+  modo=m; selA=null; selB=null;
+  document.getElementById('mUm').classList.toggle('on',m==='um');
+  document.getElementById('mDois').classList.toggle('on',m==='comparar');
+  document.getElementById('hint').textContent = m==='um' ? 'Clique numa caixa da tabela para abrir a ficha.' : 'Clique em DOIS tipos de rebocador para comparar o emprego (métodos e formas de operar).';
+  marcar(); render();
+}
+function marcar(){
+  document.querySelectorAll('.nb').forEach(b=>{
+    b.classList.remove('sel','selB'); const tg=b.querySelector('.tag'); if(tg) tg.remove();
+    if(b.dataset.k===selA){ b.classList.add('sel'); if(modo==='comparar'){ b.insertAdjacentHTML('beforeend','<span class="tag">A</span>'); } }
+    if(b.dataset.k===selB){ b.classList.add('selB'); b.insertAdjacentHTML('beforeend','<span class="tag tagB">B</span>'); }
+  });
+}
+/* ============ COMPARAÇÃO DE EMPREGO ============ */
+let onlyDiff=false, showFichas=false;
+const RL={4:['Ótimo','r4'],3:['Bom','r3'],2:['Limitado','r2'],1:['Ruim','r1'],0:['Não faz','r0'],'-1':['Sem dado','rx']};
+function cell(e){ if(!e) return '<td class="cc rx"><span class="rt">Sem dado</span></td>'; const [r,t]=e; const [lab,cls]=RL[r]; return '<td class="cc '+cls+'"><span class="rt">'+lab+'</span><div class="ct">'+fmt(t)+'</div></td>'; }
+function veredito(a,b){
+  const ra=a?a[0]:-1, rb=b?b[0]:-1;
+  if(ra<0||rb<0) return ['Sem base no Hensen','vx'];
+  if(ra===0&&rb===0) return ['Nenhum executa','v0'];
+  if(ra===rb) return ['Equivalentes','v='];
+  const comp = (ra>=3&&rb<=1)||(rb>=3&&ra<=1);
+  const who = ra>rb?'A':'B';
+  return [(comp?'Complementar — ':'')+who+' melhor', comp?'vc':(who==='A'?'va':'vb')];
+}
+function compare(a,b){
+  const ta=T[a], tb=T[b], ea=E[a], eb=E[b];
+  if(!ea||!eb) return '<div class="empty">A comparação de emprego vale para tipos de rebocador, não para caixas de grupo. Escolha dois tipos.</div>';
+  let rows='', nDiff=0;
+  METODOS.forEach(([k,tit,desc])=>{
+    const va=ea[k], vb=eb[k]; const [vt,vc]=veredito(va,vb);
+    const same = vc==='v='||vc==='v0';
+    if(!same) nDiff++;
+    if(onlyDiff && same) return;
+    rows+='<tr><th class="mh"><div>'+tit+'</div><small>'+desc+'</small></th>'+cell(va)+cell(vb)+'<td class="vd '+vc+'">'+vt+'</td></tr>';
+  });
+  const pk = PAIR[a+'|'+b]||PAIR[b+'|'+a];
+  let h='<div class="cmp"><div class="cmph"><div class="k">Comparação de emprego · métodos e formas de operar</div>'+
+   '<h3><span class="ta">A · '+ta.nome+'</span> <span class="vs">×</span> <span class="tb">B · '+tb.nome+'</span></h3>'+
+   '<div class="cmpc"><label><input type="checkbox" '+(onlyDiff?'checked':'')+' onchange="onlyDiff=this.checked;render()"> só diferenças ('+nDiff+' de '+METODOS.length+')</label>'+
+   '<label><input type="checkbox" '+(showFichas?'checked':'')+' onchange="showFichas=this.checked;render()"> ver fichas completas abaixo</label></div></div>'+
+   '<div class="tw"><table class="ct2"><thead><tr><th>Método / forma de operar</th><th class="ha">A — '+ta.nome+'</th><th class="hb">B — '+tb.nome+'</th><th>Veredito</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+   '<div class="pair"><div class="k">O que Hensen diz quando compara os dois</div>'+(pk?li(pk):'<p class="np">Hensen não compara estes dois tipos diretamente nos capítulos cobertos; a leitura acima vem das fichas individuais de cada um.</p>')+'</div>'+
+   '<p class="leg"><b>Escala:</b> Ótimo · Bom · Limitado · Ruim · Não faz / não aplicável · Sem dado (Hensen não trata). <b>Complementar</b> = um cobre a fraqueza do outro nesse método.</p></div>';
+  if(showFichas) h+='<div class="fichas two" style="margin-top:1rem">'+ficha(a,'A')+ficha(b,'B')+'</div>';
+  return h;
+}
+function render(){
+  if(modo==='um'){
+    panel.innerHTML = selA ? '<div class="fichas">'+ficha(selA,'A')+'</div>' : '<div class="empty">Nenhuma ficha aberta. Clique numa caixa da tabela.</div>';
+  } else {
+    if(!selA || !selB){ panel.innerHTML='<div class="empty">'+(selA?'Caixa A: <b>'+T[selA].nome+'</b>. Agora escolha a caixa B.':'Escolha a primeira caixa (A) e depois a segunda (B).')+'</div>'; return; }
+    panel.innerHTML=compare(selA,selB);
+  }
+  if(window.innerWidth<=1000 && (selA||selB)) panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.querySelectorAll('.nb').forEach(b=>b.addEventListener('click',()=>{
+  const k=b.dataset.k;
+  if(modo==='um'){ selA=k; }
+  else { if(!selA){selA=k;} else if(!selB && k!==selA){selB=k;} else { selA=k; selB=null; } }
+  marcar(); render();
+}));
+function toggleAll(open){ panel.querySelectorAll('details').forEach(d=>d.open=open); }
+
+/* ============ GLOSSÁRIO ============ */
+document.getElementById('glos').innerHTML = GLOS.map(([a,b])=>'<dt><b>'+a+'</b></dt><dd>'+fmt(b)+'</dd>').join('');
+
+/* ============ SUPABASE ============ */
+const SUPA_URL='https://iftourtecxtmvuhptvmo.supabase.co';
+document.getElementById('btnSupabase').onclick=async ()=>{
+  const st=document.getElementById('supStatus');
+  if(registro.length===0){ st.textContent='Responda a algum V/F antes de enviar.'; return; }
+  st.textContent='Enviando '+registro.length+' respostas...';
+  const payload=registro.map(r=>({...r, sessao_data:new Date().toISOString()}));
+  try{
+    const resp=await fetch(SUPA_URL+'/rest/v1/respostas',{method:'POST',headers:{'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(payload)});
+    st.textContent = resp.ok ? '✓ Enviado ao Painel PSCPP.' : 'Falha no envio (verifique a chave/API no painel).';
+  }catch(e){ st.textContent='Sem conexão com o painel. Respostas registradas localmente nesta sessão.'; }
+};
+</script>
+</body>
+</html>
