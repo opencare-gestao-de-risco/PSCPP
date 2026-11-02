@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Flashcards das 26 bandeiras do Código Internacional de Sinais — sinais de uma letra, fonético e significado bilíngue.">
+<meta name="theme-color" content="#0D3D36">
+<title>Bandeiras do CIS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.back-link{font-family:var(--mono);font-size:12px;color:var(--teal);text-decoration:none;letter-spacing:.04em}
+.back-link:hover{text-decoration:underline}
+
+/* Layout: one centered study column — deck counter, flip card, grading bar, then a collapsible A–Z reference table */
+:root{
+  --bg:#F7F3EA; --surface:#FFFDF7; --ink:#0D3D36; --muted:#5E716C; --line:#DCD4C2;
+  --teal:#1A7A6E; --gold:#C8A84B; --gold-soft:#F3E7BF; --ok:#1A7A6E; --bad:#B23A2E;
+  --display:"Libre Caslon Text", Georgia, serif;
+  --body:"IBM Plex Sans", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  /* signal-flag colours stay fixed in both themes */
+  --f-red:#C8102E; --f-blue:#0B3F91; --f-yel:#FFC629; --f-blk:#151515; --f-wht:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1F1C; --surface:#123029; --ink:#EDE6D3; --muted:#9DB0AA; --line:#24463F;
+  --teal:#5CC2B2; --gold:#D9BC62; --gold-soft:#3A3420; --ok:#5CC2B2; --bad:#E07A6E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1F1C; --surface:#123029; --ink:#EDE6D3; --muted:#9DB0AA; --line:#24463F;
+  --teal:#5CC2B2; --gold:#D9BC62; --gold-soft:#3A3420; --ok:#5CC2B2; --bad:#E07A6E; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:560px;margin:0 auto;padding-block:20px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+h1{font-family:var(--display);font-size:clamp(26px,7vw,34px);line-height:1.1;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:0;font-size:14px}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--muted);padding:7px 12px;font:500 13px var(--body);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 13px;font:500 13px var(--body);cursor:pointer}
+.btn:hover{border-color:var(--teal)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.progress{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+
+.scene{perspective:1200px}
+.card{position:relative;width:100%;min-height:380px;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,.7,.3,1)}
+.card.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;box-shadow:0 10px 30px -18px rgba(13,61,54,.45)}
+.back{transform:rotateY(180deg);justify-content:flex-start;align-items:stretch;overflow-y:auto}
+.flag{width:min(260px,70%);height:auto;filter:drop-shadow(0 3px 6px rgba(0,0,0,.18))}
+.flag.sm{width:96px}
+.hint{font-size:12px;color:var(--muted);font-family:var(--mono);letter-spacing:.06em}
+.q-en{font-family:var(--display);font-size:clamp(19px,5vw,23px);text-align:center;line-height:1.35;max-width:30ch;text-wrap:balance}
+
+.head{display:flex;align-items:center;gap:14px}
+.letter{font-family:var(--display);font-size:48px;line-height:1;font-weight:700}
+.phon{font-family:var(--mono);font-size:14px;color:var(--teal);letter-spacing:.04em}
+.snd{display:inline-block;margin-top:4px;font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:999px;background:var(--gold-soft);color:var(--ink);letter-spacing:.04em}
+.en{font-family:var(--display);font-size:18px;line-height:1.4;margin:0}
+.pt{margin:0;color:var(--muted);font-size:14px}
+.pt b{color:var(--ink);font-weight:600}
+.trap{border-left:3px solid var(--gold);background:var(--gold-soft);padding:9px 12px;border-radius:0 8px 8px 0;font-size:13.5px}
+.trap strong{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+
+.grade{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grade button{padding:13px;border-radius:10px;font:600 15px var(--body);cursor:pointer;border:1.5px solid}
+.g-bad{background:transparent;color:var(--bad);border-color:var(--bad)}
+.g-ok{background:var(--ok);color:var(--bg);border-color:var(--ok)}
+.grade button:disabled{opacity:.35;cursor:default}
+
+.done{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.done .score{font-family:var(--display);font-size:42px}
+
+details{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"⚓";color:var(--gold)}
+.tbl{overflow-x:auto;padding:0 8px 10px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 6px;border-top:1px solid var(--line);vertical-align:middle;text-align:left}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-top:0}
+td.l{font-family:var(--display);font-weight:700;font-size:18px}
+td svg{width:46px;display:block}
+.src{font-size:12px;color:var(--muted);margin:0}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="index.html">← Voltar à Estante PSCPP</a>
+  <header>
+    <span class="eyebrow">PSCPP 2027 · Bloco VI · CIS Cap. XI</span>
+    <h1>Bandeiras do CIS</h1>
+    <p class="sub">Sinais de uma letra, A a Z. Toque no cartão para virar; marque se acertou. Os erros voltam ao fim do baralho.</p>
+  </header>
+
+  <div class="toolbar">
+    <div class="seg" role="group" aria-label="Modo">
+      <button id="m-flag" aria-pressed="true">Bandeira → sinal</button>
+      <button id="m-mean" aria-pressed="false">Sinal → bandeira</button>
+    </div>
+    <button class="btn" id="shuffle">Embaralhar</button>
+    <button class="btn" id="restart">Recomeçar</button>
+  </div>
+
+  <div>
+    <div class="progress"><span id="pos">1 / 26</span><span><span id="okc">0</span> certas · <span id="badc">0</span> erradas</span></div>
+    <div class="bar"><i id="barfill"></i></div>
+  </div>
+
+  <div id="study">
+    <div class="scene"><div class="card" id="card" tabindex="0" role="button" aria-label="Virar cartão">
+      <div class="face front" id="front"></div>
+      <div class="face back" id="back"></div>
+    </div></div>
+  </div>
+
+  <div class="grade" id="grade">
+    <button class="g-bad" id="bad" disabled>Errei</button>
+    <button class="g-ok" id="ok" disabled>Acertei</button>
+  </div>
+
+  <details>
+    <summary>Tabela de consulta A–Z</summary>
+    <div class="tbl"><table><thead><tr><th>Bandeira</th><th></th><th>Phonetic</th><th>Significado</th></tr></thead><tbody id="tbody"></tbody></table></div>
+  </details>
+
+  <p class="src">Fonte: IMO, <i>International Code of Signals</i>, 2005 — Cap. XI (Sinais de uma letra) e Apêndice 2 (Tabela de bandeiras). * = sinal que, por som, só se usa conforme RIPEAM Regras 34 e 35.</p>
+</div>
+
+<script>
+const R='var(--f-red)',B='var(--f-blue)',Y='var(--f-yel)',K='var(--f-blk)',W='var(--f-wht)';
+const r=(x,y,w,h,f)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`;
+const p=(d,f)=>`<path d="${d}" fill="${f}"/>`;
+const SW='M0 0H150L105 50L150 100H0Z';
+const draw={
+ A:()=>`<clipPath id="cA"><path d="${SW}"/></clipPath><g clip-path="url(#cA)">${r(0,0,75,100,W)+r(75,0,75,100,B)}</g>`,
+ B:()=>p(SW,R),
+ C:()=>[B,W,R,W,B].map((c,i)=>r(0,i*20,150,20,c)).join(''),
+ D:()=>r(0,0,150,100,Y)+r(0,25,150,50,B),
+ E:()=>r(0,0,150,50,B)+r(0,50,150,50,R),
+ F:()=>r(0,0,150,100,W)+p('M75 0L150 50L75 100L0 50Z',R),
+ G:()=>[Y,B,Y,B,Y,B].map((c,i)=>r(i*25,0,25,100,c)).join(''),
+ H:()=>r(0,0,75,100,W)+r(75,0,75,100,R),
+ I:()=>r(0,0,150,100,Y)+`<circle cx="75" cy="50" r="27" fill="${K}"/>`,
+ J:()=>r(0,0,150,100,B)+r(0,33.3,150,33.4,W),
+ K:()=>r(0,0,75,100,Y)+r(75,0,75,100,B),
+ L:()=>r(0,0,150,100,K)+r(0,0,75,50,Y)+r(75,50,75,50,Y),
+ M:()=>r(0,0,150,100,B)+`<path d="M0 0L150 100M150 0L0 100" stroke="${W}" stroke-width="20"/>`,
+ N:()=>{let s='';for(let i=0;i<4;i++)for(let j=0;j<4;j++)s+=r(j*37.5,i*25,37.5,25,(i+j)%2?W:B);return s},
+ O:()=>p('M0 0H150L0 100Z',R)+p('M150 0V100H0Z',Y),
+ P:()=>r(0,0,150,100,B)+r(50,33,50,34,W),
+ Q:()=>r(0,0,150,100,Y),
+ R:()=>r(0,0,150,100,R)+r(0,42,150,16,Y)+r(67,0,16,100,Y),
+ S:()=>r(0,0,150,100,W)+r(50,33,50,34,B),
+ T:()=>r(0,0,50,100,R)+r(50,0,50,100,W)+r(100,0,50,100,B),
+ U:()=>r(0,0,150,100,W)+r(0,0,75,50,R)+r(75,50,75,50,R),
+ V:()=>r(0,0,150,100,W)+`<path d="M0 0L150 100M150 0L0 100" stroke="${R}" stroke-width="20"/>`,
+ W:()=>r(0,0,150,100,B)+r(20,16,110,68,W)+r(46,33,58,34,R),
+ X:()=>r(0,0,150,100,W)+r(0,42,150,16,B)+r(67,0,16,100,B),
+ Y:()=>{let s=r(0,0,150,100,Y);for(let k=-100;k<250;k+=40)s+=p(`M${k} 100L${k+100} 0L${k+120} 0L${k+20} 100Z`,R);return `<clipPath id="cY"><rect width="150" height="100"/></clipPath><g clip-path="url(#cY)">${s}</g>`},
+ Z:()=>p('M0 0H150L75 50Z',Y)+p('M150 0V100L75 50Z',B)+p('M150 100H0L75 50Z',R)+p('M0 100V0L75 50Z',K)
+};
+let uid=0;
+function flag(L,cls='flag'){uid++;let inner=draw[L]().replace(/id="c(\w)"/g,`id="c$1${uid}"`).replace(/url\(#c(\w)\)/g,`url(#c$1${uid})`);
+ const outline=(L==='A'||L==='B')?`<path d="${SW}" fill="none" stroke="#0000004d" stroke-width="1.5"/>`:`<rect x=".75" y=".75" width="148.5" height="98.5" fill="none" stroke="#0000004d" stroke-width="1.5"/>`;
+ return `<svg class="${cls}" viewBox="0 0 150 100" role="img" aria-label="Bandeira ${L}">${inner}${outline}</svg>`}
+
+const D=[
+ ['A','Alfa',0,'I have a diver down; keep well clear at slow speed.','Tenho mergulhador n’água; mantenha-se bem afastado e a baixa velocidade.','Única bandeira de cauda (com a B). Branco e azul = mergulhador.'],
+ ['B','Bravo',1,'I am taking in, or discharging, or carrying dangerous goods.','Estou carregando, descarregando ou transportando carga perigosa.','Vermelha e de cauda. Não confundir com J (incêndio + carga perigosa).'],
+ ['C','Charlie',1,'Affirmative — or “the significance of the previous group should be read in the affirmative”.','Afirmativo, sim, concordo.','Por voz o afirmativo é “CHARLIE”; o negativo, “NO”.'],
+ ['D','Delta',1,'Keep clear of me; I am manoeuvring with difficulty.','Mantenha-se afastado; estou manobrando com dificuldade.','D, J e T começam com “Keep clear” — o motivo é o que distingue.'],
+ ['E','Echo',1,'I am altering my course to starboard.','Estou guinando para boreste.','E = Estibordo (boreste). I = bombordo. Par clássico de troca.'],
+ ['F','Foxtrot',0,'I am disabled; communicate with me.','Estou a matroca; comunique-se comigo.','F pede comunicação porque está sem governo. K apenas deseja comunicar.'],
+ ['G','Golf',1,'I require a pilot. (Fishing vessels near fishing grounds: “I am hauling nets”.)','Solicito prático. Barcos de pesca: “Estou arrastando redes”.','G pede prático; H já tem prático. Para prático, a dupla mais cobrada.'],
+ ['H','Hotel',1,'I have a pilot on board.','Tenho prático a bordo.','H = Have pilot. Metade branca, metade vermelha.'],
+ ['I','India',1,'I am altering my course to port.','Estou guinando para bombordo.','Bola preta em fundo amarelo. I = bombordo.'],
+ ['J','Juliett',0,'Keep well clear of me. I am on fire and have dangerous cargo on board, or I am leaking dangerous cargo.','Mantenha-se bem afastado; tenho incêndio e carga perigosa a bordo, ou vazamento de carga perigosa.','Grafia IMO: “Juliett”, com dois T.'],
+ ['K','Kilo',0,'I wish to communicate with you.','Desejo comunicar-me com você.','K e S também servem como sinais de desembarque para embarcações miúdas (SOLAS V/16).'],
+ ['L','Lima',0,'You should stop your vessel instantly.','Pare imediatamente seu navio.','L é ordem a outro navio. M é informação sobre o próprio navio.'],
+ ['M','Mike',1,'My vessel is stopped and making no way through the water.','Meu navio está parado e sem seguimento.','Cruz de Santo André branca em azul. A V é vermelha em branco.'],
+ ['N','November',0,'Negative — or “the significance of the previous group should be read in the negative”.','Negativo, não, não concordo.','Só visual ou por som. Por voz/radiotelefonia diz-se “NO”.'],
+ ['O','Oscar',0,'Man overboard.','Homem ao mar.','Diagonal vermelho e amarelo. Y também é vermelho e amarelo, em listras.'],
+ ['P','Papa',0,'In harbour: all persons should report on board as the vessel is about to proceed to sea. At sea (fishing vessels): my nets have come fast upon an obstruction.','No porto: todos a bordo, o navio vai sair. No mar (pesca): minhas redes estão presas em obstrução.','Como sinal sonoro, P pode significar “Preciso de prático” (CIS, Cap. XI).'],
+ ['Q','Quebec',0,'My vessel is “healthy” and I request free pratique.','O estado sanitário do meu navio é bom e peço Livre Prática.','Toda amarela. Não confundir com D (amarelo e azul).'],
+ ['R','Romeo',0,'No single-letter meaning — see procedure signals.','Ver sinais de procedimento.','Pegadinha: R não tem significado como sinal de uma letra.'],
+ ['S','Sierra',1,'I am operating astern propulsion.','Minhas máquinas estão dando atrás.','S é o inverso de P: quadrado azul em fundo branco.'],
+ ['T','Tango',1,'Keep clear of me; I am engaged in pair trawling.','Mantenha-se afastado; estou arrastando rede em paralelo.','Tricolor vertical vermelho, branco, azul.'],
+ ['U','Uniform',0,'You are running into danger.','Você se dirige para um perigo.','U é vermelho e branco em quartos; L é amarelo e preto.'],
+ ['V','Victor',0,'I require assistance.','Solicito auxílio.','V = auxílio genérico. W = assistência médica.'],
+ ['W','Whiskey',0,'I require medical assistance.','Solicito assistência médica.','Três camadas: azul, branco, vermelho no centro.'],
+ ['X','X-ray',0,'Stop carrying out your intentions and watch for my signals.','Suspenda o que está fazendo e observe meus sinais.','Cruz azul em branco. R tem cruz amarela em vermelho.'],
+ ['Y','Yankee',0,'I am dragging my anchor.','Estou arrastando meu ferro.','Listras diagonais vermelhas e amarelas.'],
+ ['Z','Zulu',1,'I require a tug. (Fishing vessels near fishing grounds: “I am shooting nets”.)','Solicito rebocador. Barcos de pesca: “Estou lançando redes”.','Quatro triângulos: amarelo, azul, vermelho, preto.']
+];
+
+let mode='flag',deck=[],i=0,ok=0,bad=0,flipped=false;
+const $=id=>document.getElementById(id);
+function reset(shuffle){deck=D.map((_,k)=>k);if(shuffle)for(let k=deck.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[deck[k],deck[j]]=[deck[j],deck[k]]}i=0;ok=0;bad=0;render()}
+function backHTML(d){return `<div class="head">${flag(d[0],'flag sm')}<div><div class="letter">${d[0]}</div><div class="phon">${d[1].toUpperCase()}</div>${d[2]?'<span class="snd">* som: RIPEAM 34/35</span>':''}</div></div>
+ <p class="en">${d[3]}</p><p class="pt"><b>PT:</b> ${d[4]}</p><div class="trap"><strong>Banca</strong>${d[5]}</div>`}
+function render(){
+ const total=deck.length;
+ $('okc').textContent=ok;$('badc').textContent=bad;
+ $('barfill').style.width=(D.length?Math.min(100,ok/D.length*100):0)+'%';
+ $('card').classList.remove('flipped');flipped=false;$('ok').disabled=$('bad').disabled=true;
+ if(i>=total){$('pos').textContent='Fim';
+  $('study').innerHTML=`<div class="face" style="position:static;min-height:300px"><div class="done"><span class="eyebrow">Baralho concluído</span><div class="score">${ok} / 26</div><p class="sub">${bad?bad+' erro(s) revisado(s) ao longo do caminho.':'Nenhum erro. Agora tente o outro modo.'}</p><button class="btn" id="again">Recomeçar embaralhado</button></div></div>`;
+  $('again').onclick=()=>{restoreStudy();reset(true)};$('grade').hidden=true;return}
+ $('grade').hidden=false;
+ const d=D[deck[i]];$('pos').textContent=`${i+1} / ${total}`;
+ $('front').innerHTML=mode==='flag'?`${flag(d[0])}<span class="hint">QUE SINAL É ESTE?</span>`
+  :`<span class="hint">QUAL BANDEIRA?</span><p class="q-en">${d[3]}</p>`;
+ $('back').innerHTML=backHTML(d);
+}
+function restoreStudy(){$('study').innerHTML=`<div class="scene"><div class="card" id="card" tabindex="0" role="button" aria-label="Virar cartão"><div class="face front" id="front"></div><div class="face back" id="back"></div></div></div>`;bindCard()}
+function flip(){flipped=!flipped;$('card').classList.toggle('flipped',flipped);if(flipped)$('ok').disabled=$('bad').disabled=false}
+function bindCard(){const c=$('card');c.onclick=flip;c.onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();flip()}}}
+$('ok').onclick=()=>{ok++;i++;render()};
+$('bad').onclick=()=>{bad++;deck.push(deck[i]);i++;render()};
+$('shuffle').onclick=()=>{restoreStudy();reset(true)};
+$('restart').onclick=()=>{restoreStudy();reset(false)};
+function setMode(m){mode=m;$('m-flag').setAttribute('aria-pressed',m==='flag');$('m-mean').setAttribute('aria-pressed',m==='mean');restoreStudy();reset(true)}
+$('m-flag').onclick=()=>setMode('flag');$('m-mean').onclick=()=>setMode('mean');
+document.addEventListener('keydown',e=>{if(!flipped)return;if(e.key==='ArrowRight')$('ok').click();if(e.key==='ArrowLeft')$('bad').click()});
+$('tbody').innerHTML=D.map(d=>`<tr><td>${flag(d[0],'')}</td><td class="l">${d[0]}${d[2]?'*':''}</td><td><span class="phon">${d[1]}</span></td><td>${d[3]}<br><span class="pt">${d[4]}</span></td></tr>`).join('');
+bindCard();reset(false);
+</script>
+</body>
+</html>
