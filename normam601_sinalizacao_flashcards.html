@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Flashcards da sinalização náutica prevista na NORMAM-601/DHN — sinais laterais, cardinais, perigo isolado, águas seguras, especiais, ritmos de luz, painéis fluviais, pontes, offshore e auxílios radioelétricos.">
+<meta name="theme-color" content="#0D3D36">
+<title>Sinalização Náutica — NORMAM-601</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.back-link{font-family:var(--mono);font-size:12px;color:var(--teal);text-decoration:none;letter-spacing:.04em}
+.back-link:hover{text-decoration:underline}
+
+/* Layout: one centered study column — category chips, mode toggle, deck counter, flip card with animated lantern, grading bar, then a collapsible reference table grouped by category */
+:root{
+  --bg:#F7F3EA; --surface:#FFFDF7; --ink:#0D3D36; --muted:#5E716C; --line:#DCD4C2;
+  --teal:#1A7A6E; --gold:#C8A84B; --gold-soft:#F3E7BF; --ok:#1A7A6E; --bad:#B23A2E;
+  --water:#CFE3DF; --lamp-off:#5E716C;
+  --display:"Libre Caslon Text", Georgia, serif;
+  --body:"IBM Plex Sans", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  /* signal colours stay fixed in both themes (IALA) */
+  --s-red:#C8102E; --s-grn:#0E7A3E; --s-yel:#FFC629; --s-blk:#151515; --s-wht:#FFFFFF; --s-org:#F4791F;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1F1C; --surface:#123029; --ink:#EDE6D3; --muted:#9DB0AA; --line:#24463F;
+  --teal:#5CC2B2; --gold:#D9BC62; --gold-soft:#3A3420; --ok:#5CC2B2; --bad:#E07A6E; --water:#1C4A42; --lamp-off:#3A5A54; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1F1C; --surface:#123029; --ink:#EDE6D3; --muted:#9DB0AA; --line:#24463F;
+  --teal:#5CC2B2; --gold:#D9BC62; --gold-soft:#3A3420; --ok:#5CC2B2; --bad:#E07A6E; --water:#1C4A42; --lamp-off:#3A5A54; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:560px;margin:0 auto;padding-block:20px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+h1{font-family:var(--display);font-size:clamp(26px,7vw,34px);line-height:1.1;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:0;font-size:14px}
+.proto{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--gold-soft);color:var(--ink);padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:5px 11px;font:500 12.5px var(--body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--bg)}
+.chip:hover{border-color:var(--teal)}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--muted);padding:7px 12px;font:500 13px var(--body);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 13px;font:500 13px var(--body);cursor:pointer}
+.btn:hover{border-color:var(--teal)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.progress{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+
+.scene{perspective:1200px}
+.card{position:relative;width:100%;min-height:440px;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,.7,.3,1)}
+.card.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;box-shadow:0 10px 30px -18px rgba(13,61,54,.45)}
+.back{transform:rotateY(180deg);justify-content:flex-start;align-items:stretch;overflow-y:auto;gap:12px}
+.sig{width:min(220px,62%);height:auto;filter:drop-shadow(0 3px 6px rgba(0,0,0,.18))}
+.sig.sm{width:84px;flex:none}
+.sig.wide{width:min(320px,90%)}
+.hint{font-size:12px;color:var(--muted);font-family:var(--mono);letter-spacing:.06em;text-align:center}
+.q{font-family:var(--display);font-size:clamp(17px,4.6vw,21px);text-align:center;line-height:1.4;max-width:34ch;text-wrap:balance}
+.tl{width:min(320px,92%);height:16px;display:block}
+.tlabel{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+
+.head{display:flex;align-items:center;gap:14px}
+.name{font-family:var(--display);font-size:22px;line-height:1.15;font-weight:700}
+.cat{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.06em;text-transform:uppercase}
+.art{display:inline-block;margin-top:4px;font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:999px;background:var(--gold-soft);color:var(--ink);letter-spacing:.04em}
+.spec{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:13.5px}
+.spec dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.spec dd{margin:0}
+.spec dd b{font-weight:600}
+.lightrow{display:flex;align-items:center;gap:10px}
+.lightrow .tl{width:150px;height:12px;flex:none}
+.trap{border-left:3px solid var(--gold);background:var(--gold-soft);padding:9px 12px;border-radius:0 8px 8px 0;font-size:13.5px}
+.trap strong{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+
+.grade{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grade button{padding:13px;border-radius:10px;font:600 15px var(--body);cursor:pointer;border:1.5px solid}
+.g-bad{background:transparent;color:var(--bad);border-color:var(--bad)}
+.g-ok{background:var(--ok);color:var(--bg);border-color:var(--ok)}
+.grade button:disabled{opacity:.35;cursor:default}
+
+.done{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.done .score{font-family:var(--display);font-size:42px}
+
+details{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"⚓";color:var(--gold)}
+.tbl{overflow-x:auto;padding:0 8px 10px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 6px;border-top:1px solid var(--line);vertical-align:middle;text-align:left}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-top:0}
+td.n{font-weight:600}
+td svg{width:44px;display:block}
+tr.grp td{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);background:var(--bg);padding-top:10px}
+.src{font-size:12px;color:var(--muted);margin:0}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="index.html">← Voltar à Estante PSCPP</a>
+  <header>
+    <span class="eyebrow">PSCPP 2027 · Bloco III · NORMAM-601/DHN</span>
+    <h1>Sinalização Náutica</h1>
+    <p class="sub">Sistema IALA Região B, ritmos de luz, painéis fluviais, pontes e estruturas offshore. Toque para virar; a lanterna pisca no ritmo real do sinal. Os erros voltam ao fim do baralho.</p>
+  </header>
+
+  <div class="chips" id="chips" role="group" aria-label="Categoria"></div>
+
+  <div class="toolbar">
+    <div class="seg" role="group" aria-label="Modo">
+      <button id="m-sig" aria-pressed="true">Sinal → significado</button>
+      <button id="m-mean" aria-pressed="false">Significado → sinal</button>
+    </div>
+    <button class="btn" id="shuffle">Embaralhar</button>
+    <button class="btn" id="restart">Recomeçar</button>
+  </div>
+
+  <div>
+    <div class="progress"><span id="pos">1 / 0</span><span><span id="okc">0</span> certas · <span id="badc">0</span> erradas</span></div>
+    <div class="bar"><i id="barfill"></i></div>
+  </div>
+
+  <div id="study">
+    <div class="scene"><div class="card" id="card" tabindex="0" role="button" aria-label="Virar cartão">
+      <div class="face front" id="front"></div>
+      <div class="face back" id="back"></div>
+    </div></div>
+  </div>
+
+  <div class="grade" id="grade">
+    <button class="g-bad" id="bad" disabled>Errei</button>
+    <button class="g-ok" id="ok" disabled>Acertei</button>
+  </div>
+
+  <details>
+    <summary>Tabela de consulta por categoria</summary>
+    <div class="tbl"><table><thead><tr><th>Sinal</th><th>Nome</th><th>Luz</th><th>Artigo</th></tr></thead><tbody id="tbody"></tbody></table></div>
+  </details>
+
+  <p class="src">Fonte: NORMAM-601/DHN (2023), ex-NORMAM-17 — Cap. 2 (Seção V, luzes), Cap. 3 (Seções I, II e VII) e Anexos B, C, D e E. Decreto nº 92.267/1986 (IALA Região B). Os desenhos são esquemáticos; as formas das marcas de tope seguem o Anexo A.</p>
+</div>
+
+<script>
+/* ---------- colours & SVG helpers ---------- */
+const R='var(--s-red)',G='var(--s-grn)',Y='var(--s-yel)',K='var(--s-blk)',W='var(--s-wht)',O='var(--s-org)';
+const INK='var(--ink)',MUT='var(--muted)',WAT='var(--water)';
+let uid=0;
+const rect=(x,y,w,h,f,extra='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}" ${extra}/>`;
+const path=(d,f,extra='')=>`<path d="${d}" fill="${f}" ${extra}/>`;
+
+/* top marks, centred at x=100, bottom edge at y=78 */
+const TM={
+ cyl:()=>rect(84,40,32,38,K),
+ cone:()=>path('M78 78L122 78L100 38Z',K),
+ cone2up:()=>path('M80 78L120 78L100 46Z',K)+path('M80 42L120 42L100 10Z',K),
+ cone2dn:()=>path('M80 46L120 46L100 78Z',K)+path('M80 10L120 10L100 42Z',K),
+ coneE:()=>path('M80 42L120 42L100 10Z',K)+path('M80 46L120 46L100 78Z',K),
+ coneW:()=>path('M80 10L120 10L100 42Z',K)+path('M80 78L120 78L100 46Z',K),
+ sph2:()=>`<circle cx="100" cy="63" r="15" fill="${K}"/><circle cx="100" cy="29" r="15" fill="${K}"/>`,
+ sphR:()=>`<circle cx="100" cy="60" r="17" fill="${R}"/>`,
+ x:()=>`<path d="M82 44L118 78M118 44L82 78" stroke="${Y}" stroke-width="9" stroke-linecap="round"/>`,
+ none:()=>''
+};
+
+/* buoy / beacon body. bands: [[colour, fraction], …] drawn top→bottom over y 100–225; vertical:true for safe-water stripes */
+function buoy({bands,topmark='none',shape='pillar',vertical=false,lamp=true,lampColor=W,cls='sig'}){
+ uid++;const id='b'+uid;
+ const sil=shape==='can'?`<rect x="55" y="150" width="90" height="75" rx="6"/><rect x="88" y="100" width="24" height="52"/>`
+  :shape==='cone'?`<path d="M55 225L145 225L118 150L82 150Z"/><rect x="88" y="100" width="24" height="52"/>`
+  :shape==='beacon'?`<rect x="92" y="100" width="16" height="125"/>`
+  :`<rect x="55" y="172" width="90" height="53" rx="10"/><rect x="88" y="100" width="24" height="74"/>`;
+ let fills='',acc=0;const H=125;
+ if(vertical){const n=bands.length,w=100/n;bands.forEach((b,i)=>{fills+=rect(50+i*w,100,w,H,b[0])})}
+ else bands.forEach(b=>{fills+=rect(50,100+acc*H,100,b[1]*H+.5,b[0]);acc+=b[1]});
+ const lantern=lamp?`<rect x="93" y="88" width="14" height="12" fill="${INK}"/><circle class="lamp" cx="100" cy="82" r="8" fill="var(--lamp-off)" data-on="${lampColor}"/>`:'';
+ return `<svg class="${cls}" viewBox="0 -10 200 260" role="img"><defs><clipPath id="${id}">${sil}</clipPath></defs>
+ <path d="M0 230Q25 220 50 230T100 230T150 230T200 230V250H0Z" fill="${WAT}"/>
+ <g clip-path="url(#${id})">${fills}</g><g clip-path="url(#${id})" fill="none" stroke="#0000004d" stroke-width="2"><g>${sil}</g></g>
+ ${lantern}<g transform="translate(0 -18)">${TM[topmark]()}</g></svg>`;
+}
+
+/* square panel (fluvial complementary sign). sym: inner svg; bg/fg colours */
+function panel({bg=W,fg=G,sym,cls='sig',round=false,tri=false}){
+ const frame=tri?`<path d="M100 18L188 182H12Z" fill="${bg}" stroke="#0000004d" stroke-width="2"/>`
+  :round?`<circle cx="100" cy="100" r="86" fill="${bg}" stroke="#0000004d" stroke-width="2"/>`
+  :`<rect x="14" y="14" width="172" height="172" rx="6" fill="${bg}" stroke="#0000004d" stroke-width="2"/>`;
+ return `<svg class="${cls}" viewBox="0 0 200 200" role="img">${frame}${sym(fg)}</svg>`;
+}
+const margins=f=>rect(28,30,14,140,f)+rect(158,30,14,140,f);
+const arrowUp=(x,f)=>path(`M${x} 44L${x+18} 76H${x+7}V156H${x-7}V76H${x-18}Z`,f);
+
+/* bridge scene (day) */
+function bridge(){
+ return `<svg class="sig wide" viewBox="0 0 360 200" role="img">
+ <rect x="0" y="30" width="360" height="16" fill="${MUT}"/>
+ <rect x="40" y="46" width="22" height="120" fill="${MUT}"/><rect x="298" y="46" width="22" height="120" fill="${MUT}"/>
+ <path d="M0 166Q30 156 60 166T120 166T180 166T240 166T300 166T360 166V200H0Z" fill="${WAT}"/>
+ <rect x="14" y="70" width="74" height="74" fill="${W}" stroke="#0000004d"/><path d="M51 82L80 134H22Z" fill="${R}"/>
+ <rect x="272" y="70" width="74" height="74" fill="${W}" stroke="#0000004d"/><rect x="286" y="84" width="46" height="46" fill="${G}"/>
+ <circle cx="180" cy="100" r="34" fill="${W}" stroke="#0000004d"/><rect x="150" y="66" width="20" height="68" fill="${R}" clip-path="circle(34px at 180px 100px)"/><rect x="190" y="66" width="20" height="68" fill="${R}" clip-path="circle(34px at 180px 100px)"/>
+ <text x="51" y="188" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">BORESTE</text>
+ <text x="309" y="188" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">BOMBORDO</text>
+ <text x="180" y="188" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">MELHOR PONTO</text></svg>`;
+}
+function bridgeNight(){
+ return `<svg class="sig wide" viewBox="0 0 360 200" role="img">
+ <rect x="0" y="0" width="360" height="200" fill="#0B1F1C"/>
+ <rect x="0" y="30" width="360" height="16" fill="#2B3F3B"/><rect x="40" y="46" width="22" height="120" fill="#2B3F3B"/><rect x="298" y="46" width="22" height="120" fill="#2B3F3B"/>
+ <circle cx="51" cy="100" r="12" fill="${R}" class="lamp2 l-r"/><circle cx="309" cy="100" r="12" fill="${G}" class="lamp2 l-g"/><circle cx="180" cy="100" r="12" fill="${W}" class="lamp2 l-w"/>
+ <text x="51" y="130" font-size="11" text-anchor="middle" fill="#EDE6D3" font-family="IBM Plex Mono,monospace">LUZ RÍTMICA E</text>
+ <text x="309" y="130" font-size="11" text-anchor="middle" fill="#EDE6D3" font-family="IBM Plex Mono,monospace">LUZ RÍTMICA V</text>
+ <text x="180" y="130" font-size="11" text-anchor="middle" fill="#EDE6D3" font-family="IBM Plex Mono,monospace">ÁGUAS SEGURAS B</text></svg>`;
+}
+/* offshore platform */
+function platform({sound=false,wind=false}){
+ return `<svg class="sig" viewBox="0 0 200 250" role="img">
+ <path d="M0 230Q25 220 50 230T100 230T150 230T200 230V250H0Z" fill="${WAT}"/>
+ ${wind?`<rect x="92" y="60" width="16" height="170" fill="${MUT}"/><rect x="92" y="155" width="16" height="75" fill="${Y}"/><circle cx="100" cy="60" r="6" fill="${INK}"/><path d="M100 60L100 8M100 60L146 86M100 60L54 86" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>`
+ :`<rect x="40" y="110" width="120" height="40" fill="${MUT}"/><rect x="50" y="150" width="12" height="80" fill="${MUT}"/><rect x="138" y="150" width="12" height="80" fill="${MUT}"/><rect x="60" y="80" width="80" height="30" fill="${Y}"/><text x="100" y="102" font-size="18" text-anchor="middle" fill="${K}" font-family="IBM Plex Mono,monospace" font-weight="700">P-61</text><rect x="93" y="60" width="14" height="20" fill="${INK}"/>`}
+ ${sound?`<path d="M30 60Q46 80 30 100M18 50Q42 80 18 110" stroke="${INK}" stroke-width="4" fill="none" stroke-linecap="round"/><text x="100" y="48" font-size="13" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">·· —  (U)</text>`:''}
+ ${wind?'':`<circle class="lamp" cx="100" cy="52" r="8" fill="var(--lamp-off)" data-on="${W}"/>`}
+ ${wind?`<circle class="lamp" cx="30" cy="150" r="8" fill="var(--lamp-off)" data-on="${W}"/>`:''}</svg>`;
+}
+/* radio aids icons */
+/* radar screen: own ship at centre; beacon echo on the bearing line; Morse reply drawn radially from the echo OUTWARD (first element nearest the echo).
+   codes: array of 'dash'|'dot' per beacon; each beacon = {code, bearing(deg), label} */
+function racon(beacons,title){
+ const el=(d,yStart)=>{const len=d==='dash'?20:7;return `<rect x="-3.5" y="${-(yStart+len)}" width="7" height="${len}" rx="2"/>`+'|'+(yStart+len+7)};
+ let g='';
+ beacons.forEach(b=>{let y=52,r='';b.code.forEach(d=>{const [svg,next]=el(d,y).split('|');r+=svg;y=+next});
+  g+=`<g transform="translate(100 120) rotate(${b.bearing})"><path d="M0 0V-44" stroke="#5CC2B2" stroke-width="1.2" opacity=".7"/><circle cy="-44" r="4" fill="#5CC2B2"/><g fill="#8FE3D5">${r}</g><text y="${-(y+6)}" font-size="10" text-anchor="middle" fill="#9DB0AA" font-family="IBM Plex Mono,monospace" transform="rotate(${-b.bearing} 0 ${-(y+6)})">${b.label}</text></g>`});
+ return `<svg class="sig" viewBox="0 0 200 250" role="img"><circle cx="100" cy="120" r="94" fill="#0B1F1C"/><circle cx="100" cy="120" r="63" fill="none" stroke="#2B6B5F" stroke-width="1.2"/><circle cx="100" cy="120" r="31" fill="none" stroke="#2B6B5F" stroke-width="1.2"/><path d="M100 26V214M6 120H194" stroke="#2B6B5F" stroke-width="1"/>
+ <path d="M100 120L100 26" stroke="#5CC2B2" stroke-width="1.5" opacity=".5"/><path d="M96 124L100 112L104 124Z" fill="#5CC2B2"/>
+ ${g}<text x="100" y="236" font-size="12" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">${title}</text></svg>`;
+}
+/* AIS AtoN: Real = the aid itself transmits (waves from its own antenna); Sintético = aid exists but a shore base station transmits; Virtual = no physical aid, base station transmits a simulated one */
+function aisIcon(kind){
+ const waves=(x,y,f=INK)=>`<path d="M${x-14} ${y-14}q14-14 28 0M${x-24} ${y-24}q24-24 48 0M${x-34} ${y-34}q34-34 68 0" stroke="${f}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+ const buoyBody=(dash=false)=>dash?`<rect x="84" y="150" width="80" height="40" rx="8" fill="none" stroke="${Y}" stroke-width="3" stroke-dasharray="8 6"/><rect x="116" y="100" width="16" height="50" fill="none" stroke="${Y}" stroke-width="3" stroke-dasharray="8 6"/>`
+  :`<rect x="84" y="150" width="80" height="40" rx="8" fill="${Y}"/><rect x="116" y="100" width="16" height="50" fill="${Y}"/><path d="M124 96l-16-28h32Z" fill="${INK}"/>`;
+ const base=`<rect x="0" y="190" width="60" height="40" fill="${MUT}"/><rect x="26" y="60" width="6" height="130" fill="${INK}"/><path d="M14 72h30M18 92h22" stroke="${INK}" stroke-width="4"/>`;
+ const d={Real:buoyBody()+`<rect x="123" y="40" width="2" height="30" fill="${INK}"/>`+waves(124,40),
+  Sintético:base+waves(29,60)+buoyBody()+`<path d="M60 120q30-30 60-4" stroke="${INK}" stroke-width="2" stroke-dasharray="4 4" fill="none"/>`,
+  Virtual:base+waves(29,60)+buoyBody(true)+`<text x="124" y="176" font-size="22" text-anchor="middle" fill="${Y}" font-family="IBM Plex Mono,monospace">?</text>`}[kind];
+ return `<svg class="sig" viewBox="0 0 200 250" role="img"><path d="M0 230Q25 220 50 230T100 230T150 230T200 230V250H0Z" fill="${WAT}"/>${d}
+ <text x="100" y="246" font-size="12" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">AIS AtoN ${kind}</text></svg>`;
+}
+/* lamp-only card (rhythm) */
+function lampOnly(color){
+ return `<svg class="sig" viewBox="0 0 200 250" role="img"><rect x="70" y="120" width="60" height="110" rx="6" fill="${MUT}"/><rect x="86" y="96" width="28" height="26" fill="${INK}"/><circle class="lamp" cx="100" cy="76" r="22" fill="var(--lamp-off)" data-on="${color}"/></svg>`;
+}
+
+/* phase diagram for definitions: bar of light/dark segments; `hl` = [startFrac,endFrac] bracket with label */
+function phaseDiag(segs,hl,label){
+ let x=0,b='';segs.forEach(sg=>{const w=sg[1]*300;b+=rect(x,14,w,16,sg[0]==='L'?W:'#0B1F1C','rx="1"');x+=w});
+ const br=hl?`<path d="M${hl[0]*300} 40v6h${(hl[1]-hl[0])*300}v-6" stroke="${INK}" stroke-width="1.5" fill="none"/><text x="${Math.min(230,Math.max(70,(hl[0]+hl[1])/2*300))}" y="60" font-size="10" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">${label}</text>`:'';
+ return `<svg class="sig wide" viewBox="0 0 300 64" role="img"><rect x="0" y="14" width="300" height="16" rx="2" fill="#0B1F1C"/>${b}<rect x="0" y="14" width="300" height="16" rx="2" fill="none" stroke="#0000004d"/>${br}</svg>`;
+}
+/* timeline of a light sequence: seq = [[on_ms, off_ms], …] */
+function timeline(seq,color,cls='tl'){
+ if(!seq)return '';const P=seq.reduce((s,p)=>s+p[0]+p[1],0);let x=0,s='';
+ seq.forEach(p=>{const w=p[0]/P*300;s+=rect(x,2,Math.max(w,1.5),12,color,'rx="1"');x+=(p[0]+p[1])/P*300});
+ return `<svg class="${cls}" viewBox="0 0 300 16" aria-hidden="true"><rect x="0" y="2" width="300" height="12" rx="2" fill="var(--line)"/>${s}</svg>`;
+}
+
+/* ---------- light sequences (ms) ---------- */
+const rep=(p,n)=>Array.from({length:n},()=>p.slice());
+const L={
+ LpV:{c:G,label:'Lp.V 4s',seq:[[600,3400]]},
+ LpE:{c:R,label:'Lp.E 4s',seq:[[600,3400]]},
+ Lp21E:{c:R,label:'Lp(2+1).E 10s',seq:[[500,700],[500,2300],[500,5500]]},
+ Lp21V:{c:G,label:'Lp(2+1).V 10s',seq:[[500,700],[500,2300],[500,5500]]},
+ N:{c:W,label:'MR.B (contínua)',seq:[[250,250]]},
+ E:{c:W,label:'MR(3).B 5s',seq:[[250,250],[250,250],[250,3750]]},
+ S:{c:W,label:'MR(6)+LpL.B 10s',seq:[...rep([250,250],6),[2000,5000]]},
+ Wc:{c:W,label:'MR(9).B 10s',seq:[...rep([250,250],8),[250,5750]]},
+ PI:{c:W,label:'Lp(2).B 5s',seq:[[500,500],[500,3500]]},
+ AS:{c:W,label:'Mo(A).B / Iso / Oc / LpL 10s',seq:[[500,500],[1500,5500]]},
+ LpL10:{c:W,label:'LpL.B 10s',seq:[[2000,8000]]},
+ SpA:{c:Y,label:'Lp.A 5s',seq:[[500,4500]]},
+ SpODAS:{c:Y,label:'Lp(5).A 20s',seq:[...rep([300,1700],4),[300,11700]]},
+ MoU:{c:W,label:'Mo(U).B 15s',seq:[[500,500],[500,500],[1500,11500]]},
+ MoUred:{c:R,label:'Mo(U).E 15s',seq:[[500,500],[500,500],[1500,11500]]},
+ FixA:{c:Y,label:'F.A (fixa)',seq:[[1000,0]]},
+ F:{c:W,label:'F',seq:[[1000,0]]},
+ Lp:{c:W,label:'Lp 4s',seq:[[600,3400]]},
+ LpL:{c:W,label:'LpL 6s',seq:[[2000,4000]]},
+ Lp3:{c:W,label:'Lp(3) 10s',seq:[[500,1000],[500,1000],[500,6500]]},
+ Lp21:{c:W,label:'Lp(2+1) 12s',seq:[[500,800],[500,2600],[500,7100]]},
+ Iso:{c:W,label:'Iso 4s',seq:[[2000,2000]]},
+ Oc:{c:W,label:'Oc 6s',seq:[[4500,1500]]},
+ Oc2:{c:W,label:'Oc(2) 8s',seq:[[1000,1000],[5000,1000]]},
+ Rq:{c:W,label:'R (60/min)',seq:[[500,500]]},
+ MR:{c:W,label:'MR (120/min)',seq:[[250,250]]},
+ UR:{c:W,label:'UR (240/min)',seq:[[125,125]]},
+ URIn:{c:W,label:'URIn 10s',seq:[...rep([125,125],27),[125,3125]]},
+ Mo:{c:W,label:'Mo(U) 12s',seq:[[500,500],[500,500],[1500,8500]]},
+ FLp:{c:W,label:'F.Lp (fixa + lampejo)',seq:[[1000,0]]},
+ Alt:{c:W,label:'Alt. B E V',seq:[[1500,0]]},
+ EsqE:{c:R,label:'Lp.E (margem esquerda)',seq:[[600,2400]]},
+ DirV:{c:G,label:'Lp.V (margem direita)',seq:[[600,2400]]},
+ PontR:{c:W,label:'R.B (vão principal, centro)',seq:[[500,500]]},
+ EPS:{c:Y,label:'Lp.A sincronizada 5 MN',seq:[[500,2500]]},
+};
+
+/* ---------- categories ---------- */
+const CATS={def:'Definições 2.27–2.42',lat:'Laterais',card:'Cardinais',pae:'Perigo · Águas Seguras · Especial',luz:'Ritmos de luz',flu:'Fluvial e lacustre',hpp:'Hidrovia Paraguai-Paraná',pont:'Pontes',off:'Offshore e sonoros',rad:'Radioelétricos'};
+
+/* ---------- deck ---------- */
+/* fields: cat, name, draw(), light key, spec [[label, value],…], q (meaning prompt for mode 2), art, trap */
+const D=[
+
+ /* DEFINIÇÕES 2.27–2.34 — frente = definição, verso = nome */
+ {cat:'def',def:true,name:'Período',draw:()=>phaseDiag([['L',.1],['D',.4],['L',.1],['D',.4]],[0,.5],'PERÍODO'),light:null,
+  spec:[['Definição','intervalo de tempo decorrido entre os inícios de dois ciclos sucessivos e idênticos da característica de uma luz rítmica']],
+  q:'Intervalo de tempo decorrido entre os inícios de dois ciclos sucessivos e idênticos da característica de uma luz rítmica.',art:'2.27',trap:'Mede-se de <b>início a início</b> de ciclo, não de lampejo a eclipse. Lp e Oc: 2–15 s · Iso: 2–12 s · canal preferencial: ≤ 16 s.'},
+ {cat:'def',def:true,name:'Fase',draw:()=>phaseDiag([['L',.1],['D',.4],['L',.1],['D',.4]],[0,.1],'FASE'),light:null,
+  spec:[['Definição','cada um dos sucessivos aspectos de emissão luminosa (luz) ou de sua ausência (obscuridade), em um mesmo período']],
+  q:'Cada um dos sucessivos aspectos de emissão luminosa (luz) ou de sua ausência (obscuridade), em um mesmo período.',art:'2.28',trap:'Fase é o <b>pedaço</b> (luz ou escuro); período é o <b>todo</b>. "Fase detalhada" (2.33) é a lista das durações de cada fase.'},
+ {cat:'def',def:true,name:'Lampejo',draw:()=>phaseDiag([['L',.1],['D',.4],['L',.1],['D',.4]],[0,.1],'LAMPEJO'),light:null,
+  spec:[['Definição','intervalo de luz em relação a outro de maior duração de ausência total de luz, em um mesmo período']],
+  q:'Intervalo de luz em relação a outro de maior duração de ausência total de luz, em um mesmo período.',art:'2.29',trap:'Lampejo = luz <b>curta</b> contra escuro longo. Se a luz for a parte longa, o intervalo curto escuro chama-se <b>ocultação</b>.'},
+ {cat:'def',def:true,name:'Eclipse',draw:()=>phaseDiag([['L',.1],['D',.4],['L',.1],['D',.4]],[.1,.5],'ECLIPSE'),light:null,
+  spec:[['Definição','intervalo de obscuridade entre dois sucessivos lampejos em um mesmo período']],
+  q:'Intervalo de obscuridade entre dois sucessivos lampejos em um mesmo período.',art:'2.30',trap:'Eclipse é o escuro <b>entre lampejos</b> (escuro longo). Em luz de lampejo, eclipse ≥ 3× o lampejo. Nas cardinais, o eclipse antes do LpL do Sul é igual aos eclipses entre emissões.'},
+ {cat:'def',def:true,name:'Ocultação',draw:()=>phaseDiag([['L',.4],['D',.1],['L',.4],['D',.1]],[.4,.5],'OCULTAÇÃO'),light:null,
+  spec:[['Definição','intervalo de obscuridade relativamente mais curto que o de luz em um mesmo período']],
+  q:'Intervalo de obscuridade relativamente mais curto que o de luz em um mesmo período.',art:'2.31',trap:'Par simétrico: <b>lampejo</b> = luz curta / escuro longo · <b>ocultação</b> = escuro curto / luz longa. Em luz de ocultação, luz ≥ 3× o eclipse.'},
+ {cat:'def',def:true,name:'Isofase',draw:()=>phaseDiag([['L',.25],['D',.25],['L',.25],['D',.25]],[0,.5],'LUZ = ESCURO'),light:null,
+  spec:[['Definição','intervalo de tempo em que a luz e a obscuridade têm duração igual em um mesmo período']],
+  q:'Intervalo de tempo em que a luz e a obscuridade têm duração igual em um mesmo período.',art:'2.32',trap:'"Iso" = igual. Luz isofásica (2.35): período 2–12 s, de preferência ≤ 4 s. É um dos ritmos de <b>águas seguras</b>.'},
+ {cat:'def',def:true,name:'Fase detalhada',draw:()=>phaseDiag([['L',.05],['D',.15],['L',.05],['D',.15],['L',.05],['D',.55]],[0,1],'0,5 + 1,5 + 0,5 + 1,5 + 0,5 + 5,5 = 10 s'),light:null,
+  spec:[['Definição','descrição, em termos de intervalos de tempo, da duração de cada uma das diversas fases que constituem um período']],
+  q:'Descrição, em termos de intervalos de tempo, da duração de cada uma das diversas fases que constituem um período.',art:'2.33',trap:'É o que aparece no memorial descritivo e na Ficha-Histórico (anexo J): "Lp 0,5 – Ecl 1,5 – Lp 0,5 – Ecl 1,5…". Exigida junto com cor, ritmo, alcances e intensidade em candelas (art. 4.3.1).'},
+ {cat:'def',def:true,name:'Luz de lampejo (Lp)',draw:()=>phaseDiag([['L',.1],['D',.4],['L',.1],['D',.4]],null,''),light:'Lp',
+  spec:[['Definição','aquela na qual a duração da emissão luminosa, em cada período, é claramente menor que a duração do eclipse e na qual essa emissão luminosa tem sempre a mesma duração'],['Variantes','simples (< 50/min) · longo (≥ 2 s) · grupo Lp( ) · grupo composto Lp(2+1)']],
+  q:'Luz na qual a duração da emissão luminosa, em cada período, é claramente menor que a duração do eclipse, e essa emissão tem sempre a mesma duração.',art:'2.34',trap:'Dois requisitos: luz <b>claramente menor</b> que o eclipse <b>e</b> lampejos <b>sempre iguais</b>. Lampejos de durações diferentes num mesmo período não são "luz de lampejo".'},
+ {cat:'def',def:true,name:'Lampejo simples (Lp)',draw:()=>phaseDiag([['L',.08],['D',.42],['L',.08],['D',.42]],[0,.5],'< 50 POR MINUTO'),light:'Lp',
+  spec:[['Definição','luz de lampejo em que a emissão luminosa é regularmente repetida em frequência inferior a cinquenta vezes por minuto'],['Eclipse','não menor que três vezes a duração do lampejo'],['Período','não menor que 2 s nem maior que 15 s']],
+  q:'Luz de lampejo em que a emissão luminosa é regularmente repetida em uma frequência inferior a cinquenta vezes por minuto.',art:'2.34 a',trap:'Abaixo de <b>50/min</b> é Lp; de 50 a 80 já é luz <b>rápida</b>. A notação de carta é "Lp" sem número.'},
+ {cat:'def',def:true,name:'Duração do eclipse (lampejo simples)',draw:()=>phaseDiag([['L',.1],['D',.4],['L',.1],['D',.4]],[.1,.5],'≥ 3 × LAMPEJO'),light:null,
+  spec:[['Regra','a duração do eclipse entre dois lampejos sucessivos não deve ser menor que três vezes a duração do lampejo']],
+  q:'A duração do eclipse entre dois lampejos sucessivos não deve ser menor que três vezes a duração do lampejo.',art:'2.34 a-I',trap:'Na luz de <b>ocultação</b> vale o espelho: a <b>luz</b> não pode ser menor que 3× o eclipse (2.36 a-I). Mesmo "3×", lados trocados.'},
+ {cat:'def',def:true,name:'Período do lampejo simples',draw:()=>phaseDiag([['L',.1],['D',.4],['L',.1],['D',.4]],[0,.5],'2 s ≤ P ≤ 15 s'),light:null,
+  spec:[['Regra','o período não deve ser menor que dois segundos nem maior que quinze segundos']],
+  q:'A duração do período não deve ser menor que dois segundos nem maior que quinze segundos.',art:'2.34 a-II',trap:'Lp e Oc simples: <b>2–15 s</b>. Iso: <b>2–12 s</b> (pref. ≤ 4). Grupo de 2: ≤ 20 s. Grupo de 3+: ≤ 30 s.'},
+ {cat:'def',def:true,name:'Lampejo longo (LpL)',draw:()=>phaseDiag([['L',.3],['D',.2],['L',.3],['D',.2]],[0,.3],'≥ 2 s'),light:'LpL',
+  spec:[['Definição','luz de lampejo em que a emissão luminosa com duração igual ou superior a dois segundos é regularmente repetida'],['Onde','águas seguras (LpL 10 s) · cardinal Sul (após 6 emissões)']],
+  q:'Luz de lampejo em que a emissão luminosa com duração igual ou superior a dois segundos é regularmente repetida.',art:'2.34 b',trap:'O limiar é <b>2 s</b> de luz. No cardinal Sul, o LpL não pode ser maior que o eclipse que o segue (3.9 b).'},
+ {cat:'def',def:true,name:'Grupo de lampejos Lp( )',draw:()=>phaseDiag([['L',.05],['D',.08],['L',.05],['D',.08],['L',.05],['D',.69]],[0,.31],'GRUPO'),light:'Lp3',
+  spec:[['Definição','luz de lampejo em que um determinado número de lampejos (dois, três ou mais) é repetido regularmente']],
+  q:'Luz de lampejo em que um determinado número de lampejos (dois, três ou mais) é repetido regularmente.',art:'2.34 c',trap:'Notação Lp(2), Lp(3)… O número entre parênteses é a quantidade de lampejos <b>por grupo</b>, não o período.'},
+ {cat:'def',def:true,name:'Eclipses dentro do grupo e entre grupos',draw:()=>phaseDiag([['L',.05],['D',.08],['L',.05],['D',.08],['L',.05],['D',.69]],[.31,1],'ENTRE GRUPOS ≥ 3 × DENTRO'),light:null,
+  spec:[['Regra I','eclipses dentro do grupo têm igual duração, nitidamente menor que o eclipse entre grupos'],['Regra II','eclipse entre grupos não menor que três vezes o eclipse dentro do grupo'],['Regra IV','eclipse dentro do grupo não menor que a duração de um lampejo']],
+  q:'Os eclipses que separam os lampejos dentro de cada grupo têm igual duração, nitidamente menor que o eclipse entre grupos sucessivos; este não deve ser menor que três vezes o eclipse dentro do grupo.',art:'2.34 c-I, II, IV',trap:'Hierarquia de tempos no grupo: lampejo ≤ eclipse interno < eclipse entre grupos (≥ 3× o interno).'},
+ {cat:'def',def:true,name:'Número máximo de lampejos por grupo',draw:()=>phaseDiag([['L',.04],['D',.05],['L',.04],['D',.05],['L',.04],['D',.05],['L',.04],['D',.05],['L',.04],['D',.6]],[0,.4],'MÁX. 5 (EXC. 6)'),light:null,
+  spec:[['Regra III','o número de lampejos dentro de cada grupo não deve ser maior que cinco, podendo, excepcionalmente, chegar a seis']],
+  q:'O número de lampejos dentro de cada grupo não deve ser maior que cinco, podendo, excepcionalmente, chegar a seis.',art:'2.34 c-III',trap:'Lampejos: máx <b>5</b> (exc. 6). Ocultações por grupo: máx <b>4</b> (exc. 5). Cardinais usam 3, 6+LpL e 9 — o 9 do Oeste é em luz <b>rápida</b> R( ), outra classe (2.37).'},
+ {cat:'def',def:true,name:'Grupo de dois lampejos — limites',draw:()=>phaseDiag([['L',.06],['D',.06],['L',.06],['D',.82]],[0,.12],'LAMPEJO + ECLIPSE ≥ 1 s'),light:null,
+  spec:[['Regra V','em grupo de dois lampejos, a duração de um lampejo somada à de um eclipse dentro do grupo não deve ser menor que um segundo, e o período não deve ser maior que vinte segundos']],
+  q:'Em um grupo de dois lampejos, a duração de um lampejo somada à duração de um eclipse dentro do grupo não deve ser menor que um segundo, e o período não deve ser maior que vinte segundos.',art:'2.34 c-V',trap:'Grupo de <b>2</b>: soma ≥ 1 s, período ≤ 20 s. Grupo de <b>3 ou mais</b>: soma ≥ 2 s, período ≤ 30 s. O perigo isolado Lp(2) aperta ainda mais: soma 1–1,5 s (P=5 s) ou 2–3 s (P=10 s).'},
+ {cat:'def',def:true,name:'Grupo de três ou mais lampejos — limites',draw:()=>phaseDiag([['L',.05],['D',.06],['L',.05],['D',.06],['L',.05],['D',.73]],[0,.11],'LAMPEJO + ECLIPSE ≥ 2 s'),light:null,
+  spec:[['Regra VI','em grupo de três ou mais lampejos, a duração de um lampejo somada à de um eclipse dentro do grupo não deve ser menor que dois segundos, e o período não deve ser maior que trinta segundos']],
+  q:'Em um grupo de três ou mais lampejos, a duração de um lampejo somada à duração de um eclipse dentro do grupo não deve ser menor que dois segundos, e o período não deve ser maior que trinta segundos.',art:'2.34 c-VI',trap:'Quanto <b>mais</b> lampejos no grupo, <b>maior</b> o mínimo da soma (1 s → 2 s) e <b>maior</b> o período permitido (20 s → 30 s).'},
+ {cat:'def',def:true,name:'Grupo de lampejos composto Lp(2+1)',draw:()=>phaseDiag([['L',.05],['D',.07],['L',.05],['D',.2],['L',.05],['D',.58]],[0,.42],'2 + 1'),light:'Lp21',
+  spec:[['Definição','luz de lampejo em que os lampejos são combinados em sucessivos grupos de diferentes números, que se repetem regularmente'],['Regra I','período ≤ 30 s'],['Regra II','ritmo limitado a 2+1, aceito excepcionalmente 3+1']],
+  q:'Luz de lampejo em que os lampejos são combinados em sucessivos grupos de diferentes números, que se repetem regularmente.',art:'2.34 d',trap:'Uso exclusivo: sinais laterais de <b>canal preferencial</b>, onde o período cai para ≤ <b>16 s</b> e o eclipse após o "1" deve ser ≥ 3× o eclipse após o "2".'},
+ {cat:'def',def:true,name:'Luz isofásica (Iso)',draw:()=>phaseDiag([['L',.25],['D',.25],['L',.25],['D',.25]],[0,.5],'2 s ≤ P ≤ 12 s (PREF. ≤ 4 s)'),light:'Iso',
+  spec:[['Definição','aquela em que as durações de luz e de obscuridade são iguais'],['Período','nunca menor que 2 s nem maior que 12 s; preferencialmente não exceder 4 s']],
+  q:'Luz em que as durações de luz e de obscuridade são iguais; o período nunca deve ser menor que dois segundos nem maior que doze, de preferência não excedendo quatro.',art:'2.35',trap:'Único ritmo com teto de <b>12 s</b> (Lp e Oc vão a 15). O "preferencialmente ≤ 4 s" é distrator: não é obrigatório.'},
+ {cat:'def',def:true,name:'Luz de ocultação (Oc)',draw:()=>phaseDiag([['L',.4],['D',.1],['L',.4],['D',.1]],[0,.5],'LUZ > ECLIPSES'),light:'Oc',
+  spec:[['Definição','aquela em que a duração total das somas das fases de luz em um período é nitidamente mais longa que a duração total dos eclipses, e na qual os eclipses têm igual duração']],
+  q:'Luz em que a duração total das fases de luz em um período é nitidamente mais longa que a duração total dos eclipses, e na qual os eclipses têm igual duração.',art:'2.36',trap:'Definição é pela <b>soma</b> das fases de luz contra a <b>soma</b> dos eclipses, e os eclipses devem ser <b>iguais</b> entre si.'},
+ {cat:'def',def:true,name:'Ocultação simples — limites',draw:()=>phaseDiag([['L',.4],['D',.1],['L',.4],['D',.1]],[0,.4],'LUZ ≥ 3 × ECLIPSE · 2–15 s'),light:null,
+  spec:[['Regra I','a duração da emissão luminosa não deve ser menor que três vezes a duração de um eclipse'],['Regra II','período não menor que 2 s nem maior que 15 s']],
+  q:'Na ocultação simples, a duração da emissão luminosa não deve ser menor que três vezes a duração de um eclipse, e o período não deve ser menor que dois nem maior que quinze segundos.',art:'2.36 a',trap:'Espelho exato do lampejo simples (2.34 a): troca-se "eclipse ≥ 3× lampejo" por "luz ≥ 3× eclipse". Mesmo período 2–15 s.'},
+ {cat:'def',def:true,name:'Grupo de ocultação Oc( )',draw:()=>phaseDiag([['L',.08],['D',.06],['L',.08],['D',.06],['L',.72]],[0,.28],'MÁX. 4 (EXC. 5)'),light:'Oc2',
+  spec:[['Definição','aquela em que os grupos de eclipses em número especificado são repetidos em intervalos regulares'],['Regra III','máximo de quatro eclipses por grupo, excepcionalmente cinco'],['Regra IV','luz entre grupos ≥ 3× a luz dentro do grupo'],['Regras V–VI','grupo de 2: eclipse + luz ≥ 1 s, P ≤ 20 s · 3 ou mais: ≥ 2 s, P ≤ 30 s']],
+  q:'Luz em que os grupos de eclipses, em número especificado, são repetidos em intervalos regulares.',art:'2.36 b',trap:'Teto de eclipses por grupo é <b>4</b> (exc. 5); lampejos por grupo, <b>5</b> (exc. 6). Os demais limites (1 s/2 s, 20 s/30 s, 3×) são idênticos aos do grupo de lampejos.'},
+ {cat:'def',def:true,name:'Grupo de ocultação composto Oc(2+1)',draw:()=>phaseDiag([['L',.08],['D',.05],['L',.08],['D',.05],['L',.2],['D',.05],['L',.49]],[0,.51],'NÃO RECOMENDADO'),light:null,
+  spec:[['Definição','aquela em que as ocultações são combinadas em sucessivos grupos de diferentes ocultações que se repetem regularmente'],['Recomendação','não se recomenda o emprego, por ser de difícil identificação']],
+  q:'Luz em que as ocultações são combinadas em sucessivos grupos de diferentes ocultações que se repetem regularmente; a norma não recomenda seu emprego.',art:'2.36 c',trap:'Existe na norma, mas é <b>desaconselhada</b>. O composto <b>recomendado</b> é o de lampejos, Lp(2+1), do canal preferencial.'},
+ {cat:'def',def:true,name:'Luz rápida (R)',draw:()=>phaseDiag(Array(10).fill([['L',.05],['D',.05]]).flat(),[0,1],'50 ≤ f < 80 /min · REC. 60'),light:'Rq',
+  spec:[['Definição','aquela em que emissões luminosas são repetidas com frequência igual ou superior a cinquenta vezes e inferior a oitenta vezes por minuto'],['Recomendada','60 por minuto'],['Contínua','repetida regularmente por tempo indeterminado']],
+  q:'Luz em que as emissões luminosas são repetidas com frequência igual ou superior a cinquenta vezes e inferior a oitenta vezes por minuto.',art:'2.37',trap:'Limite <b>inferior inclusivo</b> (≥ 50) e <b>superior exclusivo</b> (< 80). Exatamente 80/min já é <b>muito rápida</b>.'},
+ {cat:'def',def:true,name:'Grupo de luzes rápidas R( )',draw:()=>phaseDiag([['L',.04],['D',.04],['L',.04],['D',.04],['L',.04],['D',.8]],[0,.2],'3 OU 9 · EXC. 6 + LpL'),light:null,
+  spec:[['Definição','luz rápida em que um determinado grupo de emissões luminosas é repetido regularmente'],['Regra I','número de emissões por grupo: três ou nove'],['Regra II','excepcionalmente seis emissões seguidas de lampejo longo, para cardinal Sul'],['Regra III','período não maior que vinte segundos']],
+  q:'Luz rápida em que um determinado grupo de emissões luminosas é repetido regularmente, com três ou nove emissões por grupo e período não maior que vinte segundos.',art:'2.37 b',trap:'R( ): <b>P ≤ 20 s</b>. MR( ): <b>P ≤ 15 s</b>. Os grupos 3/6+LpL/9 são as cardinais E/S/W.'},
+ {cat:'def',def:true,name:'Luz muito rápida (MR)',draw:()=>phaseDiag(Array(20).fill([['L',.025],['D',.025]]).flat(),[0,1],'80 ≤ f < 160 /min · REC. 120'),light:'MR',
+  spec:[['Definição','aquela em que emissões luminosas são repetidas com frequência igual ou superior a oitenta vezes por minuto e inferior a 160 vezes por minuto'],['Recomendada','120 por minuto'],['Grupo MR( )','três ou nove; exc. seis + LpL; período ≤ 15 s']],
+  q:'Luz em que as emissões luminosas são repetidas com frequência igual ou superior a oitenta vezes por minuto e inferior a cento e sessenta vezes por minuto.',art:'2.38',trap:'Escada de frequências: 50 · 80 · 160 · 300. Recomendadas: 60 · 120 · 240 (dobram a cada classe).'},
+ {cat:'def',def:true,name:'Luz ultrarrápida (UR)',draw:()=>phaseDiag(Array(40).fill([['L',.0125],['D',.0125]]).flat(),[0,1],'160 ≤ f < 300 /min · REC. 240'),light:'UR',
+  spec:[['Definição','aquela em que emissões luminosas são repetidas com frequência igual ou superior a 160 vezes por minuto e inferior a trezentas vezes por minuto'],['Recomendada','240 por minuto']],
+  q:'Luz em que as emissões luminosas são repetidas com frequência igual ou superior a cento e sessenta vezes por minuto e inferior a trezentas vezes por minuto.',art:'2.39',trap:'UR <b>não</b> é ritmo de cardinal (só R e MR) nem de novo perigo (R ou MR, art. 3.14 c).'},
+ {cat:'def',def:true,name:'Luz ultrarrápida interrompida (URIn)',draw:()=>phaseDiag([...Array(14).fill([['L',.025],['D',.025]]).flat(),['D',.3]],[.7,1],'ECLIPSE ≥ 3 s'),light:'URIn',
+  spec:[['Definição','luz ultrarrápida em que a sequência de emissões luminosas é interrompida regularmente por um eclipse de duração longa e constante'],['Regra I','período não maior que 15 s'],['Regra II','número de emissões por período igual ou maior que 25'],['Regra III','eclipse longo não menor que 3 s']],
+  q:'Luz ultrarrápida em que a sequência de emissões luminosas é interrompida regularmente por um eclipse de duração longa e constante.',art:'2.39 b',trap:'Três números: <b>15 s · 25 emissões · 3 s</b>. É o único ritmo que fixa um número <b>mínimo</b> de emissões por período.'},
+ {cat:'def',def:true,name:'Luz em código Morse Mo( )',draw:()=>phaseDiag([['L',.04],['D',.04],['L',.04],['D',.04],['L',.12],['D',.72]],[0,.28],'· · —  (U)'),light:'Mo',
+  spec:[['Definição','aquela em que as emissões luminosas são utilizadas para representar um ou mais caracteres do alfabeto em código Morse'],['Período','não maior que 30 s'],['Regra a','representação limitada a uma única letra, excepcionalmente duas'],['Regra b','ponto ≈ 0,5 s; traço não menor que três vezes o ponto']],
+  q:'Luz em que as emissões luminosas representam um ou mais caracteres do alfabeto em código Morse; ponto de aproximadamente meio segundo e traço não menor que três vezes o ponto.',art:'2.40',trap:'<b>Ponto 0,5 s</b> na luz; no sinal <b>sonoro</b> offshore o apito curto é ≥ <b>0,75 s</b> (3.49 b). Letras reservadas: A (águas seguras), U (offshore), D (Racon novo perigo).'},
+ {cat:'def',def:true,name:'Luz fixa e de lampejo (FLp)',draw:()=>phaseDiag([['L',.5],['L',.5]],[0,1],'FIXA + LAMPEJO MAIS INTENSO'),light:'FLp',
+  spec:[['Definição','aquela em que uma luz fixa é combinada com outra de lampejo de maior intensidade luminosa'],['FLp( )','luz fixa combinada, em intervalos regulares, com grupo de lampejos de intensidade maior que a da fixa']],
+  q:'Luz em que uma luz fixa é combinada com outra de lampejo de maior intensidade luminosa.',art:'2.41',trap:'O diferencial é a <b>intensidade</b>: o lampejo precisa ser mais brilhante que o fundo fixo, senão não se distingue.'},
+ {cat:'def',def:true,name:'Luz alternada (Alt)',draw:()=>phaseDiag([['L',.33],['L',.34],['L',.33]],[0,1],'CORES DIFERENTES, ALTERNADAS'),light:'Alt',
+  spec:[['Definição','aquela que exibe diferentes cores alternadamente'],['Cautela','assegurar que as cores sejam igualmente visíveis ao navegante'],['Variantes','Alt contínua · Lp.Alt (< 50/min) · grupo Lp.Alt · Lp(2+1).Alt · Oc.Alt · F.Alt.Lp · F.Alt.Lp( )']],
+  q:'Luz que exibe diferentes cores alternadamente; a norma recomenda adotá-la com cautela, assegurando que as cores sejam igualmente visíveis.',art:'2.42',trap:'<b>Lp.Alt</b> mantém a definição de lampejo simples: frequência <b>inferior a 50/min</b>. Alternada ≠ luz de setor (2.25 c): a de setor muda de cor conforme a <b>direção</b> do observador, não no tempo.'},
+ /* LATERAIS */
+ {cat:'lat',name:'Sinal lateral de bombordo',draw:()=>buoy({bands:[[G,1]],topmark:'cyl',shape:'can',lampColor:G}),light:'LpV',
+  spec:[['Cor','verde'],['Marca de tope','cilíndrica (obrigatória se fixo; opcional se flutuante)'],['Forma','cilíndrica, pilar ou charuto'],['Numeração','pares, em branco'],['Luz','verde, qualquer ritmo exceto o de canal preferencial']],
+  q:'Verde, marca de tope cilíndrica, números pares, luz verde. Deixar por bombordo.',art:'3.2',trap:'Região B: verde a bombordo e encarnado a boreste <b>ao entrar</b> (direção convencional). É o inverso da Região A, que a banca adora misturar.'},
+ {cat:'lat',name:'Sinal lateral de boreste',draw:()=>buoy({bands:[[R,1]],topmark:'cone',shape:'cone',lampColor:R}),light:'LpE',
+  spec:[['Cor','encarnada'],['Marca de tope','cônica, vértice para cima'],['Forma','cônica, pilar ou charuto'],['Numeração','ímpares, em branco'],['Luz','encarnada, qualquer ritmo exceto o de canal preferencial']],
+  q:'Encarnada, marca de tope cônica, números ímpares, luz encarnada. Deixar por boreste.',art:'3.3',trap:'Mnemônico Região B: "<b>red right returning</b>". Cone = boreste; cilindro = bombordo, em qualquer região.'},
+ {cat:'lat',name:'Canal preferencial a bombordo',draw:()=>buoy({bands:[[R,.4],[G,.25],[R,.35]],topmark:'cone',shape:'cone',lampColor:R}),light:'Lp21E',
+  spec:[['Cor','encarnada com faixa larga horizontal verde'],['Marca de tope','cônica, vértice para cima (obrigatória se fixo)'],['Luz','encarnada, grupo de lampejos compostos (2+1), período ≤ 16 s'],['Regra do eclipse','eclipse após o lampejo simples ≥ 3× o eclipse após o grupo de dois']],
+  q:'Na bifurcação, o canal preferencial está a bombordo. Encarnada com faixa verde, cone, luz E Lp(2+1).',art:'3.4',trap:'A cor <b>predominante</b> diz de que lado deixar o sinal pelo canal preferencial: predominante encarnada → deixe por boreste → canal preferencial a bombordo. Ritmo Lp(2+1) é exclusivo de canal preferencial.'},
+ {cat:'lat',name:'Canal preferencial a boreste',draw:()=>buoy({bands:[[G,.4],[R,.25],[G,.35]],topmark:'cyl',shape:'can',lampColor:G}),light:'Lp21V',
+  spec:[['Cor','verde com faixa larga horizontal encarnada'],['Marca de tope','cilíndrica (obrigatória se fixo)'],['Luz','verde, grupo de lampejos compostos (2+1), período ≤ 16 s']],
+  q:'Na bifurcação, o canal preferencial está a boreste. Verde com faixa encarnada, cilindro, luz V Lp(2+1).',art:'3.5',trap:'Período máximo do Lp(2+1) de canal preferencial é <b>16 s</b> (não 20 nem 30). Faixa é <b>horizontal</b>; faixas verticais só em águas seguras.'},
+
+ /* CARDINAIS */
+ {cat:'card',name:'Cardinal Norte',draw:()=>buoy({bands:[[K,.5],[Y,.5]],topmark:'cone2up'}),light:'N',
+  spec:[['Cor','preto em cima, amarelo embaixo'],['Marca de tope','dois cones pretos, ambos vértices para cima'],['Luz','branca, R ou MR contínua'],['Águas seguras','ao norte do sinal (quadrante NW–NE)']],
+  q:'Águas navegáveis ao norte. Preto sobre amarelo, dois cones para cima, luz branca contínua rápida.',art:'3.7',trap:'Os cones "apontam" para a faixa preta: N = cones para cima, preto em cima. Luz contínua = "meio-dia/meia-noite" no mnemônico do relógio.'},
+ {cat:'card',name:'Cardinal Leste',draw:()=>buoy({bands:[[K,.34],[Y,.33],[K,.33]],topmark:'coneE'}),light:'E',
+  spec:[['Cor','preta com faixa larga horizontal amarela no meio'],['Marca de tope','dois cones pretos, bases unidas (superior para cima, inferior para baixo)'],['Luz','branca, MR(3) 5 s ou R(3) 10 s'],['Águas seguras','a leste (quadrante NE–SE)']],
+  q:'Águas navegáveis a leste. Preta com faixa amarela, cones afastados (formato de ovo), 3 lampejos.',art:'3.8',trap:'Relógio: E = 3 h → <b>3 lampejos</b>. Preto nas extremidades (onde estão os vértices), amarelo no meio.'},
+ {cat:'card',name:'Cardinal Sul',draw:()=>buoy({bands:[[Y,.5],[K,.5]],topmark:'cone2dn'}),light:'S',
+  spec:[['Cor','amarelo em cima, preto embaixo'],['Marca de tope','dois cones pretos, ambos vértices para baixo'],['Luz','branca, MR(6)+LpL 10 s ou R(6)+LpL 15 s'],['Regras','eclipse antes do LpL = eclipses entre emissões; LpL ≤ eclipse seguinte']],
+  q:'Águas navegáveis ao sul. Amarelo sobre preto, dois cones para baixo, 6 emissões + lampejo longo.',art:'3.9',trap:'Relógio: S = 6 h → <b>6 emissões + lampejo longo</b>. O lampejo longo evita confundir com o Oeste (9) quando se perde a contagem. Única cardinal com LpL.'},
+ {cat:'card',name:'Cardinal Oeste',draw:()=>buoy({bands:[[Y,.34],[K,.33],[Y,.33]],topmark:'coneW'}),light:'Wc',
+  spec:[['Cor','amarela com faixa larga horizontal preta no meio'],['Marca de tope','dois cones pretos, vértices unidos (superior para baixo, inferior para cima)'],['Luz','branca, MR(9) 10 s ou R(9) 15 s'],['Águas seguras','a oeste (quadrante SW–NW)']],
+  q:'Águas navegáveis a oeste. Amarela com faixa preta, cones em formato de taça/ampulheta, 9 lampejos.',art:'3.10',trap:'Relógio: W = 9 h → <b>9 lampejos</b>. Cones unidos pelos vértices lembram a letra W de lado. Preto no meio (vértices apontam para o meio).'},
+
+ /* PERIGO ISOLADO · ÁGUAS SEGURAS · ESPECIAL · NOVO PERIGO */
+ {cat:'pae',name:'Perigo isolado',draw:()=>buoy({bands:[[K,.3],[R,.2],[K,.2],[R,.15],[K,.15]],topmark:'sph2'}),light:'PI',
+  spec:[['Cor','preta com uma ou mais faixas horizontais encarnadas'],['Marca de tope','duas esferas pretas, uma sobre a outra (obrigatória)'],['Luz','branca, Lp(2) 5 s ou 10 s'],['Onde','sobre ou junto a perigo isolado com águas navegáveis em volta']],
+  q:'Perigo de pequena extensão com águas navegáveis em toda a volta. Preto e encarnado, duas esferas, dois lampejos.',art:'3.11',trap:'"Duas esferas, dois lampejos." Lp(2) com soma lampejo+eclipse de 1–1,5 s (período 5 s) ou 2–3 s (período 10 s). Não confundir com o cardinal (cones) nem com águas seguras (esfera encarnada única).'},
+ {cat:'pae',name:'Águas seguras',draw:()=>buoy({bands:[[R,1],[W,1],[R,1],[W,1],[R,1],[W,1]],vertical:true,topmark:'sphR'}),light:'AS',
+  spec:[['Cor','faixas verticais encarnadas e brancas'],['Marca de tope','uma esfera encarnada (opcional)'],['Forma','cilíndrica, esférica, pilar ou charuto'],['Luz','branca: Iso, Oc, LpL 10 s ou Mo(A) · —'],['Onde','meio de canal, aterragem, ponto de espera']],
+  q:'Águas navegáveis em todo o entorno: meio do canal, ponto de aterragem ou de espera. Listras verticais encarnadas e brancas.',art:'3.12',trap:'Único sinal com faixas <b>verticais</b>. O <b>LpL 10 s</b> e o <b>Mo(A)</b> são reservados a águas seguras — o sinal especial é proibido de usá-los.'},
+ {cat:'pae',name:'Sinal especial',draw:()=>buoy({bands:[[Y,1]],topmark:'x',lampColor:Y}),light:'SpA',
+  spec:[['Cor','amarela'],['Marca de tope','"X" amarelo (opcional)'],['Forma','opcional, não conflitante com os demais sinais'],['Luz','amarela: grupo de ocultação; Lp simples (exceto LpL 10 s); Lp(4), Lp(5) ou exc. Lp(6); Lp composto; Morse exceto A e U'],['Usos','ODAS, separação de tráfego, dragagem/despejo, exercícios militares, cabos/dutos, fundeio, aquicultura, offshore renováveis…']],
+  q:'Assinala área ou configuração especial descrita em documentos náuticos. Amarelo, marca de tope em X, luz amarela.',art:'3.13',trap:'Proibições da luz amarela: <b>LpL 10 s</b> e <b>Mo(A)</b> (águas seguras) e <b>Mo(U)</b> (offshore). Grupo de lampejos do especial começa em <b>4</b> (os cardinais usam 3, 6 e 9).'},
+ {cat:'pae',name:'Boia ODAS (especial)',draw:()=>buoy({bands:[[Y,1]],topmark:'x',lampColor:Y}),light:'SpODAS',
+  spec:[['O que é','Sistema de Aquisição de Dados Oceânicos'],['Sinal','especial, amarelo, X'],['Luz','amarela Lp(5) 20 s — uma emissão a cada 2 s'],['Autorização','requerimento à DHN (anexo L), art. 4.13']],
+  q:'Boia de coleta de dados oceânicos: luz amarela de cinco lampejos a cada 20 segundos.',art:'3.13 obs. / 4.13',trap:'A única aplicação em que a norma <b>fixa</b> o ritmo do sinal especial: Lp(5).A.20s. Não é 4 nem 6.'},
+ {cat:'pae',name:'Novo perigo',draw:()=>`<svg class="sig wide" viewBox="0 0 400 250" role="img"><g transform="translate(0 0)">${buoy({bands:[[K,.3],[R,.2],[K,.2],[R,.15],[K,.15]],topmark:'sph2',cls:''}).replace('<svg class="" viewBox="0 0 200 250" role="img">','<g>').replace('</svg>','</g>')}</g><g transform="translate(200 0)">${buoy({bands:[[K,.3],[R,.2],[K,.2],[R,.15],[K,.15]],topmark:'sph2',cls:''}).replace('<svg class="" viewBox="0 0 200 250" role="img">','<g>').replace('</svg>','</g>')}</g><text x="200" y="22" font-size="14" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">DUPLICADO · RACON "D" (− · ·)</text></svg>`,light:null,
+  spec:[['O que é','obstrução recém-descoberta, ainda não cartografada/divulgada'],['Sinais','cardinal ou lateral, com ao menos um <b>duplicado</b> (idêntico ao par)'],['Luz','característica de cardinal ou lateral, R ou MR'],['Racon','letra D (− · ·), traço de 1 MN na tela'],['Quem','responsável pelo balizamento local informa CHM e AAM']],
+  q:'Banco, rocha ou casco soçobrado recém-descoberto. Sinal duplicado, luz rápida, Racon letra D.',art:'3.14',trap:'Três chaves: <b>duplicação</b>, ritmo <b>R/MR</b> e <b>Racon D</b> com 1 MN. A banca troca a letra (D, não U nem T) e o comprimento do traço.'},
+
+ /* RITMOS DE LUZ (Cap. 2, Seção V) */
+ {cat:'luz',name:'Luz fixa (F)',draw:()=>lampOnly(Y),light:'FixA',
+  spec:[['Definição','contínua, uniforme, cor constante'],['Uso em sinal náutico','não (IALA E-110) — pode não ser reconhecida como auxílio'],['Exceções','extremidade de cais/molhe/trapiche sem direção convencional (F amarela, ≥ 2 MN) e luz de setor de alinhamento']],
+  q:'Luz contínua e uniforme; a norma recomenda não usar em sinais náuticos, salvo em quinas de cais e luzes de setor.',art:'2.26 a / 2.2 / 3.17',trap:'"Exibindo luz fixa" é um <b>tipo de alteração</b> (art. 5.3) — um sinal rítmico que fica fixo está irregular. A única luz fixa prevista como balizamento é a <b>amarela</b> de cais sem direção convencional, alcance mínimo 2 MN.'},
+ {cat:'luz',name:'Lampejo simples (Lp)',draw:()=>lampOnly(W),light:'Lp',
+  spec:[['Definição','luz nitidamente menor que o eclipse; lampejos iguais'],['Frequência','< 50 por minuto'],['Eclipse','≥ 3× a duração do lampejo'],['Período','2 a 15 s']],
+  q:'Lampejo curto, eclipse longo, menos de 50 vezes por minuto, período entre 2 e 15 s.',art:'2.34 a',trap:'Limiares a decorar: Lp < 50/min · R 50–80 · MR 80–160 · UR 160–300. Eclipse ≥ <b>3×</b> lampejo.'},
+ {cat:'luz',name:'Lampejo longo (LpL)',draw:()=>lampOnly(W),light:'LpL',
+  spec:[['Definição','emissão com duração ≥ 2 s, repetida regularmente'],['Onde aparece','águas seguras (LpL 10 s) e cardinal Sul (após 6 emissões)']],
+  q:'Emissão luminosa de pelo menos dois segundos, repetida regularmente.',art:'2.34 b',trap:'LpL = <b>≥ 2 s</b>. LpL 10 s é exclusivo de águas seguras; o especial não pode usá-lo.'},
+ {cat:'luz',name:'Grupo de lampejos Lp( )',draw:()=>lampOnly(W),light:'Lp3',
+  spec:[['Definição','número fixo de lampejos (2, 3…) repetido regularmente'],['Máximo no grupo','5, excepcionalmente 6'],['Eclipse entre grupos','≥ 3× o eclipse dentro do grupo'],['Período','≤ 20 s (grupo de 2) · ≤ 30 s (3 ou mais)']],
+  q:'Dois, três ou mais lampejos agrupados, repetidos regularmente; no máximo cinco (exc. seis) por grupo.',art:'2.34 c',trap:'Grupo de <b>lampejos</b>: máx. 5 (exc. 6). Grupo de <b>ocultação</b>: máx. 4 (exc. 5). A banca inverte.'},
+ {cat:'luz',name:'Grupo composto Lp(2+1)',draw:()=>lampOnly(W),light:'Lp21',
+  spec:[['Definição','grupos sucessivos com números diferentes de lampejos'],['Ritmo','limitado a 2+1 (exc. 3+1)'],['Período','≤ 30 s (≤ 16 s em canal preferencial)'],['Uso','sinais laterais de canal preferencial']],
+  q:'Dois lampejos, pausa, um lampejo — grupo composto que identifica canal preferencial.',art:'2.34 d / 3.4 / 3.5',trap:'Período geral ≤ 30 s, mas em <b>canal preferencial ≤ 16 s</b>. Só 2+1 (3+1 excepcional); 4+1 não existe.'},
+ {cat:'luz',name:'Isofásica (Iso)',draw:()=>lampOnly(W),light:'Iso',
+  spec:[['Definição','luz e obscuridade de igual duração'],['Período','2 a 12 s, preferencialmente ≤ 4 s'],['Uso','águas seguras']],
+  q:'Luz e escuridão com a mesma duração.',art:'2.35',trap:'Iso: período 2–12 s (pref. ≤ 4). Lp e Oc: 2–15 s. Troca de limites é distrator clássico.'},
+ {cat:'luz',name:'Ocultação (Oc)',draw:()=>lampOnly(W),light:'Oc',
+  spec:[['Definição','luz nitidamente mais longa que os eclipses; eclipses iguais'],['Luz','≥ 3× a duração de um eclipse'],['Período','2 a 15 s'],['Uso','águas seguras; grupo de ocultação em sinais especiais']],
+  q:'Luz predominante interrompida por eclipses curtos e iguais.',art:'2.36 a',trap:'Oc é o "negativo" do Lp: luz ≥ 3× eclipse. Oc(2+1) existe, mas a norma <b>não recomenda</b> por ser difícil de identificar.'},
+ {cat:'luz',name:'Grupo de ocultação Oc( )',draw:()=>lampOnly(W),light:'Oc2',
+  spec:[['Definição','grupos de eclipses em número fixo, repetidos regularmente'],['Máximo no grupo','4 eclipses, excepcionalmente 5'],['Luz entre grupos','≥ 3× a luz dentro do grupo'],['Período','≤ 20 s (grupo de 2) · ≤ 30 s (3 ou mais)']],
+  q:'Dois ou mais eclipses agrupados em luz predominante.',art:'2.36 b',trap:'Máximo <b>4</b> (exc. 5) eclipses por grupo — um a menos que o grupo de lampejos.'},
+ {cat:'luz',name:'Luz rápida (R)',draw:()=>lampOnly(W),light:'Rq',
+  spec:[['Frequência','≥ 50 e < 80 por minuto'],['Recomendada','60 por minuto'],['Grupos R( )','3 ou 9 emissões; exc. 6 + LpL (cardinal Sul); período ≤ 20 s'],['Uso','cardinais, novos perigos, vão principal de ponte na Hidrovia']],
+  q:'Entre 50 e 80 emissões por minuto; recomenda-se 60.',art:'2.37',trap:'Grupo R( ): <b>3 ou 9</b> (E e W). 6 só com lampejo longo (S). R(3) tem período 10 s; MR(3) tem 5 s.'},
+ {cat:'luz',name:'Luz muito rápida (MR)',draw:()=>lampOnly(W),light:'MR',
+  spec:[['Frequência','≥ 80 e < 160 por minuto'],['Recomendada','120 por minuto'],['Grupos MR( )','3 ou 9; exc. 6 + LpL; período ≤ 15 s']],
+  q:'Entre 80 e 160 emissões por minuto; recomenda-se 120.',art:'2.38',trap:'Cardinais em MR: E = MR(3) 5 s · S = MR(6)+LpL 10 s · W = MR(9) 10 s. Em R: 10 s · 15 s · 15 s.'},
+ {cat:'luz',name:'Luz ultrarrápida (UR)',draw:()=>lampOnly(W),light:'UR',
+  spec:[['Frequência','≥ 160 e < 300 por minuto'],['Recomendada','240 por minuto'],['URIn','sequência interrompida por eclipse longo: período ≤ 15 s, ≥ 25 emissões por período, eclipse ≥ 3 s']],
+  q:'Entre 160 e 300 emissões por minuto; recomenda-se 240.',art:'2.39',trap:'UR não é característica de cardinal (só R e MR). URIn: eclipse longo <b>≥ 3 s</b> e <b>≥ 25</b> emissões.'},
+ {cat:'luz',name:'Código Morse Mo( )',draw:()=>lampOnly(W),light:'Mo',
+  spec:[['Definição','emissões representam letra(s) em Morse'],['Período','≤ 30 s'],['Letras','uma, excepcionalmente duas'],['Tempos','ponto ≈ 0,5 s; traço ≥ 3× o ponto'],['Reservas','A (· —) águas seguras · U (· · —) offshore · D (— · ·) Racon novo perigo']],
+  q:'Luz que soletra uma letra em Morse; ponto de meio segundo, traço pelo menos três vezes maior.',art:'2.40',trap:'Mapa das letras: <b>A</b> = águas seguras, <b>U</b> = plataformas/eólicas, <b>D</b> = Racon de novo perigo, <b>T/B</b> = Racon de ponte (boreste/bombordo).'},
+ {cat:'luz',name:'Fixa e de lampejo (FLp)',draw:()=>lampOnly(W),light:'FLp',
+  spec:[['Definição','luz fixa combinada com lampejo de maior intensidade'],['FLp( )','fixa + grupo de lampejos mais intensos']],
+  q:'Luz fixa de fundo sobre a qual surge um lampejo mais brilhante.',art:'2.41',trap:'A luz fixa aqui é <b>permitida</b> porque está combinada com lampejo mais intenso — não se confunde com a proibição geral de luz fixa isolada.'},
+ {cat:'luz',name:'Alternada (Alt)',draw:()=>lampOnly(W),light:'Alt',
+  spec:[['Definição','exibe cores diferentes alternadamente'],['Cuidado','cores devem ser igualmente visíveis'],['Variantes','Alt contínua · Lp.Alt (< 50/min) · Lp( ).Alt · Lp(2+1).Alt · Oc.Alt · F.Alt.Lp']],
+  q:'Luz que muda de cor em sequência regular.',art:'2.42',trap:'Norma recomenda adotar <b>com cautela</b>. Lp.Alt mantém a frequência de lampejo simples (< 50/min).'},
+
+ /* FLUVIAL E LACUSTRE (Anexo C) */
+ {cat:'flu',name:'Navegar junto à margem',draw:()=>panel({bg:W,fg:G,sym:f=>margins(f)+arrowUp(60,f)}),light:null,
+  spec:[['Painel','quadrangular, duas faixas laterais (margens)'],['Símbolo','seta reta junto à faixa da margem de interesse'],['Vigência','do sinal até o próximo sinal complementar de margem']],
+  q:'Recomendação para navegar junto a uma das margens do rio.',art:'3.15 a',trap:'A seta <b>reta</b> fica <b>colada</b> à faixa da margem recomendada. Seta <b>entre</b> as faixas = meio do rio; seta <b>curva</b> = mudar de margem.'},
+ {cat:'flu',name:'Mudar de margem',draw:()=>panel({bg:W,fg:R,sym:f=>margins(f)+path('M62 160C62 100 120 100 140 60L128 54L158 40L156 72L146 66C124 112 78 110 78 160Z',f)}),light:null,
+  spec:[['Painel','quadrangular, duas faixas laterais'],['Símbolo','seta curva apontando para a margem a demandar']],
+  q:'Recomendação para atravessar o rio e seguir pela outra margem.',art:'3.15 b',trap:'Na Hidrovia Paraguai-Paraná o mesmo aviso é dado por um <b>X</b> refletivo em painel losangular (Anexo D) — não confundir os dois sistemas.'},
+ {cat:'flu',name:'Navegar no meio do rio',draw:()=>panel({bg:W,fg:G,sym:f=>margins(f)+arrowUp(100,f)}),light:null,
+  spec:[['Painel','quadrangular, duas faixas laterais'],['Símbolo','seta reta entre as faixas']],
+  q:'Recomendação para seguir pelo meio do rio.',art:'3.15 c',trap:'Cores: painel <b>branco</b> com símbolo verde/encarnado serve também à noite e identifica a margem (verde = direita? não: a cor segue a margem onde está instalado, conforme projeto). Laranja/encarnado + preto é só diurno.'},
+ {cat:'flu',name:'Tráfego intenso entre margens',draw:()=>panel({bg:O,fg:K,sym:f=>rect(88,30,24,140,f)+rect(30,94,140,12,f)}),light:null,
+  spec:[['Painel','quadrangular'],['Símbolo','cruz com braço horizontal visivelmente mais fino']],
+  q:'Alerta de travessias frequentes de embarcações entre as margens.',art:'3.15 d',trap:'Braço <b>horizontal fino</b> = tráfego cruzando. Dois "+" em círculos pretos = perigo (outro sinal).'},
+ {cat:'flu',name:'Quilometragem',draw:()=>panel({bg:W,fg:K,sym:f=>`<text x="100" y="118" font-size="52" text-anchor="middle" font-weight="700" fill="${f}" font-family="IBM Plex Mono,monospace">KM 112</text>`}),light:null,
+  spec:[['Painel','retangular'],['Símbolo','"KM" seguido do número']],
+  q:'Indica a quilometragem percorrida na via.',art:'3.15 f',trap:'Único painel <b>retangular</b> da lista; os demais são quadrangulares ou circulares.'},
+ {cat:'flu',name:'Redução de velocidade',draw:()=>panel({bg:W,fg:R,sym:f=>`<text x="100" y="140" font-size="120" text-anchor="middle" font-weight="700" fill="${f}" font-family="Libre Caslon Text,serif">R</text>`}),light:null,
+  spec:[['Painel','quadrangular'],['Símbolo','letra "R"']],
+  q:'Ordem de reduzir a velocidade no trecho.',art:'3.15 g',trap:'"R" no painel fluvial = <b>Redução</b>; "R" na característica de luz = luz <b>Rápida</b>. Contexto define.'},
+ {cat:'flu',name:'Fundeio proibido',draw:()=>panel({bg:W,fg:R,sym:f=>`<path d="M100 40v100M70 70h60M100 140c-26 0-44-16-48-36M100 140c26 0 44-16 48-36" stroke="${f}" stroke-width="10" fill="none" stroke-linecap="round"/><circle cx="100" cy="36" r="10" fill="none" stroke="${f}" stroke-width="8"/><path d="M34 166L166 34" stroke="${f}" stroke-width="10" stroke-linecap="round"/>`}),light:null,
+  spec:[['Painel','quadrangular'],['Símbolo','âncora cortada por diagonal da mesma cor'],['Área','a assinalada ou o alinhamento de dois sinais iguais']],
+  q:'Proibição de fundear na área ou no alinhamento de dois painéis iguais.',art:'3.15 h',trap:'Dois painéis iguais de fundeio proibido definem um <b>alinhamento</b> de proibição — lógica semelhante ao sinal de alinhamento.'},
+ {cat:'flu',name:'Altura máxima de passagem',draw:()=>panel({bg:W,fg:K,sym:f=>path('M40 36L160 36L100 96Z',f)+`<text x="100" y="166" font-size="48" text-anchor="middle" font-weight="700" fill="${f}" font-family="IBM Plex Mono,monospace">12 m</text>`}),light:null,
+  spec:[['Painel','quadrangular'],['Metade superior','triângulo com vértice para baixo'],['Metade inferior','altura máxima, em metros']],
+  q:'Altura máxima permitida para passar sob o obstáculo.',art:'3.15 i',trap:'Vértice para <b>baixo</b> (aponta o vão). O triângulo de boreste em ponte tem vértice para <b>cima</b>.'},
+ {cat:'flu',name:'Bifurcação de canal',draw:()=>panel({bg:K,fg:Y,sym:f=>`<path d="M100 170V100M100 100L46 36M100 100L154 36" stroke="${f}" stroke-width="14" fill="none" stroke-linecap="round"/><path d="M100 100L46 36" stroke="${f}" stroke-width="26" stroke-linecap="round"/>`}),light:null,
+  spec:[['Painel','quadrangular preto'],['Símbolo','"Y" amarelo'],['Canal principal','braço superior visivelmente mais largo']],
+  q:'Dois canais navegáveis contornam um obstáculo grande (ilha); o braço mais largo indica o canal principal.',art:'3.15 j',trap:'Preto + amarelo é uma das três combinações previstas e seu uso é <b>regulamentado</b> (bifurcação, perigo, sinal especial em ponte). O braço largo = principal.'},
+ {cat:'flu',name:'Perigo (fluvial)',draw:()=>`<svg class="sig" viewBox="0 0 200 200" role="img"><circle cx="100" cy="52" r="42" fill="${K}"/><circle cx="100" cy="146" r="42" fill="${K}"/><path d="M100 28v48M76 52h48M100 122v48M76 146h48" stroke="${W}" stroke-width="12" stroke-linecap="round"/></svg>`,light:null,
+  spec:[['Painel','dois círculos pretos, um sobre o outro'],['Símbolo','"+" branco em cada círculo'],['Uso','obstáculo pequeno (pedra, casco) cercado de águas navegáveis']],
+  q:'Obstáculo de dimensões reduzidas cercado de águas navegáveis, em rio.',art:'3.15 k',trap:'É o "perigo isolado" fluvial: <b>dois</b> elementos sobrepostos, como as duas esferas da boia IALA.'},
+ {cat:'flu',name:'Painéis: combinações de cor',draw:()=>`<svg class="sig wide" viewBox="0 0 360 140" role="img">${rect(10,20,100,100,O,'rx="6"')}${rect(45,40,30,60,K)}${rect(130,20,100,100,W,'rx="6" stroke="#0000004d"')}${rect(165,40,30,60,G)}${rect(250,20,100,100,K,'rx="6"')}${rect(285,40,30,60,Y)}<text x="60" y="134" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">DIURNO</text><text x="180" y="134" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">DIA+NOITE</text><text x="300" y="134" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">REGULAMENTADO</text></svg>`,light:null,
+  spec:[['Laranja ou encarnado','símbolo preto — só diurno, contraste com vegetação'],['Branco','símbolo verde ou encarnado — também noturno; iluminado, identifica a margem'],['Preto','símbolo amarelo ou branco — uso regulamentado (bifurcação, perigo)']],
+  q:'As três combinações painel/símbolo previstas para a sinalização complementar.',art:'3.15',trap:'Painel branco com símbolo verde/encarnado é o único que, iluminado pela embarcação, <b>identifica a margem</b> à noite. Materiais retrorreflexivos são a regra.'},
+
+ /* HIDROVIA PARAGUAI-PARANÁ (Anexo D) */
+ {cat:'hpp',name:'Margem esquerda — mudar de margem',draw:()=>`<svg class="sig" viewBox="0 0 200 200" role="img"><path d="M100 12L188 100L100 188L12 100Z" fill="${W}" stroke="#0000004d" stroke-width="2"/><path d="M62 62L138 138M138 62L62 138" stroke="${R}" stroke-width="18" stroke-linecap="round"/></svg>`,light:'EsqE',
+  spec:[['Sistema','"Ações a Empreender" (Anexo D)'],['Margem esquerda','à esquerda de quem vai de montante para jusante'],['Símbolo','"X" refletivo encarnado em painel losangular branco'],['Luminoso','estrutura branca com duas faixas encarnadas, luz Lp encarnada']],
+  q:'Na Hidrovia, aviso de mudança de margem instalado na margem esquerda.',art:'Anexo D, art. 2, 4 e 12',trap:'Na Hidrovia a referência é <b>montante → jusante</b> (desce o rio); esquerda = encarnado, direita = verde. Na NORMAM comum a direção convencional em rio é <b>foz → nascente</b>.'},
+ {cat:'hpp',name:'Margem direita — canal junto à margem',draw:()=>panel({bg:W,fg:G,sym:f=>rect(52,52,96,96,f)}),light:'DirV',
+  spec:[['Margem direita','à direita de quem vai de montante para jusante'],['Símbolo','quadrado refletivo verde em painel quadrangular branco'],['Esquerda equivalente','mesmo símbolo encarnado em painel triangular']],
+  q:'Na Hidrovia, canal junto à margem, sinal da margem direita.',art:'Anexo D, art. 6 e 7',trap:'Forma do painel denuncia a margem: <b>triangular = esquerda</b>, <b>quadrangular = direita</b>. Símbolo "H" = canal a meio do rio.'},
+ {cat:'hpp',name:'Ponte na Hidrovia — vão principal',draw:()=>bridge(),light:'PontR',
+  spec:[['Centro do vão','luz rápida branca'],['Pilar a bombordo (subindo)','painel branco com retângulo verde ≥ 2,4 × 2,5 m'],['Pilar a boreste (subindo)','painel branco com triângulo encarnado, lado ≥ 1,5 m'],['Vãos secundários','luz fixa branca ou refletores'],['Alcance','todas as luzes ≥ 5 MN']],
+  q:'Sinalização dos vãos de ponte fixa sobre a Hidrovia Paraguai-Paraná.',art:'Anexo D, art. 15',trap:'Alcance mínimo de <b>5 MN</b> na Hidrovia versus <b>2 MN</b> nas pontes em geral (art. 3.19). Referência "subindo o rio".'},
+
+ /* PONTES (3.19 / Anexo E) */
+ {cat:'pont',name:'Ponte — sinalização diurna',draw:()=>bridge(),light:null,
+  spec:[['Boreste','painel com triângulo equilátero encarnado, vértice para cima'],['Bombordo','painel com quadrado verde'],['Melhor ponto de passagem','painel circular, faixa vertical branca entre duas encarnadas (águas seguras)'],['Fundo','branco, para reconhecimento positivo'],['Vãos de miúdas','painéis de sinal especial sobre fundo preto'],['Vãos não navegáveis','sem painéis']],
+  q:'Painéis fixados nos pilares para indicar os limites do vão navegável e o melhor ponto de passagem sob a ponte.',art:'3.19.3 a',trap:'Mesma lógica lateral: <b>triângulo = boreste</b>, <b>quadrado = bombordo</b>. O "melhor ponto" é um sinal de águas seguras em versão painel.'},
+ {cat:'pont',name:'Ponte — sinalização noturna',draw:()=>bridgeNight(),light:null,
+  spec:[['Boreste','luz rítmica encarnada (lateral de boreste)'],['Bombordo','luz rítmica verde (lateral de bombordo)'],['Melhor ponto','luz rítmica branca (águas seguras)'],['Alcance','≥ 2 MN, visíveis em todos os setores de interesse'],['Vãos de miúdas','luzes amarelas (especial)'],['Vãos não navegáveis','sem luz; opcionalmente luz fixa branca ou refletores nos pilares']],
+  q:'Luzes rítmicas nos pilares e no vão para a passagem noturna sob a ponte.',art:'3.19.3 b',trap:'Luzes de ponte são <b>rítmicas</b> e com alcance ≥ 2 MN; a luz <b>fixa branca</b> só aparece nos pilares de vãos <b>não navegáveis</b>.'},
+ {cat:'pont',name:'Ponte — RACON e refletores',draw:()=>racon([{code:['dash'],bearing:35,label:'T'},{code:['dash','dot','dot','dot'],bearing:-35,label:'B'}],'RACON T (BE) · B (BB)'),light:null,
+  spec:[['Refletores radar','em dolfins, boias ou postes a ≥ 20 m da ponte, para distinguir pilares no radar'],['RACON de curto alcance','pode indicar o melhor ponto de passagem'],['Dois RACON','boreste: Morse T (—) · bombordo: Morse B (— · · ·)'],['Retângulo de navegação','vão livre horizontal × vão livre vertical']],
+  q:'Auxílios radioelétricos para reconhecer pilares e limites do vão navegável no radar.',art:'3.19.4',trap:'Refletores a <b>≥ 20 m</b> da estrutura. Letras de RACON em ponte: <b>T</b> boreste, <b>B</b> bombordo. Novo perigo usa <b>D</b>.'},
+ {cat:'pont',name:'Cais, molhes e trapiches',draw:()=>`<svg class="sig wide" viewBox="0 0 360 200" role="img"><path d="M0 150Q30 140 60 150T120 150T180 150T240 150T300 150T360 150V200H0Z" fill="${WAT}"/><rect x="0" y="90" width="260" height="60" fill="${MUT}"/><rect x="236" y="40" width="10" height="50" fill="${INK}"/><circle class="lamp" cx="241" cy="32" r="9" fill="var(--lamp-off)" data-on="${Y}"/><rect x="120" y="60" width="8" height="30" fill="${INK}"/><circle cx="124" cy="54" r="6" fill="${W}" stroke="#0000004d"/><text x="130" y="180" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">F.A ≥ 2 MN NA EXTREMIDADE + ILUMINAÇÃO GERAL</text></svg>`,light:'FixA',
+  spec:[['Se associada à direção convencional e limita canal','pode usar sinal lateral'],['Se não associada','luz fixa amarela nas extremidades/quinas, alcance ≥ 2 MN'],['Complemento','iluminação por luzes fixas mostrando toda a extensão, sem ofuscar']],
+  q:'Extremidades e quinas de cais, píeres, molhes, enrocamentos, marinas, terminais, dolfins e trapiches.',art:'3.17',trap:'A <b>única</b> luz fixa amarela de balizamento prevista na norma. Alcance mínimo <b>2 MN</b>. Se a obra delimita canal com direção convencional → sinal <b>lateral</b>.'},
+
+ /* OFFSHORE E SONOROS (3.48–3.55) */
+ {cat:'off',name:'Plataforma — luz Mo(U)',draw:()=>platform({}),light:'MoU',
+  spec:[['Luz','branca, Mo(U) · · —, período ≤ 15 s, sincronizada'],['Altura','6 a 30 m acima da MHWS (preamar média de sizígia)'],['Alcance nominal','≥ 10 MN'],['Visibilidade','ao menos uma luz em qualquer direção'],['Complementar','luz encarnada Mo(U) ≤ 15 s nas extremidades, ≥ 3 MN'],['Painel','letras/números pretos de 1 m em fundo amarelo']],
+  q:'Sinalização luminosa obrigatória de plataformas de gás e petróleo (IALA O-139).',art:'3.49 a / 3.50',trap:'Luz: <b>Mo(U) ≤ 15 s · 10 MN</b>. Som: <b>Mo(U) ≤ 30 s · 2 MN</b>. Luz encarnada complementar: <b>3 MN</b>. Altura 6–30 m sobre a <b>MHWS</b>, não sobre o nível médio.'},
+ {cat:'off',name:'Plataforma — sinal sonoro',draw:()=>platform({sound:true}),light:null,
+  spec:[['Som','letra U (· · —) em Morse, período ≤ 30 s'],['Apito curto','duração mínima 0,75 s'],['Alcance','≥ 2 MN'],['Altura','6 a 30 m acima da MHWS'],['Acionamento','visibilidade meteorológica ≤ 2 MN'],['No Brasil','auxílios sonoros usados basicamente em plataformas (art. 2.1 b)']],
+  q:'Sinal sonoro de visibilidade restrita obrigatório em plataformas de gás e petróleo.',art:'3.49 b / 3.50',trap:'O som é acionado com visibilidade <b>≤ 2 MN</b> e tem alcance <b>2 MN</b> — mesmo número, funções diferentes. Ponto sonoro ≥ <b>0,75 s</b>; ponto luminoso ≈ 0,5 s.'},
+ {cat:'off',name:'Turbina eólica isolada',draw:()=>platform({wind:true}),light:'MoU',
+  spec:[['Luz','branca Mo(U) ≤ 15 s, alcance nominal 10 MN'],['Posição','abaixo do ponto mais baixo do arco das pás, ≥ 6 m acima da MHWS'],['Pintura','amarela da MHWS até 15 m'],['Painel','identificação preta de 1 m em fundo amarelo, visível em todas as direções']],
+  q:'Sinalização de turbina eólica, mastro meteorológico ou outra estrutura individual offshore.',art:'3.51 / 3.52',trap:'Pintura amarela até <b>15 m</b>. A luz fica <b>sob</b> o arco das pás e ≥ <b>6 m</b> acima da MHWS. Turbina flutuante: considerar luzes de aviação e tráfego.'},
+ {cat:'off',name:'Parque eólico — EPS e EPI',draw:()=>`<svg class="sig wide" viewBox="0 0 360 200" role="img"><path d="M0 170Q30 160 60 170T120 170T180 170T240 170T300 170T360 170V200H0Z" fill="${WAT}"/>${[40,120,200,280,320].map(x=>`<rect x="${x-4}" y="60" width="8" height="110" fill="${MUT}"/><rect x="${x-4}" y="130" width="8" height="40" fill="${Y}"/><path d="M${x} 60L${x} 30M${x} 60L${x+22} 74M${x} 60L${x-22} 74" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>`).join('')}<circle class="lamp" cx="40" cy="100" r="9" fill="var(--lamp-off)" data-on="${Y}"/><circle class="lamp" cx="320" cy="100" r="9" fill="var(--lamp-off)" data-on="${Y}"/><circle cx="200" cy="100" r="6" fill="${Y}"/><text x="40" y="192" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">EPS 5 MN</text><text x="200" y="192" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">EPI 2 MN</text><text x="320" y="192" font-size="11" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">EPS 5 MN</text></svg>`,light:'EPS',
+  spec:[['EPS (Estrutura Periférica Significativa)','quinas: luz amarela de sinal especial, 5 MN, sincronizadas, distância entre EPS ≤ 3 MN'],['EPI (Intermediária)','luz amarela com característica diferente da EPS, 2 MN, distância ≤ 2 MN da EPS/EPI vizinha'],['Pintura','amarela da MHWS até 15 m em toda estrutura']],
+  q:'Sinalização do perímetro de um parque eólico offshore.',art:'3.54',trap:'EPS: <b>5 MN</b>, espaçamento ≤ <b>3 MN</b>. EPI: <b>2 MN</b>, espaçamento ≤ <b>2 MN</b>, característica <b>diferente</b> da EPS.'},
+ {cat:'off',name:'Geradores de maré e ondas',draw:()=>buoy({bands:[[Y,1]],topmark:'x',lampColor:Y}),light:'SpA',
+  spec:[['Equipamento individual','pintado de amarelo a partir da linha d\'água; se sinalizado, luz amarela > 2 MN, diferente da do campo'],['Isolado','sinalizar como perigo isolado ou sinal especial, conforme análise de risco'],['Campo','sinais especiais no perímetro; sincronização recomendada'],['Flutuantes','margem de segurança das amarras']],
+  q:'Sinalização de equipamentos offshore geradores de energia por maré e ondas.',art:'3.55',trap:'Estrutura isolada pode ser <b>perigo isolado ou especial</b>, decidido por análise de risco — única situação em que a norma deixa a categoria em aberto.'},
+
+ /* RADIOELÉTRICOS (Cap. 2, Seção III) */
+ {cat:'rad',name:'RACON (respondedor radar)',draw:()=>racon([{code:['dash','dot','dot'],bearing:20,label:'D'}],'RACON "D" — resposta radial'),light:null,
+  spec:[['O que faz','amplifica os pulsos do radar e responde; aparece na tela como letra Morse'],['Informação','marcação e distância radar do sinal'],['Letras','D novo perigo (traço 1 MN) · T/B ponte (BE/BB) · estrutura offshore: definida pela DHN'],['Alteração','"inoperante" ou "fora do ar" (art. 5.3)']],
+  q:'Equipamento que responde ao radar do navio desenhando uma letra Morse na tela.',art:'2.18',trap:'Auxílio radioelétrico é <b>sempre considerado independente</b> do sinal visual onde está instalado (art. 2.1 c).'},
+ {cat:'rad',name:'AIS AtoN Real',draw:()=>aisIcon('Real'),light:null,
+  spec:[['Definição','estação AIS instalada no próprio auxílio; transmite posição e estado'],['MMSI','formato 99MID1XXX'],['Mensagem','21 (ITU-R M.1371): tipo, nome, posição, dimensão, status'],['Autorização','Cap. 4 + anexo K']],
+  q:'AIS instalado fisicamente na boia ou farol, transmitindo sua posição e estado reais.',art:'2.19 a / Anexo K',trap:'Real e Sintético usam MMSI <b>99MID1XXX</b>; Virtual usa <b>99MID6XXX</b>.'},
+ {cat:'rad',name:'AIS AtoN Sintético',draw:()=>aisIcon('Sintético'),light:null,
+  spec:[['Definição','transmissão feita por Estação Base distante do auxílio, que existe fisicamente'],['Monitorado','há comunicação AtoN ↔ base confirmando posição/estado'],['Previsto','sem monitoramento; só em auxílios <b>fixos</b>, nunca em flutuantes']],
+  q:'O auxílio existe, mas quem transmite é uma estação base em terra.',art:'2.19 b',trap:'Sintético <b>Previsto</b> jamais em sinal flutuante (a boia pode sair de posição e o AIS "mentiria").'},
+ {cat:'rad',name:'AIS AtoN Virtual',draw:()=>aisIcon('Virtual'),light:null,
+  spec:[['Definição','simula auxílio que não existe fisicamente ou o substitui provisoriamente'],['Usos','marcar naufrágio/novo perigo; local inexequível para sinal físico; deslocamento sazonal por gelo; sinal físico fora de posição; onde o físico atrapalharia'],['Permanente','exige avaliação de risco, estudo de alternativas, tráfego, equipamentos dos navios e consenso dos usuários']],
+  q:'Auxílio que só existe na tela do AIS, transmitido por estação base.',art:'2.19 c',trap:'MMSI <b>99MID6XXX</b>. Para novo perigo/naufrágio aplica-se o art. <b>4.6</b> (autorização provisória, até 180 dias).'},
+ {cat:'rad',name:'Radiofarol',draw:()=>`<svg class="sig" viewBox="0 0 200 250" role="img"><path d="M0 230Q25 220 50 230T100 230T150 230T200 230V250H0Z" fill="${WAT}"/><rect x="94" y="60" width="12" height="170" fill="${MUT}"/><path d="M60 90q40-40 80 0M44 70q56-56 112 0M76 110q24-24 48 0" stroke="${INK}" stroke-width="4" fill="none" stroke-linecap="round"/><text x="100" y="236" font-size="13" text-anchor="middle" fill="${INK}" font-family="IBM Plex Mono,monospace">RF</text></svg>`,light:null,
+  spec:[['O que é','estação que emite sinal de rádio característico'],['Uso','marcações por radiogoniômetro; cruzamento de LDP'],['SOLAS V/19 1.2.2','navios construídos a partir de 1º/7/2002 desobrigados do radiogoniômetro']],
+  q:'Estação transmissora cujas marcações, tomadas por radiogoniômetro, fornecem linhas de posição.',art:'2.17',trap:'Data da desobrigação do radiogoniômetro: <b>1º de julho de 2002</b> (SOLAS Cap. V, Regra 19).'},
+];
+
+/* ---------- state ---------- */
+let mode='sig',cat='all',deck=[],i=0,ok=0,bad=0,flipped=false,raf=null;
+const $=id=>document.getElementById(id);
+const pool=()=>D.map((d,k)=>k).filter(k=>cat==='all'||D[k].cat===cat);
+
+function reset(shuffle){deck=pool();if(shuffle)for(let k=deck.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[deck[k],deck[j]]=[deck[j],deck[k]]}i=0;ok=0;bad=0;render()}
+
+/* lantern animation: cycles through [on,off] pairs */
+function animate(lightKey){
+ if(raf)cancelAnimationFrame(raf);raf=null;
+ const lamps=document.querySelectorAll('#front .lamp');if(!lamps.length)return;
+ const L_=lightKey?L[lightKey]:null;
+ if(!L_){lamps.forEach(l=>l.setAttribute('fill',l.dataset.on));return}
+ const seq=L_.seq,P=seq.reduce((s,p)=>s+p[0]+p[1],0),t0=performance.now();
+ const step=now=>{let t=(now-t0)%P,on=false;for(const p of seq){if(t<p[0]){on=true;break}t-=p[0];if(t<p[1])break;t-=p[1]}
+  lamps.forEach(l=>l.setAttribute('fill',on?l.dataset.on:'var(--lamp-off)'));raf=requestAnimationFrame(step)};
+ raf=requestAnimationFrame(step);
+}
+
+function frontHTML(d){
+ const lt=d.light?L[d.light]:null;
+ if(d.def)return `<span class="hint">QUAL É O TERMO?</span><p class="q">${d.q}</p><span class="tlabel">NORMAM-601 Cap. 2, Seção V</span>`;
+ if(mode==='sig')return `${d.draw()}${lt?timeline(lt.seq,lt.c)+`<span class="tlabel">${lt.label}</span>`:''}<span class="hint">QUE SINAL É ESTE?</span>`;
+ return `<span class="hint">QUAL É O SINAL?</span><p class="q">${d.q}</p><span class="tlabel">${CATS[d.cat]} · art. ${d.art}</span>`;
+}
+function backHTML(d){
+ const lt=d.light?L[d.light]:null;
+ if(d.def)return `<div class="head"><div><div class="cat">${CATS[d.cat]}</div><div class="name">${d.name}</div><span class="art">NORMAM-601 art. ${d.art}</span></div></div>${d.draw()}<dl class="spec">${d.spec.map(s=>`<dt>${s[0]}</dt><dd>${s[1]}</dd>`).join('')}</dl><div class="trap"><strong>Banca</strong>${d.trap}</div>`;
+ return `<div class="head">${d.draw().replace('class="sig wide"','class="sig sm"').replace('class="sig"','class="sig sm"')}<div><div class="cat">${CATS[d.cat]}</div><div class="name">${d.name}</div><span class="art">NORMAM-601 art. ${d.art}</span></div></div>
+ <dl class="spec">${d.spec.map(s=>`<dt>${s[0]}</dt><dd>${s[1]}</dd>`).join('')}</dl>
+ ${lt?`<div class="lightrow">${timeline(lt.seq,lt.c)}<span class="tlabel">${lt.label}</span></div>`:''}
+ <div class="trap"><strong>Banca</strong>${d.trap}</div>`;
+}
+function render(){
+ const total=deck.length,N=pool().length;
+ $('okc').textContent=ok;$('badc').textContent=bad;
+ $('barfill').style.width=(N?Math.min(100,ok/N*100):0)+'%';
+ $('card').classList.remove('flipped');flipped=false;$('ok').disabled=$('bad').disabled=true;
+ if(i>=total){$('pos').textContent='Fim';if(raf)cancelAnimationFrame(raf);
+  $('study').innerHTML=`<div class="face" style="position:static;min-height:300px"><div class="done"><span class="eyebrow">Baralho concluído</span><div class="score">${ok} / ${N}</div><p class="sub">${bad?bad+' erro(s) revisado(s) ao longo do caminho.':'Nenhum erro. Agora tente o outro modo.'}</p><button class="btn" id="again">Recomeçar embaralhado</button></div></div>`;
+  $('again').onclick=()=>{restoreStudy();reset(true)};$('grade').hidden=true;return}
+ $('grade').hidden=false;
+ const d=D[deck[i]];$('pos').textContent=`${i+1} / ${total}`;
+ $('front').innerHTML=frontHTML(d);$('back').innerHTML=backHTML(d);
+ animate(mode==='sig'?d.light:null);
+}
+function restoreStudy(){$('study').innerHTML=`<div class="scene"><div class="card" id="card" tabindex="0" role="button" aria-label="Virar cartão"><div class="face front" id="front"></div><div class="face back" id="back"></div></div></div>`;bindCard()}
+function flip(){flipped=!flipped;$('card').classList.toggle('flipped',flipped);if(flipped){$('ok').disabled=$('bad').disabled=false;if(mode==='mean'){const d=D[deck[i]];$('back').querySelectorAll('.lamp').forEach(l=>l.setAttribute('fill',l.dataset.on))}}}
+function bindCard(){const c=$('card');c.onclick=flip;c.onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();flip()}}}
+$('ok').onclick=()=>{ok++;i++;render()};
+$('bad').onclick=()=>{bad++;deck.push(deck[i]);i++;render()};
+$('shuffle').onclick=()=>{restoreStudy();reset(true)};
+$('restart').onclick=()=>{restoreStudy();reset(false)};
+function setMode(m){mode=m;$('m-sig').setAttribute('aria-pressed',m==='sig');$('m-mean').setAttribute('aria-pressed',m==='mean');restoreStudy();reset(true)}
+$('m-sig').onclick=()=>setMode('sig');$('m-mean').onclick=()=>setMode('mean');
+document.addEventListener('keydown',e=>{if(!flipped)return;if(e.key==='ArrowRight')$('ok').click();if(e.key==='ArrowLeft')$('bad').click()});
+
+/* category chips */
+const chips=[['all','Todos ('+D.length+')'],...Object.entries(CATS).map(([k,v])=>[k,v+' ('+D.filter(d=>d.cat===k).length+')'])];
+$('chips').innerHTML=chips.map(c=>`<button class="chip" data-cat="${c[0]}" aria-pressed="${c[0]==='all'}">${c[1]}</button>`).join('');
+$('chips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{cat=b.dataset.cat;$('chips').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));restoreStudy();reset(true)});
+
+/* reference table */
+let rows='',last='';
+D.forEach(d=>{if(d.cat!==last){rows+=`<tr class="grp"><td colspan="4">${CATS[d.cat]}</td></tr>`;last=d.cat}
+ const lt=d.light?L[d.light]:null;
+ rows+=`<tr><td>${d.def?'<span class="tlabel">def.</span>':d.draw().replace(/class="sig( wide)?"/,'class=""')}</td><td class="n">${d.name}</td><td>${lt?`<span class="tlabel">${lt.label}</span>`:'—'}</td><td><span class="tlabel">${d.art}</span></td></tr>`});
+$('tbody').innerHTML=rows;
+document.querySelectorAll('#tbody .lamp').forEach(l=>l.setAttribute('fill',l.dataset.on));
+bindCard();reset(false);
+</script>
+</body>
+</html>
