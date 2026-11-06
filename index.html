@@ -124,6 +124,14 @@
    ====================================================================== */
 const CADERNOS = [
   {
+    materia:"publicacoes-dhn", badge:"DHN · fontes primárias · Bloco III item 27",
+    titulo:"Publicações Náuticas DHN — o que cada uma traz e o que a banca cobra",
+    arquivo:"publicacoes_dhn.html",
+    desc:"Caderno consolidado em 7 capítulos, um por publicação: Carta 12.000/INT 1 (5 colunas, seções A–U, NR = MLWS, sintaxe das luzes, boias IALA B em símbolos); Roteiro DH1 (volumes, convenções, Cap. I — escalas, correção a bordo, plataformas, praticagem, SAR; Cap. II — fusos, frentes, Cartas Piloto; esqueleto de porto); Lista de Faróis DH2 (8 colunas e tipografia, abreviaturas nacionais, alcances luminoso/nominal/geográfico com fórmulas, quadro IALA B e cardinais); LAR DH8 (código das estações, 13 radiofaróis, DTU1, METEOROMARINHA, avisos-rádio e NAVAREA V, racons, GMDSS); Cartas de Correntes de Maré de Vitória (13 cartas, azul 5 m/vermelho 11 m, Tabelas I/II, 2012-Q40); Avisos aos Navegantes (tipos, numeração, 8 seções do Folheto, difusão sem NAVTEX); e as demais do item 27 (Catálogo, Sinais Cegos, Tábuas, Almanaque) com a tabela 'quem corrige o quê'. Tags [BANCA] 2006–2012, [CONFLITO] entre fontes, 136 flashcards por publicação e quiz de 79 questões.",
+    tags:["BANCA","DECORAR","CALCULO","CONFLITO","Publicações náuticas","Carta 12.000","INT 1","Roteiro","Lista de Faróis","Lista de Auxílios-Rádio","LAR","Cartas de Correntes de Maré","Avisos aos Navegantes","IALA B","NAVAREA V","Racon","GMDSS","Catálogo","Tábuas das Marés","Cartas Piloto","DHN"]
+  },
+
+  {
     materia:"economia", badge:"Stopford · Caps. 6–8 · Bloco E · Item 7.3",
     titulo:"Stopford — A economia das companhias de navegação (Caps. 6 a 8): custos, receitas e fluxo de caixa; financiamento; risco e retorno",
     arquivo:"stopford_e2_economia_companhias_cap6_8.html",
@@ -702,6 +710,7 @@ const CADERNOS = [
 
 /* ---- Matérias (ordem + rótulos + cor). Crie novas aqui se precisar. ---- */
 const MATERIAS = {
+  "publicacoes-dhn":{ titulo:"Publicações Náuticas DHN", sub:"Bloco III · item 27 · fontes primárias: Carta 12.000 · Roteiro · Lista de Faróis · LAR · CCM · Avisos", cor:"#0D3D36" },
   "navegacao":{ titulo:"Navegação — Miguens", sub:"Bloco III · Miguens Vol. I e III · núcleo de referência", cor:"#1F6F8B" },
   "manobra-resist":{ titulo:"Manobrabilidade — Resistência", sub:"Módulo I · Bloco A · Resistência ao Avanço", cor:"#2C5F8A" },
   "manobra-prop":{ titulo:"Manobrabilidade — Propulsão", sub:"Módulo I · Bloco B · Propulsão e Propulsores", cor:"#1A7A6E" },
@@ -716,7 +725,7 @@ const MATERIAS = {
   "legislacao":{ titulo:"Legislação e Regulamentação", sub:"Módulo IV · LESTA · Tribunal Marítimo · NORMAMs · Portos e Registro", cor:"#4A5A2E" },
   "economia":{ titulo:"Economia Marítima — Stopford", sub:"Módulo VII · Bloco E · Economia marítima, 3. ed. (Blucher, 2017) · Caps. 1–17", cor:"#0D3D36" }
 };
-const ORDEM = ["navegacao","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes","legislacao","economia"];
+const ORDEM = ["navegacao","publicacoes-dhn","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes","legislacao","economia"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }
