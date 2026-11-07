@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="SMCP (IMO A.918(22)) em quatro baralhos separados: Glossário, Conceitos gerais, Parte A e Parte B, com distratores e questões das provas PSCPP.">
+<meta name="theme-color" content="#0D3D36">
+<title>SMCP em Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.back-link{font-family:var(--mono);font-size:12px;color:var(--teal);text-decoration:none;letter-spacing:.04em}
+.back-link:hover{text-decoration:underline}
+
+/* Layout: one study column — four deck tabs (Glossário · Conceitos gerais · Parte A · Parte B), each with its own filters, flip card, grading bar and searchable table */
+:root{
+  --bg:#F7F3EA; --surface:#FFFDF7; --ink:#0D3D36; --muted:#5E716C; --line:#DCD4C2;
+  --teal:#1A7A6E; --gold:#C8A84B; --gold-soft:#F3E7BF; --ok:#1A7A6E; --bad:#B23A2E;
+  --display:"Libre Caslon Text", Georgia, serif;
+  --body:"IBM Plex Sans", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1F1C; --surface:#123029; --ink:#EDE6D3; --muted:#9DB0AA; --line:#24463F;
+  --teal:#5CC2B2; --gold:#D9BC62; --gold-soft:#3A3420; --ok:#5CC2B2; --bad:#E07A6E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1F1C; --surface:#123029; --ink:#EDE6D3; --muted:#9DB0AA; --line:#24463F;
+  --teal:#5CC2B2; --gold:#D9BC62; --gold-soft:#3A3420; --ok:#5CC2B2; --bad:#E07A6E; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:560px;margin:0 auto;padding-block:20px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+h1{font-family:var(--display);font-size:clamp(26px,7vw,34px);line-height:1.1;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:0;font-size:14px}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--muted);padding:7px 12px;font:500 13px var(--body);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 13px;font:500 13px var(--body);cursor:pointer}
+.btn:hover{border-color:var(--teal)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.progress{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+
+.scene{perspective:1200px}
+.card{position:relative;width:100%;min-height:380px;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,.7,.3,1)}
+.card.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;box-shadow:0 10px 30px -18px rgba(13,61,54,.45)}
+.back{transform:rotateY(180deg);justify-content:flex-start;align-items:stretch;overflow-y:auto}
+.hint{font-size:12px;color:var(--muted);font-family:var(--mono);letter-spacing:.06em}
+.q-en{font-family:var(--display);font-size:clamp(19px,5vw,23px);text-align:center;line-height:1.35;max-width:30ch;text-wrap:balance}
+
+.head{display:flex;align-items:center;gap:14px}
+.phon{font-family:var(--mono);font-size:14px;color:var(--teal);letter-spacing:.04em}
+.snd{display:inline-block;margin-top:4px;font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:999px;background:var(--gold-soft);color:var(--ink);letter-spacing:.04em}
+.en{font-family:var(--display);font-size:18px;line-height:1.4;margin:0}
+.pt{margin:0;color:var(--muted);font-size:14px}
+.pt b{color:var(--ink);font-weight:600}
+.trap{border-left:3px solid var(--gold);background:var(--gold-soft);padding:9px 12px;border-radius:0 8px 8px 0;font-size:13.5px}
+.trap strong{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+
+.grade{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grade button{padding:13px;border-radius:10px;font:600 15px var(--body);cursor:pointer;border:1.5px solid}
+.g-bad{background:transparent;color:var(--bad);border-color:var(--bad)}
+.g-ok{background:var(--ok);color:var(--bg);border-color:var(--ok)}
+.grade button:disabled{opacity:.35;cursor:default}
+
+.done{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.done .score{font-family:var(--display);font-size:42px}
+
+details{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"⚓";color:var(--gold)}
+.tbl{overflow-x:auto;padding:0 8px 10px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 6px;border-top:1px solid var(--line);vertical-align:middle;text-align:left}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-top:0}
+.src{font-size:12px;color:var(--muted);margin:0}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.bar i{transition:none}}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:6px 11px;font:500 12.5px var(--body);cursor:pointer;font-variant-numeric:tabular-nums}
+.chips button[aria-pressed="true"]{border-color:var(--teal);color:var(--ink);box-shadow:inset 0 0 0 1px var(--teal)}
+.chips button span{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:4px}
+.term{font-family:var(--display);font-size:clamp(26px,7.5vw,36px);line-height:1.15;text-align:center;font-weight:700;text-wrap:balance;max-width:16ch}
+.grp{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--gold-soft);color:var(--ink)}
+.bhead .grp{align-self:flex-start}
+.grp.v{background:var(--teal);color:var(--bg)}
+.q-def{font-family:var(--display);font-size:clamp(16px,4.4vw,19px);text-align:center;line-height:1.45;max-width:32ch}
+.bhead{display:flex;flex-direction:column;gap:4px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.bterm{font-family:var(--display);font-size:24px;line-height:1.2;font-weight:700}
+.bpt{font-family:var(--body);font-weight:600;color:var(--teal);font-size:15px}
+.lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:-10px}
+.find{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:9px 11px;font:inherit;margin:0 0 6px}
+.tbl .find{display:block}
+td.t{font-family:var(--display);font-weight:700;font-size:14.5px;min-width:9em}
+td.t small{display:block;font-family:var(--body);font-weight:500;color:var(--teal);font-size:12.5px}
+td .grp{font-size:9.5px;padding:1px 6px}
+.empty{color:var(--muted);font-size:13px;padding:10px 6px}
+
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;border-bottom:1px solid var(--line);padding-bottom:12px}
+@media (max-width:560px){.tabs{grid-template-columns:repeat(2,1fr)}}
+.tabs button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:9px 10px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:1px;font:inherit}
+.tabs button b{font-family:var(--display);font-size:15px;line-height:1.2}
+.tabs button span{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs button[aria-selected="true"] span{color:var(--gold)}
+.deckinfo{margin:0;color:var(--muted);font-size:13.5px}
+.sec{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.kind{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.prompt{font-family:var(--display);font-size:clamp(17px,4.8vw,21px);line-height:1.45;text-align:center;max-width:30ch;text-wrap:pretty}
+.ans{font-family:var(--display);font-size:17px;line-height:1.45;margin:0}
+.ans.ok{color:var(--ok)} .ans.no{color:var(--bad)}
+.exam{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:999px;background:var(--gold);color:#1b1a14;align-self:flex-start}
+.frontmeta{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+td.s{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+td .q{font-family:var(--display);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="index.html">← Voltar à Estante PSCPP</a>
+  <header>
+    <span class="eyebrow">PSCPP 2027 · Bloco VI · SMCP · IMO A.918(22)</span>
+    <h1>SMCP em Flashcards</h1>
+    <p class="sub">Quatro baralhos separados. Escolha um; toque no cartão para virar; os erros voltam ao fim do baralho.</p>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Baralhos">
+    <button role="tab" id="t-gl" aria-selected="true"><b>Glossário</b><span id="c-gl"></span></button>
+    <button role="tab" id="t-ge" aria-selected="false"><b>Conceitos gerais</b><span id="c-ge"></span></button>
+    <button role="tab" id="t-pa" aria-selected="false"><b>Parte A</b><span id="c-pa"></span></button>
+    <button role="tab" id="t-pb" aria-selected="false"><b>Parte B</b><span id="c-pb"></span></button>
+  </nav>
+  <p class="deckinfo" id="deckinfo"></p>
+
+  <div class="chips" role="group" aria-label="Filtro" id="chips"></div>
+
+  <div class="toolbar">
+    <div class="seg" role="group" aria-label="Modo" id="modeseg">
+      <button id="m-term" aria-pressed="true">Termo → definição</button>
+      <button id="m-def" aria-pressed="false">Definição → termo</button>
+    </div>
+    <button class="btn" id="shuffle">Embaralhar</button>
+    <button class="btn" id="restart">Recomeçar</button>
+  </div>
+
+  <div>
+    <div class="progress"><span id="pos"></span><span><span id="okc">0</span> certas · <span id="badc">0</span> erradas</span></div>
+    <div class="bar"><i id="barfill"></i></div>
+  </div>
+
+  <div id="study"></div>
+
+  <div class="grade" id="grade">
+    <button class="g-bad" id="bad" disabled>Errei</button>
+    <button class="g-ok" id="ok" disabled>Acertei</button>
+  </div>
+
+  <details>
+    <summary id="tsum">Tabela de consulta</summary>
+    <div class="tbl">
+      <label for="q" class="hint" style="display:block;margin:2px 0 6px">BUSCAR EM INGLÊS OU PORTUGUÊS</label>
+      <input id="q" class="find" type="search" placeholder="ex.: anchor, ferro, pilot" autocomplete="off">
+      <table><thead><tr id="thead"></tr></thead><tbody id="tbody"></tbody></table>
+      <p class="empty" id="none" hidden>Nada encontrado.</p>
+    </div>
+  </details>
+
+  <p class="src">Fonte: IMO Resolution A.918(22), <i>IMO Standard Marine Communication Phrases</i>, 2001 — Introduction, General, Glossary, Part A e Part B. Frases em inglês transcritas do original; tradução apoiada na Tradução Anotada PSCPP 2027 — Bloco VI. Etiquetas de prova: PSCPP 2006 Q51, 2008 Q37, 2011 Q68. * 2011: prova sem gabarito no material; resposta deduzida pela única alternativa compatível com o SMCP. Recorte do edital (Anexo 2-A, item 1): Parte A integral; Parte B apenas B1 e B2.</p>
+</div>
+
+<script>
+// [term EN, termo PT, definition EN (A.918(22) verbatim), definição PT, grupo g|v, pegadinha de banca]
+const G=[
+["Abandon vessel (to)","Abandonar o navio","To evacuate crew and passengers from a vessel following a distress","Evacuar tripulação e passageiros de um navio na sequência de um sinistro.","g",""],
+["Accommodation ladder","Escada de portaló","Ladder attached to platform at vessel's side with flat steps and handrails enabling persons to embark / disembark from water or shore","Escada fixada a uma plataforma no costado, com degraus planos e corrimãos, para embarcar/desembarcar da água ou de terra.","g","Integra os boarding arrangements do prático, junto com a pilot ladder."],
+["Adrift","À deriva","Uncontrolled movement at sea under the influence of current, tide or wind","Movimento descontrolado no mar sob influência de corrente, maré ou vento.","g","Adrift = movimento descontrolado. Disabled = incapaz de prosseguir viagem por avaria."],
+["Air draft","Air draft (altura livre acima d'água)","The height from the waterline to the highest point of the vessel","Altura da linha d'água até o ponto mais alto do navio.","g","Air draft mede para cima; draught, para baixo. Sketch 2 do SMCP: air draft, freeboard, draft, under-keel clearance."],
+["Assembly station","Estação de reunião","Place on deck, in mess rooms, etc., assigned to crew and passengers where they have to meet according to the muster list when the corresponding alarm is released or announcement made","Local no convés, salões etc., onde tripulação e passageiros se reúnem conforme a muster list quando soa o alarme.","g","Assembly station = onde se reúnem. Lifeboat station = onde se reúnem antes de embarcar nas baleeiras."],
+["Backing (of wind)","Rondar o vento para a esquerda (anti-horário)","Shift of wind direction in an anticlockwise manner, for example from north to west (opposite of veering)","Mudança da direção do vento no sentido anti-horário, ex.: de norte para oeste. Oposto de veering.","g","Par clássico: BACKING = anti-horário · VEERING = horário."],
+["Beach (to)","Encalhar voluntariamente","To run a vessel up on a beach to prevent its sinking in deep water","Pôr o navio numa praia para evitar que afunde em águas profundas.","g","Ato deliberado, para salvar o navio. Não é grounding acidental."],
+["Berth","Berço / distância de segurança","1. A sea room to be kept for safety around a vessel, rock, platform, etc. 2. The place assigned to a vessel when anchored or lying alongside a pier, etc.","1. Espaço de mar mantido por segurança em torno de navio, pedra, plataforma etc. 2. Local designado ao navio fundeado ou atracado.","g","Dois sentidos. “Give a wide berth” usa o sentido 1."],
+["Blast","Apito (sinal sonoro)","A whistle signal made by the vessel","Sinal de apito emitido pelo navio.","g",""],
+["Blind sector","Setor cego","An area which cannot be scanned by the ship's radar because it is shielded by parts of the superstructure, masts, etc.","Área que o radar do navio não varre por estar sombreada por superestrutura, mastros etc.","g",""],
+["Boarding arrangements","Dispositivos de embarque","All equipment, such as pilot ladder, accommodation ladder, hoist, etc., necessary for a safe transfer of the pilot","Todo o equipamento (escada de prático, escada de portaló, guincho etc.) necessário à transferência segura do prático.","g","Termo de prático. Inclui pilot ladder, accommodation ladder e hoist."],
+["Boarding speed","Velocidade de embarque","The speed of a vessel adjusted to that of a pilot boat at which the pilot can safely embark/disembark","Velocidade do navio ajustada à da lancha do prático para embarque/desembarque seguro.","g","Termo de prático. Ajustada à lancha, não à corrente."],
+["Bob-cat","Bob-cat","A mini-caterpillar with push-blade used for the careful distribution of loose goods in cargo holds of bulk carriers","Mini-trator com lâmina usado para distribuir carga solta nos porões de graneleiros.","g",""],
+["Briefing","Instrução prévia (briefing)","Concise explanatory information to crew and/or passengers","Informação explicativa concisa à tripulação e/ou passageiros.","g",""],
+["Cable","Amarra / cabo / encabladura (medida)","1. Chain connecting a vessel to the anchor(s) 2. Wire or rope primarily used for mooring a ship 3. (Measurement) one hundred fathoms or one tenth of a nautical mile","1. Corrente que liga o navio ao ferro. 2. Cabo de amarração. 3. Medida: 100 braças ou 1/10 de milha náutica.","g","Decorar: 1 cable = 100 fathoms = 0,1 NM. Shackle = 15 fathoms."],
+["Capsize (to)","Emborcar","To turn over","Virar-se completamente.","g",""],
+["Cardinal buoy","Boia cardinal","A seamark, i.e. a buoy, indicating the north, east, south or west, i.e. the cardinal points from a fixed point such as a wreck, shallow water, banks, etc.","Marca de mar que indica N, E, S ou W em relação a um ponto fixo, como naufrágio, águas rasas ou bancos.","g",""],
+["Cardinal points","Pontos cardeais","The four main points of the compass: north, east, south and west","Os quatro pontos principais da agulha: norte, leste, sul e oeste.","g","Cardinal = N E S W. Half cardinal = NE SE SW NW."],
+["Casualty","Vítima fatal (aqui)","Here: case of death in an accident or shipping disaster","Aqui: caso de morte em acidente ou sinistro marítimo.","g","No glossário SMCP, casualty = morte. Não é “acidente” nem “ferido”."],
+["Check (to)","Verificar / filar","1. To make sure that equipment etc. is in proper condition or that everything is correct and safe 2. To regulate motion of a cable, rope or wire when it is running out too fast","1. Certificar-se de que o equipamento está em condições e tudo está seguro. 2. Regular o movimento de amarra ou cabo que corre rápido demais.","g","Dois sentidos: verificar e filar (segurar a amarra)."],
+["Close-coupled towing","Reboque acoplado (em gelo)","A method of towing vessels through polar ice by means of icebreaking tugs with a special stern notch suited to receive and hold the bow of the vessel to be towed","Reboque em gelo polar por rebocador quebra-gelo com entalhe de popa que recebe e prende a proa do rebocado.","g",""],
+["Close up (to)","Aproximar-se (do navio de vante)","To decrease the distance to the vessel ahead by increasing one's own speed","Diminuir a distância para o navio à frente aumentando a própria velocidade.","g","Par: CLOSE UP = aproxima (aumenta velocidade) · DROP BACK = afasta (reduz velocidade)."],
+["Compatibility (of goods)","Compatibilidade (de mercadorias)","Indicates whether different goods can be safely stowed together in one cargo space or in an adjacent hold.","Indica se mercadorias diferentes podem ser estivadas juntas com segurança no mesmo espaço ou em porão adjacente.","g","Par com segregation: separar o que não é compatível."],
+["Vessel constrained by her draft","Navio restrito pelo seu calado","A vessel severely restricted by her draught in her ability to deviate from the course followed in relation to the available depth and width of navigable water","Navio severamente limitado pelo calado em desviar do rumo, em relação à profundidade e largura disponíveis.","g","Três categorias: constrained by draft (calado) · hampered (natureza do trabalho) · NUC (circunstâncias excepcionais)."],
+["Convoy","Comboio","A group of vessels which sail together, e.g. through a canal or ice","Grupo de navios que navegam juntos, ex.: por um canal ou pelo gelo.","g",""],
+["Course","Rumo","The intended direction of movement of a vessel through the water","Direção pretendida de movimento do navio através da água.","g","Course = pretendido, na água. Course made good = efetivo, no fundo. Heading = para onde aponta a proa."],
+["Course made good","Rumo no fundo (efetivo)","That course which a vessel makes good over ground, after allowing for the effect of currents, tidal streams, and leeway caused by wind and sea","Rumo que o navio efetivamente faz sobre o fundo, considerados correntes, marés e abatimento.","g","Over ground, já com corrente e leeway. Course é through the water."],
+["COW","Lavagem com óleo cru","Crude Oil Washing: a system of cleaning the cargo tanks by washing them with the cargo of crude oil during discharge","Crude Oil Washing: limpeza dos tanques com a própria carga de óleo cru durante a descarga.","g",""],
+["CPA/TCPA","Ponto e tempo de maior aproximação","Closest Point of Approach/Time to Closest Point of Approach: limit as defined by the observer to give warning when a tracked target or targets will close to within these limits","Closest Point of Approach / Time to CPA: limite definido pelo observador para alarmar quando um alvo rastreado entrar nesses limites.","g",""],
+["Crash-stop","Parada de emergência","An emergency reversal operation of the main engine(s) to avoid a collision","Reversão de emergência da(s) máquina(s) principal(is) para evitar colisão.","g",""],
+["Damage control team","Equipe de controle de avarias","A group of crew members trained for fighting flooding in the vessel","Grupo de tripulantes treinados para combater alagamento.","g","Combate alagamento (flooding), não incêndio."],
+["Datum","Datum","1. The most probable position of a search target at a given time 2. The plane of reference to which all data as to the depth on charts are referenced","1. Posição mais provável de um alvo de busca em dado momento. 2. Plano de referência das profundidades na carta.","g","Dois sentidos: SAR (posição provável) e cartográfico (nível de redução)."],
+["Derelict","Derrelito","Vessel still afloat, abandoned at sea","Navio ainda flutuando, abandonado no mar.","g","Derelict = ainda flutua. Wreck = destruído, afundado ou abandonado."],
+["Destination","Destino","Port for which a vessel is bound","Porto para o qual o navio se dirige.","g",""],
+["Disabled","Avariado / incapacitado","A vessel damaged or impaired in such a manner as to be incapable of proceeding on its voyage","Navio danificado de forma a não poder prosseguir viagem.","g","Equivale ao F do CIS: “I am disabled; communicate with me”."],
+["Disembark (to)","Desembarcar","To go from a vessel","Sair de um navio.","g",""],
+["Distress alert (GMDSS)","Alerta de socorro (GMDSS)","A radio signal from a distressed vessel automatically directed to an MRCC giving position, identification, course and speed of the vessel as well as the nature of distress","Sinal de rádio do navio em perigo, dirigido automaticamente a um MRCC, com posição, identificação, rumo, velocidade e natureza do perigo.","g","Vai automaticamente a um MRCC. Contém posição, identificação, rumo, velocidade e natureza."],
+["Distress / Urgency traffic","Tráfego de socorro / urgência","Here: the verbal exchange of information on radio from ship to shore and/or ship to ship / aircraft about a distress / urgency situation as defined in the relevant ITU Radio Regulations","Troca verbal de informações por rádio (navio-terra, navio-navio/aeronave) sobre socorro ou urgência, conforme o Regulamento de Radiocomunicações da UIT.","g","Alert é sinal automático; traffic é a troca verbal que vem depois."],
+["Draught (or draft)","Calado","Depth in water at which a vessel floats","Profundidade na água em que o navio flutua.","g",""],
+["Dragging (of anchor)","Garrar (o ferro)","Moving of an anchor over the sea bottom involuntarily because it is no longer preventing the movement of the vessel","Movimento involuntário do ferro sobre o fundo, que já não segura o navio.","g","Par: DRAGGING = involuntário (garrar) · DREDGING = controlado (draguear). Y do CIS = dragging."],
+["Dredging (of anchor)","Draguear o ferro","Moving of an anchor over the sea bottom to control the movement of the vessel","Arrastar o ferro sobre o fundo de forma controlada para governar o movimento do navio.","g","Par: DREDGING = deliberado, para controlar o navio · DRAGGING = involuntário."],
+["Drifting","Derivando","Being driven along by the wind, tide or current","Ser levado pelo vento, maré ou corrente.","g",""],
+["Drop back (to)","Afastar-se (do navio de vante)","To increase the distance from the vessel ahead by reducing one's own speed","Aumentar a distância do navio à frente reduzindo a própria velocidade.","g","Par: DROP BACK = reduz velocidade e afasta · CLOSE UP = aumenta e aproxima."],
+["DSC","Chamada Seletiva Digital","Digital Selective Calling (in the GMDSS system)","Digital Selective Calling, no sistema GMDSS.","g",""],
+["Embark (to)","Embarcar","To go aboard a vessel","Ir a bordo de um navio.","g",""],
+["EPIRB","Radiobaliza indicadora de posição de emergência","Emergency Position Indicating Radio Beacon","Emergency Position Indicating Radio Beacon.","g","EPIRB = radiobaliza (alerta e posição). SART = transponder (localização no radar)."],
+["Escape route","Rota de fuga","A clearly marked way in the vessel which has to be followed in case of an emergency","Caminho claramente sinalizado no navio, a seguir em caso de emergência.","g",""],
+["Escort","Escolta","Attending a vessel to be available in case of need, e.g. ice-breaker, tug, etc.","Acompanhar um navio para estar disponível em caso de necessidade, ex.: quebra-gelo, rebocador.","g",""],
+["ETA","Hora estimada de chegada","Estimated Time of Arrival","Estimated Time of Arrival.","g",""],
+["ETD","Hora estimada de partida","Estimated Time of Departure","Estimated Time of Departure.","g",""],
+["Fathom","Braça","A measure of 6 feet","Medida de 6 pés.","g","Decorar: 1 fathom = 6 pés · 1 shackle = 15 fathoms · 1 cable = 100 fathoms."],
+["Fire patrol","Ronda de incêndio","A member of the watch going around the vessel at certain intervals so that an outbreak of fire may be promptly detected; mandatory in vessels carrying more than 36 passengers","Membro do quarto que percorre o navio a intervalos para detectar incêndio cedo; obrigatória em navios com mais de 36 passageiros.","g","Número: obrigatória com mais de 36 passageiros."],
+["Flooding","Alagamento","Major uncontrolled flow of seawater into the vessel","Entrada importante e descontrolada de água do mar no navio.","g","Escala: LEAKING = entrada menor · FLOODING = entrada maior e descontrolada."],
+["Fire monitor","Canhão monitor de incêndio","Fixed foam/powder/water cannon shooting fire-extinguishing agents on tank deck, manifold etc.","Canhão fixo de espuma/pó/água que lança agente extintor sobre o convés de tanques, manifold etc.","g",""],
+["Foul (of anchor)","Ferro enredado","Anchor has its own cable twisted around it or has fouled an obstruction","O ferro tem a própria amarra enrolada nele ou prendeu-se num obstáculo.","g","Foul tem dois usos no glossário: of anchor e of propeller."],
+["Foul (of propeller)","Hélice enredado","A line, wire, net, etc., is wound round the propeller","Cabo, arame, rede etc. enrolado no hélice.","g",""],
+["Full speed","Velocidade máxima","Highest possible speed of a vessel","A maior velocidade possível do navio.","g",""],
+["Fumes","Gases / vapores nocivos","Often harmful gas produced by fires, chemicals, fuel, etc.","Gás muitas vezes nocivo produzido por incêndio, produtos químicos, combustível etc.","g",""],
+["General emergency alarm","Alarme geral de emergência","A sound signal of seven short blasts and one prolonged blast given with the vessel's sound system","Sinal sonoro de sete apitos curtos e um prolongado, dado pelo sistema sonoro do navio.","g","Decorar: 7 curtos + 1 prolongado."],
+["Give way","Dar passagem","To keep out of the way of another vessel","Manter-se fora do caminho de outro navio.","g","Par: GIVE WAY = sai do caminho · STAND ON = mantém rumo e velocidade."],
+["GMDSS","Sistema Marítimo Global de Socorro e Segurança","Global Maritime Distress and Safety System","Global Maritime Distress and Safety System.","g",""],
+["(D)GPS","Sistema de Posicionamento Global (Diferencial)","(Differential) Global (satellite) Positioning System","(Differential) Global Positioning System, por satélite.","g",""],
+["Half cardinal points","Pontos colaterais","The four main points lying between the cardinal points: north east, south east, south west and north west","Os quatro pontos entre os cardeais: NE, SE, SW e NW.","g",""],
+["Hampered vessel","Navio com manobra prejudicada","A vessel restricted by her ability to manoeuvre by the nature of her work","Navio limitado na capacidade de manobrar pela natureza do seu trabalho.","g","Hampered = pela natureza do trabalho. NUC = por circunstâncias excepcionais."],
+["Hatchrails","Balaustrada de escotilha","Ropes supported by stanchions around an open hatch to prevent persons from falling into a hold","Cabos apoiados em balaústres em torno de escotilha aberta, para ninguém cair no porão.","g",""],
+["Heading","Proa (aproamento)","The horizontal direction of the vessel's bows at a given moment measured in degrees clockwise from north","Direção horizontal da proa num dado momento, em graus no sentido horário a partir do norte.","g","Heading = para onde aponta a proa agora. Course = direção pretendida na água."],
+["Hoist","Guincho de içamento (helicóptero)","Here: a cable used by helicopters for lifting or lowering persons in a pick-up operation","Aqui: cabo usado por helicópteros para içar ou arriar pessoas num resgate.","g",""],
+["Icing","Formação de gelo","Coating of ice on an object, e.g. the mast or superstructure of a vessel","Camada de gelo sobre um objeto, ex.: mastro ou superestrutura.","g",""],
+["IMO Class","Classe IMO","Group of dangerous or hazardous goods, harmful substances or marine pollutants in sea transport as classified in the International Maritime Dangerous Goods Code (IMDG Code)","Grupo de mercadorias perigosas, substâncias nocivas ou poluentes marinhos, conforme o Código IMDG.","g","A classificação vem do Código IMDG."],
+["Inert (to)","Inertizar","To reduce the oxygen in a tank by inert gas to avoid an explosive atmosphere","Reduzir o oxigênio de um tanque com gás inerte para evitar atmosfera explosiva.","g",""],
+["Initial course","Rumo inicial","Course directed by the OSC or other authorized person to be steered at the beginning of a search","Rumo determinado pelo OSC ou pessoa autorizada para o início de uma busca.","g","Quem determina: o OSC."],
+["Inoperative","Inoperante","Not functioning","Não funcionando.","g","Oposto de operational (pronto para uso imediato)."],
+["Jettison (to) (of cargo)","Alijar (carga)","To throw goods overboard in order to lighten the vessel or improve its stability in case of an emergency","Lançar carga ao mar para aliviar o navio ou melhorar a estabilidade em emergência.","g",""],
+["Launch (to)","Arriar (embarcação)","To lower, e.g. lifeboats, to the water","Arriar, ex.: baleeiras, até a água.","g",""],
+["Leaking","Vazamento","Escape of liquids such as water, oil, etc., out of pipes, boilers, tanks, etc., or a minor inflow of seawater into the vessel due to damage to the hull","Escape de líquidos de tubulações, caldeiras, tanques etc., ou entrada menor de água do mar por avaria no casco.","g","Leaking = minor inflow. Flooding = major uncontrolled flow."],
+["Leeward","Sotavento","On or towards the sheltered side of a ship; opposite of windward","No lado abrigado do navio ou em direção a ele; oposto de windward.","g","LEEWARD = sotavento (abrigado) · WINDWARD = barlavento (de onde vem o vento)."],
+["Leeway","Abatimento","Vessel's sideways drift leeward of the desired course","Deriva lateral do navio para sotavento do rumo desejado.","g","Leeway é efeito do vento; entra no course made good."],
+["Let go (to)","Largar","To set free, let loose, or cast off (of anchors, lines, etc.)","Soltar ou largar ferros, cabos etc.","g",""],
+["Lifeboat station","Posto de baleeira","Place assigned to crew and passengers to muster before being ordered into the lifeboats","Local onde tripulação e passageiros se reúnem antes da ordem de embarcar nas baleeiras.","g","Lifeboat station = antes de embarcar. Assembly station = reunião geral pela muster list."],
+["List","Banda","Here: inclination of the vessel to port side or starboard side","Aqui: inclinação do navio para bombordo ou boreste.","g",""],
+["Located","Localizado (posição confirmada)","In navigational warnings: Position of object confirmed","Em avisos à navegação: posição do objeto confirmada.","g","Par: LOCATED = confirmada · REPORTED = não confirmada."],
+["Make water (to)","Fazer água","To have seawater flowing into the vessel due to hull damage, or hatches awash and not properly closed","Ter água do mar entrando no navio por avaria no casco ou escotilhas varridas e mal fechadas.","g",""],
+["MMSI","Identidade do Serviço Móvel Marítimo","Maritime Mobile Service Identity number","Maritime Mobile Service Identity number.","g",""],
+["Moor (to)","Amarrar","To secure a vessel in a particular place by means of wires or ropes made fast to the shore, to anchors, or to anchored mooring buoys, or to ride with both anchors down","Fixar o navio por cabos presos a terra, a ferros ou a boias de amarração, ou ficar com os dois ferros no fundo.","g","Atenção: inclui “ride with both anchors down”."],
+["MRCC","Centro de Coordenação de Salvamento Marítimo","Maritime Rescue Co-ordination Centre: land-based authority responsible for promoting efficient organization of maritime search and rescue and for co-ordinating the conduct of search and rescue operations within a search and rescue region","Autoridade em terra que organiza o SAR marítimo e coordena as operações numa região de busca e salvamento.","g","MRCC = em terra, coordena a região. OSC = no local, coordena a área."],
+["Muster (to)","Reunir (para chamada)","To assemble crew, passengers or both in a special place for purposes of checking","Reunir tripulação, passageiros ou ambos em local especial para conferência.","g",""],
+["Muster list","Tabela mestra","List of crew, passengers and others on board and their functions in a distress or drill","Lista de tripulação, passageiros e demais a bordo, com suas funções em sinistro ou exercício.","g",""],
+["Not under command","Sem governo (NUC)","(abbr. NUC): a vessel which through exceptional circumstances is unable to manoeuvre as required by the COLREGs","Navio que, por circunstâncias excepcionais, não consegue manobrar como o COLREG exige.","g","NUC = circunstâncias excepcionais. Hampered = natureza do trabalho."],
+["Obstruction","Obstrução","An object such as a wreck, net, etc., which blocks a fairway, route, etc.","Objeto como naufrágio, rede etc. que bloqueia um canal ou rota.","g","Exemplo do marcador WARNING: “Obstruction in the fairway.”"],
+["Off air","Fora do ar","When the transmissions of a radio station, etc., have broken down, been switched off or suspended","Quando as transmissões de uma estação de rádio caíram, foram desligadas ou suspensas.","g",""],
+["Off station (of buoys)","Fora de posição (boias)","Not in charted position","Fora da posição da carta.","g",""],
+["Oil clearance","Remoção de óleo","Oil skimming from the surface of the water","Recolhimento de óleo da superfície da água.","g",""],
+["Operational","Operacional","Ready for immediate use","Pronto para uso imediato.","g",""],
+["Ordnance exercise","Exercício de tiro naval","Naval firing practice","Prática de tiro naval.","g",""],
+["OSC","Coordenador no Local","On-Scene Co-ordinator: A person designed to co-ordinate search and rescue operations within a specified area","On-Scene Co-ordinator: pessoa designada para coordenar a busca e salvamento numa área especificada.","g","O OSC determina initial course e search speed."],
+["Overflow","Transbordamento","Escape of oil or liquid from a tank because of a twofold condition as a result of overflowing, thermal expansion, change in vessel trim or vessel movement","Escape de óleo ou líquido de um tanque por transbordamento, expansão térmica, mudança de trim ou movimento do navio.","g",""],
+["Polluter","Poluidor","A vessel emitting harmful substances into the air or spilling oil into the sea","Navio que emite substâncias nocivas ao ar ou derrama óleo no mar.","g",""],
+["Preventers","Retenidas (de paus de carga)","Ropes or wires attached to derricks to prevent them from swinging during cargo handling operations","Cabos presos aos paus de carga para impedir que balancem na operação.","g",""],
+["Proceed (to)","Seguir / prosseguir","To sail or head for a certain position or to continue with the voyage","Navegar para certa posição ou continuar a viagem.","g",""],
+["PA-system","Sistema de alto-falantes","Public address system: loudspeakers in the vessel's cabins, mess rooms, etc., and on deck through which important information can be broadcast from a central point, mostly from the navigation bridge","Alto-falantes em camarotes, salões e convés para difundir informações de um ponto central, em geral o passadiço.","g",""],
+["Recover (to)","Recolher (náufragos)","Here: to pick up shipwrecked persons","Aqui: recolher náufragos.","g",""],
+["Refloat (to)","Desencalhar","To pull a vessel off after grounding; to set afloat again","Tirar o navio após encalhe; fazê-lo flutuar de novo.","g",""],
+["Rendez-vous","Ponto de encontro","An appointment between vessels normally made on radio to meet in a certain area or position","Encontro entre navios, normalmente combinado por rádio, numa área ou posição.","g",""],
+["Reported","Reportado (posição não confirmada)","In navigational warnings: position of object unconfirmed","Em avisos à navegação: posição do objeto não confirmada.","g","Par: REPORTED = não confirmada · LOCATED = confirmada."],
+["Restricted area","Área restrita","A deck, space, area, etc., in vessels where, for safety reasons, entry is only permitted for authorized crew members","Convés, espaço ou área do navio onde, por segurança, só entram tripulantes autorizados.","g",""],
+["Resume (to)","Retomar","Here: to re-start a voyage, service or search","Aqui: reiniciar viagem, serviço ou busca.","g",""],
+["Retreat signal","Sinal de recolhimento","Sound, visual or other signal to a team ordering it to return to its base","Sinal sonoro, visual ou outro que ordena a uma equipe voltar à base.","g",""],
+["Rig move","Deslocamento de plataforma","The movement of an oil rig, drilling platform, etc., from one position to another","Movimento de plataforma de petróleo ou perfuração de uma posição para outra.","g",""],
+["Roll call","Chamada nominal","The act of checking how many passengers and crew members are present, e.g. at assembly stations, by reading aloud a list of their names","Conferir quantos passageiros e tripulantes estão presentes lendo os nomes em voz alta, ex.: nas assembly stations.","g",""],
+["Safe speed","Velocidade de segurança","That speed of a vessel allowing time for effective action to be taken under prevailing circumstances and conditions to avoid a collision and to be stopped within an appropriate distance","Velocidade que permite ação eficaz para evitar colisão e parar a distância apropriada nas condições do momento.","g","Mesma ideia da Regra 6 do COLREG."],
+["SWL","Carga de trabalho segura","Safe working load: maximum working load of lifting equipment that should not be exceeded","Safe Working Load: carga máxima de trabalho do equipamento de içamento.","g","SWL é para içamento. Safe working pressure é para mangotes."],
+["Safe working pressure","Pressão de trabalho segura","The maximum permissible pressure in cargo hoses","Pressão máxima admissível em mangotes de carga.","g",""],
+["SAR","Busca e Salvamento","Search and Rescue","Search and Rescue.","g",""],
+["SART","Transponder de Busca e Salvamento","Search and Rescue Transponder","Search and Rescue Transponder.","g","SART = transponder radar. EPIRB = radiobaliza."],
+["Scene","Local da ocorrência","The area or location where the event, e.g. an accident, has happened","Área ou local onde ocorreu o evento, ex.: um acidente.","g",""],
+["Search pattern","Padrão de busca","A pattern according to which vessels and/or aircraft may conduct a co-ordinated search (the IMOSAR offers seven search patterns)","Padrão para busca coordenada de navios e/ou aeronaves (o IMOSAR oferece sete padrões).","g","Número: o IMOSAR oferece 7 padrões de busca."],
+["Search speed","Velocidade de busca","The speed of searching vessels directed by the OSC","Velocidade dos navios de busca, determinada pelo OSC.","g",""],
+["Seamark","Marca de mar","A navigational aid placed to act as a beacon or warning","Auxílio à navegação posicionado como baliza ou aviso.","g",""],
+["Segregation (of goods)","Segregação (de mercadorias)","Separation of goods which for different reasons must not be stowed together","Separação de mercadorias que, por diferentes razões, não podem ser estivadas juntas.","g",""],
+["Shackle","Quartel de amarra / manilha","1. Length of chain cable measuring 15 fathoms 2. U-shaped link closed with a pin used for connecting purposes","1. Comprimento de amarra de 15 braças. 2. Elo em U fechado por pino, para conexão (manilha).","g","Decorar: 1 shackle = 15 fathoms. Usado em “How many shackles are left?”."],
+["Shifting cargo","Corrimento de carga","Transverse movement of cargo, especially bulk cargo, caused by rolling or a heavy list","Movimento transversal da carga, sobretudo granel, causado por balanço ou banda acentuada.","g",""],
+["Slings","Lingas","Ropes, nets, and any other means for handling general cargoes","Cabos, redes e outros meios para movimentar carga geral.","g",""],
+["Speed of advance","Velocidade de deslocamento (de tempestade)","The speed at which a storm centre moves","Velocidade com que se desloca o centro de uma tempestade.","g","No glossário SMCP refere-se à tempestade, não ao navio."],
+["Spill","Derramamento","The accidental escape of oil, etc., from a vessel, container, etc., into the sea","Escape acidental de óleo etc. de navio ou contêiner para o mar.","g",""],
+["Spill control gear","Equipamento de controle de derramamento","Anti-pollution equipment for combating accidental spills of oils or chemicals","Equipamento antipoluição para combater derramamentos acidentais de óleo ou químicos.","g",""],
+["Elongated spreader","Espaçador alongado (escada de prático)","Here: step of a pilot ladder which prevents the ladder from twisting","Aqui: degrau da escada de prático que impede a escada de torcer.","g","Termo de prático: degrau que impede a pilot ladder de girar."],
+["Stand by (to)","Ficar de prontidão","To be in readiness or prepared to execute an order; to be readily available","Estar pronto para executar uma ordem; estar prontamente disponível.","g","Também é resposta SMCP: “Stand by” + tempo, quando a informação não está disponível."],
+["Stand clear (to)","Manter-se afastado","Here: to keep a boat away from the vessel","Aqui: manter uma embarcação afastada do navio.","g",""],
+["Standing orders","Ordens permanentes","Orders of the Master to the officer of the watch which he/she must comply with","Ordens do Comandante ao oficial de quarto, de cumprimento obrigatório.","g",""],
+["Stand on (to)","Manter rumo e velocidade","To maintain course and speed","Manter rumo e velocidade.","g","Par: STAND ON = mantém · GIVE WAY = sai do caminho."],
+["Station","Posto","The allotted place or the duties of each person on board","O lugar designado ou as funções de cada pessoa a bordo.","g",""],
+["Stripping","Esgotamento final (de tanque)","Final pumping of tank's residues","Bombeamento final dos resíduos do tanque.","g",""],
+["Survivor","Sobrevivente","A person who continues to live in spite of being in an extremely dangerous situation, e.g. a shipping disaster.","Pessoa que continua viva apesar de estar em situação extremamente perigosa, ex.: um sinistro marítimo.","g",""],
+["Take off (to)","Decolar (helicóptero)","To lift off from a vessel's deck (helicopter)","Levantar voo do convés do navio (helicóptero).","g",""],
+["Target","Alvo (eco radar)","The echo generated, e.g. by a vessel, on a radar screen","Eco gerado, ex.: por um navio, na tela do radar.","g",""],
+["Tension winch","Guincho de tensão automática","A winch which applies tension to mooring lines to keep them tight","Guincho que aplica tensão aos cabos de amarração para mantê-los tesos.","g",""],
+["TEU","Unidade equivalente a 20 pés","Twenty Foot Equivalent Unit (standard container dimension)","Twenty Foot Equivalent Unit: dimensão-padrão de contêiner.","g",""],
+["Track","Derrota","The path followed, or to be followed, between one position and another","Caminho seguido, ou a seguir, entre uma posição e outra.","g",""],
+["Transit","Trânsito","Here: the passage of a vessel through a canal, fairway, etc.","Aqui: passagem do navio por um canal, fairway etc.","g",""],
+["Transit speed","Velocidade de trânsito","Speed of a vessel required for passage through a canal, fairway, etc.","Velocidade requerida para passagem por canal, fairway etc.","g","Transit speed (glossário geral) × fairway speed (VTS, obrigatória no fairway)."],
+["Transhipment (of cargo)","Transbordo (de carga)","Here: the transfer of goods from one vessel to another outside harbours","Aqui: transferência de carga de um navio para outro fora dos portos.","g","Fora dos portos."],
+["Underway","Em movimento","Describes a vessel which is not at anchor, or made fast to the shore, or aground","Navio que não está fundeado, nem amarrado a terra, nem encalhado.","g","Definição pela negativa: não fundeado, não amarrado, não encalhado."],
+["Union purchase","Union purchase (paus de carga conjugados)","A method of cargo handling by combining two derricks, one of which is fixed over the hatch, the other over the ship's side","Movimentação de carga com dois paus de carga combinados, um sobre a escotilha e outro sobre o costado.","g",""],
+["Unlit","Apagado","When the light of a buoy or a lighthouse are inoperative","Quando a luz de boia ou farol está inoperante.","g",""],
+["UTC","Tempo Universal Coordenado","Universal Time Co-ordinated (GMT)","Universal Time Co-ordinated (GMT).","g",""],
+["Variable (of winds)","Variável (vento)","A wind that is constantly changing speed and direction","Vento que muda constantemente de velocidade e direção.","g",""],
+["Veering (of winds)","Rondar o vento para a direita (horário)","Clockwise change in the direction of the wind; opposite of backing","Mudança da direção do vento no sentido horário; oposto de backing.","g","Par: VEERING = horário · BACKING = anti-horário."],
+["Veer out (to) (of anchors)","Filar amarra","To let out a greater length of cable","Soltar maior comprimento de amarra.","g","Veer out (amarra) é diferente de veering (vento)."],
+["VHF","Frequência Muito Alta","Very High Frequency (30-300 MHz)","Very High Frequency (30–300 MHz).","g","Faixa: 30–300 MHz."],
+["Walk out (to) (of anchors)","Desencapelar o ferro (com o molinete)","To reverse the action of a windlass to lower the anchor until it is clear of the hawse pipe and ready for dropping","Reverter o molinete para arriar o ferro até sair do escovém, pronto para largar.","g","Par: WALK OUT = ferro sai do escovém, pronto para largar · WALK BACK = alivia a amarra."],
+["Walk back (to)","Reverter o molinete (aliviar a amarra)","To reverse the action of a windlass to ease the cable (of anchors)","Reverter o molinete para aliviar a amarra.","g","Par: WALK BACK = alivia a amarra · WALK OUT = arria o ferro até sair do escovém."],
+["Waypoint","Ponto de derrota (waypoint)","A position a vessel has to pass or at which she has to alter course according to her voyage plan","Posição que o navio deve passar, ou onde muda de rumo, conforme o plano de viagem.","g",""],
+["Windward","Barlavento","The general direction from which the wind blows; opposite of leeward","Direção geral de onde sopra o vento; oposto de leeward.","g","WINDWARD = barlavento · LEEWARD = sotavento."],
+["Wreck","Naufrágio / casco soçobrado","A vessel which has been destroyed, sunk or abandoned at sea","Navio destruído, afundado ou abandonado no mar.","g","Wreck pode estar afundado. Derelict ainda flutua."],
+["Fairway","Canal navegável (fairway)","Navigable part of a waterway","Parte navegável de uma via aquática.","v",""],
+["Fairway speed","Velocidade no fairway","Mandatory speed in a fairway","Velocidade obrigatória num fairway.","v","FAIRWAY speed = obrigatória · MANOEUVRING speed = reduzida, máquinas prontas · TRANSIT speed = requerida para a passagem."],
+["ITZ","Zona de Tráfego Costeiro","Inshore Traffic Zone (of a TSS): A routing measure comprising a designated area between the landward boundary of a TSS and the adjacent coast","Inshore Traffic Zone: área entre o limite do TSS do lado de terra e a costa adjacente.","v","Fica entre o TSS e a costa."],
+["Manoeuvring speed","Velocidade de manobra","A vessel's reduced speed in circumstances where it may be required to use the engines at short notice","Velocidade reduzida do navio quando pode ser preciso usar as máquinas a curto aviso.","v","Reduzida, com máquinas prontas a curto aviso."],
+["Receiving point","Ponto de recepção","A mark or place at which a vessel comes under obligatory entry, transit, or escort procedure","Marca ou local a partir do qual o navio fica sob procedimento obrigatório de entrada, trânsito ou escolta.","v","Par: RECEIVING point = começa procedimento obrigatório · REPORTING point = reporta-se ao VTS para dar posição."],
+["Reference line","Linha de referência","A line displayed on the radar screens in VTS Centres and/or electronic sea-charts separating the fairway for inbound and outbound vessels so that they can safely pass each other","Linha exibida no radar do VTS e/ou na carta eletrônica separando o fairway de entrada e de saída para cruzamento seguro.","v","É linha de tela (radar/carta eletrônica), não boia nem marca física."],
+["Reporting point","Ponto de reporte","A mark or position at which a vessel is required to report to the local VTS Station to establish its position","Marca ou posição em que o navio deve reportar-se à Estação VTS local para estabelecer sua posição.","v","Par: REPORTING = informa posição ao VTS · RECEIVING = entra em procedimento obrigatório."],
+["Separation zone / line","Zona / linha de separação","A zone or line separating the traffic lanes in which vessels are proceeding in opposite or nearly opposite directions; or separating a traffic lane from the adjacent sea area; or separating traffic lanes designated for particular classes of vessels proceeding in the same direction","Zona ou linha que separa faixas de tráfego em sentidos opostos, ou uma faixa da área adjacente, ou faixas para classes de navios no mesmo sentido.","v","Três funções de separação; a banca pode cobrar só uma."],
+["Traffic clearance","Autorização de tráfego","VTS authorization for a vessel to proceed under conditions specified","Autorização do VTS para o navio prosseguir sob condições especificadas.","v",""],
+["Traffic lane","Faixa de tráfego","An area within defined limits in which one-way traffic is established","Área em limites definidos com tráfego em sentido único.","v","One-way traffic: sentido único."],
+["TSS","Esquema de Separação de Tráfego","Traffic Separation Scheme: a routeing measure aimed at the separation of opposing streams of traffic by appropriate means and by the establishment of traffic lanes","Traffic Separation Scheme: medida de ordenamento que separa fluxos opostos e estabelece faixas de tráfego.","v",""],
+["VTS","Serviço de Tráfego de Embarcações","Vessel Traffic Services: services designed to improve the safety and efficiency of vessel traffic and to protect the environment","Vessel Traffic Services: serviços para melhorar a segurança e a eficiência do tráfego e proteger o meio ambiente.","v","Três objetivos: segurança, eficiência e meio ambiente."],
+["VTS area","Área de VTS","Area controlled by a VTS Centre or VTS Station","Área controlada por um Centro VTS ou Estação VTS.","v",""]
+];
+
+// Phrase decks. Each card: [section, subgroup, kind, front, answer (EN), explanation (PT), exam]
+const GEN=[
+["Foreword","Introdução","q","Que resolução adotou o SMCP, quando, e o que ela revogou?","Resolution A.918(22), adopted on 29 November 2001. It revokes resolution A.380(X) (Standard Marine Navigational Vocabulary).","O SMCP substituiu o SMNV, adotado em 1977 e emendado em 1985.",""],
+["Foreword","Introdução","q","Pela STCW, quem precisa saber usar e entender o SMCP?","Officers in charge of a navigational watch on ships of 500 gross tonnage or more.","Número de prova: 500 GT ou mais.",""],
+["Intro 1","Introdução","q","O SMCP substitui o COLREG, as regras locais ou o Código Internacional de Sinais?","No. The phrases are not intended to supplant or contradict COLREG or local rules, nor to supersede the International Code of Signals. External use must comply with the ITU Radio Regulations.","Também não é manual técnico com instruções operacionais.",""],
+["Intro 2","Introdução","pair","Parte A × Parte B: qual é o status de cada uma?","Part A: external communications plus essential on-board phrases (pilot on the bridge). Replaces SMNV 1985 and is required by STCW Table A-II/1. Part B: other on-board safety phrases, supplementary to Part A, useful for maritime English instruction.","A Parte A é a exigida pela STCW e inclui o prático no passadiço (SOLAS V/14(4)). A Parte B é complementar.",""],
+["Intro 4","Introdução","q","O que é a block language do SMCP e quando se usa?","Language that uses sparingly or omits the function words the, a/an, is/are. Used under pressure of time or psychological stress, and in navigational warnings.","Exemplo: “I am on fire”, “Fire under control”. O usuário pode ser flexível.",""],
+["Intro 4","Introdução","q","Cite os cinco outros basic communicative features do SMCP.","Avoiding synonyms · avoiding contracted forms · fully worded answers to yes/no questions and basic alternative answers · one phrase for one event · structure: identical invariable plus variable.","Distrator típico: “using contracted forms” ou “using synonyms for clarity”.",""],
+["Intro 5","Introdução","q","Convenções tipográficas: o que indicam ( ), /, ..., (itálico) e ~ ?","( ) part may be added where relevant · / alternatives · ... information to be filled in · (italic) kind of information requested · ~ possible words that can follow the phrase.","Parênteses = opcional; barra = alternativa.",""],
+["General 1","Procedimento","ce","“Please use IMO Standard Marine Communication Phrases.” / “I will use IMO Standard Marine Communication Phrases.”","CORRETA.","Procedimento do General 1.","2008 Q37 (C)"],
+["General 3","Marcadores","pair","INSTRUCTION × ADVICE","INSTRUCTION: influences others by a Regulation; legally binding, only with full authority (VTS, naval vessel). ADVICE: influences by a Recommendation; the decision stays with the recipient.","Regulation obriga; Recommendation não obriga, mas deve ser considerada com muito cuidado.",""],
+["General 3","Marcadores","pair","WARNING × INFORMATION","WARNING: informs others about danger; pay immediate attention. INFORMATION: restricted to observed facts, situations; mainly navigational and traffic information.","Perigo → WARNING. Fato neutro → INFORMATION.",""],
+["General 3","Marcadores","q","Qual a restrição do marcador REQUEST?","REQUEST must not be used involving navigation, or to modify COLREGS.","REQUEST é pedir algo para o navio: tugs, stores, permission.",""],
+["General 3","Marcadores","pair","REQUEST × INTENTION","REQUEST: asking for action from others with respect to the vessel (“I require two tugs”). INTENTION: immediate navigational action the sender intends to take (“I will reduce my speed”).","INTENTION é só para ações de navegação do próprio navio.",""],
+["General 3","Marcadores","q","Qual a regra sobre o conteúdo de uma ANSWER?","An answer should not contain another question.","QUESTION remove a dúvida entre pergunta e afirmação; ANSWER responde sem perguntar de volta.",""],
+["A1/6","Marcadores","q","O uso dos marcadores é obrigatório? Onde são falados?","No. It is at the discretion of the shore personnel or the ship’s officer. If used, the marker is spoken preceding the message or the corresponding part of it.","As IMO VTS Guidelines pedem que fique claro se a mensagem é information, advice, warning ou instruction.",""],
+["General 4","Respostas","ce","Pilot: “Are you ready to get underway?” Captain: “We are ready to get underway.”","ERRADA. “Yes, we are ready (to get underway).”","Resposta afirmativa começa com “Yes ...” seguido da frase completa (General 4.1).","2008 Q37 (E)"],
+["General 4","Respostas","fill","A informação pedida não está disponível agora. Responda: “____ ...”","“Stand by” followed by the time interval within which the information will be available.","Ex.: “When will the pilot embark?” → “Stand by one-five minutes.”","2008 Q37 (C)"],
+["General 4","Respostas","pair","“Stand by ...” × “No information.”","Stand by: the information is not immediately available (give the time interval). No information: the information cannot be obtained.","Uma é “ainda não”; a outra é “não vai ter”.",""],
+["General 4","Respostas","fill","“ADVICE. Do not overtake the vessel North of you.” Resposta negativa: “____”","“I will not overtake the vessel North of me.”","Depois de INSTRUCTION ou ADVICE: “I will / can ...” ou “I will not / cannot ...” + a frase completa.",""],
+["General 4","Respostas","ce","Resposta a ADVICE: “I will not overtake the vessel North of you.”","CONFLITO. O texto do SMCP traz “North of me”. A banca de 2006 deu esta frase como CORRETA.","[CONFLITO] Na prova, siga o padrão da banca se a opção vier assim; no texto, a forma é “of me”.","2006 Q51 (C)"],
+["General 5","Socorro","q","MAYDAY, PAN PAN e SECURITE anunciam o quê?","MAYDAY: distress message · PAN PAN: urgency message · SECURITE: safety message.","Distress > Urgency > Safety.",""],
+["General 6","Organização","q","“I read you ...”: escala de 1 a 5.","bad/one (barely perceptible) · poor/two (weak) · fair/three (fairly good) · good/four (good) · excellent/five (very good).","Distrator comum: trocar poor e fair.",""],
+["General 6","Organização","pair","“Stand by on VHF Channel ...” × “Standing by on VHF Channel ...”","Stand by on: when it is advisable to remain on the channel. Standing by on: when remaining on the channel is accepted.","Uma propõe; a outra confirma.",""],
+["General 6","Organização","pair","“Advise (you) change to VHF Channel ...” × “Changing to VHF Channel ...”","Advise change / try: when it is advisable to change channel. Changing to: when the change is accepted.","Mesmo padrão do stand by / standing by.",""],
+["General 7","Correções","ce","“My present speed is one-zero knots. Correction, my present speed is one-two knots.”","ERRADA. “My present speed is one-zero knots – mistake. Correction, my present speed is one-two knots.”","É preciso dizer “Mistake” antes de “Correction”.","2011 Q68 (E)*"],
+["General 8","Organização","fill","Prontidão para receber: “I am / I am not ____ your message.”","“I am / I am not ready to receive your message.”","General 8 — Readiness.",""],
+["General 9","Repetição","pair","“Repeat ...” × “Say again (please).”","Repeat: the sender safeguards an important part of his own message. Say again: the message was not properly heard.","“Do not overtake – repeat – do not overtake.”",""],
+["General 10","Números","ce","Ordem de leme: “Port two-zero.”","ERRADA. “Port twenty.”","Números vão dígito a dígito, exceto ângulos de leme: “fifteen”, “twenty”.","2011 Q68 (E)*"],
+["General 10","Números","fill","150 se diz “____”; 2,5 se diz “____”.","“One-five-zero”; “Two decimal five” or “Two point five”.","Dígito a dígito. Exceção: ângulo de leme.",""],
+["General 11","Posições","ce","“My position is two-three degrees five-seven minutes zero-four-five degrees two-nine decimal six.”","ERRADA. Faltam North/South e East/West.","Latitude e longitude em graus e minutos, North or South of the Equator, East or West of Greenwich.","2008 Q37 (E)"],
+["General 11","Posições","ce","“Your position bearing 137 degrees from Big Head lighthouse distance 2.4 nautical miles.”","CORRETA.","Marca bem definida na carta; marcação em 360° do norte verdadeiro; posição FROM the mark.","2006 Q51 (C)"],
+["General 12","Marcações","ce","“Pilot boat is bearing 215 degrees from you.”","CORRETA.","Marcações podem ser FROM the mark ou FROM the vessel.","2006 Q51 (C) · 2011 Q68 (C)*"],
+["General 12","Marcações","q","Ao reportar a própria posição em relação a uma marca, o navio dá a marcação de onde para onde?","Vessels reporting their position should always quote their bearing FROM the mark.","Da marca para o navio.",""],
+["General 12","Marcações","fill","Marcação relativa: “Buoy 030 degrees on your ____.”","“Buoy 030 degrees on your port bow.”","Relativas: em graus a partir da proa, em geral port / starboard bow. D/F relativas costumam ir em 360°.",""],
+["General 13","Rumos","q","Como se expressa um rumo no SMCP?","In 360 degree notation from north (true north unless otherwise stated). Whether it is TO or FROM a mark can be stated.","Norte verdadeiro, salvo indicação.",""],
+["General 14","Distâncias","q","Em que unidades se dão distâncias?","In nautical miles or cables (tenths of a mile), the unit always to be stated.","Sempre dizer a unidade.",""],
+["General 15","Velocidade","pair","“... knots” × “ground speed ... knots”","Without further notation: speed through the water. “Ground speed”: speed over the ground.","Sem nada = na água.",""],
+["General 16","Tempo","q","Como se expressam horários?","In the 24 hour UTC notation; if local time is used in ports or harbours it should be clearly stated.","Exceção de prova: o pedido de prático (A1/6.4.3) usa “hours local time”.",""],
+["General 17","Nomes","q","Que nomes geográficos usar? E se não forem entendidos?","Names on the chart or in the Sailing Directions in use. If not understood, give latitude and longitude.","",""],
+["General 18","Ambíguas","q","Quais são as palavras ambíguas listadas no General 18?","The conditionals “may”, “might”, “should” and “could” (18.1), and the word “can” (18.2).","Pegadinha: “must” e “would” não estão na lista.",""],
+["General 18","Ambíguas","fill","Não diga “May I enter the fairway?”. Diga: “____”","“QUESTION. Do I have permission to enter the fairway?”","",""],
+["General 18","Ambíguas","fill","Não diga “You may enter the fairway.”. Diga: “____”","“ANSWER. You have permission to enter the fairway.”","",""],
+["General 18","Ambíguas","ce","“I might enter the fairway.”","ERRADA. “INTENTION. I will enter the fairway.”","Might → INTENTION.","2006 Q51 (E)"],
+["General 18","Ambíguas","ce","“You should anchor in anchorage alfa two.”","ERRADA. “ADVICE. Anchor in anchorage alfa two.”","Should → ADVICE.","2011 Q68 (E)*"],
+["General 18","Ambíguas","ce","“You could be running into danger.”","ERRADA. “WARNING. You are running into danger.”","Could → WARNING.","2006 Q51 (E)"],
+["General 18","Ambíguas","q","Por que “can” é ambíguo e o que dizer quando se pede permissão?","“Can” describes either possibility or capability. When asking permission say: “QUESTION. Do I have permission to use the shallow draft fairway at this time?” — not “Can I use ...?”","O mesmo vale para “may”.",""],
+["General 18","Ambíguas","pair","Qual palavra ambígua vira qual marcador?","may (pergunta) → QUESTION · may (resposta) → ANSWER · might → INTENTION · should → ADVICE · could → WARNING.","Decorar os cinco pares.",""],
+["A1/6","Marcadores","fill","“____. Do not cross the fairway.” (mensagem legalmente vinculante, emitida pelo VTS)","“INSTRUCTION. Do not cross the fairway.”","Formato provável em 2027: dado o exemplo oficial, identificar o marcador. INSTRUCTION = Regulation.",""],
+["A1/6","Marcadores","fill","“____. MV Noname will overtake to the west of you.”","“INFORMATION. MV Noname will overtake to the west of you.”","Fato observado, sem perigo nem recomendação. Distrator: WARNING.",""],
+["A1/6","Marcadores","fill","“____. (Advise you) stand by on VHF Channel six nine.”","“ADVICE. (Advise you) stand by on VHF Channel six nine.”","Recomendação: a decisão fica com quem recebe. Distrator: INSTRUCTION.",""]
+];
+const PA=[
+["A1/1","Socorro e SAR","q","Como a estação que controla o tráfego de socorro impõe silêncio rádio?","“Seelonce Mayday” / “Seelonce Distress”.","Vale para estações que interferem, salvo se tiverem mensagem sobre o socorro.",""],
+["A1/1.1","Socorro e SAR","q","Com o que começa sempre o tráfego de socorro?","With stating the position of the vessel in distress (General 11 / 13), if it is not included in the DSC distress alert.","O tráfego de urgência também começa pela posição do navio que chama.",""],
+["A1/1.1","Socorro e SAR","q","Abandono: qual frase o SMCP usa?","“I / crew of MV ... must abandon vessel ... after explosion / collision / grounding / flooding / piracy / armed attack.”","Aqui “must” é legítimo: não está entre as palavras ambíguas.",""],
+["A1/1.2","Socorro e SAR","fill","EPIRB acionada sem querer: “Yes, my EPIRB/SART is transmitting ____.”","“... transmitting by mistake.” Also: “Yes, I transmitted a DSC alert by mistake.”","",""],
+["A1/1.2","Socorro e SAR","q","Quem normalmente faz as perguntas e dá os conselhos na coordenação SAR? Qual a frase de quem assume?","The On-scene Co-ordinator (OSC). “I will act as On-scene Co-ordinator.”","Referência: IAMSAR Manual.",""],
+["A1/1.2","Socorro e SAR","fill","OSC define a busca: “Initial course ... degrees, ____ ... knots.”","“Initial course ... degrees, search speed ... knots.”","Ambos determinados pelo OSC (ver glossário).",""],
+["A1/1.2","Socorro e SAR","q","Como o OSC libera um navio da busca?","“You / MV ... may stop search and proceed with voyage.”","Aqui “may” aparece no texto oficial; a regra das palavras ambíguas vale para contexto ambíguo.",""],
+["A1/2","Urgência e segurança","q","A1/2 Urgency traffic trata de quê?","Safety of a vessel (other than distress): technical failure, cargo, ice damage.","Urgência ≠ socorro: o navio corre risco, mas não há perigo grave e iminente.",""],
+["A1/2","Urgência e segurança","fill","Falha técnica: “I am / MV ... is ____ with difficulty.” “Keep clear of me.”","“I am / MV ... is manoeuvring with difficulty.”","Equivale ao D do CIS.",""],
+["A1/3.1","Urgência e segurança","q","Alerta de vento forte: como se descreve a mudança de direção?","“... force Beaufort ... backing / veering to ... (cardinal points).”","Backing = anti-horário · veering = horário.",""],
+["A1/3.2","Urgência e segurança","pair","REPORTED × LOCATED em avisos à navegação","REPORTED: position unconfirmed. LOCATED: position confirmed by survey or other means.","Ex.: “Uncharted rock reported / located in position ...”",""],
+["A1/3.2","Urgência e segurança","q","Defeitos de farol ou boia: quais palavras o SMCP usa?","“... unlit / unreliable / damaged / destroyed / off station / missing.”","Off station = fora da posição da carta.",""],
+["A1/3.2","Urgência e segurança","fill","Auxílio eletrônico fora do ar: “... off air from ... to ... Cancel ____ after time of restoration.”","“Cancel one hour after time of restoration.”","Vale para GPS/GLONASS, LORAN, RACON/RAMARK.",""],
+["A1/3.2","Urgência e segurança","fill","Navio-gás com vazamento: “I am / LNG-tanker ... leaking gas in position ... Avoid passing ____.”","“Avoid passing to leeward.”","Nas operações perigosas, o pedido padrão é “Wide berth requested.”",""],
+["A1/4.2","Prático e rebocadores","fill","Pedir a escada: “Rig the pilot ladder on port side / starboard side / ____ ... metres above water.”","“... on port side / starboard side / leeside ... metres above water.”","Antes: “Stand by pilot ladder.”",""],
+["A1/4.2","Prático e rebocadores","q","Quais defeitos da escada de prático o SMCP lista?","“The pilot ladder ~ has broken / loose steps · has broken spreaders · has spreaders too short · is too far aft / forward.”","Se não serve: “The pilot ladder is unsafe.” · “You must rig another pilot ladder.”",""],
+["A1/4.2","Prático e rebocadores","fill","Escada sobre descarga: “Move the pilot ladder ... metres aft / forward / ____.”","“... clear of discharge.”","",""],
+["A1/4.2","Prático e rebocadores","fill","Costado alto: “Rig the accommodation ladder ____ the pilot ladder.”","“Rig the accommodation ladder in combination with the pilot ladder.”","Também: “Rig the pilot ladder alongside hoist.”",""],
+["A1/4.2","Prático e rebocadores","q","Que frases preparam a escada além do posicionamento?","“Put lights on at the pilot ladder.” · “Man ropes are required / not required.” · “Have a heaving line ready at the pilot ladder.” · “Correct the list of the vessel.”","",""],
+["A1/4.2","Prático e rebocadores","fill","Abrigo para a lancha: “Make a ____ on your port side.” “Keep the sea on your port ____.”","“Make a lee on your port side / starboard side.” · “Keep the sea on your port quarter / starboard quarter.”","Também: “Steer ... degrees to make a lee.”",""],
+["A1/4.2","Prático e rebocadores","fill","Velocidade para o embarque: “Make a ____ of ... knots.”","“Make a boarding speed of ... knots.”","Depois: “Stop engine(s) until pilot boat is clear.”",""],
+["A1/4.2","Prático e rebocadores","q","Embarque impossível: quais as frases e motivos?","“Embarkation is not possible.” · “Boarding arrangements do not comply with SOLAS Regulations.” · “Vessel is not suited for the pilot ladder.”","",""],
+["A1/4.3","Prático e rebocadores","ce","“Must I take tug(s)?” — “No, you must not take tug(s).”","ERRADA. “No, you need not take tug(s).”","Need not = não é obrigado. Must not = é proibido. Mesma lógica para o prático.",""],
+["A1/4.3","Prático e rebocadores","fill","“Must I use the towing lines of my vessel?” Negativa: “No, you must use ____.”","“No, you must use the towing lines of the tug.”","",""],
+["A1/6.4.3","Prático e rebocadores","fill","“Must I take a pilot?” → “Yes, you must take a pilot – ____.”","“Yes, you must take a pilot – pilotage is compulsory.” · Negative: “No, you need not take a pilot.”","Need not, nunca must not.",""],
+["A1/6.4.3","Prático e rebocadores","q","Como o navio diz que não precisa de prático por ter isenção?","“No, I do not require a pilot – I am holder of Pilotage Exemption Certificate (No. ...).” VTS: “You are exempted from pilotage.”","",""],
+["A1/6.4.3","Prático e rebocadores","q","No pedido de prático, a ETA é dada em UTC ou hora local?","Local time: “What is your ETA at ... Pilot Station in local time?” · “The pilot will embark at ... hours local time.”","Exceção ao General 16 (UTC). Pegadinha clássica.",""],
+["A1/6.4.3","Prático e rebocadores","ce","“Stand by on VHF channel one-four until pilot transfer is completed.”","CORRETA.","A1/6.4.3.17. Antes: “Change to VHF Channel ... for pilot transfer.”","2011 Q68 (C)*"],
+["A1/5","Especiais","q","Helicóptero: como pedir o vento e o que nunca fazer com o cabo do guincho?","“Keep the wind on port / starboard bow” (or quarter). “Do not fix the hoist cable.”","H: = helicóptero; V: = navio.",""],
+["A1/5.2","Especiais","q","Comboio com quebra-gelo: como se confirmam as ordens?","Commands for all vessels in a convoy are confirmed consecutively by each vessel in turn. Commands for a single vessel are confirmed only by that vessel.","Manter escuta contínua no canal VHF e vigia de sinais sonoros e visuais.",""],
+["A1/6.1","VTS","fill","“Are you on even keel?” → “No, I am trimmed by the ____.”","“No, I am trimmed by the head / stern.”","",""],
+["A1/6.2","VTS","q","Sobre que palavras o SMCP alerta nas frases de rumo do VTS?","The user should be fully aware of the implications of “track”, “heading” and “course made good”.","“Your track is parallel with / diverging from / converging to the reference line.”",""],
+["A1/6.2","VTS","fill","Aviso de perigo do VTS: “You are ____ into danger – shallow water ... of you.”","“You are running into danger – shallow water / submerged wreck / fog bank / risk of collision ...”","É a forma certa do “could” do General 18.",""],
+["A1/6.2","VTS","fill","VTS sobre o ferro: “Are you dragging / ____ anchor?” “Do not ____ anchor.”","“Are you dragging / dredging anchor?” · “Do not dredge anchor.”","Dragging involuntário; dredging deliberado.",""],
+["A1/6.2","VTS","fill","Fiscalização: “According to my radar, your course does not comply with Rule ____ of the COLREGs.”","“... Rule 10 of the COLREGs.”","Regra 10 = Esquemas de Separação de Tráfego.",""],
+["A1/6.2","VTS","fill","Canal ou eclusa: “You must ____ on the vessel ahead of you.” / “You must ____ from the vessel ahead of you.”","“You must close up on ...” · “You must drop back from ...”","Close up aproxima; drop back afasta.",""],
+["Apêndice A1","Mensagens GMDSS","q","Estrutura da mensagem de socorro padrão.","MAYDAY · THIS IS · 9-digit MMSI plus name / call sign · position · nature of distress · assistance required · any other information.","Começa após o acknowledgement do DSC Distress Alert, no VHF 16 ou 2182 kHz.",""],
+["Apêndice A1","Mensagens GMDSS","q","Estrutura da mensagem de urgência padrão.","PAN PAN ×3 · ALL STATIONS ×3 · THIS IS · 9-digit MMSI plus name / call sign · position · text of the urgency message.","Após a DSC Urgency Call, passar para o VHF 16 ou 2182 kHz.",""],
+["Apêndice A1","Mensagens GMDSS","q","Estrutura da mensagem de segurança padrão. Que elemento ela não tem?","SÉCURITÉ ×3 · ALL STATIONS ×3 (or ships in an area, or a specific station) · THIS IS · 9-digit MMSI plus name / call sign · text of the safety message.","Não tem campo de posição do navio que transmite. Socorro e urgência têm.",""],
+["Apêndice A1","Mensagens GMDSS","pair","Como terminam os exemplos de socorro, urgência e segurança?","Distress example ends “OVER”; urgency example ends “OUT”; safety example ends “OVER”.","Detalhe dos exemplos do apêndice.",""],
+["A2/1","Leme e máquina","q","Três regras gerais das ordens de leme.","Every wheel order is repeated by the helmsman; orders are held until countermanded; the helmsman reports immediately if the vessel does not answer the wheel.","Timoneiro desatento: “What is your heading?” → “My heading is ... degrees.”",""],
+["A2/1","Leme e máquina","pair","“Meet her” × “Steady”","Meet her: check the swing of the vessel’s head in a turn. Steady: reduce swing as rapidly as possible.","Distrator clássico.",""],
+["A2/1","Leme e máquina","pair","“Steady as she goes” × “Nothing to port”","Steady as she goes: steer a steady course on the compass heading at the time of the order (helmsman calls the heading, then “Steady on ...”). Nothing to port: avoid allowing the head to go to port.","",""],
+["A2/1","Leme e máquina","q","O que significam “Midships”, “Hard-a-port” e “Ease to ten”?","Midships: rudder held fore and aft. Hard-a-port: rudder held fully over to port. Ease to ten: reduce rudder to 10° and hold.","Ângulos: five, ten, fifteen, twenty, twenty-five.",""],
+["A2/1","Leme e máquina","ce","“Starboard, steer zero-zero-zero.”","CORRETA.","Lado para onde girar a roda + cada algarismo separado, inclusive zero. Timoneiro ao estabilizar: “Steady on zero-zero-zero.”","2011 Q68 (C)*"],
+["A2/1","Leme e máquina","fill","Fim do governo: “Finished with ____, no more steering.”","“Finished with wheel, no more steering.”","Na máquina: “Finished with engines – no more manoeuvring.”",""],
+["A2/2","Leme e máquina","q","Ordens de máquina, da maior para a menor.","Full · Half · Slow · Dead slow (ahead / astern) · Stop engines · Emergency full ahead / astern · Stand by engine · Finished with engines.","Stand by engine: máquina pronta para manobrar e passadiço guarnecido.",""],
+["A2/2","Leme e máquina","ce","Navio de dois eixos: “Stop both engines.”","ERRADA. “Stop all engines.”","Com dois hélices acrescenta-se “both” (“Full ahead both”), exceto na parada: “Stop all engines”.",""],
+["A2/3","Prático no passadiço","ce","Pilot: “What is the diameter of the turning circle?” Captain: “The diameter of the turning circle is three-zero-zero-zero metres.”","CORRETA.","A2/3.2.2.","2008 Q37 (C)"],
+["A2/3","Prático no passadiço","ce","Pilot: “What is the speed at half ahead?” Captain: “The speed at half ahead is eight knots.”","CORRETA (banca). O texto traz “What is the (manoeuvring) speed at full / half / slow / dead slow ahead?”","A2/3.2.12.","2008 Q37 (C)"],
+["A2/3.5","Prático no passadiço","pair","“Walk out the anchor(s)” × “Walk back ... one shackle”","Walk out: lower the anchor with the windlass until clear of the hawse pipe, ready for dropping. Walk back: reverse the windlass to ease the cable.","",""],
+["A2/3.5","Prático no passadiço","fill","“How is the cable leading?” → “The cable is leading ____.”","“~ ahead / astern · to port / to starboard · round the bow · up and down.”","",""],
+["A2/3.5","Prático no passadiço","fill","“How is the cable growing?” → “The cable is ____.”","“The cable is slack / tight / coming tight.”","",""],
+["A2/3.5","Prático no passadiço","fill","Navio já fundeado e seguro: “Is she ____ up?”","“Is she brought up?” → “Yes, she is brought up in position ...”","Depois: anchor light(s) e “Hoist the anchor ball.”",""],
+["A2/3.5","Prático no passadiço","q","Ao suspender: frases sobre amarra e ferro.","“How much cable is out?” · “Put the windlass in gear.” · “Much / too much weight is on the cable.” · “The anchor(s) is / are aweigh.” · “... clear of the water / home / foul / secured.”","",""],
+["A2/3.6","Prático no passadiço","ce","“Stand by for making fast the tug on starboard quarter.” — “The tug is fast.” — “Let go the tug.”","CORRETA.","A2/3.6: stand by for making fast → the tug(s) is / are fast → let go the tug(s).","2006 Q51 (C)"],
+["A2/3.7","Prático no passadiço","q","Comandos de espia na atracação.","“Heave on / Pick up the slack on / Slack away / Check / Hold on the ... line(s).” · “Heave away.” · “Heave in easy.” · “Keep the ... line(s) tight.”","",""],
+["A2/3.7","Prático no passadiço","fill","Desatracação: “Single up the ... lines and ... springs ____.”","“... fore and aft.”","Fim: “Finished with manoeuvring stations.”",""],
+["A1/1.1","Socorro e SAR","fill","Frase comum a incêndio, colisão, pirataria e falha técnica: “I am / MV ... ____.”","“I am / MV ... not under command.”","NUC (glossário): incapaz de manobrar por circunstâncias excepcionais. Distrator: “hampered” (natureza do trabalho).",""],
+["A1/1.1 · A1/2","Socorro e SAR","pair","“I can proceed without assistance” × “I try to proceed without assistance”","Flooding (distress): “I / MV ... can proceed without assistance.” Technical failure (urgency): “I try / MV ... tries to proceed without assistance.”","No socorro afirma-se a capacidade; na urgência, a tentativa. Troca sutil de verbo, típica da banca.",""],
+["A1/3.1","Urgência e segurança","q","Aviso de tempestade tropical: que fenômenos o SMCP nomeia?","“Hurricane ... (name) / tropical cyclone / tornado / willy-willy / typhoon ... with central pressure of ... millibars / hectopascals located in position ...”","“Willy-willy” é o ciclone tropical australiano. Termo exótico, candidato a V/F.",""],
+["A1/3.1","Urgência e segurança","pair","Adjetivos do mar × adjetivos da vaga (swell)","Part A: “smooth / moderate / rough / high sea” · “slight / moderate / heavy swell”.","[CONFLITO] B1/1.5 inverte: “rough / heavy sea” e “high swell”. Para a prova, a forma da Parte A (repetida em A1/1.2, A1/3.1, B2/5.2 e B2/6.2) é a dominante.",""],
+["Apêndice A1","Mensagens GMDSS","q","Em que canal ou frequência se faz o tráfego de socorro, urgência e segurança por voz após o alerta DSC?","VHF Channel 16 or frequency 2182 kHz (if not automatically controlled).","Alerta DSC: canal 70 (VHF) ou 2187,5 kHz (MF). Voz: 16 / 2182. Par de números muito cobrável.",""],
+["A1/6.2","VTS","fill","Fiscalização do VTS: “____ speed is ... knots.”","“Fairway speed is ... knots.”","Glossário VTS: fairway speed = velocidade obrigatória no fairway. Distrator: “manoeuvring speed” (reduzida, máquinas prontas).",""],
+["A2/3.5","Prático no passadiço","fill","Fundeio: “Put ... ____ in the water / in the pipe / on deck.”","“Put ... shackles in the water / in the pipe / on deck.”","Shackle = quartel de amarra = 15 braças (glossário). Também: “Walk back ... one and a half shackle(s)”, “How many shackles are left?”",""],
+["A2/3.7","Prático no passadiço","q","Nomes das espias na atracação (Sketch 1): “Send out ____.”","“Send out the head / stern / breast lines, the ... spring(s) forward / aft.”","head line = lançante de vante · stern line = lançante de ré · breast line = través · spring = springue. Candidato a correlação em 2027.",""],
+["A2","Leme e máquina","pair","Três “Finished with ...”: qual encerra o quê?","“Finished with wheel, no more steering.” (helm) · “Finished with engines – no more manoeuvring.” (engine) · “Finished with manoeuvring stations.” (berthing / unberthing).","Troca de complemento é distrator fácil de montar.",""],
+["A2/1","Leme e máquina","fill","Governar por uma marca: “Steer on ____.”","“Steer on ... buoy / ... mark / ... beacon.” Order 13: “Keep the buoy / mark / beacon on port side / starboard side.”","Quem dá a ordem deve acusar a resposta do timoneiro (“The person giving the order should acknowledge the helmsman's reply”).",""],
+["A2/1","Leme e máquina","q","O que o timoneiro deve reportar sem ser perguntado?","“Report if she does not answer the wheel.” The helmsman should report immediately if the vessel does not answer the wheel.","Ordem 14 da tabela.",""]
+];
+const PB=[
+["B1/1.1","Passagem de quarto","pair","Erro da giro × erro da agulha magnética","“Gyro compass error is ... degrees plus / minus.” · “Magnetic compass error is ... degrees east / west.”","Giro em plus / minus; magnética em east / west.",""],
+["B1/1.1","Passagem de quarto","fill","“Speed ____ / ____ is ... knots.” “Set and drift is ... degrees, ... knots.”","“Speed over ground / through water is ... knots.”","“We are making ... degrees leeway.”",""],
+["B1/1.1","Passagem de quarto","fill","Folga abaixo da quilha: “____ is ... metres.”","“Underkeel clearance is ... metres.”","",""],
+["B1/1.2","Passagem de quarto","fill","Risco de colisão: “The bearing to the vessel in ... degrees is ____.”","“... is constant.”","Marcação constante = risco de colisão.",""],
+["B1/1.2","Passagem de quarto","q","Navio cruzando por boreste: que respostas a Parte B prevê?","“We need not give way / will stand on / will alter course to give way / have altered course to give way.”","Quando o outro cruza por bombordo, as frases falam dele: “The vessel will give way / has given way / is standing on”.",""],
+["B1/1.4","Passagem de quarto","q","Rádio na passagem de quarto: quais canais e frequências DSC aparecem?","“VHF DSC Channel 70 / DSC controller is switched on.” · “DSC frequency 2187.5 kHz is switched on.” · “NAVTEX is switched on.”","DSC VHF = canal 70; DSC MF = 2187,5 kHz. Socorro em voz: canal 16 / 2182 kHz.",""],
+["B1/1.13","Passagem de quarto","pair","Passagem do quarto: quem diz “You have the watch now” e quem diz “I have the watch now”?","Officer handing over: “You have the watch now.” Relieving officer: “I have the watch now.” When the Master takes over: Master says “I have the watch now”; OOW confirms “You have the watch now.”","Quem entrega diz “You”; quem assume diz “I”.",""],
+["B1/2","Passagem de quarto","fill","Trim: “The vessel is ... metres ____ the head / stern.”","“... metres down by the head / stern.” · “The vessel is on even keel.”","",""],
+["B2/1","Segurança a bordo","q","Primeiras ordens ao dar o alarme.","“Operate the general emergency alarm.” · “Inform the Master / Chief Engineer.” · “Transmit a SÉCURITÉ / PAN-PAN / distress alert / MAYDAY and report.”","Depois: “Was the distress alert / MAYDAY acknowledged?” Se não: “Repeat the distress alert.”",""],
+["B2/3","Segurança a bordo","q","Antes de mandar uma equipe entrar no incêndio, que limites se combinam?","“Restrict action to ... minutes.” · “Agree on retreat signal and report.”","Retreat signal: sinal para a equipe voltar à base.",""],
+["B2/5","Segurança a bordo","q","Encalhe: primeiras ordens.","“We are aground.” · “Stop engine(s).” · “Close watertight doors.” · “Is vessel (still) making way?” · “Give ‘vessel aground’ signals.”","",""],
+["B2/6","Segurança a bordo","q","Homem ao mar: sequência de ordens.","“Man overboard (on port side / starboard side / astern)!” · “Drop lifebuoy(s).” · “Sound ‘man overboard’ alarm.” · “Hoist flag signal ‘Oscar’.” · “Hard-a-port / hard-a-starboard the wheel.”","Ligação com o CIS: O = Man overboard.",""],
+["B2/6","Segurança a bordo","q","Ordem de resgate de pessoas.","Persons in water → injured / helpless persons → women and children → passengers → crew members.","Ordem de prova.",""],
+["B2/6","Segurança a bordo","fill","Retransmitir um socorro: “Transmit a MAYDAY – ____ to ... (radio station).”","“Transmit a MAYDAY – RELAY to ...”","",""],
+["B4/2.1 *","Segurança a bordo","pair","Alarme geral de emergência × alarme de abandono","General emergency alarm: seven short blasts and one prolonged blast. Abandon ship alarm: one prolonged and one short blast repeated continuously.","Pegadinha forte: os dois sinais são diferentes. Texto da B4 (fora do item 1.5 do edital); mantido porque o alarme geral está no Glossário e o par é cobrável.",""],
+["B2/1.7","Segurança a bordo","q","Abandono: sequência de ordens para as baleeiras.","“Swing out no. ... lifeboat(s)” → “Lower no. ... lifeboat(s) alongside the embarkation deck” → “Enter the lifeboat(s)” → “Let go no. ... lifeboat(s)” → “Stand clear of the vessel and report.”","Formato provável: ordenar a sequência. Cada ordem tem a confirmação “... and report”.",""],
+["B2/3.2","Segurança a bordo","q","Incêndio a bordo: ordens de manobra do navio.","“Turn bow / stern to windward.” · “Turn port side / starboard side to windward.” · “Alter course to ...” Plus: shut down engines, stop fuel, close all openings, switch off ventilators.","Contraintuitivo: vira-se a parte afetada para barlavento para o vento levar fumaça e chamas para fora do navio.",""],
+["B1/1.3","Passagem de quarto","q","Modos de apresentação do radar na passagem de quarto.","“The radar is ~ relative head-up / north-up / course-up · true-motion north-up / course-up.” “Port side / starboard side radar is at ... miles range scale.”","Mesmas opções de A2/3.3 (“Change the radar to ...”). Par relative × true-motion.",""]
+];
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+const isAbbr=e=>/^[A-Z(][A-Z()\/ ]{1,9}$/.test(e[0])&&e[0]===e[0].toUpperCase()||e[0]==='PA-system'||e[0]==='Not under command';
+const GEN_GROUP={'Procedimento':'Respostas e organização','Respostas':'Respostas e organização','Socorro':'Respostas e organização','Organização':'Respostas e organização','Correções':'Respostas e organização','Repetição':'Respostas e organização',
+ 'Números':'Números, posições e unidades','Posições':'Números, posições e unidades','Marcações':'Números, posições e unidades','Rumos':'Números, posições e unidades','Distâncias':'Números, posições e unidades','Velocidade':'Números, posições e unidades','Tempo':'Números, posições e unidades','Nomes':'Números, posições e unidades',
+ 'Ambíguas':'Palavras ambíguas'};
+GEN.forEach(r=>{r[1]=GEN_GROUP[r[1]]||r[1]});
+function groupFilters(items){const f={all:['Todos',()=>true]};const seen=[];items.forEach(r=>{if(!seen.includes(r[1]))seen.push(r[1])});
+ seen.forEach((g,i)=>f['g'+i]=[g,r=>r[1]===g]);f.exam=['Cobradas em prova',r=>!!r[6]];return f}
+const DECKS={
+ gl:{name:'Glossário',hash:'glossario',items:G,gloss:true,info:'Glossary da A.918(22): 154 termos gerais e 13 termos especiais de VTS.',
+  filters:{all:['Todos',()=>true],g:['Termos gerais',e=>e[4]==='g'],v:['VTS',e=>e[4]==='v'],ab:['Siglas',isAbbr],bk:['Pegadinhas de banca',e=>!!e[5]]}},
+ ge:{name:'Conceitos gerais',hash:'gerais',items:GEN,info:'Introduction e General (edital 1.1 e 1.2, itens 1.1.1 a 1.2.18): princípios, convenções, marcadores, respostas, correções, números, posições e as palavras ambíguas.',filters:groupFilters(GEN)},
+ pa:{name:'Parte A',hash:'parte-a',items:PA,info:'Part A (edital 1.4): só o que é passível de erro — pares que diferem por uma palavra, exceções à regra geral, números, colocações fixas e as frases já cobradas. Peso maior em prático, VTS, leme, máquina, fundeio e rebocadores.',filters:groupFilters(PA)},
+ pb:{name:'Parte B',hash:'parte-b',items:PB,info:'Part B (edital 1.5): apenas B1 condução da embarcação e B2 segurança a bordo. B3 carga e B4 passageiros estão fora do conteúdo programático; só o par de alarmes da B4 foi mantido, marcado com *.',filters:groupFilters(PB)}
+};
+const KIND={ce:'Correta ou errada?',fill:'Complete a frase',q:'Responda',pair:'Qual a diferença?'};
+let cur='gl',filt='all',mode='term',deck=[],i=0,ok=0,bad=0,flipped=false,pool=[];
+for(const k in DECKS)$('c-'+k).textContent=DECKS[k].items.length+' cartões';
+const grp=e=>`<span class="grp ${e[4]}">${e[4]==='v'?'VTS special term':'General term'}</span>`;
+function hide(e){const t=e[0].replace(/\s*\(.*?\)/g,'').trim();let d=e[2];
+ if(t.length>2){const re=new RegExp(t.replace(/[.*+?^${}()|[\]\\/]/g,'\\$&'),'gi');d=d.replace(re,'____')}return d}
+function front(e){const D=DECKS[cur];
+ if(D.gloss)return mode==='term'?`${grp(e)}<div class="term">${esc(e[0])}</div><span class="hint">O QUE SIGNIFICA?</span>`:`<span class="hint">QUAL É O TERMO?</span><p class="q-def">${esc(hide(e))}</p>`;
+ return `<div class="frontmeta"><span class="sec">${esc(e[0])}</span></div><span class="kind">${KIND[e[2]]}</span><p class="prompt">${esc(e[3])}</p>`}
+function back(e){const D=DECKS[cur];
+ if(D.gloss)return `<div class="bhead">${grp(e)}<div class="bterm">${esc(e[0])}</div><div class="bpt">${esc(e[1])}</div></div>
+ <span class="lbl">Definition</span><p class="en">${esc(e[2])}</p><span class="lbl">Definição</span><p class="pt">${esc(e[3])}</p>${e[5]?`<div class="trap"><strong>Banca</strong>${esc(e[5])}</div>`:''}`;
+ const cls=/^ERRADA/.test(e[4])?' no':(/^CORRETA/.test(e[4])?' ok':'');
+ return `<div class="bhead"><span class="sec" style="align-self:flex-start">${esc(e[0])} · ${esc(e[1])}</span><div class="lbl" style="margin:6px 0 0">${KIND[e[2]]}</div><div class="pt" style="color:var(--ink)">${esc(e[3])}</div></div>
+ <span class="lbl">SMCP</span><p class="ans${cls}">${esc(e[4])}</p>${e[5]?`<span class="lbl">Explicação</span><p class="pt">${esc(e[5])}</p>`:''}${e[6]?`<span class="exam">Prova ${esc(e[6])}</span>`:''}`}
+function shell(){$('study').innerHTML='<div class="scene"><div class="card" id="card" tabindex="0" role="button" aria-label="Virar cartão"><div class="face front" id="front"></div><div class="face back" id="back"></div></div></div>';
+ const c=$('card');c.onclick=flip;c.onkeydown=ev=>{if(ev.key===' '||ev.key==='Enter'){ev.preventDefault();flip()}}}
+function reset(shuffle){const D=DECKS[cur];pool=D.items.map((e,k)=>k).filter(k=>D.filters[filt][1](D.items[k]));deck=pool.slice();
+ if(shuffle)for(let k=deck.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[deck[k],deck[j]]=[deck[j],deck[k]]}
+ i=0;ok=0;bad=0;shell();render()}
+function render(){const D=DECKS[cur],n=pool.length;
+ $('okc').textContent=ok;$('badc').textContent=bad;$('barfill').style.width=(n?ok/n*100:0)+'%';
+ flipped=false;$('ok').disabled=$('bad').disabled=true;
+ if(i>=deck.length){$('pos').textContent='Fim';$('grade').hidden=true;
+  $('study').innerHTML=`<div class="face" style="position:static;min-height:300px"><div class="done"><span class="eyebrow">${esc(D.name)} · concluído</span><div class="score">${ok} / ${n}</div><p class="sub">${bad?bad+' erro(s) revisado(s) no caminho.':'Nenhum erro.'}</p><button class="btn" id="again">Recomeçar embaralhado</button></div></div>`;
+  $('again').onclick=()=>reset(true);return}
+ $('grade').hidden=false;$('card').classList.remove('flipped');
+ const e=D.items[deck[i]];$('pos').textContent=`${i+1} / ${deck.length}`;
+ $('front').innerHTML=front(e);$('back').innerHTML=back(e)}
+function flip(){flipped=!flipped;$('card').classList.toggle('flipped',flipped);if(flipped)$('ok').disabled=$('bad').disabled=false}
+$('ok').onclick=()=>{ok++;i++;render()};
+$('bad').onclick=()=>{bad++;deck.push(deck[i]);i++;render()};
+$('shuffle').onclick=()=>reset(true);$('restart').onclick=()=>reset(false);
+function setMode(m){mode=m;$('m-term').setAttribute('aria-pressed',m==='term');$('m-def').setAttribute('aria-pressed',m==='def');reset(true)}
+$('m-term').onclick=()=>setMode('term');$('m-def').onclick=()=>setMode('def');
+function chips(){const D=DECKS[cur];$('chips').innerHTML=Object.entries(D.filters).map(([k,[lab,fn]])=>{const n=D.items.filter(fn).length;
+  return n?`<button data-f="${k}" aria-pressed="${k===filt}">${esc(lab)}<span>${n}</span></button>`:''}).join('');
+ $('chips').querySelectorAll('button').forEach(b=>b.onclick=()=>{filt=b.dataset.f;$('chips').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));reset(false)})}
+let rows=[];
+function buildTable(){const D=DECKS[cur];$('q').value='';
+ if(D.gloss){$('tsum').textContent='Glossário completo A–Z';$('thead').innerHTML='<th>Term</th><th>Definition (A.918(22)) · Definição</th>';
+  rows=D.items.slice().sort((a,b)=>a[0].replace(/^[(]?D?[)]? ?/,'').localeCompare(b[0].replace(/^[(]?D?[)]? ?/,''),'en')).map(e=>({k:norm(e.join(' ')),h:`<tr><td class="t">${esc(e[0])}<small>${esc(e[1])}</small>${e[4]==='v'?' <span class="grp v">VTS</span>':''}</td><td>${esc(e[2])}<br><span class="pt">${esc(e[3])}</span></td></tr>`}))}
+ else{$('tsum').textContent='Todos os cartões — '+D.name;$('thead').innerHTML='<th>Seção</th><th>Cartão · SMCP</th>';
+  rows=D.items.map(e=>({k:norm(e.join(' ')),h:`<tr><td class="s">${esc(e[0])}</td><td><span class="q">${esc(e[3])}</span><br>${esc(e[4])}${e[6]?` <span class="exam" style="display:inline-block;margin-top:4px">${esc(e[6])}</span>`:''}</td></tr>`}))}
+ table()}
+function table(){const q=norm($('q').value.trim());const r=rows.filter(x=>!q||x.k.includes(q));$('tbody').innerHTML=r.map(x=>x.h).join('');$('none').hidden=r.length>0}
+$('q').addEventListener('input',table);
+function selectDeck(k,push){cur=k;filt='all';mode='term';const D=DECKS[k];
+ for(const j in DECKS)$('t-'+j).setAttribute('aria-selected',j===k);
+ $('deckinfo').textContent=D.info;$('modeseg').hidden=!D.gloss;
+ $('m-term').setAttribute('aria-pressed','true');$('m-def').setAttribute('aria-pressed','false');
+ chips();buildTable();reset(false);
+ if(push){try{history.replaceState(null,'','#'+D.hash)}catch(_){location.hash=D.hash}}}
+for(const k in DECKS)$('t-'+k).onclick=()=>selectDeck(k,true);
+function fromHash(){const h=location.hash.slice(1);const k=Object.keys(DECKS).find(x=>DECKS[x].hash===h);return k||'gl'}
+window.addEventListener('hashchange',()=>selectDeck(fromHash(),false));
+document.addEventListener('keydown',ev=>{if(!flipped||ev.target.id==='q')return;if(ev.key==='ArrowRight')$('ok').click();if(ev.key==='ArrowLeft')$('bad').click()});
+selectDeck(fromHash(),false);
+
+</script>
+</body>
+</html>
