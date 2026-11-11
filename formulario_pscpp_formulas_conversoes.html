@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formulário PSCPP 2027 — Fórmulas e Conversões</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] }, chtml: { scale: 1.05 } };
+</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--verde:#0D3D36;--teal:#1A7A6E;--creme:#F7F3EA;--ouro:#C8A84B;--tinta:#1d2422;--borda:#e3dcc8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--creme);color:var(--tinta);font-family:"EB Garamond",Georgia,serif;font-size:18px;line-height:1.5}
+.hero{background:linear-gradient(135deg,var(--verde),#14544b);color:var(--creme);padding:34px 22px 26px;border-bottom:4px solid var(--ouro)}
+.backlink{color:var(--ouro);text-decoration:none;font-size:15px;display:inline-block;margin-bottom:10px}
+.hero .k{letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:var(--ouro)}
+.hero h1{margin:6px 0 6px;font-size:34px;font-weight:700;line-height:1.15}
+.hero p{margin:0;max-width:820px;opacity:.9}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+.bar{position:sticky;top:0;z-index:20;background:rgba(247,243,234,.97);backdrop-filter:blur(4px);border-bottom:1px solid var(--borda);padding:10px 0}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar input{flex:1 1 220px;padding:8px 12px;border:1px solid var(--borda);border-radius:8px;font:inherit;font-size:16px;background:#fff}
+.tog{border:1px solid var(--verde);background:#fff;color:var(--verde);border-radius:999px;padding:6px 12px;font:inherit;font-size:15px;cursor:pointer}
+.tog.on{background:var(--verde);color:var(--creme)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.fbtn{border:1px solid var(--c);color:var(--c);background:#fff;border-radius:999px;padding:3px 10px;font:inherit;font-size:14px;cursor:pointer}
+.fbtn.on{background:var(--c);color:#fff}
+.fbtn.all{--c:#333}
+.chip{display:inline-block;background:var(--c);color:#fff;border-radius:999px;padding:1px 9px;font-size:13px;margin:2px 3px 2px 0;white-space:nowrap}
+.chip.sm{font-size:12px;padding:0 8px}
+.tag{display:inline-block;border:1px solid var(--t);color:var(--t);border-radius:4px;padding:0 6px;font-size:11.5px;letter-spacing:.06em;font-family:Georgia,serif;margin-left:4px}
+h2{font-size:25px;color:var(--c);border-bottom:2px solid var(--c);padding-bottom:4px;margin:38px 0 14px;display:flex;align-items:center;gap:10px}
+h2 small{margin-left:auto;font-size:14px;color:#777;font-weight:400}
+h2 .dot{width:14px;height:14px;border-radius:50%;background:var(--c);flex:none}
+.panel{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:16px 18px;margin:22px 0}
+.panel h2{margin-top:0;--c:var(--verde)}
+.alert{border-left:5px solid #9B2C2C}
+.alert h2{--c:#9B2C2C}
+.alert li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th{background:var(--verde);color:var(--creme);text-align:left;padding:7px 9px;font-weight:600}
+td{border-bottom:1px solid var(--borda);padding:7px 9px;vertical-align:top}
+td a{color:var(--teal);text-decoration:none;font-family:Georgia,serif;font-size:14px;margin-right:6px;white-space:nowrap}
+td .full{font-size:12.5px;color:#777}
+.card{scroll-margin-top:140px;background:#fff;border:1px solid var(--borda);border-left:6px solid var(--c);border-radius:12px;padding:14px 18px 10px;margin:0 0 16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card header{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.fid{font-family:Georgia,serif;font-size:13px;background:var(--c);color:#fff;border-radius:5px;padding:1px 7px}
+.card h3{margin:0;font-size:21px;color:var(--verde);flex:1 1 300px}
+.formula{background:#FBF8EF;border:1px dashed var(--ouro);border-radius:10px;padding:6px 10px;margin:10px 0 8px;overflow-x:auto;font-size:19px;transition:filter .2s}
+.leg{font-size:16px;color:#444;margin:4px 0}
+.gancho{font-size:16px;margin:6px 0;color:#5a4a12;background:#fbf3d7;border-radius:6px;padding:3px 9px;display:inline-block}
+.ex{margin:8px 0;background:#EEF6F4;border-radius:8px;padding:6px 12px}
+.ex summary{cursor:pointer;color:var(--teal);font-weight:600}
+.ex-t{margin:6px 0 2px;font-style:italic}
+.ex ol{margin:4px 0;padding-left:22px}
+.ex li{margin:2px 0}
+.res{margin:4px 0 4px;font-weight:600;color:var(--verde)}
+.nota{font-size:15px;background:#fdf0ef;border-left:3px solid #9B2C2C;padding:5px 10px;border-radius:4px;margin:8px 0}
+.card footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;border-top:1px solid #f0ebdd;margin-top:8px;padding-top:6px;font-size:14px;color:#666}
+.hidden{display:none!important}
+section.mod{scroll-margin-top:120px}
+body.decorar .formula{filter:blur(9px);cursor:pointer}
+body.decorar .formula.rev{filter:none}
+body.semex .ex{display:none}
+#conv td.g{color:#888;font-size:14px;white-space:nowrap}
+#conv tr.corr{background:#fdf0ef}
+.cn{font-size:13.5px;color:#7a2e2e;font-style:italic}
+#conv tr.add .cn{color:#666}
+.legend span{margin-right:12px;font-size:15px}
+.foot{font-size:14px;color:#777;text-align:center;padding:30px 0 50px}
+@media (max-width:640px){.bar{position:static}.hero h1{font-size:27px}body{font-size:17px}.formula{font-size:16px}#conv td.g{white-space:normal}}
+@media print{.bar{display:none}.card{break-inside:avoid}body.decorar .formula{filter:none}}
+</style>
+</head>
+<body>
+<div class="hero"><div class="wrap">
+ <a class="backlink" href="index.html">← Voltar à estante</a>
+ <div class="k">Capital Sereno · PSCPP 2027 · Caderno de consulta</div>
+ <h1>Formulário PSCPP — Fórmulas &amp; Conversões</h1>
+ <p>38 fórmulas e 16 conversões consolidadas, vinculadas a cada projeto/módulo do concurso, com fonte, gancho de memorização e exemplo resolvido.</p>
+</div></div>
+
+<div class="bar"><div class="wrap">
+ <input id="q" type="search" placeholder="Buscar: calado, rebocador, umidade, Cb, 1,56…">
+ <button class="tog" id="tDec" title="Esconde as fórmulas; toque para revelar">🙈 Modo decorar</button>
+ <button class="tog" id="tEx">Ocultar exemplos</button>
+ <div class="filters"><button class="fbtn all on" data-f="">Todos</button><button class="fbtn" data-f="AN" style="--c:#0D3D36">Arte Naval A/B/C</button><button class="fbtn" data-f="REB" style="--c:#8C5B2E">Rebocadores</button><button class="fbtn" data-f="MAN" style="--c:#4B3F72">Manobrabilidade</button><button class="fbtn" data-f="RPL" style="--c:#5B6B2E">Resist./Propulsão</button><button class="fbtn" data-f="PP" style="--c:#1A7A6E">Plan. Portuário</button><button class="fbtn" data-f="NAVM" style="--c:#7A2E3A">Navegação Miguens</button><button class="fbtn" data-f="NAVI" style="--c:#A0522D">NAVINT/NORMAM/Nayak</button><button class="fbtn" data-f="MET" style="--c:#1F6F8B">Meteo/Oceano</button><button class="fbtn" data-f="OND" style="--c:#2F5F8F">Ondas</button><button class="fbtn" data-f="LEG" style="--c:#455A64">Legislação</button><button class="fbtn" data-f="CG" style="--c:#6D6D6D">Conhec. Gerais</button></div>
+</div></div>
+
+<main class="wrap">
+
+<div class="panel alert">
+ <h2>⚠️ Correções e conflitos encontrados nos documentos originais</h2>
+ <ol>
+  <li><b>Pressão:</b> “1 Pa = 100 mb” está errado → <b>1 hPa = 1 mb</b> (1 mb = 100 Pa).</li>
+  <li><b>Temperatura:</b> “−273,15 K = 0 °C” → <b>0 °C = 273,15 K</b> (ou 0 K = −273,15 °C).</li>
+  <li><b>Distância fora da derrota:</b> “× 6” → <b>÷ 6</b> (regra do 1 em 60). Ver <a href="#NAV-05">NAV-05</a>.</li>
+  <li><b>Beaufort:</b> V<sub>TW</sub>(10) = 0,836·Bft<sup>3/2</sup> dá resultado em <b>m/s</b>, não em nós. Ver <a href="#MAN-01">MAN-01</a>.</li>
+  <li><b>Água salgada → doce:</b> Fonseca (0,016 · ~1,3 cm/m), regra ¼ pés→pol., FWA W/(40T) e PIANC (2–3%) dão valores diferentes — responda pela fonte citada. Ver <a href="#AN-08">AN-08</a> e <a href="#PP-01">PP-01</a>.</li>
+  <li><b>Densidade da água salgada:</b> 1,025 (AN-05) × 1,026 (AN-06) no mesmo texto.</li>
+  <li><b>OCR:</b> “C8” no original = <b>C<sub>B</sub></b> (coeficiente de bloco).</li>
+ </ol>
+ <p style="font-size:15px;color:#666;margin:0">Itens marcados <span class="tag" style="--t:#6B6B6B">VERIFICAR</span> tiveram a fórmula conferida, mas o artigo/página da fonte ainda deve ser confirmado no projeto.</p>
+</div>
+
+<div class="panel">
+ <h2>🗺️ Mapa: projeto × fórmulas</h2>
+ <table><thead><tr><th>Projeto</th><th>Fórmulas próprias</th><th>Também usa</th><th>Conv.</th></tr></thead><tbody><tr><td><span class="chip" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><div class="full">MÓDULO II - BLOCOS A / B / C</div></td><td><a href="#AN-01">AN-01</a> <a href="#AN-02">AN-02</a> <a href="#AN-03">AN-03</a> <a href="#AN-04">AN-04</a> <a href="#AN-05">AN-05</a> <a href="#AN-06">AN-06</a> <a href="#AN-07">AN-07</a> <a href="#AN-08">AN-08</a> <a href="#AN-09">AN-09</a> <a href="#AN-10">AN-10</a> <a href="#AN-11">AN-11</a></td><td><a href="#PP-01">PP-01</a> <a href="#PP-02">PP-02</a> <a href="#PP-05">PP-05</a></td><td>7</td></tr><tr><td><span class="chip" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span><div class="full">MÓDULO II - BLOCO H - REBOCADORES</div></td><td><a href="#REB-01">REB-01</a> <a href="#REB-02">REB-02</a> <a href="#REB-03">REB-03</a> <a href="#REB-04">REB-04</a> <a href="#REB-05">REB-05</a> <a href="#REB-06">REB-06</a> <a href="#REB-07">REB-07</a></td><td><a href="#PP-03">PP-03</a> <a href="#PP-04">PP-04</a> <a href="#PP-06">PP-06</a></td><td>4</td></tr><tr><td><span class="chip" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span><div class="full">MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H</div></td><td><a href="#MAN-01">MAN-01</a></td><td><a href="#AN-01">AN-01</a> <a href="#AN-02">AN-02</a> <a href="#AN-03">AN-03</a> <a href="#AN-04">AN-04</a> <a href="#AN-09">AN-09</a> <a href="#AN-10">AN-10</a> <a href="#REB-01">REB-01</a> <a href="#REB-02">REB-02</a> <a href="#REB-07">REB-07</a> <a href="#PP-02">PP-02</a></td><td>1</td></tr><tr><td><span class="chip" style="--c:#5B6B2E" title="Projeto: Resistência - Propulsão - Lemes">Resist./Propulsão</span><div class="full">Resistência - Propulsão - Lemes</div></td><td>—</td><td><a href="#AN-01">AN-01</a> <a href="#AN-02">AN-02</a></td><td>2</td></tr><tr><td><span class="chip" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><div class="full">PLANEJAMENTO PORTUÁRIO</div></td><td><a href="#PP-01">PP-01</a> <a href="#PP-02">PP-02</a> <a href="#PP-03">PP-03</a> <a href="#PP-04">PP-04</a> <a href="#PP-05">PP-05</a></td><td><a href="#AN-01">AN-01</a> <a href="#AN-04">AN-04</a> <a href="#AN-07">AN-07</a> <a href="#AN-08">AN-08</a> <a href="#REB-01">REB-01</a> <a href="#REB-02">REB-02</a> <a href="#REB-04">REB-04</a> <a href="#REB-05">REB-05</a> <a href="#PP-06">PP-06</a> <a href="#MAN-01">MAN-01</a> <a href="#NAVI-02">NAVI-02</a></td><td>3</td></tr><tr><td><span class="chip" style="--c:#7A2E3A" title="Projeto: MÓDULO III - NAVEGAÇÃO - MIGUENS">Navegação Miguens</span><div class="full">MÓDULO III - NAVEGAÇÃO - MIGUENS</div></td><td><a href="#NAV-01">NAV-01</a> <a href="#NAV-02">NAV-02</a> <a href="#NAV-03">NAV-03</a> <a href="#NAV-04">NAV-04</a> <a href="#NAV-05">NAV-05</a></td><td>—</td><td>3</td></tr><tr><td><span class="chip" style="--c:#A0522D" title="Projeto: MÓDULO III - NAVEGAÇÃO - NAVINT + NORMAM + NAYAK + BTM">NAVINT/NORMAM/Nayak</span><div class="full">MÓDULO III - NAVEGAÇÃO - NAVINT + NORMAM + NAYAK + BTM</div></td><td><a href="#NAVI-01">NAVI-01</a> <a href="#NAVI-02">NAVI-02</a></td><td><a href="#NAV-05">NAV-05</a></td><td>1</td></tr><tr><td><span class="chip" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span><div class="full">METEOROLOGIA E OCEANOGRAFIA</div></td><td><a href="#MET-01">MET-01</a> <a href="#MET-02">MET-02</a> <a href="#MET-03">MET-03</a> <a href="#MET-04">MET-04</a> <a href="#MET-05">MET-05</a> <a href="#MET-06">MET-06</a></td><td><a href="#MAN-01">MAN-01</a></td><td>4</td></tr><tr><td><span class="chip" style="--c:#2F5F8F" title="Projeto: ONDAS">Ondas</span><div class="full">ONDAS</div></td><td><a href="#PP-06">PP-06</a></td><td><a href="#REB-03">REB-03</a></td><td>0</td></tr><tr><td><span class="chip" style="--c:#455A64" title="Projeto: Legislação">Legislação</span><div class="full">Legislação</div></td><td>—</td><td><a href="#AN-08">AN-08</a> <a href="#AN-11">AN-11</a> <a href="#NAVI-01">NAVI-01</a></td><td>0</td></tr><tr><td><span class="chip" style="--c:#6D6D6D" title="Projeto: Conhecimentos gerais">Conhec. Gerais</span><div class="full">Conhecimentos gerais</div></td><td>—</td><td><a href="#AN-05">AN-05</a></td><td>1</td></tr></tbody></table>
+ <p class="legend" style="margin:10px 0 0"><span class="tag" style="--t:#C8A84B">DECORAR</span> saber de cor <span class="tag" style="--t:#1A7A6E">CALCULO</span> cai em conta <span class="tag" style="--t:#B5651D">BANCA</span> alto potencial/cobrada <span class="tag" style="--t:#9B2C2C">CONFLITO</span> divergência entre fontes</p>
+</div>
+
+<section class="mod" id="sec-AN" style="--c:#0D3D36"><h2><span class="dot"></span>MÓDULO II - BLOCOS A / B / C<small>11 fórmulas</small></h2>
+<article class="card" id="AN-01" data-proj="AN MAN RPL PP" data-tags="DECORAR CALCULO">
+ <header><span class="fid">AN-01</span><h3>Coeficiente de bloco — C<sub>B</sub> (<i>block coefficient</i>)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[C_B=\dfrac{V}{L\cdot B\cdot C}\]</div>
+ <p class="leg">\(V\) = volume imerso (m³) · \(L\) = comprimento entre PP · \(B\) = boca máxima da parte imersa · \(C\) = calado médio</p>
+ <p class="gancho">🧠 <b>Gancho:</b> “Volume sobre a caixa”: quanto da caixa L×B×C o casco ocupa. Sempre &lt; 1.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Navio-exemplo (usado em AN-01 a AN-06): L = 150 m, B = 22 m, C = 8 m, V = 18 480 m³</p><ol><li>\(L\cdot B\cdot C = 150\times22\times8 = 26\,400\ \text{m}^3\)</li><li>\(C_B = 18\,480 / 26\,400\)</li></ol><p class="res">➜ \(C_B = 0{,}70\) → forma “ordinária” (0,6 &lt; C<sub>B</sub> &lt; 0,7 no limite)</p></details>
+ <div class="nota">Relação útil: \(C_B = C_P \times C_{SM}\).</div>
+ <footer><span class="src">📖 Fonseca, <i>Arte Naval</i> 8ª ed., Cap. 2</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span><span class="chip sm" style="--c:#5B6B2E" title="Projeto: Resistência - Propulsão - Lemes">Resist./Propulsão</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></span></footer>
+</article>
+<article class="card" id="AN-02" data-proj="AN MAN RPL" data-tags="DECORAR CALCULO">
+ <header><span class="fid">AN-02</span><h3>Coeficiente prismático — C<sub>P</sub></h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[C_P=\dfrac{V}{A\cdot L}\]</div>
+ <p class="leg">\(A\) = área da parte imersa da seção mestra (m²) · \(L\) = comprimento entre PP</p>
+ <p class="gancho">🧠 <b>Gancho:</b> “Volume sobre o prisma”: seção mestra esticada por todo o comprimento.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Mesmo navio, com A = 172,48 m² (C<sub>SM</sub> = 0,98)</p><ol><li>\(A\cdot L = 172{,}48\times150 = 25\,872\ \text{m}^3\)</li><li>\(C_P = 18\,480/25\,872\)</li></ol><p class="res">➜ \(C_P \approx 0{,}714\) — conferência: \(0{,}714\times0{,}98 = 0{,}70 = C_B\) ✔</p></details>
+ 
+ <footer><span class="src">📖 Fonseca, <i>Arte Naval</i>, Cap. 2</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span><span class="chip sm" style="--c:#5B6B2E" title="Projeto: Resistência - Propulsão - Lemes">Resist./Propulsão</span></span></footer>
+</article>
+<article class="card" id="AN-03" data-proj="AN MAN" data-tags="DECORAR">
+ <header><span class="fid">AN-03</span><h3>Coeficiente da seção mestra — C<sub>SM</sub> (<i>midship section coefficient</i>)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[C_{SM}=\dfrac{A}{B\cdot C}\]</div>
+ <p class="leg">\(A\) = área imersa da seção mestra · \(B\) = boca · \(C\) = calado médio</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Só a fatia do meio: área da seção sobre o retângulo B×C.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Seção mestra do navio-exemplo</p><ol><li>\(B\cdot C = 22\times8 = 176\ \text{m}^2\)</li><li>\(C_{SM} = 172{,}48/176\)</li></ol><p class="res">➜ \(C_{SM}=0{,}98\) (típico de mercante: 0,97–0,99)</p></details>
+ 
+ <footer><span class="src">📖 Fonseca, <i>Arte Naval</i>, Cap. 2</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span></span></footer>
+</article>
+<article class="card" id="AN-04" data-proj="AN PP MAN" data-tags="DECORAR">
+ <header><span class="fid">AN-04</span><h3>Coeficiente da área de flutuação — C<sub>WL</sub> (<i>waterplane coefficient</i>)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[C_{WL}=\dfrac{A_F}{L\cdot B}\]</div>
+ <p class="leg">\(A_F\) = área do plano de flutuação na linha-d’água de projeto · \(L\) = comprimento entre PP · \(B\) = boca</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Visto de cima: área da “pegada” na água sobre o retângulo L×B.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Navio-exemplo com A<sub>F</sub> = 2 640 m²</p><ol><li>\(L\cdot B = 150\times22 = 3\,300\ \text{m}^2\)</li><li>\(C_{WL}=2\,640/3\,300\)</li></ol><p class="res">➜ \(C_{WL}=0{,}80\)</p></details>
+ <div class="nota">Mesma grandeza que o C<sub>WP</sub> do PIANC — a banca pode trocar a notação (distrator de nome).</div>
+ <footer><span class="src">📖 Fonseca, <i>Arte Naval</i>, Cap. 2 · mesmo conceito = C<sub>WP</sub> no PIANC (PP-01)</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span></span></footer>
+</article>
+<article class="card" id="AN-05" data-proj="AN CG" data-tags="DECORAR CALCULO">
+ <header><span class="fid">AN-05</span><h3>Deslocamento (<i>displacement</i>) — W</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[W = 1{,}025\times V_{\text{salgada}}\ (\text{m}^3) \qquad W=\dfrac{V_{\text{salgada}}\ (\text{pés}^3)}{35}\qquad W=\dfrac{V_{\text{doce}}\ (\text{pés}^3)}{36}\]</div>
+ <p class="leg">W em toneladas · 35 pés³ de água salgada pesam 1 t · 36 pés³ de água doce pesam 1 t</p>
+ <p class="gancho">🧠 <b>Gancho:</b> 35 salgada / 36 doce — a doce é menos densa, precisa de 1 pé³ a mais por tonelada.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">(a) Navio-exemplo, V = 18 480 m³ · (b) volume de 700 000 pés³</p><ol><li>(a) \(W = 1{,}025\times18\,480\)</li><li>(b) salgada: \(700\,000/35\) · doce: \(700\,000/36\)</li></ol><p class="res">➜ (a) \(W\approx18\,942\ \text{t}\) · (b) 20 000 t na salgada; 19 444 t na doce</p></details>
+ 
+ <footer><span class="src">📖 Fonseca, <i>Arte Naval</i>, Cap. 2 (art. 2.87)</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#6D6D6D" title="Projeto: Conhecimentos gerais">Conhec. Gerais</span></span></footer>
+</article>
+<article class="card" id="AN-06" data-proj="AN" data-tags="CALCULO CONFLITO">
+ <header><span class="fid">AN-06</span><h3>Cálculo aproximado do deslocamento</h3><div class="tags"><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#9B2C2C">CONFLITO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[W = C_B\times L\times B\times C\times 1{,}026\]</div>
+ <p class="leg">Mesmas variáveis de AN-01; 1,026 = massa específica da água salgada adotada (t/m³)</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Coeficiente de bloco × caixa × densidade.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Navio-exemplo</p><ol><li>\(0{,}70\times150\times22\times8 = 18\,480\ \text{m}^3\)</li><li>\(18\,480\times1{,}026\)</li></ol><p class="res">➜ \(W\approx18\,960\ \text{t}\)</p></details>
+ <div class="nota">[CONFLITO] O mesmo capítulo usa 1,025 (AN-05) e 1,026 (aqui). Na prova, use o valor que a questão der; se não der, use o da fórmula citada.</div>
+ <footer><span class="src">📖 Fonseca, <i>Arte Naval</i>, Cap. 2</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span></span></footer>
+</article>
+<article class="card" id="AN-07" data-proj="AN PP" data-tags="DECORAR CALCULO">
+ <header><span class="fid">AN-07</span><h3>Toneladas por centímetro de variação de calado (TPC)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[T = 0{,}0070\,L\,B\ \ (C_B<0{,}6)\qquad T = 0{,}0075\,L\,B\ \ (0{,}6<C_B<0{,}7)\qquad T = 0{,}0084\,L\,B\ \ (C_B>0{,}7)\]</div>
+ <p class="leg">T em t/cm · L e B em metros · finas/rápidas → 0,0070; ordinárias → 0,0075; cheias → 0,0084</p>
+ <p class="gancho">🧠 <b>Gancho:</b> 70 – 75 – 84: quanto mais “cheio” o casco, maior o coeficiente.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Graneleiro de formas cheias: L = 200 m, B = 32 m, C<sub>B</sub> = 0,82</p><ol><li>\(C_B>0{,}7\Rightarrow T = 0{,}0084\times200\times32\)</li></ol><p class="res">➜ \(T\approx53{,}8\ \text{t/cm}\)</p></details>
+ <div class="nota">No original aparece “C8” — erro de OCR; é C<sub>B</sub>.</div>
+ <footer><span class="src">📖 Fonseca, <i>Arte Naval</i>, Cap. 2</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></span></footer>
+</article>
+<article class="card" id="AN-08" data-proj="AN PP LEG" data-tags="DECORAR CALCULO CONFLITO">
+ <header><span class="fid">AN-08</span><h3>Variação de calado: água salgada ⇄ água doce</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#9B2C2C">CONFLITO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\Delta C\ (\text{cm}) = \dfrac{W\times0{,}016}{T}\qquad\text{ou}\qquad \Delta C \approx 1{,}3\ \text{cm por metro de calado}\]</div>
+ <p class="leg">W = deslocamento (t) · T = toneladas por cm (AN-07) · regra prática para mercantes: ¼ do calado máximo em pés = aumento em polegadas</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Ao entrar no rio o navio AFUNDA (aumenta calado); ao sair para o mar, sobe.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">W = 40 000 t, T = 50 t/cm, calado = 10 m (≈ 32 pés)</p><ol><li>Fórmula: \(40\,000\times0{,}016/50 = 12{,}8\ \text{cm}\)</li><li>Regra 1,3 cm/m: \(10\times1{,}3 = 13\ \text{cm}\) ✔</li><li>Regra ¼: \(32/4 = 8\) pol. \(\approx 20\ \text{cm}\)</li></ol><p class="res">➜ ≈ 13 cm pela fórmula do Fonseca; ≈ 20 cm pela regra de ¼ (e pela FWA da Convenção de Linhas de Carga, \(W/40T\))</p></details>
+ <div class="nota">[CONFLITO] Três famílias de resultado: Fonseca (0,016 → ~1,3%), regra ¼ pés/pol. e FWA \(=W/(40\,T)\) (~2%), e PIANC (2–3%, PP-01). Questão citando Fonseca → 0,016. [VERIFICAR coeficiente 0,016 no art. 2.89]</div>
+ <footer><span class="src">📖 Fonseca, <i>Arte Naval</i>, Cap. 2 (art. 2.89) · regra ¼ pés→pol.: destaque do mesmo texto</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><span class="chip sm" style="--c:#455A64" title="Projeto: Legislação">Legislação</span></span></footer>
+</article>
+<article class="card" id="AN-09" data-proj="AN MAN" data-tags="CALCULO">
+ <header><span class="fid">AN-09</span><h3>Variação de trim devido à movimentação de peso</h3><div class="tags"><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\text{Variação de trim} = \dfrac{p\cdot l}{W}\cdot\dfrac{L}{GM'}\]</div>
+ <p class="leg">\(p\) = peso movido (t) · \(l\) = distância longitudinal (m) · \(L\) = comprimento entre PP (m) · \(W\) = deslocamento (t) · \(GM'\) = altura metacêntrica longitudinal (m) · \(p\cdot l\) = momento que faz variar o trim</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Momento do peso ÷ “rigidez” longitudinal (W·GM′/L).</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">100 t de carga movidas 50 m para ré; W = 20 000 t; L = 150 m; GM′ = 180 m</p><ol><li>\(\dfrac{100\times50}{20\,000} = 0{,}25\)</li><li>\(0{,}25\times\dfrac{150}{180}=0{,}208\ \text{m}\)</li><li>Conferência pelo MCT: \(W\,GM'/(100L) = 240\ \text{t·m/cm}\Rightarrow 5\,000/240 = 20{,}8\ \text{cm}\) ✔</li></ol><p class="res">➜ Trim varia ≈ 21 cm (pela popa)</p></details>
+ 
+ <footer><span class="src">📖 Fonseca, <i>Arte Naval</i>, Cap. 2</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span></span></footer>
+</article>
+<article class="card" id="AN-10" data-proj="AN MAN" data-tags="DECORAR CALCULO BANCA">
+ <header><span class="fid">AN-10</span><h3>Fórmula do Almirantado Britânico — filame da amarra</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#B5651D">BANCA</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\text{Nº de quarteladas} = 1{,}5\sqrt{h\ (\text{m})}\qquad 1\ \text{quartelada}=27{,}5\ \text{m}\]</div>
+ <p class="leg">h = profundidade em metros · vale para amarra de aço forjado (mais leve por comprimento → exige maior filame) · dá o comprimento MÍNIMO para retenção máxima</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Cresce com a RAIZ da profundidade — é o peso da catenária que segura, não só o comprimento.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Exemplo do próprio livro: fundeio em 20 m</p><ol><li>\(1{,}5\sqrt{20} = 1{,}5\times4{,}47 = 6{,}7\) quarteladas</li><li>\(6{,}7\times27{,}5\approx184\ \text{m}\) → filame \(184/20 = 9{,}2\)</li></ol><p class="res">➜ 6,7 quarteladas (184 m). O livro ressalva: para mercante de 15 000 t em fundeadouro abrigado, 4 quarteladas (110 m, filame 5,5) costumam bastar.</p></details>
+ <div class="nota">Não confundir com a regra geral do PIANC (amarra ≥ 5 × profundidade, PP-05).</div>
+ <footer><span class="src">📖 <i>Mooring and Anchoring Ships</i>, Cap. 6 (Fig. 6.25) — Bloco C (Fundeio)</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span></span></footer>
+</article>
+<article class="card" id="AN-11" data-proj="AN LEG" data-tags="DECORAR CALCULO">
+ <header><span class="fid">AN-11</span><h3>Correção para água doce (borda livre) — AD</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[AD=\dfrac{D-BL}{48}\]</div>
+ <p class="leg">AD = correção para navegação em água doce (mm) · D = pontal para borda livre (mm) · BL = borda livre mínima (mm) · (D − BL) ≈ calado de verão</p>
+ <p class="gancho">🧠 <b>Gancho:</b> “Um quarenta e oito avos do calado.”</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">D = 12 000 mm; BL = 2 400 mm</p><ol><li>\(D-BL = 9\,600\ \text{mm}\)</li><li>\(AD = 9\,600/48\)</li></ol><p class="res">➜ \(AD = 200\ \text{mm}\)</p></details>
+ <div class="nota">Usada quando não há o deslocamento certificado; com ele, a FWA é \(W/(40\,T)\).</div>
+ <footer><span class="src">📖 NORMAM-201/DPC (borda livre) · Convenção LL 66, Regra 40 (1/48 do calado de verão)</span><span class="links"><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#455A64" title="Projeto: Legislação">Legislação</span></span></footer>
+</article></section><section class="mod" id="sec-REB" style="--c:#8C5B2E"><h2><span class="dot"></span>MÓDULO II - BLOCO H - REBOCADORES<small>7 fórmulas</small></h2>
+<article class="card" id="REB-01" data-proj="REB MAN PP" data-tags="DECORAR CALCULO BANCA">
+ <header><span class="fid">REB-01</span><h3>Força do vento — tração de ponto fixo para vento de través</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#B5651D">BANCA</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[F_w = 0{,}08\,V^2\,A_L\quad(\text{kgf})\]</div>
+ <p class="leg">\(V\) = velocidade do vento (m/s) · \(A_L\) = área lateral exposta ao vento (m²) · já inclui fator de segurança de 20%</p>
+ <p class="gancho">🧠 <b>Gancho:</b> “Oito centésimos de V ao quadrado vezes a área.” V em m/s!</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Porta-contêineres, A<sub>L</sub> = 8 000 m², vento de través de 15 m/s (≈ 29 nós)</p><ol><li>\(F_w = 0{,}08\times15^2\times8\,000 = 0{,}08\times225\times8\,000\)</li></ol><p class="res">➜ \(F_w = 144\,000\ \text{kgf}\approx144\ \text{t}\)</p></details>
+ <div class="nota">Rebocador ao costado em cabos curtos (push-pull): acrescentar ~20% aos resultados de vento, corrente e ondas.</div>
+ <footer><span class="src">📖 Hensen, <i>Tug Use in Port</i>, Cap. 5 (§5.3)</span><span class="links"><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></span></footer>
+</article>
+<article class="card" id="REB-02" data-proj="REB MAN PP" data-tags="DECORAR CALCULO BANCA">
+ <header><span class="fid">REB-02</span><h3>Força da corrente transversal — conforme a folga sob a quilha</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#B5651D">BANCA</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[F_c = k\,V^2\,L_{bp}\,T\ (\text{kgf})\quad k=\begin{cases}40 & \text{águas profundas }(h>6T)\\110 & \text{folga}=1{,}5T\\150 & \text{folga}=20\%\,T\\185 & \text{folga}=10\%\,T\end{cases}\]</div>
+ <p class="leg">\(V\) = velocidade da corrente (m/s) · \(L_{bp}\) = comprimento entre PP (m) · \(T\) = calado (m) · inclui 25% de segurança</p>
+ <p class="gancho">🧠 <b>Gancho:</b> 40 → 110 → 150 → 185: quanto menos água sob a quilha, maior a força (até ×4,6).</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Petroleiro L<sub>bp</sub> = 300 m, T = 15 m, corrente de través de 1 nó (0,5144 m/s)</p><ol><li>\(V^2 = 0{,}2646\);  \(L_{bp}T = 4\,500\)</li><li>Águas profundas: \(40\times0{,}2646\times4\,500\approx47\,600\ \text{kgf}\)</li><li>Folga 10%: \(185\times0{,}2646\times4\,500\approx220\,000\ \text{kgf}\)</li><li>Correção (petroleiro carregado, h/T = 1,10 → −30%): \(220\times0{,}7\)</li></ol><p class="res">➜ ≈ 48 t em águas profundas; ≈ 220 t com folga de 10%; ≈ 154 t após a correção de petroleiro carregado</p></details>
+ <div class="nota">Correções para pequena folga: LNG — nenhuma; petroleiro em lastro h/T 1,05 → −10%; carregado h/T 1,05 → −20%; carregado h/T 1,10 → −30%.</div>
+ <footer><span class="src">📖 Hensen, <i>Tug Use in Port</i>, Cap. 5 (§5.3)</span><span class="links"><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></span></footer>
+</article>
+<article class="card" id="REB-03" data-proj="REB OND" data-tags="DECORAR CALCULO">
+ <header><span class="fid">REB-03</span><h3>Força de ondas</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[F_{\text{onda}} = 112\,L\,H_s^2\quad(\text{kgf})\]</div>
+ <p class="leg">\(L\) = comprimento do navio (m) · \(H_s\) = altura significativa (m) · inclui 25% de margem · válida só para ondas de período curto (áreas abrigadas, ondas locais)</p>
+ <p class="gancho">🧠 <b>Gancho:</b> 112 × L × H² — dobrar a onda quadruplica a força.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Navio de 250 m em área abrigada</p><ol><li>\(H_s=1{,}0\ \text{m}: 112\times250\times1 = 28\,000\ \text{kgf}\)</li><li>\(H_s=1{,}5\ \text{m}: 112\times250\times2{,}25 = 63\,000\ \text{kgf}\)</li></ol><p class="res">➜ 28 t → 63 t (×2,25 para +50% de onda)</p></details>
+ 
+ <footer><span class="src">📖 Hensen, <i>Tug Use in Port</i>, Cap. 5 (§5.3)</span><span class="links"><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span><span class="chip sm" style="--c:#2F5F8F" title="Projeto: ONDAS">Ondas</span></span></footer>
+</article>
+<article class="card" id="REB-04" data-proj="REB PP" data-tags="DECORAR CALCULO BANCA">
+ <header><span class="fid">REB-04</span><h3>Força para deter o movimento lateral na atracação (massa virtual 1,8 Δ)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#B5651D">BANCA</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\text{Berços abertos: } F=\dfrac{0{,}09\,D\,V_i^2}{S}\qquad \text{Berços sólidos: } F=\dfrac{0{,}07\,D\,V_i^2}{S}\quad(\text{t})\]</div>
+ <p class="leg">\(V_i\) = velocidade inicial (m/s) · \(D\) = deslocamento (t) · \(S\) = distância de parada (m) · velocidade final zero · massa virtual 1,5Δ (h = 1,5T) e 1,8Δ (h = 1,1T) · VLCC: atracar a no máx. 6–8 cm/s</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Berço sólido = colchão d’água freia o navio → coeficiente menor (0,07 &lt; 0,09).</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Exemplos do próprio livro: V<sub>i</sub> = 0,5 nó = 0,25 m/s; S = 30 m</p><ol><li>VLCC em lastro, D = 124 000 t, berço aberto: \(0{,}09\times124\,000\times0{,}0625/30\)</li><li>Porta-contêineres, D = 80 000 t, berço sólido: \(0{,}07\times80\,000\times0{,}0625/30\)</li></ol><p class="res">➜ ≈ 23 t (VLCC) · ≈ 12 t (porta-contêineres) · VLCC carregado (≈ 300 000 t): quase 60 t</p></details>
+ 
+ <footer><span class="src">📖 Hensen, <i>Tug Use in Port</i>, Cap. 5</span><span class="links"><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></span></footer>
+</article>
+<article class="card" id="REB-05" data-proj="REB PP" data-tags="CALCULO VERIFICAR">
+ <header><span class="fid">REB-05</span><h3>Mesma força com S = 30 m (versão “massa adicional”)</h3><div class="tags"><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#6B6B6B">VERIFICAR</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\text{Píer vazado: } F=\dfrac{0{,}09\,\Delta\,V_y^2}{30}\qquad \text{Píer sólido: } F=\dfrac{0{,}07\,\Delta\,V_y^2}{30}\]</div>
+ <p class="leg">\(V_y\) = velocidade lateral de aproximação ao píer — médias de 0,15 a 0,25 m/s a 30 m do píer · \(\Delta\) = deslocamento (t)</p>
+ <p class="gancho">🧠 <b>Gancho:</b> É REB-04 com S fixo em 30 m.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Δ = 50 000 t, V<sub>y</sub> = 0,20 m/s, píer vazado</p><ol><li>\(F = 0{,}09\times50\,000\times0{,}04/30\)</li></ol><p class="res">➜ \(F = 6\ \text{t}\)</p></details>
+ 
+ <footer><span class="src">📖 Texto em português da bibliografia (versão de REB-04 com S = 30 m) — [VERIFICAR fonte: CONAPRA]</span><span class="links"><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></span></footer>
+</article>
+<article class="card" id="REB-06" data-proj="REB" data-tags="DECORAR CALCULO BANCA">
+ <header><span class="fid">REB-06</span><h3>Tração de ponto fixo para navios de grande deslocamento</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#B5651D">BANCA</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[BP = \dfrac{\text{deslocamento}}{100\,000}\times60+40\quad(\text{t})\]</div>
+ <p class="leg">Deslocamento em toneladas métricas · fórmula empírica para petroleiros carregados e graneleiros</p>
+ <p class="gancho">🧠 <b>Gancho:</b> “60 por cem mil, mais 40.”</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Exemplos do livro</p><ol><li>D = 300 000 t: \(3\times60+40\)</li><li>D = 100 000 t: \(1\times60+40\)</li></ol><p class="res">➜ 220 t · 100 t</p></details>
+ 
+ <footer><span class="src">📖 Hensen, <i>Tug Use in Port</i>, Cap. 5 (§5.3.2)</span><span class="links"><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span></span></footer>
+</article>
+<article class="card" id="REB-07" data-proj="REB MAN" data-tags="CALCULO">
+ <header><span class="fid">REB-07</span><h3>Distância de parada com rebocador</h3><div class="tags"><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[S=\dfrac{\text{Desl}\times V_{\text{nós}}^2}{74{,}13\times BP}\]</div>
+ <p class="leg">\(S\) = distância de parada (m) · \(V_{\text{nós}}\) = velocidade (nós) · \(BP\) = tração de ponto fixo (t) · Desl em t · não inclui o retardo entre a ordem e a frenagem plena · mais precisa para navios esbeltos e baixas velocidades</p>
+ <p class="gancho">🧠 <b>Gancho:</b> 74,13 = 2g ÷ 0,5144² — é só energia cinética ÷ força.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Navio de 100 000 t a 2 nós, rebocador de 60 t de BP</p><ol><li>\(S = \dfrac{100\,000\times2^2}{74{,}13\times60} = \dfrac{400\,000}{4\,448}\)</li></ol><p class="res">➜ \(S\approx90\ \text{m}\)</p></details>
+ <div class="nota">Não inclui massa adicionada → na prática a distância é maior.</div>
+ <footer><span class="src">📖 Hensen, <i>Tug Use in Port</i>, Cap. 5</span><span class="links"><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span></span></footer>
+</article></section><section class="mod" id="sec-PP" style="--c:#1A7A6E"><h2><span class="dot"></span>PLANEJAMENTO PORTUÁRIO<small>5 fórmulas</small></h2>
+<article class="card" id="PP-01" data-proj="PP AN" data-tags="DECORAR CALCULO">
+ <header><span class="fid">PP-01</span><h3>Calado em água de massa específica diferente (PIANC)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[T_{\rho\,\text{menor}}=\Bigl[1+(\rho_{\text{maior}}-\rho_{\text{menor}})\dfrac{C_B}{C_{WP}}\Bigr]T_{\rho\,\text{maior}}\qquad T_{\text{doce}}=\Bigl[1+0{,}025\,\dfrac{C_B}{C_{WP}}\Bigr]T_{\text{salgada}}\]</div>
+ <p class="leg">\(C_{WP}=\dfrac{A_{WP}}{L_{PP}\,B}\) · na falta de dados: \(C_{WP}\approx\tfrac{1}{3}(2C_B+1)\) · ρ em t/m³ · calado do navio de projeto aumenta ~2% a 3% da salgada para a doce</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Diferença de densidades × (C<sub>B</sub>/C<sub>WP</sub>) — e C<sub>WP</sub> ≈ (2C<sub>B</sub>+1)/3.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Navio C<sub>B</sub> = 0,80, calado em água salgada 14,0 m, entra em rio de água doce</p><ol><li>\(C_{WP}\approx(2\times0{,}80+1)/3 = 0{,}867\)</li><li>\(C_B/C_{WP} = 0{,}923\)</li><li>\(T = (1+0{,}025\times0{,}923)\times14{,}0 = 1{,}0231\times14{,}0\)</li></ol><p class="res">➜ \(T_{\text{doce}}\approx14{,}32\ \text{m}\) (+32 cm ≈ 2,3% — dentro da faixa 2–3%)</p></details>
+ <div class="nota">Compare com AN-08 (Fonseca): o PIANC dá aumento maior.</div>
+ <footer><span class="src">📖 PIANC Report 121 (2014), Cap. 2 (PT)</span><span class="links"><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span></span></footer>
+</article>
+<article class="card" id="PP-02" data-proj="PP AN MAN" data-tags="DECORAR">
+ <header><span class="fid">PP-02</span><h3>Altura do centro de gravidade — KG (contexto: banda dinâmica)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\overline{KG}=\overline{KB}-\overline{GM}+\overline{BM}\]</div>
+ <p class="leg">\(\overline{KG}\) = altura do CG a partir da quilha · \(\overline{KB}\) = altura do centro de carena · \(\overline{BM}\) = raio metacêntrico · \(\overline{GM}\) = altura metacêntrica</p>
+ <p class="gancho">🧠 <b>Gancho:</b> KM = KB + BM; KG = KM − GM.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">KB = 4,2 m; BM = 6,0 m; GM = 1,5 m</p><ol><li>\(KM = 4{,}2+6{,}0 = 10{,}2\ \text{m}\)</li><li>\(KG = 10{,}2-1{,}5\)</li></ol><p class="res">➜ \(KG = 8{,}7\ \text{m}\)</p></details>
+ 
+ <footer><span class="src">📖 PIANC Report 121, Cap. 2, §2.4.2.2 (Eq. 2-35)</span><span class="links"><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span></span></footer>
+</article>
+<article class="card" id="PP-03" data-proj="PP REB" data-tags="DECORAR CALCULO">
+ <header><span class="fid">PP-03</span><h3>Largura do canal com rebocadores — método europeu</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[W_{ci}=2B_{\max}+L_r+20\ \text{m}\qquad\text{ou}\qquad W_{ci}=3B_{\max}+L_r\]</div>
+ <p class="leg">\(W_{ci}\) = largura do canal · \(B_{\max}\) = boca máxima do navio · \(L_r\) = comprimento do rebocador [VERIFICAR legenda]</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Europeu: rebocador puxando com cabo pelo través → entra o comprimento do rebocador.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Navio com B<sub>max</sub> = 45 m, rebocador de 32 m</p><ol><li>\(2\times45+32+20 = 142\ \text{m}\)</li><li>\(3\times45+32 = 167\ \text{m}\)</li></ol><p class="res">➜ 142 m ou 167 m, conforme a forma adotada</p></details>
+ 
+ <footer><span class="src">📖 CONAPRA, <i>Planejamento Portuário</i>, Cap. 2 (§2.3.3.2)</span><span class="links"><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span></span></footer>
+</article>
+<article class="card" id="PP-04" data-proj="PP REB" data-tags="DECORAR CALCULO">
+ <header><span class="fid">PP-04</span><h3>Largura do canal com rebocadores — método americano</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[W_{ci}=2B_{\max}+2{,}5\,L_{OAR}\]</div>
+ <p class="leg">\(L_{OAR}\) = comprimento total do rebocador</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Americano = “dois e meio rebocadores”.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Mesmo navio (B<sub>max</sub> = 45 m), rebocador de 32 m</p><ol><li>\(2\times45+2{,}5\times32 = 90+80\)</li></ol><p class="res">➜ \(W_{ci}=170\ \text{m}\)</p></details>
+ <div class="nota">Distrator típico: trocar 2,5 (americano) por 20 m (europeu).</div>
+ <footer><span class="src">📖 CONAPRA, <i>Planejamento Portuário</i>, Cap. 2 (§2.3.3.2)</span><span class="links"><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span></span></footer>
+</article>
+<article class="card" id="PP-05" data-proj="PP AN" data-tags="DECORAR CALCULO BANCA">
+ <header><span class="fid">PP-05</span><h3>Raio mínimo do fundeadouro de giro livre — R<sub>A</sub></h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#B5651D">BANCA</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[R_A=L_{OA}+5h+30\ \text{m}\]</div>
+ <p class="leg">\(L_{OA}\) = comprimento total · \(h\) = profundidade (amarra = 5 × profundidade) · 30 m = garrada assumida</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Navio + amarra (5h) + garrada (30 m).</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Navio de 250 m, fundeadouro com 20 m de profundidade</p><ol><li>\(R_A=250+5\times20+30\)</li></ol><p class="res">➜ \(R_A = 380\ \text{m}\)</p></details>
+ <div class="nota">UKC no fundeadouro ≥ 1,1T. Margem adicional: 10% do L<sub>OA</sub>, mín. 20 m.</div>
+ <footer><span class="src">📖 PIANC Report 121, Cap. 3, §3.1.9.2 (Eq. 3-10)</span><span class="links"><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span></span></footer>
+</article></section><section class="mod" id="sec-MAN" style="--c:#4B3F72"><h2><span class="dot"></span>MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H<small>1 fórmula</small></h2>
+<article class="card" id="MAN-01" data-proj="MAN PP MET" data-tags="DECORAR CALCULO CONFLITO">
+ <header><span class="fid">MAN-01</span><h3>Vento a 10 m a partir da escala Beaufort</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#9B2C2C">CONFLITO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[V_{TW}(10)=0{,}836\,(\text{Bft})^{3/2}\ \ [\text{m/s}]\qquad V(z)=V_{10}\Bigl(\dfrac{z}{10}\Bigr)^{1/n},\ n=7\ (\text{OCIMF})\]</div>
+ <p class="leg">Bft = número de Beaufort (0–12) · resultado em m/s · perfil de potência 1/7 para corrigir a altura</p>
+ <p class="gancho">🧠 <b>Gancho:</b> 0,836 × Bft elevado a 1,5 → m/s.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Força 6 e força 8</p><ol><li>Bft 6: \(0{,}836\times6^{1{,}5}=0{,}836\times14{,}70\)</li><li>Bft 8: \(0{,}836\times8^{1{,}5}=0{,}836\times22{,}63\)</li></ol><p class="res">➜ Bft 6 ≈ 12,3 m/s (≈ 24 nós) · Bft 8 ≈ 18,9 m/s (≈ 37 nós) — ambos dentro das faixas da escala</p></details>
+ <div class="nota">[CONFLITO] Um quiz anterior da estante dava o resultado “em nós”. Errado: 18,9 nós não é força 8 (34–40 nós). O resultado é em m/s.</div>
+ <footer><span class="src">📖 Lewis, PNA Vol. II, Cap. V, §5.5 · OCIMF</span><span class="links"><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></span></footer>
+</article></section><section class="mod" id="sec-OND" style="--c:#2F5F8F"><h2><span class="dot"></span>ONDAS<small>1 fórmula</small></h2>
+<article class="card" id="PP-06" data-proj="OND PP REB" data-tags="DECORAR CALCULO">
+ <header><span class="fid">PP-06</span><h3>Comprimento × período de onda (águas profundas)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\lambda=1{,}56\,T_W^2\ [\text{m}]\qquad T_W=0{,}8\sqrt{\lambda}\ [\text{s}]\]</div>
+ <p class="leg">\(\lambda\) = comprimento de onda (m) · \(T_W\) = período de onda (s) · 1,56 = g/2π</p>
+ <p class="gancho">🧠 <b>Gancho:</b> “Um e cinquenta e seis T ao quadrado.”</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">(a) Onda de período 10 s · (b) onda de 100 m</p><ol><li>(a) \(1{,}56\times10^2\)</li><li>(b) \(0{,}8\times\sqrt{100}\)</li></ol><p class="res">➜ (a) λ = 156 m · (b) T = 8 s</p></details>
+ <div class="nota">Navio com L ≈ λ sofre os maiores movimentos de arfagem — ligação direta com o projeto ONDAS.</div>
+ <footer><span class="src">📖 Bibliografia de planejamento/rebocadores — [VERIFICAR §]; relação clássica \(L_0=gT^2/2\pi\)</span><span class="links"><span class="chip sm" style="--c:#2F5F8F" title="Projeto: ONDAS">Ondas</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span></span></footer>
+</article></section><section class="mod" id="sec-NAVM" style="--c:#7A2E3A"><h2><span class="dot"></span>MÓDULO III - NAVEGAÇÃO - MIGUENS<small>5 fórmulas</small></h2>
+<article class="card" id="NAV-01" data-proj="NAVM" data-tags="CALCULO">
+ <header><span class="fid">NAV-01</span><h3>Velocidade pelo tempo de passagem do comprimento</h3><div class="tags"><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[V\ (\text{nós})=\dfrac{\text{comprimento (m)}}{0{,}514\times t\ (\text{s})}\ \approx\ \dfrac{2\times\text{comprimento (m)}}{t\ (\text{s})}\]</div>
+ <p class="leg">t = tempo (s) que a embarcação leva para passar por um ponto fixo · 0,514 m/s = 1 nó</p>
+ <p class="gancho">🧠 <b>Gancho:</b> “Dobro do comprimento sobre o tempo.”</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Embarcação de 100 m leva 20 s para passar pelo través de uma boia</p><ol><li>Exata: \(100/(0{,}514\times20)\)</li><li>Aproximada: \(2\times100/20\)</li></ol><p class="res">➜ 9,7 nós (exata) · 10 nós (aproximada)</p></details>
+ 
+ <footer><span class="src">📖 Miguens, <i>Navegação: a Ciência e a Arte</i>, Vol. I</span><span class="links"><span class="chip sm" style="--c:#7A2E3A" title="Projeto: MÓDULO III - NAVEGAÇÃO - MIGUENS">Navegação Miguens</span></span></footer>
+</article>
+<article class="card" id="NAV-02" data-proj="NAVM" data-tags="DECORAR CALCULO">
+ <header><span class="fid">NAV-02</span><h3>Distância ao horizonte</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[D\ (\text{milhas}) = 2\sqrt{h\ (\text{m})}\]</div>
+ <p class="leg">h = altura do olho do observador (m)</p>
+ <p class="gancho">🧠 <b>Gancho:</b> “Duas raízes da altura.”</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Observador no passadiço a 16 m</p><ol><li>\(2\sqrt{16}=2\times4\)</li></ol><p class="res">➜ \(D = 8\) milhas</p></details>
+ 
+ <footer><span class="src">📖 Miguens, Vol. I, Cap. 11</span><span class="links"><span class="chip sm" style="--c:#7A2E3A" title="Projeto: MÓDULO III - NAVEGAÇÃO - MIGUENS">Navegação Miguens</span></span></footer>
+</article>
+<article class="card" id="NAV-03" data-proj="NAVM" data-tags="DECORAR CALCULO BANCA">
+ <header><span class="fid">NAV-03</span><h3>Distância a objeto de altitude conhecida no horizonte (“boiando”)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#B5651D">BANCA</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[D = 2\sqrt{h}+2\sqrt{H}\]</div>
+ <p class="leg">h = altura do olho do observador (m) · H = altitude do objeto (m) · D em milhas</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Soma dos dois horizontes: o seu + o do farol.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Olho a 16 m; farol com 49 m de altitude aparece boiando</p><ol><li>\(2\sqrt{16}+2\sqrt{49}=8+14\)</li></ol><p class="res">➜ \(D = 22\) milhas</p></details>
+ 
+ <footer><span class="src">📖 Miguens, Vol. I, Cap. 11 (Fig. 11.39)</span><span class="links"><span class="chip sm" style="--c:#7A2E3A" title="Projeto: MÓDULO III - NAVEGAÇÃO - MIGUENS">Navegação Miguens</span></span></footer>
+</article>
+<article class="card" id="NAV-04" data-proj="NAVM" data-tags="CALCULO">
+ <header><span class="fid">NAV-04</span><h3>Distância por dois ângulos verticais e distância navegada</h3><div class="tags"><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[D = \text{Dist. ``od''}\times\dfrac{\alpha}{\beta-\alpha}\]</div>
+ <p class="leg">α = 1º ângulo vertical (no ponto A) · β = 2º ângulo vertical (no ponto B) · dist. “od” = distância navegada entre as leituras do odômetro · D = distância de B ao objeto</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Ângulos pequenos: tg ≈ ângulo → semelhança de triângulos.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">α = 2°, β = 3°, navegou 2 milhas entre as medidas</p><ol><li>\(D = 2\times\dfrac{2}{3-2}\)</li></ol><p class="res">➜ \(D = 4\) milhas do objeto na 2ª leitura</p></details>
+ 
+ <footer><span class="src">📖 Miguens, Vol. I, Cap. 11 (Fig. 11.40)</span><span class="links"><span class="chip sm" style="--c:#7A2E3A" title="Projeto: MÓDULO III - NAVEGAÇÃO - MIGUENS">Navegação Miguens</span></span></footer>
+</article>
+<article class="card" id="NAV-05" data-proj="NAVM NAVI" data-tags="CALCULO CONFLITO">
+ <header><span class="fid">NAV-05</span><h3>Distância fora da derrota (regra do 1 em 60)</h3><div class="tags"><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#9B2C2C">CONFLITO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\text{Afastamento (cabos)}=\dfrac{(\text{marc. exigida}-\text{marc. observada})^\circ\times\text{dist. ao objeto (milhas)}}{6}\]</div>
+ <p class="leg">1° visto a 1 milha ≈ 1/60 milha = 1/6 de cabo · 1 milha = 10 cabos</p>
+ <p class="gancho">🧠 <b>Gancho:</b> 1° a 1 milha ≈ 30 m; “graus × milhas ÷ 6 = cabos”.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Marcação exigida 045°, observada 042°, objeto a 3 milhas</p><ol><li>\(\dfrac{3\times3}{6}\)</li><li>Conferência: \(3\times3/60 = 0{,}15\) milha = 1,5 cabo ✔</li></ol><p class="res">➜ 1,5 cabo (≈ 280 m) fora da derrota</p></details>
+ <div class="nota">[CORRIGIDO] No documento original estava “× 6”. Com ×6 o exemplo daria 54 cabos (5,4 milhas) — maior que a própria distância ao objeto. O correto é ÷ 6.</div>
+ <footer><span class="src">📖 [VERIFICAR fonte — Miguens / NAVINT]</span><span class="links"><span class="chip sm" style="--c:#7A2E3A" title="Projeto: MÓDULO III - NAVEGAÇÃO - MIGUENS">Navegação Miguens</span><span class="chip sm" style="--c:#A0522D" title="Projeto: MÓDULO III - NAVEGAÇÃO - NAVINT + NORMAM + NAYAK + BTM">NAVINT/NORMAM/Nayak</span></span></footer>
+</article></section><section class="mod" id="sec-NAVI" style="--c:#A0522D"><h2><span class="dot"></span>MÓDULO III - NAVEGAÇÃO - NAVINT + NORMAM + NAYAK + BTM<small>2 fórmulas</small></h2>
+<article class="card" id="NAVI-01" data-proj="NAVI LEG" data-tags="DECORAR CALCULO BANCA">
+ <header><span class="fid">NAVI-01</span><h3>Sinais náuticos — Índice de Eficácia (IE)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span><span class="tag" style="--t:#B5651D">BANCA</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[IE = 1-\dfrac{A}{D}\]</div>
+ <p class="leg">A = somatório dos dias de alteração do sinal no mês · D = número de dias do mês</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Fração do mês em que o sinal funcionou.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Farol com 3 dias de alteração num mês de 30 dias</p><ol><li>\(IE = 1-3/30 = 1-0{,}10\)</li></ol><p class="res">➜ \(IE = 0{,}90\) (90%)</p></details>
+ 
+ <footer><span class="src">📖 NORMAM-601/DHN (ex-NORMAM-17)</span><span class="links"><span class="chip sm" style="--c:#A0522D" title="Projeto: MÓDULO III - NAVEGAÇÃO - NAVINT + NORMAM + NAYAK + BTM">NAVINT/NORMAM/Nayak</span><span class="chip sm" style="--c:#455A64" title="Projeto: Legislação">Legislação</span></span></footer>
+</article>
+<article class="card" id="NAVI-02" data-proj="NAVI PP" data-tags="DECORAR CALCULO">
+ <header><span class="fid">NAVI-02</span><h3>Comprimento de cais × maior navio aceitável</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\text{Comprimento do cais}=LOA+k\times B\qquad LOA_{\max}=\text{cais disponível}-k\times B\]</div>
+ <p class="leg">k = 1,0 a 1,7 conforme o ângulo entre as espias e o cais · 45° → k = 1,0 · 30° → k = 1,7</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Espia mais rasa (30°) pede mais cais → k maior.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Cais de 300 m, navio com boca de 40 m</p><ol><li>Espias a 30°: \(300-1{,}7\times40\)</li><li>Espias a 45°: \(300-1{,}0\times40\)</li></ol><p class="res">➜ LOA máx. = 232 m (30°) · 260 m (45°)</p></details>
+ 
+ <footer><span class="src">📖 Nayak, <i>Marine Pilotage</i> (Limitações de comprimento)</span><span class="links"><span class="chip sm" style="--c:#A0522D" title="Projeto: MÓDULO III - NAVEGAÇÃO - NAVINT + NORMAM + NAYAK + BTM">NAVINT/NORMAM/Nayak</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></span></footer>
+</article></section><section class="mod" id="sec-MET" style="--c:#1F6F8B"><h2><span class="dot"></span>METEOROLOGIA E OCEANOGRAFIA<small>6 fórmulas</small></h2>
+<article class="card" id="MET-01" data-proj="MET" data-tags="DECORAR CALCULO">
+ <header><span class="fid">MET-01</span><h3>Índice de desconforto (ID)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[ID=0{,}4\,(T_s+T_u)+4{,}8\quad[^\circ\text{C}]\]</div>
+ <p class="leg">\(T_s\) = temperatura do bulbo seco · \(T_u\) = temperatura do bulbo úmido (°C)</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Média dos dois bulbos × 0,8 + 4,8 (= 0,4 × soma + 4,8).</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Psicrômetro: bulbo seco 32 °C, bulbo úmido 26 °C</p><ol><li>\(0{,}4\times(32+26)+4{,}8 = 23{,}2+4{,}8\)</li></ol><p class="res">➜ \(ID = 28\)  → ambiente quente e úmido, desconfortável</p></details>
+ 
+ <footer><span class="src">📖 Bibliografia de Meteorologia (Ynoue et al. / Lobo &amp; Soares) — [VERIFICAR página]</span><span class="links"><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></span></footer>
+</article>
+<article class="card" id="MET-02" data-proj="MET" data-tags="DECORAR">
+ <header><span class="fid">MET-02</span><h3>Umidade absoluta</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[\text{Umidade absoluta}=\dfrac{\text{massa de vapor d’água}}{\text{volume de ar}}\]</div>
+ <p class="leg">Unidade usual: g/m³ · varia com a expansão/compressão do ar mesmo sem ganho de vapor</p>
+ <p class="gancho">🧠 <b>Gancho:</b> ABSOLUTA = por VOLUME.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">1 m³ de ar contém 15 g de vapor</p><ol><li>\(15\ \text{g}/1\ \text{m}^3\)</li></ol><p class="res">➜ 15 g/m³</p></details>
+ 
+ <footer><span class="src">📖 Ynoue et al., <i>Meteorologia: noções básicas</i>, Cap. 4</span><span class="links"><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></span></footer>
+</article>
+<article class="card" id="MET-03" data-proj="MET" data-tags="DECORAR">
+ <header><span class="fid">MET-03</span><h3>Umidade específica (q)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[q=\dfrac{\text{massa de vapor d’água}}{\text{massa de ar (total)}}\]</div>
+ <p class="leg">Unidade usual: g/kg · não muda com expansão/compressão</p>
+ <p class="gancho">🧠 <b>Gancho:</b> ESPECÍFICA = sobre o ar TODO (úmido).</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">1 kg de ar úmido contendo 12 g de vapor</p><ol><li>\(q = 12\ \text{g}/1\ \text{kg}\)</li></ol><p class="res">➜ q = 12 g/kg</p></details>
+ 
+ <footer><span class="src">📖 Ynoue et al., Cap. 4</span><span class="links"><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></span></footer>
+</article>
+<article class="card" id="MET-04" data-proj="MET" data-tags="DECORAR">
+ <header><span class="fid">MET-04</span><h3>Razão de mistura (r)</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[r=\dfrac{\text{massa de vapor d’água}}{\text{massa de ar seco}}\]</div>
+ <p class="leg">Unidade usual: g/kg · na prática r ≈ q</p>
+ <p class="gancho">🧠 <b>Gancho:</b> MISTURA = sobre o ar SECO.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Mesma parcela: 12 g de vapor + 988 g de ar seco</p><ol><li>\(r = 12/0{,}988\)</li></ol><p class="res">➜ r ≈ 12,1 g/kg (≈ q, como esperado)</p></details>
+ <div class="nota">Distrator clássico: trocar “ar total” (q) por “ar seco” (r).</div>
+ <footer><span class="src">📖 Ynoue et al., Cap. 4</span><span class="links"><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></span></footer>
+</article>
+<article class="card" id="MET-05" data-proj="MET" data-tags="DECORAR CALCULO">
+ <header><span class="fid">MET-05</span><h3>Umidade relativa — pela pressão de vapor</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[UR=\dfrac{e}{e_s}\times100\%\]</div>
+ <p class="leg">\(e\) = pressão de vapor · \(e_s\) = pressão de vapor de saturação (depende só da temperatura)</p>
+ <p class="gancho">🧠 <b>Gancho:</b> O que tem ÷ o que caberia.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">Ar a 25 °C (e<sub>s</sub> ≈ 31,7 hPa) com e = 20 hPa</p><ol><li>\(UR = 20/31{,}7\times100\)</li></ol><p class="res">➜ UR ≈ 63%</p></details>
+ 
+ <footer><span class="src">📖 Ynoue et al., Cap. 4 (Eq. 4.4)</span><span class="links"><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></span></footer>
+</article>
+<article class="card" id="MET-06" data-proj="MET" data-tags="DECORAR CALCULO">
+ <header><span class="fid">MET-06</span><h3>Umidade relativa — pela razão de mistura</h3><div class="tags"><span class="tag" style="--t:#C8A84B">DECORAR</span><span class="tag" style="--t:#1A7A6E">CALCULO</span></div></header>
+ <div class="formula" title="Clique para revelar (modo decorar)">\[UR=\dfrac{r}{r_s}\times100\%\]</div>
+ <p class="leg">\(r\) = razão de mistura · \(r_s\) = razão de mistura de saturação</p>
+ <p class="gancho">🧠 <b>Gancho:</b> Mesma lógica de MET-05, com r no lugar de e.</p>
+ <details class="ex" open><summary>✍️ Exemplo de aplicação</summary>
+  <p class="ex-t">r = 10 g/kg; r<sub>s</sub> = 20 g/kg</p><ol><li>\(UR = 10/20\times100\)</li></ol><p class="res">➜ UR = 50% — se o ar esfriar e r<sub>s</sub> cair a 10 g/kg, UR = 100% (ponto de orvalho)</p></details>
+ 
+ <footer><span class="src">📖 Ynoue et al., Cap. 4 (Eq. 4.5)</span><span class="links"><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></span></footer>
+</article></section>
+
+<section class="mod" id="sec-CONV" style="--c:#0D3D36">
+ <h2><span class="dot"></span>CONVERSÕES — métricas e imperiais<small>16 itens</small></h2>
+ <div class="panel" style="padding:6px 8px">
+ <table id="conv"><thead><tr><th>Grandeza</th><th>Conversão</th><th>Usada em</th></tr></thead><tbody><tr data-proj="AN PP" class="ok"><td class="g">Comprimento</td><td><b>1 pé = 12 polegadas = 0,305 m (exato: 0,3048 m)</b> </td><td><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></td></tr><tr data-proj="AN NAVM" class="ok"><td class="g">Comprimento</td><td><b>1 braça = 6 pés ingleses ≈ 1,83 m</b> </td><td><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#7A2E3A" title="Projeto: MÓDULO III - NAVEGAÇÃO - MIGUENS">Navegação Miguens</span></td></tr><tr data-proj="AN" class="add"><td class="g">Comprimento</td><td><b>1 polegada = 2,54 cm</b> <span class="tag" style="--t:#6B6B6B">COMPLEMENTO</span><div class=cn>Necessária na regra ¼ pés → pol. (AN-08)</div></td><td><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span></td></tr><tr data-proj="NAVM NAVI" class="add"><td class="g">Comprimento</td><td><b>1 milha náutica = 1 852 m = 10 cabos · 1 cabo = 185,2 m</b> <span class="tag" style="--t:#6B6B6B">COMPLEMENTO</span><div class=cn>Necessária em NAV-05</div></td><td><span class="chip sm" style="--c:#7A2E3A" title="Projeto: MÓDULO III - NAVEGAÇÃO - MIGUENS">Navegação Miguens</span><span class="chip sm" style="--c:#A0522D" title="Projeto: MÓDULO III - NAVEGAÇÃO - NAVINT + NORMAM + NAYAK + BTM">NAVINT/NORMAM/Nayak</span></td></tr><tr data-proj="AN" class="add"><td class="g">Comprimento</td><td><b>1 quartelada = 27,5 m (15 braças)</b> <span class="tag" style="--t:#6B6B6B">COMPLEMENTO</span><div class=cn>Necessária em AN-10</div></td><td><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span></td></tr><tr data-proj="CG AN" class="ok"><td class="g">Volume</td><td><b>1 barril = 158,984 L = 42 galões americanos = 34,97 galões ingleses</b> </td><td><span class="chip sm" style="--c:#6D6D6D" title="Projeto: Conhecimentos gerais">Conhec. Gerais</span><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span></td></tr><tr data-proj="AN" class="ok"><td class="g">Volume / Massa</td><td><b>35 pés³ de água salgada = 1 t · 36 pés³ de água doce = 1 t</b> </td><td><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span></td></tr><tr data-proj="AN PP" class="add"><td class="g">Volume / Massa</td><td><b>1 m³ de água salgada ≈ 1,025 t · água doce = 1,000 t</b> <span class="tag" style="--t:#6B6B6B">COMPLEMENTO</span></td><td><span class="chip sm" style="--c:#0D3D36" title="Projeto: MÓDULO II - BLOCOS A / B / C">Arte Naval A/B/C</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></td></tr><tr data-proj="MET" class="ok"><td class="g">Pressão</td><td><b>1 atm = 101,325 kPa = 1 013,25 hPa = 1 013,25 mbar = 1,01325 bar = 760 mmHg</b> </td><td><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></td></tr><tr data-proj="MET" class="corr"><td class="g">Pressão</td><td><b>1 hPa = 1 mb (logo 1 015,2 hPa = 1 015,2 mb) · 1 Pa = 0,01 mb · 1 kPa = 10 mb</b> <span class="tag" style="--t:#9B2C2C">CORRIGIDO</span><div class=cn>Original: “1 Pa = 100 mb” — errado. Quem vale 100 Pa é 1 mb (= 1 hPa).</div></td><td><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></td></tr><tr data-proj="MET" class="corr"><td class="g">Temperatura</td><td><b>0 °C = 273,15 K · 0 K = −273,15 °C</b> <span class="tag" style="--t:#9B2C2C">CORRIGIDO</span><div class=cn>Original: “−273,15 K = 0 °C” — sinal trocado; não existe temperatura negativa em Kelvin.</div></td><td><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></td></tr><tr data-proj="MET" class="add"><td class="g">Precipitação</td><td><b>1 mm de chuva = 1 L/m²</b> <span class="tag" style="--t:#6B6B6B">COMPLEMENTO</span><div class=cn>Equivalência recorrente na banca de Meteorologia</div></td><td><span class="chip sm" style="--c:#1F6F8B" title="Projeto: METEOROLOGIA E OCEANOGRAFIA">Meteo/Oceano</span></td></tr><tr data-proj="RPL REB" class="ok"><td class="g">Potência</td><td><b>1 hp (inglês) = 0,7457 kW ≈ 0,746 kW = 550 ft·lbf/s</b> </td><td><span class="chip sm" style="--c:#5B6B2E" title="Projeto: Resistência - Propulsão - Lemes">Resist./Propulsão</span><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span></td></tr><tr data-proj="RPL REB" class="ok"><td class="g">Potência</td><td><b>1 hp métrico (cv) = 0,735 kW</b> <div class=cn>Banca: trocar 0,746 (hp inglês) por 0,735 (cv)</div></td><td><span class="chip sm" style="--c:#5B6B2E" title="Projeto: Resistência - Propulsão - Lemes">Resist./Propulsão</span><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span></td></tr><tr data-proj="REB NAVM MAN PP" class="ok"><td class="g">Velocidade</td><td><b>1 nó = 0,5144 m/s · 1 m/s ≈ 1,944 nó</b> <div class=cn>V em m/s nas fórmulas do Hensen (REB-01 a REB-04)</div></td><td><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span><span class="chip sm" style="--c:#7A2E3A" title="Projeto: MÓDULO III - NAVEGAÇÃO - MIGUENS">Navegação Miguens</span><span class="chip sm" style="--c:#4B3F72" title="Projeto: MÓDULO I - MANOBRABILIDADE - BLOCOS D / E / F / G / H">Manobrabilidade</span><span class="chip sm" style="--c:#1A7A6E" title="Projeto: PLANEJAMENTO PORTUÁRIO">Plan. Portuário</span></td></tr><tr data-proj="REB" class="add"><td class="g">Força</td><td><b>1 kgf ≈ 9,81 N · 1 t (força) = 1 000 kgf</b> <span class="tag" style="--t:#6B6B6B">COMPLEMENTO</span><div class=cn>Fórmulas do Hensen dão kgf; tração de rebocador em t</div></td><td><span class="chip sm" style="--c:#8C5B2E" title="Projeto: MÓDULO II - BLOCO H - REBOCADORES">Rebocadores</span></td></tr></tbody></table>
+ </div>
+</section>
+
+<p class="foot">Formulário PSCPP 2027 · Capital Sereno · consolidado a partir de “FÓRMULAS.docx” e “CONVERSÕES.docx”</p>
+</main>
+
+<script>
+(function(){
+ var f="",q="";
+ var cards=[].slice.call(document.querySelectorAll('.card'));
+ var rows=[].slice.call(document.querySelectorAll('#conv tbody tr'));
+ var secs=[].slice.call(document.querySelectorAll('section.mod'));
+ function norm(s){return (s||"").toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+ function apply(){
+  var nq=norm(q);
+  cards.forEach(function(c){
+   var okF=!f||c.dataset.proj.split(' ').indexOf(f)>=0;
+   var okQ=!nq||norm(c.textContent).indexOf(nq)>=0||norm(c.id).indexOf(nq)>=0;
+   c.classList.toggle('hidden',!(okF&&okQ));
+  });
+  rows.forEach(function(r){
+   var okF=!f||r.dataset.proj.split(' ').indexOf(f)>=0;
+   var okQ=!nq||norm(r.textContent).indexOf(nq)>=0;
+   r.classList.toggle('hidden',!(okF&&okQ));
+  });
+  secs.forEach(function(s){
+   var any=s.id==='sec-CONV'?rows.some(function(r){return !r.classList.contains('hidden')}):[].some.call(s.querySelectorAll('.card'),function(c){return !c.classList.contains('hidden')});
+   s.classList.toggle('hidden',!any);
+  });
+ }
+ document.querySelectorAll('.fbtn').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on')});b.classList.add('on');f=b.dataset.f;apply();
+  try{localStorage.setItem('pscpp_form_f',f)}catch(e){}
+ })});
+ document.getElementById('q').addEventListener('input',function(e){q=e.target.value;apply();});
+ var dec=document.getElementById('tDec'),ex=document.getElementById('tEx');
+ dec.addEventListener('click',function(){var on=document.body.classList.toggle('decorar');dec.classList.toggle('on',on);
+  document.querySelectorAll('.formula.rev').forEach(function(x){x.classList.remove('rev')});});
+ ex.addEventListener('click',function(){var on=document.body.classList.toggle('semex');ex.classList.toggle('on',on);ex.textContent=on?'Mostrar exemplos':'Ocultar exemplos';});
+ document.querySelectorAll('.formula').forEach(function(x){x.addEventListener('click',function(){if(document.body.classList.contains('decorar'))x.classList.toggle('rev');});});
+ try{var s=localStorage.getItem('pscpp_form_f');if(s){var b=document.querySelector('.fbtn[data-f="'+s+'"]');if(b)b.click();}}catch(e){}
+})();
+</script>
+</body>
+</html>
