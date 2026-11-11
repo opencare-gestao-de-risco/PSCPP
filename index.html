@@ -124,6 +124,13 @@
    ====================================================================== */
 const CADERNOS = [
   {
+    materia:"formulas", badge:"Todos os módulos · Consulta rápida",
+    titulo:"Formulário PSCPP — Fórmulas & Conversões",
+    arquivo:"formulario_pscpp_formulas_conversoes.html",
+    desc:"38 fórmulas e 16 conversões consolidadas e vinculadas a cada projeto: Arte Naval A/B/C (coeficientes de forma, deslocamento, TPC, água doce, trim, filame do Almirantado, AD = (D−BL)/48), Rebocadores (Hensen Cap. 5: vento, corrente 40/110/150/185, ondas, atracação, BP, parada), Planejamento Portuário (PIANC/CONAPRA: calado em água doce, KG, W<sub>ci</sub> europeu × americano, R<sub>A</sub>), Ondas (λ = 1,56T²), Beaufort, Navegação Miguens (horizonte, boiando, ângulos verticais, fora da derrota), NORMAM-601 (IE), Nayak (comprimento de cais) e Meteorologia (Ynoue Cap. 4: umidades, UR, ID). Cada fórmula com legenda, fonte, gancho de memorização e exemplo resolvido. Quadro de correções dos originais (hPa × mb, K × °C, regra do 1 em 60, Beaufort em m/s). Busca, filtro por projeto e modo decorar.",
+    tags:["DECORAR","CALCULO","BANCA","Fórmulas","Conversões","Hensen","PIANC","Fonseca","Miguens","Ynoue","Todos os módulos"]
+  },
+  {
     materia:"flashcards", badge:"Arte Naval · Fonseca Caps. 1–3 e 8–10 · Bloco II",
     titulo:"Arte Naval em Flashcards — Fonseca Caps. 1, 2, 3, 8, 9 e 10 (Blocos A, B e C)",
     arquivo:"fonseca_caps_1_2_3_flashcards.html",
@@ -731,6 +738,7 @@ const CADERNOS = [
 
 /* ---- Matérias (ordem + rótulos + cor). Crie novas aqui se precisar. ---- */
 const MATERIAS = {
+  "formulas":{ titulo:"Fórmulas", sub:"Formulário consolidado de todos os módulos · fórmulas, conversões e exemplos resolvidos", cor:"#C8A84B" },
   "flashcards":{ titulo:"Flashcards", sub:"Baralhos de memorização de qualquer módulo · repetição espaçada · erros voltam ao fim", cor:"#B8860B" },
   "publicacoes-dhn":{ titulo:"Publicações Náuticas DHN", sub:"Bloco III · item 27 · fontes primárias: Carta 12.000 · Roteiro · Lista de Faróis · LAR · CCM · Avisos", cor:"#0D3D36" },
   "navegacao":{ titulo:"Navegação — Miguens", sub:"Bloco III · Miguens Vol. I e III · núcleo de referência", cor:"#1F6F8B" },
@@ -747,7 +755,7 @@ const MATERIAS = {
   "legislacao":{ titulo:"Legislação e Regulamentação", sub:"Módulo IV · LESTA · Tribunal Marítimo · NORMAMs · Portos e Registro", cor:"#4A5A2E" },
   "economia":{ titulo:"Economia Marítima — Stopford", sub:"Módulo VII · Bloco E · Economia marítima, 3. ed. (Blucher, 2017) · Caps. 1–17", cor:"#0D3D36" }
 };
-const ORDEM = ["flashcards","navegacao","publicacoes-dhn","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes","legislacao","economia"];
+const ORDEM = ["formulas","flashcards","navegacao","publicacoes-dhn","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes","legislacao","economia"];
 
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }
