@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0D3D36">
-<title>Auxílios à Navegação e Balizamento IALA — Miguens Cap. 13 · PSCPP</title>
+<title>Auxílios à Navegação — Miguens Cap. 13 · PSCPP</title>
 <style>
   :root{
     --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
@@ -73,45 +73,7 @@
   tr:nth-child(even) td{background:#faf7ee}
   td.center,th.center{text-align:center}
   td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
-
-  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
-  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
-  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
-  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
-  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
-  .ictrl{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
-  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:120px}
-  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
-  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
-  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
-  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;margin-top:12px;min-height:52px}
-  .iread b{color:var(--verde2)}
-
-  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
-  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
-  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
     border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
-  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
-  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
-  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
-  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
-  .quiz .fb.show{display:block}
-  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
-  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
-  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
-  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
-  .quiz button.nextq:disabled{opacity:.4;cursor:default}
-  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-  .score b{color:var(--ouro);font-size:16px}
-
-  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
-  .fc{perspective:1100px;height:180px;cursor:pointer}
-  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
-  .fc.flip .fc-in{transform:rotateY(180deg)}
-  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
-  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
-  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
-  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
 
   details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
   details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
@@ -129,403 +91,91 @@
   footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
   footer b{color:var(--ouro)}
   @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+
+  .legend{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;margin:0 0 30px;line-height:1.9}
+  .t-nota{background:#dcefeb;color:#145c52}
+  .dot{color:#C0392B;font-weight:bold}
+  .ul{text-decoration:underline;text-decoration-color:#C0392B;text-decoration-thickness:2px}
+  .box.quad{padding:14px 16px}
+  h4.qt{margin:0 0 6px;font-family:'Trebuchet MS',sans-serif;font-size:13.5px;color:var(--verde);text-transform:none;letter-spacing:0}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw table{margin:6px 0;min-width:520px}
+  td.hlc{background:var(--amarelo)!important}
+  td.amb{background:#FBE7C0!important}
+  p.foot{font-size:13px;color:var(--mute);font-style:italic;margin:6px 0 0}
+  ul.steps{margin:6px 0 0;padding-left:20px;font-size:15px}
+  ul.steps li{margin:5px 0}
+  ul.steps li.sub{list-style:none;margin-left:6px;color:#3d5550}
+  .box.sint{font-size:14.5px;padding:12px 16px;margin:12px 0}
+  .box.sint.key{border-left:6px solid var(--ouro)}
+  .box.sint.banca{border-left:6px solid #D98E04;background:#fffaf0}
+  .box.sint.formula{border-left:6px solid var(--azul)}
+  .box.sint.nota{border-left:6px solid var(--verde2)}
+  table.gloss td:first-child{white-space:nowrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  table.gloss td:last-child{text-align:center;white-space:nowrap}
+  @media(max-width:600px){.tw table{font-size:13px}}
+.busca{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.busca input{flex:1;font-family:Georgia,serif;font-size:15px;padding:9px 14px;border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:0}
+.busca input:focus{outline:none;border-color:var(--verde2);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
+#qn{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);white-space:nowrap}
+mark.sq{background:#ffb347;color:inherit;border-radius:2px;padding:0 1px}
+.t-cob{background:#F2C879;color:#5a3d00}
+h3.dh{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--verde2);margin:18px 0 8px;border-bottom:1px solid var(--linha);padding-bottom:4px}
+.defs{display:grid;gap:12px;margin-bottom:10px}
+.def{background:var(--card);border:1px solid var(--linha);border-left:4px solid var(--verde2);border-radius:10px;padding:12px 16px;box-shadow:var(--sombra)}
+.def h4{margin:0 0 6px;font-size:16px;color:var(--verde)}
+.def p{margin:0;line-height:1.55}
+.def ul{margin:8px 0 0;padding-left:20px}
+.def li{margin:4px 0;line-height:1.5}
+h2.sec{flex-wrap:wrap;row-gap:4px}
+@media(max-width:600px){nav.toc .wrap .row{flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}nav.toc .wrap .row a{flex:0 0 auto}}
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap">
-    <p class="eyebrow">PSCPP 2027 · Bloco B/H — Auxílios</p>
-    <h1>Auxílios à Navegação e o <em>Balizamento IALA</em></h1>
-    <p class="sub">Faróis e sinais, as características das luzes, os três alcances (luminoso, nominal e geográfico) e o Sistema de Balizamento Marítimo da IALA — Região A × B (o Brasil é B!), com as marcas laterais, cardinais, de perigo isolado, águas seguras, especiais e novos perigos.</p>
-    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 13 (Auxílios à Navegação). Balizamento conforme NORMAM-17/DHN. A banca cita a <b>1ª edição (1996)</b>. Questões reais: PSCPP 2006, 2008, 2011 e 2012.</div>
-  </div>
-</header>
-
-<nav class="toc">
-  <div class="wrap"><div class="row">
-    <a href="#auxilios">13.2 Auxílios e luzes</a>
-    <a href="#alcances">13.2.6 Alcances ▶</a>
-    <a href="#ialaAB">IALA A × B ▶</a>
-    <a href="#cardinais">Cardinais ▶</a>
-    <a href="#outras">Perigo isolado · especiais</a>
-    <a href="#banca">Já cobrado</a>
-    <a href="#flash">Flashcards</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#pscpp">Pontos PSCPP</a>
-  </div></div>
-</nav>
-
-<main>
-<div class="wrap">
-
-<div class="related">
-  📎 Fecha o <strong>Bloco B</strong>. A Lista de Faróis (DH2) vem do <a href="miguens_cap12_publicacoes_nauticas.html">Cap. 12 (Publicações)</a>; os símbolos das marcas estão na Carta 12.000 (<a href="miguens_cap2_carta_projecoes.html">Cap. 2</a>). O balizamento fluvial liga-se à Navegação Fluvial (Vol. III Cap. 40).
-</div>
-
-<!-- ===== AUXÍLIOS E LUZES ===== -->
-<section class="bloco" id="auxilios">
-  <h2 class="sec"><span class="n">13.2</span> Auxílios visuais e as características das luzes</h2>
-  <p class="lede">Auxílio à navegação = dispositivo, sistema ou serviço externo ao navio. Os visuais vão dos faróis às boias — e a "personalidade" de cada luz é sua <strong>característica</strong>.</p>
-
-  <div class="box key">
-    <h4>Tipos de luz e o vocabulário <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
-    <p><strong>Tipos:</strong> onidirecional (mesma característica em todo o entorno) · direcional (setor estreito, uma cor, indica direção) · de setor (setores do horizonte com cores diferentes) · de alinhamento (dois sinais fixos de mesma cor definindo uma direção/eixo de canal).</p>
-    <p style="margin-top:8px"><strong>Característica</strong> = <span class="hl">ritmo + cor</span>. <strong>Período</strong> = tempo entre dois ciclos idênticos. <strong>Lampejo</strong> (luz &lt; obscuridade) · <strong>Ocultação</strong> (obscuridade &lt; luz) · <strong>Isofase</strong> (luz = obscuridade) · <strong>Eclipse</strong> (obscuridade entre lampejos).</p>
-  </div>
-
-  <div class="box">
-    <h4>Limites de setores — sempre do largo <span class="tag t-decorar">DECORAR</span></h4>
-    <p>Os limites de setores de luz e de visibilidade são dados por <strong>marcações verdadeiras</strong> (000°–360°), tomadas <span class="hl">do largo (do mar para o sinal)</span>, no sentido horário — as marcações com que <strong>o navegante avista o farol</strong> (não o contrário). Setores coloridos podem indicar um perigo ou a passagem livre entre perigos.</p>
-  </div>
-</section>
-
-<!-- ===== ALCANCES ===== -->
-<section class="bloco" id="alcances">
-  <h2 class="sec"><span class="n">13.2.6</span> Os três alcances</h2>
-  <p class="lede">Distingua-os: um depende da <em>luz</em>, outro do <em>padrão de 10 milhas</em>, o terceiro da <em>curvatura da Terra</em>.</p>
-
-  <table>
-    <tr><th>Alcance</th><th>Depende de…</th></tr>
-    <tr><td><strong>Luminoso</strong></td><td>Intensidade luminosa (candelas) + visibilidade meteorológica. Obtido no Diagrama de Alcance Luminoso.</td></tr>
-    <tr><td><strong>Nominal</strong></td><td>Alcance com visibilidade meteorológica <span class="hl">padrão de 10 milhas</span> (observador de vista normal).</td></tr>
-    <tr><td><strong>Geográfico</strong></td><td>Só a <span class="hl">curvatura da Terra</span>: elevação (altitude) da luz e altura do olho do observador.</td></tr>
-  </table>
-
-  <div class="ichart">
-    <h4>Alcance geográfico — a curvatura da Terra</h4>
-    <p class="hint">D = 1,93 (√H + √h). Ajuste a altura do observador (H) e a altitude do farol (h) e veja até onde a luz aparece no horizonte. Nas cartas, a DHN usa o observador a 5 m.</p>
-    <canvas id="cvAlc" width="860" height="280"></canvas>
-    <div class="ictrl"><label for="hobs">Observador H (m) →</label><input type="range" id="hobs" min="2" max="30" step="1" value="7" oninput="drawAlc()"></div>
-    <div class="ictrl"><label for="hfar">Farol h (m) →</label><input type="range" id="hfar" min="5" max="120" step="1" value="60" oninput="drawAlc()"></div>
-    <div class="iread" id="alcRead"></div>
-  </div>
-
-  <div class="box formula">
-    <h4>A fórmula e as regras de ouro <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
-    <div class="eq">D = 1,93 (√H + √h)<span class="lbl">D = alcance geográfico (mn) · H = altura do observador (m) · h = altitude do farol (m)</span></div>
-    <p class="vars">Ex.: obs 7 m + farol 60 m → 1,93(√7+√60) ≈ <strong>20,0 mn</strong>. Nas cartas, a DHN considera o olho do observador a <span class="hl">5 metros</span> e registra apenas o <span class="hl">MENOR</span> entre o alcance luminoso e o geográfico (é a 1ª distância em que o sinal aparece). Faróis de aterragem: alcance luminoso ≥ geográfico.</p>
-  </div>
-</section>
-
-<!-- ===== IALA A x B ===== -->
-<section class="bloco" id="ialaAB">
-  <h2 class="sec"><span class="n">13.3</span> O Sistema IALA — Região A × B</h2>
-  <p class="lede">Só os sinais <strong>laterais</strong> mudam entre as duas regiões. A "direção convencional do balizamento" no Brasil é sempre <strong>vindo do mar</strong> (e, no rio, subindo).</p>
-
-  <div class="ichart">
-    <h4>Sinais laterais — alterne a região</h4>
-    <p class="hint">Região A: Europa/África/Ásia/Oceania. Região B (Brasil): Américas, Japão, Coreia do Sul, Taiwan, Filipinas. Veja as cores/formatos de bombordo e boreste em cada região.</p>
-    <div class="ictrl" style="margin-bottom:10px">
-      <button class="regBtn" data-r="A" onclick="setReg('A')">Região A</button>
-      <button class="regBtn active" data-r="B" onclick="setReg('B')">Região B (Brasil)</button>
-    </div>
-    <svg id="svgReg" viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sinais laterais IALA"></svg>
-    <div class="iread" id="regRead"></div>
-  </div>
-
-  <div class="box key">
-    <h4>O que decorar do Brasil (Região B) <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
-    <p><strong>Bombordo:</strong> <span class="hl">verde</span>, cilíndrico (marca de tope cilindro verde). <strong>Boreste:</strong> <span class="hl">encarnado</span>, cônico (cone encarnado, vértice p/ cima). É o inverso da Região A. Ritmo: qualquer, <em>exceto</em> Grupos de Lampejos Compostos (2+1). <strong>Canal preferencial</strong> = cor do lado + faixa larga horizontal da cor oposta + ritmo <span class="hl">Gp Lampejos Compostos (2+1)</span>. Se numerados, a sequência segue a direção convencional.</p>
-  </div>
-</section>
-
-<!-- ===== CARDINAIS ===== -->
-<section class="bloco" id="cardinais">
-  <h2 class="sec"><span class="n">13.3.2c</span> Sinais cardinais</h2>
-  <p class="lede">Ligados à agulha: o nome do sinal indica o <strong>quadrante por onde passar</strong> — as águas navegáveis (mais profundas) ficam do lado do nome do sinal.</p>
-
-  <div class="ichart">
-    <h4>As quatro cardinais em torno de um perigo</h4>
-    <p class="hint">Clique num quadrante. A marca de tope são 2 cones pretos (o indicador diurno obrigatório), cuja disposição "aponta" para a cor: N (vértices ↑), S (vértices ↓), E (base a base ◇), W (ponta a ponta ⋈).</p>
-    <svg id="svgCard" viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sinais cardinais"></svg>
-    <div class="iread" id="cardRead">Toque num quadrante (N, L, S ou O).</div>
-  </div>
-
-  <table>
-    <tr><th>Cardinal</th><th>Cor</th><th>2 cones (tope)</th><th>Luz branca</th></tr>
-    <tr><td><strong>Norte</strong></td><td>Preto sobre amarelo</td><td>Vértices p/ cima ↑↑</td><td>VQ ou Q (contínua, rápida/muito rápida)</td></tr>
-    <tr><td><strong>Leste</strong></td><td>Preto c/ faixa amarela</td><td>Base a base (◇)</td><td>VQ(3)/5s ou Q(3)/10s</td></tr>
-    <tr><td><strong>Sul</strong></td><td>Amarelo sobre preto</td><td>Vértices p/ baixo ↓↓</td><td>VQ(6)+longo/10s ou Q(6)+longo/15s</td></tr>
-    <tr><td><strong>Oeste</strong></td><td>Amarelo c/ faixa preta</td><td>Ponta a ponta (⋈)</td><td>VQ(9)/10s ou Q(9)/15s</td></tr>
-  </table>
-</section>
-
-<!-- ===== OUTRAS MARCAS ===== -->
-<section class="bloco" id="outras">
-  <h2 class="sec"><span class="n">13.3.2 d-g</span> Perigo isolado · águas seguras · especiais · novos perigos</h2>
-  <p class="lede">As quatro marcas restantes — decore cor, marca de tope e ritmo.</p>
-
-  <table>
-    <tr><th>Marca</th><th>Cor</th><th>Marca de tope</th><th>Luz</th></tr>
-    <tr><td><strong>Perigo Isolado</strong> (sobre o perigo)</td><td>Preta c/ faixas <span class="hl">encarnadas</span></td><td><span class="hl">2 esferas pretas</span> (obrigatória)</td><td>Branca, <strong>Gp Lampejos (2)</strong></td></tr>
-    <tr><td><strong>Águas Seguras</strong> (meio de canal, aterragem)</td><td>Listras <span class="hl">verticais</span> encarnadas e brancas</td><td>1 esfera encarnada</td><td>Branca — Isofásica, ocultação, lampejo longo/10s ou <strong>Morse "A" (·−)</strong></td></tr>
-    <tr><td><strong>Especiais</strong> (ODAS, dutos, áreas)</td><td><span class="hl">Amarela</span></td><td><span class="hl">X amarelo</span></td><td>Amarela (ODAS = Lp(5) 20s)</td></tr>
-    <tr><td><strong>Novos Perigos</strong></td><td>Listras <span class="hl">azul e amarela</span> alternadas</td><td>Cruz amarela</td><td>Azul + amarela alternadas</td></tr>
-  </table>
-
-  <div class="box key">
-    <h4>Detalhes que a banca explora <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
-    <p><strong>Perigo isolado:</strong> tem <span class="hl">águas navegáveis em toda a volta</span> (é a definição). <strong>Novos perigos:</strong> pelo menos um sinal deve ser <span class="hl">duplicado</span> (idêntico ao par); a luz tem característica de cardinal ou lateral, rápida/muito rápida; pode-se usar um <strong>Racon transmitindo "D" (−··)</strong>, mostrando 1 milha náutica na tela do radar; comunica-se ao <strong>CHM</strong> e ao Agente da Autoridade Marítima.</p>
-  </div>
-</section>
-
-<!-- ===== MAPA DA BANCA ===== -->
-<section class="bloco" id="banca">
-  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
-  <p class="lede">Capítulo muito cobrado: alcance geográfico e balizamento IALA em todas as provas.</p>
-
-  <table>
-    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
-    <tr><td>2006</td><td><strong>Q58</strong></td><td>Elevação do observador adotada nas cartas DHN (alcance geográfico)</td><td class="center"><b>(b)</b> 5 m ✔ OCR</td></tr>
-    <tr><td>2008</td><td><strong>Q32</strong></td><td>Sinalização de novo perigo (naufrágio)</td><td class="center"><b>(e)</b> duplicar ✔ OCR</td></tr>
-    <tr><td>2011 · Amarela</td><td><strong>Q19</strong></td><td>Cenário IALA (Região B) — laterais, perigo isolado, cardinal Oeste</td><td class="center"><b>(d)</b> deduzido</td></tr>
-    <tr><td>2012 · Rosa</td><td>—</td><td>Fatores do alcance geográfico de um farol</td><td class="center"><b>(c)</b> deduzido</td></tr>
-  </table>
-
-  <div class="box key">
-    <h4>2011-Q19 resolvida — o cenário IALA <span class="tag t-banca">BANCA</span></h4>
-    <p>Verde cilíndrico (17h43) = lateral de <strong>bombordo</strong> (Região B). Encarnado c/ faixa verde (17h57) = preferencial a <strong>bombordo</strong> (não a boreste → (a) falso). 2 esferas pretas (18h07) = <strong>perigo isolado</strong>, que TEM águas navegáveis ao redor (→ (b) falso; (e) falso: sua luz é branca Fl(2), não encarnada). Luz branca Gp(9) rápidos/15s (18h12) = <strong>cardinal Oeste</strong> → de dia é <span class="hl">amarelo com faixa larga preta no meio</span>. Gabarito <b>(d)</b>.</p>
-  </div>
-
-  <div class="box trap">
-    <h4>Distratores clássicos <span class="tag t-conflito">DECORAR</span></h4>
-    <p>• <strong>Brasil = Região B</strong>: boreste encarnado, bombordo verde. • <strong>Alcance geográfico</strong> = curvatura (altura do farol + do observador), não intensidade. • <strong>DHN registra o MENOR</strong> dos dois alcances; observador a <strong>5 m</strong>. • <strong>Perigo isolado tem águas navegáveis ao redor</strong>. • Novo perigo: Racon <strong>"D"</strong>, sinal <strong>duplicado</strong>. • Cardinal: nome = por onde passar.</p>
-  </div>
-</section>
-
-<!-- ===== FLASHCARDS ===== -->
-<section class="bloco" id="flash">
-  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
-  <p class="lede">Toque para virar. Luzes, alcances e as marcas IALA.</p>
-  <div class="fcgrid" id="fcGrid"></div>
-</section>
-
-<!-- ===== QUIZ ===== -->
-<section class="bloco" id="quiz">
-  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
-  <p class="lede">Doze questões — as quatro reais (2006/2008/2011/2012) incluídas.</p>
-  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
-  <div class="quiz" id="quizBox">
-    <div class="q" id="qText"></div>
-    <div id="qOpts"></div>
-    <div class="fb" id="qFb"></div>
-    <div class="nav">
-      <span id="qCount"></span>
-      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PSCPP ===== -->
-<details class="pscpp" id="pscpp" open>
-  <summary>Pontos PSCPP — Auxílios à Navegação e Balizamento IALA (Miguens Cap. 13)</summary>
-  <ul>
-    <li><b>Luzes:</b> onidirecional · direcional · de setor · de alinhamento. Característica = ritmo + cor. Ocultação (obscuridade &lt; luz) · Isofase (iguais) · Lampejo (luz &lt; obscuridade).</li>
-    <li><b>Setores:</b> limites por marcações verdadeiras do LARGO (mar→sinal), horário — com que o navegante avista o farol.</li>
-    <li><b>Alcances:</b> Luminoso (candelas + visibilidade) · Nominal (visibilidade padrão 10 mn) · Geográfico (curvatura: altura do farol + do observador). D = 1,93(√H + √h). DHN: observador 5 m; registra o MENOR dos dois.</li>
-    <li><b>IALA — só laterais mudam.</b> Região A (Europa/África/Ásia/Oceania) × Região B (Américas, Japão, Coreia do Sul, Taiwan, Filipinas). <b>Brasil = B.</b> Direção convencional: vindo do mar (rio: subindo).</li>
-    <li><b>Região B:</b> Bombordo = VERDE (cilindro); Boreste = ENCARNADO (cone). Preferencial: faixa horizontal da cor oposta + Gp Lampejos Compostos (2+1).</li>
-    <li><b>Cardinais:</b> nome = quadrante por onde passar. 2 cones (tope, obrigatório): N ↑↑, S ↓↓, E base-a-base, W ponta-a-ponta. Cor branca; Oeste = amarelo c/ faixa preta, Q(9)/15s.</li>
-    <li><b>Perigo Isolado:</b> preto c/ faixas encarnadas; 2 esferas pretas; luz branca Fl(2); TEM águas navegáveis ao redor.</li>
-    <li><b>Águas Seguras:</b> listras VERTICAIS encarnadas/brancas; 1 esfera encarnada; Morse "A" (·−). <b>Especiais:</b> amarela; X amarelo; ODAS Lp(5)20s.</li>
-    <li><b>Novos Perigos:</b> listras azul/amarela; cruz amarela; ao menos 1 sinal duplicado; Racon "D" (−··) = 1 mn no radar; avisar CHM + Agente da Autoridade Marítima.</li>
-    <li><b>Banca:</b> 2006-Q58 (observador 5 m, gab b) · 2008-Q32 (novo perigo duplicado, gab e) · 2011-Q19 (cenário IALA / cardinal Oeste, gab d) · 2012 (alcance geográfico = altura do farol + do observador, gab c).</li>
-  </ul>
-</details>
-
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">PSCPP 2027 · Navegação — Miguens · Consulta rápida</p>
+  <h1>Auxílios à <em>Navegação</em></h1>
+  <p class="sub">Consulta rápida do Cap. 13: auxílios visuais, faróis, boias e balizas, balizamento, luzes e alcances, Sistema IALA (Região B), sinalização fluvial e de pontes, Lista de Faróis, AIS AtoN e características das luzes.</p>
+  <div class="src"><b>Fonte:</b> Miguens, Manual de Navegação da MB, Vol. I — Cap. 13 (DHN, 2ª Revisão, 2023). Consulta rápida; o caderno de leitura completo é o DOCX.</div>
+</div></header>
+<nav class="toc"><div class="wrap"><div class="busca"><input id="q" type="search" placeholder="Buscar neste caderno (ex.: ocultação, cardinal, alcance)…" aria-label="Buscar neste caderno"><span id="qn"></span></div><div class="row"><a href="#s0">13.1</a><a href="#s1">13.2</a><a href="#s2">13.3</a><a href="#s3">13.4</a><a href="#s4">13.5</a><a href="#s5">13.6</a><a href="#s6">Apêndice A</a><a href="#s7">Apêndice B</a><a href="#s8">Glossário</a></div></div></nav>
+<main><div class="wrap">
+<div class="legend"><b>Como usar:</b> consulta rápida do capítulo — definições completas do livro, listas de opções, quadros e cálculos. O texto integral com os seus destaques está no DOCX <b>Miguens_Vol1_Cap13_Destaques_PSCPP.docx</b>.
+<span class="tag t-cob">COBRADO</span> = assunto já cobrado em prova · <span class="hl">amarelo</span> = seu destaque no PDF · <span class="dot">●</span> = seu ponto vermelho ·
+<span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span> <span class="tag t-conflito">CONFLITO</span> = divergência no livro. No glossário: ★ seu destaque · ● cobrado · ○ só menção. A busca aceita palavras sem acento.</div>
+<section class="bloco" id="s0"><h2 class="sec"><span class="n">13.1</span><span class="tt">Importância e classificação dos auxílios à navegação</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Auxílio à navegação</h4><p>É um dispositivo, sistema ou serviço externo à embarcação, estabelecido para auxiliar o navegante a determinar sua posição e rumo, alertar sobre os eventuais perigos à navegação existentes na sua derrota e demarcar os limites dos canais de navegação.</p></div><div class="def srch"><h4>Auxílios à navegação — as 3 categorias <span class="tag t-cob">COBRADO</span></h4><p>Dentro da categoria de auxílios à navegação, incluem-se os auxílios visuais, sonoros e radioelétricos:</p><ul><li><b>Visuais</b> — destinados a possibilitar a orientação ou o posicionamento do navegante, ou a transmitir-lhe determinada informação, por sua forma, cor e/ou luz emitida. Podem ser luminosos (de dia e de noite) ou cegos (apenas durante o dia).</li><li><b>Sonoros</b> — dotados de algum tipo de equipamento acústico (apito, sino, gongo, sirene ou buzina de cerração), para situações de visibilidade restrita. No Brasil, estão em desuso em virtude do uso do radar por quase todos os navios; entretanto, são usados na sinalização de plataformas de perfuração e exploração submarina.</li><li><b>Radioelétricos</b> — sistemas eletrônicos que possibilitam a orientação ou o posicionamento do navio mediante o emprego de ondas de rádio. Ex.: AIS AtoN; VTS (Vessel Traffic Service), serviço de monitorização ativa do tráfego aquaviário.</li></ul></div><div class="def srch"><h4>Sinal náutico</h4><p>É um auxílio visual à navegação, construído pelo homem e externo à embarcação, estabelecido para transmitir informações ao navegante, de forma a possibilitar-lhe um posicionamento seguro, podendo ser uma estrutura fixa ou flutuante, com formas e cores legalmente definidas, dotada ou não de equipamento luminoso e de artefatos visuais, destinada a indicar uma posição geográfica e transmitir uma informação específica ao navegante.</p></div><div class="def srch"><h4>Sinalização náutica</h4><p>É o conjunto de sinais náuticos visuais, fixos ou flutuantes, externos à embarcação, especificamente estabelecidos com o propósito de garantir uma navegação segura e econômica nas vias navegáveis.</p></div></div></section><section class="bloco" id="s1"><h2 class="sec"><span class="n">13.2</span><span class="tt">Auxílios visuais à navegação</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Tipos de auxílios visuais</h4><p>Os principais tipos de auxílios visuais são:</p><ul><li><b>Luminosos</b>: faróis, faroletes, luzes de alinhamento, boias luminosas, balizas articuladas e barcas-faróis; e</li><li><b>Cegos</b>: boias cegas e balizas.</li><li>A boia de amarração <b>não</b> é considerada um auxílio à navegação (IALA).</li></ul></div><div class="def srch"><h4>Farol</h4><p>Auxílios à navegação constituídos por uma estrutura fixa, de forma e cores distintas, montados em pontos de coordenadas geográficas conhecidas na costa ou em ilhas oceânicas, bancos, rochedos, recifes ou margens de rios, dotados de equipamento luminoso exibindo luz com característica predeterminada, com <b>alcance luminoso noturno maior que 10 milhas náuticas</b>. Os componentes essenciais de um farol são a estrutura e o aparelho de luz.</p></div><div class="def srch"><h4>Faróis quanto à finalidade</h4><p>Classificação dos faróis quanto à sua finalidade:</p><ul><li><b>Faróis de aterragem</b>: destinados ao reconhecimento e demanda de um determinado porto e à correção da posição dos navios que vêm de alto-mar; reconhecidos a uma distância superior a 20 milhas (ex.: Natal, Olinda, Rasa, Moela).</li><li><b>Faróis de cabotagem</b>: destinados à navegação costeira, situados em pontos que o navegante tem interesse em reconhecer, como cabos, pontas e ilhas.</li><li><b>Farol principal de porto</b>: constitui o principal auxílio visual à demanda do porto, depois do farol de aterragem (ex.: Santa Cruz é o principal do porto do Rio; Rasa é o de aterragem).</li><li>Outras classificações: farol de alinhamento e farol de balizamento.</li></ul></div><div class="def srch"><h4>Faróis quanto ao regime de funcionamento</h4><p>Classificação dos faróis quanto ao regime de funcionamento:</p><ul><li><b>Faróis guarnecidos</b>: dispõem, permanentemente, de pessoal em suas instalações; indicados pelo símbolo “<b>G</b>” na Lista de Faróis — essa notação se limita à Lista de Faróis, não sendo utilizada nas cartas náuticas.</li><li><b>Faróis automáticos</b>: operam automaticamente, condição indicada nas cartas náuticas pela abreviatura <b>(SG)</b> – “Sem Guarnição”.</li></ul></div><div class="def srch"><h4>Farolete</h4><p>Auxílios visuais à navegação providos de estrutura fixa, montada em um ponto de coordenadas geográficas conhecidas, encimada por um equipamento luminoso exibindo luz dotada de característica predeterminada, com <b>alcance luminoso noturno menor ou igual a 10 milhas náuticas</b>. A distinção entre faróis e faroletes é apenas convencional.</p></div><div class="def srch"><h4>Luzes de alinhamento (sinal)</h4><p>São sinais fixos (faróis, faroletes ou balizas) usados aos pares, para assinalar a direção de um canal ou da entrada de um porto. O sinal mais próximo é chamado de <b>anterior</b> e o mais afastado de <b>posterior</b>; o posterior é de maior altitude. A aplicação mais comum é marcar a linha central ou eixo de um canal. Requisitos: as formas das estruturas dos sinais e suas pinturas devem ser iguais ou se completarem; e as luzes devem ter a mesma cor.</p></div><div class="def srch"><h4>Sensibilidade lateral</h4><p>Propriedade pela qual o navegante percebe uma alteração transversal da posição do seu navio, em relação ao alinhamento. É medida pela rapidez com que os sinais do alinhamento se afastam lateralmente, um em relação ao outro, quando o navio se movimenta transversalmente no canal. Considera largura (W) e comprimento (C) do canal e distância ao sinal anterior (D); define a distância entre os sinais (R) e a diferença de altura entre eles.</p></div><div class="def srch"><h4>Boia</h4><p>É um corpo flutuante de dimensões, formas e cores definidas, estabelecida em posição geográfica determinada, fundeada por meio de equipamento de fundeio específico, dotada ou não de equipamento luminoso, sonoro ou radioelétrico, encimada ou não por marca de tope. Luminosas ou cegas, destinam-se a orientar a navegação de dia e de noite, ou apenas no período diurno. Refletor radar e AIS <b>não</b> são obrigatórios. Não se deve navegar pelas boias, e elas não devem ser utilizadas como referência para obtenção de LDP.</p></div><div class="def srch"><h4>Marca de tope</h4><p>Figuras geométricas colocadas no tope das boias, que, por sua forma, cor e combinação, permitem identificar, durante o dia, o propósito do sinal.</p></div><div class="def srch"><h4>Boia articulada</h4><p>É um sinal luminoso, estabelecido em posição geográfica determinada, constituído por uma estrutura tubular longa, dotada de corpo de flutuação submerso, e de plataforma em sua extremidade superior, destinada à instalação de equipamentos de sinalização; fundeada por meio de uma poita e ligada a esta por articulação “Cardan” ou similar. Poderá ainda ser dotada de marca de tope.</p></div><div class="def srch"><h4>Barca-farol</h4><p>Plataforma flutuante de grande porte fundeada em posição geográfica preestabelecida, com propulsão própria ou não, guarnecida ou não, constituída essencialmente de uma torre encimada por um equipamento luminoso cujo alcance luminoso seja superior a dez milhas náuticas. Empregadas para assinalar um perigo isolado em mar aberto; com a criação de Zonas de Separação de Tráfego, o seu emprego vem renascendo.</p></div><div class="def srch"><h4>LANBY / LNB</h4><p>Boias gigantes ou superboias (Large Automatic Navigational Buoy / Large Navigational Buoys), com 10 metros, ou mais, de diâmetro, que podem ser dotadas de RACON e AIS AtoN. As LANBY são mais convenientes para áreas menos expostas e mares moderados, enquanto as barcas-faróis são mais apropriadas para mar aberto. No Brasil, não há barcas-faróis nem LANBY em operação.</p></div><div class="def srch"><h4>Baliza</h4><p>É um sinal visual fixo, cego, constituído de uma haste, com pintura de cor ou cores determinadas, fabricado em ferro, madeira ou outro material, <b>encimado obrigatoriamente por marca de tope</b> característica da informação que deve transmitir ao navegante, dotado ou não de refletor radar, estabelecido em águas rasas, sobre pedras, bancos ou recifes ou fixados em terra. A baliza articulada é também sinal cego, com marca de tope obrigatória.</p></div><div class="def srch"><h4>Balizamento</h4><p>É o conjunto de balizas, boias, barcas-faróis, objetos naturais ou artificiais, padronizados ou não, e de faróis e faroletes de responsabilidade da MB ou de entidades extra-MB que concorrem para a garantia da segurança da navegação em uma região ou área perfeitamente definida.</p></div><div class="def srch"><h4>Classificações do balizamento</h4><p>Os balizamentos podem ser classificados segundo vários critérios:</p><ul><li><b>Fixo</b> (faroletes e balizas) × <b>flutuante</b> (boias luminosas e boias cegas);</li><li><b>Cego</b> (balizas e boias cegas) × <b>luminoso</b> (faroletes e boias luminosas);</li><li><b>Marítimo</b> (baías, enseadas, canal de acesso e bacia de evolução de portos e terminais) × <b>fluvial</b> (rios, lagos e lagoas; regras próprias, em complemento às do marítimo).</li></ul></div><div class="def srch"><h4>Direção convencional do balizamento <span class="tag t-cob">COBRADO</span></h4><p>Aquela assumida pelo navegante que, vindo do mar, demanda uma baía, enseada, porto, estuário, lagoa ou rio. Os sinais seguem essa direção, exceto os faróis e as luzes de alinhamento.</p><ul><li>Lagos não associados a rios: sentido <b>Norte/Sul verdadeiro</b>;</li><li>Rios não associados a baía, enseada ou estuário marítimos: sempre <b>da foz para a nascente</b>;</li><li>No Brasil: sempre vindo do mar e, na navegação fluvial, <b>subindo o rio</b> (de jusante para montante).</li></ul></div><div class="def srch"><h4>Identificação dos sinais</h4><p>Os sinais de auxílio à navegação são identificados:</p><ul><li>durante o <b>período diurno</b>: pela cor, pela forma que se apresenta ao navegante, pela marca de tope e pela numeração, se houver; e</li><li>durante o <b>período noturno</b>: pela característica luminosa.</li></ul></div><div class="def srch"><h4>Tipos de luz <span class="tag t-cob">COBRADO</span></h4><p>As luzes podem ser classificadas como:</p><ul><li><b>Luz onidirecional</b>: exibe ao navegante, em todo o seu entorno, uma mesma característica;</li><li><b>Luz direcional</b>: exibe, com um mesmo ritmo, em um setor bem estreito, uma cor definida para indicar uma direção, podendo ser flanqueada por setores de cores ou intensidades diferentes;</li><li><b>Luz de setor</b>: exibe, com um mesmo ritmo e diferentes cores, diferentes setores do horizonte; e</li><li><b>Luzes de alinhamento</b>: conjunto de dois sinais fixos, com luzes de mesma cor, que definem uma direção que coincide com o eixo de um canal, um rumo ou uma referência para manobra.</li></ul></div><div class="def srch"><h4>Característica</h4><p>É a aparência pela qual as luzes são identificadas, obtida pela combinação de seus principais aspectos: <b>ritmo e cor</b>. O ritmo é formado por uma determinada sequência de emissões luminosas e eclipses, de durações específicas e regularmente repetidos.</p></div><div class="def srch"><h4>Termos das luzes <span class="tag t-cob">COBRADO</span></h4><p>Termos gerais mais usados na prática:</p><ul><li><b>Período</b>: intervalo de tempo compreendido entre os inícios de dois ciclos sucessivos idênticos na característica de uma luz rítmica.</li><li><b>Fase</b>: cada um dos sucessivos aspectos de emissão luminosa (luz) ou de ausência (obscuridade), em um mesmo período.</li><li><b>Fase detalhada</b>: descrição, em termos de intervalos de tempo, da duração de cada uma das diversas fases que constituem um período.</li><li><b>Lampejo</b>: intervalo de luz em relação a outro de maior duração de ausência total de luz (obscuridade) em um mesmo período.</li><li><b>Eclipse</b>: intervalo de obscuridade entre dois sucessivos lampejos em um mesmo período.</li><li><b>Ocultação</b>: intervalo de obscuridade relativamente mais curto que o de luz em um mesmo período.</li><li><b>Isofase</b>: intervalo de tempo em que a luz e a obscuridade têm igual duração em um mesmo período.</li></ul></div><div class="def srch"><h4>Setor de visibilidade</h4><p>Os setores de visibilidade são descritos por marcações verdadeiras tomadas do largo (do mar para o sinal), no sentido horário. Ou seja, as marcações que limitam o setor de visibilidade são as marcações com que o navegante avista o farol (e não as marcações com que o faroleiro avistaria o navio). Setores coloridos podem indicar a direção de um perigo ou a passagem livre entre perigos.</p></div><div class="def srch"><h4>Alcances de uma luz <span class="tag t-cob">COBRADO</span></h4><p>Os três alcances dos auxílios visuais:</p><ul><li><b>Alcance luminoso</b>: é a maior distância em que uma luz pode ser vista, meramente em função de sua intensidade luminosa e da visibilidade meteorológica média da região (Diagrama de Alcance Luminoso).</li><li><b>Alcance nominal</b>: é o alcance de uma luz a uma atmosfera homogênea na qual a visibilidade meteorológica é de <b>10 milhas náuticas</b>, para um observador de vista normal, sob condições normais de contraste.</li><li><b>Alcance geográfico</b>: é a maior distância na qual uma luz pode ser vista, levando-se em conta unicamente a curvatura da Terra, com a elevação da fonte luminosa e a altura do olho do observador sobre o nível do mar. D = 1,93 (√H + √h).</li><li>Nas cartas, a DHN registra apenas o <b>menor</b> entre os dois alcances (luminoso e geográfico). Faróis de aterragem: alcance luminoso no mínimo igual ao geográfico.</li></ul></div><div class="def srch"><h4>Visibilidade meteorológica (V)</h4><p>É a maior distância da qual um objeto negro, de dimensões adequadas, pode ser visto e reconhecido durante o dia, contra o céu no horizonte, desde que a iluminação do ambiente esteja no mesmo nível que a normal diurna. Expressa em milhas náuticas.</p></div><div class="def srch"><h4>Intensidade luminosa</h4><p>É o fluxo luminoso que parte de uma fonte luminosa, em uma dada direção, geralmente expresso em candelas (cd), cujo valor é informado na coluna 4 da Lista de Faróis.</p></div><div class="def srch"><h4>Fatores da visibilidade no mar</h4><p>A visibilidade no mar é função, entre outros, dos seguintes fatores:</p><ul><li>a altitude do observador e do objeto visado;</li><li>a refração atmosférica;</li><li>a transparência da atmosfera;</li><li>as condições inerentes ao objeto; e</li><li>a capacidade visual do observador.</li><li>No caso de corpos que emitem luz, como os faróis, também da intensidade e da cor da luz emitida.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Faróis e faroletes</h4><div class="tw"><table><thead><tr><th>Critério</th><th>Classes</th><th>Chave</th></tr></thead><tbody><tr class="srow"><td>Farol × farolete</td><td>Farol: alcance luminoso noturno <b>&gt; 10 milhas</b> · farolete: <b>≤ 10 milhas</b></td><td>Distinção apenas convencional</td></tr><tr class="srow"><td>Finalidade</td><td>Aterragem · cabotagem · principal de porto (também alinhamento e balizamento)</td><td>Aterragem: reconhecido a <b>&gt; 20 milhas</b>; Rio: Rasa (aterragem) × Santa Cruz (principal de porto)</td></tr><tr class="srow"><td>Regime</td><td>Guarnecido · automático</td><td>“<b>G</b>” só na Lista de Faróis · “<b>(SG)</b>” na carta</td></tr><tr class="srow"><td>Componentes essenciais</td><td>Estrutura e aparelho de luz</td><td>Aparelho = fonte + ótica + acessório de ritmo</td></tr></tbody></table></div></div><div class="box quad srch-t"><h4 class="qt">Sinais fixos e flutuantes: o que cada um é</h4><div class="tw"><table><thead><tr><th>Sinal</th><th>Luminoso/cego</th><th>Marca de tope</th><th>Ponto-chave</th></tr></thead><tbody><tr class="srow"><td>Boia luminosa / cega</td><td>Luminosa ou cega</td><td>Pode ter</td><td>Não navegar pelas boias; não usar para LDP; refletor radar e AIS não obrigatórios</td></tr><tr class="srow"><td>Boia articulada</td><td><b>Luminosa</b></td><td>“Poderá” ter</td><td>Tubo longo, flutuação submersa, Cardan na poita</td></tr><tr class="srow"><td>Baliza</td><td><b>Cega</b></td><td><b>Obrigatória</b></td><td>Haste fixa em águas rasas ou em terra; painéis no fluvial</td></tr><tr class="srow"><td>Baliza articulada</td><td><b>Cega</b></td><td><b>Obrigatória</b></td><td>Limita canais estreitos sem o giro da boia</td></tr><tr class="srow"><td>Barca-farol</td><td>Luminosa (&gt; 10 milhas)</td><td>—</td><td>Perigo isolado em mar aberto; volta com as ZST</td></tr><tr class="srow"><td>LANBY / LNB</td><td>Luminosa</td><td>—</td><td>≥ 10 m de diâmetro; mares moderados, áreas menos expostas</td></tr><tr class="srow"><td>Boia de amarração</td><td>—</td><td>—</td><td><b>Não</b> é auxílio à navegação (IALA)</td></tr></tbody></table></div></div><div class="box quad srch-t"><h4 class="qt">Direção convencional do balizamento</h4><div class="tw"><table><thead><tr><th>Situação</th><th>Direção convencional</th></tr></thead><tbody><tr class="srow"><td>Regra geral (IALA, NORMAM-17)</td><td>Navegante que, <b>vindo do mar</b>, demanda baía, enseada, porto, estuário, lagoa ou rio</td></tr><tr class="srow"><td>Rio (fluvial)</td><td><b>Subindo o rio</b>: de jusante para montante; da foz para a nascente</td></tr><tr class="srow"><td>Lago não associado a rio</td><td>Sentido <b>Norte/Sul verdadeiro</b></td></tr><tr class="srow"><td>Exceções</td><td>Faróis e luzes de alinhamento não seguem a direção convencional</td></tr></tbody></table></div><p class="foot">Distrator cobrado: “de montante para jusante” está errado; o certo é de jusante para montante.</p></div><h3>13.2.5 Luzes de auxílio à navegação</h3><div class="box quad srch-t"><h4 class="qt">Termos das luzes (e as trocas cobradas em prova)</h4><div class="tw"><table><thead><tr><th>Termo</th><th>Definição do livro</th><th>Troca típica em prova (falsa)</th></tr></thead><tbody><tr class="srow"><td>Luz direcional</td><td>Mesmo ritmo, <b>setor bem estreito</b>, cor definida para indicar uma direção</td><td>Chamar isso de “luz de setor”</td></tr><tr class="srow"><td>Luz de setor</td><td>Mesmo ritmo, <b>cores diferentes em setores diferentes</b> do horizonte</td><td>—</td></tr><tr class="srow"><td>Característica</td><td>Ritmo + cor</td><td>—</td></tr><tr class="srow"><td>Período</td><td>Entre os <b>inícios de dois ciclos</b> sucessivos idênticos</td><td>Chamar isso de “fase”</td></tr><tr class="srow"><td>Fase</td><td>Cada aspecto (luz ou obscuridade) dentro do período</td><td>—</td></tr><tr class="srow"><td>Eclipse</td><td>Obscuridade entre dois lampejos</td><td>—</td></tr><tr class="srow"><td>Ocultação</td><td>Obscuridade <b>mais curta que a luz</b></td><td>Definição correta (cobrada)</td></tr><tr class="srow"><td>Isofase</td><td>Luz e obscuridade de igual duração</td><td>—</td></tr><tr class="srow"><td>Luz de ocultação (Ap. A)</td><td>Soma das <b>fases de luz</b> mais longa que a dos eclipses; eclipses iguais</td><td>Trocar por “soma dos eclipses mais longa que a dos lampejos”</td></tr></tbody></table></div></div><h3>13.2.6 Alcances dos auxílios visuais</h3><div class="box quad srch-t"><h4 class="qt">Os três alcances</h4><div class="tw"><table><thead><tr><th>Alcance</th><th>Depende de</th><th>Onde se obtém</th></tr></thead><tbody><tr class="srow"><td>Luminoso</td><td>Intensidade (cd) + visibilidade meteorológica (V) ou transparência (T)</td><td>Diagrama de Alcance Luminoso (Lista de Faróis, Fig. 13.10)</td></tr><tr class="srow"><td>Nominal</td><td>Luminoso com V = <b>10 milhas</b> (atmosfera homogênea, vista normal)</td><td>Definição padrão</td></tr><tr class="srow"><td>Geográfico</td><td>Curvatura da Terra + altitude da luz + altura do olho</td><td>Tabela de Alcance Geográfico; D = 1,93 (√H + √h)</td></tr><tr class="srow"><td>Na carta</td><td><b>O menor</b> entre luminoso e geográfico</td><td>Primeira distância em que o sinal pode ser avistado</td></tr></tbody></table></div><p class="foot">Farol de aterragem: alcance luminoso ≥ geográfico. Nos outros casos, o luminoso pode ser menor. Lista de Faróis: luminoso com T = 0,85 (V = 18,4 milhas); geográfico com olho a 5 m.</p></div><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Alcance geográfico — fórmula e exemplos do livro</h4><ul class="steps"><li><b>D = 1,93 (√H + √h)</b> — D em milhas; H = altitude do olho do observador (m); h = altitude da luz/objeto (m). Na prática: <b>D = 2 (√H + √h)</b>. Só o horizonte: D = 1,93 √H.</li><li class="sub">Olho 7 m, foco 60 m: 1,93 × (2,646 + 7,746) = 1,93 × 10,392 = <b>20,0 milhas</b>. — do livro (pela tabela)</li><li class="sub">Olho 15 m, objeto 42 m: tabela com interpolação = <b>19,93 milhas</b> (fórmula: 1,93 × 10,354 = 19,98). — do livro</li><li class="sub">Olho 9 m, objeto 16 m: tabela = <b>13,5 milhas</b>; fórmula simplificada 2 × (3 + 4) = 14 milhas. — do livro (Ap. B)</li><li class="sub">Cabo Frio, foco 140 m, olho 5 m: 1,93 × (2,236 + 11,832) = 27,2 → Lista de Faróis: <b>27 milhas</b> (arredonda para o inteiro inferior). — conferido com a Fig. 13.36</li><li>Alcance luminoso (diagrama): Ilha do Boi nº 1, 10.050 cd, V = 10 milhas → <b>14 milhas</b> · Cabo Frio, 5.696.000 cd, T = 0,85 → <b>49 milhas</b> · Santa Cruz, 3.066 cd, V = 10 milhas (T = 0,74) → <b>9,5 milhas</b>. — do livro</li><li>Na carta, Cabo Frio aparece com o menor dos dois: 27 milhas (geográfico) &lt; 49 milhas (luminoso).</li></ul></div></section><section class="bloco" id="s2"><h2 class="sec"><span class="n">13.3</span><span class="tt">Sistema de Balizamento Marítimo da IALA</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Finalidades do balizamento</h4><p>O balizamento destina-se a:</p><ul><li>demarcar os limites de canais navegáveis e áreas de manobra;</li><li>indicar águas seguras;</li><li>alertar sobre a presença e indicar a posição de perigos à navegação; e</li><li>indicar a presença de cabos ou canalizações submarinos e outras áreas especiais.</li></ul></div><div class="def srch"><h4>Sistema IALA — o que indica</h4><p>O Sistema de Balizamento Marítimo da IALA apresenta normas que se aplicam a todos os sinais do balizamento, fixos e flutuantes, servindo para indicar:</p><ul><li>os limites laterais de canais navegáveis;</li><li>perigos naturais e outras obstruções, tais como cascos soçobrados;</li><li>outras áreas ou peculiaridades importantes para o navegante; e</li><li>novos perigos (perigos ainda não cartografados).</li></ul></div><div class="def srch"><h4>Tipos de sinais IALA (6) <span class="tag t-cob">COBRADO</span></h4><p>O sistema de balizamento possui diferentes tipos de sinais, que podem ser usados de forma combinada:</p><ul><li><b>Sinais Laterais</b>: associados a uma “direção convencional do balizamento”, geralmente usados em canais bem definidos; indicam bombordo e boreste da rota a ser seguida. Onde um canal se bifurca, um sinal lateral modificado pode ser usado para indicar a via preferencial. Diferem entre as Regiões A e B.</li><li><b>Sinais Cardinais</b>: associados ao da agulha de navegação; indicam o setor (quadrante) onde se poderá encontrar águas navegáveis.</li><li><b>Sinais de Perigo Isolado</b>: indicam perigos isolados de tamanho limitado, cercados por águas navegáveis.</li><li><b>Sinais de Águas Seguras</b>: indicam que em torno de sua posição as águas são navegáveis; por exemplo, sinais de meio de canal ou sinais de aterragem.</li><li><b>Sinais Especiais</b>: objetivo principal não é orientar a navegação, mas indicar uma área ou peculiaridade mencionada em documentos náuticos.</li><li><b>Novos Perigos</b>: sinalizam um novo perigo à navegação ainda não representado em documentos náuticos.</li></ul></div><div class="def srch"><h4>Caracterização de um sinal</h4><p>O significado de um sinal depende de uma ou mais das seguintes particularidades:</p><ul><li>à noite, <b>cor e ritmo da luz</b>; e</li><li>de dia, <b>cor, formato e marca de tope</b>.</li></ul></div><div class="def srch"><h4>Regiões de balizamento A e B <span class="tag t-cob">COBRADO</span></h4><p>Existem duas Regiões Internacionais de Balizamento, A e B, onde os sinais laterais diferem. Sistema A: encarnado para sinalizar o lado de bombordo; Sistema B: encarnado para marcar o lado de boreste. A Região A abrange Europa, África, Ásia (em sua grande maioria) e Oceania; a Região B abrange as Américas do Norte, Central e do Sul, Japão, Coreia do Sul, Taiwan e Filipinas. O Brasil optou pela Região “B” (Decreto nº 92.267, de 3 de janeiro de 1986).</p></div><div class="def srch"><h4>Sinal cardinal <span class="tag t-cob">COBRADO</span></h4><p>Os quatro quadrantes (Norte, Leste, Sul e Oeste) são limitados pelas marcações verdadeiras NW–NE, NE–SE, SE–SW, SW–NW, tomadas a partir do ponto de referência. Um sinal Cardinal recebe o nome do quadrante no qual se encontra; o nome indica o quadrante em que o navegante deve passar, em relação à posição do sinal. A marca de tope (2 cones) é sempre obrigatória.</p><ul><li>Uso: para indicar que as águas mais profundas numa área se encontram no lado (quadrante) que tem o nome do sinal; e</li><li>para indicar o lado seguro para passar um perigo, especialmente em mar aberto.</li></ul></div><div class="def srch"><h4>Sinal de perigo isolado <span class="tag t-cob">COBRADO</span></h4><p>É aquele construído sobre, fundeado sobre ou junto de um perigo isolado de dimensões relativamente pequenas, que tenha <b>águas navegáveis em toda a sua volta</b>. Marca de tope (2 esferas pretas) obrigatória; luz branca, grupo de lampejos (2).</p></div><div class="def srch"><h4>Sinal de águas seguras</h4><p>Serve para indicar a existência de águas navegáveis em todo o seu entorno, o meio de um canal, um ponto de aterragem ou um ponto de espera. Listras verticais encarnadas e brancas; luz branca isofásica, de ocultação, lampejo longo a cada 10 s ou Morse “A”.</p></div><div class="def srch"><h4>Sinal especial <span class="tag t-cob">COBRADO</span></h4><p>Sinais cujo objetivo não é orientar a navegação, mas indicar uma área ou característica especial, mencionada nos documentos náuticos apropriados (ODAS, separação de tráfego, despejos, exercícios militares, cabo ou tubulação submarino, recreação, usinas hidrelétricas, fundeio, obras, energias renováveis offshore, áreas aquícolas etc.). Amarelo, tope em “X”, luz amarela.</p><ul><li>Ritmos possíveis: grupo de ocultação; lampejo simples, <b>exceto lampejo longo a cada dez segundos</b>; grupo de 4, 5 ou excepcionalmente 6 lampejos; grupo composto; ou Morse, <b>com exceção das letras “A” e “U”</b>;</li><li>Apenas em boias ODAS deve ser utilizada a luz amarela de grupo de cinco lampejos em período de vinte segundos: <b>Lp(5) A. 20s</b>.</li></ul></div><div class="def srch"><h4>Sinal de novo perigo <span class="tag t-cob">COBRADO</span></h4><p>Serve para indicar qualquer obstrução à navegação recentemente descoberta e ainda não indicada em documentos náuticos ou que ainda não tenha sido suficientemente divulgada. Os novos perigos incluem obstruções tais como: bancos de areia, rochas, cascos soçobrados e outros resultantes da ação do homem.</p><ul><li>sinalizado por iniciativa do responsável pelo balizamento local, que informa imediatamente o <b>CHM</b> e o <b>Agente da Autoridade Marítima</b>;</li><li>pelo menos um dos sinais usados deverá ser <b>duplicado</b>, idêntico ao seu par em todos os aspectos;</li><li>qualquer sinal luminoso deve ter a característica de sinal <b>cardinal ou lateral, rápida (R) ou muito rápida (MR)</b>;</li><li>poderá ser sinalizado por um Racon transmitindo a letra “<b>D</b>” (−··) em Morse, mostrando o comprimento de uma milha na tela do radar.</li></ul></div><div class="def srch"><h4>Numeração de balizamentos <span class="tag t-cob">COBRADO</span></h4><p>O critério adotado para a numeração do balizamento é o seguinte:</p><ul><li>a numeração dos vários canais e alinhamentos é independente entre si;</li><li>a numeração de canais é uma só para todo o balizamento, quer se trate de boias cegas, boias de luz ou faroletes;</li><li>o balizamento <b>encarnado recebe números ímpares</b> e o <b>verde números pares</b>; os alinhamentos são identificados por <b>letras</b>, em ordem alfabética;</li><li>a numeração será sucessiva e em ordem crescente; para os canais, a partir da entrada nos portos, e para os alinhamentos, a partir da boia mais próxima à entrada;</li><li>só deverão ser numeradas as que, de outro modo, não possam ser facilmente identificadas pelo navegante, ou referidas nas cartas e publicações.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Quadro <span class="tag t-decorar">DECORAR</span> — Sinais laterais: Região A × Região B (Brasil)</h4><div class="tw"><table><thead><tr><th></th><th>Bombordo</th><th>Boreste</th><th>Canal preferencial a boreste</th><th>Canal preferencial a bombordo</th></tr></thead><tbody><tr class="srow"><td>Região B — cor</td><td><b>Verde</b></td><td><b>Encarnado</b></td><td>Verde com faixa larga horizontal encarnada</td><td>Encarnado com faixa larga horizontal verde</td></tr><tr class="srow"><td>Região B — tope</td><td>Cilindro verde</td><td>Cone encarnado, vértice para cima</td><td>Cilindro verde</td><td>Cone encarnado, vértice para cima</td></tr><tr class="srow"><td>Região B — luz</td><td>Verde</td><td>Encarnada</td><td>Verde, Lp(2+1)</td><td>Encarnada, Lp(2+1)</td></tr><tr class="srow"><td>Região A — cor</td><td>Encarnado</td><td>Verde</td><td>Encarnado com faixa verde</td><td>Verde com faixa encarnada</td></tr><tr class="srow"><td>Formato (A e B)</td><td>Cilíndrico, pilar ou charuto</td><td>Cônico, pilar ou charuto</td><td>Cilíndrico, pilar ou charuto</td><td>Cônico, pilar ou charuto</td></tr><tr class="srow"><td>Ritmo</td><td>Qualquer, exceto Lp(2+1)</td><td>Qualquer, exceto Lp(2+1)</td><td>Lp(2+1)</td><td>Lp(2+1)</td></tr></tbody></table></div><p class="foot">Regra do sinal modificado: a <b>cor de fundo e o formato</b> dizem de que lado o sinal está; a <b>faixa</b> e o canal preferencial vão para o outro lado. Ex. B: encarnado com faixa verde = sinal de boreste, canal preferencial a <b>bombordo</b>.</p></div><div class="box quad srch-t"><h4 class="qt">Quadro <span class="tag t-decorar">DECORAR</span> — Cardinais, perigo isolado, águas seguras, especial e novo perigo</h4><div class="tw"><table><thead><tr><th>Sinal</th><th>Cor</th><th>Marca de tope</th><th>Luz (cor · ritmo)</th></tr></thead><tbody><tr class="srow"><td>Cardinal Norte</td><td>Preto sobre amarelo</td><td>2 cones pretos, vértices <b>para cima</b></td><td>Branca · MR contínua ou R contínua</td></tr><tr class="srow"><td>Cardinal Leste</td><td>Preto com faixa larga amarela</td><td>2 cones <b>base a base</b></td><td>Branca · MR(3) 5 s ou R(3) 10 s</td></tr><tr class="srow"><td>Cardinal Sul</td><td>Amarelo sobre preto</td><td>2 cones, vértices <b>para baixo</b></td><td>Branca · MR(6)+LpL 10 s ou R(6)+LpL 15 s</td></tr><tr class="srow"><td>Cardinal Oeste</td><td><b>Amarelo com faixa larga preta</b></td><td>2 cones <b>ponta a ponta</b></td><td>Branca · MR(9) 10 s ou <b>R(9) 15 s</b></td></tr><tr class="srow"><td>Perigo isolado</td><td>Preto com faixa(s) larga(s) encarnada(s)</td><td>2 esferas pretas (<b>obrigatória</b>)</td><td>Branca · Lp(2)</td></tr><tr class="srow"><td>Águas seguras</td><td>Listras <b>verticais</b> encarnadas e brancas</td><td>1 esfera encarnada</td><td>Branca · Iso, Oc, LpL 10 s ou Mo(A)</td></tr><tr class="srow"><td>Especial</td><td>Amarela</td><td>“X” amarelo</td><td>Amarela · ver restrições abaixo</td></tr><tr class="srow"><td>Novo perigo</td><td>Listras verticais azul e amarela</td><td>Cruz amarela</td><td>Azul e amarela alternadas: 1 s azul, 0,5 s, 1 s amarela</td></tr></tbody></table></div><p class="foot">Cardinais: o nome é o quadrante <b>onde está o sinal</b> e por onde passar; marca de tope sempre <b>obrigatória</b>; ritmo pelo relógio: N contínuo, E 3 (3 h), S 6 + LpL (6 h), W 9 (9 h). Quadrantes limitados por NW–NE, NE–SE, SE–SW, SW–NW.</p></div><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Letras e ritmos reservados: “A” (·−) e LpL 10 s = <b>águas seguras</b>; “U” (··−) = <b>plataformas</b>; “D” (−··) = Racon de <b>novo perigo</b>; Lp(5) A. 20s = só <b>ODAS</b>; Lp(2+1) = canal preferencial; Lp(2) branca = perigo isolado. Por isso o sinal especial não pode usar LpL 10 s, Morse A nem U.</div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> No Brasil o <b>encarnado</b> (boreste) é <b>ímpar</b> e o <b>verde</b> (bombordo) é <b>par</b>. Nos EUA, também Região B, é o contrário: “red, right, returning”, com números pares no encarnado. Na prova vale o Miguens e a NORMAM-17. Exemplo no livro: Carta 1401 (Vitória e Tubarão), Fig. 13.22.</div></section><section class="bloco" id="s3"><h2 class="sec"><span class="n">13.4</span><span class="tt">Sinalização náutica complementar</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Sinalização náutica complementar</h4><p>Autorizada pelo Decreto nº 92.267/1986 (art. 2º), desde que aprovada pela DHN. Tem por finalidade atender a situações específicas dos balizamentos fluvial e lacustre, servindo ainda para indicar ao navegante as obras sobre águas (pontes, cais, píeres, molhes, enrocamentos, marinas, terminais, dolfins, plataformas, trapiches). É representada por <b>balizas com painéis de sinalização</b> (sinais fixos).</p></div><div class="def srch"><h4>Margem esquerda / margem direita <span class="tag t-cob">COBRADO</span></h4><p>Na sinalização fluvial, entende-se por margem esquerda a margem situada do lado esquerdo de quem <b>desce o rio</b>, navegando de montante para jusante. A margem direita, portanto, é a margem situada do lado direito de quem desce o rio.</p></div><div class="def srch"><h4>Montante / jusante</h4><p>A montante é o lugar que está mais próximo das cabeceiras de um rio; a nascente é o ponto mais a montante. A jusante indica o lado de baixo, o lado da foz; a foz é o lado mais a jusante de um rio.</p></div><div class="def srch"><h4>Cores dos painéis de sinalização <span class="tag t-cob">COBRADO</span></h4><p>O painel deverá exibir uma cor básica de fundo que ofereça o melhor contraste possível com o símbolo gráfico. As combinações previstas são:</p><ul><li>painel <b>laranja ou encarnado</b> – símbolo na cor preta (empregados exclusivamente em sinalização <b>diurna</b>, para contraste com fundo de vegetação);</li><li>painel na cor <b>branca</b> – símbolo na cor verde ou encarnada (empregados também como sinalização <b>noturna</b>; iluminados, permitem identificar a margem);</li><li>painel na cor <b>preta</b> – símbolo na cor amarela ou branca.</li></ul></div><div class="def srch"><h4>Sinais complementares do balizamento fluvial <span class="tag t-cob">COBRADO</span></h4><p>Sinais fixos de margem (Anexo C da NORMAM-17); cada um deve ser obedecido no trecho entre ele e o próximo sinal complementar de margem:</p><ul><li>Navegar junto à margem — painel quadrangular, duas faixas laterais e seta reta junto à margem de interesse;</li><li>Mudar de margem — duas faixas e seta curva de mesma cor, indicando a margem para a qual se deve seguir;</li><li>Navegar no meio do rio — duas faixas e seta entre elas;</li><li>Tráfego intenso entre as margens — cruz com o braço horizontal visivelmente mais fino;</li><li>Alinhamento — instalado em pares, em uma <b>mesma margem</b>, painel quadrangular com faixa central;</li><li>Quilometragem percorrida — painel retangular com “KM” e o número;</li><li>Redução de velocidade — letra “R”;</li><li>Fundeio proibido — âncora sob uma diagonal;</li><li>Altura máxima de passagem — triângulo com vértice para baixo e a altura em metros;</li><li>Bifurcação de canal — painel quadrangular <b>preto</b> com “Y” amarelo; o ramo mais largo é o canal principal;</li><li>Perigo isolado — dois “+” brancos em painéis circulares pretos.</li></ul></div><div class="def srch"><h4>Cais, píeres, molhes, terminais <span class="tag t-cob">COBRADO</span></h4><p>As extremidades, quinas ou outros pontos julgados pertinentes das obras sobre águas:</p><ul><li>caso estejam associadas a uma direção convencional do balizamento e delimitem a margem de um canal bem definido, podem ser sinalizadas por um <b>Sinal Lateral</b>; e</li><li>caso não estejam associadas a uma direção convencional do balizamento, devem ser sinalizadas, no período noturno, por <b>luzes fixas na cor amarela, com alcance mínimo de duas milhas</b>.</li><li>Complementarmente, devem ser iluminadas por luzes fixas que não interfiram na visibilidade dos navegantes, de modo a mostrarem todas as suas extensões.</li></ul></div><div class="def srch"><h4>Retângulo de navegação (pontes)</h4><p>Espaços livres existentes sob uma ponte, resultantes da conjugação do “vão livre horizontal” (espaço horizontal sem obstrução, na menor lâmina d’água prevista) e do “vão livre vertical” (entre a parte inferior da ponte e a maior lâmina d’água prevista). O vão livre horizontal não define, por si só, o canal de navegação, que pode ser restringido pelo calado, pela batimetria ou por distância de segurança aos pilares.</p></div><div class="def srch"><h4>Sinalização de pontes</h4><p>Se a navegação for possível em toda a largura do vão livre, os sinais ficam nos pilares que o limitam:</p><ul><li>a boreste: painel com triângulo equilátero encarnado, vértice para cima / luz rítmica encarnada;</li><li>a bombordo: painel com quadrado verde / luz rítmica verde;</li><li>“melhor ponto de passagem”: painel circular de águas seguras / luz rítmica branca, no vão entre os pilares; pode ter RACON de curto alcance;</li><li>vãos para embarcações miúdas: sinal especial (luz amarela); vãos não navegáveis: sem sinalização;</li><li>luzes com alcance mínimo de 2 milhas; refletores radar a 20 m ou mais da ponte; RACON de limite: boreste “T”, bombordo “B”.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Quadro <span class="tag t-decorar">DECORAR</span> — Margens do rio</h4><div class="tw"><table><thead><tr><th>Quem…</th><th>Margem esquerda</th><th>Margem direita</th></tr></thead><tbody><tr class="srow"><td>Desce o rio (montante → jusante) — referência do livro</td><td>À sua <b>esquerda</b></td><td>À sua direita</td></tr><tr class="srow"><td>Sobe o rio (jusante → montante) — direção convencional</td><td>À sua <b>direita</b></td><td>À sua esquerda</td></tr></tbody></table></div><p class="foot">Margem é nome geográfico (de quem desce), não bordo do navio. Margem esquerda = lado direito de quem sobe (cobrado).</p></div><div class="box quad srch-t"><h4 class="qt">Quadro <span class="tag t-decorar">DECORAR</span> — Painéis do balizamento fluvial e lacustre</h4><div class="tw"><table><thead><tr><th>Sinal</th><th>Painel</th><th>Símbolo</th></tr></thead><tbody><tr class="srow"><td>Navegar junto à margem</td><td>Quadrangular</td><td>Duas faixas laterais (margens) + seta reta junto à margem de interesse</td></tr><tr class="srow"><td>Mudar de margem</td><td>Quadrangular</td><td>Duas faixas + <b>seta curva de mesma cor</b>, indicando a margem para onde seguir</td></tr><tr class="srow"><td>Navegar no meio do rio</td><td>Quadrangular</td><td>Duas faixas + seta entre elas</td></tr><tr class="srow"><td>Tráfego intenso entre as margens</td><td>Quadrangular</td><td><b>Cruz com o braço horizontal visivelmente mais fino</b></td></tr><tr class="srow"><td>Alinhamento</td><td>Quadrangular, <b>aos pares na mesma margem</b></td><td>Faixa central</td></tr><tr class="srow"><td>Quilometragem</td><td><b>Retangular</b></td><td>“KM” + número (da foz para montante)</td></tr><tr class="srow"><td>Redução de velocidade</td><td>Quadrangular</td><td>Letra “R”</td></tr><tr class="srow"><td>Fundeio proibido</td><td>Quadrangular</td><td>Âncora sob uma diagonal</td></tr><tr class="srow"><td>Altura máxima de passagem</td><td>Quadrangular</td><td>Triângulo com vértice para baixo + altura em metros</td></tr><tr class="srow"><td>Bifurcação de canal</td><td>Quadrangular <b>preto</b></td><td>“<b>Y</b>” amarelo; o ramo mais largo é o canal principal</td></tr><tr class="srow"><td>Perigo isolado</td><td>Dois painéis <b>circulares pretos</b></td><td>Dois “+” brancos sobrepostos</td></tr></tbody></table></div><p class="foot">Cores: laranja/encarnado com símbolo preto (só diurno) · branco com símbolo verde/encarnado (também noturno, identifica a margem) · preto com símbolo amarelo/branco. Não vale a jusante de Itaipu, na Hidrovia Paraguai-Paraná (Anexo D da NORMAM-17).</p></div><div class="box quad srch-t"><h4 class="qt">Quadro <span class="tag t-decorar">DECORAR</span> — Sinalização de pontes</h4><div class="tw"><table><thead><tr><th>Posição</th><th>Diurna (painel)</th><th>Noturna (luz)</th><th>RACON</th></tr></thead><tbody><tr class="srow"><td>Pilar de boreste</td><td>Triângulo equilátero encarnado, vértice para cima</td><td>Rítmica encarnada (lateral de boreste)</td><td>Morse <b>T</b> (−)</td></tr><tr class="srow"><td>Pilar de bombordo</td><td>Quadrado verde</td><td>Rítmica verde (lateral de bombordo)</td><td>Morse <b>B</b> (−···)</td></tr><tr class="srow"><td>Melhor ponto de passagem</td><td>Círculo: faixa branca vertical entre encarnadas (águas seguras)</td><td>Rítmica branca (águas seguras)</td><td>Racon de curto alcance</td></tr><tr class="srow"><td>Vão para embarcações miúdas</td><td>Sinal especial sobre fundo preto</td><td><b>Amarela</b> (sinal especial)</td><td>—</td></tr><tr class="srow"><td>Vão não navegável</td><td>Nenhum painel</td><td>Nenhuma; pilares podem ter luz fixa branca ou refletores</td><td>—</td></tr></tbody></table></div><p class="foot">Luzes de ponte: alcance luminoso mínimo de <b>2 milhas</b>. Refletores radar a <b>≥ 20 m</b> da ponte. Cais e píeres não associados à direção convencional: luz <b>fixa amarela</b>, mínimo de 2 milhas.</p></div></section><section class="bloco" id="s4"><h2 class="sec"><span class="n">13.5</span><span class="tt">Lista de Faróis</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Lista de Faróis (DH2) <span class="tag t-cob">COBRADO</span></h4><p>Publicação editada pela DHN e atualizada pelo CHM; contém todas as informações sobre faróis, aerofaróis, faroletes, boias luminosas e luzes particulares ou de obstáculos aéreos. É periódica, <b>editada bienalmente</b>. Correções na Seção IV dos Avisos aos Navegantes. Complementada pela <b>DH18 – Lista de Sinais Cegos</b> (boias cegas, balizas e placas de ponte).</p></div><div class="def srch"><h4>Tipos de letra na Lista de Faróis</h4><p>Os nomes são diferenciados por tipos de letra:</p><ul><li><b>NEGRITO</b> – faróis e barcas-faróis com alcance igual ou superior a 15 milhas náuticas;</li><li><b>REDONDO</b> – faróis e barcas-faróis com alcance inferior a 15 milhas, faroletes, luzes de obstáculos aéreos e luzes particulares;</li><li><b>ITÁLICO</b> – boias.</li></ul></div><div class="def srch"><h4>As 8 colunas da Lista de Faróis <span class="tag t-cob">COBRADO</span></h4><p>Informações dispostas em colunas:</p><ul><li>1ª — Número de ordem nacional e número internacional;</li><li>2ª — Local, nome, carta náutica e classificação (“G” = guarnecido);</li><li>3ª — Posição;</li><li>4ª — Característica, período, fase detalhada e intensidade;</li><li>5ª — Altitude;</li><li>6ª — Alcances: luminoso pela fórmula de Allard com T = 0,85 (V = 18,4 milhas); geográfico com os olhos do observador elevados <b>5 metros</b>;</li><li>7ª — Descrição e altura;</li><li>8ª — Observações.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Quadro <span class="tag t-decorar">DECORAR</span> — As oito colunas da Lista de Faróis (com o Farol Cabo Frio)</h4><div class="tw"><table><thead><tr><th>Col.</th><th>Conteúdo</th><th>Cabo Frio</th></tr></thead><tbody><tr class="srow"><td>1</td><td>Nº de ordem nacional · nº internacional (Lista britânica)</td><td>2400 · G 0352</td></tr><tr class="srow"><td>2</td><td>Local, nome (negrito ≥ 15 milhas; redondo &lt; 15; itálico boias), carta de maior escala, “G”</td><td>Cabo Frio (negrito) · carta 1503 · G</td></tr><tr class="srow"><td>3</td><td>Posição (datum da carta)</td><td>23° 00,81′ S · 042° 00,05′ W</td></tr><tr class="srow"><td>4</td><td>Característica, período, fase detalhada, intensidade (cd)</td><td>Lp. B. · 10 s · B.1,2 – Ecl.8,8 · 5.696.000 cd</td></tr><tr class="srow"><td>5</td><td>Altitude da luz (m, acima do nível médio)</td><td>140 m</td></tr><tr class="srow"><td>6</td><td>Alcances: luminoso (Allard, T = 0,85, V = 18,4) · geográfico (olho a <b>5 m</b>)</td><td>49 milhas · 27 milhas</td></tr><tr class="srow"><td>7</td><td>Descrição da estrutura e altura</td><td>Torre troncônica metálica, branca · 16 m</td></tr><tr class="srow"><td>8</td><td>Observações (setor, RACON, radiofarol…)</td><td>Setor 231°–118° (247°) · estação de radiocomunicação</td></tr></tbody></table></div><p class="foot">Edição bienal; correções na Seção IV dos Avisos aos Navegantes; sinais cegos na DH18. Olho a 5 m: cobrado.</p></div></section><section class="bloco" id="s5"><h2 class="sec"><span class="n">13.6</span><span class="tt">AIS AtoN</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>AIS AtoN</h4><p>Transceptor operando na faixa de VHF Móvel Marítimo, destinado a transmitir ao navegante informações de interesse da segurança da navegação (nome e tipo do sinal, número de ordem, posição e condição operacional). Pode ser implementado de três formas:</p><ul><li><b>Real</b>: localizado no próprio auxílio à navegação, cuja posição e estado são transmitidos como mensagem AIS;</li><li><b>Sintético</b>: transmissão originada em uma Estação Base AIS localizada longe do auxílio real — <b>monitorado</b> (posição e estado confirmados) ou <b>previsto</b> (não monitorado; só aceitável associado a auxílios <b>fixos</b>, jamais a sinais flutuantes);</li><li><b>Virtual</b>: simula um auxílio que não existe fisicamente ou o substitui provisoriamente, transmitido de uma Estação Base AIS — para marcar naufrágio ou novo perigo; onde não é exequível um auxílio físico; auxílios deslocados pelo gelo; auxílio fora de posição; onde um auxílio físico interferiria na navegação.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Tipos de AIS AtoN</h4><div class="tw"><table><thead><tr><th>Tipo</th><th>Sinal físico existe?</th><th>Transmite de onde</th><th>Restrição</th></tr></thead><tbody><tr class="srow"><td>Real</td><td>Sim</td><td>Do <b>próprio</b> auxílio</td><td>—</td></tr><tr class="srow"><td>Sintético monitorado</td><td>Sim</td><td>Estação Base AIS distante</td><td>Posição e estado confirmados</td></tr><tr class="srow"><td>Sintético previsto</td><td>Sim</td><td>Estação Base AIS distante</td><td>Não monitorado → <b>só sinais fixos, nunca flutuantes</b></td></tr><tr class="srow"><td>Virtual</td><td><b>Não</b> (ou fora de posição)</td><td>Estação Base AIS</td><td>Naufrágio ou novo perigo, gelo, sinal deslocado, área sem sinal físico</td></tr></tbody></table></div></div></section><section class="bloco" id="s6"><h2 class="sec"><span class="tt">Apêndice A — Características das luzes</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Frequências das luzes rítmicas</h4><p>Classificação pelo número de emissões por minuto:</p><ul><li><b>Lampejo simples</b>: inferior a 50 vezes por minuto; <b>lampejo longo</b>: emissão de 2 s ou mais;</li><li><b>Rápida</b>: igual ou superior a 50 e inferior a 80 por minuto;</li><li><b>Muito rápida</b>: igual ou superior a 80 e inferior a 160 por minuto;</li><li><b>Ultrarrápida</b>: igual ou superior a 160 e inferior a 300 por minuto.</li></ul></div><div class="def srch"><h4>Luz de ocultação <span class="tag t-cob">COBRADO</span></h4><p>Luz na qual a duração total das somas das fases [de luz] em um mesmo período é nitidamente mais longa que a duração total dos eclipses, e na qual os eclipses têm igual duração.</p></div><div class="def srch"><h4>Luz isofásica</h4><p>Luz em que todas as durações de luz e de obscuridade são iguais.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Quadro <span class="tag t-decorar">DECORAR</span> — Características das luzes (Lista de Faróis, 37ª ed.)</h4><div class="tw"><table><thead><tr><th>Classe</th><th>Descrição</th><th>Abrev.</th><th>Seu ponto</th></tr></thead><tbody><tr class="srow"><td>Fixa</td><td>Contínua e uniforme, cor constante; não aplicada em sinais náuticos</td><td>F. B.</td><td></td></tr><tr class="srow"><td>1 – Ocultação</td><td>Soma das <b>fases de luz</b> nitidamente mais longa que a dos eclipses; eclipses de igual duração</td><td>Oc. E. · Oc(2) B. · Oc(2+1) B.</td><td>●</td></tr><tr class="srow"><td>2 – Isofásica</td><td>Durações de luz e de obscuridade iguais</td><td>Iso. A.</td><td>●</td></tr><tr class="srow"><td>3.1 – Lampejo simples</td><td>Emissão repetida a <b>menos de 50 vezes</b> por minuto</td><td>Lp. B.</td><td>●</td></tr><tr class="srow"><td>3.2 – Lampejo longo</td><td>Emissão de <b>2 s ou mais</b> repetida regularmente</td><td>LpL. V.</td><td>●</td></tr><tr class="srow"><td>3.3 / 3.4 – Grupo de lampejos / composto</td><td>Grupos de 2, 3 ou mais; grupos de números diferentes</td><td>Lp(3) B. · Lp(3+1) E.</td><td></td></tr><tr class="srow"><td>4 – Rápida</td><td><b>50 a &lt; 80</b> por minuto</td><td>R. B. · R(3) B.</td><td>● ●</td></tr><tr class="srow"><td>— R(6) + LpL</td><td>Uso exclusivo do <b>cardinal sul</b></td><td>R(6) B. + LpL. B.</td><td>●</td></tr><tr class="srow"><td>5 – Muito rápida</td><td><b>80 a &lt; 160</b> por minuto</td><td>MR. B. · MR(3) B. · MR(6)B. + LpL.B.</td><td>●</td></tr><tr class="srow"><td>6 – Ultrarrápida</td><td><b>160 a &lt; 300</b> por minuto</td><td>UR. B.</td><td>●</td></tr><tr class="srow"><td>6.2 – Ultrarrápida interrompida</td><td>Sequência ultrarrápida interrompida por eclipse longo e constante</td><td>URIn. B.</td><td>●</td></tr><tr class="srow"><td>7 – Código Morse</td><td>Emissões de durações diferentes formando caracteres Morse</td><td>Mo(U) B.</td><td></td></tr><tr class="srow"><td>8 – Fixa e de lampejo</td><td>Luz fixa combinada com lampejo de maior intensidade</td><td>FLp. B. · FLp(2) B.</td><td></td></tr></tbody></table></div><p class="foot">Escada de frequências: lampejo &lt; 50/min · rápida 50–80 · muito rápida 80–160 · ultrarrápida 160–300. Cores: B branca, E encarnada, V verde, A amarela.</p></div></section><section class="bloco" id="s7"><h2 class="sec"><span class="tt">Apêndice B — A visibilidade no mar</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Refração atmosférica</h4><p>Denomina-se refração à inclinação dos raios luminosos resultantes de sua passagem por sucessivas camadas atmosféricas de densidades diferentes. O efeito normal da refração (refração terrestre) é <b>elevar os objetos, tendendo a aumentar o alcance geográfico</b>.</p></div><div class="def srch"><h4>Coeficiente de transparência atmosférica (T)</h4><p>Representa a relação entre a quantidade de luz recebida (Q’) e a quantidade emitida (Q), após ter-se propagado por 1 milha náutica: T = Q’/Q, sempre inferior à unidade. T = 0,85 significa que a intensidade fica reduzida a 85% (absorção de 15%). Atlântico Norte: T = 0,74; áreas tropicais (costa brasileira): T = 0,85. Relação com a visibilidade: T = (0,05)^(1/V).</p></div><div class="def srch"><h4>Acuidade visual</h4><p>Também denominada “poder separador do olho”: é a menor distância angular que deve haver entre dois pontos, para que o olho possa distingui-los um do outro. Acuidade visual padrão: afastamento angular vertical 1′; horizontal 5′.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> No exemplo do Apêndice B o livro troca as letras (“observador h = 9 m; objeto H = 16 m”) em relação à fórmula do item 13.2.6 (H = observador, h = objeto). A soma √H + √h é a mesma; não muda o resultado. Também aparece “D = 1,93 √2H”, erro de digitação por √2HR (o correto é D = 1,93 √H).</div></section><section class="bloco" id="s8"><h2 class="sec"><span class="tt">Glossário completo — Miguens, Vol. I, Cap. 13</span></h2><div class="box quad srch-t"><div class="tw"><table class="gloss"><thead><tr><th>Item</th><th>Termo</th><th>Definição condensada</th><th>Marca</th></tr></thead><tbody><tr class="srow"><td>13.1</td><td>Auxílios visuais · sonoros · radioelétricos</td><td>Forma, cor e luz · sons (em desuso no Brasil, exceto plataformas) · ondas de rádio (AIS AtoN, VTS).</td><td>★ ●</td></tr><tr class="srow"><td>13.1</td><td>Sinal náutico × sinalização náutica</td><td>Auxílio visual que dá posicionamento seguro × conjunto de sinais para navegação segura e econômica.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Boia de amarração</td><td>Não é auxílio à navegação (IALA).</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Farol × farolete</td><td>Alcance luminoso noturno &gt; 10 milhas × ≤ 10 milhas.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Farol de aterragem</td><td>Reconhecimento e demanda do porto; visto a &gt; 20 milhas.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Farol guarnecido × automático</td><td>“G” só na Lista de Faróis × “(SG)” na carta.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Alinhamento</td><td>Dois sinais fixos aos pares; posterior mais alto; mesma cor de luz; sensibilidade lateral.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Boia</td><td>Não navegar por ela nem usá-la para LDP; refletor radar e AIS não obrigatórios.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Boia articulada</td><td>Sinal luminoso; Cardan; pode ter marca de tope.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Barca-farol · LANBY</td><td>Perigo isolado em mar aberto · ≥ 10 m de diâmetro, mares moderados.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Baliza</td><td>Sinal fixo cego; marca de tope obrigatória.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Balizamento fixo × flutuante</td><td>Faroletes e balizas × boias.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Direção convencional</td><td>Vindo do mar; rio: da foz para a nascente; lago isolado: N/S verdadeiro.</td><td>★ ●</td></tr><tr class="srow"><td>13.2</td><td>Luz direcional × de setor</td><td>Setor estreito com cor definida × cores diferentes em setores diferentes.</td><td>★ ●</td></tr><tr class="srow"><td>13.2</td><td>Período · fase · eclipse · ocultação · isofase</td><td>Inícios de dois ciclos · cada aspecto · obscuridade entre lampejos · obscuridade menor que a luz · iguais.</td><td>★ ●</td></tr><tr class="srow"><td>13.2</td><td>Setor de visibilidade</td><td>Marcações verdadeiras do mar para o sinal, sentido horário.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Visibilidade meteorológica (V)</td><td>Maior distância em que um objeto negro é visto de dia contra o céu.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Transparência (T)</td><td>T = 0,85: 85% da luz chega após 1 milha (Brasil); 0,74 no Atlântico Norte.</td><td>★</td></tr><tr class="srow"><td>13.2</td><td>Alcance luminoso · nominal · geográfico</td><td>Intensidade + V · com V = 10 milhas · curvatura + alturas; na carta, o menor.</td><td>★ ●</td></tr><tr class="srow"><td>13.3</td><td>Regiões IALA A e B</td><td>A: encarnado a bombordo · B (Brasil, Decreto 92.267/1986): encarnado a boreste.</td><td>★ ●</td></tr><tr class="srow"><td>13.3</td><td>Sinal lateral modificado</td><td>Lp(2+1); faixa indica o canal preferencial do lado oposto.</td><td>★ ●</td></tr><tr class="srow"><td>13.3</td><td>Cardinais</td><td>Nome = quadrante; tope obrigatório; N contínua, E 3, S 6+LpL, W 9.</td><td>★ ●</td></tr><tr class="srow"><td>13.3</td><td>Perigo isolado</td><td>Preto com encarnado; 2 esferas; branca Lp(2); águas navegáveis em volta.</td><td>★ ●</td></tr><tr class="srow"><td>13.3</td><td>Águas seguras</td><td>Listras verticais encarnadas e brancas; esfera; Iso, Oc, LpL 10 s, Mo(A).</td><td>★</td></tr><tr class="srow"><td>13.3</td><td>Especial · ODAS</td><td>Amarelo, “X”; ODAS só Lp(5) A. 20s.</td><td>★ ●</td></tr><tr class="srow"><td>13.3</td><td>Novo perigo</td><td>Azul e amarelo; um sinal duplicado; luz R ou MR de cardinal/lateral; Racon “D”.</td><td>★ ●</td></tr><tr class="srow"><td>13.3</td><td>Numeração</td><td>Encarnado ímpar, verde par; alinhamentos por letras; crescente a partir da entrada.</td><td>★ ●</td></tr><tr class="srow"><td>13.4</td><td>Margem esquerda</td><td>Lado esquerdo de quem desce o rio.</td><td>★ ●</td></tr><tr class="srow"><td>13.4</td><td>Cores dos painéis</td><td>Laranja/encarnado (só diurno) · branco (também noturno) · preto (amarelo ou branco).</td><td>★ ●</td></tr><tr class="srow"><td>13.4</td><td>Tráfego intenso entre margens</td><td>Cruz com braço horizontal mais fino.</td><td>★ ●</td></tr><tr class="srow"><td>13.4</td><td>Cais não associado à direção convencional</td><td>Luz fixa amarela, mínimo de 2 milhas.</td><td>★ ●</td></tr><tr class="srow"><td>13.4</td><td>Pontes</td><td>Boreste triângulo encarnado / bombordo quadrado verde / águas seguras; Racon T e B; refletores ≥ 20 m.</td><td>★</td></tr><tr class="srow"><td>13.5</td><td>Lista de Faróis</td><td>Bienal; 8 colunas; negrito ≥ 15 milhas; itálico boias; olho a 5 m; T = 0,85.</td><td>★ ●</td></tr><tr class="srow"><td>13.5</td><td>Lista de Sinais Cegos (DH18)</td><td>Boias cegas, balizas e placas de ponte.</td><td>★ ●</td></tr><tr class="srow"><td>13.6</td><td>AIS AtoN</td><td>Real · sintético (monitorado/previsto, só fixos) · virtual.</td><td>★</td></tr><tr class="srow"><td>Ap. A</td><td>Rápida · muito rápida · ultrarrápida</td><td>50–80 · 80–160 · 160–300 por minuto; lampejo &lt; 50.</td><td>★</td></tr><tr class="srow"><td>Ap. B</td><td>Refração terrestre</td><td>Eleva os objetos e aumenta o alcance geográfico.</td><td>★</td></tr><tr class="srow"><td>Ap. B</td><td>Acuidade visual padrão</td><td>1′ vertical · 5′ horizontal.</td><td>○</td></tr></tbody></table></div><p class="foot">Marca: ★ seu destaque · ● assunto cobrado em prova · ○ sem marcação, só menção.</p></div></section>
 <a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
-
-</div>
-</main>
-
-<footer>
-  <div class="wrap"><b>PSCPP 2027</b> · Auxílios à Navegação e Balizamento IALA (Miguens Vol. I, Cap. 13) · Capital Sereno · Navegação — Miguens.</div>
-</footer>
-
+</div></main>
+<footer><div class="wrap">PSCPP 2027 · Auxílios à Navegação — Miguens Cap. 13 · <b>Capital Sereno</b> · Navegação — Miguens.</div></footer>
 <script>
-var NS="http://www.w3.org/2000/svg";
-function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
-function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
-
-/* ===== ALCANCE GEOGRÁFICO ===== */
-function drawAlc(){
-  var cv=document.getElementById('cvAlc'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
-  var Hobs=+document.getElementById('hobs').value, hfar=+document.getElementById('hfar').value;
-  var D=1.93*(Math.sqrt(Hobs)+Math.sqrt(hfar));
-  // mar com leve curvatura
-  var sea=170;
-  ctx.fillStyle='#eef5fb';ctx.fillRect(0,sea,W,H-sea);
-  ctx.strokeStyle='#8fb8d8';ctx.lineWidth=2;ctx.beginPath();
-  for(var x=0;x<=W;x+=8){var y=sea+18*Math.sin((x/W)*Math.PI);ctx.lineTo(x,y);}ctx.stroke();
-  // navio (esq) com mastro proporcional a Hobs
-  var nx=120; var mastH=10+Hobs*2.2;
-  ctx.fillStyle='#16302B';ctx.fillRect(nx-26,sea-8,52,10);
-  ctx.strokeStyle='#16302B';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(nx,sea-8);ctx.lineTo(nx,sea-8-mastH);ctx.stroke();
-  ctx.fillStyle='#2C5F8A';ctx.font='11px Trebuchet MS';ctx.fillText('obs '+Hobs+' m',nx-24,sea-12-mastH);
-  // farol (dir) proporcional a hfar
-  var fx=W-130; var torH=20+hfar*1.5;
-  ctx.fillStyle='#9E3B2E';ctx.fillRect(fx-9,sea-torH,18,torH);
-  ctx.fillStyle='#C8A84B';ctx.beginPath();ctx.arc(fx,sea-torH-6,7,0,7);ctx.fill();
-  ctx.fillStyle='#9E3B2E';ctx.fillText('farol '+hfar+' m',fx-20,sea-torH-14);
-  // linha de visada (tangente) tracejada
-  ctx.strokeStyle='#C8A84B';ctx.setLineDash([6,4]);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(nx,sea-8-mastH);ctx.lineTo(fx,sea-torH-6);ctx.stroke();ctx.setLineDash([]);
-  document.getElementById('alcRead').innerHTML='Alcance geográfico D = 1,93 (√'+Hobs+' + √'+hfar+') = <b>'+D.toFixed(1)+' milhas náuticas</b>. É a maior distância em que a luz aparece no horizonte, só pela curvatura da Terra. (Nas cartas, a DHN fixa o observador em 5 m e publica o menor entre este e o alcance luminoso.)';
+(function(){
+var norm=function(x){return x.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
+var q=document.getElementById('q'), qn=document.getElementById('qn');
+function unmark(){document.querySelectorAll('mark.sq').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+function markIn(el,t){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[],n;while(n=w.nextNode())ns.push(n);
+ ns.forEach(function(n){var s=n.nodeValue,ns2=norm(s),i=ns2.indexOf(t);if(i<0)return;var f=document.createDocumentFragment(),last=0;
+  while(i>=0){f.appendChild(document.createTextNode(s.slice(last,i)));var m=document.createElement('mark');m.className='sq';m.textContent=s.slice(i,i+t.length);f.appendChild(m);last=i+t.length;i=ns2.indexOf(t,last);}
+  f.appendChild(document.createTextNode(s.slice(last)));n.parentNode.replaceChild(f,n);});}
+function run(){
+ unmark(); var t=norm(q.value.trim()), hits=0;
+ document.querySelectorAll('section.bloco').forEach(function(sec){
+  if(!t){sec.style.display='';sec.querySelectorAll('.srch,.srch-t,.srow,h3').forEach(function(e){e.style.display='';});return;}
+  var any=false;
+  var titleHit=norm(sec.querySelector('h2').textContent).indexOf(t)>=0;
+  sec.querySelectorAll('.srch').forEach(function(e){var m=norm(e.textContent).indexOf(t)>=0,ok=titleHit||m;e.style.display=ok?'':'none';if(ok)any=true;if(m){hits++;markIn(e,t);}});
+  sec.querySelectorAll('.srch-t').forEach(function(b){var cap=b.querySelector('.qt'),capHit=titleHit||(cap&&norm(cap.textContent).indexOf(t)>=0),rowsOk=0;
+   b.querySelectorAll('tr.srow').forEach(function(r){var m=norm(r.textContent).indexOf(t)>=0,ok=capHit||m;r.style.display=ok?'':'none';if(ok)rowsOk++;if(m){hits++;markIn(r,t);}});
+   if(cap&&norm(cap.textContent).indexOf(t)>=0){hits++;markIn(cap,t);}
+   var ok=rowsOk>0;b.style.display=ok?'':'none';if(ok)any=true;});
+  sec.querySelectorAll('h3').forEach(function(h){h.style.display=t?'none':'';});
+  if(titleHit){any=true;hits++;markIn(sec.querySelector('h2'),t);}
+  sec.style.display=any?'':'none';
+ });
+ qn.textContent=t?(hits?hits+' resultado'+(hits>1?'s':''):'nada encontrado'):'';
 }
-drawAlc();
-
-/* ===== IALA A x B ===== */
-var reg='B';
-function setReg(r){reg=r;document.querySelectorAll('.regBtn').forEach(function(b){b.classList.toggle('active',b.dataset.r===r);});drawReg();}
-function drawReg(){
-  var svg=document.getElementById('svgReg');svg.innerHTML='';
-  var bbCor, beCor;
-  if(reg==='A'){bbCor='#9E3B2E';beCor='#2E7D52';} else {bbCor='#2E7D52';beCor='#9E3B2E';}
-  sTx(svg,430,26,'REGIÃO '+reg+(reg==='B'?' (Brasil)':'')+' — sinais laterais',{fill:'#5a6f80',fs:13,fw:'bold',ta:'middle'});
-  // BOMBORDO (cilindro) à esquerda
-  sEl(svg,'rect',{x:190,y:90,width:70,height:110,rx:6,fill:bbCor,stroke:'#333','stroke-width':1.5});
-  sEl(svg,'rect',{x:206,y:66,width:38,height:22,rx:3,fill:bbCor,stroke:'#333'}); // tope cilindro
-  sTx(svg,225,230,'BOMBORDO',{fill:'#16302B',fs:13,fw:'bold',ta:'middle'});
-  sTx(svg,225,248,reg==='A'?'Encarnado · cilíndrico':'Verde · cilíndrico',{fill:'#7a6f55',fs:12,ta:'middle'});
-  // BORESTE (cone) à direita
-  sEl(svg,'path',{d:'M 635 200 L 600 200 L 670 200 Z',fill:'none'});
-  sEl(svg,'path',{d:'M 600 200 L 635 96 L 670 200 Z',fill:beCor,stroke:'#333','stroke-width':1.5});
-  sEl(svg,'path',{d:'M 620 88 L 635 62 L 650 88 Z',fill:beCor,stroke:'#333'}); // tope cone
-  sTx(svg,635,230,'BORESTE',{fill:'#16302B',fs:13,fw:'bold',ta:'middle'});
-  sTx(svg,635,248,reg==='A'?'Verde · cônico':'Encarnado · cônico',{fill:'#7a6f55',fs:12,ta:'middle'});
-  document.getElementById('regRead').innerHTML = reg==='B'
-    ? '<b>Região B (Brasil):</b> bombordo VERDE (cilindro), boreste ENCARNADO (cone). "Encarnado a boreste, voltando do mar."'
-    : '<b>Região A:</b> bombordo ENCARNADO (cilindro), boreste VERDE (cone) — o inverso do Brasil.';
-}
-drawReg();
-
-/* ===== CARDINAIS ===== */
-var CARD={
-  N:{lab:'NORTE',cor1:'#111',cor2:'#e5b73a',cones:'up',luz:'VQ ou Q (contínua)',passa:'Passe pelo NORTE do perigo (águas navegáveis ao N).'},
-  E:{lab:'LESTE',cor1:'#111',cor2:'#e5b73a',cones:'base',luz:'VQ(3)/5s ou Q(3)/10s',passa:'Passe pelo LESTE do perigo.'},
-  S:{lab:'SUL',cor1:'#e5b73a',cor2:'#111',cones:'down',luz:'VQ(6)+longo/10s ou Q(6)+longo/15s',passa:'Passe pelo SUL do perigo.'},
-  W:{lab:'OESTE',cor1:'#e5b73a',cor2:'#111',cones:'point',luz:'VQ(9)/10s ou Q(9)/15s',passa:'Passe pelo OESTE do perigo. De dia: amarelo com faixa preta.'}
-};
-var cardSel='N';
-function coneMark(svg,cx,cy,tipo){
-  function cone(x,y,up){var d=up?('M '+(x-9)+' '+(y+9)+' L '+x+' '+(y-9)+' L '+(x+9)+' '+(y+9)+' Z'):('M '+(x-9)+' '+(y-9)+' L '+x+' '+(y+9)+' L '+(x+9)+' '+(y-9)+' Z');sEl(svg,'path',{d:d,fill:'#111'});}
-  if(tipo==='up'){cone(cx,cy-11,true);cone(cx,cy+11,true);}
-  else if(tipo==='down'){cone(cx,cy-11,false);cone(cx,cy+11,false);}
-  else if(tipo==='base'){cone(cx,cy-11,false);cone(cx,cy+11,true);}   // base a base (pontas p/ fora)
-  else {cone(cx,cy-11,true);cone(cx,cy+11,false);}                     // ponta a ponta (pontas p/ dentro)
-}
-function drawCard(){
-  var svg=document.getElementById('svgCard');svg.innerHTML='';
-  var cx=430,cy=165;
-  // perigo central
-  sEl(svg,'circle',{cx:cx,cy:cy,r:20,fill:'#e7d3a0',stroke:'#9a7d2a','stroke-width':1.5});
-  sTx(svg,cx,cy+4,'perigo',{fill:'#7a5a2a',fs:11,fw:'bold',ta:'middle'});
-  var pos={N:[cx,60],E:[700,cy],S:[cx,275],W:[160,cy]};
-  ['N','E','S','W'].forEach(function(k){
-    var p=pos[k],c=CARD[k];
-    var sel=(k===cardSel);
-    // corpo (barril bicolor)
-    sEl(svg,'rect',{x:p[0]-15,y:p[1]-30,width:30,height:60,rx:5,fill:c.cor1,stroke:sel?'#1A7A6E':'#333','stroke-width':sel?3:1.2});
-    sEl(svg,'rect',{x:p[0]-15,y:p[1],width:30,height:30,rx:0,fill:c.cor2});
-    coneMark(svg,p[0],p[1]-46,c.cones);
-    sTx(svg,p[0],p[1]+46,c.lab,{fill:sel?'#1A7A6E':'#16302B',fs:12,fw:'bold',ta:'middle'});
-    // área clicável
-    var r=sEl(svg,'rect',{x:p[0]-40,y:p[1]-56,width:80,height:110,fill:'transparent',style:'cursor:pointer'});
-    r.addEventListener('click',function(){cardSel=k;drawCard();});
-  });
-  var c=CARD[cardSel];
-  document.getElementById('cardRead').innerHTML='<b>Cardinal '+c.lab+'</b> — '+c.passa+' Luz branca: '+c.luz+'.';
-}
-drawCard();
-window.addEventListener('resize',function(){drawAlc();drawReg();drawCard();});
-
-/* ===== FLASHCARDS ===== */
-var FC=[
-  {f:"Característica de uma luz",b:"Combinação de RITMO + COR. É o que identifica o sinal."},
-  {f:"Ocultação × Isofase × Lampejo",b:"Ocultação: obscuridade < luz. Isofase: luz = obscuridade. Lampejo: luz < obscuridade."},
-  {f:"Limites de setores",b:"Marcações verdadeiras do LARGO (mar→sinal), horário — com que o navegante avista o farol."},
-  {f:"Alcance luminoso",b:"Maior distância pela intensidade (candelas) + visibilidade meteorológica."},
-  {f:"Alcance nominal",b:"Alcance com visibilidade meteorológica padrão de 10 milhas."},
-  {f:"Alcance geográfico",b:"Só a curvatura da Terra: altura do farol + altura do observador. D = 1,93(√H+√h)."},
-  {f:"DHN e os alcances",b:"Observador fixado em 5 m; nas cartas registra-se o MENOR entre luminoso e geográfico."},
-  {f:"Faróis de aterragem",b:"Alcance luminoso ≥ geográfico (para serem vistos o mais longe possível)."},
-  {f:"IALA — o que muda",b:"Só os sinais LATERAIS diferem entre as Regiões A e B."},
-  {f:"Região A × B",b:"A: Europa/África/Ásia/Oceania. B: Américas, Japão, Coreia do Sul, Taiwan, Filipinas. Brasil = B."},
-  {f:"Laterais na Região B",b:"Bombordo VERDE (cilindro), Boreste ENCARNADO (cone). Inverso da Região A."},
-  {f:"Direção convencional (Brasil)",b:"Sempre vindo do mar; na navegação fluvial, subindo o rio."},
-  {f:"Canal preferencial",b:"Cor do lado + faixa horizontal da cor oposta + ritmo Gp Lampejos Compostos (2+1)."},
-  {f:"Sinais cardinais",b:"Nome = quadrante por onde passar (águas navegáveis do lado do nome). Ligados à agulha."},
-  {f:"Marca de tope cardinal",b:"2 cones pretos (obrigatória): N ↑↑, S ↓↓, E base-a-base, W ponta-a-ponta."},
-  {f:"Cardinal Oeste",b:"Amarelo com faixa preta; luz branca Q(9)/15s ou VQ(9)/10s."},
-  {f:"Perigo Isolado",b:"Preto c/ faixas encarnadas; 2 esferas pretas (obrigatória); luz branca Fl(2). TEM águas navegáveis ao redor."},
-  {f:"Águas Seguras",b:"Listras VERTICAIS encarnadas/brancas; 1 esfera encarnada; luz branca Morse 'A' (·−)."},
-  {f:"Sinais Especiais",b:"Amarela; marca de tope X amarelo; luz amarela. ODAS = Lp(5) 20s."},
-  {f:"Novos Perigos",b:"Listras azul/amarela; cruz amarela; ≥1 sinal duplicado; Racon 'D' (−··) = 1 mn no radar; avisar CHM."},
-  {f:"Balizamento fluvial (Brasil)",b:"Direção convencional = de jusante para montante (subindo o rio)."}
-];
-var grid=document.getElementById('fcGrid');
-FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
-  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
-  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
-
-/* ===== QUIZ ===== */
-var QUIZ=[
-  {q:"A característica de uma luz de auxílio à navegação é dada pela combinação de:",
-   o:["Intensidade e alcance","Ritmo e cor","Altura e setor","Período e cor apenas"],a:1,
-   e:"Característica = ritmo + cor. É o que identifica o sinal ao navegante."},
-  {q:"O alcance geográfico de um farol depende de:",
-   o:["Intensidade da luz e visibilidade","Altura do farol e altura do observador (curvatura da Terra)","Intensidade e cor da luz","Visibilidade meteorológica apenas"],a:1,
-   e:"O geográfico depende só da curvatura da Terra: a elevação (altitude) da luz e a altura do olho do observador. D = 1,93(√H+√h). (2012, gab c.)"},
-  {q:"[PSCPP 2006] Para qual elevação do olho do observador a DHN determina os alcances geográficos das suas publicações?",
-   o:["3 metros","5 metros","10 metros","15 metros"],a:1,
-   e:"5 metros. Gabarito (b) da prova. É a altura de olho padrão adotada pela DHN."},
-  {q:"Nas cartas náuticas da DHN, o alcance registrado para um farol é:",
-   o:["Sempre o luminoso","Sempre o geográfico","O MENOR entre o luminoso e o geográfico","A média dos dois"],a:2,
-   e:"A DHN registra o MENOR dos dois (é a primeira distância em que o navegante avista o sinal)."},
-  {q:"No Brasil (Região B da IALA), os sinais laterais de BORESTE são:",
-   o:["Verdes, cilíndricos","Encarnados, cônicos","Amarelos com faixa preta","Pretos com faixa encarnada"],a:1,
-   e:"Região B: boreste ENCARNADO e cônico; bombordo VERDE e cilíndrico. É o inverso da Região A."},
-  {q:"As duas Regiões de balizamento da IALA (A e B) diferem quanto aos sinais:",
-   o:["Cardinais","Laterais","De perigo isolado","De águas seguras"],a:1,
-   e:"Só os sinais LATERAIS mudam entre as Regiões A e B. Cardinais, perigo isolado, águas seguras, especiais e novos perigos são iguais nas duas."},
-  {q:"O nome de um sinal cardinal (Norte, Sul, Leste, Oeste) indica:",
-   o:["A cor da luz","O quadrante por onde o navegante deve passar","O tipo de perigo","A profundidade local"],a:1,
-   e:"O nome = quadrante por onde passar; as águas navegáveis/mais profundas ficam do lado do nome do sinal. Ligado à agulha."},
-  {q:"[PSCPP 2011] Um sinal com luz branca em grupo de 9 lampejos rápidos a cada 15 s é um cardinal Oeste. De dia ele se apresenta como:",
-   o:["Preto sobre amarelo","Amarelo com uma faixa larga horizontal preta no meio","Listras verticais encarnadas e brancas","Preto com faixas encarnadas"],a:1,
-   e:"Cardinal Oeste = amarelo com faixa preta; marca de tope 2 cones ponta a ponta; luz Q(9)/15s. Gabarito (d) da 2011-Q19."},
-  {q:"O sinal de PERIGO ISOLADO caracteriza-se por:",
-   o:["Ter águas navegáveis em toda a sua volta, marca de tope de 2 esferas pretas e luz branca Fl(2)","Listras verticais encarnadas e brancas","Cor amarela e marca em X","Não ter águas navegáveis ao redor"],a:0,
-   e:"Perigo isolado: preto com faixas encarnadas, 2 esferas pretas (obrigatória), luz branca grupo de 2 lampejos — e por definição TEM águas navegáveis em toda a volta."},
-  {q:"O sinal de ÁGUAS SEGURAS (meio de canal, aterragem) apresenta:",
-   o:["Cor amarela e X amarelo","Listras verticais encarnadas e brancas; luz branca Morse 'A'","Preto sobre amarelo","Faixas azul e amarela"],a:1,
-   e:"Águas seguras: listras VERTICAIS encarnadas e brancas, marca de tope 1 esfera encarnada, luz branca isofásica/ocultação/lampejo longo 10s ou Morse 'A' (·−)."},
-  {q:"[PSCPP 2008] Sobre a sinalização de um NOVO PERIGO (navio recém-naufragado), é correto:",
-   o:["A luz deve ter característica de perigo isolado","Pode-se usar Racon transmitindo 'P'","Pode-se usar Racon transmitindo 'H'","Pelo menos um dos sinais deve ser duplicado, idêntico ao par"],a:3,
-   e:"Gabarito (e): ao menos um sinal duplicado (idêntico ao par). A luz é de cardinal/lateral (rápida/muito rápida); o Racon transmite 'D' (−··); avisa-se o CHM e o Agente da Autoridade Marítima."},
-  {q:"Uma OCULTAÇÃO é definida como:",
-   o:["Luz e obscuridade de igual duração","Intervalo de obscuridade relativamente mais curto que o de luz","Intervalo de luz mais curto que o de obscuridade","Ausência total de luz"],a:1,
-   e:"Ocultação: obscuridade < luz (a luz predomina). Isofase: luz = obscuridade. Lampejo: luz < obscuridade."}
-];
-var qi=0,answered=false,hits=0,tot=0;
-function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
-  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
-function loadQ(){var Q=QUIZ[qi];answered=false;
-  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
-  var box=document.getElementById('qOpts');box.innerHTML="";
-  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
-  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
-  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
-  document.getElementById('qNext').disabled=true;
-  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
-function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
-  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
-  var fb=document.getElementById('qFb');
-  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
-  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
-  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
-function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
-loadQ();upScore();
+var tm;q.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(run,120);});
+var p=new URLSearchParams(location.search).get('q');if(p){q.value=p;run();var f=document.querySelector('mark.sq');if(f)setTimeout(function(){f.scrollIntoView({block:'center'});},60);}
+})();
 </script>
 </body>
 </html>

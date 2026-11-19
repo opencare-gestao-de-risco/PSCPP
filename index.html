@@ -37,6 +37,16 @@
   .controls{position:sticky;top:0;z-index:30;background:rgba(244,239,226,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:13px 0}
   .controls .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
   #busca{flex:1 1 240px;font-family:Georgia,serif;font-size:16px;padding:11px 16px;border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:200px}
+  #global{margin:0 0 26px}
+  #global .g-head{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#1A7A6E;margin:6px 0 10px}
+  #global .g-cad{background:#FCFAF4;border:1px solid #E5DCC6;border-radius:12px;padding:12px 16px;margin-bottom:10px;box-shadow:0 2px 14px rgba(13,61,54,.08)}
+  #global .g-tit{font-weight:bold;color:#0D3D36;text-decoration:none;font-size:16px}
+  #global .g-n{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:#7a6f55;margin-left:6px}
+  #global .g-hit{display:block;text-decoration:none;color:#16302B;padding:6px 0 6px 10px;border-left:3px solid #C8A84B;margin-top:8px;font-size:14px;line-height:1.5}
+  #global .g-hit:hover{background:#F4EFE2}
+  #global .g-sec{font-family:'Trebuchet MS',sans-serif;font-size:11.5px;color:#1A7A6E;display:block}
+  #global mark{background:#ffb347;color:inherit;border-radius:2px}
+  #global .g-mais{font-size:12.5px;color:#7a6f55;margin-top:6px}
   #busca:focus{outline:none;border-color:var(--verde-medio);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
   .filtros{display:flex;gap:7px;flex-wrap:wrap}
   .fbtn{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;cursor:pointer;border:1.5px solid var(--verde-medio);background:#fff;color:var(--verde-medio);padding:8px 14px;border-radius:20px;transition:all .15s}
@@ -68,7 +78,32 @@
   .hint-ios{background:var(--creme);border-left:4px solid var(--dourado);border-radius:0 6px 6px 0;padding:12px 16px;font-size:14px;color:#5a4f37;margin-top:24px}
   footer{background:var(--verde-escuro);color:#bcd5cf;padding:30px 0;font-family:'Trebuchet MS',sans-serif;font-size:13px}
   footer b{color:var(--dourado)}
-  @media(max-width:600px){.hero h1{font-size:29px}}
+  @media(max-width:600px){
+    header.hero{padding:18px 0 14px}
+    .hero .eyebrow{font-size:10.5px;letter-spacing:.2em;margin:0 0 6px}
+    .hero h1{font-size:24px;margin:0 0 4px}
+    .hero .sub{font-size:13.5px;line-height:1.45}
+    .hero .stat{margin-top:8px;gap:16px}
+    .hero .stat b{display:inline;font-size:17px;margin-right:4px}
+    .hero .stat div{font-size:12px}
+    .wrap{padding:0 14px}
+    .controls{padding:8px 0}
+    .controls .row{gap:8px}
+    #busca{flex:1 1 100%;font-size:16px;padding:9px 13px;min-width:0}
+    .filtros{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;padding-bottom:4px;scrollbar-width:none}
+    .filtros::-webkit-scrollbar{display:none}
+    .fbtn{flex:0 0 auto;font-size:12.5px;padding:6px 12px}
+    main{padding:20px 0 50px}
+    .mat-head{flex-wrap:wrap;gap:6px 12px}
+    .mat-titulo{font-size:20px}
+    .mat-sub{margin-left:0;font-size:12.5px;flex-basis:100%}
+    .cards{grid-template-columns:1fr;gap:12px}
+    a.card{min-height:0;padding:14px 16px}
+    a.card .c-titulo{font-size:18px}
+    a.card .c-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    a.card .c-tags{display:none}
+    a.card .c-go{margin-top:6px}
+  }
 </style>
 </head>
 <body>
@@ -88,7 +123,7 @@
 <div class="controls">
   <div class="wrap">
     <div class="row">
-      <input id="busca" type="search" placeholder="Buscar por título, tema ou etiqueta…" oninput="render()" aria-label="Buscar cadernos">
+      <input id="busca" type="search" placeholder="Buscar nos títulos e no conteúdo dos cadernos…" oninput="render()" aria-label="Buscar cadernos">
       <div class="filtros" id="filtros"></div>
     </div>
   </div>
@@ -96,6 +131,7 @@
 
 <main>
   <div class="wrap">
+    <div id="global"></div>
     <div id="estante"></div>
     <div class="vazio" id="vazio">Nenhum caderno encontrado com esse filtro.</div>
 
@@ -216,25 +252,32 @@ const CADERNOS = [
     tags:["BANCA","DECORAR","CALCULO","Radiação","Balanço de energia","Corpo negro","Stefan-Boltzmann","Wien","ROC","ROL","Efeito estufa","Albedo","Constante solar","Ynoue Cap. 2","Bloco B"]
   },
   {
-    materia:"navegacao", badge:"Miguens Vol. I · Cap. 1 e 5",
-    titulo:"O Problema Geral da Navegação e a Estimada",
-    arquivo:"miguens_cap1_5_navegacao_estimada.html",
-    desc:"Alicerce do Módulo III. Definição (ciência e arte) e as 4 fases do planejamento; tipos (águas restritas <3mn, costeira 3–50mn, oceânica >50mn) × métodos (visual/astro/eletrônica/estimada); milha náutica (1′ de latitude = 1852 m), ortodromia × loxodromia; rumos e marcações (Rv/Rmg/Rgiro/Rag, Mv=Mr+R, marcação polar) com rosa interativa; nó e SOA (base do ETA). Navegação estimada (DR): regras dos 3 e 6 minutos com calculadora, as 6 regras de plotagem, consistência de 10% e o triângulo de corrente interativo (superfície+corrente=fundo, abatimento, avanço/atraso). Mapa da banca (baixa incidência direta) com a 2012-Q19 (conversão Rv→Rag=058°). 21 flashcards e quiz de 12 questões.",
-    tags:["BANCA","DECORAR","CALCULO","Estimada","Dead reckoning","Milha náutica","Ortodromia","Loxodromia","Rumos","Marcações","SOA","Triângulo de corrente","Abatimento","Regra 3/6 min","Miguens Vol. I"]
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 1",
+    titulo:"O Problema Geral da Navegação",
+    arquivo:"miguens_cap1_problema_geral.html",
+    desc:"Consulta rápida: definições de navegação (Manual e NORMAM-28), fases e componentes do plano de viagem (FAQ, squat, ATBA), tipos (águas restritas, costeira, oceânica) e os 4 métodos (visual, astronômica, eletrônica, estimada), forma da Terra e sistemas geodésicos (Córrego Alegre, SAD-69, WGS84), linhas e planos do globo, coordenadas, milha náutica, ortodromia × loxodromia, rumos, marcações e velocidades. Definições completas, quadros, cálculos e busca interna.",
+    tags:["COBRADO","DECORAR","CALCULO","Definições","Planejamento da viagem","Tipos de navegação","Métodos de navegação","Milha náutica","Ortodromia","Loxodromia","Rumos","Marcações","Miguens Vol. I"]
+  },
+  {
+    materia:"navegacao", badge:"Miguens Vol. I · Cap. 5",
+    titulo:"Navegação Estimada",
+    arquivo:"miguens_cap5_navegacao_estimada.html",
+    desc:"Consulta rápida: conceito de navegação estimada (DR), estimada × estimada corrigida, regras dos 3 e 6 minutos, as seis regras da estima, fatores que afetam a posição, velocidades e rumos (superfície, fundo, corrente), abatimento, caimento, avanço e atraso, posições estimada, corrigida e carteada, triângulo de corrente real e estimado, consistência de 10%. Definições completas, quadros, cálculos e busca interna.",
+    tags:["COBRADO","DECORAR","CALCULO","Estimada","Dead reckoning","Regra 3/6 min","Triângulo de corrente","Abatimento","Caimento","Consistência","Miguens Vol. I"]
   },
   {
     materia:"navegacao", badge:"Miguens Vol. I · Cap. 2",
-    titulo:"A Carta Náutica e as Projeções Cartográficas",
+    titulo:"Projeções Cartográficas e a Carta Náutica",
     arquivo:"miguens_cap2_carta_projecoes.html",
-    desc:"Núcleo do Bloco B. Mapa × carta e as 6 propriedades da carta ideal; classificação das projeções. Projeção de Mercator (cilíndrica equatorial conforme): vantagens, limitações e as latitudes crescidas — distâncias só na escala das latitudes — com interativo do fator sec φ. Gnomônica (ponto de vista no centro, afilática, círculos máximos retos → cartas ortodrômicas) e o toggle interativo Mercator × Gnomônica. Escala (maior denominador = menor escala; escala natural; classificação OHI S-4) com régua interativa. Elementos do título (datum MLWS/WGS-84, IALA Região B, projeção Mercator, costa Norte/Leste/Sul). Cartas digitais ENC/RNC (S-57, propósitos 1–6) e o Plano Cartográfico Brasileiro. Mapa da banca com a 2011-Q26 (escala ALFA 1:75.000, gab d). 21 flashcards e quiz de 12 questões.",
-    tags:["BANCA","DECORAR","CALCULO","Carta náutica","Mercator","Gnomônica","Latitudes crescidas","Ortodromia","Loxodromia","Escala","ENC","RNC","WGS-84","MLWS","Miguens Vol. I"]
+    desc:"Consulta rápida: mapa × carta, propriedades e classificações das projeções (construção, superfície, situação, propriedades), Mercator e latitudes crescidas, gnomônica, estereográfica, ortográfica, azimutal equidistante, Lambert e UTM, escala, ENC × RNC, ECDIS × ECS (classes A–D), ZOC, cores da carta, confiança, correção e atualização, e-Navigation. Definições completas, quadros, cálculos e busca interna.",
+    tags:["COBRADO","DECORAR","CALCULO","Projeções","Mercator","Gnomônica","Escala","ENC","RNC","ECDIS","ZOC","Avisos aos Navegantes","Miguens Vol. I"]
   },
   {
     materia:"navegacao", badge:"Miguens Vol. I · Cap. 3",
-    titulo:"Agulhas Náuticas e a Conversão de Rumos",
+    titulo:"Agulhas Náuticas e Conversão de Rumos",
     arquivo:"miguens_cap3_agulhas_conversao_rumos.html",
-    desc:"Alto retorno do Bloco A — o cálculo que a banca mais cobra. Os quatro nortes; declinação magnética (Dm, E/W, isogônicas/agônicas, variação anual); desvio da agulha (Dv, depende dos ferros do navio, varia com o RUMO, Curva de Desvios). A sequência Rag→Rmg→Rv e a fórmula Rv=Rag±Dm±Dv (Este soma, Oeste subtrai), com rosa dos nortes interativa e calculadora de variação anual. Conversão de marcações (Mv=Mag±Dm±Dv) e a agulha giroscópica (aponta ao Norte Verdadeiro; vantagens/limitações; desvio por redução do triângulo). Mapa da banca com as duas questões de cálculo direto: 2011-Q30 (Rv 152,5°→Rag 167°) e 2012-Q19 (Rv 045°→Rag 058°). 20 flashcards e quiz de 12 questões.",
-    tags:["BANCA","DECORAR","CALCULO","Conversão de rumos","Declinação magnética","Desvio da agulha","Variação anual","Agulha giroscópica","Isogônicas","Curva de desvios","Rc=Rv±Dm±Dv","Miguens Vol. I"]
+    desc:"Consulta rápida: agulha magnética (vantagens, limitações), declinação, desvio, magnetismo permanente × induzido, compensação e desvios residuais (3°/2 anos/5°; NORMAM 14 > 3°), regulamento da agulha, conversão Rag ↔ Rmg ↔ Rv com exemplos, fluxgate, agulha giroscópica (inércia, precessão, 84/86 min, altas latitudes), desvio da giro e redução do triângulo, FOG/RLG/HRG. Definições completas, quadros, cálculos e busca interna.",
+    tags:["COBRADO","DECORAR","CALCULO","Agulha magnética","Declinação","Desvio","Conversão de rumos","Giroscópica","Precessão","Compensação","Miguens Vol. I"]
   },
   {
     materia:"navegacao", badge:"Miguens Vol. I · Cap. 4 e 6",
@@ -259,24 +302,24 @@ const CADERNOS = [
   },
   {
     materia:"navegacao", badge:"Miguens Vol. I · Cap. 11",
-    titulo:"Instrumentos Náuticos — odômetros e ecobatímetro",
+    titulo:"Instrumentos Náuticos",
     arquivo:"miguens_cap11_instrumentos_nauticos.html",
-    desc:"Bloco A. Instrumentos por finalidade; dispositivos de marcação (taxímetro, alidades, círculo azimutal). Odômetros: superfície, de fundo (tubo de Pitot) e Doppler — superfície e 'de fundo' medem em relação à ÁGUA; só o Doppler mede sobre o FUNDO (pegadinha campeã). Efeito da corrente sobre o odômetro (contra a corrente, registra mais que a distância no fundo) com interativo e a 2012-Q25 resolvida; corrida da milha. Estadímetro (d=h·cotg α) e a distinção do estaciógrafo (plotagem, não distância). Ecobatímetro (h=v·t/2, v≈1500 m/s, soma-se o calado; alarmes) com interativo do eco. Mapa da banca com 2011-Q59 (Sonar Doppler, 0,01 nó, gab b), 2012-Q22 (estaciógrafo, gab d) e 2012-Q25 (5h/90mn, gab a). 20 flashcards e quiz de 12 questões.",
-    tags:["BANCA","DECORAR","CALCULO","Odômetro","Doppler","Ecobatímetro","Estadímetro","Estaciógrafo","Corrida da milha","Tubo de Pitot","Efeito da corrente","Miguens Vol. I"]
+    desc:"Consulta rápida: fontes de rumo (fluxgate, giro, FOG/RLG, duas antenas GNSS), piloto automático, instrumentos de marcação, odômetros (superfície, Pitot, eletromagnético, Doppler), efeito da corrente no odômetro, corrida da milha, medição de distâncias (estadímetro, sextante, guarda-posto, horizonte, processos práticos), prumo de mão e ecobatímetro, régua paralela e estaciógrafo, cartas digitais na MB, binóculos. Definições completas, quadros, cálculos e busca interna.",
+    tags:["COBRADO","DECORAR","CALCULO","Odômetro","Doppler","Corrida da milha","Ecobatímetro","Estadímetro","Piloto automático","Estaciógrafo","Miguens Vol. I"]
   },
   {
     materia:"navegacao", badge:"Miguens Vol. I · Cap. 12",
-    titulo:"Publicações Náuticas e os Avisos aos Navegantes",
+    titulo:"Publicações Náuticas",
     arquivo:"miguens_cap12_publicacoes_nauticas.html",
-    desc:"Bloco B — a correlação publicação→conteúdo que a banca adora. Carta 12.000/INT 1 (grupos A–U), Roteiro (DH1), Lista de Faróis (DH2, sinais luminosos; boias cegas na Lista de Sinais Cegos DH18), Tábuas das Marés (DG6), Cartas-Piloto (12 cartas mensais; azul=ventos, verde=correntes, roxa=isogônicas), Almanaque Náutico (DN5, astronômica). Avisos aos Navegantes: Temporário (T, lápis), Preliminar (P, lápis), Permanente (caneta/bacalhau, campo Pequenas Correções), APE (não altera a carta) — com seletores interativos e o decodificador da numeração (E 4027/08). Mapa da banca com 2008-Q66 (b), 2012 (b: I·IV·V) e 2011-Q67 (b: II·III·V). 20 flashcards e quiz de 12 questões.",
-    tags:["BANCA","DECORAR","Publicações náuticas","Carta 12.000","Roteiro","Lista de Faróis","Cartas-Piloto","Avisos aos Navegantes","APE","Almanaque","Miguens Vol. I"]
+    desc:"Consulta rápida: dotação (NAVEMARINST 10-04C, NORMAM-28 e a dispensa da carta em papel), Catálogo DH7, Carta 12.000, Roteiro DH1, Lista de Faróis DH2, Lista de Auxílios-Rádio DH8 (número-índice, radiofaróis, fusos, METAREA V), Avisos-Rádio NAVAREA × Costeiros × Locais × SAR, SafetyNET, SALVAMAR, GMDSS, Tábuas das Marés, Cartas Piloto, Almanaque, Avisos aos Navegantes (T, P, Permanentes, APE) e as sete seções do folheto. Definições completas, quadros e busca interna.",
+    tags:["COBRADO","DECORAR","Publicações DHN","Roteiro","Lista de Faróis","Auxílios-Rádio","NAVAREA","SafetyNET","Avisos aos Navegantes","APE","Cartas Piloto","Miguens Vol. I"]
   },
   {
     materia:"navegacao", badge:"Miguens Vol. I · Cap. 13",
     titulo:"Auxílios à Navegação e o Balizamento IALA",
     arquivo:"miguens_cap13_auxilios_balizamento.html",
-    desc:"Bloco B/H. Classificação dos auxílios (visuais, sonoros, radioelétricos; fixos × flutuantes) e as características das luzes (fixa, lampejante, ocultações, isofásica, alternada; período). O Sistema IALA de Balizamento Marítimo: marcas laterais, cardeais, de perigo isolado, de águas seguras e especiais — com a Região B (Brasil): boreste = encarnado (subindo o canal), bombordo = verde. Marcas cardeais (topos de cones, luzes brancas VQ/Q). Interativos do balizamento e das características de luz, mapa da banca (IALA A×B, marcas cardeais) e quiz.",
-    tags:["BANCA","DECORAR","Auxílios à navegação","Balizamento","IALA","Região B","Marcas laterais","Marcas cardeais","Perigo isolado","Características de luz","Miguens Vol. I"]
+    desc:"Consulta rápida: auxílios visuais, sonoros e radioelétricos; faróis (finalidade, regime), faroletes, alinhamentos, boias, barca-farol e LANBY, balizas; balizamento e direção convencional; tipos e termos das luzes; alcances luminoso, nominal e geográfico (com cálculo); Sistema IALA Região B (laterais, cardinais, perigo isolado, águas seguras, especiais, novo perigo) e numeração; sinalização fluvial (margens, painéis), cais e pontes; Lista de Faróis (8 colunas); AIS AtoN; características das luzes. Definições completas, quadros, cálculos e busca interna.",
+    tags:["COBRADO","DECORAR","CALCULO","Auxílios à navegação","Balizamento","IALA","Região B","Cardinais","Características de luz","Alcance geográfico","Sinalização fluvial","Lista de Faróis","Miguens Vol. I"]
   },
   {
     materia:"navegacao", badge:"Miguens Vol. I · Cap. 14",
@@ -757,6 +800,73 @@ const MATERIAS = {
 };
 const ORDEM = ["formulas","flashcards","navegacao","publicacoes-dhn","manobra-resist","manobra-prop","manobra-leme","manobrabilidade","manobra-ambiente","seakeeping","shiphandling","arte-naval","meteorologia","comunicacoes","legislacao","economia"];
 
+
+// ===== Busca geral no conteúdo de todos os cadernos =====
+var IDX=null, IDXP=null;
+function gNorm(x){return (x||"").normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
+function gEsc(x){return x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function carregarIndice(onProg){
+  if(IDXP) return IDXP;
+  var feitos=0, total=CADERNOS.length;
+  IDXP=Promise.all(CADERNOS.map(function(c){
+    return fetch(c.arquivo).then(function(r){return r.ok?r.text():"";}).catch(function(){return "";}).then(function(html){
+      feitos++; if(onProg) onProg(feitos,total);
+      var out=[]; if(!html) return out;
+      var d=new DOMParser().parseFromString(html,'text/html');
+      d.querySelectorAll('script,style,noscript,template').forEach(function(e){e.remove();});
+      var cur={head:c.titulo,anchor:"",txt:[]}; out.push(cur);
+      var w=d.createTreeWalker(d.body,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT,null), n;
+      while(n=w.nextNode()){
+        if(n.nodeType===1){
+          if(/^H[1-4]$/.test(n.tagName)){
+            var a=n.id||(n.closest('[id]')?n.closest('[id]').id:"");
+            cur={head:(n.textContent||"").replace(/\s+/g,' ').trim(),anchor:a,txt:[]}; out.push(cur); w.nextSibling(); 
+          }
+        } else { var t=n.nodeValue; if(t&&t.trim()) cur.txt.push(t.replace(/\s+/g,' ')); }
+      }
+      return out.map(function(o){var t=o.txt.join(' ').replace(/\s+/g,' ').trim();return {c:c,head:o.head,anchor:o.anchor,txt:t,n:gNorm(o.head+' '+t)};}).filter(function(o){return o.txt;});
+    });
+  })).then(function(arr){IDX=[].concat.apply([],arr);return IDX;});
+  return IDXP;
+}
+function trecho(txt,t){
+  var n=gNorm(txt), i=n.indexOf(t); if(i<0) return gEsc(txt.slice(0,160))+(txt.length>160?'…':'');
+  var a=Math.max(0,i-70), b=Math.min(txt.length,i+t.length+110);
+  return (a>0?'…':'')+gEsc(txt.slice(a,i))+'<mark>'+gEsc(txt.slice(i,i+t.length))+'</mark>'+gEsc(txt.slice(i+t.length,b))+(b<txt.length?'…':'');
+}
+var gTimer=null;
+function buscaGlobal(){
+  clearTimeout(gTimer);
+  var box=document.getElementById('global');
+  var bruto=(document.getElementById('busca').value||"").trim(), t=gNorm(bruto);
+  if(t.length<3){box.innerHTML="";return;}
+  gTimer=setTimeout(function(){
+    if(!IDX) box.innerHTML='<div class="g-head">Lendo o conteúdo dos cadernos…</div>';
+    carregarIndice(function(f,tot){ if(!IDX) box.innerHTML='<div class="g-head">Lendo o conteúdo dos cadernos… '+f+'/'+tot+'</div>'; }).then(function(){
+      if(gNorm((document.getElementById('busca').value||"").trim())!==t) return;
+      var por={}, ordem=[];
+      IDX.forEach(function(o){
+        if(filtroMat!=="todos" && o.c.materia!==filtroMat) return;
+        if(o.n.indexOf(t)<0) return;
+        var k=o.c.arquivo; if(!por[k]){por[k]=[];ordem.push(k);} por[k].push(o);
+      });
+      if(!ordem.length){box.innerHTML='<div class="g-head">Nenhuma ocorrência de “'+gEsc(bruto)+'” dentro dos cadernos</div>';return;}
+      var tot=ordem.reduce(function(s,k){return s+por[k].length;},0);
+      var h='<div class="g-head">Dentro dos cadernos: '+tot+' trecho'+(tot>1?'s':'')+' em '+ordem.length+' caderno'+(ordem.length>1?'s':'')+'</div>';
+      ordem.forEach(function(k){
+        var hs=por[k], c=hs[0].c, q='?q='+encodeURIComponent(bruto);
+        h+='<div class="g-cad"><a class="g-tit" href="'+c.arquivo+q+'">'+c.titulo+'</a><span class="g-n">'+hs.length+' trecho'+(hs.length>1?'s':'')+'</span>';
+        hs.slice(0,4).forEach(function(o){
+          h+='<a class="g-hit" href="'+c.arquivo+q+(o.anchor?'#'+o.anchor:'')+'"><span class="g-sec">'+gEsc(o.head)+'</span>'+trecho(o.txt,t)+'</a>';
+        });
+        if(hs.length>4) h+='<div class="g-mais">+ '+(hs.length-4)+' trecho(s) — abra o caderno para ver todos</div>';
+        h+='</div>';
+      });
+      box.innerHTML=h;
+    });
+  },250);
+}
+
 let filtroMat = "todos";
 function setFiltro(m){ filtroMat=m; document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on', x.dataset.m===m)); render(); }
 
@@ -791,7 +901,7 @@ function render(){
     let cards="";
     itens.forEach(function(c){
       const tags=(c.tags||[]).map(function(t){
-        const cls=t.toUpperCase()==="BANCA"?"tag banca":"tag";
+        const cls=(t.toUpperCase()==="BANCA"||t.toUpperCase()==="COBRADO")?"tag banca":"tag";
         return '<span class="'+cls+'">'+t+'</span>';
       }).join("");
       cards+='<a class="card" style="--accent:'+meta.cor+'" href="'+c.arquivo+'">'
@@ -814,7 +924,8 @@ function render(){
       +'</section>');
   });
 
-  document.getElementById('vazio').style.display = visiveis===0 ? "block" : "none";
+  document.getElementById('vazio').style.display = (visiveis===0 && !termo) ? "block" : "none";
+  buscaGlobal();
 }
 
 function montarStats(){

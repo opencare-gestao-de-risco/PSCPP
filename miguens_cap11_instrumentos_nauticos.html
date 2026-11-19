@@ -73,45 +73,7 @@
   tr:nth-child(even) td{background:#faf7ee}
   td.center,th.center{text-align:center}
   td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
-
-  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
-  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
-  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
-  .ichart canvas{width:100%;height:300px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
-  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
-  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
-  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:96px}
-  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
-  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
-  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
-  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;min-width:240px}
-  .iread b{color:var(--verde2)}
-
-  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
-  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
-  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
     border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
-  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
-  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
-  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
-  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
-  .quiz .fb.show{display:block}
-  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
-  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
-  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
-  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
-  .quiz button.nextq:disabled{opacity:.4;cursor:default}
-  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-  .score b{color:var(--ouro);font-size:16px}
-
-  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
-  .fc{perspective:1100px;height:175px;cursor:pointer}
-  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
-  .fc.flip .fc-in{transform:rotateY(180deg)}
-  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
-  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
-  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
-  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
 
   details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
   details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
@@ -129,388 +91,91 @@
   footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
   footer b{color:var(--ouro)}
   @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+
+  .legend{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;margin:0 0 30px;line-height:1.9}
+  .t-nota{background:#dcefeb;color:#145c52}
+  .dot{color:#C0392B;font-weight:bold}
+  .ul{text-decoration:underline;text-decoration-color:#C0392B;text-decoration-thickness:2px}
+  .box.quad{padding:14px 16px}
+  h4.qt{margin:0 0 6px;font-family:'Trebuchet MS',sans-serif;font-size:13.5px;color:var(--verde);text-transform:none;letter-spacing:0}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw table{margin:6px 0;min-width:520px}
+  td.hlc{background:var(--amarelo)!important}
+  td.amb{background:#FBE7C0!important}
+  p.foot{font-size:13px;color:var(--mute);font-style:italic;margin:6px 0 0}
+  ul.steps{margin:6px 0 0;padding-left:20px;font-size:15px}
+  ul.steps li{margin:5px 0}
+  ul.steps li.sub{list-style:none;margin-left:6px;color:#3d5550}
+  .box.sint{font-size:14.5px;padding:12px 16px;margin:12px 0}
+  .box.sint.key{border-left:6px solid var(--ouro)}
+  .box.sint.banca{border-left:6px solid #D98E04;background:#fffaf0}
+  .box.sint.formula{border-left:6px solid var(--azul)}
+  .box.sint.nota{border-left:6px solid var(--verde2)}
+  table.gloss td:first-child{white-space:nowrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  table.gloss td:last-child{text-align:center;white-space:nowrap}
+  @media(max-width:600px){.tw table{font-size:13px}}
+.busca{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.busca input{flex:1;font-family:Georgia,serif;font-size:15px;padding:9px 14px;border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:0}
+.busca input:focus{outline:none;border-color:var(--verde2);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
+#qn{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);white-space:nowrap}
+mark.sq{background:#ffb347;color:inherit;border-radius:2px;padding:0 1px}
+.t-cob{background:#F2C879;color:#5a3d00}
+h3.dh{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--verde2);margin:18px 0 8px;border-bottom:1px solid var(--linha);padding-bottom:4px}
+.defs{display:grid;gap:12px;margin-bottom:10px}
+.def{background:var(--card);border:1px solid var(--linha);border-left:4px solid var(--verde2);border-radius:10px;padding:12px 16px;box-shadow:var(--sombra)}
+.def h4{margin:0 0 6px;font-size:16px;color:var(--verde)}
+.def p{margin:0;line-height:1.55}
+.def ul{margin:8px 0 0;padding-left:20px}
+.def li{margin:4px 0;line-height:1.5}
+h2.sec{flex-wrap:wrap;row-gap:4px}
+@media(max-width:600px){nav.toc .wrap .row{flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}nav.toc .wrap .row a{flex:0 0 auto}}
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap">
-    <p class="eyebrow">PSCPP 2027 · Bloco A — Instrumentos</p>
-    <h1>Instrumentos Náuticos — do <em>odômetro</em> ao ecobatímetro</h1>
-    <p class="sub">As ferramentas do navegante organizadas por finalidade: medir direções, velocidade e distância navegada (odômetros de superfície, de fundo e Doppler), distâncias a objetos (estadímetro, sextante) e profundidade (prumo e ecobatímetro). Com o efeito da corrente sobre o odômetro e a corrida da milha.</p>
-    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 11 (Instrumentos Náuticos). A banca cita a <b>1ª edição (1996)</b>. Questões reais: PSCPP 2011-Q59 e 2012-Q22/Q25.</div>
-  </div>
-</header>
-
-<nav class="toc">
-  <div class="wrap"><div class="row">
-    <a href="#tipos">11.1 Por finalidade</a>
-    <a href="#marcacao">11.2 Marcações</a>
-    <a href="#odometros">11.3 Odômetros ▶</a>
-    <a href="#corrente">Corrente ▶</a>
-    <a href="#distancia">11.4 Distâncias</a>
-    <a href="#ecobat">11.5 Ecobatímetro ▶</a>
-    <a href="#banca">Já cobrado</a>
-    <a href="#flash">Flashcards</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#pscpp">Pontos PSCPP</a>
-  </div></div>
-</nav>
-
-<main>
-<div class="wrap">
-
-<div class="related">
-  📎 Núcleo do <strong>Bloco A</strong>. As agulhas (direções) estão no <a href="miguens_cap3_agulhas_conversao_rumos.html">Cap. 3</a>; o ecobatímetro liga-se ao critério das profundidades (<a href="miguens_cap7_8_ldp_seguranca.html">Cap. 7</a>) e às marés (Cap. 10); o efeito da corrente vem da estimada (<a href="miguens_cap1_5_navegacao_estimada.html">Cap. 5</a>).
-</div>
-
-<!-- ===== POR FINALIDADE ===== -->
-<section class="bloco" id="tipos">
-  <h2 class="sec"><span class="n">11.1</span> As ferramentas do navegante, por finalidade</h2>
-  <p class="lede">O capítulo organiza os instrumentos pelo que medem. Guarde o mapa — a banca pede exatamente "qual instrumento serve para quê".</p>
-
-  <table>
-    <tr><th>Finalidade</th><th>Instrumentos</th></tr>
-    <tr><td>Medir <strong>direções</strong> (marcações/azimutes)</td><td>Agulhas; taxímetro, alidade de pínulas, círculo azimutal, alidade telescópica/autossíncrona, espelho azimutal, agulha digital de mão.</td></tr>
-    <tr><td>Medir <strong>velocidade e distância navegada</strong></td><td>Odômetros (superfície, fundo, Doppler) e velocímetros.</td></tr>
-    <tr><td>Medir <strong>distâncias a objetos</strong></td><td>Estadímetro, sextante, telêmetro, guarda-posto.</td></tr>
-    <tr><td>Medir <strong>profundidade</strong></td><td>Prumo de mão; ecobatímetro (ecossonda).</td></tr>
-    <tr><td><strong>Plotagem</strong> na carta</td><td>Réguas paralelas, plotadores, compasso, transferidor universal, <strong>estaciógrafo</strong>.</td></tr>
-    <tr><td><strong>Eletrônicos</strong></td><td>ECDIS.</td></tr>
-  </table>
-
-  <div class="box trap">
-    <h4>A confusão que a banca planta <span class="tag t-conflito">CONFLITO</span> <span class="tag t-banca">BANCA</span></h4>
-    <p>O <strong>estaciógrafo</strong> é instrumento de <span class="hl">plotagem</span> (posição por segmentos capazes), <strong>não</strong> de medir distância. Colocá-lo entre os instrumentos de distância (com sextante, telêmetro, guarda-posto) é o erro da <strong>2012-Q22</strong>. O de distância análogo é o <strong>estadímetro</strong>.</p>
-  </div>
-</section>
-
-<!-- ===== MARCAÇÕES ===== -->
-<section class="bloco" id="marcacao">
-  <h2 class="sec"><span class="n">11.2</span> Dispositivos para medir marcações e azimutes</h2>
-  <p class="lede">Além das agulhas (Cap. 3), há acessórios de visada montados sobre a rosa.</p>
-
-  <div class="box key">
-    <h4>Os dispositivos <span class="tag t-banca">BANCA</span></h4>
-    <p><strong>Taxímetro · alidade de pínulas · círculo azimutal · alidade telescópica</strong> (com luneta) · <strong>alidade autossíncrona</strong> (motor síncrono comandado pela giro mestra — mantém a marcação mesmo com o navio jogando) · <strong>espelho azimutal</strong> · <strong>agulha magnética digital de mão</strong> (DataScope/StarScope — dá marcações verdadeiras entrando com a declinação; StarScope tem visão noturna). Todos servem para <span class="hl">marcações e azimutes</span>.</p>
-  </div>
-  <div class="box"><h4>Alidades, agulha eletrônica e giropiloto</h4><p>A <strong>alidade autossíncrona</strong>, assim como a <strong>alidade telescópica</strong>, é usada em lugar do círculo azimutal ou do espelho azimutal para determinar a marcação de <span class="hl">objetos distantes</span>. A <strong>agulha eletrônica</strong> (fluxgate) pode ser usada em <span class="hl">latitudes mais elevadas</span> que a agulha magnética convencional. O <strong>giropiloto</strong> (piloto automático) atua quando o navio sai apenas <span class="hl">1/3 de grau</span> do rumo ajustado.</p></div>
-
-</section>
-
-<!-- ===== ODÔMETROS ===== -->
-<section class="bloco" id="odometros">
-  <h2 class="sec"><span class="n">11.3.1</span> Odômetros e velocímetros</h2>
-  <p class="lede">Três tipos — e uma distinção que a banca adora: só um deles mede a velocidade em relação ao fundo.</p>
-
-  <div class="box key">
-    <h4>Os três tipos e a grande distinção <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
-    <table style="margin:6px 0 0">
-      <tr><th>Odômetro</th><th>Mede a velocidade em relação a…</th></tr>
-      <tr><td><strong>De superfície</strong> (hélice/linha/registrador)</td><td>à <span class="hl">água</span> (superfície) — hoje é equipamento de emergência</td></tr>
-      <tr><td><strong>De fundo</strong> (tubo de Pitot: pressão estática × dinâmica)</td><td>à <span class="hl">água</span> (apesar do nome "de fundo" = montado no fundo do casco)</td></tr>
-      <tr><td><strong>Doppler</strong></td><td>ao <span class="hl">fundo do mar</span> — o único que mede velocidade sobre o fundo</td></tr>
-    </table>
-    <p class="vars"><strong>Pegadinha campeã:</strong> o odômetro <em>"de fundo"</em> mede em relação à <strong>água</strong>, não ao fundo do mar. Só o <strong>Doppler</strong> mede sobre o fundo (e indica velocidades muito pequenas — útil na atracação).</p>
-  </div>
-
-  <div class="box"><h4>Rigor por tipo de odômetro <span class="tag t-decorar">DECORAR</span></h4><p>O <strong>odômetro de fundo, tipo de pressão</strong> (Pitot) oferece um rigor da ordem de <span class="hl">meio nó</span>, aproximadamente. O <strong>odômetro eletromagnético</strong> tem características gerais semelhantes às dos de pressão, mas com indicações mais rigorosas (<span class="hl">erro = 0,1 nó</span>) e limites de utilização mais amplos (<span class="hl">0 a 40 nós</span>).</p></div>
-
-  <div class="box"><h4>Doppler: balanço × caturro e referência</h4><p>O erro do <strong>balanço</strong> é eliminado dando ao feixe o formato de feixe de sonar. Já o <strong>caturro</strong> pode introduzir erro, ao mover o feixe para vante/ré sobre o fundo. Transdutores especiais reduzem — ou até eliminam — esse erro nos <span class="hl">grandes navios</span>; nas embarcações menores (iates, pesqueiros), só é possível <span class="hl">minimizá-lo</span>. Como referência, geralmente usa-se o <strong>fundo até cerca de 90 m</strong> de profundidade e a <strong>massa d'água a partir de 90 m</strong>.</p></div>
-
-  <div class="box">
-    <h4>Odômetro de superfície — inconvenientes</h4>
-    <p>Precisa ser retirado com máquinas atrás (enrosca no hélice); sofre com mar grosso; enrosca em algas/lixo; não fica sempre pronto; indica distância, não velocidade direta; não pode ser lançado em portos movimentados (a linha é cortada). Simples de instalar e trocar peças.</p>
-  </div>
-</section>
-
-<!-- ===== CORRENTE ===== -->
-<section class="bloco" id="corrente">
-  <h2 class="sec"><span class="n">11.3.2</span> O efeito da corrente e a corrida da milha</h2>
-  <p class="lede">O odômetro (exceto o Doppler) mede em relação à água. Com corrente, sua leitura difere da distância no fundo — exatamente o que a 2012-Q25 cobra.</p>
-
-  <div class="ichart">
-    <h4>Odômetro × distância no fundo</h4>
-    <p class="hint">Velocidade na superfície 18 nós, trecho A→B de 80 mn no fundo. Deslize a corrente (contra = negativa; a favor = positiva) e compare a leitura do odômetro (relativa à água) com a distância no fundo.</p>
-    <canvas id="cvCor" width="860" height="270"></canvas>
-    <div class="ictrl"><label for="cor">Corrente →</label><input type="range" id="cor" min="-4" max="4" step="0.5" value="-2" oninput="drawCor()"></div>
-    <div class="iread" id="corRead" style="margin-top:6px"></div>
-  </div>
-
-  <div class="box key">
-    <h4>2012-Q25 resolvida <span class="tag t-banca">BANCA</span> <span class="tag t-calc">CALCULO</span></h4>
-    <p>NM Itaperi, Salvador → Cabedelo (rumo <strong>Norte</strong>), 18 nós na superfície; A→B = 80 mn; Corrente do Brasil 2 nós (flui para o Sul → <span class="hl">contrária</span>). Velocidade no fundo = 18 − 2 = <strong>16 nós</strong> → tempo = 80/16 = <strong>5 horas</strong>. Odômetro (relativo à água) = 18 × 5 = <span class="hl">90 mn</span>. Gabarito <b>(a)</b>. <em>Regra: contra a corrente o odômetro registra MAIS que a distância no fundo; a favor, MENOS.</em></p>
-  </div>
-
-  <div class="box">
-    <h4>Corrida da milha <span class="tag t-banca">BANCA</span></h4>
-    <p>Processo de <strong>calibragem/aferição</strong> de odômetros e velocímetros: o navio faz percursos de <span class="hl">distância rigorosamente conhecida</span> (marcas conspícuas em terra). Segundo Miguens, é o <span class="hl">processo mais rigoroso</span> para calibrar os odômetros. Sem odômetro, há o processo prático: cronometrar um objeto flutuante da proa à popa — <strong>vel (nós) = comprimento (m) ÷ (0,514 · t)</strong>.</p>
-  </div>
-</section>
-
-<!-- ===== DISTÂNCIAS ===== -->
-<section class="bloco" id="distancia">
-  <h2 class="sec"><span class="n">11.4</span> Distâncias a objetos</h2>
-  <p class="lede">Por métodos visuais, medindo o ângulo vertical de um objeto de altitude conhecida.</p>
-
-  <div class="box formula">
-    <h4>O estadímetro <span class="tag t-calc">CALCULO</span></h4>
-    <div class="eq">d = h · cotg α<span class="lbl">d = distância · h = altitude conhecida do objeto · α = ângulo vertical medido</span></div>
-    <p class="vars">Alcance típico 250–10.000 jardas (0,1–5 mn), com <strong>boa precisão só até ~2.000 jardas (1 mn)</strong>; altitude do objeto entre 50 e 200 pés. Muito usado para medir distância a <strong>outros navios em formatura</strong> (entra-se com a altura do mastro) ou a pontos de altitude conhecida. Outros instrumentos de distância: <strong>sextante, telêmetro, guarda-posto</strong>. (O <strong>estaciógrafo</strong> é de plotagem, não de distância.)</p>
-  </div>
-</section>
-
-<!-- ===== ECOBATÍMETRO ===== -->
-<section class="bloco" id="ecobat">
-  <h2 class="sec"><span class="n">11.5.2</span> O ecobatímetro (ecossonda)</h2>
-  <p class="lede">Mede profundidade pelo tempo de ida-e-volta de um pulso acústico refletido no fundo.</p>
-
-  <div class="ichart">
-    <h4>O princípio do eco</h4>
-    <p class="hint">Um pulso desce do transdutor, reflete no fundo e volta. Deslize a profundidade e veja o tempo do eco e a fórmula h = v·t/2 (v ≈ 1500 m/s). Some o calado para a profundidade real do local.</p>
-    <canvas id="cvEco" width="860" height="290"></canvas>
-    <div class="ictrl"><label for="prof">Profundidade →</label><input type="range" id="prof" min="10" max="300" step="5" value="80" oninput="drawEco()"></div>
-    <div class="iread" id="ecoRead" style="margin-top:6px"></div>
-  </div>
-
-  <div class="box formula">
-    <h4>A fórmula e os detalhes <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
-    <div class="eq">h = v · t / 2<span class="lbl">h = profundidade sob o transdutor · v ≈ 1.500 m/s (som na água) · t = tempo ida-e-volta</span></div>
-    <p class="vars">A profundidade é referida ao <strong>fundo do casco</strong> (onde ficam os transdutores) → <span class="hl">soma-se o calado</span> para obter a profundidade do local. Sonoros (&lt; 20 kHz) × ultrassônicos (&gt; 20 kHz). Transdutor por <strong>magnetostrição ou piezeletricidade</strong>. <strong>Fundos duros</strong> refletem melhor (eco mais forte; lama macia = eco fraco). Alarmes de <strong>baixa e alta profundidade</strong> (a baixa avisa o limite de segurança; ambos ajudam a detectar o navio <strong>garrando</strong>). Vantagens sobre o prumo: sondagem contínua, em maiores velocidades e profundidades.</p>
-  </div>
-</section>
-
-<!-- ===== MAPA DA BANCA ===== -->
-<section class="bloco" id="banca">
-  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
-  <p class="lede">Capítulo bem cobrado: três questões diretas de instrumentos (uma de cálculo).</p>
-
-  <table>
-    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
-    <tr><td>2011 · Amarela</td><td><strong>Q59</strong></td><td>Velocidade transversal na atracação de navios &gt; 100.000 tpb</td><td class="center"><b>(b)</b> Sonar Doppler, 0,01 nó</td></tr>
-    <tr><td>2012 · Rosa</td><td><strong>Q22</strong></td><td>Instrumentos náuticos — assinale a INCORRETA</td><td class="center"><b>(d)</b> estaciógrafo</td></tr>
-    <tr><td>2012 · Rosa</td><td><strong>Q25</strong> (1,3 pt)</td><td>Odômetro × corrente (leitura vs distância no fundo)</td><td class="center"><b>(a)</b> 5 h / 90 mn</td></tr>
-  </table>
-
-  <div class="box key">
-    <h4>2012-Q22 resolvida — a incorreta <span class="tag t-banca">BANCA</span></h4>
-    <p>(b) alidade/círculo azimutal/taxímetro medem marcações e azimutes → V. (c) corrida da milha como processo de calibragem dos odômetros → V (Miguens a trata como o mais rigoroso). (e) Doppler é o único que mede velocidade no fundo → V. <strong>(d)</strong> "sextante, telêmetro, guarda-posto e <span class="hl">estaciógrafo</span>" para medir distâncias → <span class="hl">INCORRETA</span>: o estaciógrafo é de <strong>plotagem</strong> (segmentos capazes), não de distância. Gabarito <b>(d)</b>.</p>
-  </div>
-
-  <div class="box key">
-    <h4>2011-Q59 — o Doppler na atracação <span class="tag t-banca">BANCA</span></h4>
-    <p>Navios &gt; 100.000 tpb precisam medir a <strong>velocidade transversal</strong> na atracação com alta precisão. Equipamento: <strong>Sonar Doppler</strong> (acústico), precisão <strong>0,01 nó</strong>. Gabarito <b>(b)</b>. (Distrator: "radar" Doppler — é sonar/acústico.)</p>
-  </div>
-
-  <div class="box trap">
-    <h4>Distratores a vigiar <span class="tag t-conflito">DECORAR</span></h4>
-    <p>• Odômetro <strong>"de fundo" mede na ÁGUA</strong>; só o Doppler no fundo. • <strong>Estaciógrafo = plotagem</strong>, não distância. • Ecobatímetro: profundidade + <strong>calado</strong>. • Contra a corrente, odômetro registra <strong>mais</strong> que a distância no fundo. • Doppler de atracação = <strong>sonar</strong>, 0,01 nó.</p>
-  </div>
-</section>
-
-<!-- ===== FLASHCARDS ===== -->
-<section class="bloco" id="flash">
-  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
-  <p class="lede">Toque para virar. Os instrumentos e suas finalidades.</p>
-  <div class="fcgrid" id="fcGrid"></div>
-</section>
-
-<!-- ===== QUIZ ===== -->
-<section class="bloco" id="quiz">
-  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
-  <p class="lede">Doze questões — as três reais (2011-Q59, 2012-Q22, 2012-Q25) incluídas.</p>
-  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
-  <div class="quiz" id="quizBox">
-    <div class="q" id="qText"></div>
-    <div id="qOpts"></div>
-    <div class="fb" id="qFb"></div>
-    <div class="nav">
-      <span id="qCount"></span>
-      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PSCPP ===== -->
-<details class="pscpp" id="pscpp" open>
-  <summary>Pontos PSCPP — Instrumentos Náuticos (Miguens Cap. 11)</summary>
-  <ul>
-    <li><b>Por finalidade:</b> direções (agulhas, taxímetro, alidades, círculo azimutal) · velocidade/distância navegada (odômetros) · distâncias a objetos (estadímetro, sextante, telêmetro, guarda-posto) · profundidade (prumo, ecobatímetro) · plotagem (réguas, compasso, estaciógrafo, TU) · ECDIS.</li>
-    <li><b>Odômetros:</b> superfície, fundo (Pitot) e Doppler. Superfície e fundo medem em relação à ÁGUA; só o DOPPLER mede em relação ao FUNDO (e indica velocidades muito pequenas).</li>
-    <li><b>Odômetro de superfície:</b> equipamento de emergência; retirar com máquinas atrás; sofre mar grosso; enrosca em algas/lixo.</li>
-    <li><b>Efeito da corrente:</b> odômetro (exceto Doppler) mede na água. Contra a corrente → odômetro registra MAIS que a distância no fundo; a favor → MENOS.</li>
-    <li><b>Corrida da milha:</b> calibragem/aferição de odômetros e velocímetros por percursos de distância conhecida (marcas em terra). "Mais comumente utilizada." Processo prático: vel = comprimento ÷ (0,514·t).</li>
-    <li><b>Estadímetro:</b> d = h·cotg α; 250–10.000 jd (bom até ~2.000 jd); altitude 50–200 pés; usado p/ navios em formatura. Estaciógrafo é de PLOTAGEM (segmentos capazes), não de distância.</li>
-    <li><b>Ecobatímetro:</b> h = v·t/2 (v ≈ 1.500 m/s). Referido ao fundo do casco → soma-se o CALADO. Sonoros &lt;20 kHz / ultrassônicos &gt;20 kHz. Transdutor por magnetostrição/piezeletricidade. Fundos duros = eco mais forte. Alarmes de baixa/alta profundidade (garrando).</li>
-    <li><b>Banca:</b> 2011-Q59 (Sonar Doppler, 0,01 nó, atracação de navios &gt;100.000 tpb, gab b) · 2012-Q22 (incorreta: estaciógrafo entre instrumentos de distância, gab d) · 2012-Q25 (odômetro × corrente, 5 h e 90 mn, gab a).</li>
-  </ul>
-</details>
-
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">PSCPP 2027 · Navegação — Miguens · Consulta rápida</p>
+  <h1>Instrumentos <em>Náuticos</em></h1>
+  <p class="sub">Consulta rápida do Cap. 11: agulhas e fontes de rumo, piloto automático, instrumentos de marcação, odômetros (superfície, pressão, eletromagnético, Doppler), corrida da milha, medição de distâncias, prumo e ecobatímetro, instrumentos para cartas em papel e digitais, binóculos.</p>
+  <div class="src"><b>Fonte:</b> Miguens, Manual de Navegação da MB, Vol. I — Cap. 11 (DHN, 2ª Revisão, 2023). Consulta rápida; o caderno de leitura completo é o DOCX.</div>
+</div></header>
+<nav class="toc"><div class="wrap"><div class="busca"><input id="q" type="search" placeholder="Buscar neste caderno (ex.: ocultação, cardinal, alcance)…" aria-label="Buscar neste caderno"><span id="qn"></span></div><div class="row"><a href="#s0">11.2</a><a href="#s1">11.3</a><a href="#s2">11.4</a><a href="#s3">11.5</a><a href="#s4">11.6</a><a href="#s5">11.7</a><a href="#s6">11.8</a><a href="#s7">Glossário</a></div></div></nav>
+<main><div class="wrap">
+<div class="legend"><b>Como usar:</b> consulta rápida do capítulo — definições completas do livro, listas de opções, quadros e cálculos. O texto integral com os seus destaques está no DOCX <b>Miguens_Vol1_Cap11_Destaques_PSCPP.docx</b>.
+<span class="tag t-cob">COBRADO</span> = assunto já cobrado em prova · <span class="hl">amarelo</span> = seu destaque no PDF · <span class="dot">●</span> = seu ponto vermelho ·
+<span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span> <span class="tag t-conflito">CONFLITO</span> = divergência no livro. No glossário: ★ seu destaque · ● cobrado · ○ só menção. A busca aceita palavras sem acento.</div>
+<section class="bloco" id="s0"><h2 class="sec"><span class="n">11.2</span><span class="tt">Instrumentos para medida de direções no mar</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Agulha eletrônica (fluxgate) <span class="tag t-cob">COBRADO</span></h4><p>Modelo de agulha magnética que baseia seu funcionamento na medida do campo magnético terrestre; apresentação analógica ou digital, transmitida facilmente a repetidoras, radares e piloto automático; pode ser usada em latitudes mais elevadas que a magnética convencional. Magnetômetros de smartphones (efeito Hall) <b>não</b> são reconhecidos pela MB.</p></div><div class="def srch"><h4>Fontes de rumo a bordo</h4><p>Além das agulhas magnética e eletrônica:</p><ul><li><b>Giroscópicas</b> — instaladas no passadiço; navios modernos têm mais de uma (reserva). FOG e RLG: mais compactas, menor manutenção (sem partes móveis), estabilização mais rápida e medida de atitude;</li><li><b>Duas antenas de posicionador por satélite</b> — o rumo deixa de vir de um sensor autônomo e fica <b>dependente da confiabilidade de sistemas externos</b>.</li></ul></div><div class="def srch"><h4>Piloto automático (giropiloto)</h4><p>Aparelho para controle automático do rumo; pode operar com repetidora da giro ou da magnética, mas quando associado à giro chama-se “<b>giropiloto</b>”. Indica variações de 1/6 de grau e atua com afastamento de 1/3 de grau; governa melhor, aumenta a distância realmente navegada para o mesmo consumo e reduz o desgaste da máquina do leme. Porém é “<b>cego</b>”: exige vigilância permanente.</p></div><div class="def srch"><h4>Registrador de rumos</h4><p>Instrumento que registra graficamente, em papel, os rumos navegados em função do tempo, acionado por uma repetidora da giro; serve de prova de manobras em acidentes (colisão). O ECDIS faz esse registro eletronicamente.</p></div><div class="def srch"><h4>Instrumentos de marcação e azimute</h4><p>Vistos no Cap. 3: taxímetro, agulha magnética de mão, alidade de pínulas, círculo azimutal e alidade telescópica. No Cap. 11:</p><ul><li><b>Espelho azimutal</b>: alidade com espelho e prisma de reflexão, usada como o círculo azimutal;</li><li><b>Alidade autossíncrona</b>: alidade telescópica com motor síncrono comandado pela giro mestra — não perde o objeto com o navio jogando; para objetos distantes;</li><li><b>Agulha magnética digital de mão</b> (DATASCOPE, luneta 5x30; STARSCOPE com visão noturna): sensores de fluxo magnético; aceita a declinação e dá marcações verdadeiras.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Piloto automático: serve a <b>giro ou magnética</b> (com repetidora); com giro = “giropiloto”; indica 1/6°, atua a 1/3°; vantagens: governo melhor, mais distância pelo mesmo combustível, menos desgaste da máquina do leme; é “cego”. Distrator: “uso exclusivo com a giro”.</div></section><section class="bloco" id="s1"><h2 class="sec"><span class="n">11.3</span><span class="tt">Instrumentos de medida de velocidade e distância percorrida</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Tipos de odômetro <span class="tag t-cob">COBRADO</span></h4><p>Os odômetros podem ser classificados em:</p><ul><li><b>Odômetro de superfície</b> (hélice, volante, linha de reboque e registrador) — antigo, mantido como equipamento de emergência; indica distância na superfície, não dá velocidade diretamente;</li><li><b>Odômetro de fundo</b> — tipo <b>pressão (tubo de Pitot)</b>: diferença entre pressão total e estática; rigor de ~meio nó; pouco correto a baixa velocidade; haste içada em portos e águas rasas; tipo <b>eletromagnético</b>: FEM proporcional à velocidade em relação à água; erro 0,1 nó; 0 a 40 nós;</li><li><b>Odômetro Doppler</b> — único que mede a velocidade <b>em relação ao fundo</b>.</li><li>Os dois primeiros medem a velocidade <b>na superfície</b> (em relação à massa d’água), apesar do nome “de fundo” (instalado no fundo do casco).</li></ul></div><div class="def srch"><h4>Odômetro Doppler <span class="tag t-cob">COBRADO</span></h4><p>Transdutores de emissão e recepção no casco; sinal ultrassônico refletido pelo fundo ou por partículas; diferença de frequências proporcional à velocidade. É o <b>único que mede a velocidade no fundo</b> e indica velocidades muito pequenas. Referência: o fundo até cerca de <b>90 m</b> e a massa d’água além disso (sinal contínuo: até 50 m). Precisão de cerca de <b>0,5% da distância</b> (1,8 milha em 360). Em VLCC/ULCC, sonar Doppler de dois eixos (longitudinal e transversal), muito útil na atracação.</p></div><div class="def srch"><h4>Tabela RPM × velocidade</h4><p>Indispensável a bordo, mas usada com cuidado: para as mesmas RPM, a velocidade depende do grau de limpeza do casco, estado do mar, calado e vento; e a velocidade <b>não é função linear</b> das RPM.</p></div><div class="def srch"><h4>Efeito da corrente no odômetro <span class="tag t-cob">COBRADO</span></h4><p>Exceto o Doppler, os odômetros medem em relação à massa líquida: fundeado numa corrente de 2 nós, indica 2 nós; à deriva, indica zero. Exemplo do livro: 100 milhas no fundo a 10 nós contra 2 nós de corrente → velfd 8 nós, 12,5 h, odômetro <b>125 milhas</b>; a favor → 12 nós, 8,33 h, odômetro <b>83,3 milhas</b>.</p></div><div class="def srch"><h4>Corrida da milha <span class="tag t-cob">COBRADO</span></h4><p>O processo <b>mais comumente utilizado</b> e o <b>mais rigoroso</b> para calibrar odômetros. Distância entre marcas de uma milha, de preferência 3 ou mais; média de duas corridas consecutivas em rumos opostos (anula a corrente); bom tempo, sem vento, profundidade de pelo menos <b>5 vezes o calado</b>; navio no rumo cerca de 1 milha antes do primeiro alinhamento. O erro instrumental, se não eliminado, é corrigido com sinal contrário.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> Nome enganoso: o “odômetro <b>de fundo</b>” (pressão ou eletromagnético) é instalado no fundo do casco, mas mede velocidade <b>na superfície</b> (em relação à água). Só o <b>Doppler</b> mede em relação ao fundo. Distrator garantido.</div><div class="box quad srch-t"><h4 class="qt">Odômetros</h4><div class="tw"><table><thead><tr><th>Tipo</th><th>Princípio</th><th>Mede em relação a</th><th>Precisão / limites</th><th>Ponto de prova</th></tr></thead><tbody><tr class="srow"><td>Superfície (mecânico)</td><td>Hélice rebocado + contador</td><td>Água</td><td>Bastante preciso; emergência</td><td>Dá distância, não velocidade direta; retirar em máquinas atrás</td></tr><tr class="srow"><td>Fundo — pressão (Pitot)</td><td>Pressão total − estática = dinâmica</td><td>Água</td><td>≈ 0,5 nó; ruim a baixa velocidade</td><td>Haste 0,60–0,75 m; içar em portos e águas rasas</td></tr><tr class="srow"><td>Fundo — eletromagnético</td><td>FEM induzida (lei de Faraday)</td><td>Água</td><td>0,1 nó; 0 a 40 nós</td><td>Mais rigoroso que o de pressão</td></tr><tr class="srow"><td>Doppler</td><td>Diferença de frequência do eco</td><td><b>Fundo</b> (até ~90 m; além disso, massa d’água)</td><td>0,5% da distância (1,8 em 360 mn)</td><td>Único que mede no fundo; velocidades muito pequenas; VLCC: dois eixos</td></tr></tbody></table></div></div><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Corrida da milha — exemplo do livro (Cabo Frio, Carta 1508, p. 11-20)</h4><ul class="steps"><li>1ª corrida (090°): 1 milha em 390 s → velfd = 3.600 ÷ 390 = 9,23 nós; odômetro 1,2’ em 390 s → 11,08 nós.</li><li>2ª corrida (270°): 1 milha em 340 s → velfd = 10,59 nós; odômetro 0,9’ → 9,53 nós.</li><li>Médias (anulam a corrente): velfd = 9,91 · vel od = 10,30.</li><li>ei = (vel od − vel fd) ÷ vel od × 100 = 0,39 ÷ 10,30 = <b>+3,8%</b> (vel od &gt; vel fd → erro +).</li><li class="sub">Correção = mesmo valor, sinal contrário: <b>−3,8%</b> em todas as leituras.</li></ul></div><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Processo prático de velocidade (11.3.3, sem marcação)</h4><ul class="steps"><li>Objeto flutuante lançado da proa; t = tempo da proa à popa; 1 nó = 0,514 m/s.</li><li>v (nós) = L (m) ÷ (0,514 × t) ≈ <b>2 × L ÷ t</b>. Ex.: L = 100 m, t = 20 s → ≈ 10 nós.</li></ul></div></section><section class="bloco" id="s2"><h2 class="sec"><span class="n">11.4</span><span class="tt">Instrumentos para medição de distâncias no mar</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Medição de distâncias no mar <span class="tag t-cob">COBRADO</span></h4><p>Por sistemas eletrônicos (radar) ou por métodos visuais. Os métodos visuais utilizam <b>estadímetros, sextantes, telêmetros e guarda-postos</b>.</p><ul><li><b>Estadímetro</b>: ângulo vertical de objeto de altitude conhecida, d = h · cotg α; mecânico de 250 a 10.000 jardas (preciso até 2.000), objeto de 15 a 60 m; usado sobretudo em formatura; substituído na MB pelo eletrônico (KVH DataScope);</li><li><b>Sextante</b>: ângulo vertical de objeto aquém do horizonte, D = H · cotg α (distância ao objeto, não à costa); Tábua II do Vol. III;</li><li><b>Guarda-posto</b>: instrumento de refração com prismas de 16 e 32 pés, para manter o posto em formatura.</li></ul></div><div class="def srch"><h4>Distância ao horizonte</h4><p>A distância ao horizonte (alcance geográfico) pode ser determinada, em função da elevação do olho do observador, por <b>D (milhas) = 2 √h (metros)</b>. Para observador e objeto: D = 2√h + 2√H (ex.: 9 m e 100 m → 26 milhas).</p></div><div class="def srch"><h4>Distância por dois ângulos e distância navegada</h4><p>Com o navio aproado ao objeto (ou dando-lhe a popa): <b>D = dist “od” × α ÷ (β − α)</b>. Exemplo do livro: α 2°15’ (135’), β 3°28’ (208’), 3,5 milhas → D = 6,5 milhas.</p></div><div class="def srch"><h4>Processos práticos de distância</h4><p>Métodos de bolso:</p><ul><li><b>Régua vertical</b>: D = d × H ÷ L (farol de 70 m cobre 4 cm a 60 cm do olho → 1.050 m);</li><li><b>Régua horizontal</b>: objeto de comprimento conhecido, D = C × d ÷ h (ilha → 7,2 milhas);</li><li><b>Método do dedo</b>: D = P% × C × 10 (0,5 × 2 × 10 = 10 milhas).</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Números do estadímetro mecânico</h4><div class="tw"><table><thead><tr><th>Item</th><th>Valor</th></tr></thead><tbody><tr class="srow"><td>Faixa de distâncias</td><td>250 a 10.000 jardas (0,1 a 5 milhas)</td></tr><tr class="srow"><td>Precisão razoável</td><td>até 2.000 jardas (1 milha)</td></tr><tr class="srow"><td>Altitude do objeto</td><td>50 a 200 pés (15 a 60 m)</td></tr><tr class="srow"><td>Mastro &lt; 50 pés</td><td>introduzir o dobro da altura e dividir a leitura por 2</td></tr><tr class="srow"><td>Emprego principal</td><td>distância a outros navios em formatura</td></tr></tbody></table></div></div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> O exemplo imprime “D = √4 = 4 milhas”; falta o fator 2: <b>D = 2√4 = 4 milhas</b>. O resultado está certo, a fórmula escrita não.</div><div class="box quad srch-t"><h4 class="qt">Fórmulas de distância do capítulo <span class="tag t-calc">CALCULO</span></h4><div class="tw"><table><thead><tr><th>Método</th><th>Fórmula</th><th>Exemplo do livro</th></tr></thead><tbody><tr class="srow"><td>Estadímetro / sextante (ângulo vertical)</td><td>D = H · cotg α</td><td>Tábua II do Vol. III</td></tr><tr class="srow"><td>Horizonte (alcance geográfico)</td><td>D (mn) = 2√h (m) · objeto: 2√h + 2√H</td><td>h 4 m → 4 mn · h 9 m, H 100 m → 26 mn</td></tr><tr class="srow"><td>Dois ângulos + distância navegada</td><td>D = dist od × α ÷ (β − α), ângulos em minutos</td><td>3,5 × 135 ÷ 73 = 6,5 mn</td></tr><tr class="srow"><td>Régua na vertical</td><td>D = d × H ÷ L</td><td>0,6 × 70 ÷ 0,04 = 1.050 m</td></tr><tr class="srow"><td>Régua na horizontal</td><td>D = C × d ÷ h</td><td>1,2 × 60 ÷ 10 = 7,2 mn</td></tr><tr class="srow"><td>Método do dedo</td><td>D = P% × C × 10</td><td>0,5 × 2 × 10 = 10 mn</td></tr></tbody></table></div></div></section><section class="bloco" id="s3"><h2 class="sec"><span class="n">11.5</span><span class="tt">Instrumentos para medição de profundidades</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Prumo de mão</h4><p>Chumbada com cavado onde se coloca sabão ou sebo para trazer amostra do fundo (tença). Marcas: 2, 4, 6 e 8 m nós em merlim; ímpares tira de couro; 10 m uma pinha e filele branco; 20 m duas pinhas, azul; 30 m três pinhas, encarnado. Velocidade até <b>3 nós</b>; o fundo é geralmente menor que o lido (catenária). Fundeado, indica se o navio garra.</p></div><div class="def srch"><h4>Ecobatímetro <span class="tag t-cob">COBRADO</span></h4><p>Mede o tempo de ida e volta do som (≅ <b>1.500 m/s</b> na água): <b>h = v · t / 2</b>. Sonoros (&lt; 20 kHz) ou ultrassônicos (&gt; 20 kHz); transdutores por magnetostrição ou piezeletricidade; fundos duros refletem melhor. A leitura tem como referência o fundo do navio: somar o <b>calado</b>; para comparar com a carta (Nível de Redução = média das baixa-mares de sizígia), subtrair a altura da maré. Monofeixe × multifeixe (faixa transversal, melhor delimitação de perigos).</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Ecobatímetro → sondagem da carta</h4><ul class="steps"><li>h (ecobatímetro) = v · t / 2, com v ≈ 1.500 m/s. Ex.: t = 0,02 s → 15 m abaixo do transdutor.</li><li>Profundidade local = leitura + calado. Comparar com a carta = profundidade local − altura da maré (acima do NR).</li><li class="sub">Ex.: leitura 12 m + calado 8 m = 20 m; maré +1,5 m → 18,5 m para comparar com a sondagem da carta.</li></ul></div><div class="box sint nota srch"><span class="tag t-nota">NOTA</span> Ponte com o Cap. 2 (2.7): cartas recentes sondadas com multifeixe podem ter 100% de ensonificação; com monofeixe, a linha de sondagem só vale nas proximidades imediatas. E com o Cap. 4: isóbata como LDP de segurança (somar o calado, descontar a maré).</div></section><section class="bloco" id="s4"><h2 class="sec"><span class="n">11.6</span><span class="tt">Instrumentos para uso das cartas náuticas em papel</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Instrumentos para a carta em papel</h4><p>Ferramentas de plotagem:</p><ul><li><b>Régua paralela</b> — tradicional; cuidado para não tomar a direção recíproca; <b>plotador paralelo</b> com roletes e graduação, lê direções verdadeiras em qualquer meridiano ou paralelo;</li><li><b>Compasso de navegação</b> e <b>cintel</b> (arcos de distância maiores, útil na navegação radar);</li><li><b>Estaciógrafo</b> — plotagem da posição por <b>segmentos capazes</b>: os ângulos medidos com o sextante são ajustados nos braços, que tangenciam os três objetos; o navio fica no centro do instrumento.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> 11.6.4 diz que o Transferidor Universal “já foi devidamente explicado no Capítulo 5”, mas o Cap. 5 da 2ª revisão (Navegação Estimada) não trata do TU — resto da numeração antiga. Lápis (11.6.5): HB ou nº 2, ou lapiseira 0,5 mm HB.</div></section><section class="bloco" id="s5"><h2 class="sec"><span class="n">11.7</span><span class="tt">Instrumentos para uso das cartas náuticas digitais</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Cartas digitais na MB</h4><p>O CISNE (IPqM) exibe cartas eletrônicas, mas não tem os atributos de um ECDIS: é um ECS. Pela NAVEMARINST nº 10-15: só cartas digitais oficiais atualizadas, validadas e distribuídas por RENC; <b>obrigatoriamente mantida a andaina de cartas em papel</b>; ocorrências na Folha N-2; operação por pessoal qualificado. Classes de ECS (RTCM): A, B, C e D.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Sistema de exibição de cartas digitais × carta em papel (pp. 11-43 a 11-44; sem marcação)</h4><div class="tw"><table><thead><tr><th>Vantagens (seleção)</th><th>Desvantagens</th></tr></thead><tbody><tr class="srow"><td>Integração com agulha, GPS, radar, ecobatímetro; plotagem automática; mudança automática de ENC e de escala</td><td>Equipamento eletrônico sujeito a falhas</td></tr><tr class="srow"><td>Acesso digital a Roteiro, Auxílios-Rádio, Lista de Faróis, Avisos, AIS; correções introduzidas pelo operador ou por arquivo</td><td>Tela menor que a carta em papel</td></tr><tr class="srow"><td>Registro e recuperação do planejamento e da execução; way-points; movimento verdadeiro ou relativo; cálculos (ETA, SOA, PMA)</td><td>Poluição de tela (clutter)</td></tr><tr class="srow"><td>Sobreposição de radar e carta sinótica; alarmes de tempo, posição, profundidade e de alvos (com radar)</td><td>Excesso de confiança do operador</td></tr></tbody></table></div></div></section><section class="bloco" id="s6"><h2 class="sec"><span class="n">11.8</span><span class="tt">Outros instrumentos de navegação</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Binóculos</h4><p>Designados por dois números (ex.: <b>7x50</b>): o primeiro é a potência (aumento) e o segundo o diâmetro da objetiva em mm. Um farol a 3,5 milhas, com 7x, parece estar a 0,5 milha. Campo de 150 m = abertura de 150 m a 1.000 m. <b>Quanto maior o aumento, menor o campo de visão</b>. Perda de ~5% da luz por superfície de vidro; distância interpupilar de 55 a 70 mm.</p></div></div><h3 class="dh">Quadros e sínteses</h3></section><section class="bloco" id="s7"><h2 class="sec"><span class="tt">Glossário completo — Miguens, Vol. I, Cap. 11</span></h2><div class="box quad srch-t"><div class="tw"><table class="gloss"><thead><tr><th>Item</th><th>Termo</th><th>Definição condensada</th><th>Marca</th></tr></thead><tbody><tr class="srow"><td>11.1</td><td>Grupos de instrumentos</td><td>Direções; velocidade/distância percorrida; distâncias no mar; profundidades; carta em papel; carta digital; visão; outros.</td><td>○</td></tr><tr class="srow"><td>11.2.1</td><td>Agulha eletrônica (fluxgate)</td><td>Mede o campo magnético terrestre; rumo transmitido a radar e piloto automático; usável em latitudes mais altas que a magnética convencional.</td><td>★ ●</td></tr><tr class="srow"><td>11.2.1</td><td>Rumo por duas antenas GNSS</td><td>Rumo calculado pela diferença de posição das antenas; depende de sistema externo.</td><td>○</td></tr><tr class="srow"><td>11.2.1</td><td>Piloto automático / giropiloto</td><td>Para giro ou magnética com repetidora; indica 1/6°, atua a 1/3°; mais distância por combustível, menos desgaste do leme; “cego”.</td><td>★</td></tr><tr class="srow"><td>11.2.1</td><td>Registrador de rumos</td><td>Registra em papel os rumos × tempo, acionado pela repetidora da giro; prova em acidentes.</td><td>★</td></tr><tr class="srow"><td>11.2.2</td><td>Espelho azimutal</td><td>Alidade com espelho e prisma; azimutes e marcações como o círculo azimutal.</td><td>★</td></tr><tr class="srow"><td>11.2.2</td><td>Alidade telescópica · autossíncrona</td><td>Luneta sobre o círculo; campo de visão limitado · motor síncrono comandado pela giro mestra.</td><td>★</td></tr><tr class="srow"><td>11.2.2</td><td>DATASCOPE · STARSCOPE</td><td>Agulha digital de mão (fluxo magnético) com declinação → marcação verdadeira · com visão noturna.</td><td>★</td></tr><tr class="srow"><td>11.3.1</td><td>Odômetros</td><td>Superfície, fundo (pressão e eletromagnético) — medem na água; Doppler — mede no fundo.</td><td>★ ●</td></tr><tr class="srow"><td>11.3.1</td><td>Odômetro de pressão (Pitot)</td><td>Pressão total − estática; haste 0,60–0,75 m; ruim a baixa velocidade; ≈ 0,5 nó.</td><td>★</td></tr><tr class="srow"><td>11.3.1</td><td>Odômetro eletromagnético</td><td>FEM induzida; erro 0,1 nó; 0 a 40 nós.</td><td>★</td></tr><tr class="srow"><td>11.3.1</td><td>Odômetro Doppler</td><td>Único que mede no fundo; velocidades muito pequenas; pulsos (profundo) × contínuo (até 50 m); fundo até ~90 m; 0,5% da distância; VLCC em dois eixos.</td><td>★ ●</td></tr><tr class="srow"><td>11.3.1</td><td>Velocímetros</td><td>Haste ou hélice; poucos cuidados; aferir pela corrida da milha; comuns em embarcações menores.</td><td>★</td></tr><tr class="srow"><td>11.3.1</td><td>Tabela RPM × velocidade</td><td>Depende de casco, mar, calado e vento; relação não linear.</td><td>★</td></tr><tr class="srow"><td>11.3.2</td><td>Efeito da corrente no odômetro</td><td>Odômetro mede na água: contra a corrente indica mais que a distância no fundo; a favor, menos.</td><td>● </td></tr><tr class="srow"><td>11.3.2</td><td>Corrida da milha</td><td>Mais comum e mais rigoroso; média de corridas em rumos opostos; bom tempo, profundidade ≥ 5 calados; no rumo 1 milha antes.</td><td>★ ●</td></tr><tr class="srow"><td>11.3.2</td><td>Calibragem do odômetro</td><td>Velocidade do odômetro × medida direta; erro instrumental corrigido com sinal contrário.</td><td>★</td></tr><tr class="srow"><td>11.3.3</td><td>Processo prático</td><td>v (nós) ≈ 2 × L (m) ÷ t (s).</td><td>○</td></tr><tr class="srow"><td>11.4</td><td>Métodos visuais de distância</td><td>Estadímetros, sextantes, telêmetros e guarda-postos.</td><td>●</td></tr><tr class="srow"><td>11.4.1</td><td>Estadímetro</td><td>d = h · cotg α; 250–10.000 jd, preciso até 2.000 jd; objeto de 50–200 pés; formatura; mastro &lt; 50 pés: dobro da altura.</td><td>★</td></tr><tr class="srow"><td>11.4.2</td><td>Sextante (ângulo vertical)</td><td>Distância a objeto aquém do horizonte: D = H · cotg α; distância ao objeto, não à costa.</td><td>★</td></tr><tr class="srow"><td>11.4.3</td><td>Guarda-posto</td><td>Instrumento de refração; prismas de 16 e 32 pés a uma amarra; distância entre navios em formatura.</td><td>★</td></tr><tr class="srow"><td>11.4.4</td><td>Alcance geográfico</td><td>D = 2√h (m); para objeto: 2√h + 2√H.</td><td>●</td></tr><tr class="srow"><td>11.4.5</td><td>Dois ângulos verticais</td><td>D = dist od × α ÷ (β − α), ângulos em minutos.</td><td>★</td></tr><tr class="srow"><td>11.4.6</td><td>Régua e método do dedo</td><td>D = d × H ÷ L · D = C × d ÷ h · D = P% × C × 10.</td><td>★</td></tr><tr class="srow"><td>11.5.1</td><td>Prumo de mão</td><td>Marcações em merlim, couro e pinhas; velocidade ≤ 3 nós; indica se o navio garra.</td><td>★</td></tr><tr class="srow"><td>11.5.2</td><td>Ecobatímetro</td><td>h = v · t/2 (≈ 1.500 m/s); sonoro &lt; 20 kHz, ultrassônico &gt; 20 kHz; somar calado, descontar maré.</td><td>★</td></tr><tr class="srow"><td>11.5.2</td><td>Monofeixe × multifeixe</td><td>Feixe vertical ao longo da linha × faixa transversal (melhor delimitação de perigos).</td><td>★</td></tr><tr class="srow"><td>11.6.1</td><td>Plotador paralelo</td><td>Roletes; graduação lida em qualquer meridiano ou paralelo.</td><td>★</td></tr><tr class="srow"><td>11.6.2</td><td>Cintel</td><td>Traça arcos maiores que a abertura do compasso (navegação radar).</td><td>○</td></tr><tr class="srow"><td>11.6.3</td><td>Estaciógrafo</td><td>Plotagem da posição por segmentos capazes (três objetos, dois ângulos).</td><td>★ ●</td></tr><tr class="srow"><td>11.7</td><td>ECS classes A–D · CISNE</td><td>A back-up de ECDIS; A/B marítimas; C/D águas interiores · CISNE (IPqM) é ECS.</td><td>★</td></tr><tr class="srow"><td>11.7</td><td>NAVEMARINST 10-15</td><td>Só cartas oficiais validadas por RENC; manter cartas em papel; registrar na Folha N-2; pessoal treinado.</td><td>○</td></tr><tr class="srow"><td>11.8.1</td><td>Binóculo 7x50</td><td>Aumento 7 vezes; objetiva de 50 mm; campo em metros a 1.000 m; maior aumento, menor campo.</td><td>★</td></tr></tbody></table></div><p class="foot">Marca: ★ seu destaque · ● assunto cobrado em prova · ○ sem marcação, só menção.</p></div></section>
 <a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
-
-</div>
-</main>
-
-<footer>
-  <div class="wrap"><b>PSCPP 2027</b> · Instrumentos Náuticos (Miguens Vol. I, Cap. 11) · Capital Sereno · Navegação — Miguens.</div>
-</footer>
-
+</div></main>
+<footer><div class="wrap">PSCPP 2027 · Instrumentos Náuticos — Miguens Cap. 11 · <b>Capital Sereno</b> · Navegação — Miguens.</div></footer>
 <script>
-var NS="http://www.w3.org/2000/svg";
-function hhmm(t){return t;}
-
-/* ===== ODÔMETRO × CORRENTE ===== */
-function drawCor(){
-  var cv=document.getElementById('cvCor'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
-  var velN=18, D=80, cor=+document.getElementById('cor').value;
-  var velfd=velN+cor; // favor +, contra -
-  var t=D/velfd, odom=velN*t;
-  // mar
-  ctx.fillStyle='#eef5fb';ctx.fillRect(0,120,W,H-120);
-  // seta de corrente
-  var cx0=90,cy=150;
-  ctx.strokeStyle=cor<0?'#9E3B2E':(cor>0?'#2E7D52':'#9aa9b8');ctx.lineWidth=3;
-  var dir=cor<0?-1:1, len=Math.min(Math.abs(cor)*30,120);
-  if(cor!==0){ctx.beginPath();ctx.moveTo(430-dir*len/2,cy-40);ctx.lineTo(430+dir*len/2,cy-40);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(430+dir*len/2,cy-40);ctx.lineTo(430+dir*len/2-dir*10,cy-45);ctx.lineTo(430+dir*len/2-dir*10,cy-35);ctx.fill();}
-  ctx.fillStyle=cor<0?'#9E3B2E':(cor>0?'#2E7D52':'#7a6f55');ctx.font='bold 13px Trebuchet MS';
-  ctx.fillText('corrente '+Math.abs(cor)+' nós '+(cor<0?'(contra)':(cor>0?'(a favor)':'')),360,cy-52);
-  // navio (proa para a direita = rumo Norte/avante)
-  ctx.fillStyle='#16302B';ctx.beginPath();ctx.moveTo(400,150);ctx.lineTo(470,150);ctx.lineTo(485,163);ctx.lineTo(470,176);ctx.lineTo(400,176);ctx.closePath();ctx.fill();
-  ctx.fillStyle='#fff';ctx.font='11px Trebuchet MS';ctx.fillText('18 nós',415,167);
-  // barras de distância
-  function bar(y,val,max,col,lab){
-    var x0=90,x1=W-90;var w=(x1-x0)*Math.min(val/max,1);
-    ctx.fillStyle='#eee3c6';ctx.fillRect(x0,y,x1-x0,22);
-    ctx.fillStyle=col;ctx.fillRect(x0,y,w,22);
-    ctx.fillStyle='#0D3D36';ctx.font='bold 12px Trebuchet MS';ctx.fillText(lab,x0,y-6);
-    ctx.fillStyle='#16302B';ctx.font='12px Trebuchet MS';ctx.fillText(val.toFixed(1)+' mn',x1-70,y-6);
-  }
-  bar(205, D, 130, '#2C5F8A','distância no FUNDO (A→B)');
-  bar(250, odom, 130, '#1A7A6E','leitura do ODÔMETRO (na água)');
-  var rel = odom>D?'MAIS':(odom<D?'MENOS':'igual');
-  document.getElementById('corRead').innerHTML='Velocidade no fundo = 18 '+(cor<0?'−':'+')+' '+Math.abs(cor)+' = <b>'+velfd.toFixed(1)+' nós</b> → tempo = 80/'+velfd.toFixed(1)+' = <b>'+t.toFixed(2)+' h</b>. Odômetro = 18 × '+t.toFixed(2)+' = <b>'+odom.toFixed(1)+' mn</b> (registra <b>'+rel+'</b> que a distância no fundo).';
+(function(){
+var norm=function(x){return x.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
+var q=document.getElementById('q'), qn=document.getElementById('qn');
+function unmark(){document.querySelectorAll('mark.sq').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+function markIn(el,t){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[],n;while(n=w.nextNode())ns.push(n);
+ ns.forEach(function(n){var s=n.nodeValue,ns2=norm(s),i=ns2.indexOf(t);if(i<0)return;var f=document.createDocumentFragment(),last=0;
+  while(i>=0){f.appendChild(document.createTextNode(s.slice(last,i)));var m=document.createElement('mark');m.className='sq';m.textContent=s.slice(i,i+t.length);f.appendChild(m);last=i+t.length;i=ns2.indexOf(t,last);}
+  f.appendChild(document.createTextNode(s.slice(last)));n.parentNode.replaceChild(f,n);});}
+function run(){
+ unmark(); var t=norm(q.value.trim()), hits=0;
+ document.querySelectorAll('section.bloco').forEach(function(sec){
+  if(!t){sec.style.display='';sec.querySelectorAll('.srch,.srch-t,.srow,h3').forEach(function(e){e.style.display='';});return;}
+  var any=false;
+  var titleHit=norm(sec.querySelector('h2').textContent).indexOf(t)>=0;
+  sec.querySelectorAll('.srch').forEach(function(e){var m=norm(e.textContent).indexOf(t)>=0,ok=titleHit||m;e.style.display=ok?'':'none';if(ok)any=true;if(m){hits++;markIn(e,t);}});
+  sec.querySelectorAll('.srch-t').forEach(function(b){var cap=b.querySelector('.qt'),capHit=titleHit||(cap&&norm(cap.textContent).indexOf(t)>=0),rowsOk=0;
+   b.querySelectorAll('tr.srow').forEach(function(r){var m=norm(r.textContent).indexOf(t)>=0,ok=capHit||m;r.style.display=ok?'':'none';if(ok)rowsOk++;if(m){hits++;markIn(r,t);}});
+   if(cap&&norm(cap.textContent).indexOf(t)>=0){hits++;markIn(cap,t);}
+   var ok=rowsOk>0;b.style.display=ok?'':'none';if(ok)any=true;});
+  sec.querySelectorAll('h3').forEach(function(h){h.style.display=t?'none':'';});
+  if(titleHit){any=true;hits++;markIn(sec.querySelector('h2'),t);}
+  sec.style.display=any?'':'none';
+ });
+ qn.textContent=t?(hits?hits+' resultado'+(hits>1?'s':''):'nada encontrado'):'';
 }
-drawCor();
-
-/* ===== ECOBATÍMETRO ===== */
-function drawEco(){
-  var cv=document.getElementById('cvEco'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
-  var prof=+document.getElementById('prof').value; // metros
-  var calado=6;
-  var v=1500; var t=2*prof/v; // s (ida e volta)
-  // superfície
-  var surf=50;
-  ctx.strokeStyle='#8fb8d8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,surf);ctx.lineTo(W,surf);ctx.stroke();
-  ctx.fillStyle='#eef5fb';ctx.fillRect(0,surf,W,H-surf);
-  // navio + transdutor
-  ctx.fillStyle='#16302B';ctx.fillRect(360,surf-16,140,16);
-  ctx.fillStyle='#C8A84B';ctx.beginPath();ctx.arc(430,surf,5,0,7);ctx.fill();
-  ctx.fillStyle='#0D3D36';ctx.font='11px Trebuchet MS';ctx.fillText('transdutor',445,surf-4);
-  // fundo (escala: prof metros -> px)
-  var maxpx=H-90; var scale=(maxpx-surf)/300;
-  var fy=surf+prof*scale;
-  ctx.fillStyle='#c9b58a';ctx.fillRect(0,fy,W,H-fy);
-  ctx.fillStyle='#7a5a2a';ctx.fillText('fundo do mar',20,fy+18);
-  // pulso (cone) e eco
-  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=2;
-  ctx.beginPath();ctx.moveTo(430,surf);ctx.lineTo(414,fy);ctx.moveTo(430,surf);ctx.lineTo(446,fy);ctx.stroke();
-  ctx.fillStyle='#2C5F8A';ctx.font='bold 12px Trebuchet MS';ctx.fillText('pulso ↓',352,(surf+fy)/2);
-  ctx.fillStyle='#9E3B2E';ctx.fillText('eco ↑',470,(surf+fy)/2);
-  // cota de profundidade
-  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(120,surf);ctx.lineTo(120,fy);ctx.stroke();
-  ctx.fillStyle='#9E3B2E';ctx.fillText('h = '+prof+' m',60,(surf+fy)/2);
-  document.getElementById('ecoRead').innerHTML='Profundidade sob o transdutor <b>h = '+prof+' m</b> → tempo do eco t = 2h/v = <b>'+t.toFixed(3)+' s</b> (v ≈ 1500 m/s). Profundidade do local = h + calado ('+calado+' m) = <b>'+(prof+calado)+' m</b>.';
-}
-drawEco();
-window.addEventListener('resize',function(){drawCor();drawEco();});
-
-/* ===== FLASHCARDS ===== */
-var FC=[
-  {f:"Instrumentos por finalidade",b:"Direções · velocidade/distância navegada · distâncias a objetos · profundidade · plotagem · eletrônicos."},
-  {f:"Dispositivos de marcação",b:"Taxímetro, alidade de pínulas, círculo azimutal, alidade telescópica/autossíncrona, espelho azimutal, agulha digital de mão."},
-  {f:"Alidade autossíncrona",b:"Motor síncrono comandado pela giro mestra: mantém a marcação mesmo com o navio jogando."},
-  {f:"3 tipos de odômetro",b:"De superfície · de fundo (Pitot) · Doppler."},
-  {f:"Quem mede no fundo?",b:"Só o DOPPLER mede velocidade em relação ao fundo. Superfície e 'de fundo' medem em relação à ÁGUA."},
-  {f:"Odômetro 'de fundo'",b:"Tubo de Pitot (pressão estática × dinâmica). 'De fundo' = montado no fundo do casco; mede na ÁGUA."},
-  {f:"Odômetro de superfície",b:"Hélice/linha/registrador. Emergência. Retirar com máquinas atrás; sofre mar grosso; enrosca em algas."},
-  {f:"Efeito da corrente",b:"Odômetro (exceto Doppler) mede na água. Contra a corrente → registra MAIS que a distância no fundo; a favor → MENOS."},
-  {f:"Corrida da milha",b:"Calibragem de odômetros/velocímetros por percursos de distância conhecida (marcas em terra). A mais comum."},
-  {f:"Velocidade — processo prático",b:"Objeto flutuante da proa à popa: vel(nós) = comprimento(m) ÷ (0,514·t)."},
-  {f:"Estadímetro",b:"d = h·cotg α. 250–10.000 jd (bom até ~2.000 jd); altitude 50–200 pés. Distância a navios em formatura."},
-  {f:"Estaciógrafo",b:"Instrumento de PLOTAGEM (posição por segmentos capazes). NÃO mede distância."},
-  {f:"Ecobatímetro — princípio",b:"Pulso acústico vertical reflete no fundo; h = v·t/2, v ≈ 1500 m/s."},
-  {f:"Ecobatímetro + calado",b:"A profundidade é referida ao fundo do casco → soma-se o calado para a profundidade do local."},
-  {f:"Sonoro × ultrassônico",b:"Sonoros <20 kHz; ultrassônicos >20 kHz. Transdutor por magnetostrição ou piezeletricidade."},
-  {f:"Fundo duro × macio",b:"Fundos duros refletem melhor (eco mais forte). Lama macia dá eco fraco."},
-  {f:"Alarmes do ecobatímetro",b:"Baixa e alta profundidade. A baixa avisa o limite de segurança; ajudam a detectar o navio garrando."},
-  {f:"Ecobatímetro × prumo",b:"Sondagem contínua, em maiores velocidades e profundidades, com menos dependência do tempo."},
-  {f:"2012-Q22",b:"Incorreta: estaciógrafo entre instrumentos de distância. Gab (d)."},
-  {f:"2011-Q59",b:"Velocidade transversal na atracação (>100.000 tpb): Sonar Doppler, 0,01 nó. Gab (b)."}
-];
-var grid=document.getElementById('fcGrid');
-FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
-  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
-  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
-
-/* ===== QUIZ ===== */
-var QUIZ=[
-  {q:"Os odômetros classificam-se em:",
-   o:["De proa, de popa e de través","De superfície, de fundo e Doppler","Mecânico, óptico e digital","De pressão, de hélice e de satélite"],a:1,
-   e:"Três tipos: de superfície, de fundo (tubo de Pitot) e Doppler."},
-  {q:"Qual odômetro mede a velocidade em relação ao FUNDO do mar?",
-   o:["O de superfície","O de fundo (Pitot)","O Doppler","Todos"],a:2,
-   e:"Só o Doppler mede em relação ao fundo. O de superfície e o 'de fundo' (Pitot) medem em relação à ÁGUA — o nome 'de fundo' refere-se à montagem no fundo do casco."},
-  {q:"Um navio a 18 nós na superfície navega contra uma corrente de 2 nós. A sua velocidade no fundo é:",
-   o:["20 nós","16 nós","18 nós","2 nós"],a:1,
-   e:"Contra a corrente: velfd = velN − corrente = 18 − 2 = 16 nós. A favor seria 20 nós."},
-  {q:"[PSCPP 2012] NM Itaperi: 18 nós na superfície, A→B = 80 mn, Corrente do Brasil 2 nós (contrária, rumo Norte). Duração e leitura do odômetro em B:",
-   o:["5 h e 90 mn","4 h e 80 mn","5 h e 80 mn","4 h e 72 mn"],a:0,
-   e:"velfd = 18 − 2 = 16 nós → tempo = 80/16 = 5 h. Odômetro = 18 × 5 = 90 mn (na água). Gabarito (a). Contra a corrente, o odômetro registra mais que a distância no fundo."},
-  {q:"A 'corrida da milha' destina-se a:",
-   o:["Medir a profundidade","Calibrar/aferir odômetros e velocímetros","Determinar a posição astronômica","Medir o desvio da agulha"],a:1,
-   e:"É o processo de aferição/calibragem de odômetros e velocímetros, por percursos de distância rigorosamente conhecida entre marcas em terra."},
-  {q:"[PSCPP 2012] Assinale a afirmativa INCORRETA sobre instrumentos náuticos:",
-   o:["Alidade, círculo azimutal e taxímetro medem marcações e azimutes","O Doppler é o único que mede velocidade no fundo","Sextante, telêmetro, guarda-posto e estaciógrafo medem distâncias","O odômetro de superfície é hoje um equipamento de emergência"],a:2,
-   e:"Incorreta (gab d na prova): o estaciógrafo é instrumento de PLOTAGEM (posição por segmentos capazes), não de medir distância. O de distância análogo é o estadímetro."},
-  {q:"O estadímetro determina a distância a um objeto pela fórmula:",
-   o:["d = v·t/2","d = h·cotg α","d = h·tg α","d = v·t"],a:1,
-   e:"d = h·cotg α, medindo o ângulo vertical α de um objeto de altitude conhecida h. Bom até ~2.000 jardas; muito usado para navios em formatura."},
-  {q:"No ecobatímetro, a profundidade sob o transdutor é dada por:",
-   o:["h = v·t","h = v·t/2","h = v/t","h = 2·v·t"],a:1,
-   e:"h = v·t/2 (v ≈ 1.500 m/s), pois t é o tempo de ida-e-volta do pulso. Para a profundidade do local, soma-se o calado (o transdutor fica no fundo do casco)."},
-  {q:"Para obter a profundidade real do local a partir da leitura do ecobatímetro, deve-se:",
-   o:["Subtrair o calado","Somar o calado do navio","Somar a altura da maré","Multiplicar por 2"],a:1,
-   e:"A leitura é referida ao fundo do casco (onde ficam os transdutores) → soma-se o calado para obter a profundidade do local."},
-  {q:"Sobre o ecobatímetro, é correto:",
-   o:["Fundos macios refletem melhor que os duros","Fundos duros produzem eco mais forte","O som na água viaja a ~340 m/s","Não possui alarmes"],a:1,
-   e:"Fundos duros são melhores refletores (eco mais forte); lama macia dá eco fraco. O som na água ≈ 1.500 m/s. Possui alarmes de baixa e alta profundidade (úteis também para detectar garramento)."},
-  {q:"[PSCPP 2011] Para medir a velocidade transversal na atracação de navios acima de 100.000 tpb, usa-se:",
-   o:["Radar Doppler, 0,1 nó","Sonar Doppler, 0,01 nó","Acelerômetro de Schuler, 0,01 nó","Radar Doppler, 0,01 nó"],a:1,
-   e:"Sonar Doppler (acústico), com precisão de 0,01 nó. Gabarito (b). O distrator troca por 'radar' Doppler."},
-  {q:"Um inconveniente do odômetro de superfície é:",
-   o:["Medir a velocidade no fundo","Precisar ser retirado quando o navio opera máquinas atrás","Não sofrer com o mar grosso","Dispensar preparação"],a:1,
-   e:"Deve ser retirado com máquinas atrás (a linha pode enroscar no hélice); sofre com mar grosso; enrosca em algas/lixo; não pode ser lançado em portos movimentados."}
-];
-var qi=0,answered=false,hits=0,tot=0;
-function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
-  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
-function loadQ(){var Q=QUIZ[qi];answered=false;
-  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
-  var box=document.getElementById('qOpts');box.innerHTML="";
-  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
-  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
-  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
-  document.getElementById('qNext').disabled=true;
-  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
-function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
-  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
-  var fb=document.getElementById('qFb');
-  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
-  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
-  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
-function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
-loadQ();upScore();
+var tm;q.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(run,120);});
+var p=new URLSearchParams(location.search).get('q');if(p){q.value=p;run();var f=document.querySelector('mark.sq');if(f)setTimeout(function(){f.scrollIntoView({block:'center'});},60);}
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Navegação Estimada — Miguens Cap. 5 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+
+  .legend{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;margin:0 0 30px;line-height:1.9}
+  .t-nota{background:#dcefeb;color:#145c52}
+  .dot{color:#C0392B;font-weight:bold}
+  .ul{text-decoration:underline;text-decoration-color:#C0392B;text-decoration-thickness:2px}
+  .box.quad{padding:14px 16px}
+  h4.qt{margin:0 0 6px;font-family:'Trebuchet MS',sans-serif;font-size:13.5px;color:var(--verde);text-transform:none;letter-spacing:0}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw table{margin:6px 0;min-width:520px}
+  td.hlc{background:var(--amarelo)!important}
+  td.amb{background:#FBE7C0!important}
+  p.foot{font-size:13px;color:var(--mute);font-style:italic;margin:6px 0 0}
+  ul.steps{margin:6px 0 0;padding-left:20px;font-size:15px}
+  ul.steps li{margin:5px 0}
+  ul.steps li.sub{list-style:none;margin-left:6px;color:#3d5550}
+  .box.sint{font-size:14.5px;padding:12px 16px;margin:12px 0}
+  .box.sint.key{border-left:6px solid var(--ouro)}
+  .box.sint.banca{border-left:6px solid #D98E04;background:#fffaf0}
+  .box.sint.formula{border-left:6px solid var(--azul)}
+  .box.sint.nota{border-left:6px solid var(--verde2)}
+  table.gloss td:first-child{white-space:nowrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  table.gloss td:last-child{text-align:center;white-space:nowrap}
+  @media(max-width:600px){.tw table{font-size:13px}}
+.busca{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.busca input{flex:1;font-family:Georgia,serif;font-size:15px;padding:9px 14px;border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:0}
+.busca input:focus{outline:none;border-color:var(--verde2);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
+#qn{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);white-space:nowrap}
+mark.sq{background:#ffb347;color:inherit;border-radius:2px;padding:0 1px}
+.t-cob{background:#F2C879;color:#5a3d00}
+h3.dh{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--verde2);margin:18px 0 8px;border-bottom:1px solid var(--linha);padding-bottom:4px}
+.defs{display:grid;gap:12px;margin-bottom:10px}
+.def{background:var(--card);border:1px solid var(--linha);border-left:4px solid var(--verde2);border-radius:10px;padding:12px 16px;box-shadow:var(--sombra)}
+.def h4{margin:0 0 6px;font-size:16px;color:var(--verde)}
+.def p{margin:0;line-height:1.55}
+.def ul{margin:8px 0 0;padding-left:20px}
+.def li{margin:4px 0;line-height:1.5}
+h2.sec{flex-wrap:wrap;row-gap:4px}
+@media(max-width:600px){nav.toc .wrap .row{flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}nav.toc .wrap .row a{flex:0 0 auto}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">PSCPP 2027 · Navegação — Miguens · Consulta rápida</p>
+  <h1>Navegação <em>Estimada</em></h1>
+  <p class="sub">Consulta rápida do Cap. 5: conceito, plotagem, regras dos 3 e 6 minutos, as seis regras da estima, fatores que afetam a posição, velocidades, rumos, abatimento, caimento e avanço, posições estimada, corrigida e carteada, triângulo de corrente e consistência da posição estimada.</p>
+  <div class="src"><b>Fonte:</b> Miguens, Manual de Navegação da MB, Vol. I — Cap. 5 (DHN, 2ª Revisão, 2023). Consulta rápida; o caderno de leitura completo é o DOCX.</div>
+</div></header>
+<nav class="toc"><div class="wrap"><div class="busca"><input id="q" type="search" placeholder="Buscar neste caderno (ex.: ocultação, cardinal, alcance)…" aria-label="Buscar neste caderno"><span id="qn"></span></div><div class="row"><a href="#s0">5.1</a><a href="#s1">5.2</a><a href="#s2">5.3</a><a href="#s3">5.4</a><a href="#s4">5.5</a><a href="#s5">5.6</a><a href="#s6">5.8</a><a href="#s7">Glossário</a></div></div></nav>
+<main><div class="wrap">
+<div class="legend"><b>Como usar:</b> consulta rápida do capítulo — definições completas do livro, listas de opções, quadros e cálculos. O texto integral com os seus destaques está no DOCX <b>Miguens_Vol1_Cap05_Destaques_PSCPP.docx</b>.
+<span class="tag t-cob">COBRADO</span> = assunto já cobrado em prova · <span class="hl">amarelo</span> = seu destaque no PDF · <span class="dot">●</span> = seu ponto vermelho ·
+<span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span> <span class="tag t-conflito">CONFLITO</span> = divergência no livro. No glossário: ★ seu destaque · ● cobrado · ○ só menção. A busca aceita palavras sem acento.</div>
+<section class="bloco" id="s0"><h2 class="sec"><span class="n">5.1</span><span class="tt">Conceito de navegação estimada</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Navegação estimada <span class="tag t-cob">COBRADO</span></h4><p>É o método para determinar a posição provável do navio, recorrendo-se somente às características do seu movimento, a partir de uma posição conhecida; consiste na aplicação da equação que relaciona distância, velocidade e tempo. No método convencional, o movimento é caracterizado pelo <b>rumo verdadeiro</b> (agulha) e pela <b>distância percorrida</b> (odômetro). Em inglês: Dead Reckoning (DR).</p><ul><li>Não depende de meios exteriores ao navio nem de condições atmosféricas favoráveis;</li><li>Usada paralelamente a outros métodos, previne erros grosseiros e mantém a consciência situacional.</li></ul></div><div class="def srch"><h4>Ponto estimado × estimado corrigido</h4><p>O <b>ponto estimado</b> é uma posição aproximada, porque não leva em consideração os efeitos da corrente. Considerando o efeito da corrente, obtém-se uma posição mais precisa, a <b>estimada corrigida</b> — ainda assim aproximada.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Estimada = rumo verdadeiro (agulha) + distância (odômetro), <b>sem corrente</b>. Estimada corrigida = <b>com corrente</b> — mais precisa, mas ainda aproximada. Vantagem-chave: independe de tempo favorável e de fontes externas. Distrator: dizer que a estimada corrigida é posição “determinada” ou “observada”.</div></section><section class="bloco" id="s1"><h2 class="sec"><span class="n">5.2</span><span class="tt">Plotagem do ponto estimado</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Regras dos três e dos seis minutos</h4><p>Práticas para velocidade, tempo e distância:</p><ul><li><b>Regra dos três minutos</b>: a distância percorrida pelo navio, em jardas, em três minutos, é igual à sua velocidade, em nós, multiplicada por 100;</li><li><b>Regra dos seis minutos</b>: a distância percorrida pelo navio, em milhas, em seis minutos, é igual à sua velocidade, em nós, dividida por 10.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Regras dos 3 e dos 6 minutos</h4><ul class="steps"><li>d = v × t. Em 6 min (0,1 h): d [milhas] = v ÷ 10 → 12 nós → <b>1,2 milha</b>.</li><li>Em 3 min (1/20 h): d = v ÷ 20 milhas ≈ v ÷ 20 × 2.000 jardas = <b>v × 100 jardas</b> → 12 nós → <b>1.200 jardas</b>.</li><li class="sub">Por que funciona: 1 milha ≈ 2.000 jardas (2.025,37 jd — Cap. 1, 1.10).</li><li>Distrator: trocar as unidades — 3 min dá jardas (×100); 6 min dá milhas (÷10).</li></ul></div></section><section class="bloco" id="s2"><h2 class="sec"><span class="n">5.3</span><span class="tt">Regras para a navegação estimada</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>As seis regras da navegação estimada</h4><p>Uma posição estimada deve ser plotada:</p><ul><li>nas horas inteiras (e nas meias horas);</li><li>a cada mudança de rumo;</li><li>a cada mudança de velocidade;</li><li>para o instante em que se obtém uma posição determinada;</li><li>para o instante em que se obtém uma única linha de posição; e</li><li>uma nova linha de rumo e uma nova plotagem estimada devem ser originadas de cada posição determinada plotada.</li><li>Notas: não se ajusta uma plotagem estimada com uma única LDP; uma LDP cruzando uma linha de rumo <b>não</b> é posição determinada (linha de rumo não é LDP). Em águas restritas, intervalos menores.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Seis gatilhos para plotar estimada: <b>hora/meia hora · mudança de rumo · mudança de velocidade · posição determinada · LDP única · nova derrota a partir de cada posição determinada</b>. Pegadinhas das notas: uma LDP sozinha <b>não</b> ajusta a estima; LDP × linha de rumo <b>não</b> é posição determinada. Ponte com o Cap. 1 (Fig. 1.1): em águas restritas, posição a cada 3 min no mínimo.</div></section><section class="bloco" id="s3"><h2 class="sec"><span class="n">5.4</span><span class="tt">Fatores que influenciam a posição estimada</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Fatores que influenciam a posição estimada</h4><p>Fatores que alteram o movimento do navio — cuja resultante, na prática costeira, é chamada “<b>corrente</b>”:</p><ul><li>correntes marítimas; correntes de maré; efeito do vento;</li><li>estado do mar; mau governo;</li><li>pequenas diferenças de RPM entre eixos e de velocidade;</li><li>banda e trim; e</li><li>desvio da agulha não detectado ou mal determinado.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Nove fatores; “corrente” na estima = <b>resultante de todos eles</b>, não só a corrente marítima. Distrator: listar só correntes e vento. Ponte com o Cap. 3: “desvio da agulha não detectado” entra aqui como “corrente”.</div></section><section class="bloco" id="s4"><h2 class="sec"><span class="n">5.5</span><span class="tt">Termos empregados na navegação estimada</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Velocidades <span class="tag t-cob">COBRADO</span></h4><p>Termos da navegação estimada:</p><ul><li><b>Velocidade do navio (velN)</b>: distância percorrida em 1 hora <b>na superfície</b>;</li><li><b>Velocidade no fundo (velfd)</b>: distância percorrida em 1 hora em relação ao fundo — resultante da velocidade do navio com a da corrente;</li><li><b>Velocidade da corrente (velcor)</b>: efeito combinado dos fatores, durante cada hora, sobre o caminho percorrido.</li></ul></div><div class="def srch"><h4>Rumos</h4><p>Termos da navegação estimada:</p><ul><li><b>Rumo na superfície (RN)</b>: ângulo entre o Norte Verdadeiro e a direção na qual se governa o navio;</li><li><b>Rumo no fundo (Rfd)</b>: ângulo entre o caminho efetivamente percorrido (projetado sobre o fundo) e o Norte Verdadeiro;</li><li><b>Rumo da corrente (Rcor)</b>: direção <b>para onde flui</b> a corrente, a partir do Norte Verdadeiro, de 000º a 360º, sentido horário.</li></ul></div><div class="def srch"><h4>Abatimento</h4><p>É o ângulo entre o rumo na superfície (RN) e o rumo no fundo (Rfd), contado para BE ou para BB a partir do rumo na superfície.</p></div><div class="def srch"><h4>Caimento, avanço e atraso</h4><p>Comparando a posição observada com a estimada para o mesmo instante, a distância entre elas é o efeito da corrente, decomposto em:</p><ul><li><b>Avanço</b> (ou <b>atraso</b>): rebatimento do ponto estimado sobre o rumo no fundo — diferença entre as distâncias no fundo e na superfície; avanço quando velfd &gt; velN, atraso quando velfd &lt; velN;</li><li><b>Caimento</b>: a corda compreendida pelo arco do rebatimento.</li><li>Vetorialmente: velcor = velcaimento + velavanço.</li></ul></div><div class="def srch"><h4>Posições: estimada, estimada corrigida e carteada</h4><p>Definições:</p><ul><li><b>Posição estimada</b>: posição (presente) obtida aplicando, a partir de uma posição observada, vetores definidos pelo rumo do navio e pela distância em relação à superfície;</li><li><b>Posição estimada corrigida</b>: posição (presente) com vetores de rumo no fundo e distância no fundo, supondo que o vetor de corrente permanecerá idêntico;</li><li><b>Posição carteada</b>: posição (futura) que se prevê que o navio ocupará; pode partir de posição observada, estimada ou estimada corrigida, com ou sem corrente; representada por um pequeno traço cortando o rumo, com a hora; útil para antecipar eventos (faróis que vão “boiar”, isóbatas, perigos).</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Corrente: rumo = <b>para onde vai</b> (corrente “090°” empurra para leste). Vento é o contrário: vem <b>de onde sopra</b>. Abatimento: ângulo RN → Rfd, para <b>BE ou BB a partir do rumo na superfície</b>. Atenção: “abatimento” do Cap. 5 (estima) ≠ “abatimento” da curva de giro.</div><div class="box quad srch-t"><h4 class="qt">As três posições da estima</h4><div class="tw"><table><thead><tr><th>Posição</th><th>Tempo</th><th>Vetores aplicados</th><th>Símbolo</th></tr></thead><tbody><tr class="srow"><td>Estimada</td><td>Presente</td><td>Rumo e distância na superfície (sem corrente)</td><td>Semicírculo/triângulo com hora (Fig. 5.3)</td></tr><tr class="srow"><td>Estimada corrigida (EC)</td><td>Presente</td><td>Rumo e distância no fundo (com corrente)</td><td>Losango + hora + “EC” (p. 5-17)</td></tr><tr class="srow"><td>Carteada</td><td><b>Futura</b></td><td>Base observada, estimada ou EC; com ou sem corrente</td><td>Pequeno traço cortando o rumo + hora</td></tr></tbody></table></div></div><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Avanço ↔ velfd &gt; velN; atraso ↔ velfd &lt; velN. Caimento = componente lateral (corda do arco). velcor = velcaimento + velavanço (vetorial). Carteada é a única <b>futura</b>.</div></section><section class="bloco" id="s5"><h2 class="sec"><span class="n">5.6</span><span class="tt">O triângulo de corrente · 5.7 Resolução gráfica</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Triângulo de corrente — real × estimado</h4><p>Dois casos:</p><ul><li><b>Real</b>: conhecidos RN/velN e Rfd/velfd (de duas posições determinadas) → determina-se <b>Rcor/velcor</b>;</li><li><b>Estimado</b>: conhecidos RN/velN e Rcor/velcor estimados (Cartas-Piloto, Tábuas ou Cartas de Correntes de Maré, observação anterior) → determinam-se <b>Rfd/velfd</b> previstos;</li><li>Variações do estimado: dados corrente e Rfd/velfd desejados → RN/velN a usar; dados corrente, Rfd desejado e velN → RN a adotar e velfd resultante.</li><li>Três vetores (fundo, superfície, corrente), seis elementos: conhecidos quatro, determinam-se dois.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Inglês da estima: <b>SET</b> = rumo da corrente · <b>DRIFT</b> = velocidade da corrente · <b>COG</b> (course over ground) = Rfd · <b>SOG</b> (speed over ground) = velfd. Pode cair em questão em inglês (BTM, SMCP).</div><div class="box quad srch-t"><h4 class="qt">Os cinco problemas-tipo com os exemplos do livro (pp. 5-9 a 5-17; sem marcação) <span class="tag t-calc">CALCULO</span></h4><div class="tw"><table><thead><tr><th>Problema</th><th>Dados</th><th>Procura-se</th><th>Resultado do livro</th></tr></thead><tbody><tr class="srow"><td>a. Corrente por duas posições observadas</td><td>Obs 0300 e 0400; RN 055°, velN 9</td><td>Rcor, velcor, Rfd, velfd</td><td>Rcor 101°, velcor 1 nó; Rfd 059°, velfd 9,7 nós; abt 4° BE, avanço 0,7, caimento 0,7 BE</td></tr><tr class="srow"><td>b. Elementos do fundo</td><td>RN 315°, velN 8; Rcor 270°, velcor 1</td><td>Rfd, velfd</td><td>Rfd 311°, velfd 8,7 nós</td></tr><tr class="srow"><td>c. Elementos da superfície</td><td>Rfd 310°, velfd 9,6 (ponto às 1600); corrente 270°/1</td><td>RN, velN</td><td>RN 314°, velN 8,8 nós</td></tr><tr class="srow"><td>d. RN e velfd (velN fixa)</td><td>Rfd 072°, velN 6; corrente 100°/1,5; AB 9 milhas</td><td>RN, velfd, ETA</td><td>RN 065°, velfd 7,3 nós; 74 min → ETA 1114</td></tr><tr class="srow"><td>e. Estimada corrigida</td><td>Obs 0800; RN 120°, velN 7; corrente 030°/1</td><td>EC de 0900</td><td>Lat 23°02,6’S, Long 043°01,6’W</td></tr></tbody></table></div><p class="foot">Regra de montagem: o vetor corrente sai da extremidade do vetor superfície (ou do ponto inicial, nos problemas c e d) e o vetor fundo fecha o triângulo. Corrente determinada por posições: sentido estimada → observada. Intervalo diferente de 1 h: dividir a distância pelo tempo (v = e/t).</p></div><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Exemplo cobrado — superfície × fundo × odômetro</h4><ul class="steps"><li>Salvador → Cabedelo (rumo norte); Corrente do Brasil 2 nós (flui para o sul) → <b>contrária</b>.</li><li>velfd = velN − velcor = 18 − 2 = <b>16 nós</b> → tempo A–B = 80 ÷ 16 = <b>5 h</b>.</li><li>O odômetro mede a distância <b>na água</b> (superfície): 18 × 5 = <b>90 mn</b>.</li><li class="sub">→ resposta: 5 horas; o odômetro registrava 90 mn.</li><li>Erros típicos: 5 h e 80 mn (tratar o odômetro como medida no fundo); 4 h (corrente a favor); 4 h 27 (usar só velN).</li></ul></div></section><section class="bloco" id="s6"><h2 class="sec"><span class="n">5.8</span><span class="tt">Precisão e consistência da posição estimada</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Consistência da posição estimada <span class="tag t-cob">COBRADO</span></h4><p>Os pontos estimados representam apenas uma posição em que o navio tem maiores probabilidades de se encontrar; em situações perigosas, substitui-se o ponto por uma zona de probabilidade (circunferência em torno do ponto estimado). O raio desta circunferência é denominado <b>consistência do ponto estimado</b>, função dos erros prováveis no rumo e na distância (além da corrente). Admite-se, empiricamente, consistência de <b>0,1 (10%) da distância percorrida desde a última posição observada</b>.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Consistência do ponto estimado</h4><ul class="steps"><li>Raio da zona de probabilidade = 0,1 × distância percorrida desde a última posição observada.</li><li>Ex.: 3 h a 12 nós desde a última posição observada = 36 milhas → raio ≈ <b>3,6 milhas</b>.</li><li class="sub">Consequência prática: quanto mais tempo sem posição observada, maior o círculo — por isso a regra 6 (nova estima a cada posição determinada).</li></ul></div><div class="box sint nota srch"><span class="tag t-nota">NOTA</span> Ponte com o Cap. 9 (erros e precisão): a consistência é a forma empírica da “zona de probabilidade” da estima.</div></section><section class="bloco" id="s7"><h2 class="sec"><span class="tt">Glossário completo — Miguens, Vol. I, Cap. 5</span></h2><div class="box quad srch-t"><div class="tw"><table class="gloss"><thead><tr><th>Item</th><th>Termo</th><th>Definição condensada</th><th>Marca</th></tr></thead><tbody><tr class="srow"><td>5.1</td><td>Navegação estimada (DR)</td><td>Posição provável pela equação distância–velocidade–tempo a partir de posição conhecida; rumo verdadeiro (agulha) e distância (odômetro).</td><td>★</td></tr><tr class="srow"><td>5.1</td><td>Ponto estimado</td><td>Sem efeito da corrente; posição aproximada.</td><td>★</td></tr><tr class="srow"><td>5.1</td><td>Estimada corrigida</td><td>Com o efeito da corrente; mais precisa, ainda aproximada.</td><td>★</td></tr><tr class="srow"><td>5.1</td><td>Relevância da estima</td><td>Independe de condições atmosféricas e de fontes externas; crítica permanente; consciência situacional.</td><td>★ ●</td></tr><tr class="srow"><td>5.2</td><td>Velocidade usada na estima</td><td>Velocidade na superfície, usada como velocidade no fundo à guisa de aproximação.</td><td>★</td></tr><tr class="srow"><td>5.2</td><td>Regra dos 3 minutos</td><td>Distância em jardas em 3 min = velocidade em nós × 100.</td><td>★</td></tr><tr class="srow"><td>5.2</td><td>Regra dos 6 minutos</td><td>Distância em milhas em 6 min = velocidade em nós ÷ 10.</td><td>★</td></tr><tr class="srow"><td>5.3</td><td>Seis regras</td><td>Hora/meia hora; mudança de rumo; mudança de velocidade; posição determinada; LDP única; nova estima de cada posição determinada.</td><td>★</td></tr><tr class="srow"><td>5.3</td><td>Notas das regras</td><td>Uma LDP não ajusta a estima; LDP × linha de rumo não é posição determinada.</td><td>★</td></tr><tr class="srow"><td>5.3</td><td>Frequência de plotagem</td><td>Função da escala da carta e da navegação; menor em águas restritas.</td><td>★</td></tr><tr class="srow"><td>5.4</td><td>Corrente (na estima)</td><td>Resultante de correntes, maré, vento, mar, mau governo, RPM, velocidade, banda/trim, desvio da agulha.</td><td>★</td></tr><tr class="srow"><td>5.5</td><td>velN · velfd · velcor</td><td>Distância por hora na superfície · em relação ao fundo · efeito combinado dos fatores.</td><td>○ ●</td></tr><tr class="srow"><td>5.5</td><td>RN · Rfd</td><td>Rumo governado (superfície) · caminho efetivo sobre o fundo; ambos a partir do NV.</td><td>○ ●</td></tr><tr class="srow"><td>5.5</td><td>Rcor (SET)</td><td>Direção para onde flui a corrente, a partir do NV.</td><td>★</td></tr><tr class="srow"><td>5.5</td><td>Abatimento</td><td>Ângulo entre RN e Rfd, para BE ou BB a partir do RN.</td><td>★</td></tr><tr class="srow"><td>5.5</td><td>Avanço · atraso · caimento</td><td>velfd &gt; velN · velfd &lt; velN · componente lateral (corda do arco).</td><td>★</td></tr><tr class="srow"><td>5.5</td><td>Posição carteada</td><td>Posição futura; base observada, estimada ou EC; com ou sem corrente; traço cortando o rumo + hora.</td><td>★</td></tr><tr class="srow"><td>5.6</td><td>Triângulo real × estimado</td><td>Real: duas posições determinadas → corrente. Estimado: corrente conhecida → fundo previsto.</td><td>★</td></tr><tr class="srow"><td>5.6</td><td>Vetores</td><td>Superfície (RN, velN) + corrente (Rcor, velcor) = fundo (Rfd, velfd); 6 elementos, 4 conhecidos.</td><td>○</td></tr><tr class="srow"><td>5.7</td><td>SET · DRIFT · COG · SOG</td><td>Rumo da corrente · velocidade da corrente · rumo no fundo · velocidade no fundo.</td><td>★</td></tr><tr class="srow"><td>5.7</td><td>Fontes da corrente</td><td>Próprio navio (período anterior), Cartas-Piloto, Tábuas/Cartas de Correntes de Maré.</td><td>★</td></tr><tr class="srow"><td>5.7</td><td>ETA</td><td>Estimated time of arrival; depende de Rfd e velfd previstos.</td><td>○</td></tr><tr class="srow"><td>5.7</td><td>Símbolo da EC</td><td>Losango com a hora e “EC”.</td><td>○</td></tr><tr class="srow"><td>5.8</td><td>Zona de probabilidade</td><td>Circunferência em torno do ponto estimado em situações perigosas.</td><td>★</td></tr><tr class="srow"><td>5.8</td><td>Consistência</td><td>Raio da zona: erros de rumo e distância + corrente; empiricamente 10% da distância desde a última posição observada.</td><td>★</td></tr></tbody></table></div><p class="foot">Marca: ★ seu destaque · ● assunto cobrado em prova · ○ sem marcação, só menção.</p></div></section>
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+</div></main>
+<footer><div class="wrap">PSCPP 2027 · Navegação Estimada — Miguens Cap. 5 · <b>Capital Sereno</b> · Navegação — Miguens.</div></footer>
+<script>
+(function(){
+var norm=function(x){return x.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
+var q=document.getElementById('q'), qn=document.getElementById('qn');
+function unmark(){document.querySelectorAll('mark.sq').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+function markIn(el,t){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[],n;while(n=w.nextNode())ns.push(n);
+ ns.forEach(function(n){var s=n.nodeValue,ns2=norm(s),i=ns2.indexOf(t);if(i<0)return;var f=document.createDocumentFragment(),last=0;
+  while(i>=0){f.appendChild(document.createTextNode(s.slice(last,i)));var m=document.createElement('mark');m.className='sq';m.textContent=s.slice(i,i+t.length);f.appendChild(m);last=i+t.length;i=ns2.indexOf(t,last);}
+  f.appendChild(document.createTextNode(s.slice(last)));n.parentNode.replaceChild(f,n);});}
+function run(){
+ unmark(); var t=norm(q.value.trim()), hits=0;
+ document.querySelectorAll('section.bloco').forEach(function(sec){
+  if(!t){sec.style.display='';sec.querySelectorAll('.srch,.srch-t,.srow,h3').forEach(function(e){e.style.display='';});return;}
+  var any=false;
+  var titleHit=norm(sec.querySelector('h2').textContent).indexOf(t)>=0;
+  sec.querySelectorAll('.srch').forEach(function(e){var m=norm(e.textContent).indexOf(t)>=0,ok=titleHit||m;e.style.display=ok?'':'none';if(ok)any=true;if(m){hits++;markIn(e,t);}});
+  sec.querySelectorAll('.srch-t').forEach(function(b){var cap=b.querySelector('.qt'),capHit=titleHit||(cap&&norm(cap.textContent).indexOf(t)>=0),rowsOk=0;
+   b.querySelectorAll('tr.srow').forEach(function(r){var m=norm(r.textContent).indexOf(t)>=0,ok=capHit||m;r.style.display=ok?'':'none';if(ok)rowsOk++;if(m){hits++;markIn(r,t);}});
+   if(cap&&norm(cap.textContent).indexOf(t)>=0){hits++;markIn(cap,t);}
+   var ok=rowsOk>0;b.style.display=ok?'':'none';if(ok)any=true;});
+  sec.querySelectorAll('h3').forEach(function(h){h.style.display=t?'none':'';});
+  if(titleHit){any=true;hits++;markIn(sec.querySelector('h2'),t);}
+  sec.style.display=any?'':'none';
+ });
+ qn.textContent=t?(hits?hits+' resultado'+(hits>1?'s':''):'nada encontrado'):'';
+}
+var tm;q.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(run,120);});
+var p=new URLSearchParams(location.search).get('q');if(p){q.value=p;run();var f=document.querySelector('mark.sq');if(f)setTimeout(function(){f.scrollIntoView({block:'center'});},60);}
+})();
+</script>
+</body>
+</html>

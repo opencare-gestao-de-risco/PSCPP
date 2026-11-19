@@ -73,41 +73,7 @@
   tr:nth-child(even) td{background:#faf7ee}
   td.center,th.center{text-align:center}
   td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
-
-  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
-  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
-  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
-  .ictrl{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
-  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:7px 13px;cursor:pointer}
-  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
-  .iread{font-family:'Trebuchet MS',sans-serif;font-size:14px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:12px 15px;margin-top:12px;min-height:64px}
-  .iread b{color:var(--verde2)}
-
-  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
-  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
-  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
     border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
-  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
-  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
-  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
-  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
-  .quiz .fb.show{display:block}
-  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
-  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
-  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
-  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
-  .quiz button.nextq:disabled{opacity:.4;cursor:default}
-  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-  .score b{color:var(--ouro);font-size:16px}
-
-  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
-  .fc{perspective:1100px;height:175px;cursor:pointer}
-  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
-  .fc.flip .fc-in{transform:rotateY(180deg)}
-  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
-  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
-  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
-  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
 
   details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
   details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
@@ -125,325 +91,91 @@
   footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
   footer b{color:var(--ouro)}
   @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+
+  .legend{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;margin:0 0 30px;line-height:1.9}
+  .t-nota{background:#dcefeb;color:#145c52}
+  .dot{color:#C0392B;font-weight:bold}
+  .ul{text-decoration:underline;text-decoration-color:#C0392B;text-decoration-thickness:2px}
+  .box.quad{padding:14px 16px}
+  h4.qt{margin:0 0 6px;font-family:'Trebuchet MS',sans-serif;font-size:13.5px;color:var(--verde);text-transform:none;letter-spacing:0}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw table{margin:6px 0;min-width:520px}
+  td.hlc{background:var(--amarelo)!important}
+  td.amb{background:#FBE7C0!important}
+  p.foot{font-size:13px;color:var(--mute);font-style:italic;margin:6px 0 0}
+  ul.steps{margin:6px 0 0;padding-left:20px;font-size:15px}
+  ul.steps li{margin:5px 0}
+  ul.steps li.sub{list-style:none;margin-left:6px;color:#3d5550}
+  .box.sint{font-size:14.5px;padding:12px 16px;margin:12px 0}
+  .box.sint.key{border-left:6px solid var(--ouro)}
+  .box.sint.banca{border-left:6px solid #D98E04;background:#fffaf0}
+  .box.sint.formula{border-left:6px solid var(--azul)}
+  .box.sint.nota{border-left:6px solid var(--verde2)}
+  table.gloss td:first-child{white-space:nowrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  table.gloss td:last-child{text-align:center;white-space:nowrap}
+  @media(max-width:600px){.tw table{font-size:13px}}
+.busca{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.busca input{flex:1;font-family:Georgia,serif;font-size:15px;padding:9px 14px;border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:0}
+.busca input:focus{outline:none;border-color:var(--verde2);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
+#qn{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);white-space:nowrap}
+mark.sq{background:#ffb347;color:inherit;border-radius:2px;padding:0 1px}
+.t-cob{background:#F2C879;color:#5a3d00}
+h3.dh{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--verde2);margin:18px 0 8px;border-bottom:1px solid var(--linha);padding-bottom:4px}
+.defs{display:grid;gap:12px;margin-bottom:10px}
+.def{background:var(--card);border:1px solid var(--linha);border-left:4px solid var(--verde2);border-radius:10px;padding:12px 16px;box-shadow:var(--sombra)}
+.def h4{margin:0 0 6px;font-size:16px;color:var(--verde)}
+.def p{margin:0;line-height:1.55}
+.def ul{margin:8px 0 0;padding-left:20px}
+.def li{margin:4px 0;line-height:1.5}
+h2.sec{flex-wrap:wrap;row-gap:4px}
+@media(max-width:600px){nav.toc .wrap .row{flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}nav.toc .wrap .row a{flex:0 0 auto}}
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap">
-    <p class="eyebrow">PSCPP 2027 · Bloco B — Publicações</p>
-    <h1>Publicações Náuticas — a <em>correlação</em> que a banca cobra</h1>
-    <p class="sub">Qual publicação contém o quê: Carta 12.000, Roteiro, Lista de Faróis, Cartas-Piloto, Tábuas das Marés, Almanaque — e o coração do capítulo, os Avisos aos Navegantes (Temporário, Preliminar, Permanente e APE), com a atualização das cartas a lápis ou a caneta.</p>
-    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 12 (Publicações Náuticas). A banca cita a <b>1ª edição (1996)</b>. Questões reais: PSCPP 2008-Q66, 2011-Q67 e 2012 (Avisos aos Navegantes).</div>
-  </div>
-</header>
-
-<nav class="toc">
-  <div class="wrap"><div class="row">
-    <a href="#correlacao">Publicação → conteúdo ▶</a>
-    <a href="#carta12000">Carta 12.000</a>
-    <a href="#faróis">Lista de Faróis</a>
-    <a href="#piloto">Cartas-Piloto</a>
-    <a href="#avisos">Avisos aos Navegantes ▶</a>
-    <a href="#banca">Já cobrado</a>
-    <a href="#flash">Flashcards</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#pscpp">Pontos PSCPP</a>
-  </div></div>
-</nav>
-
-<main>
-<div class="wrap">
-
-<div class="related">
-  📎 Núcleo do <strong>Bloco B</strong>. Complementa a <a href="miguens_cap2_carta_projecoes.html">Carta Náutica (Cap. 2)</a> — a Carta 12.000 explica seus símbolos. A Lista de Faróis é detalhada em <strong>Auxílios à Navegação (Cap. 13)</strong>; as Tábuas das Marés, no <a href="miguens_cap10_calculo_mares.html">Cálculo de Marés (Cap. 10)</a>.
-</div>
-
-<!-- ===== CORRELAÇÃO ===== -->
-<section class="bloco" id="correlacao">
-  <h2 class="sec"><span class="n">12.1–12.10</span> Cada publicação e o que contém</h2>
-  <p class="lede">O formato preferido da banca é a correlação "publicação → conteúdo". Domine o mapa abaixo — e treine no seletor.</p>
-
-  <div class="ichart">
-    <h4>Seletor — clique numa publicação e veja o que ela traz</h4>
-    <p class="hint">Toque em cada publicação (com seu código DHN) para revisar seu conteúdo.</p>
-    <div class="ictrl" id="pubBtns"></div>
-    <div class="iread" id="pubRead">Selecione uma publicação acima.</div>
-  </div>
-
-  <table>
-    <tr><th>Publicação (código)</th><th>Contém</th></tr>
-    <tr><td><strong>Carta 12.000 / INT 1</strong></td><td>Símbolos, abreviaturas e termos das cartas náuticas (bilíngue; grupos A–U). Documento de consulta.</td></tr>
-    <tr><td><strong>Roteiro (DH1)</strong></td><td>Descrição da costa, demanda de portos/fundeadouros, perigos, profundidades em barras/canais, recursos, balizamento, meteo, correntes e marés. 3 volumes (Norte/Leste/Sul).</td></tr>
-    <tr><td><strong>Lista de Faróis (DH2)</strong></td><td>Sinais <span class="hl">luminosos</span> (faróis, aerofaróis, faroletes, barcas-faróis, boias luminosas, luzes particulares). NÃO inclui boias cegas/balizas.</td></tr>
-    <tr><td><strong>Lista de Sinais Cegos (DH18)</strong></td><td>Boias cegas e balizas (os sinais <span class="hl">não</span> luminosos).</td></tr>
-    <tr><td><strong>Lista de Auxílios-Rádio (DH8)</strong></td><td>Auxílios-rádio à navegação e Avisos-Rádio Náuticos.</td></tr>
-    <tr><td><strong>Tábuas das Marés (DG6)</strong></td><td>Previsão de marés para 54 portos/terminais/barras + Antártica (Cap. 10).</td></tr>
-    <tr><td><strong>Cartas de Correntes de Maré</strong></td><td>Correntes de maré para 11 portos/áreas.</td></tr>
-    <tr><td><strong>Atlas de Cartas-Piloto</strong></td><td>Meteorologia e oceanografia (ventos, correntes, temperaturas, declinação). 12 cartas mensais.</td></tr>
-    <tr><td><strong>Almanaque Náutico (DN5)</strong></td><td>Navegação <span class="hl">astronômica</span> (Sol, Lua, 4 planetas, 57 estrelas).</td></tr>
-    <tr><td><strong>Catálogo de Cartas e Publicações (DH7)</strong></td><td>Índice de todas as cartas e publicações da DHN.</td></tr>
-  </table>
-</section>
-
-<!-- ===== CARTA 12.000 ===== -->
-<section class="bloco" id="carta12000">
-  <h2 class="sec"><span class="n">12.3</span> A Carta 12.000 (INT 1)</h2>
-  <p class="lede">A "chave" para ler qualquer carta: a coletânea de símbolos e abreviaturas, baseada nas Especificações da OHI, bilíngue.</p>
-
-  <div class="box key">
-    <h4>Os grupos de símbolos (A–U) <span class="tag t-decorar">DECORAR</span></h4>
-    <p><strong>Generalidades:</strong> A (número/título/informações marginais) · B (posições, distâncias, marcações, rosa). <strong>Topografia:</strong> C (feições naturais) · D (edificações) · E (pontos de referência) · F (portos). <strong>Hidrografia:</strong> H (marés e correntes) · I (profundidades) · J (natureza do fundo) · K (rochas/cascos/obstruções) · L (instalações ao largo) · M (derrotas/rotas) · N (áreas/limites). <strong>Auxílios:</strong> P (luzes) · Q (boias/balizas) · R (sinais de cerração) · S (radar/rádio/satélite) · T (serviços) · U (pequenas embarcações). <em>(G e O não são utilizados.)</em></p>
-  </div>
-</section>
-
-<!-- ===== LISTA DE FARÓIS ===== -->
-<section class="bloco" id="faróis">
-  <h2 class="sec"><span class="n">12.5</span> Lista de Faróis (DH2) — cuidado com o nome</h2>
-  <p class="lede">O nome engana: hoje relaciona TODOS os sinais luminosos, não só faróis.</p>
-
-  <div class="box trap">
-    <h4>A pegadinha do nome <span class="tag t-conflito">CONFLITO</span> <span class="tag t-banca">BANCA</span></h4>
-    <p>A Lista de Faróis relaciona <strong>sinais luminosos</strong>: faróis, aerofaróis, faroletes, barcas-faróis, boias luminosas e luzes particulares. <span class="hl">Não inclui</span> boias cegas e balizas — essas estão na <strong>Lista de Sinais Cegos (DH18)</strong>. Traz a Tabela de <strong>Alcance Geográfico</strong> (elevação da luz e do observador) e o Diagrama de <strong>Alcance Luminoso</strong> (intensidade e visibilidade). Publicada a cada 2 anos; detalhada no Cap. 13.</p>
-  </div>
-</section>
-
-<!-- ===== CARTAS-PILOTO ===== -->
-<section class="bloco" id="piloto">
-  <h2 class="sec"><span class="n">12.8</span> Atlas de Cartas-Piloto</h2>
-  <p class="lede">A publicação meteo-oceanográfica: 12 cartas (uma por mês), em Mercator 1:10.000.000, do Atlântico Sul-Ocidental.</p>
-
-  <div class="box key">
-    <h4>O código de cores <span class="tag t-decorar">DECORAR</span></h4>
-    <table style="margin:6px 0 0">
-      <tr><th>Cor</th><th>Informação</th></tr>
-      <tr><td><strong>Azul</strong></td><td>Ventos (rosas dos ventos: % por direção; força na escala Beaufort por "penas"; calmarias no centro).</td></tr>
-      <tr><td><strong>Verde</strong></td><td>Correntes marítimas à superfície (direção e velocidade média em nós).</td></tr>
-      <tr><td><strong>Encarnada cheia</strong></td><td>Isotermas da água do mar (°C).</td></tr>
-      <tr><td><strong>Encarnada tracejada</strong></td><td>Isotermas do ar (°C).</td></tr>
-      <tr><td><strong>Roxa</strong></td><td>Isogônicas (declinação magnética) — cheia; variação anual — tracejada.</td></tr>
-    </table>
-    <p class="vars">No verso: temperatura, nevoeiro, visibilidade e ventos nos portos. Traz os limites das <strong>Áreas de Previsão</strong> (Alfa a Hotel + Norte e Sul Oceânicas).</p>
-  </div>
-</section>
-
-<!-- ===== AVISOS AOS NAVEGANTES ===== -->
-<section class="bloco" id="avisos">
-  <h2 class="sec"><span class="n">12.11</span> Os Avisos aos Navegantes</h2>
-  <p class="lede">Nenhuma publicação inspira confiança sem estar atualizada. Os Avisos aos Navegantes (AVGANTES) mantêm cartas e publicações em dia; os Avisos-Rádio Náuticos (AvRaN) dão o urgente.</p>
-
-  <div class="ichart">
-    <h4>Os quatro avisos — a lápis, a caneta, e o que altera a carta</h4>
-    <p class="hint">Toque em cada tipo e veja como se corrige a carta e se ele a altera. Cuidado com o APE, que se parece com o Permanente mas não altera a carta.</p>
-    <div class="ictrl" id="avBtns"></div>
-    <div class="iread" id="avRead">Selecione um tipo de aviso.</div>
-  </div>
-
-  <div class="box key">
-    <h4>Decodificando a numeração <span class="tag t-banca">BANCA</span> <span class="tag t-decorar">DECORAR</span></h4>
-    <p>Ex.: <strong>E 4027/08</strong> = aviso-rádio náutico <span class="hl">costeiro</span> da <span class="hl">costa Leste (E)</span>, número 4027, do ano de <span class="hl">2008</span>. (Foi a 2008-Q66.) As letras indicam a região; a numeração é sequencial ao longo do ano, independentemente da área. Avisos Temporários levam <strong>(T)</strong>, Preliminares <strong>(P)</strong>, e os Permanentes só número + ano.</p>
-  </div>
-
-  <div class="box">
-    <h4>Periodicidade e organização</h4>
-    <p>Folhetos: Área Marítima e Hidrovias em geral a cada <span class="hl">15 dias (quinzenal)</span>; Hidrovia Paraguai-Paraná <strong>mensal</strong>; Tietê-Paraná <strong>trimestral</strong>. O folheto tem <strong>7 seções</strong> (I Informações Gerais · II Avisos-Rádio · III Correções às Cartas · IV Correções às Publicações · V APE · VI Notícias · VII "bacalhaus"). Elaborado pelo <strong>CHM</strong>, por delegação da DHN.</p>
-  </div>
-</section>
-
-<!-- ===== MAPA DA BANCA ===== -->
-<section class="bloco" id="banca">
-  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
-  <p class="lede">Os Avisos aos Navegantes são o filão: caíram em 2008, 2011 e 2012.</p>
-
-  <table>
-    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
-    <tr><td>2008</td><td><strong>Q66</strong></td><td>Avisos aos Navegantes — decodificar numeração / APE</td><td class="center"><b>(b)</b> ✔ OCR</td></tr>
-    <tr><td>2011 · Amarela</td><td><strong>Q67</strong></td><td>Avisos aos Navegantes — costeiro/NAVAREA, APE, caneta/bacalhau</td><td class="center"><b>(b)</b> II·III·V ⚠</td></tr>
-    <tr><td>2012 · Rosa</td><td>—</td><td>Disseminação de informações — Preliminar, APE, NAVAREA</td><td class="center"><b>(b)</b> I·IV·V</td></tr>
-  </table>
-
-  <div class="box key">
-    <h4>2008-Q66 resolvida <span class="tag t-banca">BANCA</span></h4>
-    <p>Correta <strong>(b)</strong>: <em>E 4027/08 é um aviso-rádio náutico costeiro da costa Leste, de 2008</em>. Distratores: (a) e (d) confundem <strong>APE</strong> (que NÃO altera a carta) com correções à carta / informações urgentes; (c) diz que os costeiros são precedidos de "NAVAREA" (errado — NAVAREA é oceânico).</p>
-  </div>
-
-  <div class="box key">
-    <h4>2012 resolvida <span class="tag t-banca">BANCA</span></h4>
-    <p>Gabarito <strong>(b) I, IV e V</strong>. <strong>I</strong> (Preliminar antecipa Permanentes) → V. <strong>IV</strong> (APE não altera cartas; divulga informações gerais permanentes) → V. <strong>V</strong> (NAVAREA/costeiros diários; após 6 semanas entram nos Avisos aos Navegantes) → V. II e III são falsas (detalhes trocados sobre interdição/locais).</p>
-  </div>
-
-  <div class="box trap">
-    <h4>Os distratores clássicos <span class="tag t-conflito">DECORAR</span></h4>
-    <p>• <strong>APE ≠ Aviso Permanente</strong>: o APE NÃO altera a carta. • <strong>Temporário/Preliminar → lápis</strong>; <strong>Permanente → caneta/bacalhau</strong> (registra ano+número no campo "Pequenas Correções", canto inferior esquerdo). • <strong>Costeiro ≠ NAVAREA</strong> (NAVAREA = oceânico). • Lista de Faróis ≠ boias cegas (Sinais Cegos, DH18). • Avisos aos Navegantes = <strong>quinzenal</strong>, CHM.</p>
-  </div>
-</section>
-
-<!-- ===== FLASHCARDS ===== -->
-<section class="bloco" id="flash">
-  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
-  <p class="lede">Toque para virar. Publicações e os Avisos aos Navegantes.</p>
-  <div class="fcgrid" id="fcGrid"></div>
-</section>
-
-<!-- ===== QUIZ ===== -->
-<section class="bloco" id="quiz">
-  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
-  <p class="lede">Doze questões — com as reais de Avisos aos Navegantes (2008/2011/2012).</p>
-  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
-  <div class="quiz" id="quizBox">
-    <div class="q" id="qText"></div>
-    <div id="qOpts"></div>
-    <div class="fb" id="qFb"></div>
-    <div class="nav">
-      <span id="qCount"></span>
-      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PSCPP ===== -->
-<details class="pscpp" id="pscpp" open>
-  <summary>Pontos PSCPP — Publicações Náuticas (Miguens Cap. 12)</summary>
-  <ul>
-    <li><b>Carta 12.000 (INT 1):</b> símbolos e abreviaturas das cartas (bilíngue, grupos A–U). Documento de consulta.</li>
-    <li><b>Roteiro (DH1):</b> descrição da costa, portos, perigos, recursos, balizamento, meteo, correntes/marés. 3 volumes (Norte/Leste/Sul); Cap. I e II comuns. Hidrovias: DH1-VI (Paraguai-Paraná), DH1-VII (Tietê-Paraná).</li>
-    <li><b>Lista de Faróis (DH2):</b> sinais LUMINOSOS (não inclui boias cegas/balizas → Lista de Sinais Cegos, DH18). Alcance geográfico e luminoso. A cada 2 anos.</li>
-    <li><b>Cartas-Piloto:</b> meteo/oceanografia, 12 cartas mensais, Mercator 1:10.000.000. Azul=ventos (Beaufort), verde=correntes, encarnada cheia=isoterma água / tracejada=ar, roxa=isogônicas. Áreas de previsão Alfa–Hotel.</li>
-    <li><b>Almanaque Náutico (DN5):</b> navegação astronômica (Sol, Lua, 4 planetas, 57 estrelas).</li>
-    <li><b>Tábuas das Marés (DG6):</b> 54 portos. <b>Cartas de Correntes de Maré:</b> 11 portos/áreas.</li>
-    <li><b>Avisos aos Navegantes (AVGANTES):</b> atualizam cartas/publicações; quinzenal (Paraguai-Paraná mensal, Tietê-Paraná trimestral); CHM/DHN; 7 seções.</li>
-    <li><b>Tipos:</b> Temporário (T, lápis) · Preliminar (P, lápis, antecipa Permanente) · Permanente (caneta/bacalhau; registra ano+número no campo "Pequenas Correções") · APE (NÃO altera a carta — não confundir com Permanente).</li>
-    <li><b>Numeração:</b> ex. E 4027/08 = aviso-rádio costeiro da costa Leste, 2008. Sequencial no ano, independentemente da área.</li>
-    <li><b>Avisos-Rádio Náuticos (AvRaN):</b> urgência. NAVAREA (oceânico), Costeiro, Local. DH20: correções permanentes semestral.</li>
-    <li><b>Banca:</b> 2008-Q66 (E 4027/08, gab b) · 2012 (Preliminar/APE/NAVAREA, gab b: I·IV·V) · 2011-Q67 (APE/caneta, gab b: II·III·V, verificar).</li>
-  </ul>
-</details>
-
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">PSCPP 2027 · Navegação — Miguens · Consulta rápida</p>
+  <h1>Publicações <em>Náuticas</em></h1>
+  <p class="sub">Consulta rápida do Cap. 12: dotação, Catálogo, Carta 12.000, Roteiro, Lista de Faróis, Lista de Auxílios-Rádio (número-índice, radiofaróis, fusos, Avisos-Rádio, SafetyNET, SALVAMAR, GMDSS), Tábuas das Marés, Cartas Piloto, Almanaque e Avisos aos Navegantes.</p>
+  <div class="src"><b>Fonte:</b> Miguens, Manual de Navegação da MB, Vol. I — Cap. 12 (DHN, 2ª Revisão, 2023). Consulta rápida; o caderno de leitura completo é o DOCX.</div>
+</div></header>
+<nav class="toc"><div class="wrap"><div class="busca"><input id="q" type="search" placeholder="Buscar neste caderno (ex.: ocultação, cardinal, alcance)…" aria-label="Buscar neste caderno"><span id="qn"></span></div><div class="row"><a href="#s0">12.1</a><a href="#s1">12.2</a><a href="#s2">12.3</a><a href="#s3">12.4</a><a href="#s4">12.5</a><a href="#s5">12.6</a><a href="#s6">12.7</a><a href="#s7">12.8</a><a href="#s8">12.9</a><a href="#s9">12.11</a><a href="#s10">Glossário</a></div></div></nav>
+<main><div class="wrap">
+<div class="legend"><b>Como usar:</b> consulta rápida do capítulo — definições completas do livro, listas de opções, quadros e cálculos. O texto integral com os seus destaques está no DOCX <b>Miguens_Vol1_Cap12_Destaques_PSCPP.docx</b>.
+<span class="tag t-cob">COBRADO</span> = assunto já cobrado em prova · <span class="hl">amarelo</span> = seu destaque no PDF · <span class="dot">●</span> = seu ponto vermelho ·
+<span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span> <span class="tag t-conflito">CONFLITO</span> = divergência no livro. No glossário: ★ seu destaque · ● cobrado · ○ só menção. A busca aceita palavras sem acento.</div>
+<section class="bloco" id="s0"><h2 class="sec"><span class="n">12.1</span><span class="tt">Importância e dotação das publicações náuticas</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Publicações náuticas</h4><p>Além das Cartas Náuticas, os navegantes utilizam diversas outras Publicações Náuticas ou Publicações de Auxílio à Navegação, cujas informações complementam ou ampliam os elementos fornecidos pelas cartas. A consulta é indispensável, tanto na fase de planejamento da derrota como na de execução, e devem ser sempre mantidas atualizadas de acordo com os “Avisos aos Navegantes”.</p></div><div class="def srch"><h4>Dotação — navios da MB</h4><p>Estabelecida pela DHN por meio da <b>NAVEMARINST nº 10-04C</b>. A andaina mínima de cartas em papel abrange toda a área geográfica em que o navio opera; as cartas em papel são as únicas reconhecidas, oficialmente, para emprego nos navios da MB; quem dispõe de ECDIS/ECS deve ter também andaina mínima de ENC das mesmas áreas. A BHMN fornece a dotação inicial.</p><ul><li>Em papel: Roteiros, Tábuas das Marés, cartas, Livro dos Cronômetros (DN13), Livro das Agulhas (DN12), DN4, Almanaque Náutico (DN5);</li><li>Digitais: Lista de Faróis, Lista de Auxílios-Rádio, Catálogo, Lista de Sinais Cegos;</li><li>Quadros afixados no passadiço: Regras de Governo, Balizamento, Sinais Sonoros e Luminosos, Luzes e Marcas, Nuvens, Escala Beaufort.</li></ul></div><div class="def srch"><h4>Dispensa da carta em papel (NORMAM-28) <span class="tag t-cob">COBRADO</span></h4><p>Para embarcações SOLAS (item 0210 da NORMAM-28/DHN), são aceitas, com exceção das cartas náuticas, publicações em papel ou digitais (com backup em mídia independente). A dispensa da dotação de cartas náuticas em papel é permitida quando a embarcação dispuser de <b>ECDIS</b>, utilizando cartas eletrônicas oficiais (ENC), <b>bem como um segundo ECDIS como backup do principal</b>, instalado segundo o preconizado pela IMO; cartas náuticas em formato <b>RASTER não são aceitas</b> para o atendimento a esta dispensa.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Dotação dos navios da MB (NAVEMARINST 10-04C; sem marcação)</h4><div class="tw"><table><thead><tr><th>Em papel</th><th>Digitais</th><th>Quadros (afixados no passadiço)</th></tr></thead><tbody><tr class="srow"><td>Roteiros (DH1-I, II, III e VI)</td><td>Lista de Faróis (DH2)</td><td>Regras de Governo e Navegação (DHN-0614)</td></tr><tr class="srow"><td>Tábuas das Marés (DG6)</td><td>Lista de Auxílios-Rádio (DH8)</td><td>Balizamento Cego e Luminoso (DHN-4504)</td></tr><tr class="srow"><td>Cartas náuticas (andaina mínima); croquis (navegação fluvial)</td><td>Catálogo de Cartas e Publicações (DH7)</td><td>Sinais Sonoros e Luminosos (DHN-0616)</td></tr><tr class="srow"><td>Livro dos Cronômetros e Comparadores (DN13); Livro das Agulhas Magnéticas (DN12)</td><td>Relação de Cartas, Publicações e Impressos de Uso na MB</td><td>Luzes e Marcas (DHN-0615)</td></tr><tr class="srow"><td>Tábuas para Navegação Astronômica (DN4); Almanaque Náutico (DN5)</td><td>Lista de Sinais Cegos (DH18)</td><td>Classificação de Nuvens (DHN-5906)</td></tr><tr class="srow"><td>Lista de Sinais — Hidrovia Paraná-Paraguai (navios da região)</td><td>—</td><td>Escala Beaufort — Estado do Mar (DHN-5909)</td></tr></tbody></table></div></div><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Dispensa da carta em papel (NORMAM 28): <b>ECDIS + ENC oficiais + segundo ECDIS de backup</b> (instalação IMO). <b>RNC não vale</b> para a dispensa. Distrator: “ECDIS com RNC” ou “ECDIS único com cartas em papel de reserva”. Na MB (NAVEMARINST), a carta em papel continua sendo a única oficialmente reconhecida.</div></section><section class="bloco" id="s1"><h2 class="sec"><span class="n">12.2</span><span class="tt">Catálogo de Cartas e Publicações</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Catálogo de Cartas e Publicações (DH7)</h4><p>Tem o propósito de apresentar ao navegante todas as cartas náuticas, publicações e impressos editados pela DHN; essencial para a seleção das cartas e publicações para uma travessia. Dividido em três partes:</p><ul><li><b>Parte 1</b>: relação de todas as cartas publicadas pela DHN, com os índices;</li><li><b>Parte 2</b>: os <b>20 índices</b> em que as cartas são distribuídas (número, escala, edições; cartograma);</li><li><b>Parte 3</b>: todas as publicações e impressos de interesse exclusivo para a navegação.</li><li>Correções: o folheto quinzenal “Avisos aos Navegantes” publica em sua Parte (Seção) IV as correções permanentes ao Catálogo.</li></ul></div><div class="def srch"><h4>Folha substituta × folha inserida</h4><p>A folha substituta tem numeração igual à da folha substituída acrescida do número e ano do folheto quinzenal portador. A folha a ser inserida contém matéria nova; sua numeração é a da página anterior seguida de uma letra minúscula, em ordem alfabética, e do número sequencial e ano do folheto portador.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> Aqui o livro diz “<b>Parte IV</b>” do folheto; em 12.11.2 a mesma divisão é chamada “<b>Seção IV – Correções às Publicações Náuticas</b>”. É a mesma coisa: correções às publicações estão na Seção IV.</div></section><section class="bloco" id="s2"><h2 class="sec"><span class="n">12.3</span><span class="tt">Carta 12.000 (INT 1)</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Carta 12.000 (INT 1)</h4><p>Símbolos, Abreviaturas e Termos Usados nas Cartas Náuticas Brasileiras: publicação cuja utilização é essencial para interpretar corretamente todas as informações contidas nas cartas náuticas editadas pela DHN. Bilíngue, baseada nas Especificações de Cartas da OHI, dividida em quatro seções com grupos de símbolos de A até U:</p><ul><li><b>Generalidades</b> (A, B);</li><li><b>Topografia</b> (C a G);</li><li><b>Hidrografia</b> (H a O);</li><li><b>Auxílios à navegação</b> (P a U) — P luzes, Q boias e balizas, R sinais de cerração, S sistemas radar/rádio/satélite.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">As quatro seções da Carta 12.000 e os grupos A–U</h4><div class="tw"><table><thead><tr><th>Seção</th><th>Grupos</th></tr></thead><tbody><tr class="srow"><td>Generalidades</td><td>A Número da carta, título e informações marginais · B Posições, distâncias, marcações e rosa-dos-ventos</td></tr><tr class="srow"><td>Topografia</td><td>C Feições naturais · D Edificações · E Pontos de referência · F Portos · G (não utilizado)</td></tr><tr class="srow"><td>Hidrografia</td><td>H Marés e correntes · I Profundidades · J Natureza do fundo · K Rochas, cascos soçobrados e obstruções · L Instalações ao largo da costa · M Derrotas e rotas · N Áreas e limites · O (não utilizado)</td></tr><tr class="srow"><td>Auxílios à navegação</td><td>P Luzes · Q Boias e balizas · R Sinais de cerração · S Sistemas de navegação por radar, rádio e satélite · T Serviços · U Facilidades para pequenas embarcações</td></tr></tbody></table></div><p class="foot">Ex.: luzes de faróis → Seção P; fundeadouro recomendado → N (Apêndice A do Cap. 2 cita “Seção IN”).</p></div></section><section class="bloco" id="s3"><h2 class="sec"><span class="n">12.4</span><span class="tt">Roteiro (DH1)</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Roteiro (DH1)</h4><p>Publicação que contém as informações úteis ao navegante com relação à descrição da costa, demanda de portos e fundeadouros, perigos, profundidades em barras e canais, recursos em portos, balizamento, condições meteorológicas predominantes, correntes e marés observadas, etc. Na prática, deve ser consultado sempre que se tem necessidade de conhecer, com detalhes, as informações contidas nas cartas.</p></div><div class="def srch"><h4>Volumes do Roteiro</h4><p>A publicação é dividida em três volumes, cada um focalizando determinado trecho da costa:</p><ul><li><b>Costa Norte</b> — da Baía do Oiapoque ao Cabo Calcanhar, inclusive o Rio Amazonas e seus afluentes navegáveis e o Rio Pará;</li><li><b>Costa Leste</b> — do Cabo Calcanhar ao Cabo Frio, incluindo Atol das Rocas, Fernando de Noronha, São Pedro e São Paulo, Trindade e Martin Vaz;</li><li><b>Costa Sul</b> — do Cabo Frio ao Arroio Chuí, inclusive as lagoas dos Patos e Mirim.</li><li>Capítulo I (Informações Gerais) e Capítulo II (informações gerais sobre o Brasil) são comuns a todos os volumes; apêndices com vistas da costa e plantas de portos.</li><li>Hidrovias: DH1-VI (Paraguai-Paraná) e DH1-VII (Tietê-Paraná).</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Três volumes, mesma divisão da costa usada no título da carta e na Lista de Faróis: Norte (Oiapoque–Calcanhar, com Amazonas e Pará) · Leste (Calcanhar–Cabo Frio, com ilhas oceânicas) · Sul (Cabo Frio–Chuí, com Patos e Mirim). Caps. I e II comuns a todos. Hidrovias: DH1-VI e DH1-VII.</div></section><section class="bloco" id="s4"><h2 class="sec"><span class="n">12.5</span><span class="tt">Lista de Faróis (DH2)</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Lista de Faróis (DH2) <span class="tag t-cob">COBRADO</span></h4><p>Apresenta todos os sinais luminosos das áreas cobertas pelas cartas da DHN (faróis, aerofaróis, faroletes, barcas-faróis, boias luminosas e luzes particulares); não inclui boias cegas e balizas, que estão na Lista de Sinais Cegos (DH18). Divide a costa, como o Roteiro, em Norte, Leste e Sul; dados em oito colunas; traz a Tabela de Alcance Geográfico, o Diagrama de Alcance Luminoso e o Sistema de Balizamento. Publicada <b>a cada dois anos</b>.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Lista de Faróis = todos os sinais <b>luminosos</b> (inclusive boias luminosas); sinais <b>cegos</b> (boias cegas e balizas) ficam na <b>Lista de Sinais Cegos (DH18)</b>. Nova edição a cada <b>2 anos</b>. Distrator: “a Lista de Faróis só traz faróis da costa”.</div></section><section class="bloco" id="s5"><h2 class="sec"><span class="n">12.6</span><span class="tt">Lista de Auxílios-Rádio (DH8)</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Lista de Auxílios-Rádio (DH8)</h4><p>Tem por finalidade reunir em uma única publicação as informações de maior relevância sobre os auxílios radioelétricos à navegação marítima existentes na costa do Brasil e sobre serviços-rádio (incluindo transmissões via satélite) úteis ao navegante que estiver no oceano Atlântico Sul. Cada capítulo trata de um tipo de serviço. Visa à <b>complementação</b> das publicações próprias dos serviços-rádio, nunca a sua substituição.</p></div><div class="def srch"><h4>Correções da Lista de Auxílios-Rádio</h4><p>As correções e atualizações são efetuadas do seguinte modo:</p><ul><li>o <b>Aviso-Rádio</b> divulga alterações temporárias, normalmente canceladas por outro Aviso-Rádio;</li><li>o Folheto Quinzenal de Avisos aos Navegantes publica os Avisos-Rádio em vigor e, em sua <b>Seção IV</b>, as correções permanentes;</li><li>o Folheto Quinzenal pode distribuir folhas com grandes correções, para substituição ou inserção.</li></ul></div><div class="def srch"><h4>Número-índice das estações</h4><p>Todas as estações são numeradas com um número-índice de quatro algarismos:</p><ul><li><b>Milhar</b> = serviço: 2 radiofaróis; 3 sinais horários; 4 boletins meteorológicos e avisos de mau tempo; 5 avisos-rádio náuticos e SAR; 7 tráfego de perigo e segurança; 8 costeiras de tráfego comercial;</li><li><b>Centena</b> = área: 0 e 1 Costa Norte; 2, 3 e 4 Costa Leste; 5, 6 e 7 Costa Sul; 8 rios da bacia Amazônica e rio Paraguai; 9 países estrangeiros;</li><li><b>Dezena e unidade</b> = sequência, de Norte para Sul e de Leste para Oeste.</li><li>Horas sempre em HMG (0000 a 2400); a hora legal vem escrita “Hora Legal”.</li></ul></div><div class="def srch"><h4>Radiogoniometria</h4><p>Conjunto de operações visando à determinação da direção segundo a qual uma estação recebe sinais radiotelegráficos transmitidos por outra estação. As estações radiogoniométricas informam a direção que recebem, com erro menor que 2º para distâncias até 50 milhas. No Brasil, não há estações radiogoniométricas abertas ao público.</p></div><div class="def srch"><h4>Tipos de radiofaróis</h4><p>Os radiofaróis são divididos em três tipos:</p><ul><li><b>Direcionais</b>: sinais dentro de um setor, normalmente entre 15° e 30°, para dar um rumo de governo; uso primordialmente aéreo; não existem no Brasil para a navegação marítima;</li><li><b>Rotativos</b>: feixe direcional com movimento rotativo uniforme; marcação com receptor comum e cronógrafo; não existem no Brasil;</li><li><b>Circulares</b>: mesma intensidade em todas as direções; marcação pelo radiogoniômetro de bordo; o tipo mais comum — todos os radiofaróis marítimos do Brasil.</li></ul></div><div class="def srch"><h4>Sinais horários e fusos do Brasil</h4><p>Os sinais horários merecem confiança absoluta na sua precisão, que atinge em média 0,1 segundo (Observatório Nacional). O Brasil possui quatro fusos para a hora legal:</p><ul><li><b>OSCAR</b> (HMG − 2): Fernando de Noronha e Trindade;</li><li><b>PAPA</b> (HMG − 3): DF, Sul, Sudeste, Nordeste, GO, TO, PA e AP;</li><li><b>QUEBEC</b> (HMG − 4): MT, MS, RO, RR e leste do AM;</li><li><b>ROMEO</b> (HMG − 5): AC e oeste do AM.</li></ul></div><div class="def srch"><h4>Informações meteorológicas (CHM)</h4><p>O serviço de meteorologia na área marítima do Brasil (METAREA V) cabe ao CHM, por delegação da DHN. As informações meteorológicas de interesse do navegante elaboradas pelo CHM são: o <b>METEOROMARINHA</b>; as <b>Previsões Especiais</b>; e os <b>Avisos de Mau Tempo</b>.</p></div><div class="def srch"><h4>Avisos-Rádio Náuticos <span class="tag t-cob">COBRADO</span></h4><p>Mensagens transmitidas aos navios com o propósito de fornecer “informações urgentes” relevantes para a navegação segura (Regra 4, Cap. V da SOLAS). Junto com Avisos de Mau Tempo, previsões e outras mensagens urgentes formam as <b>Informações de Segurança Marítima (ISM/MSI)</b>. O mundo está dividido em <b>21 NAVAREA</b>; a NAVAREA V abrange apenas o Brasil, coordenada pela DHN.</p></div><div class="def srch"><h4>Classes de Avisos-Rádio Náuticos <span class="tag t-cob">COBRADO</span></h4><p>Classificados em função do tipo de navegação a que irão, primordialmente, interessar:</p><ul><li><b>NAVAREA</b> — navegação oceânica na NAVAREA V, além dos limites das regiões costeiras; numeração 0001 a 6999 + ano (ex.: 0123/18);</li><li><b>Costeiros</b> — navegação costeira nas regiões costeiras; letra da região + 0001 a 6999 + ano (ex.: E 0027/18);</li><li><b>Locais</b> — navegação interior até ~3 milhas da costa ou em vias interiores (baías, portos, canais, rios, lagos e lagoas) onde navios maiores navegam com práticos; letra + a partir de 7001 + ano (ex.: S 7021/17); nos rios Paraguai, Paraná e Tietê, a partir de 0001.</li><li>Letras: I Bacia Amazônica; N Norte; E Leste; S Sul; HG Hidrovias em Geral; HI Rio Paraguai; HT Tietê e Paraná.</li></ul></div><div class="def srch"><h4>Meios de divulgação dos Avisos-Rádio <span class="tag t-cob">COBRADO</span></h4><p>Na NAVAREA V, os Avisos-Rádio Náuticos são divulgados por:</p><ul><li>transmissões via satélite, pelo serviço <b>SafetyNET</b>;</li><li>radiodifusão em HF, pela Estação Rádio da Marinha no Rio de Janeiro (<b>PWZ 33</b>);</li><li>radiodifusão em VHF/HF, pela <b>RENEC</b> (Embratel);</li><li>internet (sítio da DHN/CHM); e</li><li>folhetos de “Avisos aos Navegantes” (os Avisos-Rádio SAR não).</li></ul></div><div class="def srch"><h4>SafetyNET <span class="tag t-cob">COBRADO</span></h4><p>Serviço internacional de difusão e recepção automática de Informações de Segurança Marítima através do sistema <b>EGC Inmarsat</b>, projetado como parte do GMDSS. O sistema EGC, operado por quatro satélites do sistema Inmarsat-C, cobre aproximadamente entre 76º S e 76º N. As transmissões de Avisos-Rádio Náuticos via SafetyNET são realizadas a partir do <b>CHM</b>.</p></div><div class="def srch"><h4>Avisos-Rádio SAR</h4><p>Mensagens de alerta de emergência SAR ou de coordenação de busca e salvamento transmitidas aos navios que se encontram em uma determinada área (Regra 7, Cap. V da SOLAS). Identificados por “SAR” + número sequencial anual a partir de 0001 + ano (ex.: SAR 0056/21). Não são classificados por tipo de navegação nem por região.</p></div><div class="def srch"><h4>SISTRAM</h4><p>Sistema de Informações sobre o Tráfego Marítimo (COMPAAz). A principal finalidade, à semelhança dos demais sistemas do mundo, é permitir, no caso de um incidente SAR, a rápida localização das embarcações mais próximas, em condições de prestar auxílio.</p></div><div class="def srch"><h4>Centros SALVAMAR <span class="tag t-cob">COBRADO</span></h4><p>A SRR brasileira (até 10ºW, Carta SAR 5114) é dividida em seis sub-regiões, mais três centros em águas interiores:</p><ul><li>SALVAMAR NORTE (Belém); NORDESTE (Natal); LESTE (Salvador); SUESTE (Rio de Janeiro); SUL-SUESTE (São Paulo); SUL (Rio Grande);</li><li>Águas interiores: NOROESTE (Manaus); CENTRO-OESTE (Brasília); OESTE (Ladário).</li></ul></div><div class="def srch"><h4>GMDSS</h4><p>O conceito básico do GMDSS é alertar, rapidamente, as autoridades de busca e salvamento em terra, assim como os navios que navegam nas proximidades de uma embarcação sinistrada, a fim de que possam auxiliar na operação de busca e salvamento dentro do menor tempo possível, sendo a sua característica principal a <b>automação</b>. Em vigor em 1992; implementado em 1º de fevereiro de 1999.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Número-índice da Lista de Auxílios-Rádio (4 algarismos) <span class="tag t-calc">CALCULO</span></h4><div class="tw"><table><thead><tr><th>Posição</th><th>Significa</th><th>Valores</th></tr></thead><tbody><tr class="srow"><td>Milhar</td><td>Serviço</td><td>2 radiofaróis · 3 sinais horários · 4 meteorologia e mau tempo · 5 avisos-rádio náuticos e SAR · 7 tráfego de perigo e segurança · 8 costeiras de tráfego comercial</td></tr><tr class="srow"><td>Centena</td><td>Área geográfica</td><td>0–1 Costa Norte · 2–4 Costa Leste (com ilhas ao largo) · 5–7 Costa Sul · 8 rios da bacia Amazônica e rio Paraguai · 9 países estrangeiros</td></tr><tr class="srow"><td>Dezena + unidade</td><td>Sequência na área</td><td>De Norte para Sul e de Leste para Oeste</td></tr></tbody></table></div><p class="foot">Exemplos: 2040 = radiofarol, costa Norte, nº 40 (Canivete) · 3545 / 4545 / 7545 = mesma estação (PPR-Rio Rádio, costa Sul, nº 45) prestando sinal horário / meteorologia / perigo e segurança — muda só o milhar.</p></div><div class="box quad srch-t"><h4 class="qt">Tipos de radiofarol</h4><div class="tw"><table><thead><tr><th>Tipo</th><th>Emissão</th><th>Como se obtém a marcação</th><th>No Brasil (navegação marítima)</th></tr></thead><tbody><tr class="srow"><td>Direcional</td><td>Setor de 15° a 30°; rumo de governo</td><td>—</td><td>Não existe (uso aéreo)</td></tr><tr class="srow"><td>Rotativo</td><td>Feixe com movimento rotativo uniforme</td><td>Receptor comum + cronógrafo</td><td>Não existe</td></tr><tr class="srow"><td>Circular (RC)</td><td>Mesma intensidade em todas as direções</td><td>Radiogoniômetro de bordo</td><td><b>Todos os radiofaróis marítimos</b>; funcionamento contínuo; administração DHN</td></tr></tbody></table></div></div><div class="box quad srch-t"><h4 class="qt">Fusos horários do Brasil (hora legal)</h4><div class="tw"><table><thead><tr><th>Fuso</th><th>Hora</th><th>Abrange</th></tr></thead><tbody><tr class="srow"><td>OSCAR</td><td class="center">HMG − 2 h</td><td class="center">Fernando de Noronha e Trindade</td></tr><tr class="srow"><td>PAPA</td><td class="center">HMG − 3 h</td><td class="center">DF, Sul, Sudeste, Nordeste, GO, TO, PA, AP</td></tr><tr class="srow"><td>QUEBEC</td><td class="center">HMG − 4 h</td><td class="center">MT, MS, RO, RR e leste do AM</td></tr><tr class="srow"><td>ROMEO</td><td class="center">HMG − 5 h</td><td class="center">AC e oeste do AM</td></tr></tbody></table></div><p class="foot">A Lista de Auxílios-Rádio usa sempre HMG (0000 a 2400); hora legal vem escrita “Hora Legal”. Sinais horários: precisão média de 0,1 s (Observatório Nacional).</p></div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> O texto diz que as estações do METEOROMARINHA estão no “Apêndice IV-3, do capítulo <b>3</b>”; pela numeração (IV) e pelo item, é o Capítulo <b>4</b> (Serviços Radiometeorológicos).</div><div class="box quad srch-t"><h4 class="qt">Decodificar um Aviso-Rádio Náutico <span class="tag t-calc">CALCULO</span></h4><div class="tw"><table><thead><tr><th>Classe</th><th>Interessa a</th><th>Formato</th><th>Exemplo</th></tr></thead><tbody><tr class="srow"><td>NAVAREA</td><td>Navegação oceânica na NAVAREA V, além das regiões costeiras</td><td>Sem letra · 0001–6999 / ano</td><td>0123/18</td></tr><tr class="srow"><td>Costeiro</td><td>Navegação costeira nas regiões costeiras da NAVAREA V</td><td>Letra da região · 0001–6999 / ano</td><td>E 0027/18 · <b>E 4027/08</b></td></tr><tr class="srow"><td>Local</td><td>Até ~3 milhas da costa e vias interiores (navios com prático)</td><td>Letra da região · a partir de 7001 / ano (Paraguai, Paraná, Tietê: desde 0001)</td><td>S 7021/17</td></tr><tr class="srow"><td>SAR</td><td>Alerta ou coordenação de busca e salvamento (Regra 7, Cap. V SOLAS)</td><td>“SAR” · 0001 em diante / ano</td><td>SAR 0056/21</td></tr></tbody></table></div><p class="foot">Regra prática: sem letra = NAVAREA; letra + número até 6999 = Costeiro; letra + 7001 ou mais = Local. Letras: N, E, S (costas), I (Amazônia), HG, HI, HT (hidrovias).</p></div><div class="box quad srch-t"><h4 class="qt">Centros SALVAMAR</h4><div class="tw"><table><thead><tr><th>Mar (seis sub-regiões da SRR)</th><th>Sede</th><th>Águas interiores</th><th>Sede</th></tr></thead><tbody><tr class="srow"><td>SALVAMAR NORTE</td><td>Belém/PA</td><td>SALVAMAR NOROESTE</td><td>Manaus/AM</td></tr><tr class="srow"><td>SALVAMAR NORDESTE</td><td>Natal/RN</td><td>SALVAMAR CENTRO-OESTE</td><td>Brasília/DF</td></tr><tr class="srow"><td>SALVAMAR LESTE</td><td>Salvador/BA</td><td>SALVAMAR OESTE</td><td>Ladário/MS</td></tr><tr class="srow"><td>SALVAMAR SUESTE</td><td>Rio de Janeiro/RJ</td><td></td><td></td></tr><tr class="srow"><td>SALVAMAR SUL-SUESTE</td><td>São Paulo/SP</td><td></td><td></td></tr><tr class="srow"><td>SALVAMAR SUL</td><td>Rio Grande/RS</td><td></td><td></td></tr></tbody></table></div><p class="foot">SRR brasileira até 10°W (Carta SAR 5114). Coordenação geral: SALVAMAR BRASIL. Avisos-Rádio SAR: Regra 7, Cap. V SOLAS; não são classificados por tipo de navegação nem por região; não constam da Seção II do folheto.</p></div><div class="box quad srch-t"><h4 class="qt">Meios de divulgação: Avisos-Rádio Náuticos × SAR</h4><div class="tw"><table><thead><tr><th>Meio</th><th>Náuticos</th><th>SAR</th></tr></thead><tbody><tr class="srow"><td>SafetyNET (Inmarsat-C, EGC, a partir do CHM)</td><td class="center">Sim</td><td class="center">Sim</td></tr><tr class="srow"><td>HF — Estação Rádio da Marinha no Rio (PWZ 33)</td><td class="center">Sim</td><td class="center">Sim</td></tr><tr class="srow"><td>VHF/HF — RENEC (Embratel)</td><td class="center">Sim</td><td class="center">Sim</td></tr><tr class="srow"><td>Internet (DHN/CHM)</td><td class="center">Sim</td><td class="center">Sim</td></tr><tr class="srow"><td>Folheto “Avisos aos Navegantes”</td><td class="center">Sim (os em vigor há mais de 6 semanas, na Seção II)</td><td class="center"><b>Não</b></td></tr></tbody></table></div></div><div class="box quad srch-t"><h4 class="qt">Capítulos da Lista de Auxílios-Rádio (DH8)</h4><div class="tw"><table><thead><tr><th>Cap.</th><th>Assunto</th></tr></thead><tbody><tr class="srow"><td>1</td><td>Introdução</td></tr><tr class="srow"><td>2</td><td>Radiogoniometria e radiofaróis</td></tr><tr class="srow"><td>3</td><td>Sinais horários</td></tr><tr class="srow"><td>4</td><td>Serviços radiometeorológicos (METEOROMARINHA, METAREA V)</td></tr><tr class="srow"><td>5</td><td>Avisos-Rádio Náuticos e SAR</td></tr><tr class="srow"><td>6</td><td>RACON</td></tr><tr class="srow"><td>7</td><td>Comunicações de socorro e segurança (GMDSS)</td></tr><tr class="srow"><td>8</td><td>Apoio costeiro (RENEC, iates clubes)</td></tr><tr class="srow"><td>9</td><td>Sistemas de navegação eletrônica (GPS/DGPS)</td></tr></tbody></table></div></div></section><section class="bloco" id="s6"><h2 class="sec"><span class="n">12.7</span><span class="tt">Tábuas das Marés e Cartas de Correntes de Maré</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Tábuas das Marés (DG6) e Cartas de Correntes de Maré</h4><p>A publicação anual DG6, Tábuas das Marés, fornece a previsão de marés para os <b>54</b> principais portos, terminais, barras, ilhas oceânicas e fundeadouros brasileiros, relacionados do Norte para o Sul, e para o fundeadouro da Estação Antártica Comandante Ferraz. As Cartas de Correntes de Maré apresentam os elementos da corrente de maré para <b>11</b> portos e áreas.</p></div></div></section><section class="bloco" id="s7"><h2 class="sec"><span class="n">12.8</span><span class="tt">Atlas de Cartas Piloto</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Atlas de Cartas Piloto</h4><p>Cartas com informações meteorológicas e oceanográficas para o planejamento e a execução da derrota; abrangem de Trinidad ao Rio da Prata e até o meridiano de 020º W. São 12 cartas (uma por mês), na Projeção de Mercator, escala 1:10.000.000. As principais informações para a navegação referem-se a <b>ventos e correntes</b>; trazem ainda declinação magnética, temperatura do ar e da água; no verso, nevoeiro, visibilidade, temperatura e ventos nos principais portos e ilhas.</p><ul><li>Ventos: <b>azul</b> (rosas dos ventos; calmarias no centro);</li><li>Correntes: <b>verde</b>;</li><li>Temperatura da água: <b>encarnado, linha cheia</b>; do ar: <b>encarnado, tracejada</b>;</li><li>Isogônicas: <b>roxo, linha cheia</b>; variação anual da declinação: <b>roxo, tracejada</b>.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Cores e linhas da Carta Piloto</h4><div class="tw"><table><thead><tr><th>Elemento</th><th>Representação</th><th>Lê-se</th></tr></thead><tbody><tr class="srow"><td>Ventos</td><td><b>Azul</b>: rosas dos ventos, setas e “penas”</td><td>Direção de onde sopram (%) e força Beaufort; calmarias no centro da rosa</td></tr><tr class="srow"><td>Correntes</td><td><b>Verde</b>: setas e números</td><td>Direção predominante e velocidade média em nós</td></tr><tr class="srow"><td>Temperatura da água (superfície)</td><td><b>Encarnado, linha cheia</b></td><td>Isotermas em °C</td></tr><tr class="srow"><td>Temperatura do ar (superfície)</td><td><b>Encarnado, linha tracejada</b></td><td>Isotermas em °C</td></tr><tr class="srow"><td>Declinação magnética</td><td><b>Roxo, linha cheia</b></td><td>Isogônicas (ano-base 2015)</td></tr><tr class="srow"><td>Variação anual da declinação</td><td><b>Roxo, linha tracejada</b></td><td>Linhas de mesma variação anual</td></tr><tr class="srow"><td>Verso de cada carta</td><td>Tabelas</td><td>Temperatura, nevoeiro, visibilidade, ventos predominantes e fortes em portos e ilhas</td></tr></tbody></table></div><p class="foot">Atlas: 12 cartas (uma por mês), Mercator, 1:10.000.000, de Trinidad ao Rio da Prata e até 020°W. Ex. do livro: maio, ao largo de Santos, corrente para ENE (060°) a 1,0 nó; água em Angra 24 °C; ar em Florianópolis 21 °C.</p></div></section><section class="bloco" id="s8"><h2 class="sec"><span class="n">12.9</span><span class="tt">Almanaque Náutico (DN5)</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Almanaque Náutico (DN5)</h4><p>Publicação anual da DHN, indispensável na Navegação Astronômica. Fornece elementos para a posição pelo Sol, a Lua, os 4 Planetas (Vênus, Marte, Júpiter e Saturno) e as 57 Estrelas usadas em Navegação Astronômica.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Publicação → conteúdo (formato de correlação cobrado em prova)</h4><div class="tw"><table><thead><tr><th>Sigla</th><th>Publicação</th><th>O que traz</th></tr></thead><tbody><tr class="srow"><td>DH1</td><td>Roteiro (Norte, Leste, Sul; VI e VII hidrovias)</td><td>Descrição da costa, demanda de portos, fundeadouros, perigos, recursos, balizamento, meteorologia, correntes e marés; vistas e plantas de portos</td></tr><tr class="srow"><td>DH2</td><td>Lista de Faróis</td><td>Todos os sinais luminosos (faróis, faroletes, boias luminosas…); alcance geográfico e luminoso; nova edição a cada 2 anos</td></tr><tr class="srow"><td>DH7</td><td>Catálogo de Cartas e Publicações</td><td>Parte 1 cartas · Parte 2 os 20 índices · Parte 3 publicações e impressos</td></tr><tr class="srow"><td>DH8</td><td>Lista de Auxílios-Rádio</td><td>Radiofaróis, sinais horários, meteorologia, Avisos-Rádio Náuticos e SAR, RACON, GMDSS, GPS; número-índice de 4 algarismos</td></tr><tr class="srow"><td>DH18</td><td>Lista de Sinais Cegos</td><td>Boias cegas e balizas</td></tr><tr class="srow"><td>DH20</td><td>Relação das cartas e publicações e correções permanentes</td><td>Consolidação semestral das correções (Seções III e VII do folheto)</td></tr><tr class="srow"><td>DG6</td><td>Tábuas das Marés</td><td>Previsão para 54 portos e locais + Estação Antártica Comandante Ferraz (anual)</td></tr><tr class="srow"><td>—</td><td>Cartas de Correntes de Maré</td><td>Correntes de maré em 11 portos e áreas</td></tr><tr class="srow"><td>—</td><td>Atlas de Cartas Piloto</td><td>Ventos, correntes, temperaturas, declinação; 12 cartas mensais</td></tr><tr class="srow"><td>DN4 · DN5</td><td>Tábuas para Navegação Astronômica · Almanaque Náutico</td><td>Cálculo astronômico · efemérides do Sol, Lua, 4 planetas e 57 estrelas (anual)</td></tr><tr class="srow"><td>DN12 · DN13</td><td>Livro das Agulhas Magnéticas · Livro dos Cronômetros</td><td>Registros de agulhas (Cap. 3) e de cronômetros</td></tr><tr class="srow"><td>Carta 12.000</td><td>Símbolos, Abreviaturas e Termos (INT 1)</td><td>Seções Generalidades, Topografia, Hidrografia, Auxílios; grupos A–U</td></tr></tbody></table></div></div></section><section class="bloco" id="s9"><h2 class="sec"><span class="n">12.11</span><span class="tt">Avisos aos Navegantes</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Avisos aos Navegantes (AVGANTES) <span class="tag t-cob">COBRADO</span></h4><p>Informações sobre alterações à navegação na costa, rios, lagos e lagoas navegáveis, divulgadas para alertar os navegantes, promover a tempestiva atualização das Cartas e Publicações Náuticas, e ainda divulgar outras informações, de caráter geral, sob a classificação de Avisos Permanentes Especiais (APE). Os AVGANTES atualizam cartas e publicações; os Avisos-Rádio Náuticos (AvRaN) divulgam as informações com caráter de urgência.</p><ul><li>Folhetos no site do CHM: Área Marítima e Hidrovias em Geral, a cada <b>15 dias</b>; Hidrovia Paraguai-Paraná, <b>mensais</b>; Tietê-Paraná, <b>trimestrais</b>.</li></ul></div><div class="def srch"><h4>Tipos de Avisos aos Navegantes <span class="tag t-cob">COBRADO</span></h4><p>Os Avisos referentes às atualizações de cartas são classificados da seguinte forma:</p><ul><li><b>Temporários</b> — correções de caráter transitório; feitas <b>a lápis</b>; letra(s) da região + nº + (T) + ano;</li><li><b>Preliminares</b> — antecipam correções que, posteriormente, serão objeto de Avisos Permanentes; feitas <b>a lápis</b>; letra(s) + nº + (P) + ano;</li><li><b>Permanentes</b> — correções definitivas; feitas <b>a caneta ou por inserção de “bacalhaus”</b>; após a correção, preencher o campo “<b>Pequenas Correções</b>” (canto inferior esquerdo da carta) com ano e número do Aviso; nº + ano;</li><li><b>Permanentes Especiais (APE)</b> — informações de caráter geral; <b>não constituem alterações permanentes à carta</b> e não devem ser confundidos com os Avisos Permanentes; “APE” + nº anual.</li><li>As numerações são sequenciais ao longo do ano, independentemente da área.</li></ul></div><div class="def srch"><h4>Seções do folheto “Avisos aos Navegantes” <span class="tag t-cob">COBRADO</span></h4><p>O folheto Área Marítima e Hidrovias em Geral compreende sete seções:</p><ul><li>I — Informações Gerais;</li><li>II — Avisos-Rádio Náuticos em vigor há <b>mais de 6 semanas</b> (inteiro teor na 1ª vez). Não constam: Avisos-Rádio SAR, interdição de área, reboques, derrelitos, regatas, levantamentos e eventos de curta duração;</li><li>III — Correções às Cartas Náuticas (Temporários, Preliminares e Permanentes);</li><li>IV — Correções às Publicações Náuticas;</li><li>V — Avisos Permanentes Especiais (APE);</li><li>VI — Notícias Diversas;</li><li>VII — Reproduções de Trechos, Quadros e Notas (“bacalhaus”).</li><li>Seções III e VII consolidadas semestralmente na <b>DH20</b>; todos os T, P e APE em vigor saem nos folhetos nº 1 e 13.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Avisos aos Navegantes: tipos, correção e numeração</h4><div class="tw"><table><thead><tr><th>Tipo</th><th>Natureza</th><th>Correção na carta</th><th>Numeração</th></tr></thead><tbody><tr class="srow"><td>Temporário (T)</td><td>Correção transitória</td><td>Lápis</td><td>Letra da região + nº + (T) + ano · ex.: E40(T)/21</td></tr><tr class="srow"><td>Preliminar (P)</td><td>Antecipa correção que virá por Aviso Permanente</td><td>Lápis</td><td>Letra da região + nº + (P) + ano</td></tr><tr class="srow"><td>Permanente</td><td>Correção definitiva</td><td>Caneta ou “bacalhau”; ano e número no campo “Pequenas Correções” (canto inferior esquerdo)</td><td>Nº sequencial + ano (sem letra)</td></tr><tr class="srow"><td>Permanente Especial (APE)</td><td>Informação geral de caráter permanente; <b>não altera a carta</b></td><td>—</td><td>“APE” + nº sequencial anual</td></tr></tbody></table></div><p class="foot">Periodicidade dos folhetos: Área Marítima e Hidrovias em Geral, 15 dias · Paraguai-Paraná, mensal · Tietê-Paraná, trimestral. Numeração sequencial no ano, independente da área. Todos os Temporários, Preliminares e APE em vigor saem em inteiro teor nos folhetos nº 1 e 13 de cada ano.</p></div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> Correção permanente: Cap. 2 (2.8) manda fazer “a <b>tinta vermelha</b>” e registrar no canto esquerdo da margem inferior; Cap. 12 diz “a <b>caneta ou por inserção de bacalhaus</b>” e preencher o campo “<b>Pequenas Correções</b>” (canto inferior esquerdo). O local do registro é o mesmo; “caneta” em prova não torna a afirmativa falsa. O que torna falsa é dizer que o registro vai “<b>ao lado da correção</b>”.</div><div class="box quad srch-t"><h4 class="qt">As sete seções do folheto “Avisos aos Navegantes”</h4><div class="tw"><table><thead><tr><th>Seção</th><th>Conteúdo</th></tr></thead><tbody><tr class="srow"><td>I</td><td>Informações gerais: estrutura, classificação e numeração dos avisos, canais e horários de MSI</td></tr><tr class="srow"><td>II</td><td>Avisos-Rádio Náuticos em vigor há <b>mais de 6 semanas</b> (inteiro teor na 1ª vez). <b>Não</b> entram: SAR, interdição de área, reboques, derrelitos, regatas, levantamentos e eventos de curta duração</td></tr><tr class="srow"><td>III</td><td>Correções às cartas: Temporários, Preliminares e Permanentes (todos os T e P em vigor nos folhetos 1 e 13)</td></tr><tr class="srow"><td>IV</td><td>Correções às publicações (Lista de Faróis, Auxílios-Rádio, Roteiros, Catálogo, Sinais Cegos)</td></tr><tr class="srow"><td>V</td><td>Avisos Permanentes Especiais (APE)</td></tr><tr class="srow"><td>VI</td><td>Notícias diversas</td></tr><tr class="srow"><td>VII</td><td>Reproduções de trechos, quadros e notas (“bacalhaus”)</td></tr></tbody></table></div><p class="foot">Para atualizar as cartas: Seções III e VII; consolidação semestral na DH20.</p></div></section><section class="bloco" id="s10"><h2 class="sec"><span class="tt">Glossário completo — Miguens, Vol. I, Cap. 12</span></h2><div class="box quad srch-t"><div class="tw"><table class="gloss"><thead><tr><th>Item</th><th>Termo</th><th>Definição condensada</th><th>Marca</th></tr></thead><tbody><tr class="srow"><td>12.1</td><td>NAVEMARINST 10-04C</td><td>Dotação de documentos náuticos dos navios da MB (papel, digitais, quadros); carta em papel é a única oficial na MB.</td><td>○</td></tr><tr class="srow"><td>12.1</td><td>BHMN</td><td>Base de Hidrografia da Marinha em Niterói: fornece a dotação inicial.</td><td>○</td></tr><tr class="srow"><td>12.1</td><td>NORMAM 28 — dotação SOLAS</td><td>Publicações exigidas (item 0210); aceitas digitais, exceto cartas; backup independente.</td><td>○</td></tr><tr class="srow"><td>12.1</td><td>Dispensa da carta em papel</td><td>ECDIS com ENC oficiais + segundo ECDIS de backup; RNC não vale.</td><td>★</td></tr><tr class="srow"><td>12.2</td><td>Catálogo (DH7)</td><td>Parte 1 cartas · Parte 2 os 20 índices · Parte 3 publicações; correções pela Parte/Seção IV do folheto.</td><td>★</td></tr><tr class="srow"><td>12.2</td><td>Folha substituta × inserida</td><td>Mesma numeração + nº/ano do folheto × página anterior + letra minúscula + nº/ano do folheto.</td><td>○</td></tr><tr class="srow"><td>12.3</td><td>Carta 12.000 (INT 1)</td><td>Símbolos, abreviaturas e termos; bilíngue; 4 seções; grupos A–U; documento de consulta.</td><td>★</td></tr><tr class="srow"><td>12.4</td><td>Roteiro (DH1)</td><td>Descrição da costa, portos, perigos, recursos, meteorologia, marés; 3 volumes; Caps. I e II comuns; apêndices com vistas e plantas.</td><td>★</td></tr><tr class="srow"><td>12.4</td><td>Roteiros de hidrovias</td><td>DH1-VI Paraguai-Paraná · DH1-VII Tietê-Paraná (o Amazonas está no Roteiro Costa Norte).</td><td>★</td></tr><tr class="srow"><td>12.5</td><td>Lista de Faróis (DH2)</td><td>Todos os sinais luminosos; 8 colunas; alcance geográfico e luminoso; nova edição a cada 2 anos.</td><td>★ ●</td></tr><tr class="srow"><td>12.5</td><td>Lista de Sinais Cegos (DH18)</td><td>Boias cegas e balizas.</td><td>○</td></tr><tr class="srow"><td>12.6</td><td>Lista de Auxílios-Rádio (DH8)</td><td>Auxílios radioelétricos e serviços-rádio do Atlântico Sul; complementa, nunca substitui as publicações dos serviços-rádio.</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>Número-índice</td><td>Milhar = serviço (2 radiofarol, 3 hora, 4 meteo, 5 avisos e SAR, 7 perigo/segurança, 8 comercial) · centena = área (0–1 N, 2–4 E, 5–7 S, 8 rios, 9 exterior).</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>HMG na Lista</td><td>Horas em HMG (0000–2400); hora legal vem escrita “Hora Legal”.</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>Estação radiogoniométrica</td><td>Informa a direção recebida; erro &lt; 2° até 50 milhas; não há abertas ao público no Brasil.</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>Radiofaróis</td><td>Direcionais (15°–30°, aéreos) · rotativos · circulares (todos os marítimos do Brasil).</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>Sinais horários</td><td>Precisão média 0,1 s; Observatório Nacional.</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>Fusos do Brasil</td><td>OSCAR −2 · PAPA −3 · QUEBEC −4 · ROMEO −5.</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>METAREA V · CHM</td><td>Área de meteorologia do Brasil; METEOROMARINHA, Previsões Especiais e Avisos de Mau Tempo.</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>Avisos-Rádio Náuticos</td><td>Informações urgentes (Regra 4, Cap. V SOLAS); com meteorologia formam as MSI.</td><td>★ ●</td></tr><tr class="srow"><td>12.6</td><td>NAVAREA</td><td>21 áreas do WWNWS; NAVAREA V coordenada pela DHN.</td><td>★ ●</td></tr><tr class="srow"><td>12.6</td><td>NAVAREA × Costeiro × Local</td><td>Oceânica além das costeiras · costeira · até ~3 milhas e vias interiores; numeração 0001–6999 / letra + 0001–6999 / letra + 7001+.</td><td>★ ●</td></tr><tr class="srow"><td>12.6</td><td>SafetyNET</td><td>Difusão de MSI pelo EGC Inmarsat-C (GMDSS), a partir do CHM; cobertura 76°S–76°N.</td><td>★ ●</td></tr><tr class="srow"><td>12.6</td><td>Avisos-Rádio SAR</td><td>Alerta ou coordenação SAR (Regra 7, Cap. V SOLAS); “SAR 0001/aa”.</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>SISTRAM</td><td>Localizar rapidamente embarcações próximas num incidente SAR.</td><td>★</td></tr><tr class="srow"><td>12.6</td><td>SALVAMAR</td><td>Norte (Belém), Nordeste (Natal), Leste (Salvador), Sueste (Rio), Sul-Sueste (São Paulo), Sul (Rio Grande); Noroeste, Centro-Oeste, Oeste.</td><td>★ ●</td></tr><tr class="srow"><td>12.6</td><td>GMDSS</td><td>Alertar rapidamente terra e navios próximos; característica principal: automação; em vigor 1992, implementado 1999.</td><td>★</td></tr><tr class="srow"><td>12.7</td><td>Tábuas das Marés (DG6)</td><td>Previsão anual para 54 locais + Estação Antártica Comandante Ferraz.</td><td>★</td></tr><tr class="srow"><td>12.7</td><td>Cartas de Correntes de Maré</td><td>Correntes de maré para 11 portos e áreas.</td><td>★</td></tr><tr class="srow"><td>12.8</td><td>Atlas de Cartas Piloto</td><td>12 cartas mensais, Mercator 1:10.000.000; Trinidad–Rio da Prata, até 020°W; ventos e correntes.</td><td>★</td></tr><tr class="srow"><td>12.8</td><td>Cores da Carta Piloto</td><td>Ventos azul · correntes verde · temperatura da água encarnado cheio, do ar tracejado · isogônicas roxo cheio, variação anual tracejado.</td><td>★</td></tr><tr class="srow"><td>12.9</td><td>Almanaque Náutico (DN5)</td><td>Anual; Sol, Lua, 4 planetas e 57 estrelas.</td><td>★</td></tr><tr class="srow"><td>12.11</td><td>AVGANTES × AvRaN</td><td>Atualização de cartas e publicações × informações urgentes.</td><td>★ ●</td></tr><tr class="srow"><td>12.11</td><td>Periodicidade dos folhetos</td><td>Marítima e Hidrovias em Geral 15 dias · Paraguai-Paraná mensal · Tietê-Paraná trimestral.</td><td>★</td></tr><tr class="srow"><td>12.11</td><td>Temporário · Preliminar · Permanente</td><td>Lápis (T) · lápis (P) · caneta ou bacalhau + “Pequenas Correções”.</td><td>★ ●</td></tr><tr class="srow"><td>12.11</td><td>APE</td><td>Aviso Permanente Especial: informação geral; não altera a carta.</td><td>★ ●</td></tr><tr class="srow"><td>12.11</td><td>Seções do folheto</td><td>I geral · II avisos-rádio &gt; 6 semanas · III cartas · IV publicações · V APE · VI notícias · VII bacalhaus.</td><td>★ ●</td></tr><tr class="srow"><td>12.11</td><td>DH20</td><td>Consolidação semestral das correções permanentes.</td><td>○</td></tr></tbody></table></div><p class="foot">Marca: ★ seu destaque · ● assunto cobrado em prova · ○ sem marcação, só menção.</p></div></section>
 <a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
-
-</div>
-</main>
-
-<footer>
-  <div class="wrap"><b>PSCPP 2027</b> · Publicações Náuticas (Miguens Vol. I, Cap. 12) · Capital Sereno · Navegação — Miguens.</div>
-</footer>
-
+</div></main>
+<footer><div class="wrap">PSCPP 2027 · Publicações Náuticas — Miguens Cap. 12 · <b>Capital Sereno</b> · Navegação — Miguens.</div></footer>
 <script>
-/* ===== SELETOR PUBLICAÇÃO → CONTEÚDO ===== */
-var PUBS=[
-  ["Carta 12.000 (INT 1)","Símbolos, abreviaturas e termos das cartas náuticas (bilíngue; grupos A–U). É o documento de consulta para interpretar qualquer carta."],
-  ["Roteiro (DH1)","Descrição da costa, demanda de portos e fundeadouros, perigos, profundidades em barras/canais, recursos, balizamento, meteo, correntes e marés. 3 volumes (Norte/Leste/Sul); Cap. I e II comuns."],
-  ["Lista de Faróis (DH2)","Todos os sinais LUMINOSOS (faróis, aerofaróis, faroletes, barcas-faróis, boias luminosas, luzes particulares). NÃO inclui boias cegas/balizas."],
-  ["Sinais Cegos (DH18)","Boias cegas e balizas — os sinais NÃO luminosos, que ficam de fora da Lista de Faróis."],
-  ["Auxílios-Rádio (DH8)","Auxílios-rádio à navegação e os Avisos-Rádio Náuticos."],
-  ["Tábuas das Marés (DG6)","Previsão de marés para 54 portos/terminais/barras + Antártica."],
-  ["Cartas de Correntes de Maré","Elementos da corrente de maré para 11 portos/áreas."],
-  ["Atlas de Cartas-Piloto","Meteorologia e oceanografia: ventos, correntes, temperaturas, declinação. 12 cartas mensais, Mercator 1:10.000.000."],
-  ["Almanaque Náutico (DN5)","Navegação ASTRONÔMICA: Sol, Lua, 4 planetas e 57 estrelas; crepúsculos, correção de alturas etc."]
-];
-var pbc=document.getElementById('pubBtns');
-PUBS.forEach(function(p,i){var b=document.createElement('button');b.textContent=p[0];b.onclick=function(){
-  document.querySelectorAll('#pubBtns button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');
-  document.getElementById('pubRead').innerHTML='<b>'+p[0]+':</b> '+p[1];};pbc.appendChild(b);});
-
-/* ===== SELETOR AVISOS ===== */
-var AVS=[
-  ["Temporário (T)","Correções de caráter TRANSITÓRIO. Corrige-se a carta a <b>LÁPIS</b>. Numeração: região + nº + (T) + ano. Altera a carta? Sim, provisoriamente."],
-  ["Preliminar (P)","ANTECIPA correções que depois virão como Avisos Permanentes (ex.: farol em construção). Corrige-se a <b>LÁPIS</b>. Numeração: região + nº + (P) + ano."],
-  ["Permanente","Correções DEFINITIVAS. Corrige-se a <b>CANETA</b> ou por inserção de <b>bacalhaus</b>. Registra-se ano + número no campo <b>Pequenas Correções</b> (canto inferior esquerdo). Numeração: nº + ano."],
-  ["APE (Perm. Especial)","Avisos Permanentes ESPECIAIS. <b>NÃO alteram a carta náutica</b> — divulgam informações gerais de caráter permanente (ex.: zonas de segurança offshore). Não confundir com o Aviso Permanente! Numeração: 'APE' + nº."]
-];
-var abc=document.getElementById('avBtns');
-AVS.forEach(function(p){var b=document.createElement('button');b.textContent=p[0];b.onclick=function(){
-  document.querySelectorAll('#avBtns button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');
-  document.getElementById('avRead').innerHTML='<b>'+p[0]+':</b> '+p[1];};abc.appendChild(b);});
-
-/* ===== FLASHCARDS ===== */
-var FC=[
-  {f:"Carta 12.000 (INT 1)",b:"Símbolos, abreviaturas e termos das cartas (bilíngue, grupos A–U). Documento de consulta."},
-  {f:"Roteiro (DH1)",b:"Descrição da costa, portos, perigos, recursos, balizamento, meteo, correntes/marés. 3 volumes (N/L/S)."},
-  {f:"Roteiro — hidrovias",b:"DH1-VI (Paraguai-Paraná) e DH1-VII (Tietê-Paraná)."},
-  {f:"Lista de Faróis (DH2)",b:"Sinais LUMINOSOS (faróis, faroletes, boias luminosas...). NÃO inclui boias cegas/balizas."},
-  {f:"Sinais Cegos (DH18)",b:"Boias cegas e balizas — os sinais não luminosos."},
-  {f:"Alcance geográfico × luminoso",b:"Geográfico: elevação da luz e do observador. Luminoso: intensidade e visibilidade meteorológica."},
-  {f:"Auxílios-Rádio (DH8)",b:"Auxílios-rádio à navegação e Avisos-Rádio Náuticos."},
-  {f:"Tábuas das Marés (DG6)",b:"Previsão para 54 portos + Antártica. Correntes de maré: 11 portos/áreas."},
-  {f:"Atlas de Cartas-Piloto",b:"Meteo/oceanografia, 12 cartas mensais, Mercator 1:10.000.000."},
-  {f:"Cartas-Piloto — cores",b:"Azul=ventos (Beaufort); verde=correntes; encarnada cheia=isoterma água / tracejada=ar; roxa=isogônicas."},
-  {f:"Almanaque Náutico (DN5)",b:"Navegação astronômica: Sol, Lua, 4 planetas, 57 estrelas."},
-  {f:"Avisos aos Navegantes",b:"Atualizam cartas/publicações. Quinzenal (área marítima). CHM por delegação da DHN. 7 seções."},
-  {f:"Aviso Temporário (T)",b:"Correção transitória → a LÁPIS."},
-  {f:"Aviso Preliminar (P)",b:"Antecipa Permanentes (ex.: farol em construção) → a LÁPIS."},
-  {f:"Aviso Permanente",b:"Correção definitiva → a CANETA ou bacalhau. Registra ano+número no campo 'Pequenas Correções' (canto inf. esq.)."},
-  {f:"APE",b:"Aviso Permanente Especial: NÃO altera a carta. Divulga informações gerais permanentes. Não confundir com Permanente!"},
-  {f:"Numeração E 4027/08",b:"Aviso-rádio costeiro da costa Leste (E), nº 4027, ano 2008. Sequencial no ano."},
-  {f:"Periodicidade",b:"Área marítima: 15 dias. Paraguai-Paraná: mensal. Tietê-Paraná: trimestral."},
-  {f:"Avisos-Rádio Náuticos",b:"Urgência. NAVAREA (oceânico), Costeiro, Local. Costeiro ≠ NAVAREA."},
-  {f:"DH20",b:"Relação de cartas/publicações e correções permanentes divulgadas por Avisos (semestral)."}
-];
-var grid=document.getElementById('fcGrid');
-FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
-  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
-  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
-
-/* ===== QUIZ ===== */
-var QUIZ=[
-  {q:"A publicação que reúne os símbolos e abreviaturas usados nas cartas náuticas é a:",
-   o:["Lista de Faróis","Carta 12.000 (INT 1)","Roteiro","Catálogo de Cartas"],a:1,
-   e:"A Carta 12.000 (INT 1) é a coletânea de símbolos, abreviaturas e termos das cartas — documento de consulta, bilíngue, grupos A–U."},
-  {q:"A publicação que descreve a costa, portos, perigos, recursos e balizamento, em 3 volumes, é o:",
-   o:["Roteiro","Almanaque Náutico","Atlas de Cartas-Piloto","Catálogo"],a:0,
-   e:"O Roteiro (DH1): descrição da costa, demanda de portos, perigos, recursos, balizamento, meteo e marés, em 3 volumes (Norte/Leste/Sul)."},
-  {q:"A Lista de Faróis (DH2) relaciona:",
-   o:["Boias cegas e balizas","Todos os sinais luminosos (faróis, faroletes, boias luminosas)","Apenas os faróis da costa","As correntes de maré"],a:1,
-   e:"Apesar do nome, relaciona TODOS os sinais luminosos. As boias cegas e balizas ficam na Lista de Sinais Cegos (DH18)."},
-  {q:"Nas Cartas-Piloto, as correntes marítimas à superfície são representadas na cor:",
-   o:["Azul","Verde","Encarnada","Roxa"],a:1,
-   e:"Verde = correntes. Azul = ventos; encarnada = isotermas (água cheia / ar tracejada); roxa = isogônicas."},
-  {q:"O Almanaque Náutico (DN5) é indispensável para a navegação:",
-   o:["Costeira","Estimada","Astronômica","Fluvial"],a:2,
-   e:"O Almanaque Náutico fornece os elementos da navegação astronômica (Sol, Lua, 4 planetas e 57 estrelas)."},
-  {q:"As correções decorrentes de um Aviso Temporário ou Preliminar devem ser feitas na carta:",
-   o:["A caneta","A lápis","Por bacalhau","Não se corrige"],a:1,
-   e:"Temporários e Preliminares → a LÁPIS (são transitórios / antecipam). Só os Permanentes vão a caneta ou bacalhau."},
-  {q:"A correção definitiva na carta, decorrente de um Aviso Permanente, é feita a caneta/bacalhau e registrada:",
-   o:["No verso da carta","No campo 'Pequenas Correções', no canto inferior esquerdo","No título","No Roteiro"],a:1,
-   e:"Registra-se o ano e o número do Aviso Permanente no campo 'Pequenas Correções' (canto inferior esquerdo da carta)."},
-  {q:"O Aviso Permanente Especial (APE) caracteriza-se por:",
-   o:["Alterar definitivamente a carta","NÃO alterar a carta, divulgando informações gerais de caráter permanente","Ser feito a lápis","Ser um aviso-rádio de urgência"],a:1,
-   e:"O APE NÃO altera a carta náutica (divulga informações gerais permanentes, ex.: zonas de segurança offshore). Não confundir com o Aviso Permanente, que altera a carta."},
-  {q:"[PSCPP 2008] Um aviso numerado 'E 4027/08' indica:",
-   o:["Aviso permanente especial nº 4027","Aviso-rádio náutico costeiro da costa Leste, de 2008","Aviso temporário da costa Sul","Erro de numeração"],a:1,
-   e:"E = costa Leste; 4027 = número; /08 = ano 2008. É um aviso-rádio náutico costeiro. Gabarito (b) da prova."},
-  {q:"[PSCPP 2012] São verdadeiras: I (Preliminar antecipa Permanentes), IV (APE não altera cartas) e V (NAVAREA/costeiros). A opção correta é:",
-   o:["Todas verdadeiras","Apenas I, IV e V","Apenas III e IV","Apenas II e V"],a:1,
-   e:"Gabarito (b): I, IV e V verdadeiras. II e III trazem detalhes trocados sobre interdição de área e avisos locais."},
-  {q:"Os folhetos de Avisos aos Navegantes da Área Marítima são publicados com periodicidade:",
-   o:["Diária","Quinzenal (15 dias)","Mensal","Anual"],a:1,
-   e:"Quinzenal (15 dias) para a área marítima e hidrovias em geral. Paraguai-Paraná é mensal; Tietê-Paraná, trimestral. Elaborado pelo CHM."},
-  {q:"As boias cegas e balizas, que NÃO constam da Lista de Faróis, são registradas na:",
-   o:["Carta 12.000","Lista de Sinais Cegos (DH18)","Lista de Auxílios-Rádio (DH8)","Tábua das Marés"],a:1,
-   e:"A Lista de Sinais Cegos (DH18) registra as boias cegas e balizas (sinais não luminosos)."}
-];
-var qi=0,answered=false,hits=0,tot=0;
-function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
-  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
-function loadQ(){var Q=QUIZ[qi];answered=false;
-  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
-  var box=document.getElementById('qOpts');box.innerHTML="";
-  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
-  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
-  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
-  document.getElementById('qNext').disabled=true;
-  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
-function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
-  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
-  var fb=document.getElementById('qFb');
-  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
-  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
-  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
-function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
-loadQ();upScore();
+(function(){
+var norm=function(x){return x.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
+var q=document.getElementById('q'), qn=document.getElementById('qn');
+function unmark(){document.querySelectorAll('mark.sq').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+function markIn(el,t){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[],n;while(n=w.nextNode())ns.push(n);
+ ns.forEach(function(n){var s=n.nodeValue,ns2=norm(s),i=ns2.indexOf(t);if(i<0)return;var f=document.createDocumentFragment(),last=0;
+  while(i>=0){f.appendChild(document.createTextNode(s.slice(last,i)));var m=document.createElement('mark');m.className='sq';m.textContent=s.slice(i,i+t.length);f.appendChild(m);last=i+t.length;i=ns2.indexOf(t,last);}
+  f.appendChild(document.createTextNode(s.slice(last)));n.parentNode.replaceChild(f,n);});}
+function run(){
+ unmark(); var t=norm(q.value.trim()), hits=0;
+ document.querySelectorAll('section.bloco').forEach(function(sec){
+  if(!t){sec.style.display='';sec.querySelectorAll('.srch,.srch-t,.srow,h3').forEach(function(e){e.style.display='';});return;}
+  var any=false;
+  var titleHit=norm(sec.querySelector('h2').textContent).indexOf(t)>=0;
+  sec.querySelectorAll('.srch').forEach(function(e){var m=norm(e.textContent).indexOf(t)>=0,ok=titleHit||m;e.style.display=ok?'':'none';if(ok)any=true;if(m){hits++;markIn(e,t);}});
+  sec.querySelectorAll('.srch-t').forEach(function(b){var cap=b.querySelector('.qt'),capHit=titleHit||(cap&&norm(cap.textContent).indexOf(t)>=0),rowsOk=0;
+   b.querySelectorAll('tr.srow').forEach(function(r){var m=norm(r.textContent).indexOf(t)>=0,ok=capHit||m;r.style.display=ok?'':'none';if(ok)rowsOk++;if(m){hits++;markIn(r,t);}});
+   if(cap&&norm(cap.textContent).indexOf(t)>=0){hits++;markIn(cap,t);}
+   var ok=rowsOk>0;b.style.display=ok?'':'none';if(ok)any=true;});
+  sec.querySelectorAll('h3').forEach(function(h){h.style.display=t?'none':'';});
+  if(titleHit){any=true;hits++;markIn(sec.querySelector('h2'),t);}
+  sec.style.display=any?'':'none';
+ });
+ qn.textContent=t?(hits?hits+' resultado'+(hits>1?'s':''):'nada encontrado'):'';
+}
+var tm;q.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(run,120);});
+var p=new URLSearchParams(location.search).get('q');if(p){q.value=p;run();var f=document.querySelector('mark.sq');if(f)setTimeout(function(){f.scrollIntoView({block:'center'});},60);}
+})();
 </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0D3D36">
-<title>A Carta Náutica e as Projeções — Miguens Cap. 2 · PSCPP</title>
+<title>Projeções Cartográficas e a Carta Náutica — Miguens Cap. 2 · PSCPP</title>
 <style>
   :root{
     --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
@@ -73,45 +73,7 @@
   tr:nth-child(even) td{background:#faf7ee}
   td.center,th.center{text-align:center}
   td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
-
-  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
-  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
-  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
-  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
-  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
-  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
-  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:90px}
-  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
-  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
-  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
-  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:8px 12px;min-width:240px}
-  .iread b{color:var(--verde2)}
-
-  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
-  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
-  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
     border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
-  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
-  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
-  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
-  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
-  .quiz .fb.show{display:block}
-  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
-  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
-  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
-  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
-  .quiz button.nextq:disabled{opacity:.4;cursor:default}
-  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-  .score b{color:var(--ouro);font-size:16px}
-
-  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
-  .fc{perspective:1100px;height:175px;cursor:pointer}
-  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
-  .fc.flip .fc-in{transform:rotateY(180deg)}
-  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
-  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
-  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
-  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
 
   details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
   details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
@@ -129,449 +91,91 @@
   footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
   footer b{color:var(--ouro)}
   @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+
+  .legend{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;margin:0 0 30px;line-height:1.9}
+  .t-nota{background:#dcefeb;color:#145c52}
+  .dot{color:#C0392B;font-weight:bold}
+  .ul{text-decoration:underline;text-decoration-color:#C0392B;text-decoration-thickness:2px}
+  .box.quad{padding:14px 16px}
+  h4.qt{margin:0 0 6px;font-family:'Trebuchet MS',sans-serif;font-size:13.5px;color:var(--verde);text-transform:none;letter-spacing:0}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw table{margin:6px 0;min-width:520px}
+  td.hlc{background:var(--amarelo)!important}
+  td.amb{background:#FBE7C0!important}
+  p.foot{font-size:13px;color:var(--mute);font-style:italic;margin:6px 0 0}
+  ul.steps{margin:6px 0 0;padding-left:20px;font-size:15px}
+  ul.steps li{margin:5px 0}
+  ul.steps li.sub{list-style:none;margin-left:6px;color:#3d5550}
+  .box.sint{font-size:14.5px;padding:12px 16px;margin:12px 0}
+  .box.sint.key{border-left:6px solid var(--ouro)}
+  .box.sint.banca{border-left:6px solid #D98E04;background:#fffaf0}
+  .box.sint.formula{border-left:6px solid var(--azul)}
+  .box.sint.nota{border-left:6px solid var(--verde2)}
+  table.gloss td:first-child{white-space:nowrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  table.gloss td:last-child{text-align:center;white-space:nowrap}
+  @media(max-width:600px){.tw table{font-size:13px}}
+.busca{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.busca input{flex:1;font-family:Georgia,serif;font-size:15px;padding:9px 14px;border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:0}
+.busca input:focus{outline:none;border-color:var(--verde2);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
+#qn{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);white-space:nowrap}
+mark.sq{background:#ffb347;color:inherit;border-radius:2px;padding:0 1px}
+.t-cob{background:#F2C879;color:#5a3d00}
+h3.dh{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--verde2);margin:18px 0 8px;border-bottom:1px solid var(--linha);padding-bottom:4px}
+.defs{display:grid;gap:12px;margin-bottom:10px}
+.def{background:var(--card);border:1px solid var(--linha);border-left:4px solid var(--verde2);border-radius:10px;padding:12px 16px;box-shadow:var(--sombra)}
+.def h4{margin:0 0 6px;font-size:16px;color:var(--verde)}
+.def p{margin:0;line-height:1.55}
+.def ul{margin:8px 0 0;padding-left:20px}
+.def li{margin:4px 0;line-height:1.5}
+h2.sec{flex-wrap:wrap;row-gap:4px}
+@media(max-width:600px){nav.toc .wrap .row{flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}nav.toc .wrap .row a{flex:0 0 auto}}
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap">
-    <p class="eyebrow">PSCPP 2027 · Bloco B — Cartas</p>
-    <h1>A Carta Náutica e as <em>Projeções Cartográficas</em></h1>
-    <p class="sub">Como se representa a Terra num plano: a Projeção de Mercator (loxodromia reta e latitudes crescidas), a gnomônica (ortodromia reta), as outras projeções, a escala da carta, os elementos e símbolos, e as cartas digitais ENC/RNC.</p>
-    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 2 (Projeções Cartográficas e a Carta Náutica). A banca cita a <b>1ª edição (1996)</b>.</div>
-  </div>
-</header>
-
-<nav class="toc">
-  <div class="wrap"><div class="row">
-    <a href="#condicoes">2.2/2.3 Condições e classes</a>
-    <a href="#mercator">2.4 Mercator ▶</a>
-    <a href="#gnomonica">2.5 Gnomônica ▶</a>
-    <a href="#outras">Outras projeções</a>
-    <a href="#escala">2.6.2 Escala ▶</a>
-    <a href="#elementos">Elementos e símbolos</a>
-    <a href="#digitais">ENC/RNC · plano BR</a>
-    <a href="#banca">Já cobrado</a>
-    <a href="#flash">Flashcards</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#pscpp">Pontos PSCPP</a>
-  </div></div>
-</nav>
-
-<main>
-<div class="wrap">
-
-<div class="related">
-  📎 Núcleo do <strong>Bloco B</strong>. A milha náutica e a orto/loxodromia vêm do <a href="miguens_cap1_5_navegacao_estimada.html">Cap. 1 (Fundamentos)</a>. O datum vertical (MLWS) das sondagens é detalhado no <strong>Cap. 10 (Marés)</strong>; os símbolos e o balizamento IALA, no <strong>Cap. 13 (Auxílios)</strong>.
-</div>
-
-<!-- ===== CONDIÇÕES E CLASSIFICAÇÃO ===== -->
-<section class="bloco" id="condicoes">
-  <h2 class="sec"><span class="n">2.2/2.3</span> Mapa × carta · condições ideais · classes</h2>
-  <p class="lede"><strong>Mapa</strong> = ilustrativo (fronteiras, cidades). <strong>Carta</strong> = feita para se trabalhar sobre ela (ângulos, distâncias, posição). Nenhuma projeção atende a tudo — escolhe-se conforme o fim.</p>
-
-  <div class="box key">
-    <h4>As 6 propriedades da "carta ideal" (nenhuma tem todas) <span class="tag t-decorar">DECORAR</span></h4>
-    <p>Conformidade (ângulos/formas sem deformação) · Equivalência (áreas) · Equidistância (distâncias) · círculos máximos como retas · <span class="hl">loxodromias como retas</span> · facilidade de coordenadas. A Cartografia Náutica exige, acima de tudo, a <strong>loxodromia (linha de rumo) como reta</strong> formando ângulo constante = azimute → daí a Projeção de Mercator.</p>
-  </div>
-
-  <table>
-    <tr><th>Critério</th><th>Classes</th></tr>
-    <tr><td>Método de construção</td><td>Geométricas (perspectivas: <strong>gnomônica</strong> ponto de vista no centro · <strong>estereográfica</strong> na superfície · <strong>ortográfica</strong> no infinito), analíticas, convencionais.</td></tr>
-    <tr><td>Superfície</td><td>Planas/azimutais · por desenvolvimento (cônicas, cilíndricas, poliédricas).</td></tr>
-    <tr><td>Propriedade conservada</td><td>Equidistantes · equivalentes · conformes · <strong>afiláticas</strong> (não conservam nada).</td></tr>
-  </table>
-
-  <div class="box">
-    <h4>Designação (a regra de nomear) <span class="tag t-decorar">DECORAR</span></h4>
-    <p>Natureza da superfície + situação + propriedade. Ex.: <strong>Mercator = cilíndrica equatorial conforme</strong>; Azimutal de Lambert = azimutal equivalente; plana polar gnomônica.</p>
-  </div>
-</section>
-
-<!-- ===== MERCATOR ===== -->
-<section class="bloco" id="mercator">
-  <h2 class="sec"><span class="n">2.4</span> A Projeção de Mercator</h2>
-  <p class="lede">Gerardus Mercator (Flandres, 1512); Carta Universal de 1569. <strong>Cilíndrica equatorial conforme</strong> (ortomorfa) — cilindro tangente no Equador. Resolveu graficamente a estima: a loxodromia vira uma reta.</p>
-
-  <div class="ichart">
-    <h4>Latitudes crescidas — a deformação com a latitude</h4>
-    <p class="hint">Como a projeção é conforme, ao esticar horizontalmente ela também estica verticalmente: as áreas crescem por sec(φ). Deslize a latitude e veja o fator de ampliação (por que a Groenlândia "fica maior que o Brasil").</p>
-    <canvas id="cvMerc" width="860" height="320"></canvas>
-    <div class="ictrl"><label for="lat">Latitude →</label><input type="range" id="lat" min="0" max="80" value="0" oninput="drawMerc()"></div>
-    <div class="iread" id="mercRead" style="margin-top:6px"></div>
-  </div>
-
-  <table>
-    <tr><th>Vantagens</th><th>Limitações</th></tr>
-    <tr><td>Meridianos retos; paralelos retos ⊥; fácil plotar/ler coordenadas; ângulos idênticos (direções diretas); <span class="hl">loxodromias retas</span>; construção fácil.</td><td>Deformação excessiva nas <span class="hl">altas latitudes</span>; <span class="hl">impossível representar os polos</span>; círculos máximos (exceto Equador/meridianos) não são retos.</td></tr>
-  </table>
-
-  <div class="box trap">
-    <h4>O cuidado fundamental <span class="tag t-conflito">CONFLITO</span> <span class="tag t-decorar">DECORAR</span></h4>
-    <p>A escala das <strong>longitudes</strong> é constante, mas a das <strong>latitudes</strong> cresce (latitudes crescidas). Logo, a escala da carta varia com a latitude — <span class="hl">as distâncias só são verdadeiras se medidas na escala das latitudes</span> (meridianos laterais), nunca na das longitudes. Limite prático: paralelo de 60° (até 80° com cautela).</p>
-  </div>
-</section>
-
-<!-- ===== GNOMÔNICA ===== -->
-<section class="bloco" id="gnomonica">
-  <h2 class="sec"><span class="n">2.5.1</span> A gnomônica e a ortodromia</h2>
-  <p class="lede">Para singraduras muito extensas navega-se pela ortodromia (menor distância). Ex.: Sidney→Valparaíso, a loxo é 748 milhas mais longa. Planejar a ortodrômica exige uma carta onde o círculo máximo seja reto: a gnomônica.</p>
-
-  <div class="ichart">
-    <h4>Onde cada linha é reta — Mercator × Gnomônica</h4>
-    <p class="hint">Dois pontos afastados. Alterne as cartas: na <b>Mercator</b> a loxodromia (linha de rumo) é reta e a ortodromia é curva; na <b>gnomônica</b> é o oposto — a ortodromia (círculo máximo) é reta.</p>
-    <div class="ictrl" style="margin-bottom:8px">
-      <button class="projBtn active" data-m="mercator" onclick="setProj('mercator')">Carta de Mercator</button>
-      <button class="projBtn" data-m="gnomonica" onclick="setProj('gnomonica')">Carta Gnomônica</button>
-    </div>
-    <svg id="svgProj" viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mercator × Gnomônica"></svg>
-    <div class="iread" id="projRead" style="margin-top:10px"></div>
-  </div>
-
-  <div class="box key">
-    <h4>A gnomônica em resumo <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
-    <p>Plano tangente, projeção do <strong>centro da Terra</strong> (a mais antiga; Thales, ~600 a.C.). É <span class="hl">afilática</span> (não é conforme, nem equivalente, nem equidistante) — escala exata só no ponto de tangência. Mas tem a <strong>propriedade única de representar todos os círculos máximos como retas</strong> → usada nas <strong>Cartas para Navegação Ortodrômica</strong> e para preencher a lacuna polar de Mercator. Meridianos = retas convergindo ao polo; paralelos (exceto Equador) = curvas; azimutes do ponto de tangência sem deformação.</p>
-  </div>
-</section>
-
-<!-- ===== OUTRAS PROJEÇÕES ===== -->
-<section class="bloco" id="outras">
-  <h2 class="sec"><span class="n">2.5</span> As outras projeções — reconhecer</h2>
-  <p class="lede">Reconhecer o ponto de vista e a propriedade, não recitar. Todas perspectivas azimutais têm os azimutes do ponto de tangência sem deformação.</p>
-
-  <table>
-    <tr><th>Projeção</th><th>Ponto de vista / natureza</th><th>Uso / propriedade</th></tr>
-    <tr><td><strong>Gnomônica</strong></td><td>Centro da Terra</td><td>Círculos máximos retos → cartas ortodrômicas. Afilática.</td></tr>
-    <tr><td><strong>Estereográfica</strong></td><td>Superfície da Terra (ponto oposto)</td><td>Conforme; cartas polares.</td></tr>
-    <tr><td><strong>Ortográfica</strong></td><td>Infinito</td><td>Aspecto de globo; ilustrativa.</td></tr>
-    <tr><td><strong>Azimutal equidistante</strong></td><td>Plana</td><td>Distâncias e azimutes corretos a partir do centro.</td></tr>
-    <tr><td><strong>Cartas polares</strong></td><td>—</td><td>Regiões que a Mercator não representa.</td></tr>
-  </table>
-</section>
-
-<!-- ===== ESCALA ===== -->
-<section class="bloco" id="escala">
-  <h2 class="sec"><span class="n">2.6.2</span> A escala da carta</h2>
-  <p class="lede">Escala = valor gráfico ÷ valor real. Quanto <strong>maior o denominador, menor a escala</strong>. Escala natural = a do paralelo de referência (o único sem deformação).</p>
-
-  <div class="box formula">
-    <h4>Definição e contas <span class="tag t-calc">CALCULO</span></h4>
-    <div class="eq">E = valor gráfico na carta ÷ valor real na Terra<span class="lbl">ex.: 1:100.000 → 1 mm no papel = 100.000 mm = 100 m no terreno</span></div>
-    <p class="vars">500 m em 1:100.000 → 5 mm; em 1:25.000 → 20 mm. E 15 mm em 1:25.000 → 375 m. <strong>Maior escala = menor denominador = maior detalhe, menor área.</strong></p>
-  </div>
-
-  <div class="ichart">
-    <h4>Onde cai cada escala (classificação OHI S-4)</h4>
-    <p class="hint">Deslize o denominador e veja o tipo de carta e o uso, da oceânica à atracação.</p>
-    <svg id="svgEsc" viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Escalas"></svg>
-    <div class="ictrl"><label for="den">1 : →</label><input type="range" id="den" min="10000" max="3000000" step="5000" value="300000" oninput="drawEsc()"></div>
-    <div class="iread" id="escRead" style="margin-top:6px"></div>
-  </div>
-
-  <table>
-    <tr><th>Faixa</th><th>Uso</th><th>Escala</th></tr>
-    <tr><td>Pequena</td><td>Oceânica (alto-mar)</td><td>&lt; 1:2.000.000</td></tr>
-    <tr><td rowspan="3">Média</td><td>Travessia / aterragem</td><td>1:2.000.000 – 1:350.000</td></tr>
-    <tr><td>Cabotagem (costeira)</td><td>1:350.000 – 1:75.000</td></tr>
-    <tr><td>Aproximação de portos</td><td>1:75.000 – 1:30.000</td></tr>
-    <tr><td>Grande</td><td>Portos, ancoradouros, canais / atracação</td><td>&gt; 1:30.000</td></tr>
-  </table>
-</section>
-
-<!-- ===== ELEMENTOS ===== -->
-<section class="bloco" id="elementos">
-  <h2 class="sec"><span class="n">2.6.3</span> Elementos e símbolos da carta</h2>
-  <p class="lede">O <strong>reticulado</strong> é o conjunto de meridianos e paralelos. Distâncias sempre na escala de latitudes (laterais); longitudes em cima/embaixo. O título é obrigatório de ler.</p>
-
-  <div class="box key">
-    <h4>O que o título informa <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
-    <p>Área/trecho da costa · referência (N→S) · <strong>profundidades em metros</strong> · <strong>escala natural e paralelo de referência</strong> · datum vertical (<span class="hl">baixa-mar média de sizígia = MLWS</span> para sondagens) · altitudes ao Nível Médio · <strong>datum horizontal WGS-84</strong> (posições) · balizamento <strong>IALA Região B</strong> · <strong>projeção: Mercator</strong> · levantamentos (diagrama de confiabilidade).</p>
-  </div>
-
-  <div class="box">
-    <h4>A costa do Brasil na cartografia <span class="tag t-decorar">DECORAR</span></h4>
-    <p><strong>Norte:</strong> Cabo Orange → Cabo Calcanhar. <strong>Leste:</strong> Cabo Calcanhar → Cabo Frio. <strong>Sul:</strong> Cabo Frio → Arroio Chuí. Cartas antigas tendem a ser menos precisas (instrumentos da época) e podem estar desatualizadas (assoreamento, dragagem).</p>
-  </div>
-</section>
-
-<!-- ===== DIGITAIS / PLANO ===== -->
-<section class="bloco" id="digitais">
-  <h2 class="sec"><span class="n">2.6.4/2.9</span> Cartas digitais e o plano brasileiro</h2>
-  <p class="lede">A carta eletrônica vetorial (ENC) é "inteligente"; a matricial (RNC) é uma imagem da carta em papel.</p>
-
-  <table>
-    <tr><th>Tipo</th><th>Característica</th></tr>
-    <tr><td><strong>ENC</strong> (vetorial, S-57)</td><td>Banco de dados vetorial; não perde resolução com o zoom; gera alarmes; criptografada. Carta "inteligente" para navegação <strong>SOLAS</strong>. <strong>IENC</strong> = águas interiores (fora da SOLAS).</td></tr>
-    <tr><td><strong>RNC</strong> (matricial)</td><td>Imagem raster da carta em papel (perde qualidade no zoom).</td></tr>
-  </table>
-
-  <div class="box key">
-    <h4>Nomenclatura da ENC e propósitos de uso <span class="tag t-decorar">DECORAR</span></h4>
-    <p>Arquivo <strong>AAPXXXXX</strong>: AA = agência (Brasil = <span class="hl">BR</span>); P = propósito de uso (<strong>1 Oceânica · 2 Geral · 3 Costeira · 4 Aproximação · 5 Porto · 6 Atracação</strong>); XXXXX = 5 caracteres (ligados à carta em papel). Ex.: BR5 01401 (Portos de Vitória e Tubarão).</p>
-  </div>
-
-  <div class="box">
-    <h4>Plano Cartográfico Náutico Brasileiro (DHN)</h4>
-    <p>1º Plano elaborado 1933–35; número da carta ligado à escala: cartas <strong>10, 20, 30</strong> ~1:3.500.000 (grandes trechos); <strong>40–90</strong> ~1:1.000.000 (médios trechos); <strong>100–2200</strong> ~1:300.000 (pequenos trechos, costeira). Cartas gerais (&lt;1:3.000.000, derrotas oceânicas) e Cartas Particulares (portos, baías). Levantamentos e edição de cartas são <span class="hl">atribuição exclusiva da DHN</span>.</p>
-  </div>
-</section>
-
-<!-- ===== MAPA DA BANCA ===== -->
-<section class="bloco" id="banca">
-  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
-  <p class="lede">Varredura das quatro provas. As projeções em si (Mercator/gnomônica) têm baixa incidência; a <strong>escala</strong> e a <strong>carta eletrônica</strong> apareceram.</p>
-
-  <table>
-    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
-    <tr><td>2011 · Amarela</td><td><strong>Q26</strong></td><td>Escala grande × pequena (cálculo) e grau de detalhe</td><td class="center"><b>(d)</b> deduzido</td></tr>
-    <tr><td>2011 · Amarela</td><td><strong>Q70</strong></td><td>Exibição padrão da carta eletrônica (ECDIS) — toca o 2.6.4</td><td class="center">(a) · ECDIS/IMO</td></tr>
-    <tr><td>2012 · Rosa</td><td><strong>Q23</strong></td><td>ENC / SENC / ECDIS (Res. A.817) — definições</td><td class="center">ECDIS/IMO</td></tr>
-  </table>
-
-  <div class="box key">
-    <h4>2011-Q26 resolvido — escala e detalhe <span class="tag t-banca">BANCA</span> <span class="tag t-calc">CALCULO</span></h4>
-    <p>Carta <strong>ALFA</strong>: 3 km ↔ 40 mm → E = 40 / 3.000.000 = <strong>1:75.000</strong>. Carta <strong>BRAVO</strong>: 1 km ↔ 10 mm → E = 10 / 1.000.000 = <strong>1:100.000</strong>. Menor denominador = maior escala → <span class="hl">ALFA é a de maior escala</span> e, portanto, com maior grau de detalhe. Gabarito <b>(d)</b>.</p>
-  </div>
-
-  <div class="box trap">
-    <h4>Distratores a vigiar <span class="tag t-conflito">DECORAR</span></h4>
-    <p>• <strong>Maior escala = menor denominador = mais detalhe, menos área</strong> (é o que a Q26 explora). • Distâncias só na <strong>escala das latitudes</strong>. • <strong>Mercator</strong>: loxodromia reta; <strong>gnomônica</strong>: ortodromia reta. • Gnomônica é <strong>afilática</strong>, não conforme. • NR das sondagens = <strong>MLWS</strong>; datum horizontal = <strong>WGS-84</strong>. <em>(A carta eletrônica/ECDIS aprofundada é do projeto de Navegação Eletrônica — Bento.)</em></p>
-  </div>
-</section>
-
-<!-- ===== FLASHCARDS ===== -->
-<section class="bloco" id="flash">
-  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
-  <p class="lede">Toque para virar. Projeções, escala e elementos da carta.</p>
-  <div class="fcgrid" id="fcGrid"></div>
-</section>
-
-<!-- ===== QUIZ ===== -->
-<section class="bloco" id="quiz">
-  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
-  <p class="lede">Doze questões sobre carta e projeções, com a 2011-Q26 real.</p>
-  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
-  <div class="quiz" id="quizBox">
-    <div class="q" id="qText"></div>
-    <div id="qOpts"></div>
-    <div class="fb" id="qFb"></div>
-    <div class="nav">
-      <span id="qCount"></span>
-      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PSCPP ===== -->
-<details class="pscpp" id="pscpp" open>
-  <summary>Pontos PSCPP — A Carta Náutica e as Projeções (Miguens Cap. 2)</summary>
-  <ul>
-    <li><b>Mapa × carta:</b> carta é para trabalhar sobre ela (ângulos, distâncias, posição). Nenhuma projeção reúne todas as 6 propriedades.</li>
-    <li><b>Exigência náutica:</b> loxodromia (linha de rumo) representada por reta com ângulo constante = azimute → Projeção de Mercator.</li>
-    <li><b>Classes:</b> método (geométricas [gnomônica=centro, estereográfica=superfície, ortográfica=infinito], analíticas, convencionais); superfície (planas/azimutais, por desenvolvimento); propriedade (equidistante, equivalente, conforme, afilática).</li>
-    <li><b>Mercator:</b> cilíndrica equatorial conforme (ortomorfa); cilindro tangente no Equador; Gerardus Mercator, 1569. Loxodromia reta.</li>
-    <li><b>Vantagens:</b> meridianos/paralelos retos, coordenadas fáceis, ângulos idênticos, loxo reta. <b>Limitações:</b> deformação em altas latitudes, não representa polos, círculos máximos não retos.</li>
-    <li><b>Latitudes crescidas:</b> escala das longitudes constante, das latitudes cresce → distâncias só na ESCALA DAS LATITUDES. Limite ~60° (até 80° com cautela). Groenlândia "maior que o Brasil".</li>
-    <li><b>Gnomônica:</b> ponto de vista no centro; afilática; propriedade única = círculos máximos (ortodromias) como retas → cartas ortodrômicas e regiões polares. Thales ~600 a.C.</li>
-    <li><b>Escala:</b> E = gráfico/real. Maior denominador = menor escala. Grande escala = maior detalhe, menor área. Escala natural = paralelo de referência.</li>
-    <li><b>Classificação OHI (S-4):</b> pequena (oceânica &lt;1:2.000.000) · média (travessia/cabotagem/aproximação, até 1:30.000) · grande (portos/atracação &gt;1:30.000).</li>
-    <li><b>Título/datum:</b> sondagens em metros ao <b>MLWS</b>; altitudes ao NM; posições ao <b>WGS-84</b>; balizamento IALA Região B; projeção Mercator. Costa: Norte (Orange–Calcanhar), Leste (Calcanhar–C.Frio), Sul (C.Frio–Chuí).</li>
-    <li><b>ENC (S-57):</b> vetorial "inteligente" (SOLAS); IENC águas interiores. Nome AAPXXXXX: BR + propósito (1 Oceânica…6 Atracação) + 5 chars. RNC = matricial (raster).</li>
-    <li><b>Plano BR (DHN, exclusiva):</b> cartas 10/20/30 (~1:3,5M), 40–90 (~1:1M), 100–2200 (~1:300k).</li>
-    <li><b>Banca:</b> 2011-Q26 (escala → ALFA 1:75.000 maior escala/detalhe, gab d). ENC/ECDIS (2011-Q70, 2012-Q23) toca o 2.6.4, mas aprofunda em Navegação Eletrônica (Bento).</li>
-  </ul>
-</details>
-
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">PSCPP 2027 · Navegação — Miguens · Consulta rápida</p>
+  <h1>Projeções Cartográficas e a <em>Carta Náutica</em></h1>
+  <p class="sub">Consulta rápida do Cap. 2: mapa × carta, propriedades e classificação das projeções, Mercator e latitudes crescidas, gnomônica e demais projeções, escala, cartas digitais (ENC, RNC), ECDIS × ECS, ZOC, cores da carta, confiança, correção e atualização, e-Navigation.</p>
+  <div class="src"><b>Fonte:</b> Miguens, Manual de Navegação da MB, Vol. I — Cap. 2 (DHN, 2ª Revisão, 2023). Consulta rápida; o caderno de leitura completo é o DOCX.</div>
+</div></header>
+<nav class="toc"><div class="wrap"><div class="busca"><input id="q" type="search" placeholder="Buscar neste caderno (ex.: ocultação, cardinal, alcance)…" aria-label="Buscar neste caderno"><span id="qn"></span></div><div class="row"><a href="#s0">2.1</a><a href="#s1">2.2</a><a href="#s2">2.3</a><a href="#s3">2.4</a><a href="#s4">2.5</a><a href="#s5">2.6</a><a href="#s6">2.7</a><a href="#s7">2.8</a><a href="#s8">2.9</a><a href="#s9">Apêndice A</a><a href="#s10">Apêndice B</a><a href="#s11">Glossário</a></div></div></nav>
+<main><div class="wrap">
+<div class="legend"><b>Como usar:</b> consulta rápida do capítulo — definições completas do livro, listas de opções, quadros e cálculos. O texto integral com os seus destaques está no DOCX <b>Miguens_Vol1_Cap02_Destaques_PSCPP.docx</b>.
+<span class="tag t-cob">COBRADO</span> = assunto já cobrado em prova · <span class="hl">amarelo</span> = seu destaque no PDF · <span class="dot">●</span> = seu ponto vermelho ·
+<span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span> <span class="tag t-conflito">CONFLITO</span> = divergência no livro. No glossário: ★ seu destaque · ● cobrado · ○ só menção. A busca aceita palavras sem acento.</div>
+<section class="bloco" id="s0"><h2 class="sec"><span class="n">2.1</span><span class="tt">O problema da representação da Terra sobre uma superfície plana</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Mapa × carta</h4><p>Diferença entre os conceitos:</p><ul><li><b>Mapa</b>: representação do globo terrestre, ou de trechos da sua superfície, sobre um plano, indicando fronteiras políticas, características físicas, localização de cidades e outras informações geográficas, sócio-políticas ou econômicas; normalmente sem caráter técnico ou científico especializado.</li><li><b>Carta</b>: representação da superfície terrestre sobre um plano, especialmente confeccionada para ser usada em navegação ou outra atividade técnica ou científica, para que se trabalhe sobre ela na resolução de problemas gráficos (ângulos e distâncias) ou na determinação da posição; permite medições precisas de distâncias e direções. Em navegação: sempre Cartas Náuticas.</li></ul></div><div class="def srch"><h4>Sistemas de projeções cartográficas</h4><p>Métodos para representar a superfície de uma esfera (ou de um elipsoide), no todo ou em parte, sobre uma superfície plana. O processo consiste em transferir pontos da superfície da esfera para um plano ou para uma superfície desenvolvível em um plano, tal como um cilindro ou um cone. É impossível fazê-lo sem deformações, pois a superfície de uma esfera não é desenvolvível no plano.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Mapa = ilustrativo/cultural, sem caráter técnico. Carta = para <b>trabalhar sobre ela</b>: ângulos e distâncias, posição por coordenadas; medições precisas de distâncias e direções (azimutes). Em navegação, sempre “carta”.</div></section><section class="bloco" id="s1"><h2 class="sec"><span class="n">2.2</span><span class="tt">Seleção do sistema de projeção · condições desejáveis</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Propriedades da carta ideal</h4><p>A carta ideal deveria possuir as seguintes propriedades (impossíveis de reunir todas):</p><ul><li>representação dos ângulos sem deformação e manutenção da verdadeira forma das áreas (<b>conformidade</b>);</li><li>inalterabilidade das dimensões relativas das áreas (<b>equivalência</b>);</li><li>constância das relações entre as distâncias representadas e as reais (<b>equidistância</b>);</li><li>círculos máximos representados por linhas retas;</li><li>loxodromias (linhas de rumo) representadas por linhas retas; e</li><li>facilidade de obter e plotar coordenadas geográficas.</li><li>A Cartografia Náutica precisa representar a loxodromia como reta, formando com os meridianos um ângulo constante e igual ao seu azimute.</li></ul></div><div class="def srch"><h4>Escala — pequena × grande</h4><p>Escala é uma relação entre o tamanho real de algo e sua representação. Cartas de <b>pequena escala</b> apresentam poucos detalhes, em detrimento da representação de uma grande área (ex.: carta geral do mundo). Cartas de <b>grande escala</b> apresentam grande quantidade de detalhes, representando pequenas áreas (baías, ilhas, portos e canais). Nas cartas de escala muito grande, todas as projeções tornam-se praticamente idênticas.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Conformidade = ângulos (e forma); equivalência = áreas; equidistância = distâncias. A exigência <b>indispensável</b> da Cartografia Náutica é a (e): loxodromia como reta, com ângulo constante igual ao azimute — e é Mercator quem a atende (2.4).</div></section><section class="bloco" id="s2"><h2 class="sec"><span class="n">2.3</span><span class="tt">Classificação dos sistemas de projeções</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Classificação quanto ao método de construção</h4><p>As projeções classificam-se em geométricas, analíticas e convencionais:</p><ul><li><b>Geométricas</b>: baseiam-se em princípios geométricos projetivos; subdividem-se em <b>perspectivas</b> (interseção dos feixes de retas que passam pelo ponto de vista) e <b>pseudo-perspectivas</b> (com algum artifício; ex.: cilíndrica equatorial estereográfica);</li><li>Perspectivas, conforme o ponto de vista: <b>gnomônica</b> (centro da Terra), <b>estereográfica</b> (superfície da Terra) e <b>ortográfica</b> (infinito);</li><li><b>Analíticas</b>: perderam o sentido geométrico pela introdução de leis matemáticas, visando determinadas propriedades;</li><li><b>Convencionais</b>: baseiam-se em princípios arbitrários, puramente convencionais.</li></ul></div><div class="def srch"><h4>Classificação quanto à superfície de projeção</h4><p>Segundo a superfície de projeção adotada:</p><ul><li><b>Planas</b>: a superfície é um plano, tangente ou secante; chamadas <b>azimutais</b> (azimutes em torno do ponto de tangência sem deformações) ou zenitais;</li><li><b>Por desenvolvimento</b>: superfície desenvolvível — <b>cônicas</b> (incluindo policônicas), <b>cilíndricas</b> e <b>poliédricas</b>.</li></ul></div><div class="def srch"><h4>Classificação quanto à situação da superfície</h4><p>Posição da superfície de projeção:</p><ul><li>Planas: <b>polares</b> (tangência no polo); <b>equatoriais ou meridianas</b> (tangência no equador); <b>horizontais ou oblíquas</b> (tangência em ponto qualquer);</li><li>Por desenvolvimento: <b>normais</b> (eixo do cone paralelo ao eixo da Terra); <b>equatoriais</b> (eixo do cilindro paralelo ao eixo da Terra); <b>transversas</b> (eixo do cone perpendicular); <b>transversas ou meridianas</b> (eixo do cilindro perpendicular); <b>horizontais ou oblíquas</b> (eixo inclinado).</li></ul></div><div class="def srch"><h4>Classificação quanto às propriedades que conservam</h4><p>As projeções classificam-se em equidistantes, equivalentes, conformes e afiláticas:</p><ul><li><b>Equidistantes</b>: não apresentam deformações lineares numa determinada direção — meridianas (segundo os meridianos), transversais (segundo os paralelos) e azimutais ou ortodrômicas (círculos máximos pelo ponto de tangência; sempre planas);</li><li><b>Equivalentes</b>: não deformam as áreas;</li><li><b>Conformes</b>: não deformam os ângulos e, em decorrência, não deformam a representação das pequenas áreas;</li><li><b>Afiláticas</b>: não conservam comprimentos, áreas nem ângulos, mas podem ter outra propriedade útil (a gnomônica representa as ortodromias como retas).</li></ul></div></div><h3>Quanto ao método de construção</h3><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Mnemônico do ponto de vista, de dentro para fora: <b>G</b>nomônica = centro · <b>E</b>stereográfica = superfície (oposta ao ponto de tangência) · <b>O</b>rtográfica = infinito (projetantes paralelas). “G-E-O”, do centro ao infinito.</div><h3>Quanto à situação da superfície de projeção</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Armadilha de nomenclatura: eixo <b>paralelo</b> ao da Terra chama-se <b>normal</b> no cone e <b>equatorial</b> no cilindro; eixo <b>perpendicular</b> chama-se <b>transversa</b> no cone e <b>transversa ou meridiana</b> no cilindro. Nas planas, “equatorial ou meridiana” = tangência no Equador. Mercator = cilíndrica <b>equatorial</b>; Transversa de Mercator = cilíndrica <b>transversa</b>.</div><h3>Quanto às propriedades que conservam</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Equidistante → distâncias (meridianas: ao longo dos meridianos; transversais: ao longo dos paralelos; azimutais/ortodrômicas: ao longo dos círculos máximos pelo ponto de tangência — sempre planas). Equivalente → áreas. Conforme → ângulos (e pequenas áreas). <b>Afilática</b> → nada conserva; exemplo-chave: <b>gnomônica</b>.</div><div class="box quad srch-t"><h4 class="qt">As quatro classificações das projeções (Miguens, item 2.3)</h4><div class="tw"><table><thead><tr><th>Critério</th><th>Classes</th><th>Subdivisões</th></tr></thead><tbody><tr class="srow"><td>Método de construção</td><td>Geométricas · Analíticas · Convencionais</td><td>Geométricas → perspectivas (gnomônica, estereográfica, ortográfica) e pseudo-perspectivas</td></tr><tr class="srow"><td>Superfície de projeção</td><td>Planas (azimutais/zenitais) · Por desenvolvimento</td><td>Desenvolvimento → cônicas (incl. policônicas), cilíndricas, poliédricas</td></tr><tr class="srow"><td>Situação da superfície</td><td>Planas: polares · equatoriais/meridianas · horizontais/oblíquas</td><td>Desenvolvimento: normais (cone) · equatoriais (cilindro) · transversas (cone) · transversas/meridianas (cilindro) · horizontais/oblíquas</td></tr><tr class="srow"><td>Propriedades conservadas</td><td>Equidistantes · Equivalentes · Conformes · Afiláticas</td><td>Equidistantes → meridianas, transversais, azimutais (ortodrômicas)</td></tr></tbody></table></div><p class="foot">2.3.1 (sem marcação): para designar uma projeção, citar (a) natureza da superfície, (b) situação e (c) propriedade — ex.: “projeção cilíndrica transversa conforme”, “projeção plana polar gnomônica”.</p></div></section><section class="bloco" id="s3"><h2 class="sec"><span class="n">2.4</span><span class="tt">O emprego da Projeção de Mercator na Cartografia Náutica</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Projeção de Mercator</h4><p>Atende à exigência básica da Cartografia Náutica: representar as loxodromias por linhas retas. Classificada como <b>projeção cilíndrica equatorial conforme</b>:</p><ul><li><b>cilíndrica</b>, por ser a superfície de projeção um cilindro;</li><li><b>equatorial</b>, por ser o cilindro tangente no Equador; e</li><li><b>conforme</b>, pois os ângulos são representados sem deformação (também chamada <b>ortomorfa</b>).</li><li>Na realidade é uma projeção <b>convencional</b>, apenas inspirada numa cilíndrica.</li></ul></div><div class="def srch"><h4>Vantagens e limitações de Mercator</h4><p>Vantagens: meridianos e paralelos em retas perpendiculares; pontos cardeais fáceis; plotagem e leitura de coordenadas fáceis; ângulos idênticos (direções medidas diretamente); loxodromias retas; fácil construção. Limitações:</p><ul><li>deformação excessiva nas altas latitudes;</li><li>impossibilidade de representação dos polos; e</li><li>círculos máximos, exceto o Equador e os meridianos, não são representados por linhas retas.</li><li>Uso limitado geralmente ao paralelo de 60º; satisfatório até 80º com cuidados na escala de distâncias.</li></ul></div><div class="def srch"><h4>Latitude crescida</h4><p>É o comprimento do arco de meridiano compreendido entre a projeção do paralelo considerado e o Equador, tomando-se para unidade de medida o comprimento do arco de 1 minuto do Equador (1 minuto de longitude). Numa carta de Mercator a escala das longitudes é constante e a das latitudes cresce com a latitude; as distâncias só são verdadeiras se lidas na <b>escala das latitudes</b>.</p></div></div><h3>2.4.1 e 2.4.2 A Projeção de Mercator e sua classificação</h3><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Pegadinha clássica: Mercator é <b>cilíndrica equatorial conforme</b> (ortomorfa), mas, quanto ao método de construção, é <b>convencional</b> — não é uma projeção geométrica (perspectiva) do globo sobre o cilindro.</div><h3>2.4.4 Latitudes crescidas e medição de distâncias</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Longitudes: escala <b>constante</b>. Latitudes: escala <b>cresce</b> com a latitude. Distância: sempre na escala das <b>latitudes</b>, na altura da latitude média do trecho (Apêndice A, problema E). Distrator: “medir na escala das longitudes, que é constante”.</div><h3>2.4.5 Utilização da Projeção de Mercator</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Dois números: <b>60°</b> = limite usual; <b>80°</b> = limite com precauções na escala das distâncias. Outros usos (8): piloto, fusos, magnéticas, geológicas, celestes, meteorológicas, aeronáuticas, mapas-múndi.</div></section><section class="bloco" id="s4"><h2 class="sec"><span class="n">2.5</span><span class="tt">Outras projeções usadas em Cartografia Náutica</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Outras projeções e seus usos</h4><p>Projeções usadas em Cartografia Náutica além de Mercator:</p><ul><li><b>Gnomônica</b>: plana, apresenta todos os tipos de deformação; propriedade única de representar <b>todos os círculos máximos por linhas retas</b>; usada nas cartas para navegação ortodrômica;</li><li><b>Estereográfica</b>: ponto de vista oposto ao de tangência; azimutal ortomorfa; usada em cartas das regiões polares;</li><li><b>Ortográfica</b>: ponto de vista no infinito; não é conforme, equivalente nem equidistante; usada na navegação astronômica (triângulo de posição);</li><li><b>Azimutal equidistante</b>: escala constante ao longo de qualquer círculo máximo pelo ponto de tangência; distâncias e direções a partir do ponto de tangência sem distorção; pode representar toda a Terra; usada para estações de rádio, cartas polares e Star Finder;</li><li><b>Conforme de Lambert</b>: cônica secante com dois paralelos padrão; reta ≈ círculo máximo; mais usada em cartas aeronáuticas; em altas latitudes, cartas polares;</li><li><b>Transversa de Mercator</b>: cilindro tangente ao longo de um meridiano; útil para grande faixa de latitudes e estreita de longitudes; o <b>UTM</b> é uma grade quilométrica sobre ela (folhas de bordo, sondagens, cartas militares).</li></ul></div><div class="def srch"><h4>Paralelo padrão</h4><p>Nas projeções cônicas, o paralelo ao longo do qual não há distorções. A cônica simples não é conforme; a Conforme de Lambert usa cone secante com dois paralelos padrão.</p></div></div><h3>2.5.7 Cartas polares (sem marcação)</h3><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Seus destaques fecham a lista de “cartas polares” espalhada pelo item: estereográfica (principal uso ●), azimutal equidistante, Lambert modificada e Transversa de Mercator. Se a prova perguntar “qual NÃO é usada para cartas polares” → <b>Mercator</b> (normal) ou ortográfica.</div><h3>2.5.8 Projeções mais utilizadas em Cartografia Náutica</h3><div class="box quad srch-t"><h4 class="qt">Figura 2.24 transcrita: projeções utilizadas em Cartografia Náutica (p. 2-25)</h4><div class="tw"><table><thead><tr><th></th><th>Mercator</th><th>Lambert</th><th>Gnomônica</th></tr></thead><tbody><tr class="srow"><td>Paralelos</td><td>Linhas retas horizontais</td><td>Arcos de círculos concêntricos</td><td>Curvas (seções de cone), exceto o Equador</td></tr><tr class="srow"><td>Meridianos</td><td>Linhas retas verticais, perpendiculares ao Equador</td><td>Linhas retas, raios dos paralelos, convergindo para o polo</td><td>Linhas retas</td></tr><tr class="srow"><td>Conforme</td><td>Sim</td><td>Sim</td><td><b>Não</b></td></tr><tr class="srow"><td>Círculos máximos</td><td>Linhas curvas (exceto meridianos e Equador)</td><td>Linhas aproximadamente retas</td><td><b>Linhas retas</b></td></tr><tr class="srow"><td>Linhas de rumo</td><td><b>Linhas retas</b> — ângulo medido com qualquer meridiano</td><td>Linhas curvas</td><td>Linhas curvas</td></tr><tr class="srow"><td>Escala de distâncias</td><td>Variável (usa-se a do paralelo médio)</td><td>Aproximadamente constante</td><td>Variável (ábacos impressos na carta)</td></tr><tr class="srow"><td>Aumento da escala</td><td>Com a distância do Equador</td><td>Com a distância do paralelo central</td><td>Com a distância ao centro da projeção</td></tr><tr class="srow"><td>Uso para o navegante</td><td>Navegação em geral</td><td>Navegação costeira, estimada e eletrônica</td><td>Determinação da derrota ortodrômica</td></tr></tbody></table></div></div><div class="box quad srch-t"><h4 class="qt">Projeções e usos (síntese de 2.4 e 2.5; ● = seu ponto vermelho)</h4><div class="tw"><table><thead><tr><th>Projeção</th><th>Classificação / ponto de vista</th><th>Propriedade-chave</th><th>Uso em Cartografia Náutica</th></tr></thead><tbody><tr class="srow"><td>Mercator</td><td>Cilíndrica equatorial conforme (convencional)</td><td>Loxodromia = reta; distâncias na escala das latitudes</td><td>Navegação em geral; até 60° (80° com precaução)</td></tr><tr class="srow"><td>Gnomônica</td><td>Plana; ponto de vista no centro</td><td>Afilática; todo círculo máximo = reta</td><td>Cartas para navegação ortodrômica</td></tr><tr class="srow"><td>Estereográfica</td><td>Plana; ponto de vista na superfície oposta</td><td>Azimutal ortomorfa (conforme)</td><td>● Cartas das regiões polares</td></tr><tr class="srow"><td>Ortográfica</td><td>Plana; ponto de vista no infinito</td><td>Não conforme, nem equivalente, nem equidistante</td><td>Navegação astronômica (triângulo de posição)</td></tr><tr class="srow"><td>Azimutal equidistante</td><td>Plana; não perspectiva</td><td>Distâncias e azimutes do ponto de tangência; toda a Terra</td><td>Antena rádio; cartas polares; Identificador de Estrelas</td></tr><tr class="srow"><td>Conforme de Lambert</td><td>Cônica secante (2 paralelos padrões)</td><td>Reta ≈ círculo máximo; conforme</td><td>Aeronáuticas; forma modificada: cartas polares</td></tr><tr class="srow"><td>Transversa de Mercator</td><td>Cilíndrica transversa conforme</td><td>● Reta ≈ círculo máximo perto do meridiano de tangência</td><td>Faixas N–S estreitas; regiões polares; cartas celestes</td></tr><tr class="srow"><td>UTM</td><td>Grade quilométrica sobre a Transversa de Mercator</td><td>● Fins técnico-científicos ou militares</td><td>Folhas de Bordo e de Sondagens; cartas militares</td></tr></tbody></table></div></div></section><section class="bloco" id="s5"><h2 class="sec"><span class="n">2.6</span><span class="tt">Utilização e interpretação de uma carta náutica</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Carta náutica</h4><p>Documento cartográfico que resulta de levantamentos hidrográficos de áreas oceânicas, mares, baías, rios, canais, lagos, lagoas ou qualquer outra massa d’água navegável e se destina a servir de base à navegação aquaviária. Publicada oficialmente sob a autoridade de um governo por meio de um serviço hidrográfico; geralmente na projeção de Mercator. Duas formas: em papel e digital (normas técnicas da OHI).</p></div><div class="def srch"><h4>Cartas digitais: ENC, IENC e RNC <span class="tag t-cob">COBRADO</span></h4><p>A carta náutica digital pode ser de dois tipos: eletrônica (vetorial) e Raster:</p><ul><li><b>ENC</b> (Electronic Navigational Chart): banco de dados padronizado (conteúdo, estrutura e formato), produzido sob autoridade de governo/serviço hidrográfico, para uso em ECDIS; arquivo vetorial que não perde resolução com a escala, permite interagir com os elementos e gerar alarmes — carta “<b>inteligente</b>”; pode conter informações suplementares à carta em papel. Distribuída pelos RENC: IC-ENC (Reino Unido) e PRIMAR (Noruega);</li><li><b>IENC</b>: ENC específica para águas interiores (não SOLAS);</li><li><b>RNC</b> (Raster Navigational Chart): imagem digitalizada e georreferenciada de uma carta em papel (bitmap), formatos BSB (NOAA) ou ARCS (UKHO); não é “inteligente”; qualquer alteração exige substituir o arquivo inteiro. As RNC do CHM não dispensam o uso concomitante das cartas em papel atualizadas.</li></ul></div><div class="def srch"><h4>ECDIS × ECS <span class="tag t-cob">COBRADO</span></h4><p>Sistemas eletrônicos de exibição de cartas náuticas:</p><ul><li><b>ECDIS</b> (Electronic Chart Display and Information System): sistema certificado periodicamente, que integra as informações de navegação às das ENC; seu banco de dados interno é o <b>SENC</b>; sem ENC para um trecho, pode apresentar RNC operando no modo <b>RCDS</b>; cumpre especificações da IMO (SOLAS);</li><li><b>ECS</b> (Electronic Chart System): sistemas genéricos que <b>não</b> cumprem as especificações da IMO; quatro classes (RTCM): <b>A</b> back-up de ECDIS e auxílio em áreas marítimas (planejamento, monitoramento e gravação); <b>B</b> auxílio em áreas marítimas; <b>C</b> plotagem e monitoramento em águas interiores; <b>D</b> plotagem da posição em águas interiores.</li></ul></div><div class="def srch"><h4>Escala da carta <span class="tag t-cob">COBRADO</span></h4><p>A escala é a relação entre um valor gráfico na carta e o valor real correspondente na superfície da Terra. <b>Quanto maior o denominador da escala, menor ela será</b>; quanto maior a escala, mais detalhada a representação. <b>Escala natural</b> é a escala de latitudes em um determinado paralelo, normalmente o paralelo médio da área — o único representado sem deformação de escala.</p></div><div class="def srch"><h4>Diagramas de levantamentos e ZOC</h4><p>Informações sobre a qualidade dos dados da carta:</p><ul><li><b>Diagrama de Levantamentos</b>: obrigatório nas cartas com escala de 1:500.000 e maiores; indica limites, datas, escalas e outras informações dos levantamentos; usado no planejamento da derrota;</li><li><b>Diagrama de Zona de Confiança (ZOC)</b>: avalia a qualidade dos dados hidrográficos em seis categorias — <b>A1, A2, B, C, D</b> e <b>U</b> (não avaliado) —, combinando acurácia da posição, acurácia da profundidade e cobertura do fundo. A DHN só emprega ZOC nas cartas digitais (ENC).</li></ul></div><div class="def srch"><h4>Cores da carta náutica</h4><p>Todas as cartas devem ser impressas em, no mínimo, quatro cores: preto, magenta, bege (ou cinza) e azul (S-4 da OHI):</p><ul><li><b>Preto</b>: estrutura cartográfica básica e todos os recursos físicos (sólidos), inclusive profundidades; é a cor padrão;</li><li><b>Magenta</b>: chamar atenção para símbolos de significado amplo (embarque de prático, luzes, estações de maré, rádio e radar) e informações sobrepostas que não sejam obstrução física (rotas, áreas de exercício, cabos e dutos, ATBA);</li><li><b>Bege (amarelo) ou cinza</b>: tom da parte de terra;</li><li><b>Azul</b>: enfatizar as águas rasas (mais escuro = mais raso);</li><li><b>Verde</b>: áreas de estirâncio e, em vez da magenta, informações ambientais.</li></ul></div><div class="def srch"><h4>Curvas isogônicas na carta</h4><p>Nas cartas com escala menor que 1:750.000, ou quando a informação dentro das rosas é impraticável, as informações magnéticas são representadas por linhas de igual declinação magnética (curvas isogônicas), a intervalos de 1º, 2º ou 3º, rotuladas com a declinação e sua variação anual.</p></div></div><h3>2.6.2 Escala da carta</h3><h3 class="dh">Quadros e sínteses</h3><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Escala: exemplos do livro (p. 2-27) e exemplo cobrado</h4><ul class="steps"><li>E = valor gráfico na carta ÷ valor real na Terra (mesma unidade).</li><li>1) 500 m em 1:100.000 → 1 mm = 100.000 mm = 100 m → x = 500 ÷ 100 = <b>5 mm</b></li><li>2) 500 m em 1:25.000 → 1 mm = 25 m → x = 500 ÷ 25 = <b>20 mm</b></li><li>3) 15 mm em 1:25.000 → 15 × 25 m = <b>375 m</b></li><li>Exemplo cobrado — carta ALFA: 3 km representados por 40 mm → 3.000.000 mm ÷ 40 mm = <b>1:75.000</b></li><li>Exemplo cobrado — carta BRAVO: 1 km representado por 1 cm → 1.000.000 mm ÷ 10 mm = <b>1:100.000</b></li><li class="sub">Denominador menor = escala maior → ALFA tem maior escala e mais detalhe.</li></ul></div><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Regra de ouro: denominador <b>menor</b> → escala <b>maior</b> → área <b>menor</b> → detalhe <b>maior</b>. Navegar sempre na carta de maior escala disponível (p. 2-28 e 2.7). Mesmo erro gráfico = dezenas de metros na carta grande e décimos de milha na pequena.</div><div class="box quad srch-t"><h4 class="qt">Classificações de escala (pp. 2-27 e 2-28; sem marcação, complemento)</h4><div class="tw"><table><thead><tr><th>S-4 (carta INT em papel)</th><th>S-65 (propósito da ENC)</th><th>III PCNB (DHN)</th></tr></thead><tbody><tr class="srow"><td>Oceânica: menor que 1:2.000.000</td><td>1 Oceânica: menor que 1:1.499.999</td><td>Oceânicas: 1:3.500.000 a 1:10.000.000</td></tr><tr class="srow"><td>Travessia/aterragem: 1:2.000.000 – 1:350.000</td><td>2 Geral: 1:350.000 a 1:1.499.999</td><td>Gerais / ENC BR2: 1:1.000.000</td></tr><tr class="srow"><td>Cabotagem: 1:350.000 – 1:75.000</td><td>3 Costeira: 1:90.000 a 1:349.999</td><td>Costeiras / ENC BR3: 1:300.000</td></tr><tr class="srow"><td>Aproximação/águas costeiras: 1:75.000 – 1:30.000</td><td>4 Aproximação: 1:22.000 a 1:89.999</td><td>Aproximação / ENC BR4: 1:75.000 a 1:100.000</td></tr><tr class="srow"><td>Portos/ancoradouros/canais: maior que 1:30.000</td><td>5 Porto: 1:4.000 a 1:21.999</td><td>Porto / ENC BR5: maior que 1:30.000</td></tr><tr class="srow"><td>Atracação: escalas muito grandes</td><td>6 Atracação: maior que 1:4.000</td><td>ENC de Atracação (BR6)</td></tr></tbody></table></div><p class="foot">S-4: pequena escala = oceânica; média = travessia e cabotagem; grande = aproximação, portos, atracação. O dígito após “BR” no nome da ENC é o propósito de uso (2.6.4).</p></div><h3>2.6.3 Principais elementos de uma carta náutica em papel</h3><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> O PDF imprime “AI.” e “FI.” (com i maiúsculo). As abreviaturas corretas da INT 1 são <b>Al.</b> (alternating, L minúsculo) e <b>Fl.</b> (flashing). Aqui foram transcritas na forma correta.</div><div class="box sint nota srch"><span class="tag t-nota">NOTA</span> Lista de Faróis (DH2): contém todas as informações sobre faróis, aerofaróis, barcas-faróis, faroletes, balizas, boias luminosas e luzes particulares (p. 2-32). Ponte com o Cap. 12 (publicações).</div><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Dois limiares de escala para não confundir: <b>menor que 1:750.000</b> → curvas isogônicas (1°, 2° ou 3°); <b>1:500.000 e maiores</b> → Diagrama de Levantamentos obrigatório. ZOC: A1, A2, B, C, D + U (não avaliado); A1/A2 exigem varredura total (tecnologia pós-1980); DHN usa ZOC <b>só em ENC</b>.</div><div class="box quad srch-t"><h4 class="qt">Cores da carta náutica (S-4 via Miguens 2.6.3 l)</h4><div class="tw"><table><thead><tr><th>Cor</th><th>Uso normal</th><th>Ponto de prova</th></tr></thead><tbody><tr class="srow"><td>Preto</td><td>Estrutura (borda, reticulado, título) e recursos físicos, inclusive profundidades</td><td>Escolha padrão: sem cor especificada → preto. Esgoto/emissário/duto-obstrução → preto</td></tr><tr class="srow"><td>Magenta</td><td>Símbolos de alcance além do local; informação sobreposta sem obstrução física permanente</td><td>Embarque de prático, luzes, rádio/radar, cabos, EST, isogônicas, rosas, “DATUM WGS 84”</td></tr><tr class="srow"><td>Bege (amarelo) ou cinza</td><td>Tom da parte de terra</td><td>Terra + azul = cor do estirâncio (se só 4 cores)</td></tr><tr class="srow"><td>Azul</td><td>Águas rasas; contornos de profundidade</td><td>Tom mais escuro = mais raso</td></tr><tr class="srow"><td>Verde (opcional)</td><td>Estirâncio; informações e limites ambientais</td><td>Pode substituir a magenta em limites ambientais</td></tr></tbody></table></div></div><h3>2.6.4 As cartas náuticas digitais · peculiaridades</h3><div class="box quad srch-t"><h4 class="qt">ENC × IENC × RNC</h4><div class="tw"><table><thead><tr><th></th><th>ENC</th><th>IENC</th><th>RNC</th></tr></thead><tbody><tr class="srow"><td>Natureza</td><td>Arquivo vetorial / banco de dados</td><td>Arquivo vetorial / banco de dados</td><td>Imagem digitalizada e georreferenciada (bitmap)</td></tr><tr class="srow"><td>Zoom</td><td>Não perde resolução</td><td>Não perde resolução</td><td>Imagem: perde qualidade ao ampliar</td></tr><tr class="srow"><td>Interação / alarmes</td><td>Sim — “inteligente”</td><td>Sim</td><td>Não — não é “inteligente”</td></tr><tr class="srow"><td>Uso</td><td>Navegação SOLAS</td><td>Águas interiores (fora da SOLAS)</td><td>No ECDIS: modo RCDS; não dispensa a carta em papel</td></tr><tr class="srow"><td>Formato / distribuição</td><td>Padrões OHI (S-57); IC-ENC e PRIMAR (licença)</td><td>Idem</td><td>BSB (NOAA) ou ARCS (UKHO); grátis no CHM</td></tr><tr class="srow"><td>Atualização</td><td>Novo arquivo a cada alteração</td><td>Idem</td><td>Substituir o arquivo inteiro ou parte da imagem</td></tr></tbody></table></div></div><div class="box quad srch-t"><h4 class="qt">ECDIS × ECS (classes RTCM)</h4><div class="tw"><table><thead><tr><th>Sistema</th><th>Área / função</th><th>Exibe carta digital</th><th>Planeja e monitora viagem</th><th>Grava viagem</th></tr></thead><tbody><tr class="srow"><td>ECDIS</td><td class="center">Certificado; integra navegação + ENC (SENC); modo RCDS com RNC; cumpre IMO/SOLAS</td><td class="center">Sim</td><td class="center">Sim</td><td class="center">Sim</td></tr><tr class="srow"><td>ECS classe A</td><td class="center">Back-up de ECDIS + auxílio; áreas marítimas</td><td class="center">Sim</td><td class="center">Sim</td><td class="center">Sim</td></tr><tr class="srow"><td>ECS classe B</td><td class="center">Auxílio; áreas marítimas</td><td class="center">Sim</td><td class="center">Sim</td><td class="center">Sim</td></tr><tr class="srow"><td>ECS classe C</td><td class="center">Plotagem e monitoramento; águas interiores</td><td class="center">Sim</td><td class="center">Não obrigatório</td><td class="center">—</td></tr><tr class="srow"><td>ECS classe D</td><td class="center">Plotagem da posição; águas interiores</td><td class="center">Sim</td><td class="center">Não (só plota a posição)</td><td class="center">—</td></tr></tbody></table></div><p class="foot">Só a classe A é back-up de ECDIS. Todas as classes exibem carta digital. A e B = áreas marítimas; C e D = águas interiores. Nenhum ECS cumpre as especificações IMO.</p></div><div class="box sint nota srch"><span class="tag t-nota">NOTA</span> O texto de ECDIS, SENC, RCDS e classes RTCM se repete quase literalmente no Cap. 11 (pp. 11-41/42), que acrescenta o CISNE (IPqM), considerado ECS. Estudar uma vez, serve para os dois capítulos.</div></section><section class="bloco" id="s6"><h2 class="sec"><span class="n">2.7</span><span class="tt">Confiança e precisão da carta náutica</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Confiança da carta <span class="tag t-cob">COBRADO</span></h4><p>O valor de uma carta depende, principalmente, da precisão do levantamento hidrográfico em que é baseada (datas dos levantamentos e categorias ZOC são um bom guia). Regras práticas:</p><ul><li>em costa rochosa, não navegar por dentro da linha de <b>20 metros</b> sem toda precaução;</li><li>evitar fundos irregulares, mesmo em carta de grande escala; espaços em branco podem significar ausência de sondagens;</li><li>as linhas de sondagem representam o relevo apenas nas proximidades imediatas (exceto levantamentos com multifeixe ou sonar de varredura lateral);</li><li>navegar sobre a <b>derrota aconselhada</b> — linha indicada na carta, especialmente investigada para assegurar que está livre de perigos;</li><li>usar sempre a carta de maior escala disponível.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Espaço em branco: com bastante fundo em volta → profundidade grande e uniforme; com pouca água e pedras na carta → <b>suspeito</b>. Linhas de sondagem valem só nas proximidades imediatas — exceto levantamento multifeixe/varredura lateral (até <b>100% de ensonificação</b>).</div></section><section class="bloco" id="s7"><h2 class="sec"><span class="n">2.8</span><span class="tt">Atualização das cartas náuticas</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Correção da carta em papel a bordo <span class="tag t-cob">COBRADO</span></h4><p>Ao usar uma carta recém-adquirida, verificar os Avisos Permanentes após o último registrado e anotar os Temporários e Preliminares em vigor. Regras:</p><ul><li><b>Aviso-Rádio</b>: inserir <b>a lápis</b> e apagar quando cancelado;</li><li><b>Aviso Temporário</b>: a lápis, com número e ano (ex.: E40(T)/21); se virar Permanente em data prefixada, cobrir com tinta vermelha nessa data;</li><li><b>Aviso Permanente</b>: a <b>tinta vermelha</b>, sem rasuras; registrar no <b>canto esquerdo da margem inferior</b> o ano e o número do aviso;</li><li>usar as convenções da Carta 12.000; não prejudicar informações existentes.</li></ul></div><div class="def srch"><h4>Correção das ENC</h4><p>Diferentemente da carta em papel, a atualização não é feita sobre a ENC, mas substituindo seu arquivo digital no ECDIS por um novo, fornecido pelo Distribuidor de ENCs; os Serviços Hidrográficos encaminham as ENC ao RENC, que as valida (S-58).</p></div><div class="def srch"><h4>Reimpressão × nova edição</h4><p>Atualização das cartas pela DHN:</p><ul><li><b>Reimpressão</b>: nova impressão da edição em vigor, sem alteração significativa além das já divulgadas por Avisos; <b>não cancela</b> a impressão anterior;</li><li><b>Nova edição</b>: publicada quando a carta fica desatualizada (geralmente por novos levantamentos), com alterações importantes; <b>cancela</b> a edição anterior. A data das edições subsequentes vai no lado direito da margem inferior; a da 1ª edição permanece no centro.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Como corrigir a carta em papel</h4><div class="tw"><table><thead><tr><th>Origem</th><th>Instrumento</th><th>Registro</th><th>Quando sai</th></tr></thead><tbody><tr class="srow"><td>Aviso-Rádio</td><td>Lápis</td><td>—</td><td>Apagado quando novo aviso cancela ou na data fixada</td></tr><tr class="srow"><td>Aviso Temporário</td><td>Lápis</td><td>Número/ano junto à correção, a lápis — ex.: E40(T)/21</td><td>Se virar permanente: correção e número/ano cobertos a tinta vermelha</td></tr><tr class="srow"><td>Aviso Preliminar</td><td>Lápis (Cap. 12)</td><td>—</td><td>Substituído pelo Permanente</td></tr><tr class="srow"><td>Aviso Permanente</td><td>Tinta vermelha (Cap. 12: caneta ou “bacalhau”)</td><td>Ano e número no canto esquerdo da margem inferior (“Pequenas Correções”)</td><td>Definitivo</td></tr></tbody></table></div></div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> Cap. 2 diz “tinta vermelha”; Cap. 12 (12.11.1) diz “a caneta ou por inserção de bacalhaus” e “campo Pequenas Correções (canto inferior esquerdo)”. Não se contradizem no local do registro; na prova, se aparecer “caneta”, não marcar como falso só por isso.</div><div class="box quad srch-t"><h4 class="qt">Margem inferior da carta em papel</h4><div class="tw"><table><thead><tr><th>Posição</th><th>O que vai</th></tr></thead><tbody><tr class="srow"><td>Canto esquerdo</td><td>Ano e número dos Avisos Permanentes (pequenas correções), a tinta vermelha</td></tr><tr class="srow"><td>Centro</td><td>Data da 1ª edição — permanece inalterada</td></tr><tr class="srow"><td>Lado direito</td><td>Data das edições subsequentes, em substituição</td></tr></tbody></table></div></div><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Reimpressão <b>não cancela</b> a anterior; nova edição <b>cancela</b>. Print-on-Demand = reimpressão única e atualizada. ENC: não há reimpressão — cada alteração gera novo arquivo validado.</div></section><section class="bloco" id="s8"><h2 class="sec"><span class="n">2.9</span><span class="tt">O Plano Cartográfico Náutico Brasileiro</span></h2><div class="box sint nota srch"><span class="tag t-nota">NOTA</span> A DHN tem atribuição exclusiva de editar cartas náuticas e executar os levantamentos hidrográficos para esse fim (p. 2-46).</div></section><section class="bloco" id="s9"><h2 class="sec"><span class="tt">Apêndice A — Resolução gráfica de problemas-tipo</span></h2><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Notas importantes do Apêndice A (p. 2-55): só se traçam na carta <b>rumos e marcações verdadeiros</b>; trabalha-se na carta <b>apenas com lápis</b>. Por isso a conversão Rag → Rv (Cap. 3) vem antes de qualquer plotagem.</div></section><section class="bloco" id="s10"><h2 class="sec"><span class="tt">Apêndice B — Futuro da carta náutica em papel</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>e-Navigation</h4><p>Definido como a “coleta, integração, intercâmbio, apresentação e análise harmonizados de informações marítimas, a bordo e em terra, por meios eletrônicos, com o propósito de aprimorar a navegação de berço a berço do cais e serviços relacionados, para a proteção e a segurança no mar, bem como a preservação do ambiente marinho.” Reforça a família S-100 (S-101 ENC); a carta em papel não pode ser integrada com camadas adicionais de informação.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> e-Navigation (IMO): coleta, integração, intercâmbio, apresentação e análise <b>harmonizados</b> de informações marítimas, <b>a bordo e em terra</b>, por meios eletrônicos, navegação <b>berço a berço</b>. Estratégia: MSC 85 (2009). Serviços Marítimos: MSC <b>jun/2019</b> → padrão <b>S-100</b> (OHI); ENC futura = <b>S-101</b>. Dados do NCWG: uso de carta em papel caiu quase à metade de 2008 a 2018; uso de ENC cresceu cerca de 7 vezes; ECDIS obrigatório na maioria dos navios comerciais desde jul/2018.</div></section><section class="bloco" id="s11"><h2 class="sec"><span class="tt">Glossário completo — Miguens, Vol. I, Cap. 2</span></h2><div class="box quad srch-t"><div class="tw"><table class="gloss"><thead><tr><th>Item</th><th>Termo</th><th>Definição condensada</th><th>Marca</th></tr></thead><tbody><tr class="srow"><td>2.1</td><td>Mapa</td><td>Representação do globo ou de trechos sobre um plano, com fins ilustrativos ou culturais; sem caráter técnico.</td><td>○</td></tr><tr class="srow"><td>2.1</td><td>Carta</td><td>Representação para trabalhar sobre ela: ângulos e distâncias, posição por coordenadas; medições precisas de distâncias e azimutes.</td><td>★</td></tr><tr class="srow"><td>2.1</td><td>Sistema de projeção cartográfica</td><td>Método de transferir pontos da esfera/elipsoide para um plano ou superfície desenvolvível (cilindro, cone).</td><td>○</td></tr><tr class="srow"><td>2.2</td><td>Conformidade · equivalência · equidistância</td><td>Conservação de ângulos (e forma) · de áreas · de distâncias.</td><td>○</td></tr><tr class="srow"><td>2.2</td><td>Exigência da Cartografia Náutica</td><td>Loxodromia representada como reta, com ângulo constante igual ao azimute com as transformadas dos meridianos.</td><td>★</td></tr><tr class="srow"><td>2.2</td><td>Escala grande × pequena</td><td>Grande: pequena área, muito detalhe (portos). Pequena: grande área, pouco detalhe (carta geral).</td><td>○ ●</td></tr><tr class="srow"><td>2.3</td><td>Geométricas · analíticas · convencionais</td><td>Princípios projetivos · leis matemáticas (sem sentido geométrico) · princípios arbitrários.</td><td>★</td></tr><tr class="srow"><td>2.3</td><td>Perspectivas</td><td>Interseção dos feixes de retas que passam pelo ponto de vista: gnomônica (centro), estereográfica (superfície), ortográfica (infinito).</td><td>★</td></tr><tr class="srow"><td>2.3</td><td>Pseudo-perspectivas</td><td>Perspectivas com artifício para obter uma propriedade (ex.: cilíndrica equatorial estereográfica).</td><td>★</td></tr><tr class="srow"><td>2.3</td><td>Planas (azimutais, zenitais)</td><td>Superfície de projeção é um plano; azimutes em torno do ponto de tangência sem deformação. Polares, equatoriais/meridianas, horizontais/oblíquas.</td><td>★</td></tr><tr class="srow"><td>2.3</td><td>Por desenvolvimento</td><td>Cônicas (incl. policônicas), cilíndricas, poliédricas. Normais, equatoriais, transversas, transversas/meridianas, oblíquas.</td><td>★</td></tr><tr class="srow"><td>2.3</td><td>Equidistantes</td><td>Sem deformação linear numa direção: meridianas, transversais, azimutais (ortodrômicas; sempre planas).</td><td>★</td></tr><tr class="srow"><td>2.3</td><td>Equivalentes</td><td>Não deformam áreas.</td><td>★</td></tr><tr class="srow"><td>2.3</td><td>Conformes</td><td>Não deformam ângulos nem pequenas áreas.</td><td>★</td></tr><tr class="srow"><td>2.3</td><td>Afiláticas</td><td>Não conservam comprimentos, áreas nem ângulos; ex.: gnomônica.</td><td>★</td></tr><tr class="srow"><td>2.4</td><td>Mercator</td><td>Cilíndrica equatorial conforme (ortomorfa); na realidade, convencional. Loxodromia = reta.</td><td>★</td></tr><tr class="srow"><td>2.4.3</td><td>Limitações de Mercator</td><td>Deformação nas altas latitudes; polos não representáveis; círculos máximos (exceto Equador e meridianos) não retos.</td><td>★</td></tr><tr class="srow"><td>2.4.4</td><td>Latitude crescida</td><td>Arco de meridiano entre o paralelo projetado e o Equador, em minutos de longitude (1’ do Equador).</td><td>○</td></tr><tr class="srow"><td>2.4.4</td><td>Medição de distância</td><td>Só verdadeira na escala das latitudes (escala das longitudes é constante).</td><td>★</td></tr><tr class="srow"><td>2.4.5</td><td>Limites de uso</td><td>Geralmente até 60°; até 80° com precauções na escala das distâncias. Outros usos: piloto, fusos, magnéticas, geológicas, celestes, meteorológicas, aeronáuticas, mapas-múndi.</td><td>★</td></tr><tr class="srow"><td>2.5.1</td><td>Gnomônica</td><td>Plano tangente, ponto de vista no centro; todos os círculos máximos retos; cartas para navegação ortodrômica.</td><td>○</td></tr><tr class="srow"><td>2.5.2</td><td>Estereográfica</td><td>Ponto de vista oposto ao de tangência; azimutal ortomorfa; principal uso: cartas polares.</td><td>★</td></tr><tr class="srow"><td>2.5.3</td><td>Ortográfica</td><td>Ponto de vista no infinito; não conforme, equivalente ou equidistante; navegação astronômica.</td><td>★</td></tr><tr class="srow"><td>2.5.4</td><td>Azimutal equidistante</td><td>Distâncias e azimutes a partir do ponto de tangência; toda a Terra; antena rádio, cartas polares, Identificador de Estrelas.</td><td>★</td></tr><tr class="srow"><td>2.5.5</td><td>Paralelo padrão</td><td>Paralelo sem distorção na projeção cônica.</td><td>○</td></tr><tr class="srow"><td>2.5.5</td><td>Conforme de Lambert</td><td>Cônica secante com dois paralelos padrões; reta ≈ círculo máximo; aeronáuticas; modificada para cartas polares.</td><td>★</td></tr><tr class="srow"><td>2.5.6</td><td>Transversa de Mercator</td><td>Cilindro tangente a um meridiano; perto dele, reta ≈ círculo máximo.</td><td>★</td></tr><tr class="srow"><td>2.5.6</td><td>UTM</td><td>Grade quilométrica sobre a Transversa de Mercator; Folhas de Bordo e de Sondagens; cartas militares.</td><td>★</td></tr><tr class="srow"><td>2.5.7</td><td>Cartas polares</td><td>Transversa de Mercator, Lambert modificada (Ney), Polar Estereográfica; também gnomônica e azimutal equidistante.</td><td>○</td></tr><tr class="srow"><td>2.6.1</td><td>Carta náutica</td><td>Resulta de levantamentos hidrográficos; geralmente em Mercator; profundidades, perigos, fundo, fundeadouros, auxílios, marés, correntes, magnetismo.</td><td>★</td></tr><tr class="srow"><td>2.6.1</td><td>ENC / RNC / IENC</td><td>Eletrônica vetorial / raster / eletrônica para águas interiores.</td><td>★ ●</td></tr><tr class="srow"><td>2.6.2</td><td>Escala natural</td><td>Escala de latitudes no paralelo médio; único paralelo sem deformação de escala.</td><td>★ ●</td></tr><tr class="srow"><td>2.6.2</td><td>Escala</td><td>Valor gráfico ÷ valor real; maior denominador = menor escala; definida por tipo de navegação, natureza da área e quantidade de informações.</td><td>★ ●</td></tr><tr class="srow"><td>2.6.2</td><td>S-4 · S-65 · III PCNB</td><td>Classificações de escala: carta INT em papel · propósitos 1–6 da ENC · cartas e ENC da DHN.</td><td>○</td></tr><tr class="srow"><td>2.6.3</td><td>Título da carta</td><td>Área e trecho, referência, profundidades, escala natural + paralelo, datum vertical, altitudes, datum WGS-84, IALA B, projeção, levantamentos.</td><td>○</td></tr><tr class="srow"><td>2.6.3</td><td>Al. · Fl. · WWR</td><td>Alternating · flashing · white white red (cartas INT).</td><td>★</td></tr><tr class="srow"><td>2.6.3</td><td>Omissão por escala</td><td>Informações de faróis podem ser omitidas à medida que a escala diminui (ex.: altitude do foco).</td><td>★</td></tr><tr class="srow"><td>2.6.3</td><td>Curvas isogônicas</td><td>Em cartas com escala menor que 1:750.000 (ou rosas impraticáveis); intervalos de 1°, 2° ou 3°; com declinação e variação anual.</td><td>★</td></tr><tr class="srow"><td>2.6.3</td><td>Diagrama de Levantamentos</td><td>Obrigatório em escala 1:500.000 e maiores; limites, datas, escalas dos levantamentos; usar no planejamento.</td><td>★</td></tr><tr class="srow"><td>2.6.3</td><td>ZOC / CATZOC</td><td>Zonas de confiança A1, A2, B, C, D e U; papel e ENC; DHN só em ENC.</td><td>★</td></tr><tr class="srow"><td>2.6.3</td><td>Cores</td><td>Mínimo 4: preto, magenta, bege/cinza, azul; preto = padrão; magenta = embarque de prático etc.; verde = estirâncio/ambiental.</td><td>★</td></tr><tr class="srow"><td>2.6.4</td><td>AAPXXXXX</td><td>Nome da ENC: agência (BR), propósito (1–6), 5 caracteres.</td><td>○</td></tr><tr class="srow"><td>2.6.4</td><td>ENC (detalhe)</td><td>Arquivo vetorial de banco de dados; não perde resolução; “inteligente”; SOLAS.</td><td>★ ●</td></tr><tr class="srow"><td>2.6.4</td><td>RNC (detalhe)</td><td>Imagem digitalizada e georreferenciada (BSB/ARCS); não interativa.</td><td>★ ●</td></tr><tr class="srow"><td>2.6.4</td><td>ECDIS · SENC · RCDS</td><td>Sistema certificado que integra navegação e ENC · banco de dados interno · modo raster com RNC.</td><td>★ ●</td></tr><tr class="srow"><td>2.6.4</td><td>ECS · RTCM A–D</td><td>Sistemas genéricos que não cumprem IMO; A back-up de ECDIS; A/B marítimas; C/D águas interiores.</td><td>★</td></tr><tr class="srow"><td>2.7</td><td>Linha de 20 m</td><td>Em costa rochosa, não navegar por dentro dela sem toda precaução.</td><td>★ ●</td></tr><tr class="srow"><td>2.7</td><td>Espaços em branco</td><td>Fundo grande e uniforme se há bastante água em volta; suspeitos se há pouca água e pedras.</td><td>★</td></tr><tr class="srow"><td>2.7</td><td>Linhas de sondagem</td><td>Valem só nas proximidades imediatas, exceto multifeixe/varredura lateral (100% de ensonificação).</td><td>★</td></tr><tr class="srow"><td>2.7</td><td>Derrota aconselhada</td><td>Linha especialmente investigada, livre de perigos, recomendada pela carta.</td><td>○</td></tr><tr class="srow"><td>2.8</td><td>Aviso-Rádio</td><td>Correção a lápis, apagada no cancelamento ou na data fixada.</td><td>★ ●</td></tr><tr class="srow"><td>2.8</td><td>Aviso Temporário</td><td>A lápis com número/ano; se virar permanente, coberto a tinta vermelha.</td><td>★ ●</td></tr><tr class="srow"><td>2.8</td><td>Aviso Permanente</td><td>Tinta vermelha; ano e número no canto esquerdo da margem inferior.</td><td>● </td></tr><tr class="srow"><td>2.8</td><td>Reimpressão</td><td>Nova impressão da edição em vigor; não cancela a anterior; Print-on-Demand = reimpressão única atualizada.</td><td>★</td></tr><tr class="srow"><td>2.8</td><td>Nova edição</td><td>Por novos levantamentos; cancela a anterior; 1ª edição no centro da margem inferior.</td><td>★</td></tr><tr class="srow"><td>2.9</td><td>III PCNB</td><td>Aprovado em 19/jul/2016; subplanos Papel e ENC.</td><td>○</td></tr><tr class="srow"><td>Ap. A</td><td>Rumos verdadeiros</td><td>Só se traçam na carta rumos e marcações verdadeiros, a lápis.</td><td>★</td></tr><tr class="srow"><td>Ap. B</td><td>e-Navigation</td><td>Coleta, integração, intercâmbio, apresentação e análise harmonizados de informações marítimas, bordo e terra, berço a berço.</td><td>★</td></tr><tr class="srow"><td>Ap. B</td><td>S-100 / S-101</td><td>Estrutura OHI exigida para serviços marítimos (MSC, jun/2019) / futura ENC.</td><td>★</td></tr></tbody></table></div><p class="foot">Marca: ★ seu destaque · ● assunto cobrado em prova · ○ sem marcação, só menção.</p></div></section>
 <a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
-
-</div>
-</main>
-
-<footer>
-  <div class="wrap"><b>PSCPP 2027</b> · A Carta Náutica e as Projeções (Miguens Vol. I, Cap. 2) · Capital Sereno · Navegação — Miguens.</div>
-</footer>
-
+</div></main>
+<footer><div class="wrap">PSCPP 2027 · Projeções Cartográficas e a Carta Náutica — Miguens Cap. 2 · <b>Capital Sereno</b> · Navegação — Miguens.</div></footer>
 <script>
-var NS="http://www.w3.org/2000/svg";
-function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
-function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
-
-/* ===== MERCATOR — latitudes crescidas ===== */
-function drawMerc(){
-  var cv=document.getElementById('cvMerc'),ctx=cv.getContext('2d');var W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
-  var lat=+document.getElementById('lat').value;
-  var sec=1/Math.cos(lat*Math.PI/180);
-  // globo (esquerda): fuso com círculo de tamanho real
-  ctx.strokeStyle='#cdbf99';ctx.lineWidth=1.5;
-  ctx.beginPath();ctx.ellipse(180,H/2,70,150,0,0,7);ctx.stroke();
-  ctx.fillStyle='#7a6f55';ctx.font='12px Trebuchet MS';ctx.fillText('no globo (real)',120,H-16);
-  var r0=26;
-  var yGlobe=H/2 - (lat/90)*120;
-  ctx.strokeStyle='#2C5F8A';ctx.lineWidth=2;ctx.beginPath();ctx.arc(180,yGlobe,r0,0,7);ctx.stroke();
-  ctx.fillStyle='#2C5F8A';ctx.fillText('φ='+lat+'°',150,yGlobe-r0-6);
-  // Mercator (direita): mesmo objeto ampliado por sec(phi)
-  ctx.strokeStyle='#e5dcc6';ctx.lineWidth=1;
-  for(var i=0;i<=4;i++){var x=520+i*70;ctx.beginPath();ctx.moveTo(x,40);ctx.lineTo(x,H-40);ctx.stroke();}
-  ctx.fillStyle='#7a6f55';ctx.fillText('na Carta de Mercator',560,H-16);
-  var rr=r0*Math.min(sec,4);
-  var yM=H/2 - (lat/90)*120;
-  ctx.strokeStyle='#9E3B2E';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(700,yM,rr,0,7);ctx.stroke();
-  ctx.fillStyle='#9E3B2E';ctx.fillText('× '+sec.toFixed(2),700+rr+6,yM);
-  document.getElementById('mercRead').innerHTML='Na latitude <b>'+lat+'°</b>, a projeção amplia as áreas por <b>sec φ = '+sec.toFixed(2)+'×</b> (a 60° já dobra; a 80°, ~5,8×). Por isso as distâncias só valem na <b>escala das latitudes</b>. É a razão de a Groenlândia parecer maior que o Brasil.';
+(function(){
+var norm=function(x){return x.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
+var q=document.getElementById('q'), qn=document.getElementById('qn');
+function unmark(){document.querySelectorAll('mark.sq').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+function markIn(el,t){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[],n;while(n=w.nextNode())ns.push(n);
+ ns.forEach(function(n){var s=n.nodeValue,ns2=norm(s),i=ns2.indexOf(t);if(i<0)return;var f=document.createDocumentFragment(),last=0;
+  while(i>=0){f.appendChild(document.createTextNode(s.slice(last,i)));var m=document.createElement('mark');m.className='sq';m.textContent=s.slice(i,i+t.length);f.appendChild(m);last=i+t.length;i=ns2.indexOf(t,last);}
+  f.appendChild(document.createTextNode(s.slice(last)));n.parentNode.replaceChild(f,n);});}
+function run(){
+ unmark(); var t=norm(q.value.trim()), hits=0;
+ document.querySelectorAll('section.bloco').forEach(function(sec){
+  if(!t){sec.style.display='';sec.querySelectorAll('.srch,.srch-t,.srow,h3').forEach(function(e){e.style.display='';});return;}
+  var any=false;
+  var titleHit=norm(sec.querySelector('h2').textContent).indexOf(t)>=0;
+  sec.querySelectorAll('.srch').forEach(function(e){var m=norm(e.textContent).indexOf(t)>=0,ok=titleHit||m;e.style.display=ok?'':'none';if(ok)any=true;if(m){hits++;markIn(e,t);}});
+  sec.querySelectorAll('.srch-t').forEach(function(b){var cap=b.querySelector('.qt'),capHit=titleHit||(cap&&norm(cap.textContent).indexOf(t)>=0),rowsOk=0;
+   b.querySelectorAll('tr.srow').forEach(function(r){var m=norm(r.textContent).indexOf(t)>=0,ok=capHit||m;r.style.display=ok?'':'none';if(ok)rowsOk++;if(m){hits++;markIn(r,t);}});
+   if(cap&&norm(cap.textContent).indexOf(t)>=0){hits++;markIn(cap,t);}
+   var ok=rowsOk>0;b.style.display=ok?'':'none';if(ok)any=true;});
+  sec.querySelectorAll('h3').forEach(function(h){h.style.display=t?'none':'';});
+  if(titleHit){any=true;hits++;markIn(sec.querySelector('h2'),t);}
+  sec.style.display=any?'':'none';
+ });
+ qn.textContent=t?(hits?hits+' resultado'+(hits>1?'s':''):'nada encontrado'):'';
 }
-drawMerc();
-
-/* ===== MERCATOR × GNOMÔNICA ===== */
-var projMode='mercator';
-function setProj(m){projMode=m;document.querySelectorAll('.projBtn').forEach(function(b){b.classList.toggle('active',b.dataset.m===m);});drawProj();}
-function drawProj(){
-  var svg=document.getElementById('svgProj');svg.innerHTML='';
-  var P1x=210,P2x=650,midY=200;
-  if(projMode==='mercator'){
-    // meridianos verticais, paralelos horizontais
-    for(var i=0;i<=6;i++){var x=110+i*110;sEl(svg,'line',{x1:x,y1:40,x2:x,y2:320,stroke:'#e5dcc6','stroke-width':1});}
-    for(var j=0;j<=4;j++){var y=60+j*65;sEl(svg,'line',{x1:90,y1:y,x2:770,y2:y,stroke:'#e5dcc6','stroke-width':1});}
-    sTx(svg,430,30,'CARTA DE MERCATOR — meridianos e paralelos retos',{fill:'#5a6f80',fs:12,fw:'bold',ta:'middle'});
-    // loxodromia reta (mesma latitude -> ao longo do paralelo)
-    sEl(svg,'line',{x1:P1x,y1:midY,x2:P2x,y2:midY,stroke:'#1A7A6E','stroke-width':3.5});
-    sTx(svg,430,midY+22,'loxodromia (linha de rumo) = RETA',{fill:'#1A7A6E',fs:12.5,fw:'bold',ta:'middle'});
-    // ortodromia curva (bojo p/ o polo = cima)
-    sEl(svg,'path',{d:'M '+P1x+' '+midY+' Q 430 '+(midY-80)+' '+P2x+' '+midY,fill:'none',stroke:'#2C5F8A','stroke-width':3,'stroke-dasharray':'8 5'});
-    sTx(svg,430,midY-70,'ortodromia (círculo máximo) = curva',{fill:'#2C5F8A',fs:12,ta:'middle'});
-    document.getElementById('projRead').innerHTML='Na <b>Mercator</b>, a <b>loxodromia é reta</b> (governa-se num rumo constante) e a ortodromia — a menor distância — aparece curva, arqueada para o polo.';
-  } else {
-    // gnomônica: meridianos convergindo ao polo (topo), paralelos curvos
-    var poleX=430,poleY=-40;
-    for(var i=0;i<=6;i++){var x=110+i*110;sEl(svg,'line',{x1:x,y1:320,x2:poleX+(x-poleX)*0.35,y2:70,stroke:'#e5dcc6','stroke-width':1});}
-    for(var j=1;j<=4;j++){var y=70+j*60;sEl(svg,'path',{d:'M 90 '+(y+18)+' Q 430 '+(y-22)+' 770 '+(y+18),fill:'none',stroke:'#e5dcc6','stroke-width':1});}
-    sTx(svg,430,30,'CARTA GNOMÔNICA — meridianos convergem ao polo',{fill:'#5a6f80',fs:12,fw:'bold',ta:'middle'});
-    // ortodromia reta
-    sEl(svg,'line',{x1:P1x,y1:midY,x2:P2x,y2:midY,stroke:'#2C5F8A','stroke-width':3.5});
-    sTx(svg,430,midY+22,'ortodromia (círculo máximo) = RETA',{fill:'#2C5F8A',fs:12.5,fw:'bold',ta:'middle'});
-    // loxodromia curva (bojo p/ baixo)
-    sEl(svg,'path',{d:'M '+P1x+' '+midY+' Q 430 '+(midY+72)+' '+P2x+' '+midY,fill:'none',stroke:'#1A7A6E','stroke-width':3,'stroke-dasharray':'8 5'});
-    sTx(svg,430,midY+96,'loxodromia = curva',{fill:'#1A7A6E',fs:12,ta:'middle'});
-    document.getElementById('projRead').innerHTML='Na <b>gnomônica</b>, a <b>ortodromia é reta</b> — por isso ela serve para planejar a derrota ortodrômica (basta ligar os dois pontos com uma régua). A loxodromia aparece curva.';
-  }
-  // pontos
-  [[P1x,'1'],[P2x,'2']].forEach(function(p){sEl(svg,'circle',{cx:p[0],cy:midY,r:6,fill:'#0D3D36'});sTx(svg,p[0],midY-12,p[1],{fill:'#0D3D36',fs:13,fw:'bold',ta:'middle'});});
-}
-drawProj();
-
-/* ===== ESCALA (classificação OHI) ===== */
-function drawEsc(){
-  var svg=document.getElementById('svgEsc');svg.innerHTML='';var W=860;
-  var den=+document.getElementById('den').value;
-  // barra log de 10.000 a 3.000.000
-  var x0=40,x1=W-40,y=90;
-  sEl(svg,'line',{x1:x0,y1:y,x2:x1,y2:y,stroke:'#cdbf99','stroke-width':2});
-  function X(d){var a=Math.log(10000),b=Math.log(3000000);return x0+(Math.log(d)-a)/(b-a)*(x1-x0);}
-  // marcos
-  [[30000,'1:30k'],[75000,'1:75k'],[350000,'1:350k'],[2000000,'1:2M']].forEach(function(m){
-    var x=X(m[0]);sEl(svg,'line',{x1:x,y1:y-8,x2:x,y2:y+8,stroke:'#7a6f55','stroke-width':1.5});
-    sTx(svg,x,y+24,m[1],{fill:'#7a6f55',fs:11,ta:'middle'});});
-  sTx(svg,x0,y-16,'GRANDE escala (mais detalhe)',{fill:'#2E7D52',fs:11,fw:'bold'});
-  sTx(svg,x1,y-16,'PEQUENA escala',{fill:'#9E3B2E',fs:11,fw:'bold',ta:'end'});
-  var px=X(den);
-  sEl(svg,'circle',{cx:px,cy:y,r:8,fill:'#0D3D36'});
-  var uso;
-  if(den<30000)uso='GRANDE — portos, ancoradouros, canais, atracação';
-  else if(den<75000)uso='Média — aproximação de portos / águas costeiras';
-  else if(den<350000)uso='Média — cabotagem (navegação costeira)';
-  else if(den<2000000)uso='Média — travessia / aterragem';
-  else uso='PEQUENA — navegação oceânica (alto-mar)';
-  document.getElementById('escRead').innerHTML='Escala <b>1:'+den.toLocaleString('pt-BR')+'</b> → '+uso+'. Lembre: <b>menor denominador = maior escala = mais detalhe</b>.';
-}
-drawEsc();
-window.addEventListener('resize',function(){drawMerc();drawProj();drawEsc();});
-
-/* ===== FLASHCARDS ===== */
-var FC=[
-  {f:"Mapa × carta",b:"Mapa = ilustrativo. Carta = feita para se trabalhar sobre ela (ângulos, distâncias, posição)."},
-  {f:"Exigência da carta náutica",b:"Representar a loxodromia (linha de rumo) por uma reta de ângulo constante = azimute → Mercator."},
-  {f:"6 propriedades ideais",b:"Conformidade · equivalência · equidistância · círculos máximos retos · loxodromias retas · coordenadas fáceis. Nenhuma projeção tem todas."},
-  {f:"Projeção de Mercator",b:"Cilíndrica equatorial conforme (ortomorfa). Cilindro tangente no Equador. Mercator, 1569."},
-  {f:"Vantagens de Mercator",b:"Meridianos/paralelos retos, coordenadas fáceis, ângulos idênticos, loxodromia reta, construção fácil."},
-  {f:"Limitações de Mercator",b:"Deformação em altas latitudes; não representa os polos; círculos máximos (exceto Equador/meridianos) não são retos."},
-  {f:"Latitudes crescidas",b:"Escala das longitudes constante, das latitudes cresce. Distâncias só na ESCALA DAS LATITUDES. Groenlândia 'maior que o Brasil'."},
-  {f:"Limite da Mercator",b:"~paralelo 60° (deformação excessiva); até 80° com cautela na escala das distâncias."},
-  {f:"Gnomônica — ponto de vista",b:"No centro da Terra, plano tangente. A mais antiga (Thales ~600 a.C.)."},
-  {f:"Gnomônica — propriedade",b:"Afilática, mas representa TODOS os círculos máximos como retas → cartas para navegação ortodrômica e regiões polares."},
-  {f:"Ponto de vista das perspectivas",b:"Gnomônica = centro; estereográfica = superfície; ortográfica = infinito."},
-  {f:"Afilática",b:"Não conserva comprimentos, áreas nem ângulos (caso da gnomônica)."},
-  {f:"Escala — definição",b:"E = valor gráfico ÷ valor real. Maior denominador = menor escala."},
-  {f:"Grande × pequena escala",b:"Grande escala = menor denominador = mais detalhe, menor área (porto). Pequena = oceânica."},
-  {f:"Escala natural",b:"A escala do paralelo de referência (latitude média) — único representado sem deformação."},
-  {f:"Classificação OHI (S-4)",b:"Pequena <1:2M (oceânica); média até 1:30k (travessia/cabotagem/aproximação); grande >1:30k (porto/atracação)."},
-  {f:"Datum das cartas BR",b:"Sondagens ao MLWS (baixa-mar média de sizígia); altitudes ao NM; posições ao WGS-84."},
-  {f:"Costa do Brasil",b:"Norte: Orange–Calcanhar. Leste: Calcanhar–Cabo Frio. Sul: Cabo Frio–Arroio Chuí."},
-  {f:"ENC × RNC",b:"ENC = vetorial 'inteligente' (S-57, SOLAS), gera alarmes. RNC = matricial (raster, imagem da carta em papel)."},
-  {f:"Nomenclatura ENC",b:"AAPXXXXX: BR + propósito (1 Oceânica…6 Atracação) + 5 caracteres."},
-  {f:"Plano Cartográfico BR",b:"Cartas 10/20/30 (~1:3,5M), 40–90 (~1:1M), 100–2200 (~1:300k). DHN é exclusiva."}
-];
-var grid=document.getElementById('fcGrid');
-FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
-  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
-  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
-
-/* ===== QUIZ ===== */
-var QUIZ=[
-  {q:"A condição indispensável que a Cartografia Náutica exige do sistema de projeção é:",
-   o:["Representar as áreas sem deformação","Representar a loxodromia (linha de rumo) por uma reta de ângulo constante","Representar os polos","Ser equidistante em todas as direções"],a:1,
-   e:"A carta náutica precisa que a linha de rumo (loxodromia) seja uma reta formando ângulo constante = azimute. Essa condição é atendida pela Projeção de Mercator."},
-  {q:"A Projeção de Mercator é classificada como:",
-   o:["Plana polar gnomônica","Cônica normal equidistante","Cilíndrica equatorial conforme","Azimutal equivalente"],a:2,
-   e:"Cilíndrica (superfície = cilindro), equatorial (tangente no Equador) e conforme (sem deformação angular; ortomorfa)."},
-  {q:"Numa Carta de Mercator, as distâncias devem ser medidas:",
-   o:["Na escala das longitudes","Na escala das latitudes","No Equador","Em qualquer borda"],a:1,
-   e:"A escala das longitudes é constante, mas a das latitudes cresce (latitudes crescidas). As distâncias só são verdadeiras na escala das latitudes (meridianos laterais)."},
-  {q:"NÃO é uma limitação da Projeção de Mercator:",
-   o:["Deformação excessiva nas altas latitudes","Impossibilidade de representar os polos","Representação da loxodromia por reta","Círculos máximos não são retos (exceto Equador/meridianos)"],a:2,
-   e:"Representar a loxodromia por uma reta é a grande VANTAGEM da Mercator, não uma limitação."},
-  {q:"A projeção que representa todos os círculos máximos (ortodromias) como linhas retas é a:",
-   o:["Mercator","Gnomônica","Estereográfica","Ortográfica"],a:1,
-   e:"A gnomônica (ponto de vista no centro da Terra) é afilática, mas tem a propriedade única de representar círculos máximos como retas → usada nas cartas para navegação ortodrômica."},
-  {q:"Quanto à propriedade conservada, a projeção gnomônica é:",
-   o:["Conforme","Equivalente","Equidistante","Afilática (não conserva comprimentos, áreas nem ângulos)"],a:3,
-   e:"É afilática: apresenta todas as deformações; a escala só é exata no ponto de tangência. Sua justificativa é representar os círculos máximos como retas."},
-  {q:"Sobre a escala de uma carta, é correto afirmar:",
-   o:["Quanto maior o denominador, maior a escala","Grande escala representa grandes áreas com pouco detalhe","Quanto maior o denominador, menor a escala (menos detalhe)","A escala natural vale em toda a carta"],a:2,
-   e:"Maior denominador = menor escala = menos detalhe / mais área. A escala natural só vale no paralelo de referência (latitude média)."},
-  {q:"[PSCPP 2011] Carta ALFA: 3 km ↔ 40 mm. Carta BRAVO: 1 km ↔ 10 mm. Qual escolher e por quê?",
-   o:["BRAVO, por ser de maior escala","ALFA, por ser de menor escala e menor detalhe","ALFA, por ser de maior escala (1:75.000) e maior detalhe","BRAVO, por ser de menor escala e maior detalhe"],a:2,
-   e:"ALFA = 40/3.000.000 = 1:75.000; BRAVO = 10/1.000.000 = 1:100.000. Menor denominador → ALFA é a de maior escala e maior detalhe. Gabarito (d) da prova."},
-  {q:"Pela classificação da OHI, uma carta de escala 1:20.000 (porto) é considerada:",
-   o:["Pequena escala","Média escala","Grande escala","Escala oceânica"],a:2,
-   e:"Escalas maiores que 1:30.000 (denominador menor) são de GRANDE escala — portos, ancoradouros, canais e atracação."},
-  {q:"Nas cartas náuticas brasileiras, o datum horizontal das posições e o plano das sondagens são, respectivamente:",
-   o:["SAD-69 e Nível Médio","WGS-84 e MLWS (baixa-mar média de sizígia)","WGS-84 e MHWS","Córrego Alegre e MLWN"],a:1,
-   e:"Posições referidas ao WGS-84; profundidades (sondagens) reduzidas ao MLWS (baixa-mar média de sizígia). Altitudes ao Nível Médio."},
-  {q:"Na nomenclatura de uma ENC brasileira (AAPXXXXX), o dígito P indica:",
-   o:["A agência produtora","O propósito de uso (1 Oceânica … 6 Atracação)","O ano de edição","A escala natural"],a:1,
-   e:"AA = agência (BR); P = propósito de uso (1 Oceânica, 2 Geral, 3 Costeira, 4 Aproximação, 5 Porto, 6 Atracação); XXXXX = 5 caracteres."},
-  {q:"A ortodromia entre dois pontos muito afastados, comparada à loxodromia:",
-   o:["É sempre maior","É a menor distância (círculo máximo)","Tem o mesmo comprimento","Não pode ser navegada"],a:1,
-   e:"A ortodromia (arco de círculo máximo) é a menor distância. Ex.: Sidney–Valparaíso, a loxodromia é 748 milhas mais longa. Mas exige mudar de rumo continuamente."}
-];
-var qi=0,answered=false,hits=0,tot=0;
-function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
-  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
-function loadQ(){var Q=QUIZ[qi];answered=false;
-  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
-  var box=document.getElementById('qOpts');box.innerHTML="";
-  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
-  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
-  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
-  document.getElementById('qNext').disabled=true;
-  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
-function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
-  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
-  var fb=document.getElementById('qFb');
-  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
-  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
-  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
-function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
-loadQ();upScore();
+var tm;q.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(run,120);});
+var p=new URLSearchParams(location.search).get('q');if(p){q.value=p;run();var f=document.querySelector('mark.sq');if(f)setTimeout(function(){f.scrollIntoView({block:'center'});},60);}
+})();
 </script>
 </body>
 </html>

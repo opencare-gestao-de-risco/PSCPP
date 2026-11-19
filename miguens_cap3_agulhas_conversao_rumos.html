@@ -73,45 +73,7 @@
   tr:nth-child(even) td{background:#faf7ee}
   td.center,th.center{text-align:center}
   td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
-
-  .ichart{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px;margin:18px 0;box-shadow:var(--sombra)}
-  .ichart h4{margin:0 0 4px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
-  .ichart .hint{font-size:13px;color:var(--mute);margin:0 0 12px}
-  .ichart canvas{width:100%;height:320px;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
-  .ichart svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--linha);border-radius:8px}
-  .ictrl{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
-  .ictrl label{font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde);min-width:96px}
-  .ictrl input[type=range]{flex:1;min-width:120px;accent-color:var(--verde2)}
-  .ictrl button{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:12.5px;border:1.5px solid var(--verde2);background:#fff;color:var(--verde2);border-radius:18px;padding:6px 13px;cursor:pointer}
-  .ictrl button.active{background:var(--verde);color:var(--ouro);border-color:var(--verde)}
-  .iread{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#f3f8f6;border:1px solid var(--linha);border-radius:8px;padding:10px 13px;min-width:240px}
-  .iread b{color:var(--verde2)}
-
-  .quiz{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:20px;margin:18px 0;box-shadow:var(--sombra)}
-  .quiz .q{font-weight:bold;color:var(--verde);margin-bottom:12px;font-size:16px}
-  .quiz .opt{display:block;width:100%;text-align:left;font-family:Georgia,serif;font-size:15px;background:#fff;border:1.5px solid var(--linha);
     border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
-  .quiz .opt:hover{border-color:var(--verde2);background:#f3f8f6}
-  .quiz .opt.right{border-color:var(--verde-ok);background:#eaf6ee}
-  .quiz .opt.wrong{border-color:var(--vermelho);background:#fbeeec}
-  .quiz .fb{margin-top:10px;font-size:14px;padding:11px 14px;border-radius:8px;display:none}
-  .quiz .fb.show{display:block}
-  .quiz .fb.ok{background:#eaf6ee;border-left:4px solid var(--verde-ok)}
-  .quiz .fb.no{background:#fbeeec;border-left:4px solid var(--vermelho)}
-  .quiz .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--mute)}
-  .quiz button.nextq{font-family:'Trebuchet MS',sans-serif;font-weight:bold;background:var(--verde2);color:#fff;border:none;border-radius:20px;padding:8px 18px;cursor:pointer}
-  .quiz button.nextq:disabled{opacity:.4;cursor:default}
-  .score{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:var(--verde);color:var(--creme);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-  .score b{color:var(--ouro);font-size:16px}
-
-  .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
-  .fc{perspective:1100px;height:175px;cursor:pointer}
-  .fc-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
-  .fc.flip .fc-in{transform:rotateY(180deg)}
-  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:var(--sombra)}
-  .fc-front{background:var(--verde);color:var(--creme);font-weight:bold;font-size:15px}
-  .fc-back{background:var(--card);border:1px solid var(--linha);color:var(--tinta);font-size:12px;transform:rotateY(180deg);line-height:1.4}
-  .fc-front .hintflip{position:absolute;bottom:8px;right:12px;font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--ouro);font-weight:normal}
 
   details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
   details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
@@ -129,379 +91,91 @@
   footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
   footer b{color:var(--ouro)}
   @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+
+  .legend{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;margin:0 0 30px;line-height:1.9}
+  .t-nota{background:#dcefeb;color:#145c52}
+  .dot{color:#C0392B;font-weight:bold}
+  .ul{text-decoration:underline;text-decoration-color:#C0392B;text-decoration-thickness:2px}
+  .box.quad{padding:14px 16px}
+  h4.qt{margin:0 0 6px;font-family:'Trebuchet MS',sans-serif;font-size:13.5px;color:var(--verde);text-transform:none;letter-spacing:0}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw table{margin:6px 0;min-width:520px}
+  td.hlc{background:var(--amarelo)!important}
+  td.amb{background:#FBE7C0!important}
+  p.foot{font-size:13px;color:var(--mute);font-style:italic;margin:6px 0 0}
+  ul.steps{margin:6px 0 0;padding-left:20px;font-size:15px}
+  ul.steps li{margin:5px 0}
+  ul.steps li.sub{list-style:none;margin-left:6px;color:#3d5550}
+  .box.sint{font-size:14.5px;padding:12px 16px;margin:12px 0}
+  .box.sint.key{border-left:6px solid var(--ouro)}
+  .box.sint.banca{border-left:6px solid #D98E04;background:#fffaf0}
+  .box.sint.formula{border-left:6px solid var(--azul)}
+  .box.sint.nota{border-left:6px solid var(--verde2)}
+  table.gloss td:first-child{white-space:nowrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  table.gloss td:last-child{text-align:center;white-space:nowrap}
+  @media(max-width:600px){.tw table{font-size:13px}}
+.busca{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.busca input{flex:1;font-family:Georgia,serif;font-size:15px;padding:9px 14px;border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:0}
+.busca input:focus{outline:none;border-color:var(--verde2);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
+#qn{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);white-space:nowrap}
+mark.sq{background:#ffb347;color:inherit;border-radius:2px;padding:0 1px}
+.t-cob{background:#F2C879;color:#5a3d00}
+h3.dh{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--verde2);margin:18px 0 8px;border-bottom:1px solid var(--linha);padding-bottom:4px}
+.defs{display:grid;gap:12px;margin-bottom:10px}
+.def{background:var(--card);border:1px solid var(--linha);border-left:4px solid var(--verde2);border-radius:10px;padding:12px 16px;box-shadow:var(--sombra)}
+.def h4{margin:0 0 6px;font-size:16px;color:var(--verde)}
+.def p{margin:0;line-height:1.55}
+.def ul{margin:8px 0 0;padding-left:20px}
+.def li{margin:4px 0;line-height:1.5}
+h2.sec{flex-wrap:wrap;row-gap:4px}
+@media(max-width:600px){nav.toc .wrap .row{flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}nav.toc .wrap .row a{flex:0 0 auto}}
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap">
-    <p class="eyebrow">PSCPP 2027 · Bloco A — Agulhas · Alto retorno</p>
-    <h1>Agulhas Náuticas e a <em>Conversão de Rumos</em></h1>
-    <p class="sub">O cálculo que a banca mais cobra do Miguens: os quatro nortes, a declinação magnética (com variação anual), o desvio da agulha, e a sequência <strong>Rag → Rmg → Rv</strong> (Rc = Rv ± Dm ± Dv) — mais a agulha giroscópica. Com calculadora interativa e duas questões reais resolvidas.</p>
-    <div class="src"><b>Fonte:</b> Miguens, <em>Navegação: A Ciência e a Arte</em>, Vol. I — Cap. 3 (Agulhas Náuticas. Conversão de Rumos e Marcações). A banca cita a <b>1ª edição (1996)</b>. Questões reais: PSCPP 2011-Q30 e 2012-Q19.</div>
-  </div>
-</header>
-
-<nav class="toc">
-  <div class="wrap"><div class="row">
-    <a href="#nortes">Os 4 nortes ▶</a>
-    <a href="#declinacao">3.2.3 Declinação</a>
-    <a href="#desvio">3.2.4 Desvio</a>
-    <a href="#conversao">3.2.5 Conversão ▶</a>
-    <a href="#variacao">Variação anual ▶</a>
-    <a href="#marcacoes">Marcações</a>
-    <a href="#giro">3.3 Giroscópica</a>
-    <a href="#banca">Já cobrado</a>
-    <a href="#flash">Flashcards</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#pscpp">Pontos PSCPP</a>
-  </div></div>
-</nav>
-
-<main>
-<div class="wrap">
-
-<div class="related">
-  📎 Alto retorno do <strong>Bloco A</strong>. Usa os rumos e marcações do <a href="miguens_cap1_5_navegacao_estimada.html">Cap. 1 (Fundamentos)</a> (Rv, Rag, Mv, Mr) e a declinação vem da carta (<a href="miguens_cap2_carta_projecoes.html">Cap. 2</a>). A conversão alimenta a estimada e a determinação da posição.
-</div>
-
-<!-- ===== OS 4 NORTES ===== -->
-<section class="bloco" id="nortes">
-  <h2 class="sec"><span class="n">3.1</span> Os quatro nortes e as duas correções</h2>
-  <p class="lede">Tudo gira em torno de três referências de norte, separadas por dois ângulos: a declinação (Dm) e o desvio (Dv). A giro dá um quarto norte (o da giro).</p>
-
-  <div class="ichart">
-    <h4>Rosa dos nortes — declinação e desvio ao vivo</h4>
-    <p class="hint">Ajuste a declinação (Dm), o desvio (Dv) e o rumo. Veja o Norte Verdadeiro (NV), o Magnético (NM, a Dm do NV) e o da Agulha (NA, a Dv do NM), e leia Rv, Rmg e Rag simultâneos. Use os atalhos com os exemplos reais de banca.</p>
-    <svg id="svgRosa" viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rosa dos nortes"></svg>
-    <div class="ictrl" style="margin-top:10px">
-      <button class="preBtn" onclick="preset(70,-20,5)">Exemplo do livro</button>
-      <button class="preBtn" onclick="preset(152.5,-16.5,2)">2011-Q30</button>
-      <button class="preBtn" onclick="preset(45,-15,2)">2012-Q19</button>
-    </div>
-    <div class="ictrl"><label for="dm">Declinação Dm →</label><input type="range" id="dm" min="-30" max="30" step="0.5" value="-20" oninput="drawRosa()"></div>
-    <div class="ictrl"><label for="dv">Desvio Dv →</label><input type="range" id="dv" min="-10" max="10" step="0.5" value="5" oninput="drawRosa()"></div>
-    <div class="ictrl"><label for="rv">Rumo verdadeiro →</label><input type="range" id="rv" min="0" max="359" step="0.5" value="70" oninput="drawRosa()"></div>
-    <div class="iread" id="rosaRead" style="margin-top:8px"></div>
-  </div>
-</section>
-
-<!-- ===== DECLINAÇÃO ===== -->
-<section class="bloco" id="declinacao">
-  <h2 class="sec"><span class="n">3.2.3</span> Declinação Magnética (Dm / Dec mg)</h2>
-  <p class="lede">É o ângulo entre o Norte Verdadeiro e o Norte Magnético no local. Depende do lugar e do tempo — vem da carta náutica.</p>
-
-  <div class="box key">
-    <h4>Conceito e propriedades <span class="tag t-decorar">DECORAR</span></h4>
-    <p>Designação <strong>Leste (E)</strong> ou <strong>Oeste (W)</strong>, conforme o lado do Meridiano Verdadeiro em que está o Magnético. Varia <span class="hl">de local para local</span> (irregularidades do campo) e <span class="hl">ao longo do tempo</span> (os polos magnéticos migram). As cartas informam o valor e a <strong>variação anual</strong>. Cartas especiais trazem as linhas <strong>isogônicas</strong> (mesma declinação) e <strong>agônicas</strong> (declinação nula).</p>
-  </div>
-</section>
-
-<!-- ===== DESVIO ===== -->
-<section class="bloco" id="desvio">
-  <h2 class="sec"><span class="n">3.2.4</span> Desvio da Agulha (Dv / Dag)</h2>
-  <p class="lede">É o ângulo entre o Norte Magnético e o Norte da Agulha. Nasce do ferro do próprio navio — por isso muda com a proa.</p>
-
-  <div class="box key">
-    <h4>Por que varia com o rumo <span class="tag t-decorar">DECORAR</span> <span class="tag t-banca">BANCA</span></h4>
-    <p>O desvio depende dos <span class="hl">ferros do navio</span>, dos corretores e da orientação deles no campo terrestre — logo, <strong>varia com a proa</strong> do navio. Obtém-se da <strong>Curva de Desvios</strong> da agulha, entrando-se com o <span class="hl">RUMO</span> (não com a marcação). Um mesmo desvio vale para todas as marcações enquanto o navio mantiver o rumo; mudou o rumo, novo desvio.</p>
-  </div>
-</section>
-
-<!-- ===== CONVERSÃO ===== -->
-<section class="bloco" id="conversao">
-  <h2 class="sec"><span class="n">3.2.5</span> A conversão de rumos</h2>
-  <p class="lede">Do que se lê na agulha ao que se traça na carta. Só se traçam na carta rumos e marcações <strong>verdadeiros</strong>.</p>
-
-  <div class="box formula">
-    <h4>A sequência e a regra dos sinais <span class="tag t-calc">CALCULO</span> <span class="tag t-banca">BANCA</span></h4>
-    <div class="eq">Rag &nbsp;—(± Dv)→&nbsp; Rmg &nbsp;—(± Dm)→&nbsp; Rv<span class="lbl">da agulha para o verdadeiro; no sentido inverso, do Rv para o Rag, trocam-se os sinais</span></div>
-    <div class="eq">Rv = Rag ± Dm ± Dv<span class="lbl">indo da agulha para o verdadeiro: soma-se o que é LESTE (E), subtrai-se o que é OESTE (W)</span></div>
-    <p class="vars">Regras de ouro: <strong>(1)</strong> só se traçam na carta valores verdadeiros; <strong>(2)</strong> a Dm vem da carta (local + ano); <strong>(3)</strong> o Dv vem da Curva de Desvios, entrando com o <strong>rumo</strong>; <strong>(4)</strong> aproxime tudo a <span class="hl">0,5°</span>. Mnemônico: <em>de agulha para verdadeiro, Este soma / Oeste subtrai</em>.</p>
-  </div>
-
-  <div class="box key">
-    <h4>Exemplo do livro (passo a passo)</h4>
-    <p>Dm = 20° W, Rag = 085°, Dv = 5° E. <strong>Rmg</strong> = Rag ± Dv = 085° + 5° (E) = <strong>090°</strong>. <strong>Rv</strong> = Rmg ± Dm = 090° − 20° (W) = <span class="hl">070°</span>. (Da agulha para o verdadeiro: o Este de 5° somou, o Oeste de 20° subtraiu.)</p>
-  </div>
-
-  <div class="box trap">
-    <h4>A inversão que derruba na prova <span class="tag t-conflito">CONFLITO</span></h4>
-    <p>Trocar a ordem <strong>Dm/Dv</strong> ou o sinal <strong>E/W</strong> é o distrator campeão. Fixe o sentido: <strong>subindo</strong> (agulha→verdadeiro) o Este soma; <strong>descendo</strong> (verdadeiro→agulha) o Este subtrai. E o desvio entra sempre pelo <strong>rumo</strong>, nunca pela marcação.</p>
-  </div>
-</section>
-
-<!-- ===== VARIAÇÃO ANUAL ===== -->
-<section class="bloco" id="variacao">
-  <h2 class="sec"><span class="n">3.2.3b</span> A variação anual da declinação</h2>
-  <p class="lede">A carta dá a Dm de um ano-base e a variação anual. Antes de converter, atualize a Dm para o ano da navegação.</p>
-
-  <div class="ichart">
-    <h4>Atualização da declinação (exemplo 2011-Q30)</h4>
-    <p class="hint">Dm base 16°10′ W (2007), variando 5′ W por ano. Deslize o ano e veja a Dm atualizada — a mesma conta da questão de 2011.</p>
-    <svg id="svgVar" viewBox="0 0 860 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Variação anual"></svg>
-    <div class="ictrl"><label for="ano">Ano →</label><input type="range" id="ano" min="2007" max="2027" step="1" value="2011" oninput="drawVar()"></div>
-    <div class="iread" id="varRead" style="margin-top:6px"></div>
-  </div>
-
-  <div class="box formula">
-    <h4>A fórmula <span class="tag t-calc">CALCULO</span></h4>
-    <div class="eq">Dm(ano) = Dm(base) ± (variação anual × nº de anos)<span class="lbl">mesma designação → soma; designação contrária → subtrai</span></div>
-    <p class="vars">2011-Q30: 16°10′ W (2007) + 5′ W × 4 anos = 16°10′ + 20′ = <span class="hl">16°30′ W = 16,5° W</span>. Só então converte-se o rumo.</p>
-  </div>
-</section>
-
-<!-- ===== MARCAÇÕES ===== -->
-<section class="bloco" id="marcacoes">
-  <h2 class="sec"><span class="n">3.2.5b</span> Conversão de marcações</h2>
-  <p class="lede">Igual à dos rumos, com um cuidado: o desvio depende do <strong>rumo</strong> do navio, não da marcação observada.</p>
-
-  <div class="box key">
-    <h4>Marcação verdadeira <span class="tag t-calc">CALCULO</span> <span class="tag t-decorar">DECORAR</span></h4>
-    <div class="eq">Mv = Mag ± Dm ± Dv<span class="lbl">o Dv é o do rumo do navio; vale para todas as marcações naquele rumo</span></div>
-    <p class="vars">Exemplo: no Rag 110° (Dv = 2° E pela curva), Dm = 23° W, marca-se Mag = 327°. <strong>Mmg</strong> = 327° + 2° (E) = 329°; <strong>Mv</strong> = 329° − 23° (W) = <span class="hl">306°</span>. E o próprio Rv = Rag ± Dm ± Dv = 110° − 23° + 2° = 89°.</p>
-  </div>
-</section>
-
-<!-- ===== GIROSCÓPICA ===== -->
-<section class="bloco" id="giro">
-  <h2 class="sec"><span class="n">3.3</span> A agulha giroscópica</h2>
-  <p class="lede">Aponta para o Norte <strong>Verdadeiro</strong> (não o magnético). Independe do magnetismo terrestre — daí sua precisão.</p>
-
-  <table>
-    <tr><th>Vantagens</th><th>Limitações</th></tr>
-    <tr><td>Aponta ao Norte <strong>Verdadeiro</strong> (independe do magnetismo); maior precisão; serve em latitudes mais altas; não é afetada por material magnético; alimenta repetidoras, radar, piloto automático, ECDIS e sistemas de armas.</td><td>Exige energia elétrica constante (sensível a flutuações); equipamento complexo, manutenção especializada; <span class="hl">erros a partir de latitudes &gt; 70°</span> (N ou S).</td></tr>
-  </table>
-
-  <div class="box">
-    <h4>Desvio da giro (Dgi) por "redução do triângulo" <span class="tag t-decorar">DECORAR</span></h4>
-    <p>Marcando 3+ pontos conspícuos de um navio parado: se as LDP cruzam num ponto, o desvio da giro é <strong>zero</strong>; se formam um <strong>triângulo</strong>, há desvio. Somam-se/subtraem-se incrementos de 1° a todas as marcações até "reduzir o triângulo". Se a correção foi <strong>subtraída → desvio Oeste (W)</strong>; se <strong>somada → desvio Leste (E)</strong>.</p>
-  </div>
-</section>
-
-<!-- ===== MAPA DA BANCA ===== -->
-<section class="bloco" id="banca">
-  <h2 class="sec"><span class="n">⚑</span> Já cobrado — mapa das 4 provas (2006 · 2008 · 2011 · 2012)</h2>
-  <p class="lede">A conversão de rumos é dos poucos temas de fundamento que a banca cobra <strong>como cálculo direto</strong>. Duas questões, ambas de conversão:</p>
-
-  <table>
-    <tr><th>Prova</th><th>Questão</th><th>Tema</th><th class="center">Gabarito</th></tr>
-    <tr><td>2011 · Amarela</td><td><strong>Q30</strong></td><td>Conversão Rv→Rag com variação anual da declinação</td><td class="center"><b>(c) 167°</b> deduzido</td></tr>
-    <tr><td>2012 · Rosa</td><td><strong>Q19</strong></td><td>Conversão Rv→Rag ("fora de giro", governar pela agulha)</td><td class="center"><b>(c) 058°</b> deduzido</td></tr>
-  </table>
-
-  <div class="box key">
-    <h4>2011-Q30 resolvido <span class="tag t-banca">BANCA</span> <span class="tag t-calc">CALCULO</span></h4>
-    <p>Rv = 152,5°; Dm(2007) = 16°10′ W, variação 5′ W; Dag = 2° E; ano 2011. <strong>1)</strong> Dm(2011) = 16°10′ + 5′×4 = <strong>16°30′ W = 16,5° W</strong>. <strong>2)</strong> descendo (Rv→Rag), o Oeste soma e o Este subtrai: Rmg = Rv + Dm(W) = 152,5 + 16,5 = 169°; Rag = Rmg − Dv(E) = 169 − 2 = <span class="hl">167°</span>. Gabarito <b>(c)</b>.</p>
-  </div>
-
-  <div class="box key">
-    <h4>2012-Q19 resolvido <span class="tag t-banca">BANCA</span> <span class="tag t-calc">CALCULO</span></h4>
-    <p>Rv = 045°; Dm = 15° W; Dag = 2° E; a giro saiu, governa-se pela agulha. Erro total = Dm + Dv = (−15) + (+2) = −13°. Rag = Rv − Dm − Dv = 045 − (−15) − (+2) = <span class="hl">058°</span>. Gabarito <b>(c)</b>. A marcação polar 030° BE do enunciado é só contexto.</p>
-  </div>
-
-  <div class="box trap">
-    <h4>O que a banca explora <span class="tag t-conflito">DECORAR</span></h4>
-    <p>• <strong>Atualizar a Dm</strong> pela variação anual ANTES de converter. • Sinal: <strong>subindo</strong> (agulha→verdadeiro) Este soma; <strong>descendo</strong> Este subtrai. • Desvio entra pelo <strong>rumo</strong>. • Só se traça <strong>verdadeiro</strong> na carta. • Giro aponta ao <strong>Norte Verdadeiro</strong>; magnética ao Magnético.</p>
-  </div>
-</section>
-
-<!-- ===== FLASHCARDS ===== -->
-<section class="bloco" id="flash">
-  <h2 class="sec"><span class="n">↻</span> Flashcards de fixação</h2>
-  <p class="lede">Toque para virar. Agulhas, correções e a conversão.</p>
-  <div class="fcgrid" id="fcGrid"></div>
-</section>
-
-<!-- ===== QUIZ ===== -->
-<section class="bloco" id="quiz">
-  <h2 class="sec"><span class="n">?</span> Quiz no estilo da banca</h2>
-  <p class="lede">Doze questões — as duas reais de conversão (2011/2012) e o essencial das agulhas.</p>
-  <div class="score" id="score">Placar da sessão: <b id="scHit">0</b> acertos · <b id="scTot">0</b> respondidas · <span id="scPct">—</span></div>
-  <div class="quiz" id="quizBox">
-    <div class="q" id="qText"></div>
-    <div id="qOpts"></div>
-    <div class="fb" id="qFb"></div>
-    <div class="nav">
-      <span id="qCount"></span>
-      <button class="nextq" id="qNext" onclick="nextQ()" disabled>Próxima →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PSCPP ===== -->
-<details class="pscpp" id="pscpp" open>
-  <summary>Pontos PSCPP — Agulhas e Conversão de Rumos (Miguens Cap. 3)</summary>
-  <ul>
-    <li><b>Declinação (Dm/Dec mg):</b> ângulo NV↔NM. Designação E/W. Varia por local (isogônicas/agônicas) e no tempo (variação anual). Vem da carta.</li>
-    <li><b>Desvio (Dv/Dag):</b> ângulo NM↔NA. Depende dos ferros do navio → varia com o RUMO. Vem da Curva de Desvios, entrando com o rumo (não a marcação).</li>
-    <li><b>Regra de ouro:</b> só se traçam na carta rumos/marcações VERDADEIROS. Aproximar tudo a 0,5°.</li>
-    <li><b>Sequência:</b> Rag —(±Dv)→ Rmg —(±Dm)→ Rv. Fórmula: Rv = Rag ± Dm ± Dv.</li>
-    <li><b>Sinais:</b> da agulha para o verdadeiro (subindo), Este SOMA / Oeste SUBTRAI; no sentido inverso, trocam-se os sinais.</li>
-    <li><b>Variação anual:</b> Dm(ano) = Dm(base) ± (variação × nº de anos). Atualize ANTES de converter.</li>
-    <li><b>Marcações:</b> Mv = Mag ± Dm ± Dv, com o Dv do RUMO do navio (vale p/ todas as marcações naquele rumo).</li>
-    <li><b>Giroscópica:</b> aponta ao Norte VERDADEIRO; independe do magnetismo; mais precisa; alimenta repetidoras/radar/piloto/ECDIS. Limitações: energia, manutenção, erros &gt;70° de latitude.</li>
-    <li><b>Desvio da giro (redução do triângulo):</b> LDP num ponto → desvio 0; triângulo → há desvio. Correção subtraída = W; somada = E.</li>
-    <li><b>Banca (cálculo direto):</b> 2011-Q30 (Rv 152,5° → Rag 167°, com variação anual, gab c) · 2012-Q19 (Rv 045° → Rag 058°, giro fora, gab c).</li>
-  </ul>
-</details>
-
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">PSCPP 2027 · Navegação — Miguens · Consulta rápida</p>
+  <h1>Agulhas Náuticas e <em>Conversão de Rumos</em></h1>
+  <p class="sub">Consulta rápida do Cap. 3: agulha magnética, declinação, desvio, magnetismo permanente e induzido, compensação, regulamento da agulha, conversão de rumos e marcações, fluxgate, agulha giroscópica, precessão, desvio da giro, redução do triângulo e novas tecnologias.</p>
+  <div class="src"><b>Fonte:</b> Miguens, Manual de Navegação da MB, Vol. I — Cap. 3 (DHN, 2ª Revisão, 2023). Consulta rápida; o caderno de leitura completo é o DOCX.</div>
+</div></header>
+<nav class="toc"><div class="wrap"><div class="busca"><input id="q" type="search" placeholder="Buscar neste caderno (ex.: ocultação, cardinal, alcance)…" aria-label="Buscar neste caderno"><span id="qn"></span></div><div class="row"><a href="#s0">3.1</a><a href="#s1">3.2</a><a href="#s2">3.2.5</a><a href="#s3">3.3</a><a href="#s4">Apêndice</a><a href="#s5">Glossário</a></div></div></nav>
+<main><div class="wrap">
+<div class="legend"><b>Como usar:</b> consulta rápida do capítulo — definições completas do livro, listas de opções, quadros e cálculos. O texto integral com os seus destaques está no DOCX <b>Miguens_Vol1_Cap03_Destaques_PSCPP.docx</b>.
+<span class="tag t-cob">COBRADO</span> = assunto já cobrado em prova · <span class="hl">amarelo</span> = seu destaque no PDF · <span class="dot">●</span> = seu ponto vermelho ·
+<span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span> <span class="tag t-conflito">CONFLITO</span> = divergência no livro. No glossário: ★ seu destaque · ● cobrado · ○ só menção. A busca aceita palavras sem acento.</div>
+<section class="bloco" id="s0"><h2 class="sec"><span class="n">3.1</span><span class="tt">Obtenção de rumos e marcações a bordo</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Agulhas náuticas</h4><p>A bordo, os rumos e marcações são obtidos através do uso de Agulhas Náuticas. Existem dois tipos: <b>Agulhas Magnéticas</b> e <b>Agulhas Giroscópicas</b>.</p></div></div></section><section class="bloco" id="s1"><h2 class="sec"><span class="n">3.2</span><span class="tt">Agulhas magnéticas</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Agulha magnética</h4><p>Rosa circular graduada de 000º a 360º, flutuando em uma cuba cheia de líquido, montada em suspensão cardan sobre um pedestal denominado <b>bitácula</b>; a <b>linha-de-fé</b> (referência para rumos) deve ser rigorosamente alinhada com a linha proa–popa. Geralmente há duas: a <b>Agulha de Governo</b> (passadiço) e a <b>Agulha Padrão</b> (tijupá, mais livre de influências magnéticas). Mesmo com a giro como fonte primária, sempre há magnéticas como back-up.</p></div><div class="def srch"><h4>Agulha magnética — vantagens e limitações</h4><p>Vantagens: simples, opera sem energia elétrica; quase nenhuma manutenção; robusta; custo baixo. Limitações:</p><ul><li>indica o Norte Magnético, em lugar do Norte Verdadeiro;</li><li>é afetada por material magnético ou equipamentos elétricos;</li><li>tem diferentes desvios conforme a proa;</li><li>não é tão precisa e fácil de usar como a giro;</li><li>suas informações não são transmitidas com facilidade a outros equipamentos (radar, ECDIS);</li><li>é mais afetada por altas latitudes (acima de 60º) que a giro.</li></ul></div><div class="def srch"><h4>Declinação magnética <span class="tag t-cob">COBRADO</span></h4><p>A diferença em direção entre o Meridiano Magnético e o Meridiano Verdadeiro (ou Geográfico), em um determinado lugar; ou o ângulo entre o Norte Verdadeiro e o Norte Magnético no local. Expressa em graus e minutos, com designação <b>Leste ou Oeste</b>; varia com o local e ao longo do tempo — as cartas informam o valor e a <b>variação anual</b>.</p><ul><li><b>Isogônicas</b>: linhas que unem pontos de mesma declinação magnética;</li><li><b>Agônicas</b>: linhas que unem pontos onde a declinação é nula.</li><li>Componente horizontal (H) do campo: zero nos polos magnéticos, máxima no equador magnético — é a que orienta a agulha.</li></ul></div><div class="def srch"><h4>Desvio da agulha <span class="tag t-cob">COBRADO</span></h4><p>A bordo, a agulha não se orienta segundo o meridiano magnético, mas segundo outra direção, o “<b>norte da agulha</b>”. O Desvio da Agulha é o ângulo entre o Norte Magnético e o Norte da Agulha; depende dos ferros do navio, dos corretores e da orientação deles em relação ao campo terrestre — é <b>variável com a proa</b>.</p></div><div class="def srch"><h4>Magnetismo permanente × induzido</h4><p>Origem dos desvios:</p><ul><li><b>Permanente</b>: das massas de ferro duro (aços e ferros fundidos), adquirido na construção; pouco se altera; depende da proa em que o navio foi construído e do campo no local da construção;</li><li><b>Induzido</b>: das massas de ferro doce; temporário; depende da proa e do campo no local onde o navio se encontra — varia com o rumo e com o lugar.</li></ul></div><div class="def srch"><h4>Agulha sensível e estável</h4><p>Uma boa agulha deve ser “sensível” (acusar qualquer variação da proa) e “estável” (indicar firmemente a proa). Condições até certo ponto antagônicas, obtidas com grande momento magnético, pequeno peso e pouco atrito — mais facilmente nas <b>agulhas líquidas</b>. As agulhas secas são muito sensíveis, mas pouco estáveis.</p></div><div class="def srch"><h4>Fatores que alteram os desvios</h4><p>Podem alterar os desvios da agulha:</p><ul><li>deslocamento ou alteração dos ferros de bordo; alteração dos corretores;</li><li>colocação ou supressão de equipamentos elétricos perto da agulha; ferros deixados perto dela;</li><li>atrito exagerado entre estilete e conjunto flutuador–rosa;</li><li>trovoadas, raios, tempestades magnéticas;</li><li>proximidade de terra com material magnético ou de outros navios;</li><li>aumento da temperatura dos ferros (especialmente da chaminé);</li><li>choques violentos (abalroamento, encalhe, tiros de artilharia).</li></ul></div><div class="def srch"><h4>Compensação e desvios residuais <span class="tag t-cob">COBRADO</span></h4><p>A compensação visa anular ou reduzir as influências dos ferros de bordo, reduzindo os desvios, que passam a ser chamados <b>desvios residuais</b>. Navio novo: desvio em qualquer proa não superior a <b>3º</b>; depois, compensar a cada <b>dois anos</b>, no máximo, com desvio não superior a <b>5º</b>. Na Marinha Mercante, a compensação é fiscalizada pela <b>DPC</b> e feita por perito habilitado pela <b>DHN</b>; desvios registrados na Tabela e Curva de Desvios e no Certificado de Compensação (DHN-0108).</p></div><div class="def srch"><h4>Regulamento (calibragem) da agulha — métodos</h4><p>A operação de determinação dos desvios é denominada “Regulamento da Agulha” ou “Calibragem da Agulha”. Métodos mais usados:</p><ul><li>comparação com a agulha giroscópica;</li><li>alinhamentos;</li><li>marcação de um ponto distante (objeto a no mínimo <b>6 milhas</b>); e</li><li>azimutes de astros.</li><li>Proas equidistantes de 15º, 30º ou 45º; desvios com precisão de 0,5º (tabela em grau inteiro); 3 a 4 minutos em cada proa; com degaussing, duas tabelas (ligado e desligado).</li></ul></div></div><h3>3.2.1 Descrição e partes componentes</h3><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Passadiço → <b>Agulha de Governo</b>; Tijupá → <b>Agulha Padrão</b> (mais livre de influências magnéticas). Com a giro fora de serviço, governa-se pela agulha de governo: daí a conversão Rv → Rag (cobrado).</div><h3>3.2.3 Declinação magnética</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Declinação = NV ↔ NM (depende do <b>lugar</b> e do <b>ano</b>). Isogônicas = mesma declinação; agônicas = declinação nula. Ponte com o Cap. 2: em cartas com escala menor que 1:750.000, a declinação vem em curvas isogônicas (1°, 2° ou 3°).</div><div class="box sint formula srch"><span class="tag t-calc">CALCULO</span> Atualizar a declinação: Dmg (ano) = Dmg (ano da carta) + nº de anos × variação anual, com o sinal da variação. Ex. do livro: 22°10’W (2015) + 6 × 6’W = 22°46’W ≈ <b>23°W</b> em 2021 (arredondar a 0,5°).</div><h3>3.2.4 Desvio da agulha</h3><div class="box quad srch-t"><h4 class="qt">Magnetismo permanente × induzido</h4><div class="tw"><table><thead><tr><th></th><th>Permanente</th><th>Induzido</th></tr></thead><tbody><tr class="srow"><td>Material</td><td>Ferro duro (fortemente carburado: aços, ferros fundidos)</td><td>Ferro doce (não carburado)</td></tr><tr class="srow"><td>Duração</td><td>Adquirido na construção; pouco se altera</td><td>Temporário; altera-se</td></tr><tr class="srow"><td>Depende de</td><td>Proa em que o navio foi construído + campo terrestre no local da construção</td><td>Proa atual + campo terrestre no lugar onde navega</td></tr><tr class="srow"><td>Varia com</td><td>Muito lentamente; muito tempo na mesma proa, choques</td><td>Rumo e lugar</td></tr></tbody></table></div></div><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Três nortes, dois ângulos: <b>NV —(declinação)— NM —(desvio)— Nag</b>. Declinação depende do lugar e do ano; desvio depende da <b>proa</b> (rumo). Distrator clássico: “o desvio depende do lugar” ou “a declinação varia com o rumo”.</div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> Três números no mesmo capítulo: 3.2.4 d (navio novo ≤ <b>3°</b>; compensar a cada <b>2 anos</b>; depois ≤ <b>5°</b>) × Apêndice (NORMAM 14/DPC: compensar <b>sempre que os desvios excederem 3°</b>; resultado aceitável ≤ 3°). Na prova, ler a fonte citada no enunciado: “Miguens/MB” → 3°/2 anos/5°; “NORMAM 14” → 3°.</div><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Compensar ≠ regular. <b>Compensação</b> = reduzir os desvios com corretores. <b>Regulamento/calibragem</b> = determinar os desvios residuais (tabela e curva). 3–4 min por proa existe para o <b>magnetismo induzido</b> se estabelecer.</div><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Desvios por comparação com a giro (exemplo do livro, p. 3-13)</h4><ul class="steps"><li>Dados: Dmg = 20°W; Dgi = 0°. Rmg escolhidos de 45° em 45° → Rgi = Rmg − 20° (W): 000→340 · 045→025 · 090→070 · 135→115 · 180→160 · 225→205 · 270→250 · 315→295.</li><li>Leituras da agulha (Rag): 002 · 044 · 087 · 135 · 183 · 225 · 267 · 314.</li><li>Dag = diferença Rmg × Rag: Rag maior que Rmg → desvio <b>W</b>; Rag menor → desvio <b>E</b>.</li><li class="sub">000/002 → 2°W · 045/044 → 1°E · 090/087 → 3°E · 135/135 → 0° · 180/183 → 3°W · 225/225 → 0° · 270/267 → 3°E · 315/314 → 1°E.</li></ul></div></section><section class="bloco" id="s2"><h2 class="sec"><span class="n">3.2.5</span><span class="tt">Conversão de rumos e marcações</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Regras da conversão de rumos e marcações <span class="tag t-cob">COBRADO</span></h4><p>Na conversão, recordar sempre que:</p><ul><li><b>só se traçam na carta marcações e rumos verdadeiros</b>;</li><li>a declinação (local e ano) vem da carta náutica;</li><li>os desvios variam com o rumo e vêm da curva de desvios — entra-se com o <b>rumo</b>, não com as marcações;</li><li>valores aproximados a <b>0,5º</b>.</li><li>Rmg = Rag ± Dag; Rv = Rmg ± Dec mg (E soma, W subtrai no sentido agulha → verdadeiro). O mesmo desvio vale para todas as marcações enquanto o navio mantiver o rumo.</li></ul></div><div class="def srch"><h4>Bússola de fluxo magnético (fluxgate)</h4><p>Supera a dificuldade de transmissão de sinais da agulha magnética; leitura digital ou em mostrador analógico eletrônico; muito precisa (0,5º); o sinal digitalizado é transmitido facilmente ao radar, piloto automático, ECDIS e repetidoras. Compensação simples: modo de auto compensação e <b>dois giros completos</b> com o navio.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Regra de sinal — sentido <b>agulha → verdadeiro</b> (Rag → Rmg → Rv): <b>E soma, W subtrai</b>. Sentido <b>verdadeiro → agulha</b> (Rv → Rmg → Rag): inverte — <b>W soma, E subtrai</b>. Sequência sempre com o magnético no meio. Distratores típicos: inverter a ordem (aplicar o desvio antes da declinação no sentido Rv → Rag), trocar o sinal de um dos dois, ou somar dado irrelevante (marcação polar).</div><div class="box quad srch-t"><h4 class="qt">Exemplos de rumos do livro (pp. 3-16 a 3-17) e exemplos cobrados <span class="tag t-calc">CALCULO</span></h4><div class="tw"><table><thead><tr><th>Caso</th><th>Rv</th><th>± Dmg</th><th>Rmg</th><th>± Dag</th><th>Rag</th></tr></thead><tbody><tr class="srow"><td>Livro 1 (Dmg 15°W)</td><td class="center">075°</td><td class="center">+15° (W)</td><td class="center">090°</td><td class="center">−3° (E)</td><td class="center">087°</td></tr><tr class="srow"><td>Livro 2 (2021: 22°10’W 2015 + 6×6’W = 23°W)</td><td class="center">135°</td><td class="center">+23° (W)</td><td class="center">158°</td><td class="center">+2° (W)</td><td class="center">160° (dado)</td></tr><tr class="srow"><td>Livro 3 (Sul magnético)</td><td class="center">157°</td><td class="center">+23° (W)</td><td class="center">180° (dado)</td><td class="center">+3° (W)</td><td class="center">183°</td></tr><tr class="srow"><td>Livro 4 (Rasa → Maricás)</td><td class="center">078° (dado)</td><td class="center">+23° (W)</td><td class="center">101°</td><td class="center">−2,5° (E)</td><td class="center">098,5°</td></tr><tr class="srow"><td class="amb">Cobrado: 16°10’W (2007) + 4×5’W = 16°30’W em 2011</td><td class="amb center">152,5° (dado)</td><td class="amb center">+16,5° (W)</td><td class="amb center">169°</td><td class="amb center">−2° (E)</td><td class="amb center"><b>167°</b></td></tr><tr class="srow"><td class="amb">Cobrado (a marcação polar dada sobra)</td><td class="amb center">045° (dado)</td><td class="amb center">+15° (W)</td><td class="amb center">060°</td><td class="amb center">−2° (E)</td><td class="amb center"><b>058°</b></td></tr></tbody></table></div><p class="foot">Leitura da esquerda para a direita = Rv → Rag (W soma, E subtrai). Da direita para a esquerda = Rag → Rv (E soma, W subtrai). Linhas âmbar: exemplos cobrados. Erros típicos: parar no Rmg; somar a marcação polar; trocar o sinal da declinação.</p></div><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Marcações — exemplos do livro (pp. 3-17 a 3-18); Dmg 2021 = 23°W</h4><ul class="steps"><li>1) Rag 110°, Mag 327° (farol Ilha Rasa). Dag na curva para o rumo 110° = 2°E.</li><li class="sub">Mmg = 327° + 2° (E) = 329° → Mv = 329° − 23° (W) = <b>306°</b> · Rv = 110° − 23° + 2° = <b>089°</b>.</li><li>2) Mv 075° (farol de Maricás), Rag 180°. Mmg = 075° + 23° (W) = 098° · Dag (rumo 180°) = 3°W → Mag = 098° + 3° = <b>101°</b> · Rv = 180° − 23° − 3° = <b>154°</b>.</li><li>3) Rag 110°: Mag 072° (Ponta Negra) e 345° (Maricás); Dag = 2°E para as duas, porque o rumo é um só.</li><li class="sub">Mv = Mag − 23° + 2° → Ponta Negra <b>051°</b> · Maricás <b>324°</b> · Rv <b>089°</b>.</li><li class="sub">Atalho: correção total = Dmg + Dag com sinal (aqui −23° + 2° = −21°), a mesma para rumo e para todas as marcações no mesmo rumo.</li></ul></div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> O livro manda entrar na curva com o rumo <b>magnético</b>, mas nos exemplos entra com o <b>Rag</b> “como se fosse o Rmg” (exemplo 2 de rumos; exemplos 1–3 de marcações). A diferença só importa quando o desvio é grande. Na prova, seguir o dado do enunciado: “entrando-se com o Rmg na tabela de desvios”.</div><div class="box sint nota srch"><span class="tag t-nota">NOTA</span> Erro mais caro em marcação: entrar na curva com a <b>marcação</b> em vez do <b>rumo</b> — é exatamente o seu duplo ponto vermelho.</div></section><section class="bloco" id="s3"><h2 class="sec"><span class="n">3.3</span><span class="tt">Agulha giroscópica</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Agulha giroscópica</h4><p>É, essencialmente, um giroscópio “<b>busca-meridiano</b>”, cujo eixo de rotação permanece alinhado com os meridianos terrestres, capaz de oscilar em torno do eixo vertical e de medir o ângulo entre a proa do navio e o eixo de rotação do giroscópio, isto é, o <b>Rumo Verdadeiro</b>. Rotor a ~6.000 RPM; a força diretiva vem da componente tangencial da rotação da Terra (máxima no Equador, zero nos Polos).</p></div><div class="def srch"><h4>Giroscópio básico</h4><p>Rotor perfeitamente balanceado, livre para girar em torno de três eixos perpendiculares que se interceptam no centro de gravidade — três graus de liberdade: <b>eixo de rotação</b>, <b>eixo horizontal</b> (de torque) e <b>eixo vertical</b> (de precessão).</p></div><div class="def srch"><h4>Propriedades do giroscópio <span class="tag t-cob">COBRADO</span></h4><p>Com o rotor girando em alta velocidade, o giroscópio desenvolve duas propriedades:</p><ul><li><b>Inércia giroscópica (rigidez no espaço)</b> — afetada principalmente pelo peso do rotor e pela velocidade de rotação;</li><li><b>Precessão</b> — movimento resultante do rotor quando se aplica uma força que tende a alterar a direção do eixo; o eixo move-se num plano perpendicular à força; a direção é a da força girada <b>90º no sentido de rotação</b> do rotor.</li><li>Precessão indesejável: “deriva mecânica”, por atrito nos mancais e desbalanceamento do rotor.</li></ul></div><div class="def srch"><h4>Estabilização e tempo de partida (Sperry)</h4><p>Nas agulhas Sperry, estabilização pelo <b>balístico de mercúrio</b>; o giroscópio pendular não amortecido descreve uma elipse em <b>84 minutos</b>; com amortecimento, espiral convergente de cerca de <b>86 minutos</b>. Como leva três períodos para estabilizar, a agulha deve ser ligada <b>5 horas</b> antes de suspender (86 × 3 = 268 min). Agulhas alemãs (Anschutz, Plath, Atlas): giroesfera com dois giroscópios, sem erro de amortecimento.</p></div><div class="def srch"><h4>Giro nas altas latitudes</h4><p>A força diretiva diminui nas altas latitudes. Além de <b>70º</b>, o erro deve ser verificado continuamente; entre 75º e 80º, a maioria apresenta grandes erros; a cerca de <b>85º</b>, a giro torna-se virtualmente inútil.</p></div><div class="def srch"><h4>Repetidora, peloro, círculo azimutal e alidade</h4><p>A repetidora da giro é montada em um pedestal denominado <b>peloro</b>. Para marcações, instala-se sobre ela um <b>círculo azimutal</b> (fenda de visada e mira com retículo, mantendo a rosa nivelada pelo nível de bolha); para objetos distantes, uma <b>alidade telescópica</b>.</p></div><div class="def srch"><h4>Desvio da giro (Dgi) <span class="tag t-cob">COBRADO</span></h4><p>O Dgi é <b>leste</b> quando o zero da rosa (Norte da Giro) fica a leste do meridiano verdadeiro, e <b>oeste</b> quando fica a oeste. As causas nada têm em comum com as do desvio da magnética: o Dgi é <b>constante para todos os rumos</b>, enquanto os desvios da magnética variam com o rumo magnético. Corretores de latitude e de velocidade (o rumo entra automaticamente).</p></div><div class="def srch"><h4>Métodos de determinação do desvio da giro</h4><p>Em águas costeiras ou restritas:</p><ul><li><b>Alinhamento</b> (marcação da giro × marcação verdadeira do alinhamento na carta) — muito simples e preciso;</li><li>marcação de um ponto distante a partir de posição conhecida;</li><li>rumo da giro com o navio atracado paralelo ao cais (aproximado);</li><li><b>redução do triângulo</b> (marcação de 3 objetos);</li><li>comparação com outra agulha de desvio conhecido;</li><li>no mar: azimute do Sol ou de outro astro.</li></ul></div><div class="def srch"><h4>Redução do triângulo</h4><p>Do navio estacionário, marcam-se três ou mais pontos de terra. Se as LDP se cruzam num ponto, o desvio é zero; se formam um triângulo, somam-se ou subtraem-se incrementos de 1º a todas as marcações até que se cruzem num ponto. A correção total é o desvio da giro: <b>se subtraída, desvio W; se somada, desvio E</b>.</p></div><div class="def srch"><h4>Novas tecnologias de giroscópio</h4><p>Baseadas no <b>efeito Sagnac</b> (dois feixes de luz em sentidos opostos chegam em instantes diferentes se o circuito gira): <b>FOG</b> (fibra ótica, diferença de fase) e <b>RLG</b> (anel de laser, frequência de batimento), sem partes móveis. E o <b>HRG</b> (ressonância hemisférica, efeito de Bryan), uma cúpula vibrante.</p></div></div><h3>3.3.3 Agulhas giroscópicas · busca do meridiano · latitudes</h3><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Números de latitude (Cap. 3 e Cap. 2)</h4><div class="tw"><table><thead><tr><th>Latitude</th><th>O que acontece</th></tr></thead><tbody><tr class="srow"><td>&gt; 60°</td><td>Agulha magnética com desempenho prejudicado (componente H diminui) · Mercator geralmente limitada</td></tr><tr class="srow"><td>70° N/S</td><td>Giro: grandes erros possíveis; verificar o erro continuamente</td></tr><tr class="srow"><td>75° a 80°</td><td>Giro: a maioria apresenta grandes erros · Mercator utilizável até 80° com precauções</td></tr><tr class="srow"><td>≈ 85°</td><td>Giro virtualmente inútil</td></tr></tbody></table></div></div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> “Ligar 5 horas antes” vem de 3 × 86 min = 268 min, que o próprio livro escreve como “≈ 4,5 horas”. Se a prova perguntar o tempo recomendado, responder <b>5 horas</b> (texto); se perguntar a conta, 3 períodos de 86 min.</div><h3>3.3.4 Vantagens e limitações da giro</h3><div class="box quad srch-t"><h4 class="qt">Agulha magnética × giroscópica × fluxgate (3.2.2, 3.2.8, 3.3.4)</h4><div class="tw"><table><thead><tr><th></th><th>Magnética tradicional</th><th>Giroscópica</th><th>Fluxgate</th></tr></thead><tbody><tr class="srow"><td>Indica</td><td>Norte magnético</td><td>Norte verdadeiro</td><td>Norte magnético</td></tr><tr class="srow"><td>Energia</td><td>Independe de energia elétrica</td><td>Exige fonte constante; sensível a flutuações</td><td>Eletrônica</td></tr><tr class="srow"><td>Transmissão do sinal</td><td>Difícil (<span class="hl">seu destaque</span>)</td><td>Fácil: repetidoras, radar, piloto automático, ECDIS/ECS, armas</td><td>Fácil (<span class="hl">seu destaque</span>)</td></tr><tr class="srow"><td>Precisão</td><td>Menor</td><td>Maior para governo e marcações</td><td>0,5°</td></tr><tr class="srow"><td>Altas latitudes</td><td>Mais afetada (&gt; 60°)</td><td>Erros a partir de 70°</td><td>—</td></tr><tr class="srow"><td>Material magnético</td><td>Afetada</td><td>Não afetada</td><td>Compensação simples (2 giros)</td></tr><tr class="srow"><td>Manutenção</td><td>Quase nenhuma; robusta; barata</td><td>Complexa; técnicos especializados</td><td>—</td></tr></tbody></table></div></div><h3>3.3.6 Desvio da giro</h3><div class="box quad srch-t"><h4 class="qt">Desvio da agulha magnética (Dag) × desvio da giro (Dgi)</h4><div class="tw"><table><thead><tr><th></th><th>Dag</th><th>Dgi</th></tr></thead><tbody><tr class="srow"><td>Ângulo entre</td><td>Norte magnético e norte da agulha</td><td>Norte verdadeiro e norte da giro</td></tr><tr class="srow"><td>Varia com o rumo?</td><td>Sim — curva de desvios por proa</td><td>Não — constante para todos os rumos</td></tr><tr class="srow"><td>Varia com o lugar?</td><td>Sim (magnetismo induzido)</td><td>Não, salvo se a causa for o erro de latitude</td></tr><tr class="srow"><td>Determinação</td><td>Comparação com a giro, alinhamentos, ponto distante, astros</td><td>Alinhamento, ponto distante, cais/píer, redução do triângulo, outra agulha, astros</td></tr><tr class="srow"><td>Sinal (giro → verdadeiro)</td><td>E soma, W subtrai</td><td>E soma, W subtrai (Mv = Mgi − Dgi W)</td></tr></tbody></table></div></div><div class="box sint nota srch"><span class="tag t-nota">NOTA</span> O “triângulo” aqui é efeito de <b>erro sistemático</b> (Dgi igual em todas as marcações), não o triângulo de incerteza por erros aleatórios. Ponte com os Caps. 4 e 9.</div><h3>3.3.9 Novas tecnologias em giroscópios</h3><div class="box quad srch-t"><h4 class="qt">Giroscópios</h4><div class="tw"><table><thead><tr><th>Tipo</th><th>Princípio</th><th>Medida</th><th>Partes móveis</th></tr></thead><tbody><tr class="srow"><td>Mecânico (Foucault, 1852)</td><td>Conservação do momento angular (rotor em cardan)</td><td>Inércia e precessão</td><td>Sim</td></tr><tr class="srow"><td>FOG — fibra ótica</td><td>Efeito Sagnac (1913)</td><td>Diferença de fase</td><td>Não</td></tr><tr class="srow"><td>RLG — anel de laser</td><td>Efeito Sagnac</td><td>Frequência de batimento</td><td>Não</td></tr><tr class="srow"><td>HRG — ressonância hemisférica</td><td>Efeito Bryan (1890): onda estacionária na “taça”</td><td>Deslocamento do antinodo</td><td>—</td></tr></tbody></table></div></div></section><section class="bloco" id="s4"><h2 class="sec"><span class="tt">Apêndice — Compensação da agulha magnética</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Compensação — norma e corretores</h4><p>Compensação é a operação que tem por fim anular ou reduzir a valores muito pequenos (geralmente inferiores a 2º ou 3º) os desvios da agulha. Pela <b>NORMAM 14/DPC</b>, deve ser compensada sempre que os desvios <b>excederem a 3 graus</b>. Corretores:</p><ul><li><b>Ímãs permanentes</b> (barras com extremidades vermelha = polo norte e azul = polo sul), no interior da bitácula;</li><li><b>Compensadores do desvio quadrantal</b>: esferas de ferro doce nos dois lados da bitácula;</li><li><b>Barra de Flinders</b>: cilindro de ferro doce em tubo de latão vertical na bitácula.</li></ul></div><div class="def srch"><h4>Compensação provisória × definitiva</h4><p>A <b>provisória</b> é feita após a construção, só com ímãs permanentes e compensadores quadrantais (ainda não se pode calcular a barra de Flinders). A <b>definitiva</b> ocorre depois de uma viagem com franca variação de latitude, quando se calcula e ajusta a barra de Flinders.</p></div><div class="def srch"><h4>Advertências na compensação</h4><p>Cuidados durante a operação:</p><ul><li>se o navio esteve muito tempo na mesma proa, ficar 24 horas amarrado ou fundeado antes;</li><li>com desvios grandes, proceder por aproximações sucessivas;</li><li>preferir corretores maiores e afastados a menos potentes e próximos;</li><li>guinadas vagarosas e 3 a 4 minutos em cada proa;</li><li>não determinar desvios a menos de 500 m de outros navios; chaminé na temperatura habitual;</li><li>navio compassado; içar o sinal <b>OQ</b> do CIS (“estou compensando as agulhas”) e o sinal de manobra restrita.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Provisória = só ímãs permanentes + esferas (quadrantal), sem Flinders. Definitiva = com a barra de Flinders calculada após o navio se deslocar <b>francamente em latitude</b>. Navio que nunca muda de latitude nunca chega à definitiva — “sem qualquer inconveniente”.</div><div class="box sint key srch"><span class="tag t-decorar">DECORAR</span> Números do apêndice: <b>24 h</b> parado após longa permanência na mesma proa · <b>3 a 4 min</b> por proa · <b>500 m</b> de outros navios · sinal <b>OQ</b> + marcas de manobra restrita (COLREG). Ponte com o Cap. 1/CIS e com o COLREG (projeto P3c).</div><div class="box quad srch-t"><h4 class="qt">Sequência de proas na compensação por comparação com a giro (pp. 3-42 a 3-43; sem marcação)</h4><div class="tw"><table><thead><tr><th>Proa</th><th>Rumo magnético</th><th>Corretor</th><th>Ação</th></tr></thead><tbody><tr class="srow"><td>1ª</td><td>E ou W</td><td>Ímãs verticais (balde) + balança de inclinação a 0,9 d (0,8 d em compartimento de aço)</td><td>Desvio de banda: balança na horizontal</td></tr><tr class="srow"><td>2ª</td><td>N</td><td>Ímãs transversais</td><td>Anula o desvio</td></tr><tr class="srow"><td>3ª</td><td>E (ou W)</td><td>Ímãs longitudinais</td><td>Anula o desvio</td></tr><tr class="srow"><td>4ª</td><td>S</td><td>Ímãs transversais</td><td>Tira metade</td></tr><tr class="srow"><td>5ª</td><td>W (oposto da 3ª)</td><td>Ímãs longitudinais</td><td>Tira metade</td></tr><tr class="srow"><td>6ª</td><td>Intercardeal qualquer</td><td>Esferas de Barlow (quadrantal)</td><td>Anula o desvio</td></tr><tr class="srow"><td>7ª</td><td>Intercardeal a 90° da anterior</td><td>Esferas de Barlow</td><td>Tira metade</td></tr></tbody></table></div><p class="foot">Padrão: semicircular nas proas 2–5 (transversais em N/S, longitudinais em E/W), quadrantal nas 6–7; na segunda proa de cada par tira-se só a metade. Depois, giro completo para a curva de desvios residuais (com Degaussing ligado, se houver). Modelo DHN-0104.</p></div></section><section class="bloco" id="s5"><h2 class="sec"><span class="tt">Glossário completo — Miguens, Vol. I, Cap. 3</span></h2><div class="box quad srch-t"><div class="tw"><table class="gloss"><thead><tr><th>Item</th><th>Termo</th><th>Definição condensada</th><th>Marca</th></tr></thead><tbody><tr class="srow"><td>3.1</td><td>Rumo · marcação</td><td>Ângulo horizontal da referência à proa · da referência à linha navio–objeto; 000° a 360°, horário.</td><td>○</td></tr><tr class="srow"><td>3.2.1</td><td>Agulha de governo · padrão</td><td>No passadiço · no tijupá (mais livre de influências magnéticas).</td><td>★ ●</td></tr><tr class="srow"><td>3.2.1</td><td>Bitácula · linha-de-fé</td><td>Pedestal da agulha · referência para rumos, alinhada com a linha proa–popa.</td><td>○</td></tr><tr class="srow"><td>3.2.2</td><td>Limitações da magnética</td><td>NM em vez de NV; afetada por ferros e equipamentos; desvios por proa; menos precisa; sinal difícil de transmitir; pior em altas latitudes.</td><td>★</td></tr><tr class="srow"><td>3.2.3</td><td>Componentes H e Z</td><td>H orienta a agulha (máxima no equador magnético, nula nos polos); Z o inverso. Magnética prejudicada acima de 60°.</td><td>○</td></tr><tr class="srow"><td>3.2.3</td><td>Declinação magnética</td><td>Ângulo entre NV e NM no lugar; E ou W; varia com lugar e tempo (variação anual na carta).</td><td>★ ●</td></tr><tr class="srow"><td>3.2.3</td><td>Isogônicas · agônicas</td><td>Linhas de mesma declinação · de declinação nula.</td><td>★</td></tr><tr class="srow"><td>3.2.4</td><td>Sensível × estável</td><td>Acusa variação de proa × indica firme; agulhas secas: muito sensíveis, pouco estáveis.</td><td>★</td></tr><tr class="srow"><td>3.2.4</td><td>Magnetismo permanente</td><td>Ferro duro; adquirido na construção; depende da proa de construção e do campo local.</td><td>★</td></tr><tr class="srow"><td>3.2.4</td><td>Magnetismo induzido</td><td>Ferro doce; temporário; varia com rumo e lugar.</td><td>★</td></tr><tr class="srow"><td>3.2.4</td><td>Desvio da agulha (Dag)</td><td>Ângulo entre NM e norte da agulha; varia com a proa.</td><td>★ ●</td></tr><tr class="srow"><td>3.2.4</td><td>Desvios residuais</td><td>Desvios que restam após a compensação.</td><td>○</td></tr><tr class="srow"><td>3.2.4</td><td>Limites de desvio</td><td>Navio novo ≤ 3°; compensar no máximo a cada 2 anos; depois ≤ 5° (Apêndice/NORMAM 14: compensar se &gt; 3°).</td><td>★</td></tr><tr class="srow"><td>3.2.4</td><td>Certificado DHN-0108</td><td>Tabela e curva de desvios residuais; obrigatório a bordo.</td><td>★</td></tr><tr class="srow"><td>3.2.4</td><td>Regulamento / calibragem</td><td>Determinação dos desvios; agulha “regulada” quando eles são perfeitamente conhecidos.</td><td>★</td></tr><tr class="srow"><td>3.2.4</td><td>Métodos de determinação</td><td>Comparação com a giro, alinhamentos, ponto distante (≥ 6 milhas), azimutes de astros.</td><td>★</td></tr><tr class="srow"><td>3.2.4</td><td>Degaussing</td><td>Circuito de desmagnetização: duas tabelas e curvas (ligado e desligado).</td><td>★</td></tr><tr class="srow"><td>3.2.5</td><td>Calunga</td><td>Diagrama de NV, NM e Nag em torno da proa para resolver a conversão.</td><td>○ ●</td></tr><tr class="srow"><td>3.2.5</td><td>Conversão</td><td>Rag ± Dag = Rmg; Rmg ± Dmg = Rv (E soma, W subtrai); inverso no sentido Rv → Rag; aproximar a 0,5°.</td><td>● </td></tr><tr class="srow"><td>3.2.5</td><td>Entrada na curva</td><td>Sempre o rumo, nunca a marcação; mudou o rumo, novo desvio.</td><td>★</td></tr><tr class="srow"><td>3.2.6</td><td>Livro das Agulhas (DN-12)</td><td>Registro de dados, exames, reparos, compensações e desvios em viagem.</td><td>○</td></tr><tr class="srow"><td>3.2.8</td><td>Fluxgate</td><td>Bússola de fluxo magnético; precisão 0,5°; sinal digital transmissível; autocompensação com dois giros.</td><td>★ ●</td></tr><tr class="srow"><td>3.3.1</td><td>Giro busca-meridiano</td><td>Eixo de rotação alinhado ao meridiano; mede o rumo verdadeiro.</td><td>○</td></tr><tr class="srow"><td>3.3.2</td><td>Graus de liberdade</td><td>Três eixos: rotação, horizontal (torque), vertical (precessão).</td><td>★</td></tr><tr class="srow"><td>3.3.2</td><td>Inércia giroscópica</td><td>Rigidez no espaço; cresce com peso do rotor e velocidade de rotação.</td><td>○</td></tr><tr class="srow"><td>3.3.2</td><td>Precessão</td><td>Movimento do rotor perpendicular à força que tenta alterar o eixo (força girada 90° no sentido de rotação).</td><td>★</td></tr><tr class="srow"><td>3.3.2</td><td>Deriva mecânica</td><td>Precessão indesejável; causas: atrito nos mancais e desbalanceamento do rotor.</td><td>★</td></tr><tr class="srow"><td>3.3.3</td><td>Balístico de mercúrio (Sperry)</td><td>Torna o giroscópio pendular; 84 min sem amortecimento, 86 min com; ligar 5 h antes.</td><td>○</td></tr><tr class="srow"><td>3.3.3</td><td>Força diretiva</td><td>Componente tangencial da rotação da Terra: máxima no Equador, nula nos polos.</td><td>★</td></tr><tr class="srow"><td>3.3.3</td><td>Limites da giro</td><td>70°: verificar continuamente; 75–80°: grandes erros; ≈ 85°: inútil. 6.000 RPM em média.</td><td>★</td></tr><tr class="srow"><td>3.3.5</td><td>Peloro · círculo azimutal · alidade telescópica</td><td>Pedestal da repetidora · visada por fenda e mira · luneta para objetos distantes.</td><td>★ ●</td></tr><tr class="srow"><td>3.3.6</td><td>Corretores da giro</td><td>Latitude e velocidade; o rumo é introduzido automaticamente.</td><td>★</td></tr><tr class="srow"><td>3.3.6</td><td>Desvio da giro (Dgi)</td><td>Ângulo entre NV e norte da giro; constante para todos os rumos.</td><td>★</td></tr><tr class="srow"><td>3.3.6</td><td>Métodos do Dgi</td><td>Alinhamento, ponto distante, cais/píer (aproximado), redução do triângulo, outra agulha, astros.</td><td>★</td></tr><tr class="srow"><td>3.3.8</td><td>Redução do triângulo</td><td>Incrementos de 1° em todas as marcações até o ponto; subtraiu = W, somou = E.</td><td>○</td></tr><tr class="srow"><td>3.3.9</td><td>FOG · RLG · HRG</td><td>Fibra ótica e anel de laser (Sagnac, sem partes móveis) · ressonância hemisférica (“taça”).</td><td>★</td></tr><tr class="srow"><td>Ap.</td><td>Corretores</td><td>Ímãs permanentes (dentro da bitácula), esferas de ferro doce (quadrantal, fora), barra de Flinders (vertical).</td><td>★</td></tr><tr class="srow"><td>Ap.</td><td>Compensação provisória × definitiva</td><td>Sem Flinders × com Flinders calculada após deslocamento franco em latitude.</td><td>★</td></tr><tr class="srow"><td>Ap.</td><td>Advertências</td><td>24 h parado se muito tempo na mesma proa; corretores grandes e afastados; 3–4 min por proa; &gt; 500 m de navios; chaminé normal; sinal OQ.</td><td>★</td></tr></tbody></table></div><p class="foot">Marca: ★ seu destaque · ● assunto cobrado em prova · ○ sem marcação, só menção.</p></div></section>
 <a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
-
-</div>
-</main>
-
-<footer>
-  <div class="wrap"><b>PSCPP 2027</b> · Agulhas e Conversão de Rumos (Miguens Vol. I, Cap. 3) · Capital Sereno · Navegação — Miguens.</div>
-</footer>
-
+</div></main>
+<footer><div class="wrap">PSCPP 2027 · Agulhas e Conversão de Rumos — Miguens Cap. 3 · <b>Capital Sereno</b> · Navegação — Miguens.</div></footer>
 <script>
-var NS="http://www.w3.org/2000/svg";
-function sEl(svg,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
-function sTx(svg,x,y,s,a){var e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill',(a&&a.fill)||'#16302B');e.setAttribute('font-family','Trebuchet MS,sans-serif');e.setAttribute('font-size',(a&&a.fs)||13);if(a&&a.fw)e.setAttribute('font-weight',a.fw);if(a&&a.ta)e.setAttribute('text-anchor',a.ta);e.textContent=s;svg.appendChild(e);return e;}
-function d3(n){n=Math.round(n*2)/2;var s=('00'+Math.floor(n)).slice(-3);var f=n-Math.floor(n);return s+(f?',5':'');}
-function norm(t){t=t%360;if(t<0)t+=360;return t;}
-function vec(t){var r=t*Math.PI/180;return [Math.sin(r),-Math.cos(r)];} // rumo(°)->[x, y(cima=-)]
-
-/* ===== ROSA DOS NORTES ===== */
-function preset(rv,dm,dv){document.getElementById('rv').value=rv;document.getElementById('dm').value=dm;document.getElementById('dv').value=dv;drawRosa();}
-function drawRosa(){
-  var svg=document.getElementById('svgRosa');svg.innerHTML='';
-  var Dm=+document.getElementById('dm').value, Dv=+document.getElementById('dv').value, Rv=+document.getElementById('rv').value;
-  var Rmg=norm(Rv-Dm), Rag=norm(Rv-Dm-Dv);
-  var cx=300,cy=190,R=140;
-  sEl(svg,'circle',{cx:cx,cy:cy,r:R,fill:'#fbfaf5',stroke:'#e5dcc6','stroke-width':1.5});
-  // três nortes: NV(0), NM(+Dm), NA(+Dm+Dv)
-  function nlin(ang,col,lab,rr){var v=vec(ang);sEl(svg,'line',{x1:cx,y1:cy,x2:cx+v[0]*R,y2:cy+v[1]*R,stroke:col,'stroke-width':2});
-    sTx(svg,cx+v[0]*(R+rr),cy+v[1]*(R+rr),lab,{fill:col,fs:12,fw:'bold',ta:'middle'});}
-  nlin(0,'#C8A84B','NV',16);
-  nlin(Dm,'#2C5F8A','NM',30);
-  nlin(Dm+Dv,'#9E3B2E','NA',44);
-  // proa (Rv a partir do NV)
-  var p=vec(Rv);
-  sEl(svg,'line',{x1:cx,y1:cy,x2:cx+p[0]*(R+8),y2:cy+p[1]*(R+8),stroke:'#1A7A6E','stroke-width':3.5});
-  sTx(svg,cx+p[0]*(R+26),cy+p[1]*(R+26),'PROA',{fill:'#1A7A6E',fs:12,fw:'bold',ta:'middle'});
-  sEl(svg,'circle',{cx:cx,cy:cy,r:4,fill:'#0D3D36'});
-  // painel de leitura à direita
-  var bx=520,by=95;
-  var dmDes=Dm>=0?'E':'W', dvDes=Dv>=0?'E':'W';
-  sTx(svg,bx,by,'Dm = '+Math.abs(Dm).toFixed(1)+'° '+dmDes,{fill:'#2C5F8A',fs:15,fw:'bold'});
-  sTx(svg,bx,by+26,'Dv = '+Math.abs(Dv).toFixed(1)+'° '+dvDes,{fill:'#9E3B2E',fs:15,fw:'bold'});
-  sTx(svg,bx,by+60,'Rv  = '+d3(Rv)+'°',{fill:'#0D3D36',fs:17,fw:'bold'});
-  sTx(svg,bx,by+86,'Rmg = '+d3(Rmg)+'°',{fill:'#0D3D36',fs:17,fw:'bold'});
-  sTx(svg,bx,by+112,'Rag = '+d3(Rag)+'°',{fill:'#0D3D36',fs:17,fw:'bold'});
-  sTx(svg,bx,by+146,'Rv = Rag ± Dm ± Dv',{fill:'#7a6f55',fs:12});
-  document.getElementById('rosaRead').innerHTML='Da agulha para o verdadeiro: <b>Rag '+d3(Rag)+'°</b> '+(Dv>=0?'+':'−')+' '+Math.abs(Dv)+'° ('+dvDes+') = <b>Rmg '+d3(Rmg)+'°</b> '+(Dm>=0?'+':'−')+' '+Math.abs(Dm)+'° ('+dmDes+') = <b>Rv '+d3(Rv)+'°</b>. (Este soma, Oeste subtrai.)';
+(function(){
+var norm=function(x){return x.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
+var q=document.getElementById('q'), qn=document.getElementById('qn');
+function unmark(){document.querySelectorAll('mark.sq').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+function markIn(el,t){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[],n;while(n=w.nextNode())ns.push(n);
+ ns.forEach(function(n){var s=n.nodeValue,ns2=norm(s),i=ns2.indexOf(t);if(i<0)return;var f=document.createDocumentFragment(),last=0;
+  while(i>=0){f.appendChild(document.createTextNode(s.slice(last,i)));var m=document.createElement('mark');m.className='sq';m.textContent=s.slice(i,i+t.length);f.appendChild(m);last=i+t.length;i=ns2.indexOf(t,last);}
+  f.appendChild(document.createTextNode(s.slice(last)));n.parentNode.replaceChild(f,n);});}
+function run(){
+ unmark(); var t=norm(q.value.trim()), hits=0;
+ document.querySelectorAll('section.bloco').forEach(function(sec){
+  if(!t){sec.style.display='';sec.querySelectorAll('.srch,.srch-t,.srow,h3').forEach(function(e){e.style.display='';});return;}
+  var any=false;
+  var titleHit=norm(sec.querySelector('h2').textContent).indexOf(t)>=0;
+  sec.querySelectorAll('.srch').forEach(function(e){var m=norm(e.textContent).indexOf(t)>=0,ok=titleHit||m;e.style.display=ok?'':'none';if(ok)any=true;if(m){hits++;markIn(e,t);}});
+  sec.querySelectorAll('.srch-t').forEach(function(b){var cap=b.querySelector('.qt'),capHit=titleHit||(cap&&norm(cap.textContent).indexOf(t)>=0),rowsOk=0;
+   b.querySelectorAll('tr.srow').forEach(function(r){var m=norm(r.textContent).indexOf(t)>=0,ok=capHit||m;r.style.display=ok?'':'none';if(ok)rowsOk++;if(m){hits++;markIn(r,t);}});
+   if(cap&&norm(cap.textContent).indexOf(t)>=0){hits++;markIn(cap,t);}
+   var ok=rowsOk>0;b.style.display=ok?'':'none';if(ok)any=true;});
+  sec.querySelectorAll('h3').forEach(function(h){h.style.display=t?'none':'';});
+  if(titleHit){any=true;hits++;markIn(sec.querySelector('h2'),t);}
+  sec.style.display=any?'':'none';
+ });
+ qn.textContent=t?(hits?hits+' resultado'+(hits>1?'s':''):'nada encontrado'):'';
 }
-drawRosa();
-
-/* ===== VARIAÇÃO ANUAL ===== */
-function drawVar(){
-  var svg=document.getElementById('svgVar');svg.innerHTML='';var W=860;
-  var ano=+document.getElementById('ano').value;
-  var base=16+10/60, varAnual=5/60; // graus
-  var anos=ano-2007;
-  var dm=base+varAnual*anos; // W cresce
-  var g=Math.floor(dm), m=Math.round((dm-g)*60);
-  // barra
-  var x0=50,x1=W-50,y=70;
-  sEl(svg,'line',{x1:x0,y1:y,x2:x1,y2:y,stroke:'#cdbf99','stroke-width':2});
-  for(var a=2007;a<=2027;a+=5){var x=x0+(a-2007)/20*(x1-x0);sEl(svg,'line',{x1:x,y1:y-6,x2:x,y2:y+6,stroke:'#7a6f55','stroke-width':1.5});sTx(svg,x,y+22,a+'',{fill:'#7a6f55',fs:11,ta:'middle'});}
-  var px=x0+(ano-2007)/20*(x1-x0);
-  sEl(svg,'circle',{cx:px,cy:y,r:8,fill:'#2C5F8A'});
-  sTx(svg,px,y-16,d3v(dm),{fill:'#2C5F8A',fs:13,fw:'bold',ta:'middle'});
-  document.getElementById('varRead').innerHTML='Em <b>'+ano+'</b> ('+anos+' anos após 2007): Dm = 16°10′ W + 5′ W × '+anos+' = <b>'+g+'°'+('0'+m).slice(-2)+'′ W ≈ '+dm.toFixed(1)+'° W</b>. '+(ano===2011?'(É a Dm da 2011-Q30: 16°30′ W.)':'');
-}
-function d3v(dm){var g=Math.floor(dm),m=Math.round((dm-g)*60);return g+'°'+('0'+m).slice(-2)+'′W';}
-drawVar();
-window.addEventListener('resize',function(){drawRosa();drawVar();});
-
-/* ===== FLASHCARDS ===== */
-var FC=[
-  {f:"Os 3 (4) nortes",b:"Verdadeiro (NV), Magnético (NM), da Agulha (NA) — e o da Giro. Dm separa NV↔NM; Dv separa NM↔NA."},
-  {f:"Declinação (Dm)",b:"Ângulo NV↔NM. Designação E/W. Varia por local e no tempo. Vem da carta."},
-  {f:"Isogônicas × agônicas",b:"Isogônicas unem pontos de mesma declinação; agônicas, pontos de declinação NULA."},
-  {f:"Desvio (Dv)",b:"Ângulo NM↔NA. Depende dos ferros do navio → varia com o RUMO. Vem da Curva de Desvios."},
-  {f:"Entrada na Curva de Desvios",b:"Entra-se com o RUMO (não a marcação). Um desvio vale p/ todas as marcações no mesmo rumo."},
-  {f:"Regra de ouro",b:"Só se traçam na carta rumos e marcações VERDADEIROS. Aproximar a 0,5°."},
-  {f:"Sequência de conversão",b:"Rag —(±Dv)→ Rmg —(±Dm)→ Rv. E o inverso trocando sinais."},
-  {f:"Fórmula-mãe",b:"Rv = Rag ± Dm ± Dv."},
-  {f:"Regra dos sinais",b:"Da agulha p/ o verdadeiro (subindo): Este SOMA, Oeste SUBTRAI. Descendo: inverte."},
-  {f:"Exemplo do livro",b:"Dm 20W, Rag 085, Dv 5E → Rmg 090 → Rv 070."},
-  {f:"Variação anual",b:"Dm(ano) = Dm(base) ± variação × nº anos. Atualize ANTES de converter."},
-  {f:"Ex. variação (2011-Q30)",b:"16°10′W (2007) + 5′W×4 = 16°30′W = 16,5°W."},
-  {f:"Conversão de marcação",b:"Mv = Mag ± Dm ± Dv, com o Dv do RUMO do navio."},
-  {f:"Giroscópica — aponta a",b:"Norte VERDADEIRO (não o magnético). Independe do magnetismo terrestre."},
-  {f:"Vantagens da giro",b:"Mais precisa; latitudes mais altas; imune a material magnético; alimenta repetidoras/radar/piloto/ECDIS."},
-  {f:"Limitações da giro",b:"Precisa de energia constante; manutenção especializada; erros a partir de 70° de latitude."},
-  {f:"Desvio da giro (Dgi)",b:"Redução do triângulo: LDP num ponto → 0; triângulo → há desvio. Subtraiu = W; somou = E."},
-  {f:"2011-Q30",b:"Rv 152,5° → Rag 167° (Dm 16,5°W atualizada, Dag 2°E). Gab (c)."},
-  {f:"2012-Q19",b:"Rv 045°, giro fora → Rag 058° (Dm 15°W, Dag 2°E). Gab (c)."},
-  {f:"Só verdadeiro na carta",b:"Rumos e marcações traçados na carta são sempre verdadeiros (referidos ao NV)."}
-];
-var grid=document.getElementById('fcGrid');
-FC.forEach(function(c){var d=document.createElement('div');d.className='fc';
-  d.innerHTML='<div class="fc-in"><div class="fc-face fc-front">'+c.f+'<span class="hintflip">virar ↻</span></div><div class="fc-face fc-back">'+c.b+'</div></div>';
-  d.onclick=function(){d.classList.toggle('flip');};grid.appendChild(d);});
-
-/* ===== QUIZ ===== */
-var QUIZ=[
-  {q:"A Declinação Magnética é definida como o ângulo entre:",
-   o:["O Norte Magnético e o Norte da Agulha","O Norte Verdadeiro e o Norte Magnético","A proa e o Norte Verdadeiro","O Norte da Giro e o Norte Verdadeiro"],a:1,
-   e:"Declinação (Dm) = ângulo NV↔NM. O ângulo NM↔NA é o Desvio da Agulha (Dv)."},
-  {q:"O Desvio da Agulha varia com o rumo do navio porque:",
-   o:["A declinação muda com a proa","Depende dos ferros do navio e da orientação deles no campo terrestre","Depende da latitude apenas","É constante e não varia"],a:1,
-   e:"O desvio nasce do ferro do próprio navio; conforme a proa, a orientação desse material no campo terrestre muda, alterando o desvio. Obtém-se da Curva de Desvios entrando com o rumo."},
-  {q:"Para obter o desvio na Curva de Desvios, deve-se entrar com:",
-   o:["A marcação observada","O rumo do navio","A declinação","A latitude"],a:1,
-   e:"Entra-se com o RUMO, nunca com a marcação. O desvio obtido vale para todas as marcações enquanto o navio mantiver esse rumo."},
-  {q:"As linhas que unem pontos de mesma declinação magnética chamam-se:",
-   o:["Agônicas","Isóbaras","Isogônicas","Isóbatas"],a:2,
-   e:"Isogônicas = mesma declinação. Agônicas = declinação nula. Isóbatas = mesma profundidade."},
-  {q:"Na conversão da agulha para o verdadeiro (Rv = Rag ± Dm ± Dv), os valores a LESTE (E):",
-   o:["São subtraídos","São somados","São ignorados","Dependem da latitude"],a:1,
-   e:"Subindo (agulha → verdadeiro), o Este SOMA e o Oeste SUBTRAI. No sentido inverso, os sinais se invertem."},
-  {q:"Dm = 20° W, Rag = 085°, Dv = 5° E. O Rumo Verdadeiro é:",
-   o:["070°","110°","090°","060°"],a:0,
-   e:"Rmg = Rag ± Dv = 085 + 5 (E) = 090°. Rv = Rmg ± Dm = 090 − 20 (W) = 070°."},
-  {q:"[PSCPP 2011] Rv = 152,5°; Dm(2007) = 16°10′ W, variação 5′ W/ano; Dag = 2° E. Em 2011, o Rag é:",
-   o:["154°","167°","169°","171°"],a:1,
-   e:"Dm(2011) = 16°10′ + 5′×4 = 16°30′W = 16,5°W. Rmg = Rv + Dm(W) = 152,5 + 16,5 = 169°. Rag = Rmg − Dv(E) = 169 − 2 = 167°. Gabarito (c)."},
-  {q:"[PSCPP 2012] Rv = 045°, Dm = 15° W, Dag = 2° E, agulha giro fora. Governando pela agulha, o rumo é:",
-   o:["032°","058°","060°","075°"],a:1,
-   e:"Erro total = Dm + Dv = (−15) + (+2) = −13°. Rag = Rv − Dm − Dv = 045 + 15 − 2 = 058°. Gabarito (c)."},
-  {q:"Antes de converter um rumo, a declinação da carta deve ser:",
-   o:["Usada sempre no valor do ano-base","Atualizada pela variação anual até o ano da navegação","Ignorada se for menor que 20°","Convertida para o desvio"],a:1,
-   e:"Dm(ano) = Dm(base) ± variação × nº de anos. Só depois de atualizada é que se converte o rumo."},
-  {q:"A agulha giroscópica, comparada à magnética, tem como vantagem:",
-   o:["Dispensar energia elétrica","Apontar ao Norte Verdadeiro, independente do magnetismo","Funcionar melhor acima de 70° de latitude","Não precisar de manutenção"],a:1,
-   e:"Aponta ao Norte Verdadeiro e independe do magnetismo terrestre (mais precisa, alimenta repetidoras/radar/piloto/ECDIS). Mas exige energia e apresenta erros acima de 70° de latitude."},
-  {q:"Na determinação do desvio da giro por 'redução do triângulo', se a correção teve de ser SUBTRAÍDA, o desvio é:",
-   o:["Leste (E)","Oeste (W)","Nulo","Indeterminado"],a:1,
-   e:"Correção subtraída → desvio Oeste (W); correção somada → Leste (E). Se as LDP já cruzam num ponto, o desvio é zero."},
-  {q:"Na conversão de uma marcação da agulha (Mag) para verdadeira (Mv), o desvio a aplicar é o correspondente:",
-   o:["À própria marcação observada","Ao rumo do navio","À declinação local","Ao Norte da Giro"],a:1,
-   e:"Mv = Mag ± Dm ± Dv, sendo o Dv o do RUMO do navio — vale para todas as marcações enquanto o rumo não mudar."}
-];
-var qi=0,answered=false,hits=0,tot=0;
-function upScore(){document.getElementById('scHit').textContent=hits;document.getElementById('scTot').textContent=tot;
-  document.getElementById('scPct').textContent = tot? Math.round(100*hits/tot)+'%':'—';}
-function loadQ(){var Q=QUIZ[qi];answered=false;
-  document.getElementById('qText').textContent=(qi+1)+". "+Q.q;
-  var box=document.getElementById('qOpts');box.innerHTML="";
-  Q.o.forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){pick(i,b);};box.appendChild(b);});
-  var fb=document.getElementById('qFb');fb.className='fb';fb.textContent="";
-  document.getElementById('qCount').textContent="Questão "+(qi+1)+" de "+QUIZ.length;
-  document.getElementById('qNext').disabled=true;
-  document.getElementById('qNext').textContent=(qi>=QUIZ.length-1)?"Fim ✓":"Próxima →";}
-function pick(i,btn){if(answered)return;answered=true;var Q=QUIZ[qi];tot++;
-  document.querySelectorAll('#qOpts .opt').forEach(function(o,j){if(j===Q.a)o.classList.add('right');});
-  var fb=document.getElementById('qFb');
-  if(i===Q.a){hits++;fb.className='fb ok show';fb.innerHTML="✓ Correto. "+Q.e;}
-  else{btn.classList.add('wrong');fb.className='fb no show';fb.innerHTML="✗ "+Q.e;}
-  upScore();document.getElementById('qNext').disabled=(qi>=QUIZ.length-1);}
-function nextQ(){if(qi<QUIZ.length-1){qi++;loadQ();}}
-loadQ();upScore();
+var tm;q.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(run,120);});
+var p=new URLSearchParams(location.search).get('q');if(p){q.value=p;run();var f=document.querySelector('mark.sq');if(f)setTimeout(function(){f.scrollIntoView({block:'center'});},60);}
+})();
 </script>
 </body>
 </html>
