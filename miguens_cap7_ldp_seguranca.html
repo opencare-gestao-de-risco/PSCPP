@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>LDP de Segurança — Miguens Cap. 7 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+
+  .legend{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;margin:0 0 30px;line-height:1.9}
+  .t-nota{background:#dcefeb;color:#145c52}
+  .dot{color:#C0392B;font-weight:bold}
+  .ul{text-decoration:underline;text-decoration-color:#C0392B;text-decoration-thickness:2px}
+  .box.quad{padding:14px 16px}
+  h4.qt{margin:0 0 6px;font-family:'Trebuchet MS',sans-serif;font-size:13.5px;color:var(--verde);text-transform:none;letter-spacing:0}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw table{margin:6px 0;min-width:520px}
+  td.hlc{background:var(--amarelo)!important}
+  td.amb{background:#FBE7C0!important}
+  p.foot{font-size:13px;color:var(--mute);font-style:italic;margin:6px 0 0}
+  ul.steps{margin:6px 0 0;padding-left:20px;font-size:15px}
+  ul.steps li{margin:5px 0}
+  ul.steps li.sub{list-style:none;margin-left:6px;color:#3d5550}
+  .box.sint{font-size:14.5px;padding:12px 16px;margin:12px 0}
+  .box.sint.key{border-left:6px solid var(--ouro)}
+  .box.sint.banca{border-left:6px solid #D98E04;background:#fffaf0}
+  .box.sint.formula{border-left:6px solid var(--azul)}
+  .box.sint.nota{border-left:6px solid var(--verde2)}
+  table.gloss td:first-child{white-space:nowrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  table.gloss td:last-child{text-align:center;white-space:nowrap}
+  @media(max-width:600px){.tw table{font-size:13px}}
+.busca{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.busca input{flex:1;font-family:Georgia,serif;font-size:15px;padding:9px 14px;border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:0}
+.busca input:focus{outline:none;border-color:var(--verde2);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
+#qn{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);white-space:nowrap}
+mark.sq{background:#ffb347;color:inherit;border-radius:2px;padding:0 1px}
+.t-cob{background:#F2C879;color:#5a3d00}
+h3.dh{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--verde2);margin:18px 0 8px;border-bottom:1px solid var(--linha);padding-bottom:4px}
+.defs{display:grid;gap:12px;margin-bottom:10px}
+.def{background:var(--card);border:1px solid var(--linha);border-left:4px solid var(--verde2);border-radius:10px;padding:12px 16px;box-shadow:var(--sombra)}
+.def h4{margin:0 0 6px;font-size:16px;color:var(--verde)}
+.def p{margin:0;line-height:1.55}
+.def ul{margin:8px 0 0;padding-left:20px}
+.def li{margin:4px 0;line-height:1.5}
+h2.sec{flex-wrap:wrap;row-gap:4px}
+@media(max-width:600px){nav.toc .wrap .row{flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}nav.toc .wrap .row a{flex:0 0 auto}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">PSCPP 2027 · Navegação — Miguens · Consulta rápida</p>
+  <h1>Linhas de Posição <em>de Segurança</em></h1>
+  <p class="sub">Consulta rápida do Cap. 7: navegação de segurança, “iluminar” a carta (critério das profundidades e da distância), LDP de segurança (alinhamento, marcação de perigo, luz de setor, distância de perigo, ângulos vertical e horizontal) e sondagens como limite.</p>
+  <div class="src"><b>Fonte:</b> Miguens, Manual de Navegação da MB, Vol. I — Cap. 7 (DHN, 2ª Revisão, 2023). Consulta rápida; o caderno de leitura completo é o DOCX.</div>
+</div></header>
+<nav class="toc"><div class="wrap"><div class="busca"><input id="q" type="search" placeholder="Buscar neste caderno (ex.: ocultação, cardinal, alcance)…" aria-label="Buscar neste caderno"><span id="qn"></span></div><div class="row"><a href="#s0">7.1</a><a href="#s1">7.2</a><a href="#s2">7.3</a><a href="#s3">Glossário</a></div></div></nav>
+<main><div class="wrap">
+<div class="legend"><b>Como usar:</b> consulta rápida do capítulo — definições completas do livro, listas de opções, quadros e cálculos. O texto integral com os seus destaques está no DOCX <b>Miguens_Vol1_Cap07_Destaques_PSCPP.docx</b>.
+<span class="tag t-cob">COBRADO</span> = assunto já cobrado em prova · <span class="hl">amarelo</span> = seu destaque no PDF · <span class="dot">●</span> = seu ponto vermelho ·
+<span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span> <span class="tag t-conflito">CONFLITO</span> = divergência no livro. No glossário: ★ seu destaque · ● cobrado · ○ só menção. A busca aceita palavras sem acento.</div>
+<section class="bloco" id="s0"><h2 class="sec"><span class="n">7.1</span><span class="tt">Conceito de navegação de segurança</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Navegação de segurança</h4><p>Emprego de linhas de posição como <b>limite de segurança</b>, comum em navegação costeira e principalmente em águas restritas, permitindo ao navio passar de modo seguro próximo a perigos mesmo sem ter a posição perfeitamente determinada. Uma única LDP não define a posição, mas dá indicações úteis para a segurança.</p></div><div class="def srch"><h4>“Iluminar” a carta</h4><p>Assinalar nas cartas náuticas os contornos das áreas perigosas para o navio — tradicionalmente, hachurá-las a lápis, com cuidado para não ocultar pontos conspícuos. Os limites variam de navio para navio, conforme <b>calado, comprimento, boca e características de manobra</b>.</p></div><div class="def srch"><h4>Critérios para traçar as linhas de perigo <span class="tag t-cob">COBRADO</span></h4><p>Dois critérios podem ser adotados:</p><ul><li><b>Critério das profundidades</b> — linha de perigo com base numa profundidade igual ao <b>calado do navio mais a margem de segurança</b> estabelecida (ou <b>15% do calado</b>, quando esta percentagem for maior que a margem). É a lazeira mínima de água abaixo da quilha; a margem considera maré, squat e vagas (ex.: calado 14 m + 2 m → isóbata de 16 m).</li><li><b>Critério da distância ao perigo mais próximo</b> — o Comandante estipula a menor distância a passar dos perigos e a linha une os pontos a essa distância (ex.: 2 milhas dos perigos ao largo de Alcatrazes).</li><li>No ECDIS, pode-se exibir só as profundidades de interesse, destacando as NON GO AREAS.</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Critério das profundidades — profundidade-base da linha de perigo</h4><ul class="steps"><li><b>Profundidade-base = calado + maior entre (margem de segurança) e (15% do calado)</b>.</li><li class="sub">Exemplo do livro: calado 14 m, margem 2 m; 15% × 14 = 2,1 m → maior é 2,1 m → 16,1 m (o livro arredonda e traça a isóbata de <b>16 m</b>).</li><li class="sub">Calado 10 m, margem 2 m: 15% × 10 = 1,5 m &lt; 2 m → base = <b>12 m</b>. — ilustrativo</li><li class="sub">Calado 20 m, margem 2 m: 15% × 20 = 3 m &gt; 2 m → base = <b>23 m</b>. — ilustrativo</li><li>A margem considera maré, squat e vagas; o Comandante pode aumentá-la.</li></ul></div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> No exemplo do livro (calado 14 m, margem 2 m), 15% do calado é 2,1 m, maior que 2 m; pela regra a base seria 16,1 m, mas o livro traça 16 m. Diferença desprezível na prática — na prova, aplicar a regra “o que for maior”.</div></section><section class="bloco" id="s1"><h2 class="sec"><span class="n">7.2</span><span class="tt">Linhas de posição de segurança</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>LDP de segurança — tipos</h4><p>Úteis quando é preciso passar a salvo de perigos sem posição precisa. As LDP de segurança podem ser:</p><ul><li><b>Alinhamentos</b> — as mais precisas LDP de segurança;</li><li><b>Marcação de segurança</b> (ou de perigo);</li><li><b>Distância de perigo</b>;</li><li><b>Ângulo vertical</b> ou <b>ângulo horizontal</b> de perigo.</li></ul></div><div class="def srch"><h4>Marcação de segurança (de perigo)</h4><p>Traça-se, do ponto de referência, uma tangente ao limite da área perigosa. A marcação de segurança é <b>sempre determinada do navio para o ponto de referência</b>, isto é, do largo para terra (nunca a recíproca). Com perigo de um só bordo, marcações de um lado do valor indicam águas seguras e do outro, perigo; com perigos nos dois bordos, mantém-se a marcação entre os dois valores-limite, corrigindo o rumo conforme se aproxima de cada um.</p></div><div class="def srch"><h4>Luzes de setor</h4><p>Delimitam limites de segurança em águas restritas, com advertência “sim-não”. O canal é coberto por um setor estreito <b>branco</b>; ao se aproximar, manter o setor <b>verde a bombordo</b> e o <b>encarnado a boreste</b>; entrando num setor colorido, voltar imediatamente ao branco. Menos sensível que um alinhamento, mas requer <b>uma única estrutura</b> (o alinhamento requer duas) e <b>pode indicar limites navegáveis</b>, o que o alinhamento não faz.</p></div><div class="def srch"><h4>Distância de perigo</h4><p>Para passar entre dois perigos A e B próximos de um ponto C, traçam-se as distâncias de perigo dA e dB; o navio deve manter a distância a C entre esses valores, verificando-a seguidamente até ultrapassar os perigos.</p></div><div class="def srch"><h4>Ângulo vertical de segurança</h4><p>Um ângulo vertical medido para um objeto de altitude conhecida determina uma circunferência de raio <b>d = h · cotg α</b> (ou tg α = h/d). Para passar entre dois perigos, calculam-se αA e αB; ângulo <b>aumentando</b> → aproximando-se do objeto; ângulo <b>diminuindo</b> → afastando-se. Medido com <b>sextante</b>.</p></div><div class="def srch"><h4>Ângulo horizontal de segurança</h4><p>Ângulo entre dois pontos notáveis (segmento capaz) calculado para os pontos mais salientes dos perigos; navega-se mantendo o ângulo medido entre os valores-limite α e β. Pode ser obtido com <b>sextante</b> ou pela <b>diferença de marcações simultâneas</b> (verdadeiras, relativas ou da agulha).</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box quad srch-t"><h4 class="qt">Quadro <span class="tag t-decorar">DECORAR</span> — LDP de segurança</h4><div class="tw"><table><thead><tr><th>LDP de segurança</th><th>Como funciona</th><th>Instrumento</th><th>Ponto-chave</th></tr></thead><tbody><tr class="srow"><td>Alinhamento</td><td>Manter a proa (ou popa) no alinhamento</td><td>Olho nu</td><td><b>A mais precisa</b></td></tr><tr class="srow"><td>Marcação de perigo</td><td>Tangente do ponto de referência ao limite do perigo; marcação maior/menor indica seguro/perigoso</td><td>Agulha</td><td>Sempre <b>do navio para o ponto</b> (do largo para terra), nunca a recíproca</td></tr><tr class="srow"><td>Luz de setor</td><td>Setor branco no canal; verde a BB e encarnado a BE ao se aproximar</td><td>Olho nu</td><td>Uma só estrutura; indica limites; menos sensível que alinhamento</td></tr><tr class="srow"><td>Distância de perigo</td><td>Manter a distância ao ponto entre dA e dB</td><td>Radar</td><td>Conferir seguidamente</td></tr><tr class="srow"><td>Ângulo vertical</td><td>tg α = h/d; círculos de distância a objeto de altitude conhecida</td><td>Sextante</td><td>Ângulo maior = mais perto do objeto</td></tr><tr class="srow"><td>Ângulo horizontal</td><td>Ângulo entre dois pontos notáveis (segmento capaz)</td><td>Sextante ou diferença de marcações simultâneas</td><td>Ver Cap. 4</td></tr><tr class="srow"><td>Isóbata / sondagem</td><td>Profundidade mínima segura; alarme do ecobatímetro</td><td>Ecobatímetro</td><td>Importante com baixa visibilidade</td></tr></tbody></table></div></div><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Ângulo vertical de segurança</h4><ul class="steps"><li>Objeto de altitude h e distância d: <b>d = h · cotg α</b> ⇔ <b>tg α = h / d</b>.</li><li class="sub">Ilustrativo: farol de 60 m; perigo exige passar a 1.000 m → tg α = 60/1.000 = 0,06 → α ≈ <b>3,4°</b> (3°26’).</li><li class="sub">Ilustrativo: passar a no máximo 2.000 m do mesmo farol → tg α = 0,03 → α ≈ <b>1,7°</b> (1°43’).</li><li>Entre dois perigos (dA e dB): manter o ângulo entre αA e αB; ângulo crescendo = aproximando-se do farol.</li><li>h deve estar na mesma unidade de d (o livro usa altitude do objeto; ver também a Tábua II do Vol. III).</li></ul></div></section><section class="bloco" id="s2"><h2 class="sec"><span class="n">7.3</span><span class="tt">Uso de sondagens como limite de segurança</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Sondagens como limite de segurança</h4><p>Em navegação de segurança, particularmente com <b>baixa visibilidade</b>, o uso de sondagens torna-se importante: comparar as profundidades da carta com as do ecobatímetro pode ser o único recurso para demandar águas seguras. O <b>alarme de baixa profundidade</b> do ecobatímetro, ajustado à profundidade mínima segura, é muito conveniente.</p></div></div><h3 class="dh">Quadros e sínteses</h3></section><section class="bloco" id="s3"><h2 class="sec"><span class="tt">Glossário completo — Miguens, Vol. I, Cap. 7</span></h2><div class="box quad srch-t"><div class="tw"><table class="gloss"><thead><tr><th>Item</th><th>Termo</th><th>Definição condensada</th><th>Marca</th></tr></thead><tbody><tr class="srow"><td>7.1</td><td>Navegação de segurança</td><td>Usar LDP como limite para passar safo de perigos sem posição perfeita.</td><td>○</td></tr><tr class="srow"><td>7.1</td><td>“Iluminar” a carta</td><td>Hachurar a lápis os contornos das áreas perigosas para o navio (calado, comprimento, boca, manobra).</td><td>★</td></tr><tr class="srow"><td>7.1</td><td>Critérios</td><td>Profundidades e distância ao perigo mais próximo.</td><td>★</td></tr><tr class="srow"><td>7.1</td><td>Critério das profundidades</td><td>Calado + margem de segurança (ou 15% do calado, se maior).</td><td>★ ●</td></tr><tr class="srow"><td>7.1</td><td>Lazeira mínima</td><td>Água que se deseja ter abaixo da quilha.</td><td>○</td></tr><tr class="srow"><td>7.1</td><td>Critério da distância</td><td>Menor distância aos perigos fixada pelo Comandante.</td><td>★</td></tr><tr class="srow"><td>7.2</td><td>LDP de segurança</td><td>Alinhamento, marcação de perigo, distância de perigo, ângulo vertical ou horizontal.</td><td>★</td></tr><tr class="srow"><td>7.2</td><td>Alinhamento</td><td>A mais precisa LDP de segurança.</td><td>○</td></tr><tr class="srow"><td>7.2</td><td>Marcação de segurança</td><td>Do navio para o ponto (do largo para terra); tangente ao limite do perigo.</td><td>★</td></tr><tr class="srow"><td>7.2</td><td>Luz de setor</td><td>Uma estrutura; indica limites; branco no canal, verde a BB, encarnado a BE.</td><td>★</td></tr><tr class="srow"><td>7.2</td><td>Distância de perigo</td><td>Manter a distância ao ponto entre dA e dB.</td><td>○</td></tr><tr class="srow"><td>7.2</td><td>Ângulo vertical de segurança</td><td>tg α = h/d; medido com sextante.</td><td>★</td></tr><tr class="srow"><td>7.2</td><td>Ângulo horizontal de segurança</td><td>Sextante ou diferença de marcações simultâneas.</td><td>★</td></tr><tr class="srow"><td>7.3</td><td>Sondagens</td><td>Limite de segurança, sobretudo com baixa visibilidade; alarme do ecobatímetro.</td><td>★</td></tr></tbody></table></div><p class="foot">Marca: ★ seu destaque · ● assunto cobrado em prova · ○ sem marcação, só menção.</p></div></section>
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+</div></main>
+<footer><div class="wrap">PSCPP 2027 · LDP de Segurança — Miguens Cap. 7 · <b>Capital Sereno</b> · Navegação — Miguens.</div></footer>
+<script>
+(function(){
+var norm=function(x){return x.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
+var q=document.getElementById('q'), qn=document.getElementById('qn');
+function unmark(){document.querySelectorAll('mark.sq').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+function markIn(el,t){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[],n;while(n=w.nextNode())ns.push(n);
+ ns.forEach(function(n){var s=n.nodeValue,ns2=norm(s),i=ns2.indexOf(t);if(i<0)return;var f=document.createDocumentFragment(),last=0;
+  while(i>=0){f.appendChild(document.createTextNode(s.slice(last,i)));var m=document.createElement('mark');m.className='sq';m.textContent=s.slice(i,i+t.length);f.appendChild(m);last=i+t.length;i=ns2.indexOf(t,last);}
+  f.appendChild(document.createTextNode(s.slice(last)));n.parentNode.replaceChild(f,n);});}
+function run(){
+ unmark(); var t=norm(q.value.trim()), hits=0;
+ document.querySelectorAll('section.bloco').forEach(function(sec){
+  if(!t){sec.style.display='';sec.querySelectorAll('.srch,.srch-t,.srow,h3').forEach(function(e){e.style.display='';});return;}
+  var any=false;
+  var titleHit=norm(sec.querySelector('h2').textContent).indexOf(t)>=0;
+  sec.querySelectorAll('.srch').forEach(function(e){var m=norm(e.textContent).indexOf(t)>=0,ok=titleHit||m;e.style.display=ok?'':'none';if(ok)any=true;if(m){hits++;markIn(e,t);}});
+  sec.querySelectorAll('.srch-t').forEach(function(b){var cap=b.querySelector('.qt'),capHit=titleHit||(cap&&norm(cap.textContent).indexOf(t)>=0),rowsOk=0;
+   b.querySelectorAll('tr.srow').forEach(function(r){var m=norm(r.textContent).indexOf(t)>=0,ok=capHit||m;r.style.display=ok?'':'none';if(ok)rowsOk++;if(m){hits++;markIn(r,t);}});
+   if(cap&&norm(cap.textContent).indexOf(t)>=0){hits++;markIn(cap,t);}
+   var ok=rowsOk>0;b.style.display=ok?'':'none';if(ok)any=true;});
+  sec.querySelectorAll('h3').forEach(function(h){h.style.display=t?'none':'';});
+  if(titleHit){any=true;hits++;markIn(sec.querySelector('h2'),t);}
+  sec.style.display=any?'':'none';
+ });
+ qn.textContent=t?(hits?hits+' resultado'+(hits>1?'s':''):'nada encontrado'):'';
+}
+var tm;q.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(run,120);});
+var p=new URLSearchParams(location.search).get('q');if(p){q.value=p;run();var f=document.querySelector('mark.sq');if(f)setTimeout(function(){f.scrollIntoView({block:'center'});},60);}
+})();
+</script>
+</body>
+</html>

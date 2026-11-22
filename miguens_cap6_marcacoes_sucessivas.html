@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D3D36">
+<title>Marcações Sucessivas — Miguens Cap. 6 · PSCPP</title>
+<style>
+  :root{
+    --verde:#0D3D36; --verde2:#1A7A6E; --ouro:#C8A84B; --creme:#F4EFE2;
+    --card:#FCFAF4; --linha:#E5DCC6; --tinta:#16302B; --mute:#7a6f55;
+    --amarelo:#FFF1A6; --ambar:#F2C879; --roxo:#6B4E8E; --vermelho:#9E3B2E;
+    --azul:#2C5F8A; --mar:#3a7bb5; --verde-ok:#2E7D52;
+    --sombra:0 2px 14px rgba(13,61,54,.10); --sombra2:0 10px 34px rgba(13,61,54,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(200,168,75,.25)}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:Georgia,'Times New Roman',serif;line-height:1.62;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--verde2)}
+
+  header.hero{background:
+      radial-gradient(circle at 85% 12%,rgba(200,168,75,.20),transparent 45%),
+      linear-gradient(160deg,var(--verde) 0%,#0a322c 62%,#082822 100%);
+    color:var(--creme);padding:42px 0 36px;border-bottom:4px solid var(--ouro)}
+  .eyebrow{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:bold;margin:0 0 12px}
+  .hero h1{font-size:32px;line-height:1.14;margin:0 0 10px;font-weight:normal;letter-spacing:-.4px}
+  .hero h1 em{color:var(--ouro);font-style:normal}
+  .hero .sub{font-size:17px;color:#cfe3df;max-width:730px;margin:0 0 18px}
+  .hero .src{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;color:#a9c8c1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:6px}
+  .hero .src b{color:var(--ouro)}
+
+  nav.toc{position:sticky;top:0;z-index:40;background:rgba(244,239,226,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:10px 0}
+  nav.toc .row{display:flex;gap:7px;flex-wrap:wrap}
+  nav.toc a{font-family:'Trebuchet MS',sans-serif;font-size:12.5px;font-weight:bold;text-decoration:none;color:var(--verde2);
+    border:1.5px solid var(--verde2);border-radius:20px;padding:6px 12px;transition:.15s}
+  nav.toc a:hover{background:var(--verde2);color:#fff}
+
+  main{padding:34px 0 70px}
+  section.bloco{margin-bottom:42px;scroll-margin-top:64px}
+  h2.sec{font-size:25px;color:var(--verde);margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+  h2.sec .n{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;color:var(--ouro);letter-spacing:.10em;white-space:nowrap}
+  h2.sec + .lede{color:var(--mute);font-size:15.5px;margin:0 0 20px;border-bottom:2px solid var(--linha);padding-bottom:14px}
+  h3{color:var(--verde2);font-size:18px;margin:24px 0 8px}
+  p{margin:11px 0}
+
+  .tag{font-family:'Trebuchet MS',sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:.05em;padding:2px 9px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .t-banca{background:var(--verde);color:var(--ouro)}
+  .t-decorar{background:#ece2ff;color:#4b2e7a}
+  .t-calc{background:#d7e7ff;color:#1b3a6b}
+  .t-conflito{background:#ffdcd4;color:#7a241a}
+
+  .hl{background:linear-gradient(transparent 58%,var(--amarelo) 58%);padding:0 1px}
+  .hl-amb{background:linear-gradient(transparent 58%,var(--ambar) 58%);padding:0 1px}
+
+  .box{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:18px 20px;margin:18px 0;box-shadow:var(--sombra)}
+  .box.formula{border-left:6px solid var(--azul)}
+  .box.trap{border-left:6px solid var(--vermelho);background:#fdf3f1}
+  .box.key{border-left:6px solid var(--ouro)}
+  .box h4{margin:0 0 8px;font-family:'Trebuchet MS',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde)}
+  .box.trap h4{color:var(--vermelho)}
+
+  .eq{font-family:'Cambria Math','Times New Roman',serif;font-size:19px;text-align:center;background:#fff;border:1px solid var(--linha);border-radius:8px;padding:14px 10px;margin:10px 0;overflow-x:auto}
+  .eq .lbl{display:block;font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--mute);letter-spacing:.08em;margin-top:6px}
+  .vars{font-size:14px;color:#4a5f59;margin:8px 0 0}
+  .vars b{font-family:'Cambria Math',serif;color:var(--verde)}
+  sub,sup{font-size:.72em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--verde);color:var(--creme);font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  tr:nth-child(even) td{background:#faf7ee}
+  td.center,th.center{text-align:center}
+  td.sym{font-family:'Cambria Math',serif;font-weight:bold;color:var(--verde);text-align:center;white-space:nowrap}
+    border-radius:8px;padding:11px 14px;margin:7px 0;cursor:pointer;transition:.15s;color:var(--tinta)}
+
+  details.pscpp{background:var(--verde);color:var(--creme);border-radius:12px;margin:22px 0;padding:0 20px;font-family:'Trebuchet MS',sans-serif}
+  details.pscpp summary{cursor:pointer;padding:15px 0;font-weight:bold;list-style:none;font-size:15px}
+  details.pscpp summary::-webkit-details-marker{display:none}
+  details.pscpp summary::before{content:"⚓ ";color:var(--ouro)}
+  details.pscpp[open] summary{border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+  details.pscpp ul{margin:0 0 16px;padding-left:20px;font-size:14px}
+  details.pscpp li{margin:7px 0}
+  details.pscpp b{color:var(--ouro)}
+
+  .related{background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;font-size:13.5px;font-family:'Trebuchet MS',sans-serif;margin:18px 0}
+  .related a{font-weight:bold}
+  .backlink{display:inline-block;margin:8px 0 0;font-family:'Trebuchet MS',sans-serif;font-size:13px;font-weight:bold;color:var(--verde2);text-decoration:none}
+
+  footer{background:var(--verde);color:#bcd5cf;padding:26px 0;font-family:'Trebuchet MS',sans-serif;font-size:12.5px;margin-top:30px}
+  footer b{color:var(--ouro)}
+  @media(max-width:600px){.hero h1{font-size:23px}.eq{font-size:15px}}
+
+  .legend{font-family:'Trebuchet MS',sans-serif;font-size:13px;background:#eef5f3;border:1px solid #cfe3df;border-radius:10px;padding:12px 16px;margin:0 0 30px;line-height:1.9}
+  .t-nota{background:#dcefeb;color:#145c52}
+  .dot{color:#C0392B;font-weight:bold}
+  .ul{text-decoration:underline;text-decoration-color:#C0392B;text-decoration-thickness:2px}
+  .box.quad{padding:14px 16px}
+  h4.qt{margin:0 0 6px;font-family:'Trebuchet MS',sans-serif;font-size:13.5px;color:var(--verde);text-transform:none;letter-spacing:0}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw table{margin:6px 0;min-width:520px}
+  td.hlc{background:var(--amarelo)!important}
+  td.amb{background:#FBE7C0!important}
+  p.foot{font-size:13px;color:var(--mute);font-style:italic;margin:6px 0 0}
+  ul.steps{margin:6px 0 0;padding-left:20px;font-size:15px}
+  ul.steps li{margin:5px 0}
+  ul.steps li.sub{list-style:none;margin-left:6px;color:#3d5550}
+  .box.sint{font-size:14.5px;padding:12px 16px;margin:12px 0}
+  .box.sint.key{border-left:6px solid var(--ouro)}
+  .box.sint.banca{border-left:6px solid #D98E04;background:#fffaf0}
+  .box.sint.formula{border-left:6px solid var(--azul)}
+  .box.sint.nota{border-left:6px solid var(--verde2)}
+  table.gloss td:first-child{white-space:nowrap;font-family:'Trebuchet MS',sans-serif;font-size:12.5px}
+  table.gloss td:last-child{text-align:center;white-space:nowrap}
+  @media(max-width:600px){.tw table{font-size:13px}}
+.busca{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.busca input{flex:1;font-family:Georgia,serif;font-size:15px;padding:9px 14px;border:1.5px solid #d8cfb4;border-radius:10px;background:#fff;color:var(--tinta);min-width:0}
+.busca input:focus{outline:none;border-color:var(--verde2);box-shadow:0 0 0 3px rgba(26,122,110,.12)}
+#qn{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--mute);white-space:nowrap}
+mark.sq{background:#ffb347;color:inherit;border-radius:2px;padding:0 1px}
+.t-cob{background:#F2C879;color:#5a3d00}
+h3.dh{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--verde2);margin:18px 0 8px;border-bottom:1px solid var(--linha);padding-bottom:4px}
+.defs{display:grid;gap:12px;margin-bottom:10px}
+.def{background:var(--card);border:1px solid var(--linha);border-left:4px solid var(--verde2);border-radius:10px;padding:12px 16px;box-shadow:var(--sombra)}
+.def h4{margin:0 0 6px;font-size:16px;color:var(--verde)}
+.def p{margin:0;line-height:1.55}
+.def ul{margin:8px 0 0;padding-left:20px}
+.def li{margin:4px 0;line-height:1.5}
+h2.sec{flex-wrap:wrap;row-gap:4px}
+@media(max-width:600px){nav.toc .wrap .row{flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}nav.toc .wrap .row a{flex:0 0 auto}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">PSCPP 2027 · Navegação — Miguens · Consulta rápida</p>
+  <h1>Posição por <em>Marcações Sucessivas</em></h1>
+  <p class="sub">Consulta rápida do Cap. 6: LDP sucessivas, transporte de linha de posição, marcações do mesmo objeto, de objetos diferentes e com corrente, marcações duplas, Série de Traub e as fórmulas de distância.</p>
+  <div class="src"><b>Fonte:</b> Miguens, Manual de Navegação da MB, Vol. I — Cap. 6 (DHN, 2ª Revisão, 2023). Consulta rápida; o caderno de leitura completo é o DOCX.</div>
+</div></header>
+<nav class="toc"><div class="wrap"><div class="busca"><input id="q" type="search" placeholder="Buscar neste caderno (ex.: ocultação, cardinal, alcance)…" aria-label="Buscar neste caderno"><span id="qn"></span></div><div class="row"><a href="#s0">6.1</a><a href="#s1">6.2</a><a href="#s2">6.3</a><a href="#s3">Glossário</a></div></div></nav>
+<main><div class="wrap">
+<div class="legend"><b>Como usar:</b> consulta rápida do capítulo — definições completas do livro, listas de opções, quadros e cálculos. O texto integral com os seus destaques está no DOCX <b>Miguens_Vol1_Cap06_Destaques_PSCPP.docx</b>.
+<span class="tag t-cob">COBRADO</span> = assunto já cobrado em prova · <span class="hl">amarelo</span> = seu destaque no PDF · <span class="dot">●</span> = seu ponto vermelho ·
+<span class="tag t-decorar">DECORAR</span> <span class="tag t-calc">CALCULO</span> <span class="tag t-conflito">CONFLITO</span> = divergência no livro. No glossário: ★ seu destaque · ● cobrado · ○ só menção. A busca aceita palavras sem acento.</div>
+<section class="bloco" id="s0"><h2 class="sec"><span class="n">6.1</span><span class="tt">Conceitos preliminares</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Posição por LDP sucessivas</h4><p>Quando só é possível identificar, de cada vez, um único ponto notável representado na carta, determina-se a posição com duas LDP obtidas em instantes diferentes, com intervalo de tempo considerável entre elas. Conhecendo o intervalo, a velocidade e o rumo verdadeiro, calcula-se a distância percorrida e <b>transporta-se a primeira LDP para o instante da segunda</b>. Usa os conceitos da navegação estimada.</p></div></div></section><section class="bloco" id="s1"><h2 class="sec"><span class="n">6.2</span><span class="tt">Transporte de uma linha de posição</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Transporte de uma LDP</h4><p>Para o transporte de uma linha de posição, é necessário conhecer o <b>rumo verdadeiro</b> e a <b>distância navegada</b> no intervalo (t’ – t), obtida pelo odômetro ou pelo produto da velocidade pelo tempo. Se no instante t o navio estava sobre uma LDP e navegou a distância d no rumo R, em t’ estará sobre a mesma LDP deslocada de d segundo R. Identifica-se repetindo a identificação original e anotando t’ após t (ex.: 1300/1330).</p></div><div class="def srch"><h4>Limite do transporte</h4><p>O transporte de linhas de posição é um <b>processo estimado</b> (corrente, vento, mar e timoneiro alteram rumo e velocidade), devendo ser evitado, na navegação costeira, transporte de LDP com diferenças de tempo superiores a <b>30 minutos</b>.</p></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Transporte de uma reta de marcação — exemplo do livro (Fig. 6.1)</h4><ul class="steps"><li>Às 1300: rumo 000°, vel 10 nós, odômetro 0107,0; marcou a Caixa d’Água “A” aos 284°. Às 1330: odômetro 0112,0.</li><li class="sub">Distância navegada = 0112,0 − 0107,0 = <b>5 milhas</b> (= 10 nós × 0,5 h).</li><li class="sub">Por qualquer ponto da LDP de 1300, traçar reta no rumo 000° e marcar 5 milhas (ponto A’).</li><li class="sub">Por A’, traçar paralela à marcação de 1300 → LDP “A” de <b>1300/1330</b> (transportada).</li><li>O alinhamento transporta-se do mesmo modo. Limite prático: Δt ≤ <b>30 min</b>.</li></ul></div></section><section class="bloco" id="s2"><h2 class="sec"><span class="n">6.3</span><span class="tt">Posição por marcações sucessivas</span> <span class="tag t-cob">COBRADO</span></h2><h3 class="dh">Definições</h3><div class="defs"><div class="def srch"><h4>Marcações sucessivas — as três situações</h4><p>As LDP usadas são retas de marcação transportadas ou retas de marcações polares que satisfazem condições especiais. Três situações:</p><ul><li>duas marcações de um <b>mesmo objeto</b>, com intervalo de tempo entre elas;</li><li>duas marcações de <b>objetos diferentes</b>, com intervalo de tempo entre elas; e</li><li>uma <b>série de marcações</b> de um mesmo objeto.</li></ul></div><div class="def srch"><h4>Duas marcações de um mesmo objeto</h4><p>A posição no instante da segunda observação é obtida transportando-se a primeira LDP para o instante da segunda; a interseção da segunda LDP com a primeira transportada é a posição. Observações:</p><ul><li>normalmente não se considera a corrente — evitar intervalos superiores a <b>30 minutos</b>; processo aproximado, melhor que a estimada pura e menos preciso que LDP simultâneas;</li><li>melhores resultados com uma posição observada próxima da primeira marcação e em área de corrente pouco significativa;</li><li>com mudança de rumo e/ou velocidade, unir as posições estimadas dos dois instantes e transportar paralelamente a essa linha;</li><li>conhecida a corrente, aplicá-la entre as duas LDP (estimada corrigida) para aumentar a precisão.</li></ul></div><div class="def srch"><h4>Marcações de objetos diferentes</h4><p>Se dois pontos notáveis não podem ser observados simultaneamente, transporta-se a LDP do primeiro, no rumo verdadeiro e pela distância navegada, até o instante da marcação do segundo; o cruzamento é a posição.</p></div><div class="def srch"><h4>Marcações duplas</h4><p>Duas marcações polares em que a segunda é o <b>dobro</b> da primeira (α e 2α): a distância do navio ao ponto no instante da segunda marcação é <b>igual à distância percorrida</b> entre as marcações (triângulo isósceles). Pares usuais: 22,5°/45°, 30°/60° e 45°/90°. O par <b>45°/90°</b> (BE ou BB) é muito usado: a distância navegada é igual à <b>distância pelo través</b>.</p></div><div class="def srch"><h4>Série de Traub <span class="tag t-cob">COBRADO</span></h4><p>Sequência de <b>marcações polares</b> de um mesmo ponto, espaçadas igualmente ao longo da derrota de uma distância d, tomadas em intervalos de tempo iguais, que permitem obter a posição na marcação polar 090° à distância <b>2d</b>. Valores (arredondados): <b>14°, 16°, 18°, 22°, 27°, 34°, 45°, 63° e 90°</b>.</p><ul><li>as distâncias navegadas entre marcações consecutivas são <b>iguais</b>;</li><li>a distância pelo través é o <b>dobro</b> da distância navegada entre duas marcações consecutivas;</li><li>é pouco usada em <b>veleiros e pequenas embarcações</b>, pela menor precisão na leitura das agulhas;</li><li>havendo corrente, <b>não serve</b> para distâncias e posições, mas indica a corrente: intervalos <b>decrescentes</b> → corrente empurrando o navio para o ponto marcado; intervalos <b>crescentes</b> → corrente afastando o navio do ponto.</li></ul></div><div class="def srch"><h4>Fórmulas das marcações sucessivas</h4><p>Com duas marcações polares Mp1 e Mp2 do mesmo objeto e a distância d navegada entre elas:</p><ul><li>distância na 2ª marcação: d2 = d · sen Mp1 / sen (Mp2 − Mp1) (no livro o fator d foi omitido por erro);</li><li>distância pelo través: dt = d / (cotg Mp1 − cotg Mp2);</li><li>distância a navegar até o través: d’ = d · sen Mp1 · cos Mp2 / sen (Mp2 − Mp1).</li></ul></div></div><h3 class="dh">Quadros e sínteses</h3><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Marcações sucessivas — os exemplos do livro</h4><ul class="steps"><li><b>Mesmo objeto</b> (Fig. 6.3): rumo 090°, vel 12 nós; Torre marcada às 1805 (odômetro 0120,0) e às 1830 (0125,0) → d = 5 milhas; transporta-se a LDP de 1805 por 5 milhas no rumo 090°; o cruzamento com a LDP de 1830 é a posição de 1830.</li><li><b>Com corrente</b> (Fig. 6.5): rumo 095°, vel 12; corrente 190°/3,0 nós; tanque aos 020° às 1215 (0310,5) e aos 330° às 1245 (0316,5).</li><li class="sub">Aplicar a corrente de 30 min (1,5 milha para 190°) à estimada de 1245 → estimada corrigida (EC).</li><li class="sub">Unir a estimada de 1215 à EC de 1245; transportar a LDP de 1215 paralelamente a essa linha, pela distância entre as duas; cruzar com a LDP de 1245.</li><li><b>Objetos diferentes</b> (Fig. 6.6): rumo 195°, vel 10; farol aos 270° às 0900; monumento aos 247° às 0930 → transportar a LDP do farol 5 milhas no rumo 195° e cruzar com a do monumento.</li></ul></div><div class="box quad srch-t"><h4 class="qt">Quadro <span class="tag t-decorar">DECORAR</span> — Marcações duplas e Série de Traub</h4><div class="tw"><table><thead><tr><th>Caso</th><th>Marcações polares</th><th>Resultado</th></tr></thead><tbody><tr class="srow"><td>Marcações duplas</td><td>α e 2α (22,5°/45°, 30°/60°, <b>45°/90°</b>)</td><td>Distância ao objeto na 2ª marcação = distância navegada entre as marcações (triângulo isósceles)</td></tr><tr class="srow"><td>Caso 45°/90°</td><td>45° e 90° (BE ou BB)</td><td>Distância navegada = <b>distância pelo través</b></td></tr><tr class="srow"><td>Série de Traub</td><td>14°, 16°, 18°, 22°, 27°, 34°, 45°, 63°, 90°</td><td>Intervalos iguais de distância d; distância pelo través = <b>2d</b></td></tr><tr class="srow"><td>Traub com corrente</td><td>Mesma série</td><td>Não dá distância nem posição; intervalos <b>decrescentes</b> → corrente empurra para o objeto; <b>crescentes</b> → afasta</td></tr></tbody></table></div><p class="foot">Pares sucessivos da Série de Traub: 14°/18° · 16°/22° · 18°/27° · 22°/34° · 27°/45° · 34°/63° · 45°/90°.</p></div><div class="box formula srch"><h4><span class="tag t-calc">CALCULO</span> Fórmulas das marcações sucessivas (pp. 6-9) e os exemplos do livro</h4><ul class="steps"><li>d = distância navegada entre Mp1 e Mp2 (odômetro ou vel × tempo).</li><li class="sub">Distância na 2ª marcação: <b>d2 = d · sen Mp1 / sen (Mp2 − Mp1)</b></li><li class="sub">Distância pelo través: <b>dt = d / (cotg Mp1 − cotg Mp2)</b></li><li class="sub">Distância a navegar até o través: <b>d’ = d · sen Mp1 · cos Mp2 / sen (Mp2 − Mp1)</b></li><li><b>Marcações duplas</b> (Fig. 6.9): rumo 090°, vel 15; antena a Mp 030° BB às 1600 (0410,0) e a Mp 060° BB às 1622 (0415,5) → d2 = 5,5 milhas na marcação 030°. Conferência: 15 nós × 22 min = 5,5 milhas.</li><li><b>Série de Traub</b> (Fig. 6.12): rumo 206°, vel 15,5; chaminé a 22°, 27°, 34°, 45° BE às 1008, 1017, 1026, 1035 (Δt = 9 min).</li><li class="sub">d = 15,5 × 9/60 = <b>2,325 milhas</b>; dt = 2d = 4,65 ≈ <b>4,7 milhas</b>.</li><li class="sub">Faltam 63° e 90° → mais 2d = <b>4,7 milhas</b> e 2 × 9 = 18 min → través às <b>1053</b>.</li><li class="sub">Conferência pela fórmula: dt = 2,325 / (cotg 22° − cotg 27°) = 2,325 / (2,475 − 1,963) ≈ 4,5 milhas (valores arredondados da série).</li></ul></div><div class="box sint trap srch"><span class="tag t-conflito">CONFLITO</span> No livro (p. 6-9) a fórmula de d2 aparece como “sen Mp1 / sen (Mp2 − Mp1)”, <b>sem o fator d</b>. O correto é <b>d2 = d · sen Mp1 / sen (Mp2 − Mp1)</b> (lei dos senos); confira com o d’, que traz o d.</div></section><section class="bloco" id="s3"><h2 class="sec"><span class="tt">Glossário completo — Miguens, Vol. I, Cap. 6</span></h2><div class="box quad srch-t"><div class="tw"><table class="gloss"><thead><tr><th>Item</th><th>Termo</th><th>Definição condensada</th><th>Marca</th></tr></thead><tbody><tr class="srow"><td>6.1</td><td>LDP sucessivas</td><td>Duas LDP com intervalo de tempo considerável; transporta-se a primeira para o instante da segunda.</td><td>○</td></tr><tr class="srow"><td>6.2</td><td>Transporte de LDP</td><td>Exige rumo verdadeiro e distância navegada (odômetro ou vel × tempo).</td><td>★</td></tr><tr class="srow"><td>6.2</td><td>Limite do transporte</td><td>Processo estimado; evitar Δt &gt; 30 min na navegação costeira.</td><td>★</td></tr><tr class="srow"><td>6.3</td><td>LDP das marcações sucessivas</td><td>Retas transportadas ou marcações polares com condições especiais.</td><td>★</td></tr><tr class="srow"><td>6.3</td><td>Três situações</td><td>Duas do mesmo objeto; duas de objetos diferentes; série do mesmo objeto.</td><td>★</td></tr><tr class="srow"><td>6.3</td><td>Precisão</td><td>Melhor que a estimada pura, pior que LDP simultâneas.</td><td>○</td></tr><tr class="srow"><td>6.3</td><td>Melhores resultados</td><td>Posição observada próxima e pouca corrente.</td><td>★</td></tr><tr class="srow"><td>6.3</td><td>Mudança de rumo ou velocidade</td><td>Unir as posições estimadas dos dois instantes e transportar paralelamente.</td><td>★</td></tr><tr class="srow"><td>6.3</td><td>Com corrente conhecida</td><td>Aplicá-la entre as LDP (estimada corrigida).</td><td>★</td></tr><tr class="srow"><td>6.3</td><td>Marcações duplas</td><td>α e 2α: distância na 2ª = distância navegada.</td><td>★</td></tr><tr class="srow"><td>6.3</td><td>45°/90°</td><td>Distância navegada = distância pelo través.</td><td>★</td></tr><tr class="srow"><td>6.3</td><td>Série de Traub</td><td>14…90°; distâncias iguais d; distância pelo través 2d.</td><td>● ★</td></tr><tr class="srow"><td>6.3</td><td>Traub e pequenas embarcações</td><td>Pouco usada: agulhas menos precisas.</td><td>★ ●</td></tr><tr class="srow"><td>6.3</td><td>Traub com corrente</td><td>Não dá posição; intervalos decrescentes → corrente para o objeto; crescentes → afasta.</td><td>★ ●</td></tr><tr class="srow"><td>6.3</td><td>Fórmulas</td><td>d2 = d sen Mp1/sen(Mp2−Mp1); dt = d/(cotg Mp1 − cotg Mp2); d’ = d sen Mp1 cos Mp2/sen(Mp2−Mp1).</td><td>○</td></tr></tbody></table></div><p class="foot">Marca: ★ seu destaque · ● assunto cobrado em prova · ○ sem marcação, só menção.</p></div></section>
+<a class="backlink" href="index.html">← Voltar à Estante PSCPP</a>
+</div></main>
+<footer><div class="wrap">PSCPP 2027 · Marcações Sucessivas — Miguens Cap. 6 · <b>Capital Sereno</b> · Navegação — Miguens.</div></footer>
+<script>
+(function(){
+var norm=function(x){return x.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
+var q=document.getElementById('q'), qn=document.getElementById('qn');
+function unmark(){document.querySelectorAll('mark.sq').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+function markIn(el,t){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[],n;while(n=w.nextNode())ns.push(n);
+ ns.forEach(function(n){var s=n.nodeValue,ns2=norm(s),i=ns2.indexOf(t);if(i<0)return;var f=document.createDocumentFragment(),last=0;
+  while(i>=0){f.appendChild(document.createTextNode(s.slice(last,i)));var m=document.createElement('mark');m.className='sq';m.textContent=s.slice(i,i+t.length);f.appendChild(m);last=i+t.length;i=ns2.indexOf(t,last);}
+  f.appendChild(document.createTextNode(s.slice(last)));n.parentNode.replaceChild(f,n);});}
+function run(){
+ unmark(); var t=norm(q.value.trim()), hits=0;
+ document.querySelectorAll('section.bloco').forEach(function(sec){
+  if(!t){sec.style.display='';sec.querySelectorAll('.srch,.srch-t,.srow,h3').forEach(function(e){e.style.display='';});return;}
+  var any=false;
+  var titleHit=norm(sec.querySelector('h2').textContent).indexOf(t)>=0;
+  sec.querySelectorAll('.srch').forEach(function(e){var m=norm(e.textContent).indexOf(t)>=0,ok=titleHit||m;e.style.display=ok?'':'none';if(ok)any=true;if(m){hits++;markIn(e,t);}});
+  sec.querySelectorAll('.srch-t').forEach(function(b){var cap=b.querySelector('.qt'),capHit=titleHit||(cap&&norm(cap.textContent).indexOf(t)>=0),rowsOk=0;
+   b.querySelectorAll('tr.srow').forEach(function(r){var m=norm(r.textContent).indexOf(t)>=0,ok=capHit||m;r.style.display=ok?'':'none';if(ok)rowsOk++;if(m){hits++;markIn(r,t);}});
+   if(cap&&norm(cap.textContent).indexOf(t)>=0){hits++;markIn(cap,t);}
+   var ok=rowsOk>0;b.style.display=ok?'':'none';if(ok)any=true;});
+  sec.querySelectorAll('h3').forEach(function(h){h.style.display=t?'none':'';});
+  if(titleHit){any=true;hits++;markIn(sec.querySelector('h2'),t);}
+  sec.style.display=any?'':'none';
+ });
+ qn.textContent=t?(hits?hits+' resultado'+(hits>1?'s':''):'nada encontrado'):'';
+}
+var tm;q.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(run,120);});
+var p=new URLSearchParams(location.search).get('q');if(p){q.value=p;run();var f=document.querySelector('mark.sq');if(f)setTimeout(function(){f.scrollIntoView({block:'center'});},60);}
+})();
+</script>
+</body>
+</html>
